@@ -26,27 +26,75 @@ const parseSdf = (contents, filename) => {
 
   const cidMatch = contents.match(/> <PUBCHEM_COMPOUND_CID>\r?\n(\d+)/);
   assert.ok(cidMatch, `${filename} must carry PUBCHEM_COMPOUND_CID`);
-
+  const formulaMatch = contents.match(
+    /> <PUBCHEM_MOLECULAR_FORMULA>\r?\n([^\r\n]+)/,
+  );
+  const inchiKeyMatch = contents.match(
+    /> <PUBCHEM_IUPAC_INCHIKEY>\r?\n([^\r\n]+)/,
+  );
   return {
     titleCid: Number.parseInt(lines[0].trim(), 10),
     propertyCid: Number.parseInt(cidMatch[1], 10),
     atomCount,
     bondCount,
     atoms,
+    formula: formulaMatch?.[1] ?? null,
+    inchiKey: inchiKeyMatch?.[1] ?? null,
   };
 };
 
+const formulaFromAtoms = (atoms) => {
+  const counts = new Map();
+  for (const { element } of atoms) {
+    counts.set(element, (counts.get(element) ?? 0) + 1);
+  }
+  const orderedElements = [
+    ...(["C", "H"].filter((element) => counts.has(element))),
+    ...[...counts.keys()]
+      .filter((element) => element !== "C" && element !== "H")
+      .sort(),
+  ];
+  return orderedElements
+    .map((element) => `${element}${counts.get(element) === 1 ? "" : counts.get(element)}`)
+    .join("");
+};
+
 test("every catalog PubChem CID has CID-matched, non-empty 2D and 3D SDF assets", async () => {
-  const catalogSource = await readFile(
-    new URL("../lib/data/beta-blockers.ts", import.meta.url),
-    "utf8",
+  const catalogSources = await Promise.all(
+    ["beta-blockers.ts", "nsaids.ts"].map((filename) =>
+      readFile(new URL(`../lib/data/${filename}`, import.meta.url), "utf8"),
+    ),
   );
-  const catalogCids = [
-    ...catalogSource.matchAll(/^\s+cid:\s*(\d+),$/gm),
-  ].map((match) => Number.parseInt(match[1], 10));
+  const catalogRecords = catalogSources.flatMap((source) =>
+    [
+      ...source.matchAll(
+        /^ {2}\{\r?\n {4}slug: "([^"]+)",[\s\S]*?^ {4}cid: (\d+),[\s\S]*?^ {4}formula: "([^"]+)",[\s\S]*?^ {4}inchiKey: "([A-Z]{14}-[A-Z]{10}-[A-Z])",/gm,
+      ),
+    ].map((match) => ({
+      slug: match[1],
+      cid: Number.parseInt(match[2], 10),
+      formula: match[3],
+      inchiKey: match[4],
+    })),
+  );
+  const catalogCids = catalogRecords.map((record) => record.cid);
+  const recordByCid = new Map(catalogRecords.map((record) => [record.cid, record]));
 
   assert.ok(catalogCids.length > 0, "catalog must contain PubChem identities");
   assert.equal(new Set(catalogCids).size, catalogCids.length, "catalog CIDs must be unique");
+
+  const sourceRegistry = await readFile(
+    new URL("../lib/data/sources.ts", import.meta.url),
+    "utf8",
+  );
+  const registeredCids = [
+    ...sourceRegistry.matchAll(/^ {2}\["[^"]+", "[^"]+", (\d+)\],$/gm),
+  ].map((match) => Number.parseInt(match[1], 10));
+  assert.deepEqual(
+    [...registeredCids].sort((a, b) => a - b),
+    [...catalogCids].sort((a, b) => a - b),
+    "every catalog identity must have a PubChem source record",
+  );
 
   const filenames = (await readdir(assetDirectory))
     .filter((filename) => /^cid-\d+-(?:2d|3d)\.sdf$/.test(filename))
@@ -58,6 +106,8 @@ test("every catalog PubChem CID has CID-matched, non-empty 2D and 3D SDF assets"
 
   for (const cid of catalogCids) {
     const parsed = {};
+    const catalogRecord = recordByCid.get(cid);
+    assert.ok(catalogRecord, `CID ${cid} must retain catalog identity metadata`);
 
     for (const dimension of ["2d", "3d"]) {
       const filename = `cid-${cid}-${dimension}.sdf`;
@@ -70,6 +120,11 @@ test("every catalog PubChem CID has CID-matched, non-empty 2D and 3D SDF assets"
       parsed[dimension] = parseSdf(contents, filename);
       assert.equal(parsed[dimension].titleCid, cid, `${filename} title CID mismatch`);
       assert.equal(parsed[dimension].propertyCid, cid, `${filename} property CID mismatch`);
+      assert.equal(formulaFromAtoms(parsed[dimension].atoms), catalogRecord.formula);
+      if (dimension === "2d") {
+        assert.equal(parsed[dimension].formula, catalogRecord.formula);
+        assert.equal(parsed[dimension].inchiKey, catalogRecord.inchiKey);
+      }
     }
 
     assert.equal(parsed["2d"].atomCount, parsed["3d"].atomCount);
@@ -84,12 +139,15 @@ test("catalog records attach generated structure sets", async () => {
     new URL("../lib/domain/molecule.ts", import.meta.url),
     "utf8",
   );
-  const catalogSource = await readFile(
-    new URL("../lib/data/beta-blockers.ts", import.meta.url),
-    "utf8",
+  const catalogSources = await Promise.all(
+    ["beta-blockers.ts", "nsaids.ts"].map((filename) =>
+      readFile(new URL(`../lib/data/${filename}`, import.meta.url), "utf8"),
+    ),
   );
   assert.match(moleculeDomain, /readonly structures: MoleculeStructureSet/);
-  assert.match(catalogSource, /structures: createPubChemStructureSet\(/);
+  for (const catalogSource of catalogSources) {
+    assert.match(catalogSource, /structures: createPubChemStructureSet\(/);
+  }
 });
 
 test("PubChem structure records retain source, origin, and review provenance", () => {

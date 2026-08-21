@@ -1,6 +1,7 @@
-import { betaBlockerById } from "@/lib/data/beta-blockers";
+import { moleculeById } from "@/lib/data/catalog";
 import { sourceById } from "@/lib/data/sources";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
+import type { MoleculeId } from "@/lib/domain";
 
 export interface EvidenceCardFinding {
   readonly label: string;
@@ -41,7 +42,7 @@ export function createLocalEvidenceCard(
   moleculeId: string,
   question: string,
 ): MentorEvidenceCard | null {
-  const molecule = betaBlockerById.get(moleculeId as `molecule:${string}`);
+  const molecule = moleculeById.get(moleculeId as MoleculeId);
   if (!molecule) return null;
 
   const story = synthesisStories.find((item) => item.moleculeId === molecule.id);

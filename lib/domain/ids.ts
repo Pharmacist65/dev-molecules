@@ -1,6 +1,8 @@
 export type MoleculeId = `molecule:${string}`;
+export type MoleculeClassificationId = `classification:${string}`;
 export type StructureAssetId = `structure:${string}`;
 export type ChemicalFormId = `form:${string}`;
+export type RegulatoryProductId = `regulatory-product:${string}`;
 export type SourceId = `source:${string}`;
 export type EvidenceClaimId = `claim:${string}`;
 export type SynthesisStoryId = `synthesis:${string}`;

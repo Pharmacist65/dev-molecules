@@ -9,8 +9,10 @@ export type StructureOrigin =
   | "database-2d-record"
   | "computed-3d-conformer"
   | "experimental-structure"
+  | "experimental-bound-pose"
   | "user-supplied"
-  | "model-generated";
+  | "model-generated"
+  | "user-edited-conformation";
 
 interface SdfStructureAssetBase {
   readonly id: StructureAssetId;
@@ -36,6 +38,7 @@ export interface Sdf2DStructureAsset extends SdfStructureAssetBase {
 
 export interface Sdf3DStructureAsset extends SdfStructureAssetBase {
   readonly dimension: "3d";
+  /** This seed provider stores PubChem computed conformers; other providers may use another origin. */
   readonly origin: "computed-3d-conformer";
 }
 

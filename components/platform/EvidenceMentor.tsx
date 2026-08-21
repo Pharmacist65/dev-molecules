@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { betaBlockers } from "@/lib/data/beta-blockers";
 import type { MentorEvidenceCard } from "@/lib/application/evidence-card";
+import { moleculeCatalog } from "@/lib/data/catalog";
 import type { MoleculeRecord } from "@/lib/domain";
 
 import styles from "./platform.module.css";
@@ -75,7 +75,7 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
                 setCard(null);
               }}
             >
-              {betaBlockers.map((candidate) => (
+              {moleculeCatalog.map((candidate) => (
                 <option key={candidate.id} value={candidate.id}>
                   {candidate.identity.preferredName} · {candidate.identity.molecularFormula}
                 </option>

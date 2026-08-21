@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-import { betaBlockerById } from "@/lib/data/beta-blockers";
+import { moleculeById } from "@/lib/data/catalog";
 import { learningMissions } from "@/lib/data/learning-missions";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
-import type { MissionTask } from "@/lib/domain";
+import type { MissionTask, MoleculeId } from "@/lib/domain";
 
 import styles from "./platform.module.css";
 
@@ -15,7 +15,7 @@ interface MissionStudioProps {
 }
 
 function itemLabel(itemId: string) {
-  const molecule = betaBlockerById.get(itemId as `molecule:${string}`);
+  const molecule = moleculeById.get(itemId as MoleculeId);
   if (molecule) return molecule.identity.preferredName;
   for (const story of synthesisStories) {
     const step = story.steps.find((candidate) => candidate.id === itemId);

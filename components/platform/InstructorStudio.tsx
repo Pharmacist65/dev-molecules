@@ -1,6 +1,6 @@
 "use client";
 
-import { betaBlockers } from "@/lib/data/beta-blockers";
+import { moleculeCatalog } from "@/lib/data/catalog";
 import { learningMissions } from "@/lib/data/learning-missions";
 import { sourceRegistry } from "@/lib/data/sources";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
@@ -55,14 +55,14 @@ export function InstructorStudio({
 
       <div className={styles.metricGrid}>
         <article><span>LEARNER COMPLETION</span><strong>{completion}%</strong><div><i style={{ width: `${completion}%` }} /></div><small>{completedMissionIds.size} of {learningMissions.length} missions</small></article>
-        <article><span>CATALOG SEED</span><strong>{betaBlockers.length}</strong><p>source-linked identities</p><small>Seed is not the final catalog ceiling</small></article>
+        <article><span>CATALOG SEED</span><strong>{moleculeCatalog.length}</strong><p>source-linked identities</p><small>Two families; seed is not the catalog ceiling</small></article>
         <article><span>SYNTHESIS STORIES</span><strong>{synthesisStories.length}</strong><p>reviewer-ready drafts</p><small>0 currently expert-verified</small></article>
         <article><span>SOURCE REGISTRY</span><strong>{reviewedSources}/{sourceRegistry.length}</strong><p>verified source records</p><small>License and review gates remain visible</small></article>
       </div>
 
       <div className={styles.instructorGrid}>
         <div className={styles.assignmentPanel}>
-          <div className={styles.panelHeading}><div><span className={styles.smallLabel}>FOUNDATION COURSE</span><h2>Beta-blocker structure & evidence</h2></div><span>DEVICE LOCAL</span></div>
+          <div className={styles.panelHeading}><div><span className={styles.smallLabel}>COURSE PACK</span><h2>Beta-blocker structure & evidence</h2></div><span>DEVICE LOCAL</span></div>
           <div className={styles.assignmentTable} role="table" aria-label="Görev ilerlemesi">
             <div className={styles.tableHead} role="row"><span>Mission</span><span>Level</span><span>Review</span><span>Progress</span></div>
             {learningMissions.map((mission) => (
@@ -80,7 +80,7 @@ export function InstructorStudio({
           <span className={styles.smallLabel}>SCIENTIFIC REVIEW QUEUE</span>
           <h2>Publication remains fail-closed</h2>
           <div className={styles.queueItem}><span>01</span><div><strong>Synthesis narratives</strong><small>Named synthetic chemistry reviewer required</small></div><i>3 pending</i></div>
-          <div className={styles.queueItem}><span>02</span><div><strong>Receptor teaching lens</strong><small>Pharmacology sign-off required</small></div><i>10 pending</i></div>
+          <div className={styles.queueItem}><span>02</span><div><strong>Catalog classifications</strong><small>Pharmacology sign-off required</small></div><i>{moleculeCatalog.length} pending</i></div>
           <div className={styles.queueItem}><span>03</span><div><strong>Mission wording</strong><small>Pharmacy educator review required</small></div><i>5 pending</i></div>
           <div className={styles.queuePolicy}><b>PUBLISHING RULE</b><p>Pending içerik, doğrulanmış bilimsel gerçek görünümüyle yayımlanamaz.</p></div>
         </aside>

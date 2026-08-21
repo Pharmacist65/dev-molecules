@@ -1,5 +1,4 @@
 import type {
-  BetaReceptorProfile,
   ChemicalFormKind,
   MoleculeRecord,
   SourceId,
@@ -7,6 +6,7 @@ import type {
   VerificationRecord,
 } from "../domain";
 import { createPubChemStructureSet } from "./pubchem-structures";
+import { getRegulatoryProductsForMolecule } from "./regulatory-approvals";
 
 interface FormSeed {
   readonly slug: string;
@@ -40,6 +40,14 @@ interface BetaBlockerSeed {
   readonly tags: readonly string[];
 }
 
+type BetaReceptorProfile =
+  | "nonselective-beta"
+  | "beta1-selective"
+  | "mixed-alpha1-beta"
+  | "beta1-selective-vasodilatory"
+  | "other"
+  | "unknown";
+
 const pending = (note: string): VerificationRecord => ({
   status: "pending-review",
   note,
@@ -52,6 +60,23 @@ const sourceSupported = (note: string): VerificationRecord => ({
 
 const identitySource = (cid: number): SourceId => `source:pubchem-${cid}`;
 const labelSource = (slug: string): SourceId => `source:dailymed-${slug}`;
+const educationalDraftSource: SourceId =
+  "source:dev-molecules-educational-draft-001";
+
+const receptorProfileLabels: Readonly<Record<BetaReceptorProfile, string>> = {
+  "nonselective-beta": "Nonselective beta profile",
+  "beta1-selective": "Beta1-selective profile",
+  "mixed-alpha1-beta": "Mixed alpha1/beta profile",
+  "beta1-selective-vasodilatory": "Beta1-selective, vasodilatory profile",
+  other: "Other beta-receptor profile",
+  unknown: "Unreviewed receptor profile",
+};
+
+const classificationValue = (value: string): string =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
 const seeds: readonly BetaBlockerSeed[] = [
   {
@@ -451,6 +476,7 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
   const moleculeId = `molecule:${seed.slug}` as const;
   const pubChemSourceId = identitySource(seed.cid);
   const dailyMedSourceId = labelSource(seed.slug);
+  const regulatoryProducts = getRegulatoryProductsForMolecule(moleculeId);
 
   return {
     id: moleculeId,
@@ -467,6 +493,7 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         status: "verified",
         note: "Normalized identity fields checked against PubChem PUG REST on 2026-08-21.",
         reviewedAt: "2026-08-21",
+        reviewedBy: "Dev Molecules PubChem identity check",
       },
       sourceIds: [pubChemSourceId],
     },
@@ -481,34 +508,100 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
       summary: seed.stereoSummary,
       verification: seed.stereoVerification,
     },
-    forms: seed.forms.map((form) => ({
-      id: `form:${seed.slug}:${form.slug}`,
-      parentMoleculeId: moleculeId,
-      displayName: form.displayName,
-      kind: form.kind,
-      counterionOrModifier: form.modifier,
-      relation: form.kind === "free-base" ? "active-moiety" : "pharmaceutical-form",
-      isCommonProductContext: form.commonProductContext,
-      verification:
-        form.kind === "free-base"
-          ? {
-              status: "source-supported",
-              note: "Identity-level active moiety; product presentation is a separate record.",
-            }
-          : pending(
-              "Common form is an educational draft until an exact DailyMed label set is pinned.",
-            ),
-      sourceIds: form.kind === "free-base" ? [pubChemSourceId] : [dailyMedSourceId],
-    })),
-    betaBlockerProfile: {
-      receptorProfile: seed.receptorProfile,
-      scaffoldFamily: seed.scaffoldFamily,
-      educationalSummary: seed.profileSummary,
+    forms: seed.forms.map((form) => {
+      const formId = `form:${seed.slug}:${form.slug}` as const;
+      const regulatoryProduct = regulatoryProducts.find(
+        (product) => product.chemicalFormId === formId,
+      );
+      return {
+        id: formId,
+        parentMoleculeId: moleculeId,
+        displayName: form.displayName,
+        kind: form.kind,
+        counterionOrModifier: form.modifier,
+        relation: form.kind === "free-base" ? "active-moiety" : "pharmaceutical-form",
+        isCommonProductContext: form.commonProductContext,
+        verification: regulatoryProduct
+          ? sourceSupported(
+              `Linked to exact Drugs@FDA ${regulatoryProduct.applicationNumber} product ${regulatoryProduct.productNumber}; approval remains product/form scoped.`,
+            )
+          : form.kind === "free-base"
+            ? sourceSupported(
+                "Identity-level active moiety; product presentation is a separate record.",
+              )
+            : pending(
+                "Common form is an educational draft until an exact product source is pinned.",
+              ),
+        sourceIds: regulatoryProduct
+          ? [pubChemSourceId, regulatoryProduct.sourceId]
+          : form.kind === "free-base"
+            ? [pubChemSourceId]
+            : [dailyMedSourceId],
+      };
+    }),
+    classifications: [
+      {
+        id: `classification:${seed.slug}:therapeutic-area:cardiovascular`,
+        axis: "therapeutic-area",
+        value: "cardiovascular",
+        label: "Cardiovascular",
+        isPrimary: true,
+        summary:
+          "Educational catalog grouping only; it is not a product-level indication statement.",
+        verification: pending(
+          "Therapeutic-area grouping requires editorial review against an exact pharmacology source.",
+        ),
+        sourceIds: [educationalDraftSource],
+      },
+      {
+        id: `classification:${seed.slug}:pharmacologic-class:beta-blocker`,
+        axis: "pharmacologic-class",
+        value: "beta-adrenergic-blocker",
+        label: "Beta-adrenergic blocker",
+        isPrimary: true,
+        summary:
+          "Prototype pharmacologic-class grouping for education, separate from clinical claims.",
+        verification: pending(
+          "Classification must be reviewed against a named pharmacology source before publication.",
+        ),
+        sourceIds: [educationalDraftSource],
+      },
+      {
+        id: `classification:${seed.slug}:target-profile:${seed.receptorProfile}`,
+        axis: "target-profile",
+        value: seed.receptorProfile,
+        label: receptorProfileLabels[seed.receptorProfile],
+        isPrimary: true,
+        summary: seed.profileSummary,
+        verification: pending(
+          "Receptor profile is a navigation aid awaiting named pharmacology review.",
+        ),
+        sourceIds: [educationalDraftSource],
+      },
+      {
+        id: `classification:${seed.slug}:structural-family:${classificationValue(seed.scaffoldFamily)}`,
+        axis: "structural-family",
+        value: classificationValue(seed.scaffoldFamily),
+        label: seed.scaffoldFamily,
+        isPrimary: true,
+        summary:
+          "Human-readable scaffold grouping for comparison; it is not a computed similarity result.",
+        verification: pending(
+          "Scaffold-family wording requires medicinal chemistry review.",
+        ),
+        sourceIds: [educationalDraftSource, pubChemSourceId],
+      },
+    ],
+    educationalProfile: {
+      summary: seed.profileSummary,
+      learningContext:
+        "Compare receptor-profile and scaffold differences while keeping identity, form, and evidence status separate.",
       verification: pending(
-        "Classification is suitable for prototype navigation but requires named pharmacology review before publication.",
+        "Educational framing requires named pharmacology review before publication.",
       ),
-      sourceIds: [pubChemSourceId],
+      sourceIds: [educationalDraftSource],
     },
+    regulatoryProducts,
     conformers: [
       {
         kind: "computed-conformer",
@@ -517,6 +610,8 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         verification: {
           status: "verified",
           note: "Computed PubChem conformer; it must never be labeled as an experimental bound pose.",
+          reviewedAt: "2026-08-21",
+          reviewedBy: "Dev Molecules asset integrity check",
         },
       },
     ],
@@ -528,7 +623,11 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         statement: `${seed.preferredName} maps to normalized PubChem CID ${seed.cid}.`,
         intent: "reference",
         evidenceLevel: "curated-database",
-        verification: { status: "verified", reviewedAt: "2026-08-21" },
+        verification: {
+          status: "verified",
+          reviewedAt: "2026-08-21",
+          reviewedBy: "Dev Molecules PubChem identity check",
+        },
         sourceIds: [pubChemSourceId],
         limitations: [
           "The normalized parent is not the same record as every salt, solvate, stereoisomer or commercial product.",
@@ -544,11 +643,22 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         verification: pending(
           "Review against an exact pharmacology source before elevating beyond educational status.",
         ),
-        sourceIds: [pubChemSourceId],
+        sourceIds: [educationalDraftSource],
         limitations: [
           "Receptor selectivity is context- and concentration-dependent; this label is a teaching lens, not clinical advice.",
         ],
       },
+      ...regulatoryProducts.map((product) => ({
+        id: `claim:${seed.slug}:approval:${product.applicationNumber.toLowerCase()}:${product.productNumber}` as const,
+        subjectId: product.chemicalFormId,
+        category: "approval" as const,
+        statement: `${product.brandName} (${product.applicationNumber}, product ${product.productNumber}) has a Drugs@FDA ORIG/1/AP record linked through ${product.chemicalFormId}.`,
+        intent: "reference" as const,
+        evidenceLevel: "regulatory" as const,
+        verification: product.verification,
+        sourceIds: [product.sourceId],
+        limitations: product.limitations,
+      })),
     ],
     tags: seed.tags,
     notForClinicalUse: true,

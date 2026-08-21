@@ -7,12 +7,19 @@ import type {
 import type {
   AIEvidenceCardId,
   LearningMissionId,
+  MoleculeClassificationId,
   MoleculeId,
   SourceId,
+  StructureAssetId,
   SynthesisStoryId,
 } from "./ids";
 import type { LearningMission } from "./learning";
-import type { MoleculeRecord } from "./molecule";
+import type {
+  MoleculeClassification,
+  MoleculeEducationalProfile,
+  MoleculeRecord,
+  RegulatoryProductReference,
+} from "./molecule";
 import type {
   MoleculeStructureSet,
   SdfStructureAsset,
@@ -367,6 +374,164 @@ export const validateMoleculeStructureSet = (
   return issues;
 };
 
+const validateMoleculeClassification = (
+  classification: MoleculeClassification,
+  knownSourceIds: ReadonlySet<SourceId>,
+  path: string,
+): readonly ValidationIssue[] => {
+  const issues: ValidationIssue[] = [
+    ...validateVerification(classification.verification, `${path}.verification`),
+    ...validateKnownSourceIds(
+      classification.sourceIds,
+      knownSourceIds,
+      `${path}.sourceIds`,
+    ),
+  ];
+
+  if (
+    !isNonBlank(classification.value) ||
+    !isNonBlank(classification.label) ||
+    !isNonBlank(classification.summary)
+  ) {
+    issues.push(
+      makeIssue(
+        "error",
+        "incomplete-molecule-classification",
+        path,
+        "Classification value, label, and summary must be non-empty.",
+      ),
+    );
+  }
+  if (classification.sourceIds.length === 0) {
+    issues.push(
+      makeIssue(
+        "error",
+        "unsourced-molecule-classification",
+        `${path}.sourceIds`,
+        "A classification must retain at least one resolvable source or review record.",
+      ),
+    );
+  }
+
+  return issues;
+};
+
+const validateMoleculeEducationalProfile = (
+  profile: MoleculeEducationalProfile,
+  knownSourceIds: ReadonlySet<SourceId>,
+  path: string,
+): readonly ValidationIssue[] => {
+  const issues: ValidationIssue[] = [
+    ...validateVerification(profile.verification, `${path}.verification`),
+    ...validateKnownSourceIds(profile.sourceIds, knownSourceIds, `${path}.sourceIds`),
+  ];
+
+  if (!isNonBlank(profile.summary) || !isNonBlank(profile.learningContext)) {
+    issues.push(
+      makeIssue(
+        "error",
+        "incomplete-educational-profile",
+        path,
+        "Educational summary and learning context must be non-empty.",
+      ),
+    );
+  }
+  if (profile.sourceIds.length === 0) {
+    issues.push(
+      makeIssue(
+        "error",
+        "unsourced-educational-profile",
+        `${path}.sourceIds`,
+        "Educational framing must link to a source or internal review record.",
+      ),
+    );
+  }
+
+  return issues;
+};
+
+const validateRegulatoryProduct = (
+  product: RegulatoryProductReference,
+  molecule: MoleculeRecord,
+  knownSourceIds: ReadonlySet<SourceId>,
+  path: string,
+): readonly ValidationIssue[] => {
+  const issues: ValidationIssue[] = [
+    ...validateVerification(product.verification, `${path}.verification`),
+    ...validateKnownSourceIds([product.sourceId], knownSourceIds, `${path}.sourceId`),
+  ];
+
+  if (product.moleculeId !== molecule.id) {
+    issues.push(
+      makeIssue("error", "regulatory-molecule-mismatch", `${path}.moleculeId`,
+        "Regulatory product must point to its containing molecule."),
+    );
+  }
+  if (!molecule.forms.some((form) => form.id === product.chemicalFormId)) {
+    issues.push(
+      makeIssue("error", "regulatory-form-missing", `${path}.chemicalFormId`,
+        "Approval evidence must resolve to an explicit chemical form in the molecule record."),
+    );
+  }
+  if (!/^(?:NDA|ANDA)\d{6}$/.test(product.applicationNumber)) {
+    issues.push(
+      makeIssue("error", "invalid-regulatory-application", `${path}.applicationNumber`,
+        "Drugs@FDA application number must be an exact NDA/ANDA identifier."),
+    );
+  }
+  if (!/^\d{3}$/.test(product.productNumber)) {
+    issues.push(
+      makeIssue("error", "invalid-regulatory-product", `${path}.productNumber`,
+        "Drugs@FDA product number must be the exact three-digit product identifier."),
+    );
+  }
+  if (
+    product.approvalAction.submissionType !== "ORIG" ||
+    product.approvalAction.submissionNumber !== "1" ||
+    product.approvalAction.submissionStatus !== "AP"
+  ) {
+    issues.push(
+      makeIssue("error", "unapproved-regulatory-action", `${path}.approvalAction`,
+        "Approval evidence must contain the exact Drugs@FDA ORIG/1/AP action."),
+    );
+  }
+  if (
+    !isIsoDate(product.approvalAction.actionDate) ||
+    !isIsoDate(product.datasetLastUpdated) ||
+    !isIsoDate(product.retrievedAt)
+  ) {
+    issues.push(
+      makeIssue("error", "invalid-regulatory-date", path,
+        "Regulatory action, dataset, and retrieval dates must be ISO-compatible."),
+    );
+  }
+  if (!/^[a-f0-9]{64}$/.test(product.canonicalSha256)) {
+    issues.push(
+      makeIssue("error", "invalid-regulatory-snapshot-hash", `${path}.canonicalSha256`,
+        "Regulatory snapshot must retain a lowercase SHA-256 digest."),
+    );
+  }
+  if (!isHttpUrl(product.apiQueryUrl) || !isHttpUrl(product.sourceUrl)) {
+    issues.push(
+      makeIssue("error", "invalid-regulatory-url", path,
+        "Regulatory evidence must retain resolvable API and human-readable URLs."),
+    );
+  }
+  if (
+    !isNonBlank(product.brandName) ||
+    !isNonBlank(product.activeIngredient.name) ||
+    !isNonBlank(product.activeIngredient.strength) ||
+    product.limitations.length === 0
+  ) {
+    issues.push(
+      makeIssue("error", "incomplete-regulatory-product", path,
+        "Regulatory product identity, ingredient, strength, and limitations are required."),
+    );
+  }
+
+  return issues;
+};
+
 export const validateMoleculeRecord = (
   molecule: MoleculeRecord,
   knownSourceIds: ReadonlySet<SourceId>,
@@ -387,22 +552,66 @@ export const validateMoleculeRecord = (
       molecule.stereochemistry.verification,
       `${path}.stereochemistry.verification`,
     ),
-    ...validateVerification(
-      molecule.betaBlockerProfile.verification,
-      `${path}.betaBlockerProfile.verification`,
-    ),
-    ...validateKnownSourceIds(
-      molecule.betaBlockerProfile.sourceIds,
-      knownSourceIds,
-      `${path}.betaBlockerProfile.sourceIds`,
-    ),
     ...validateMoleculeStructureSet(
       molecule.structures,
       molecule,
       knownSourceIds,
       `${path}.structures`,
     ),
+    ...validateMoleculeEducationalProfile(
+      molecule.educationalProfile,
+      knownSourceIds,
+      `${path}.educationalProfile`,
+    ),
   ];
+
+  if (molecule.classifications.length === 0) {
+    issues.push(
+      makeIssue(
+        "error",
+        "missing-molecule-classification",
+        `${path}.classifications`,
+        "Catalog molecules need at least one sourced classification.",
+      ),
+    );
+  }
+
+  for (const duplicate of duplicateValues(
+    molecule.classifications.map((classification) => classification.id),
+  )) {
+    issues.push(
+      makeIssue(
+        "error",
+        "duplicate-classification-id",
+        `${path}.classifications`,
+        `Classification ${duplicate} is duplicated.`,
+      ),
+    );
+  }
+
+  molecule.classifications.forEach((classification, index) => {
+    issues.push(
+      ...validateMoleculeClassification(
+        classification,
+        knownSourceIds,
+        `${path}.classifications[${index}]`,
+      ),
+    );
+  });
+
+  const primaryAxes = molecule.classifications
+    .filter((classification) => classification.isPrimary)
+    .map((classification) => classification.axis);
+  for (const duplicate of duplicateValues(primaryAxes)) {
+    issues.push(
+      makeIssue(
+        "error",
+        "multiple-primary-classifications",
+        `${path}.classifications`,
+        `Classification axis ${duplicate} has more than one primary value.`,
+      ),
+    );
+  }
 
   if (
     !isNonBlank(molecule.identity.preferredName) ||
@@ -488,6 +697,35 @@ export const validateMoleculeRecord = (
     );
   });
 
+  for (const duplicate of duplicateValues(
+    molecule.regulatoryProducts.map((product) => product.id),
+  )) {
+    issues.push(
+      makeIssue("error", "duplicate-regulatory-product-id", `${path}.regulatoryProducts`,
+        `Regulatory product ${duplicate} is duplicated.`),
+    );
+  }
+  for (const duplicate of duplicateValues(
+    molecule.regulatoryProducts.map(
+      (product) => `${product.applicationNumber}:${product.productNumber}`,
+    ),
+  )) {
+    issues.push(
+      makeIssue("error", "duplicate-regulatory-product-anchor", `${path}.regulatoryProducts`,
+        `Regulatory application/product ${duplicate} is duplicated.`),
+    );
+  }
+  molecule.regulatoryProducts.forEach((product, index) => {
+    issues.push(
+      ...validateRegulatoryProduct(
+        product,
+        molecule,
+        knownSourceIds,
+        `${path}.regulatoryProducts[${index}]`,
+      ),
+    );
+  });
+
   molecule.conformers.forEach((conformer, index) => {
     const conformerPath = `${path}.conformers[${index}]`;
     issues.push(
@@ -526,7 +764,11 @@ export const validateMoleculeRecord = (
         `${path}.claims[${index}]`,
       ),
     );
-    if (claim.subjectId !== molecule.id) {
+    const claimSubjectIsKnown =
+      claim.subjectId === molecule.id ||
+      molecule.forms.some((form) => form.id === claim.subjectId) ||
+      molecule.regulatoryProducts.some((product) => product.id === claim.subjectId);
+    if (!claimSubjectIsKnown) {
       issues.push(
         makeIssue(
           "warning",
@@ -864,6 +1106,21 @@ export const validateDomainDataset = (
       values: dataset.molecules.map((molecule) => molecule.id),
     },
     {
+      label: "molecule classification",
+      path: "molecules.classifications",
+      values: dataset.molecules.flatMap((molecule) =>
+        molecule.classifications.map((classification) => classification.id),
+      ),
+    },
+    {
+      label: "structure asset",
+      path: "molecules.structures",
+      values: dataset.molecules.flatMap((molecule) => [
+        molecule.structures.twoDimensional.id,
+        molecule.structures.threeDimensional.id,
+      ]),
+    },
+    {
       label: "synthesis story",
       path: "synthesisStories",
       values: dataset.synthesisStories.map((story) => story.id),
@@ -932,6 +1189,8 @@ export const validateDomainDataset = (
 // These aliases make the accepted ID collections discoverable to API callers.
 export type DomainCatalogId =
   | MoleculeId
+  | MoleculeClassificationId
+  | StructureAssetId
   | SourceId
   | SynthesisStoryId
   | LearningMissionId

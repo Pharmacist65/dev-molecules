@@ -24,7 +24,7 @@ Adapters (D1/R2/search/chemical tools/AI/providers) implement ports
 
 ### Identity and Catalog
 
-Owns molecular entities, stereoisomers, salts/solvates/esters, active ingredients, products, approvals, synonyms and canonical external identifiers. It is the only domain allowed to merge or separate chemical identities.
+Owns molecular entities, stereoisomers, salts/solvates/esters, active ingredients, products, approvals, synonyms and canonical external identifiers. It is the only domain allowed to merge or separate chemical identities. Regulatory approval attaches to an exact product/application and explicit `ChemicalForm`; it is never copied onto a normalized parent CID merely because that parent is related to a marketed salt or formulation.
 
 ### Explore
 
@@ -65,6 +65,7 @@ Owns private research projects and evidence assessments for user designs. It con
 - **Derived search/index data:** exact identifiers, structure fingerprints, text indexes, vectors and spatial coordinates are rebuildable projections. They are never authoritative records.
 - **Chemical computation:** structure normalization, valence checks, fingerprints, similarity, conformer generation and atom mapping live behind versioned chemical-tool ports.
 - **External sources:** every importer stages raw records and provenance before normalization. Imports never overwrite reviewed claims directly.
+- **Regulatory anchors:** Drugs@FDA records retain exact application/product/action identifiers, linked chemical form, dataset/retrieval dates, resolvable API and human URLs, review scope and a canonical snapshot hash. `ORIG/1/AP` is a product-application action, not automatically the active moiety's first historical approval.
 
 Canonical identity should retain source IDs plus normalized representations such as canonical/isomeric SMILES and InChIKey where scientifically appropriate. Equality rules must state whether stereochemistry, charge, isotope and salt form participate.
 
@@ -87,11 +88,27 @@ The model never receives authority to invent a missing source, infer novelty fro
 ## Web and interaction boundary
 
 - Keep molecule viewers and editors behind adapter components so 3Dmol.js, Mol*, Ketcher or alternatives can change.
-- Use progressive level of detail: icons/clusters at universe scale, structures at family scale, full 3D only on demand.
+- Explore uses a four-stage, explicit level-of-detail contract:
+  - **Far Universe:** cluster glyphs and categorical topology; no structure asset fan-out.
+  - **Near Universe:** at most 40 visible, low-detail 3D molecular structures from source XYZ coordinates.
+  - **Cluster:** the selected cluster in one shared, medium-detail 3D scene.
+  - **Focus:** one high-detail, fully interactive 3D molecular structure.
+- Explore owns at most one active WebGL context. Universe, Cluster and Focus reuse one molecular-scene adapter; opening a viewer per molecule or rendering one WebGL canvas per card is prohibited.
+- The WebGL adapter batches repeated atom and bond geometry, lazy-loads only visible structures, keeps a bounded cache and disposes GPU resources on unmount.
+- Runtime structure loading requires a 3D SDF record before rendering. Optional provider-specific identity expectations (for example PubChem CID) are checked when supplied without making the adapter provider-specific.
+- A failed structure never produces fallback atoms/bonds. Partial multi-molecule loads retain successful geometry and identify each failed record; an all-failed load is blocking and explicit.
+- Rendering is demand-driven: an idle scene does not retain a continuous animation loop.
+- A 2D canonical structure canvas and an accessible list/search surface remain available without weakening the 3D provenance contract.
 - Preserve keyboard-accessible list/search navigation beside the spatial atlas.
 - Do not serialize authoritative scientific status into client-only state.
 - Keep route and molecule URLs stable enough for teaching references and source review.
 - Avoid framework-specific code inside chemistry, evidence and scoring rules.
+
+### Molecular scene adapter boundary
+
+`MolecularScenePort` separates React navigation from the rendering engine. Its implementation owns structure loading, visible-set changes, LOD, camera, focus, representation, hydrogen visibility, atom highlighting, resizing and deterministic disposal. The initial implementation uses Three.js with instanced sphere/cylinder meshes, a perspective camera, depth buffering and source SDF coordinates. Three.js is a replaceable adapter, never a scientific source of truth.
+
+Lens projections are derived artifacts. Each coordinate set stores a projection ID, algorithm and algorithm version, input version/hash, generation time, coordinate system, meaning, non-meaning statement, provenance and review status. Categorical layouts must say that proximity is categorical layout—not chemical similarity. Structural similarity wording is ineligible until a versioned fingerprint/similarity pipeline exists.
 
 ## Security and privacy
 

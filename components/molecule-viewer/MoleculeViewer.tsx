@@ -11,6 +11,7 @@ import {
   type WheelEvent,
 } from "react";
 
+import { getStructureProvenancePresentation } from "@/lib/application/structure-presentation";
 import type { MoleculeStructure, SdfAtom } from "@/lib/structure/sdf";
 
 import styles from "./MoleculeViewer.module.css";
@@ -394,6 +395,11 @@ export function MoleculeViewer({
   const activeOriginLabel =
     dimension === "2d" ? (twoDOriginLabel ?? "2B köken belirtilmedi") : originLabel;
   const activeSourceHref = dimension === "2d" ? twoDSourceHref : sourceHref;
+  const activePresentation = getStructureProvenancePresentation({
+    dimension,
+    origin: activeOriginLabel,
+    sourceLabel: activeSourceLabel,
+  });
   const canvasInstruction =
     dimension === "3d"
       ? "Sürükleyerek döndürün; kaydırma aracı veya Shift ile sürükleyerek taşıyın. Tekerlek ile yakınlaştırın."
@@ -408,8 +414,9 @@ export function MoleculeViewer({
         <div className={styles.identity}>
           <span className={styles.liveDot} aria-hidden="true" />
           <div>
-            <p>{dimension === "3d" ? "GERÇEK 3B YAPI" : "GERÇEK 2B YAPI"}</p>
+            <p>{activePresentation.heading}</p>
             <strong>{moleculeName}</strong>
+            <small className={styles.originNote}>{activePresentation.note}</small>
           </div>
         </div>
         <div className={styles.provenance} aria-label="Yapı kaynağı">

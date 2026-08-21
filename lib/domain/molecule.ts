@@ -1,5 +1,11 @@
 import type { EvidenceClaim, VerificationRecord } from "./evidence";
-import type { ChemicalFormId, MoleculeId, SourceId } from "./ids";
+import type {
+  ChemicalFormId,
+  MoleculeClassificationId,
+  MoleculeId,
+  RegulatoryProductId,
+  SourceId,
+} from "./ids";
 import type { MoleculeStructureSet } from "./structure";
 
 export type StereoPresentation =
@@ -26,6 +32,7 @@ export interface StereochemistryProfile {
 export type ChemicalFormKind =
   | "free-base"
   | "free-acid"
+  | "neutral"
   | "salt"
   | "solvate"
   | "ester"
@@ -57,20 +64,66 @@ export interface MolecularIdentity {
   readonly sourceIds: readonly SourceId[];
 }
 
-export type BetaReceptorProfile =
-  | "nonselective-beta"
-  | "beta1-selective"
-  | "mixed-alpha1-beta"
-  | "beta1-selective-vasodilatory"
-  | "other"
-  | "unknown";
+export type MoleculeClassificationAxis =
+  | "therapeutic-area"
+  | "pharmacologic-class"
+  | "target-profile"
+  | "structural-family";
 
-export interface BetaBlockerProfile {
-  readonly receptorProfile: BetaReceptorProfile;
-  readonly scaffoldFamily: string;
-  readonly educationalSummary: string;
+export interface MoleculeClassification {
+  readonly id: MoleculeClassificationId;
+  readonly axis: MoleculeClassificationAxis;
+  /** Stable, machine-readable value used for grouping and filtering. */
+  readonly value: string;
+  readonly label: string;
+  readonly isPrimary: boolean;
+  readonly summary: string;
   readonly verification: VerificationRecord;
   readonly sourceIds: readonly SourceId[];
+}
+
+export interface MoleculeEducationalProfile {
+  readonly summary: string;
+  readonly learningContext: string;
+  readonly verification: VerificationRecord;
+  readonly sourceIds: readonly SourceId[];
+}
+
+export interface RegulatoryProductReference {
+  readonly id: RegulatoryProductId;
+  readonly moleculeId: MoleculeId;
+  readonly authority: "US FDA";
+  readonly jurisdiction: "US";
+  readonly applicationNumber: `${"NDA" | "ANDA"}${string}`;
+  readonly productNumber: string;
+  readonly brandName: string;
+  readonly sponsorName: string;
+  readonly activeIngredient: {
+    readonly name: string;
+    readonly strength: string;
+  };
+  readonly dosageForm: string;
+  readonly route: string;
+  readonly marketingStatus: "Prescription" | "Over-the-counter";
+  readonly referenceDrug: "Yes" | "No";
+  readonly referenceStandard: "Yes" | "No";
+  readonly chemicalFormId: ChemicalFormId;
+  readonly relationship: "approved-product-linked-via-chemical-form";
+  readonly approvalAction: {
+    readonly submissionType: "ORIG";
+    readonly submissionNumber: "1";
+    readonly submissionStatus: "AP";
+    /** Date of this product application's ORIG/1/AP action, not first active-moiety approval. */
+    readonly actionDate: string;
+  };
+  readonly datasetLastUpdated: string;
+  readonly retrievedAt: string;
+  readonly canonicalSha256: string;
+  readonly apiQueryUrl: string;
+  readonly sourceId: SourceId;
+  readonly sourceUrl: string;
+  readonly verification: VerificationRecord;
+  readonly limitations: readonly string[];
 }
 
 export interface ConformerReference {
@@ -90,9 +143,21 @@ export interface MoleculeRecord {
   readonly structures: MoleculeStructureSet;
   readonly stereochemistry: StereochemistryProfile;
   readonly forms: readonly ChemicalForm[];
-  readonly betaBlockerProfile: BetaBlockerProfile;
+  readonly classifications: readonly MoleculeClassification[];
+  readonly educationalProfile: MoleculeEducationalProfile;
+  readonly regulatoryProducts: readonly RegulatoryProductReference[];
   readonly conformers: readonly ConformerReference[];
   readonly claims: readonly EvidenceClaim[];
   readonly tags: readonly string[];
   readonly notForClinicalUse: true;
 }
+
+export const getPrimaryClassification = (
+  molecule: Pick<MoleculeRecord, "classifications">,
+  axis: MoleculeClassificationAxis,
+): MoleculeClassification | undefined => {
+  const matches = molecule.classifications.filter(
+    (classification) => classification.axis === axis,
+  );
+  return matches.find((classification) => classification.isPrimary) ?? matches[0];
+};

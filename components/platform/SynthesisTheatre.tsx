@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 
-import { betaBlockerById } from "@/lib/data/beta-blockers";
+import { moleculeById } from "@/lib/data/catalog";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
+import type { MoleculeId } from "@/lib/domain";
 
 import styles from "./platform.module.css";
 
@@ -28,7 +29,7 @@ export function SynthesisTheatre({
     () => synthesisStories.find((candidate) => candidate.id === storyId) ?? synthesisStories[0],
     [storyId],
   );
-  const molecule = story ? betaBlockerById.get(story.moleculeId) : undefined;
+  const molecule = story ? moleculeById.get(story.moleculeId as MoleculeId) : undefined;
   const activeStep = story?.steps[activeStepIndex];
 
   function chooseStory(nextStoryId: string) {
@@ -59,7 +60,7 @@ export function SynthesisTheatre({
 
       <div className={styles.storyTabs} role="tablist" aria-label="Sentez hikâyeleri">
         {synthesisStories.map((candidate, index) => {
-          const candidateMolecule = betaBlockerById.get(candidate.moleculeId);
+          const candidateMolecule = moleculeById.get(candidate.moleculeId as MoleculeId);
           return (
             <button
               key={candidate.id}

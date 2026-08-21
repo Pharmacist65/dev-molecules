@@ -1,4 +1,8 @@
 import type { SourceId, SourceReference } from "../domain";
+import {
+  regulatoryProductSeeds,
+  regulatorySourceId,
+} from "./regulatory-approvals";
 
 const RETRIEVED_AT = "2026-08-21";
 
@@ -25,6 +29,7 @@ const pubChemSource = (
     status: "verified",
     note: "CID, formula, molecular weight, SMILES and InChIKey checked via PUG REST.",
     reviewedAt: RETRIEVED_AT,
+    reviewedBy: "Dev Molecules PubChem identity check",
   },
 });
 
@@ -50,7 +55,33 @@ const dailyMedSearchSource = (slug: string, name: string): SourceReference => ({
   },
 });
 
-const compounds = [
+const drugsFdaProductSource = (
+  seed: (typeof regulatoryProductSeeds)[number],
+): SourceReference => ({
+  id: regulatorySourceId(seed.applicationNumber, seed.productNumber),
+  provider: "US FDA Drugs@FDA",
+  kind: "regulatory-label",
+  title: `${seed.brandName} — ${seed.applicationNumber} product ${seed.productNumber}`,
+  externalId: `${seed.applicationNumber} / product ${seed.productNumber} / ORIG-1-AP`,
+  url: `https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=${seed.applicationNumber.slice(-6)}`,
+  retrievedAt: RETRIEVED_AT,
+  scope:
+    `Exact Drugs@FDA application/product anchor for ${seed.activeIngredientName}. ` +
+    "Approval is scoped to the linked pharmaceutical form and product; it is not assigned directly to the normalized PubChem parent.",
+  license: {
+    label: "Official US FDA data; openFDA terms",
+    url: "https://open.fda.gov/license/",
+    reuseStatus: "unknown",
+  },
+  verification: {
+    status: "verified",
+    note: `Exact product ${seed.productNumber} and ORIG/1/AP action checked in the Drugs@FDA snapshot updated 2026-08-20.`,
+    reviewedBy: "Dev Molecules Drugs@FDA exact product audit",
+    reviewedAt: RETRIEVED_AT,
+  },
+});
+
+const catalogCompounds = [
   ["propranolol", "Propranolol", 4946],
   ["metoprolol", "Metoprolol", 4171],
   ["atenolol", "Atenolol", 2249],
@@ -61,23 +92,29 @@ const compounds = [
   ["nadolol", "Nadolol", 39147],
   ["nebivolol", "Nebivolol", 71301],
   ["acebutolol", "Acebutolol", 1978],
+  ["aspirin", "Aspirin", 2244],
+  ["ibuprofen", "Ibuprofen", 3672],
+  ["naproxen", "Naproxen", 156391],
+  ["diclofenac", "Diclofenac", 3033],
+  ["celecoxib", "Celecoxib", 2662],
 ] as const;
 
 export const sourceRegistry: readonly SourceReference[] = [
-  ...compounds.flatMap(([slug, name, cid]) => [
+  ...catalogCompounds.flatMap(([slug, name, cid]) => [
     pubChemSource(name, cid),
     dailyMedSearchSource(slug, name),
   ]),
+  ...regulatoryProductSeeds.map(drugsFdaProductSource),
   {
     id: "source:dev-molecules-educational-draft-001",
     provider: "Dev Molecules editorial queue",
     kind: "internal-review",
-    title: "Beta-blocker educational synthesis drafts",
+    title: "Catalog classification and educational profile drafts",
     externalId: "DM-EDU-DRAFT-001",
     url: null,
     retrievedAt: RETRIEVED_AT,
     scope:
-      "Non-operational educational outlines awaiting named medicinal/synthetic chemistry review.",
+      "Cross-family navigation classifications and non-operational educational outlines awaiting named chemistry and pharmacology review.",
     license: {
       label: "Internal draft — do not publish as a scientific source",
       url: null,
@@ -93,4 +130,3 @@ export const sourceRegistry: readonly SourceReference[] = [
 export const sourceById: ReadonlyMap<SourceId, SourceReference> = new Map(
   sourceRegistry.map((source) => [source.id, source]),
 );
-

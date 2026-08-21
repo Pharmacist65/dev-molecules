@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { betaBlockerById, betaBlockers } from "@/lib/data/beta-blockers";
-import type { MoleculeRecord } from "@/lib/domain";
-import {
-  MoleculeUniverse,
-  type MoleculeEvidenceTone,
-  type UniverseMolecule,
-} from "@/components/universe";
+import { MoleculeUniverse } from "@/components/universe";
+import { createExploreCatalogView } from "@/lib/application/explore-catalog";
+import { moleculeById, moleculeCatalog } from "@/lib/data/catalog";
+import type { MoleculeId } from "@/lib/domain";
 
 import { EvidenceMentor } from "./EvidenceMentor";
 import { GuidedBuilder } from "./GuidedBuilder";
@@ -32,85 +29,7 @@ const modes: readonly {
   { id: "discover", label: "Discover", eyebrow: "05", description: "Private Sandbox" },
 ] as const;
 
-const accents = [
-  "#c8ff62", "#69e7da", "#ffb86b", "#85a8ff", "#db91ff",
-  "#ff8f83", "#73dfb7", "#f2d36f", "#a8dcff", "#b9f38b",
-] as const;
-
-const receptorLabels: Record<string, string> = {
-  "nonselective-beta": "Nonselective β",
-  "beta1-selective": "β1-selective",
-  "mixed-alpha1-beta": "Mixed α1 / β",
-  "beta1-selective-vasodilatory": "β1 + vasodilatory",
-  other: "Other profile",
-  unknown: "Unknown",
-};
-
-function evidenceTone(record: MoleculeRecord): MoleculeEvidenceTone {
-  const statuses = [
-    record.identity.verification.status,
-    record.betaBlockerProfile.verification.status,
-  ];
-  if (statuses.includes("predicted")) return "predicted";
-  if (statuses.includes("pending-review")) return "pending";
-  if (statuses.includes("unknown") || statuses.includes("conflicting")) return "unknown";
-  if (statuses.every((status) => status === "verified" || status === "expert-reviewed")) {
-    return "verified";
-  }
-  if (statuses.some((status) => status === "source-supported")) return "supported";
-  return "unknown";
-}
-
-function evidenceLabel(record: MoleculeRecord) {
-  const identityStatus = record.identity.verification.status;
-  const classificationStatus = record.betaBlockerProfile.verification.status;
-  const identityLabel =
-    identityStatus === "verified" || identityStatus === "expert-reviewed"
-      ? "Kimlik doğrulandı"
-      : "Kimlik incelemede";
-  const classificationLabel =
-    classificationStatus === "verified" || classificationStatus === "expert-reviewed"
-      ? "sınıflama doğrulandı"
-      : classificationStatus === "source-supported"
-        ? "sınıflama kaynak destekli"
-        : classificationStatus === "predicted"
-          ? "sınıflama öngörü"
-          : "eğitim sınıflaması incelemede";
-
-  return `${identityLabel} · ${classificationLabel}`;
-}
-
-function toUniverseMolecule(record: MoleculeRecord, index: number): UniverseMolecule {
-  return {
-    id: record.id,
-    name: record.identity.preferredName,
-    formula: record.identity.molecularFormula,
-    category: receptorLabels[record.betaBlockerProfile.receptorProfile],
-    summary: record.betaBlockerProfile.educationalSummary,
-    lensValues: {
-      therapeutic: "Kardiyovasküler",
-      target: receptorLabels[record.betaBlockerProfile.receptorProfile],
-      scaffold: record.betaBlockerProfile.scaffoldFamily,
-    },
-    evidenceLabel: evidenceLabel(record),
-    evidenceTone: evidenceTone(record),
-    accent: accents[index % accents.length],
-    structure: {
-      threeDUrl: record.structures.threeDimensional.publicPath,
-      twoDUrl: record.structures.twoDimensional.publicPath,
-      sourceLabel: `${record.structures.threeDimensional.sourceProvider} · ${record.structures.threeDimensional.sourceExternalId}`,
-      sourceHref: record.structures.threeDimensional.sourceUrl,
-      sourceId: record.structures.threeDimensional.sourceId,
-      originLabel: record.structures.threeDimensional.origin,
-      reviewStatus: record.structures.threeDimensional.verification.status,
-      twoDSourceLabel: `${record.structures.twoDimensional.sourceProvider} · ${record.structures.twoDimensional.sourceExternalId}`,
-      twoDSourceHref: record.structures.twoDimensional.sourceUrl,
-      twoDSourceId: record.structures.twoDimensional.sourceId,
-      twoDOriginLabel: record.structures.twoDimensional.origin,
-      twoDReviewStatus: record.structures.twoDimensional.verification.status,
-    },
-  };
-}
+const exploreCatalogView = createExploreCatalogView(moleculeCatalog);
 
 function BrandMark() {
   return <span className={styles.brandMark} aria-hidden="true"><i /><i /><i /></span>;
@@ -118,15 +37,11 @@ function BrandMark() {
 
 export function DevMoleculesApp() {
   const [activeMode, setActiveMode] = useState<PlatformMode>("explore");
-  const [selectedId, setSelectedId] = useState<string>(betaBlockers[0]?.id ?? "");
+  const [selectedId, setSelectedId] = useState<string>(moleculeCatalog[0]?.id ?? "");
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<string>>(new Set());
 
-  const universeMolecules = useMemo(
-    () => betaBlockers.map(toUniverseMolecule),
-    [],
-  );
   const selectedMolecule =
-    betaBlockerById.get(selectedId as `molecule:${string}`) ?? betaBlockers[0];
+    moleculeById.get(selectedId as MoleculeId) ?? moleculeCatalog[0];
 
   useEffect(() => {
     let restoreTimer: number | undefined;
@@ -201,12 +116,13 @@ export function DevMoleculesApp() {
         {activeMode === "explore" ? (
           <div className={styles.workspacePage}>
             <MoleculeUniverse
-              molecules={universeMolecules}
+              molecules={exploreCatalogView.molecules}
+              lenses={exploreCatalogView.lenses}
               initialLensId="scaffold"
               initialSelectedId={selectedId}
               eyebrow="EXPLORE / MOLECULAR UNIVERSE"
               title="İlaç moleküllerinin 3B evrenini keşfet."
-              description="Gerçek atom ve bağ yapılarını; tedavi alanı, hedef ailesi ve yapısal iskelet lensleriyle incele."
+              description="Kaynaklı SDF atom ve bağ kayıtlarını; tedavi alanı, hedef ailesi ve yapısal iskelet lensleriyle incele."
               onMoleculeSelect={(molecule) => setSelectedId(molecule.id)}
             />
           </div>
