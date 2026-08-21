@@ -1,4 +1,5 @@
 export type MoleculeId = `molecule:${string}`;
+export type StructureAssetId = `structure:${string}`;
 export type ChemicalFormId = `form:${string}`;
 export type SourceId = `source:${string}`;
 export type EvidenceClaimId = `claim:${string}`;
@@ -7,4 +8,3 @@ export type SynthesisStepId = `synthesis-step:${string}`;
 export type LearningMissionId = `mission:${string}`;
 export type LearningProgressId = `progress:${string}`;
 export type AIEvidenceCardId = `ai-card:${string}`;
-

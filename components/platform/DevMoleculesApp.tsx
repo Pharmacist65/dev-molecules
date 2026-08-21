@@ -47,11 +47,37 @@ const receptorLabels: Record<string, string> = {
 };
 
 function evidenceTone(record: MoleculeRecord): MoleculeEvidenceTone {
-  const status = record.identity.verification.status;
-  if (status === "verified") return "verified";
-  if (status === "source-supported" || status === "expert-reviewed") return "supported";
-  if (status === "predicted") return "predicted";
+  const statuses = [
+    record.identity.verification.status,
+    record.betaBlockerProfile.verification.status,
+  ];
+  if (statuses.includes("predicted")) return "predicted";
+  if (statuses.includes("pending-review")) return "pending";
+  if (statuses.includes("unknown") || statuses.includes("conflicting")) return "unknown";
+  if (statuses.every((status) => status === "verified" || status === "expert-reviewed")) {
+    return "verified";
+  }
+  if (statuses.some((status) => status === "source-supported")) return "supported";
   return "unknown";
+}
+
+function evidenceLabel(record: MoleculeRecord) {
+  const identityStatus = record.identity.verification.status;
+  const classificationStatus = record.betaBlockerProfile.verification.status;
+  const identityLabel =
+    identityStatus === "verified" || identityStatus === "expert-reviewed"
+      ? "Kimlik doğrulandı"
+      : "Kimlik incelemede";
+  const classificationLabel =
+    classificationStatus === "verified" || classificationStatus === "expert-reviewed"
+      ? "sınıflama doğrulandı"
+      : classificationStatus === "source-supported"
+        ? "sınıflama kaynak destekli"
+        : classificationStatus === "predicted"
+          ? "sınıflama öngörü"
+          : "eğitim sınıflaması incelemede";
+
+  return `${identityLabel} · ${classificationLabel}`;
 }
 
 function toUniverseMolecule(record: MoleculeRecord, index: number): UniverseMolecule {
@@ -66,72 +92,28 @@ function toUniverseMolecule(record: MoleculeRecord, index: number): UniverseMole
       target: receptorLabels[record.betaBlockerProfile.receptorProfile],
       scaffold: record.betaBlockerProfile.scaffoldFamily,
     },
-    evidenceLabel:
-      record.identity.verification.status === "verified"
-        ? "Kimlik doğrulandı"
-        : "İnceleme bekliyor",
+    evidenceLabel: evidenceLabel(record),
     evidenceTone: evidenceTone(record),
     accent: accents[index % accents.length],
+    structure: {
+      threeDUrl: record.structures.threeDimensional.publicPath,
+      twoDUrl: record.structures.twoDimensional.publicPath,
+      sourceLabel: `${record.structures.threeDimensional.sourceProvider} · ${record.structures.threeDimensional.sourceExternalId}`,
+      sourceHref: record.structures.threeDimensional.sourceUrl,
+      sourceId: record.structures.threeDimensional.sourceId,
+      originLabel: record.structures.threeDimensional.origin,
+      reviewStatus: record.structures.threeDimensional.verification.status,
+      twoDSourceLabel: `${record.structures.twoDimensional.sourceProvider} · ${record.structures.twoDimensional.sourceExternalId}`,
+      twoDSourceHref: record.structures.twoDimensional.sourceUrl,
+      twoDSourceId: record.structures.twoDimensional.sourceId,
+      twoDOriginLabel: record.structures.twoDimensional.origin,
+      twoDReviewStatus: record.structures.twoDimensional.verification.status,
+    },
   };
 }
 
 function BrandMark() {
   return <span className={styles.brandMark} aria-hidden="true"><i /><i /><i /></span>;
-}
-
-function MoleculePassport({ molecule }: { molecule: MoleculeRecord }) {
-  const pubChemUrl = molecule.conformers[0]?.url?.split("#")[0] ?? null;
-
-  return (
-    <section className={styles.passportSection} aria-labelledby="passport-heading">
-      <div className={styles.sectionIntro}>
-        <p className={styles.kicker}>MOLECULE PASSPORT / SOURCE-BACKED IDENTITY</p>
-        <h2 id="passport-heading">{molecule.identity.preferredName}</h2>
-        <p>
-          Moleküler varlık, stereokimya ve farmasötik formlar birbirine
-          karıştırılmadan aynı pasaportta izlenir.
-        </p>
-      </div>
-
-      <div className={styles.passportGrid}>
-        <div className={styles.structureCard}>
-          <div className={styles.structureCloud} aria-hidden="true">
-            <span className={styles.atomA}>O</span><i className={styles.bondA} />
-            <span className={styles.atomB}>N</span><i className={styles.bondB} />
-            <span className={styles.atomC}>OH</span><i className={styles.bondC} />
-            <span className={styles.ring}>AR</span>
-          </div>
-          <div className={styles.structureMeta}>
-            <span>COMPUTED 2D REPRESENTATION</span>
-            <strong>{molecule.identity.molecularFormula}</strong>
-          </div>
-        </div>
-
-        <dl className={styles.identityGrid}>
-          <div><dt>PubChem CID</dt><dd>{molecule.identity.pubChemCid}</dd></div>
-          <div><dt>Molecular weight</dt><dd>{molecule.identity.molecularWeight.toFixed(2)} g/mol</dd></div>
-          <div><dt>InChIKey</dt><dd className={styles.mono}>{molecule.identity.inchiKey}</dd></div>
-          <div><dt>Stereochemistry</dt><dd>{molecule.stereochemistry.presentation}</dd></div>
-          <div><dt>Teaching profile</dt><dd>{receptorLabels[molecule.betaBlockerProfile.receptorProfile]}</dd></div>
-          <div><dt>Scientific state</dt><dd><span className={styles.stateDot} /> {molecule.identity.verification.status}</dd></div>
-        </dl>
-
-        <div className={styles.formsCard}>
-          <span className={styles.smallLabel}>IDENTITY BOUNDARIES</span>
-          <h3>Parent and pharmaceutical forms</h3>
-          <ul>
-            {molecule.forms.map((form) => (
-              <li key={form.id}>
-                <span>{form.displayName}</span>
-                <small>{form.kind} · {form.verification.status}</small>
-              </li>
-            ))}
-          </ul>
-          {pubChemUrl ? <a href={pubChemUrl} target="_blank" rel="noreferrer">Open source record <span>↗</span></a> : null}
-        </div>
-      </div>
-    </section>
-  );
 }
 
 export function DevMoleculesApp() {
@@ -200,7 +182,7 @@ export function DevMoleculesApp() {
           ))}
         </nav>
         <div className={styles.topStatus}>
-          <span><i /> Evidence guard active</span>
+          <span><i /> Yapı kaynakları bağlı</span>
           <button type="button" onClick={() => setActiveMode("teach")} aria-label="İlerleme özetini aç">
             {completedMissionIds.size}/5
           </button>
@@ -213,7 +195,7 @@ export function DevMoleculesApp() {
             <span>{modes.find((mode) => mode.id === activeMode)?.eyebrow}</span>
             <strong>{modes.find((mode) => mode.id === activeMode)?.description}</strong>
           </div>
-          <p>Full platform foundation · Seed data is not the final catalog</p>
+          <p>Ölçeklenebilir katalog · Kaynaklı yapı verisi · Eğitim amaçlı</p>
         </div>
 
         {activeMode === "explore" ? (
@@ -223,11 +205,10 @@ export function DevMoleculesApp() {
               initialLensId="scaffold"
               initialSelectedId={selectedId}
               eyebrow="EXPLORE / MOLECULAR UNIVERSE"
-              title="İlaç kimyasını gezilebilir bir sisteme dönüştür."
-              description="On doğrulanmış kimlik kaydıyla başlayan bu atlas; yapı, hedef ve farmasötik form sınırlarını aynı öğrenme yolculuğunda görünür kılar."
+              title="İlaç moleküllerinin 3B evrenini keşfet."
+              description="Gerçek atom ve bağ yapılarını; tedavi alanı, hedef ailesi ve yapısal iskelet lensleriyle incele."
               onMoleculeSelect={(molecule) => setSelectedId(molecule.id)}
             />
-            {selectedMolecule ? <MoleculePassport molecule={selectedMolecule} /> : null}
           </div>
         ) : null}
 

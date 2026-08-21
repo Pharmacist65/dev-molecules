@@ -39,7 +39,8 @@ test("server-renders the Dev Molecules product shell", async () => {
   assert.match(html, /<title>Dev Molecules — Pharmaceutical Molecular Universe<\/title>/i);
   assert.match(html, /DEV MOLECULES/);
   assert.match(html, /Molecular Universe/);
-  assert.match(html, /Kimlik doğrulandı/);
+  assert.match(html, /Yapı kaynakları bağlı/);
+  assert.match(html, /3B evrenini keşfet/);
   assert.match(html, /Explore/);
   assert.match(html, /Learn/);
   assert.match(html, /Build/);

@@ -1,100 +1,89 @@
-# vinext-starter
+# Dev Molecules
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Dev Molecules, ilaç moleküllerini kaynak, kanıt durumu ve eğitim bağlamıyla birlikte keşfetmek için geliştirilen desktop-first bir moleküler öğrenme platformudur. Ürün kabuğu Explore, Learn, Build, Teach ve Discover modlarını tek bir kimlik akışında birleştirir.
 
-## Prerequisites
+## Çalışan dikey dilim
 
-- Node.js `>=22.13.0`
+- Explore içinde Universe → cluster → molecule focus geçişi
+- PubChem PUG REST kayıtlarından yerel olarak önbelleğe alınmış gerçek 2B ve 3B SDF yapıları
+- Universe ölçeğinde hafif 2B canvas önizlemeleri; yalnız focus görünümünde tam etkileşimli viewer
+- Ball-and-stick ve space-filling gösterimleri
+- Döndürme, kaydırma, yakınlaştırma, ortalama/sıfırlama ve hidrojen görünürlüğü
+- Atom hover/seçimi, element etiketi ve 2B/3B geçişi
+- Boyuta özgü yapı kaynağı, origin ve review durumu
+- Arama, üç kümelenme lensi, klavye gezinmesi, breadcrumb ve kalıcı hash bağlantıları
+- Learn, Build, Teach ve private-by-default Discover temel akışları
 
-## Quick Start
+## Yapı verisi
+
+Seed katalog 10 beta-bloker kimliği içerir; bu sayı şema veya ürün tavanı değildir. Her kayıt için iki kaynak dosyası tutulur:
+
+```text
+public/structures/pubchem/cid-{CID}-2d.sdf
+public/structures/pubchem/cid-{CID}-3d.sdf
+```
+
+Kaynak endpoint:
+
+```text
+https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/record/SDF?record_type=2d|3d
+```
+
+3B kayıtlar PubChem tarafından hesaplanmış conformer'lardır; deneysel bound pose olarak sunulmaz. 2B ve 3B asset kimliği, CID eşleşmesi, atom/bağ blokları ve coordinate dimension testlerle doğrulanır.
+
+## Çalıştırma
+
+Gereksinim: Node.js `>=22.13.0`.
 
 ```bash
 npm install
 npm run dev
+```
+
+Uygulama: `http://localhost:3000/`
+
+Kalıcı Explore bağlantıları:
+
+```text
+http://localhost:3000/#universe
+http://localhost:3000/#molecule/propranolol
+http://localhost:3000/#cluster/scaffold/{encoded-cluster-name}
+```
+
+## Kalite kapıları
+
+```bash
+npm run typecheck
+npm run lint
 npm run build
+node --test tests/*.test.mjs
 ```
 
-This starter does not use `wrangler.jsonc`.
+Testler SDF parsing, gerçek fixture bütünlüğü, PubChem provenance, generic structure provider, directional stereo bond rendering, server-rendered ürün kabuğu ve evidence API'nin fail-closed davranışını kapsar.
 
-## Included Shape
+## Mimari sınırlar
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+- React bileşenleri kimya, evidence veya verification kararı üretmez.
+- Yapı bulunamadığında sahte atom ya da rastgele bağ üretilmez.
+- Kimlik doğrulaması ile eğitim sınıflamasının review durumu ayrı gösterilir.
+- `not found`, yenilik, patentlenebilirlik veya sentezlenebilirlik sonucu değildir.
+- Kullanıcı tasarımları varsayılan olarak özeldir.
+- AI çıktısı typed, citation-checked ve fail-closed olmadan bilimsel iddia olarak yayınlanamaz.
+- Repo içine secret, signing key veya doldurulmuş `.env` eklenmez.
 
-## Workspace Auth Headers
+Ayrıntılar:
 
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
+- [Mimari](docs/ARCHITECTURE.md)
+- [Yol haritası ve kabul kapıları](docs/ROADMAP.md)
 
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
+## Başlıca dizinler
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```text
+components/universe/          Explore seviye ve LOD deneyimi
+components/molecule-viewer/   SDF tabanlı 2B/3B canvas viewer
+lib/domain/                   Kimlik, yapı, evidence ve doğrulama modelleri
+lib/data/                     Seed katalog ve yapı provider adapter'ları
+lib/structure/                V2000 parser ve element görsel kuralları
+public/structures/pubchem/    Kaynaklı yerel SDF assetleri
+tests/                        Domain, asset, renderer, SSR ve API kontrolleri
 ```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)

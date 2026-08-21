@@ -6,6 +6,7 @@ import type {
   StereoPresentation,
   VerificationRecord,
 } from "../domain";
+import { createPubChemStructureSet } from "./pubchem-structures";
 
 interface FormSeed {
   readonly slug: string;
@@ -469,6 +470,11 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
       },
       sourceIds: [pubChemSourceId],
     },
+    structures: createPubChemStructureSet({
+      moleculeId,
+      pubChemCid: seed.cid,
+      sourceId: pubChemSourceId,
+    }),
     stereochemistry: {
       presentation: seed.stereoPresentation,
       centers: seed.stereoCenters,
@@ -554,4 +560,3 @@ export const betaBlockers: readonly MoleculeRecord[] = seeds.map(toRecord);
 export const betaBlockerById = new Map(
   betaBlockers.map((molecule) => [molecule.id, molecule]),
 );
-

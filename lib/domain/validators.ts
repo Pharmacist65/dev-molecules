@@ -13,6 +13,11 @@ import type {
 } from "./ids";
 import type { LearningMission } from "./learning";
 import type { MoleculeRecord } from "./molecule";
+import type {
+  MoleculeStructureSet,
+  SdfStructureAsset,
+  StructureDimension,
+} from "./structure";
 import type { SynthesisStory } from "./synthesis";
 
 export type ValidationSeverity = "error" | "warning";
@@ -216,6 +221,152 @@ export const validateEvidenceClaim = (
   return issues;
 };
 
+const validateStructureAsset = (
+  asset: SdfStructureAsset,
+  expectedDimension: StructureDimension,
+  structureSet: MoleculeStructureSet,
+  knownSourceIds: ReadonlySet<SourceId>,
+  path: string,
+): readonly ValidationIssue[] => {
+  const issues: ValidationIssue[] = [
+    ...validateVerification(asset.verification, `${path}.verification`),
+    ...validateKnownSourceIds([asset.sourceId], knownSourceIds, `${path}.sourceId`),
+  ];
+
+  if (asset.moleculeId !== structureSet.moleculeId) {
+    issues.push(
+      makeIssue(
+        "error",
+        "structure-molecule-mismatch",
+        `${path}.moleculeId`,
+        "Structure asset must point to its containing molecule structure set.",
+      ),
+    );
+  }
+  if (asset.pubChemCid !== structureSet.pubChemCid) {
+    issues.push(
+      makeIssue(
+        "error",
+        "structure-cid-mismatch",
+        `${path}.pubChemCid`,
+        "Structure asset CID must match its containing molecule structure set.",
+      ),
+    );
+  }
+  if (asset.dimension !== expectedDimension) {
+    issues.push(
+      makeIssue(
+        "error",
+        "structure-dimension-mismatch",
+        `${path}.dimension`,
+        `Expected a ${expectedDimension.toUpperCase()} structure asset.`,
+      ),
+    );
+  }
+  if (!asset.publicPath.startsWith("/") || !asset.publicPath.endsWith(".sdf")) {
+    issues.push(
+      makeIssue(
+        "error",
+        "invalid-structure-path",
+        `${path}.publicPath`,
+        "A cached SDF asset needs a root-relative .sdf public path.",
+      ),
+    );
+  }
+  if (!isNonBlank(asset.sourceProvider) || !isNonBlank(asset.sourceExternalId)) {
+    issues.push(
+      makeIssue(
+        "error",
+        "incomplete-structure-source",
+        path,
+        "A structure asset needs a source provider and external ID.",
+      ),
+    );
+  }
+  if (!isHttpUrl(asset.sourceUrl)) {
+    issues.push(
+      makeIssue(
+        "error",
+        "invalid-structure-source-url",
+        `${path}.sourceUrl`,
+        "Structure source URLs must use http or https.",
+      ),
+    );
+  }
+  if (!isIsoDate(asset.retrievedAt)) {
+    issues.push(
+      makeIssue(
+        "error",
+        "invalid-structure-retrieval-date",
+        `${path}.retrievedAt`,
+        "Structure retrievedAt must be an ISO-compatible date string.",
+      ),
+    );
+  }
+
+  return issues;
+};
+
+export const validateMoleculeStructureSet = (
+  structureSet: MoleculeStructureSet,
+  molecule: Pick<MoleculeRecord, "id" | "identity">,
+  knownSourceIds: ReadonlySet<SourceId>,
+  path = `molecules.${molecule.id}.structures`,
+): readonly ValidationIssue[] => {
+  const issues: ValidationIssue[] = [];
+
+  if (structureSet.moleculeId !== molecule.id) {
+    issues.push(
+      makeIssue(
+        "error",
+        "structure-set-molecule-mismatch",
+        `${path}.moleculeId`,
+        "Structure set must point to its containing molecule.",
+      ),
+    );
+  }
+  if (structureSet.pubChemCid !== molecule.identity.pubChemCid) {
+    issues.push(
+      makeIssue(
+        "error",
+        "structure-set-cid-mismatch",
+        `${path}.pubChemCid`,
+        "Structure set CID must match the normalized molecule identity.",
+      ),
+    );
+  }
+
+  issues.push(
+    ...validateStructureAsset(
+      structureSet.twoDimensional,
+      "2d",
+      structureSet,
+      knownSourceIds,
+      `${path}.twoDimensional`,
+    ),
+    ...validateStructureAsset(
+      structureSet.threeDimensional,
+      "3d",
+      structureSet,
+      knownSourceIds,
+      `${path}.threeDimensional`,
+    ),
+  );
+
+  if (structureSet.twoDimensional.id === structureSet.threeDimensional.id) {
+    issues.push(
+      makeIssue(
+        "error",
+        "duplicate-structure-asset-id",
+        path,
+        "The 2D and 3D structure assets must have distinct IDs.",
+      ),
+    );
+  }
+
+  return issues;
+};
+
 export const validateMoleculeRecord = (
   molecule: MoleculeRecord,
   knownSourceIds: ReadonlySet<SourceId>,
@@ -244,6 +395,12 @@ export const validateMoleculeRecord = (
       molecule.betaBlockerProfile.sourceIds,
       knownSourceIds,
       `${path}.betaBlockerProfile.sourceIds`,
+    ),
+    ...validateMoleculeStructureSet(
+      molecule.structures,
+      molecule,
+      knownSourceIds,
+      `${path}.structures`,
     ),
   ];
 

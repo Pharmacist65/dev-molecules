@@ -1,5 +1,6 @@
 import type { EvidenceClaim, VerificationRecord } from "./evidence";
 import type { ChemicalFormId, MoleculeId, SourceId } from "./ids";
+import type { MoleculeStructureSet } from "./structure";
 
 export type StereoPresentation =
   | "achiral"
@@ -86,6 +87,7 @@ export interface ConformerReference {
 export interface MoleculeRecord {
   readonly id: MoleculeId;
   readonly identity: MolecularIdentity;
+  readonly structures: MoleculeStructureSet;
   readonly stereochemistry: StereochemistryProfile;
   readonly forms: readonly ChemicalForm[];
   readonly betaBlockerProfile: BetaBlockerProfile;
@@ -94,4 +96,3 @@ export interface MoleculeRecord {
   readonly tags: readonly string[];
   readonly notForClinicalUse: true;
 }
-
