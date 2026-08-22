@@ -33,6 +33,11 @@ test("new product hashes resolve to stable primary sections", () => {
     academyArea: "pharmacology",
     lessonId: "targets-01",
   });
+  assert.deepEqual(parsePlatformHash("#academy/module/adme"), {
+    section: "academy",
+    academyArea: "module",
+    lessonId: "adme",
+  });
   assert.deepEqual(parsePlatformHash("#academy/synthesis/celecoxib/reported-route"), {
     section: "academy",
     academyArea: "synthesis",
@@ -82,7 +87,11 @@ test("Home keeps Atlas, Dossier, Academy, Lab, and Three.js behind lazy route bo
   assert.doesNotMatch(appSource, /import\s+\{[^}]*MoleculeUniverse[^}]*\}\s+from/);
   assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/atlas"\)/);
   assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/dossier"\)/);
-  assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("\.\/LearningJourneyMap"\)/);
+  assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/academy"\)/);
+  assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/synthesis"\)/);
   assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/lab"\)/);
+  assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/instructor"\)/);
+  assert.match(appSource, /lazy\(\(\)\s*=>\s*\n?\s*import\("@\/components\/reviewer"\)/);
+  assert.match(appSource, /<ReviewerConsole[\s\S]*adapter=\{null\}/);
   assert.match(homeSource, /lazy\(\(\)\s*=>\s*import\("\.\/HomeMoleculeStage"\)\)/);
 });

@@ -9,7 +9,12 @@ export type PlatformSection =
   | "reviewer";
 
 export type AtlasView = "browse" | "spatial";
-export type AcademyArea = "home" | "nomenclature" | "pharmacology" | "synthesis";
+export type AcademyArea =
+  | "home"
+  | "module"
+  | "nomenclature"
+  | "pharmacology"
+  | "synthesis";
 
 export interface PlatformRoute {
   readonly section: PlatformSection;
@@ -84,6 +89,12 @@ export function parsePlatformHash(rawHash: string): PlatformRoute {
   }
 
   if (head === "academy") {
+    if (second === "module") {
+      const lessonId = decodeSegment(third);
+      return lessonId
+        ? { section: "academy", academyArea: "module", lessonId }
+        : { section: "academy", academyArea: "home", canonicalHash: "#academy" };
+    }
     if (second === "nomenclature" || second === "pharmacology") {
       return {
         section: "academy",
