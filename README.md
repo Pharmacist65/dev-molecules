@@ -33,7 +33,7 @@ Read [Scientific governance](docs/SCIENTIFIC_GOVERNANCE.md) and [Synthesis prove
 
 ## Run locally
 
-Requirement: Node.js `>=22.13.0`.
+Requirement: Node.js `>=22.23.2` (the Node test suite uses built-in TypeScript type stripping; CI validates the patched 22.x LTS release).
 
 ```bash
 npm ci

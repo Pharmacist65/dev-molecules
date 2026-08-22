@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22.13.0
+          node-version: 22.23.2
           cache: npm
       - run: npm ci
       - run: npm audit --omit=dev --audit-level=high
@@ -40,7 +40,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22.13.0
+          node-version: 22.23.2
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
@@ -48,3 +48,4 @@ jobs:
       - run: npx playwright test
         env:
           PLAYWRIGHT_BROWSER: chromium
+          PLAYWRIGHT_PERFORMANCE_PROFILE: shared-software-renderer

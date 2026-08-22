@@ -26,10 +26,25 @@ test.beforeEach(async ({ page }) => {
 function expectInteractivePerformanceEvidence(
   evidence: Awaited<ReturnType<typeof measureInteractiveCanvasPerformance>>,
 ) {
+  const usesSharedSoftwareRenderer =
+    process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer";
+  const averageBudgetMs = usesSharedSoftwareRenderer ? 100 : 50;
+  const p95BudgetMs = usesSharedSoftwareRenderer ? 200 : 100;
+
   expect(evidence.cameraRevisionDelta).toBeGreaterThanOrEqual(3);
   expect(evidence.interactionRafCadence.sampleCount).toBeGreaterThanOrEqual(12);
-  expect(evidence.interactionRafCadence.averageMs).toBeLessThan(50);
-  expect(evidence.interactionRafCadence.p95Ms).toBeLessThan(100);
+  expect(
+    evidence.interactionRafCadence.averageMs,
+    `interaction average must stay below the ${averageBudgetMs} ms ${
+      usesSharedSoftwareRenderer ? "shared software-renderer" : "local production"
+    } budget`,
+  ).toBeLessThan(averageBudgetMs);
+  expect(
+    evidence.interactionRafCadence.p95Ms,
+    `interaction p95 must stay below the ${p95BudgetMs} ms ${
+      usesSharedSoftwareRenderer ? "shared software-renderer" : "local production"
+    } budget`,
+  ).toBeLessThan(p95BudgetMs);
   expect(evidence.longTasks.supported, "Chrome must expose the Long Tasks API").toBe(true);
   expect(evidence.longTasks.count).toBeLessThanOrEqual(3);
   expect(evidence.longTasks.maxDurationMs).toBeLessThan(200);

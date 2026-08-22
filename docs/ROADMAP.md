@@ -38,7 +38,7 @@ Stabilize the repository and hosted build as a reproducible engineering artifact
 
 **Acceptance gate**
 
-- A clean clone on Node `22.13.0` passes every documented command.
+- A clean clone on Node `22.23.2` passes every documented command.
 - Hosted and local production builds expose the same core journeys.
 - No secret, private structure, generated credential, or personal path is present in the public tree or history.
 - Critical keyboard paths and readable focus states pass manual and automated review.
