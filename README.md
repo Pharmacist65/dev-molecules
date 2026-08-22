@@ -66,7 +66,7 @@ npm run catalog:report
 
 ## Run locally
 
-Requirement: Node.js `>=22.23.2`.
+Requirement: Node.js `>=24.19.0`. CI validates the latest patched Node 24 LTS line required by the route-lazy Ketcher integration.
 
 ```bash
 npm ci

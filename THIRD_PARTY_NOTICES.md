@@ -13,6 +13,12 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
 - **chroma-js 2.6.0** — Gregor Aisch — BSD-3-Clause AND Apache-2.0 Licenses
   Project: <https://github.com/gka/chroma.js>
   Purpose: transitive color utility used by `smiles-drawer`.
+- **ketcher-core 3.17.2**, **ketcher-react 3.17.2** and
+  **ketcher-standalone 3.17.2** — EPAM Systems — Apache License 2.0
+  Project: <https://github.com/epam/ketcher>
+  Purpose: the route-lazy, browser-only chemical structure editor and its
+  local binary-WASM structure-service provider in Lab. The integration does
+  not send user-created structures to a Dev Molecules server.
 
 ## Development and verification
 
@@ -23,7 +29,7 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
   Project: <https://github.com/DefinitelyTyped/DefinitelyTyped>
   Purpose: compile-time TypeScript declarations only.
 
-The lockfile pins exact direct versions. Both `npm audit` and `npm audit --omit=dev` report zero known vulnerabilities for this dependency set as checked on 2026-08-22. Toolchain upgrades are compatibility-tested rather than forced across the Vinext/worker boundary.
+The lockfile pins exact direct versions. Both `npm audit` and `npm audit --omit=dev` report zero known vulnerabilities for this dependency set as checked on 2026-08-23. Toolchain upgrades are compatibility-tested rather than forced across the Vinext/worker boundary.
 
 ## Data and scientific-content notices
 

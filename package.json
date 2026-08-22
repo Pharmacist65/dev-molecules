@@ -12,7 +12,7 @@
     "url": "https://github.com/Pharmacist65/dev-molecules/issues"
   },
   "engines": {
-    "node": ">=22.23.2"
+    "node": ">=24.19.0"
   },
   "scripts": {
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
@@ -25,6 +25,7 @@
     "e2e:pages": "playwright test --config playwright.pages.config.ts",
     "catalog:download": "node --import tsx scripts/catalog/cli.mts download",
     "catalog:normalize": "node --import tsx scripts/catalog/cli.mts normalize",
+    "catalog:enrich": "node --import tsx scripts/catalog/cli.mts enrich",
     "catalog:build": "node --import tsx scripts/catalog/cli.mts build",
     "catalog:validate": "node --import tsx scripts/catalog/cli.mts validate",
     "catalog:report": "node --import tsx scripts/catalog/cli.mts report",
@@ -32,6 +33,9 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
+    "ketcher-core": "3.17.2",
+    "ketcher-react": "3.17.2",
+    "ketcher-standalone": "3.17.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "smiles-drawer": "2.4.1",
@@ -44,7 +48,7 @@
     "@next/eslint-plugin-next": "16.2.6",
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.2.1",
-    "@types/node": "22.19.19",
+    "@types/node": "24.13.3",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/three": "0.185.4",
