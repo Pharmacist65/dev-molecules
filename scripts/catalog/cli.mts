@@ -1,5 +1,6 @@
 import { generateStaticCatalog } from "./build-catalog.mjs";
 import { downloadSourceSnapshots } from "./download-source-snapshots.mjs";
+import { generateEnrichmentReadinessReport } from "./enrich-catalog.mjs";
 import { normalizeIdentities } from "./normalize-identities.mjs";
 import { readCatalogReport } from "./report-catalog.mjs";
 import { validateGeneratedCatalog } from "./validate-catalog.mjs";
@@ -22,6 +23,8 @@ const run = async (): Promise<unknown> => {
         coverage: result.coverage,
       };
     }
+    case "enrich":
+      return generateEnrichmentReadinessReport();
     case "build":
       return generateStaticCatalog();
     case "validate":
@@ -30,7 +33,7 @@ const run = async (): Promise<unknown> => {
       return readCatalogReport();
     default:
       throw new Error(
-        "Usage: cli.mts <download|normalize|build|validate|report> [--dry-run|--refresh]",
+        "Usage: cli.mts <download|normalize|enrich|build|validate|report> [--dry-run|--refresh]",
       );
   }
 };

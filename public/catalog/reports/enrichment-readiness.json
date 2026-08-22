@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-22T03:14:07.118Z",
+  "catalogRecordCount": 1552,
+  "activeAdapterCount": 2,
+  "configuredEnrichmentSnapshotCount": 0,
+  "classificationsEnriched": 0,
+  "pharmacologyProfilesEnriched": 0,
+  "admeProfilesEnriched": 0,
+  "note": "This release records source and license readiness only. It does not promote unconfigured enrichment sources into scientific coverage.",
+  "adapters": [
+    {
+      "adapter": "DrugCentralApprovedDrugAdapter",
+      "sourceName": "DrugCentral",
+      "status": "active",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "versionPolicy": "Pin the source URL, capture timestamp, last-modified value and digest.",
+      "limitation": "Registry membership is not a substitute for application, product or active-moiety linkage."
+    },
+    {
+      "adapter": "PubChemStructureAdapter",
+      "sourceName": "PubChem",
+      "status": "active",
+      "redistribution": "build-time-derived-fields-only",
+      "licenseName": "NCBI database policy; submitter rights may vary",
+      "licenseUrl": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "versionPolicy": "Pin CID, InChIKey, request URL, capture timestamp and asset digest.",
+      "limitation": "NCBI cannot grant rights it does not hold in third-party submissions; redistribution remains reviewable."
+    },
+    {
+      "adapter": "DrugCentralTargetAdapter",
+      "sourceName": "DrugCentral target data",
+      "status": "not-configured",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "versionPolicy": "Enable only with a dated target snapshot and deterministic identity join report.",
+      "limitation": "No target snapshot is checked in for the current release."
+    },
+    {
+      "adapter": "ChEMBLBioactivityAdapter",
+      "sourceName": "ChEMBL",
+      "status": "not-configured",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "versionPolicy": "Pin a ChEMBL release and preserve assay, species, unit and document identifiers.",
+      "limitation": "Cross-assay values are not directly comparable without matched conditions."
+    },
+    {
+      "adapter": "GuideToPharmacologyAdapter",
+      "sourceName": "IUPHAR/BPS Guide to PHARMACOLOGY",
+      "status": "not-configured",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "ODbL database / CC BY-SA 4.0 contents",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/",
+      "versionPolicy": "Use a numbered download release; do not depend on browser-time REST access.",
+      "limitation": "The API is transitioning to registered API-key access; no versioned snapshot is checked in."
+    },
+    {
+      "adapter": "DailyMedLabelAdapter",
+      "sourceName": "DailyMed",
+      "status": "not-configured",
+      "redistribution": "link-only",
+      "licenseName": "Label content may retain manufacturer copyright",
+      "licenseUrl": "https://dailymed.nlm.nih.gov/dailymed/about-dailymed.cfm",
+      "versionPolicy": "Pin SPL set/version and section locator; retain short structured fields, not copied label prose.",
+      "limitation": "DailyMed notes that in-use labeling may differ from the latest FDA-approved labeling."
+    },
+    {
+      "adapter": "OpenFdaLabelAdapter",
+      "sourceName": "openFDA Structured Product Labeling",
+      "status": "not-configured",
+      "redistribution": "build-time-derived-fields-only",
+      "licenseName": "Public Domain / CC0 1.0",
+      "licenseUrl": "https://open.fda.gov/license/",
+      "versionPolicy": "Pin export date and SPL identifiers; parse only explicitly mapped sections.",
+      "limitation": "openFDA warns that records are not validated for clinical or production use."
+    },
+    {
+      "adapter": "AtcClassificationAdapter",
+      "sourceName": "WHO Collaborating Centre ATC/DDD",
+      "status": "not-configured",
+      "redistribution": "blocked-pending-permission",
+      "licenseName": "Copyright — attribution required; no commercial copying or modification",
+      "licenseUrl": "https://atcddd.fhi.no/filearchive/publications/2026_guidelines_for_atc_classification_and_ddd_assignment.pdf",
+      "versionPolicy": "Do not package an ATC hierarchy until a compatible permission or licensed source is recorded.",
+      "limitation": "Public-repository redistribution and translated hierarchy generation require a separate rights decision."
+    },
+    {
+      "adapter": "ClinPgxAdapter",
+      "sourceName": "ClinPGx",
+      "status": "not-configured",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "versionPolicy": "Pin a release/export and limit requests to the published service rate.",
+      "limitation": "Pharmacogenomic guidance is not direct diagnostic advice and needs its own reviewed presentation."
+    },
+    {
+      "adapter": "BindingDbAdapter",
+      "sourceName": "BindingDB",
+      "status": "not-configured",
+      "redistribution": "bundle-with-attribution",
+      "licenseName": "CC BY 4.0 for BindingDB-curated data",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "versionPolicy": "Pin a download release and keep measurement, target, species and source-document context.",
+      "limitation": "Only BindingDB-curated fields covered by the stated license may be promoted."
+    }
+  ]
+}
