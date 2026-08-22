@@ -134,7 +134,12 @@ export function parsePlatformHash(rawHash: string): PlatformRoute {
   };
   if (legacyTopLevel[head]) return legacyTopLevel[head];
 
-  if (head === "molecule" || head === "cluster" || head === "compare") {
+  if (
+    head === "universe" ||
+    head === "molecule" ||
+    head === "cluster" ||
+    head === "compare"
+  ) {
     return {
       section: "atlas",
       atlasView: "spatial",

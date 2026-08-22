@@ -54,6 +54,7 @@ test("retired top-level modes redirect deterministically without erasing spatial
   assert.equal(parsePlatformHash("#discover").canonicalHash, "#reviewer");
 
   for (const hash of [
+    "#universe",
     "#molecule/propranolol",
     "#cluster/therapeutic/Cardiovascular",
     "#compare/propranolol,atenolol",
