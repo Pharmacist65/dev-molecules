@@ -9,6 +9,7 @@ import {
 import {
   getReviewerConsoleBootState,
   resolveReviewerAuthorization,
+  serializeRawReviewRecord,
   validateReviewerAction,
   validateScientificReviewRecord,
 } from "@/lib/application/reviewer-console";
@@ -151,7 +152,7 @@ const getRecordStatusLabel = (
 ): string => localizeScientificTerm(
   { kind: "verification", value: record.verificationStatus },
   locale,
-);
+) || copy[locale].recordInvalid;
 
 const emptyReviewRecords: readonly ScientificReviewRecord[] = [];
 
@@ -250,6 +251,9 @@ export function ReviewerConsole({
   const selectedRecordIssues = selectedRecord
     ? validateScientificReviewRecord(selectedRecord)
     : [];
+  const serializedRawRecord = selectedRecord
+    ? serializeRawReviewRecord(selectedRecord.rawRecord)
+    : null;
   const formIsCurrent = form.token === adapterRequest.token &&
     form.recordId === selectedRecordId;
   const rationale = formIsCurrent ? form.rationale : "";
@@ -412,15 +416,17 @@ export function ReviewerConsole({
                 <div><dt>{labels.hash}</dt><dd><code>{selectedRecord.source.contentHash}</code></dd></div>
                 <div><dt>{labels.retrieved}</dt><dd>{selectedRecord.source.retrievedAt}</dd></div>
               </dl>
-              <a href={selectedRecord.source.url} target="_blank" rel="noreferrer">
-                {labels.openSource} <span aria-hidden="true">↗</span>
-              </a>
+              {!selectedRecordIssues.includes("invalid-source-url") ? (
+                <a href={selectedRecord.source.url} target="_blank" rel="noreferrer">
+                  {labels.openSource} <span aria-hidden="true">↗</span>
+                </a>
+              ) : null}
             </section>
 
             <details className={styles.rawRecord}>
               <summary><span>02</span> {labels.rawRecord}</summary>
               <p>{labels.rawBoundary}</p>
-              <pre>{JSON.stringify(selectedRecord.rawRecord, null, 2)}</pre>
+              <pre>{serializedRawRecord ?? labels.recordInvalid}</pre>
             </details>
 
             <section className={styles.tools} data-record-valid={selectedRecordIssues.length === 0}>

@@ -6,6 +6,7 @@ import { tsImport } from "tsx/esm/api";
 const {
   getReviewerConsoleBootState,
   resolveReviewerAuthorization,
+  serializeRawReviewRecord,
   validateReviewerAction,
   validateScientificReviewRecord,
 } = await tsImport(
@@ -107,6 +108,13 @@ test("valid reviewer authorization preserves only declared scopes and expiration
 
 test("review records require resolvable provenance, locator, version, hash, and raw record", () => {
   assert.deepEqual(validateScientificReviewRecord(record), []);
+  const circular = {};
+  circular.self = circular;
+  assert.equal(serializeRawReviewRecord(circular), null);
+  assert.deepEqual(
+    validateScientificReviewRecord({ ...record, rawRecord: circular }),
+    ["raw-record-not-serializable"],
+  );
   const invalid = {
     ...record,
     source: {

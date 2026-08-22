@@ -100,7 +100,17 @@ export type ReviewRecordIssue =
   | "invalid-retrieval-date"
   | "missing-version"
   | "invalid-content-hash"
-  | "missing-raw-record";
+  | "missing-raw-record"
+  | "raw-record-not-serializable";
+
+export const serializeRawReviewRecord = (value: unknown): string | null => {
+  try {
+    const serialized = JSON.stringify(value, null, 2);
+    return typeof serialized === "string" ? serialized : null;
+  } catch {
+    return null;
+  }
+};
 
 export function validateScientificReviewRecord(
   record: ScientificReviewRecord,
@@ -135,6 +145,8 @@ export function validateScientificReviewRecord(
   }
   if (record.rawRecord === null || record.rawRecord === undefined) {
     issues.push("missing-raw-record");
+  } else if (serializeRawReviewRecord(record.rawRecord) === null) {
+    issues.push("raw-record-not-serializable");
   }
   return issues;
 }

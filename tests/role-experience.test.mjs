@@ -112,7 +112,7 @@ test("role surfaces are responsive, standalone, and declare separate security bo
     reviewer.indexOf("adapter.authorize(controller.signal)") <
       reviewer.indexOf("adapter.listReviewRecords(controller.signal)"),
   );
-  assert.match(reviewer, /JSON\.stringify\(selectedRecord\.rawRecord/);
+  assert.match(reviewer, /serializeRawReviewRecord\(selectedRecord\.rawRecord\)/);
   assert.match(instructorCss, /@media \(max-width: 620px\)/);
   assert.match(reviewerCss, /@media \(max-width: 650px\)/);
   assert.doesNotMatch(instructorCss, /min-width:\s*(?:[4-9]\d{2}|\d{4,})px/);

@@ -168,12 +168,25 @@ const completedReferenceKeys = (
   ),
 ]);
 
+const hasValidProgressSnapshot = (
+  snapshot: InstructorProgressSnapshot,
+): boolean => snapshot.scope === "device-local" &&
+  Number.isFinite(Date.parse(snapshot.capturedAt)) &&
+  new Set(snapshot.completedNomenclatureTaskIds).size ===
+    snapshot.completedNomenclatureTaskIds.length &&
+  snapshot.completedNomenclatureTaskIds.every((id) => id.startsWith("academy:")) &&
+  new Set(snapshot.completedSynthesisTaskIds).size ===
+    snapshot.completedSynthesisTaskIds.length &&
+  snapshot.completedSynthesisTaskIds.every((id) =>
+    id.startsWith("synthesis-atlas-challenge:")
+  );
+
 export function buildInstructorAssignmentSummary(
   taskReferences: readonly InstructorTaskReference[],
   snapshot: InstructorProgressSnapshot | null,
 ): InstructorAssignmentSummary {
   const selectedTaskCount = new Set(taskReferences.map(referenceKey)).size;
-  if (!snapshot) {
+  if (!snapshot || !hasValidProgressSnapshot(snapshot)) {
     return {
       selectedTaskCount,
       completedTaskCount: null,
@@ -208,7 +221,11 @@ export function createInstructorProgressExport(
   locale: RoleExperienceLocale,
   exportedAt: string,
 ): InstructorProgressExport | null {
-  if (!snapshot || !Number.isFinite(Date.parse(exportedAt))) return null;
+  if (
+    !snapshot ||
+    !hasValidProgressSnapshot(snapshot) ||
+    !Number.isFinite(Date.parse(exportedAt))
+  ) return null;
   const completed = completedReferenceKeys(snapshot);
   const tasks = lessonPackage.taskReferences.map((reference) => ({
     reference,
