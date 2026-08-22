@@ -1,0 +1,2714 @@
+.universe {
+  --ink: #eff5ed;
+  --muted: #8d9c95;
+  --faint: #617069;
+  --line: rgb(224 240 232 / 10%);
+  --panel: #0c1613;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 76% -10%, rgb(74 173 142 / 12%), transparent 29rem),
+    linear-gradient(150deg, #111d19 0%, #07100e 68%);
+  color: var(--ink);
+  box-shadow: 0 28px 82px rgb(0 0 0 / 25%);
+  font-family: inherit;
+}
+
+.universe *,
+.universe *::before,
+.universe *::after {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  min-height: 112px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.15rem clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.headingBlock {
+  display: grid;
+  max-width: 850px;
+  grid-template-columns: minmax(210px, auto) minmax(260px, 1fr);
+  align-items: end;
+  column-gap: 1.35rem;
+}
+
+.eyebrow {
+  grid-column: 1 / -1;
+  margin: 0 0 0.45rem;
+  color: #b8f46d;
+  font: 700 0.56rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.17em;
+}
+
+.header h2 {
+  margin: 0;
+  color: #f4f5e9;
+  font-size: clamp(1.45rem, 2.4vw, 2.4rem);
+  font-weight: 520;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.header h2:focus,
+.clusterHeader h3:focus,
+.focusHeader h3:focus {
+  outline: none;
+}
+
+.header h2:focus-visible,
+.clusterHeader h3:focus-visible,
+.focusHeader h3:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgb(164 227 204 / 72%);
+}
+
+.description {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.headerSummary {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+.headerSummary span {
+  display: grid;
+  min-width: 82px;
+  align-content: center;
+  gap: 0.12rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 2.5%);
+  color: #899a92;
+  font-size: 0.56rem;
+  text-align: center;
+}
+
+.headerSummary strong {
+  color: #dce8e2;
+  font: 650 0.74rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.headerSummary span[data-level="focus"] {
+  border-color: rgb(184 244 109 / 24%);
+  background: rgb(184 244 109 / 5%);
+}
+
+.toolbar {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.62fr) minmax(460px, 1.38fr);
+  align-items: end;
+  gap: 1rem;
+  padding: 0.75rem clamp(1rem, 2.5vw, 2.25rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgb(2 8 6 / 34%);
+}
+
+.searchField label,
+.controlLabel {
+  display: block;
+  margin: 0 0 0.38rem;
+  color: #96a59e;
+  font-size: 0.61rem;
+  font-weight: 650;
+}
+
+.searchControl {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  width: 0.68rem;
+  height: 0.68rem;
+  transform: translateY(-55%);
+  border: 1.4px solid #728079;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.searchIcon::after {
+  position: absolute;
+  right: -0.25rem;
+  bottom: -0.13rem;
+  width: 0.33rem;
+  height: 1px;
+  transform: rotate(45deg);
+  background: #728079;
+  content: "";
+}
+
+.searchControl input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0.6rem 4.4rem 0.6rem 2.1rem;
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-radius: 9px;
+  outline: none;
+  background: rgb(255 255 255 / 4%);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.72rem;
+}
+
+.searchControl input::placeholder {
+  color: #92a29a;
+}
+
+.searchControl input:focus-visible {
+  border-color: #85d8bb;
+  box-shadow: 0 0 0 3px rgb(117 219 189 / 13%);
+}
+
+.clearButton {
+  position: absolute;
+  top: 50%;
+  right: 0.35rem;
+  padding: 0.35rem 0.45rem;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #94a39c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.57rem;
+}
+
+.clearButton:hover {
+  background: rgb(255 255 255 / 7%);
+  color: white;
+}
+
+.lensPanel {
+  min-width: 0;
+}
+
+.lensDisclosureButton {
+  display: grid;
+  width: 100%;
+  min-height: 46px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.18rem 0.8rem;
+  padding: 0.52rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 3%);
+  color: #dfeae5;
+  cursor: pointer;
+  text-align: left;
+}
+
+.lensDisclosureButton span {
+  grid-column: 1;
+  color: #96a59e;
+  font-size: 0.54rem;
+}
+
+.lensDisclosureButton strong {
+  grid-column: 1;
+  overflow: hidden;
+  font-size: 0.66rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lensDisclosureButton i {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: #b8f46d;
+  font: normal 1rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.lensDrawer {
+  position: absolute;
+  z-index: 45;
+  top: calc(100% + 1px);
+  left: clamp(1rem, 2.5vw, 2.25rem);
+  width: min(680px, calc(100% - clamp(2rem, 5vw, 4.5rem)));
+  max-height: min(66svh, 560px);
+  padding: 0.8rem;
+  overflow-y: auto;
+  border: 1px solid rgb(126 219 190 / 24%);
+  border-radius: 0 0 12px 12px;
+  background: rgb(8 17 15 / 97%);
+  box-shadow: 0 24px 50px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(16px);
+}
+
+.lensButtons {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.lensButton {
+  min-height: 38px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgb(255 255 255 / 9%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 2%);
+  color: #83928b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
+
+.lensButton:hover {
+  border-color: rgb(126 219 190 / 32%);
+  color: #dfeae5;
+}
+
+.lensButton[aria-pressed="true"] {
+  border-color: rgb(184 244 109 / 30%);
+  background: rgb(184 244 109 / 8%);
+  color: #d9f6b5;
+}
+
+.lensDescription {
+  display: block;
+  min-height: 0.8rem;
+  margin-top: 0.28rem;
+  overflow: hidden;
+  color: #899a92;
+  font-size: 0.64rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumb {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 0.46rem;
+  padding: 0 clamp(1rem, 2.5vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+  background: rgb(8 16 13 / 78%);
+  color: #98a8a0;
+  font: 0.64rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.breadcrumb button {
+  padding: 0.32rem 0.4rem;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #a7b6af;
+  cursor: pointer;
+  font: inherit;
+}
+
+.breadcrumb button:hover,
+.breadcrumb button[aria-current="page"],
+.breadcrumb > span[aria-current="page"] {
+  color: #d9f6b5;
+}
+
+.breadcrumb p {
+  margin: 0 0 0 auto;
+  color: #91a199;
+}
+
+.universeStage,
+.clusterStage,
+.focusStage {
+  min-height: clamp(520px, calc(100svh - 285px), 720px);
+}
+
+.universeStage {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  background:
+    radial-gradient(circle at 50% 46%, rgb(75 162 135 / 9%), transparent 36%),
+    linear-gradient(rgb(168 214 198 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(168 214 198 / 3%) 1px, transparent 1px),
+    #08100e;
+  background-position: center;
+  background-size: auto, 48px 48px, 48px 48px, auto;
+}
+
+.universeStage::before {
+  position: absolute;
+  inset: 7% 9%;
+  border: 1px solid rgb(130 226 193 / 7%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.universeStage[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.universeWorld {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.universeStage[data-dragging="true"] .universeWorld {
+  transition: none;
+}
+
+.axisLabel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #53635b;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.axisLabel i {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, #6b8e81, transparent);
+}
+
+.clusterNode {
+  --accent: #89e4c4;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  z-index: 2;
+  display: grid;
+  width: clamp(160px, 16vw, 232px);
+  height: clamp(140px, 17vh, 188px);
+  padding: 0;
+  transform: translate(-50%, -50%);
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.clusterHalo {
+  position: absolute;
+  inset: 13% 8% 20%;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 86%);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 90%), transparent 68%);
+  box-shadow: 0 0 48px color-mix(in srgb, var(--accent), transparent 92%);
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.clusterNode:hover .clusterHalo,
+.clusterNode:focus-visible .clusterHalo {
+  transform: scale(1.08);
+  border-color: color-mix(in srgb, var(--accent), transparent 55%);
+}
+
+.clusterNode:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent), white 8%);
+  outline-offset: 5px;
+}
+
+.clusterStructures {
+  position: absolute;
+  inset: 5% 4% 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.clusterPreview {
+  position: relative;
+  width: 62%;
+  height: 100%;
+  flex: 0 0 62%;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  filter: drop-shadow(0 10px 20px rgb(0 0 0 / 35%));
+}
+
+.clusterPreview:nth-child(2),
+.clusterPreview:nth-child(3) {
+  position: absolute;
+  width: 43%;
+  height: 72%;
+  opacity: 0.58;
+}
+
+.clusterPreview:nth-child(2) {
+  left: 0;
+  transform: translate(-18%, 12%) scale(0.88);
+}
+
+.clusterPreview:nth-child(3) {
+  right: 0;
+  transform: translate(18%, 12%) scale(0.88);
+}
+
+.clusterPreview:first-child {
+  z-index: 2;
+}
+
+.clusterPreview canvas,
+.choicePreview canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.clusterIdentity {
+  position: absolute;
+  right: 8%;
+  bottom: 2%;
+  left: 8%;
+  z-index: 4;
+  display: grid;
+  justify-items: center;
+  gap: 0.16rem;
+  padding-top: 0.42rem;
+  border-top: 1px solid color-mix(in srgb, var(--accent), transparent 78%);
+  background: linear-gradient(90deg, transparent, rgb(8 16 14 / 88%) 18%, rgb(8 16 14 / 88%) 82%, transparent);
+}
+
+.clusterIdentity strong {
+  max-width: 100%;
+  overflow: hidden;
+  color: #e9f1ed;
+  font-size: 0.66rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clusterIdentity small {
+  color: #75857d;
+  font-size: 0.52rem;
+}
+
+.missingCompact,
+.missingStructure {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  border: 1px dashed rgb(224 240 232 / 15%);
+  color: #829089;
+  text-align: center;
+}
+
+.missingCompact {
+  width: 78%;
+  height: 68%;
+  border-radius: 50%;
+  font-size: 0.54rem;
+}
+
+.missingStructure {
+  width: 100%;
+  height: 100%;
+  gap: 0.35rem;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 1.5%);
+}
+
+.missingStructure strong {
+  color: #a1ada7;
+  font-size: 0.66rem;
+}
+
+.missingStructure small {
+  color: #617069;
+  font-size: 0.54rem;
+}
+
+.cameraControls {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgb(6 13 11 / 86%);
+  box-shadow: 0 9px 28px rgb(0 0 0 / 26%);
+  backdrop-filter: blur(10px);
+}
+
+.cameraControls button,
+.emptyState button,
+.emptyStateInline button {
+  min-height: 30px;
+  padding: 0.35rem 0.55rem;
+  border: 0;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 4%);
+  color: #aab7b1;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.59rem;
+}
+
+.cameraControls button:first-child,
+.cameraControls button:nth-child(3) {
+  min-width: 30px;
+  font-size: 0.9rem;
+}
+
+.cameraControls button:hover,
+.emptyState button:hover,
+.emptyStateInline button:hover {
+  background: rgb(126 219 190 / 12%);
+  color: #e7f6f0;
+}
+
+.cameraControls output {
+  min-width: 45px;
+  color: #718179;
+  font: 0.55rem var(--font-geist-mono, ui-monospace, monospace);
+  text-align: center;
+}
+
+.stageStatus {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 5;
+  display: flex;
+  gap: 0.75rem;
+  color: #899a92;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+  pointer-events: none;
+}
+
+.stageStatus span + span::before {
+  margin-right: 0.75rem;
+  color: #3b4943;
+  content: "/";
+}
+
+.emptyState,
+.emptyStateInline {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.emptyState {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  width: min(340px, calc(100% - 2rem));
+  padding: 1.6rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgb(8 16 14 / 94%);
+}
+
+.emptyState strong,
+.emptyStateInline strong {
+  color: #e0e9e4;
+  font-size: 0.82rem;
+}
+
+.emptyState p,
+.emptyStateInline p {
+  margin: 0.48rem 0 0.9rem;
+  color: #7b8982;
+  font-size: 0.67rem;
+  line-height: 1.5;
+}
+
+.clusterStage {
+  display: grid;
+  align-content: start;
+  background:
+    radial-gradient(circle at 50% 22%, rgb(80 175 145 / 10%), transparent 32rem),
+    #08100e;
+}
+
+.clusterHeader {
+  display: flex;
+  min-height: 92px;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem clamp(1rem, 2.5vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.clusterHeader p,
+.focusHeader p,
+.inspectorKicker {
+  margin: 0 0 0.34rem;
+  color: #85d8bb;
+  font: 650 0.53rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.12em;
+}
+
+.clusterHeader h3,
+.focusHeader h3 {
+  margin: 0;
+  color: #f1f3e8;
+  font-size: clamp(1.35rem, 2.2vw, 2.15rem);
+  font-weight: 520;
+  letter-spacing: -0.04em;
+}
+
+.clusterHeader > span {
+  color: #728179;
+  font-size: 0.61rem;
+}
+
+.moleculeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.35rem;
+  padding: clamp(0.7rem, 1.5vw, 1.25rem);
+}
+
+.moleculeChoice {
+  --accent: #89e4c4;
+  display: grid;
+  min-width: 0;
+  min-height: 235px;
+  padding: 0.5rem;
+  grid-template-rows: minmax(170px, 1fr) auto;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.moleculeChoice:hover,
+.moleculeChoice:focus-visible {
+  border-color: color-mix(in srgb, var(--accent), transparent 60%);
+  background: color-mix(in srgb, var(--accent), transparent 95%);
+}
+
+.moleculeChoice:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent), white 8%);
+  outline-offset: 2px;
+}
+
+.choiceStructure {
+  position: relative;
+  display: block;
+  min-height: 170px;
+  overflow: hidden;
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at center, color-mix(in srgb, var(--accent), transparent 92%), transparent 62%),
+    linear-gradient(rgb(154 200 185 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(154 200 185 / 3%) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  pointer-events: none;
+}
+
+.choicePreview {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+}
+
+.choiceIdentity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin: 0 0.55rem;
+  padding: 0.68rem 0 0.28rem;
+  border-top: 1px solid color-mix(in srgb, var(--accent), transparent 79%);
+}
+
+.choiceIdentity > span {
+  display: grid;
+  min-width: 0;
+  gap: 0.16rem;
+}
+
+.choiceIdentity strong {
+  overflow: hidden;
+  color: #e6eee9;
+  font-size: 0.71rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.choiceIdentity small {
+  color: #788880;
+  font: 0.56rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.choiceIdentity i,
+.evidenceBadge i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #707d77;
+  box-shadow: 0 0 8px currentcolor;
+}
+
+.choiceIdentity i[data-tone="verified"],
+.evidenceBadge[data-tone="verified"] i {
+  background: #75e0b7;
+}
+
+.choiceIdentity i[data-tone="supported"],
+.evidenceBadge[data-tone="supported"] i {
+  background: #78b9ff;
+}
+
+.choiceIdentity i[data-tone="pending"],
+.evidenceBadge[data-tone="pending"] i {
+  background: #efb45f;
+}
+
+.choiceIdentity i[data-tone="predicted"],
+.evidenceBadge[data-tone="predicted"] i {
+  background: #d39cff;
+}
+
+.emptyStateInline {
+  min-height: 390px;
+  align-content: center;
+}
+
+.emptyStateInline > div {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.focusStage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 310px);
+  background: #08100e;
+}
+
+.focusStage[data-inspector="closed"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.focusMain {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.focusHeader {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem 0.85rem clamp(1rem, 2.5vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.focusActions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.focusActions button,
+.inspectorTopline button {
+  min-height: 34px;
+  padding: 0.48rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 3%);
+  color: #9ba9a2;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.59rem;
+}
+
+.focusActions button:hover,
+.inspectorTopline button:hover {
+  border-color: rgb(126 219 190 / 28%);
+  color: #e3efe9;
+}
+
+.viewerSurface {
+  display: grid;
+  min-height: 0;
+  padding: 0.65rem;
+}
+
+.focusViewer {
+  --molecule-viewer-height: clamp(420px, calc(100svh - 405px), 640px);
+  min-height: 100%;
+  border-radius: 16px;
+}
+
+.structureError {
+  display: grid;
+  min-height: clamp(420px, calc(100svh - 405px), 640px);
+  align-content: center;
+  justify-items: center;
+  padding: 2rem;
+  border: 1px dashed rgb(255 154 132 / 24%);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle, rgb(255 128 100 / 6%), transparent 40%),
+    rgb(255 255 255 / 1%);
+  text-align: center;
+}
+
+.structureError > span {
+  margin-bottom: 0.65rem;
+  color: #e6a190;
+  font: 650 0.55rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.15em;
+}
+
+.structureError h4 {
+  margin: 0;
+  color: #e8ebe5;
+  font-size: 1.1rem;
+  font-weight: 560;
+}
+
+.structureError p {
+  max-width: 520px;
+  margin: 0.7rem 0 0;
+  color: #839089;
+  font-size: 0.73rem;
+  line-height: 1.6;
+}
+
+.inspector {
+  min-width: 0;
+  padding: 1rem;
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+  background:
+    linear-gradient(rgb(255 255 255 / 2%), transparent 38%),
+    var(--panel);
+}
+
+.inspectorTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 1.65rem;
+}
+
+.evidenceBadge {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.4rem;
+  overflow: visible;
+  color: #99a69f;
+  font-size: 0.58rem;
+  line-height: 1.35;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.inspectorTopline button {
+  min-height: 28px;
+  padding: 0.32rem 0.45rem;
+}
+
+.inspectorKicker {
+  color: #899a92;
+}
+
+.inspector h4 {
+  margin: 0;
+  color: #f0f3e8;
+  font-size: 1.48rem;
+  font-weight: 540;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.formula {
+  margin: 0.45rem 0 0;
+  color: #8addbf;
+  font: 0.72rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.summary {
+  margin: 1rem 0;
+  color: #91a099;
+  font-size: 0.7rem;
+  line-height: 1.58;
+}
+
+.regulatoryEvidence {
+  display: grid;
+  gap: 0.32rem;
+  margin: 0 0 0.9rem;
+  padding: 0.72rem;
+  border: 1px solid rgb(108 196 255 / 20%);
+  border-radius: 9px;
+  background: rgb(67 139 188 / 7%);
+}
+
+.regulatoryEvidence p,
+.regulatoryEvidence strong,
+.regulatoryEvidence span,
+.regulatoryEvidence small {
+  margin: 0;
+}
+
+.regulatoryEvidence p {
+  color: #9ecfed;
+  font: 650 0.57rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.08em;
+}
+
+.regulatoryEvidence strong {
+  color: #e2f1f8;
+  font-size: 0.7rem;
+}
+
+.regulatoryEvidence span,
+.regulatoryEvidence small {
+  color: #a5b8c2;
+  font-size: 0.61rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.regulatoryEvidence a {
+  color: #a9dcf5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.regulatoryEvidence small {
+  color: #8fa39b;
+}
+
+.provenanceList,
+.lensValues {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.provenanceList > div,
+.lensValues > div {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.72fr) minmax(96px, 1.28fr);
+  gap: 0.55rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.provenanceList dt,
+.provenanceList dd,
+.lensValues dt,
+.lensValues dd {
+  min-width: 0;
+  margin: 0;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.provenanceList dt,
+.lensValues dt {
+  color: #8c9d95;
+}
+
+.provenanceList dd,
+.lensValues dd {
+  color: #b9c6bf;
+  text-align: right;
+}
+
+.provenanceList a {
+  color: #9be2ca;
+  text-decoration: underline;
+  text-decoration-color: rgb(155 226 202 / 35%);
+  text-underline-offset: 3px;
+}
+
+.provenanceWarning {
+  margin: 0.8rem 0;
+  padding: 0.7rem;
+  border: 1px solid rgb(239 180 95 / 20%);
+  border-radius: 8px;
+  background: rgb(239 180 95 / 5%);
+  color: #bca77f;
+  font-size: 0.57rem;
+  line-height: 1.5;
+}
+
+.lensValues > div[data-active="true"] {
+  margin-inline: -0.45rem;
+  padding-inline: 0.45rem;
+  background: rgb(126 219 190 / 5%);
+}
+
+.lensValues > div[data-active="true"] dt,
+.lensValues > div[data-active="true"] dd {
+  color: #a5dfcb;
+}
+
+.footer {
+  display: flex;
+  min-height: 39px;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem clamp(1rem, 2.5vw, 2.25rem);
+  border-top: 1px solid var(--line);
+  color: #899a92;
+  font-size: 0.6rem;
+}
+
+.footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.footer span:last-child {
+  margin-left: auto;
+  text-align: right;
+}
+
+.footer kbd {
+  display: inline-grid;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 0.25rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 4px;
+  background: rgb(255 255 255 / 3%);
+  color: #93a098;
+  font: inherit;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.universe button:focus-visible,
+.universe a:focus-visible,
+.universe input:focus-visible {
+  outline: 2px solid #a4e3cc;
+  outline-offset: 2px;
+}
+
+@media (max-width: 1040px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .headingBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .description {
+    margin-top: 0.55rem;
+  }
+
+  .headerSummary span:nth-child(2) {
+    display: none;
+  }
+
+  .clusterNode {
+    width: clamp(140px, 19vw, 190px);
+  }
+
+  .focusStage {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+}
+
+@media (max-width: 800px) {
+  .header {
+    min-height: 0;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .headerSummary span {
+    flex: 1;
+  }
+
+  .headerSummary span:nth-child(2) {
+    display: grid;
+  }
+
+  .toolbar {
+    grid-template-columns: minmax(0, 1fr) minmax(132px, 0.42fr);
+    align-items: end;
+  }
+
+  .lensButtons {
+    padding-bottom: 0.2rem;
+    overflow-x: auto;
+  }
+
+  .universeStage,
+  .clusterStage,
+  .focusStage {
+    min-height: 560px;
+  }
+
+  .universeWorld {
+    min-width: 760px;
+    transform-origin: left center;
+  }
+
+  .clusterNode {
+    width: 150px;
+    height: 142px;
+  }
+
+  .focusStage {
+    grid-template-columns: 1fr;
+  }
+
+  .inspector {
+    max-height: none;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .focusHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .focusViewer {
+    --molecule-viewer-height: 520px;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+  }
+
+  .footer span:last-child {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media (max-width: 540px) {
+  .universe {
+    border-radius: 18px;
+  }
+
+  .header h2 {
+    font-size: 1.55rem;
+  }
+
+  .headerSummary span:nth-child(2) {
+    display: none;
+  }
+
+  .toolbar {
+    gap: 0.55rem;
+    padding: 0.62rem 0.75rem;
+  }
+
+  .lensDisclosureButton {
+    min-height: 42px;
+    padding: 0.42rem 0.55rem;
+  }
+
+  .lensDisclosureButton span {
+    font-size: 0.5rem;
+  }
+
+  .lensDisclosureButton strong {
+    font-size: 0.58rem;
+  }
+
+  .lensDrawer {
+    left: 0.75rem;
+    width: calc(100% - 1.5rem);
+    max-height: 58svh;
+  }
+
+  .breadcrumb {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .breadcrumb p {
+    display: none;
+  }
+
+  .universeStage {
+    min-height: 520px;
+  }
+
+  .universeWorld {
+    min-width: 820px;
+  }
+
+  .stageStatus {
+    display: none;
+  }
+
+  .clusterHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .moleculeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .moleculeChoice {
+    min-height: 260px;
+  }
+
+  .focusActions {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .focusActions button {
+    white-space: nowrap;
+  }
+
+  .focusViewer {
+    --molecule-viewer-height: 470px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .universe *,
+  .universe *::before,
+  .universe *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .universe,
+  .universeStage,
+  .clusterStage,
+  .focusStage,
+  .clusterNode,
+  .moleculeChoice,
+  .inspector {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .clusterHalo,
+  .universeStage::before,
+  .axisLabel {
+    display: none;
+  }
+}
+
+/* Shared single-context Explore scene */
+.lensNarrative {
+  min-width: 0;
+}
+
+.lensTechnical {
+  display: block;
+  margin-top: 0.18rem;
+  overflow: hidden;
+  color: #899a92;
+  font: 0.59rem var(--font-geist-mono, ui-monospace, monospace);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lensMeaning,
+.lensCaveat {
+  display: block;
+  margin-top: 0.22rem;
+  color: #a9b9b1;
+  font-size: 0.64rem;
+  line-height: 1.45;
+}
+
+.lensMeaning strong,
+.lensCaveat strong {
+  color: #d4e2db;
+  font-weight: 650;
+}
+
+.lensCaveat {
+  color: #b9ad8f;
+}
+
+.exploreStage {
+  position: relative;
+  min-height: clamp(560px, calc(100svh - 285px), 760px);
+  overflow: hidden;
+  background: #07100f;
+}
+
+.sceneTelemetry {
+  position: relative;
+  min-height: inherit;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgb(73 155 132 / 9%), transparent 42%),
+    linear-gradient(rgb(157 205 189 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(157 205 189 / 3%) 1px, transparent 1px),
+    #07100f;
+  background-size: auto, 48px 48px, 48px 48px, auto;
+}
+
+.sharedScene,
+.sceneHidden {
+  --molecular-scene-height: clamp(560px, calc(100svh - 285px), 760px);
+  min-height: inherit;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.sceneHidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.twoDStage {
+  position: absolute;
+  z-index: 3;
+  inset: 154px 0 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgb(77 159 136 / 11%), transparent 45%),
+    linear-gradient(rgb(157 205 189 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(157 205 189 / 3%) 1px, transparent 1px),
+    #07100f;
+  background-size: auto, 42px 42px, 42px 42px, auto;
+}
+
+.twoDStage > div {
+  width: min(86%, 980px);
+  height: min(78%, 560px);
+  border: 0;
+  background: transparent;
+}
+
+.twoDStage canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.missingStructure {
+  position: absolute;
+  z-index: 12;
+  inset: 154px 0 0;
+  display: grid;
+  width: auto;
+  height: auto;
+  align-content: center;
+  justify-items: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 0;
+  background: rgb(7 16 15 / 93%);
+  color: #eff4ef;
+  text-align: center;
+}
+
+.missingStructure strong {
+  color: #ffb0a7;
+  font-size: 0.92rem;
+}
+
+.missingStructure p {
+  margin: 0;
+  color: #8e9e96;
+  font-size: 0.68rem;
+}
+
+.clusterLayer,
+.clusterOverlay,
+.focusOverlay {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+}
+
+.farClusterWorld {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  transition: transform 120ms ease-out;
+}
+
+.nearClusterNavigation {
+  position: absolute;
+  z-index: 8;
+  top: 0.7rem;
+  right: 0.7rem;
+  left: 0.7rem;
+  display: flex;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.38rem;
+  overflow-x: auto;
+  border: 1px solid rgb(220 241 232 / 12%);
+  border-radius: 10px;
+  background: rgb(6 14 12 / 88%);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 26%);
+  list-style: none;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.nearClusterNavigation li {
+  flex: 0 0 auto;
+}
+
+.nearClusterNavigation button {
+  min-height: 34px;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid rgb(226 242 234 / 11%);
+  border-radius: 7px;
+  outline: none;
+  background: rgb(255 255 255 / 4%);
+  color: #c2d1ca;
+  cursor: pointer;
+  font: 620 0.57rem var(--font-geist-mono, ui-monospace, monospace);
+  white-space: nowrap;
+}
+
+.nearClusterNavigation button:hover,
+.nearClusterNavigation button:focus-visible {
+  border-color: rgb(120 229 193 / 48%);
+  background: rgb(77 151 126 / 24%);
+  color: #e4f8f0;
+}
+
+.nearClusterNavigation button:focus-visible {
+  outline: 2px solid #7ce5c1;
+  outline-offset: 2px;
+}
+
+.nearClusterNavigation small {
+  margin-left: 0.25rem;
+  color: #9aaca3;
+  font-size: 0.51rem;
+}
+
+.moleculeHoverLabel {
+  position: absolute;
+  z-index: 8;
+  bottom: 3.65rem;
+  left: 1rem;
+  max-width: min(74vw, 420px);
+  padding: 0.42rem 0.58rem;
+  border: 1px solid rgb(117 224 188 / 18%);
+  border-radius: 7px;
+  background: rgb(5 13 11 / 88%);
+  color: #bcd0c7;
+  font: 0.56rem var(--font-geist-mono, ui-monospace, monospace);
+  pointer-events: none;
+}
+
+.structureGapStatus {
+  position: absolute;
+  z-index: 9;
+  top: 4.65rem;
+  left: 1rem;
+  display: grid;
+  max-width: min(520px, calc(100% - 2rem));
+  gap: 0.2rem;
+  padding: 0.55rem 0.68rem;
+  border: 1px solid rgb(239 180 95 / 28%);
+  border-radius: 8px;
+  background: rgb(30 24 13 / 90%);
+  color: #d9c99f;
+  pointer-events: auto;
+}
+
+.structureGapStatus strong {
+  color: #f0c985;
+  font-size: 0.61rem;
+}
+
+.structureGapStatus > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.structureGapStatus > div + div {
+  padding-top: 0.42rem;
+  border-top: 1px solid rgb(239 180 95 / 18%);
+}
+
+.structureGapStatus span {
+  font-size: 0.54rem;
+  line-height: 1.42;
+}
+
+.clusterGlyph {
+  --accent: #8be1c4;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  display: grid;
+  width: clamp(132px, 12.5vw, 190px);
+  min-height: 98px;
+  padding: 0.55rem;
+  transform: translate(-50%, -50%);
+  place-items: center;
+  border: 0;
+  border-radius: 3px;
+  outline: none;
+  background: transparent;
+  color: #eaf1ed;
+  cursor: pointer;
+  font: inherit;
+  pointer-events: auto;
+  isolation: isolate;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease, opacity 150ms ease;
+}
+
+.clusterGlyph::before {
+  position: absolute;
+  z-index: -1;
+  inset: -14% -9%;
+  clip-path: polygon(7% 36%, 23% 10%, 63% 4%, 93% 25%, 98% 64%, 72% 94%, 31% 88%, 4% 68%);
+  background:
+    radial-gradient(circle at 49% 48%, color-mix(in srgb, var(--accent), transparent 82%), transparent 69%),
+    rgb(6 14 12 / 58%);
+  content: "";
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.clusterGlyph:hover,
+.clusterGlyph:focus-visible {
+  z-index: 4;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.clusterGlyph:hover::before,
+.clusterGlyph:focus-visible::before {
+  filter: brightness(1.18) saturate(1.12);
+  transform: scale(1.035);
+}
+
+.clusterGlyph:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent), white 15%);
+  outline-offset: 3px;
+}
+
+.clusterGlyph > i {
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 28px;
+  clip-path: polygon(4% 28%, 31% 2%, 88% 18%, 98% 71%, 62% 98%, 12% 79%);
+  background: color-mix(in srgb, var(--accent), transparent 83%);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--accent), transparent 76%);
+}
+
+.clusterGlyph > i b {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.clusterGlyph > i b:first-child { top: 5px; left: 8px; }
+.clusterGlyph > i b:nth-child(2) { top: 12px; right: 7px; }
+.clusterGlyph > i b:nth-child(3) { bottom: 4px; left: 16px; }
+
+.clusterGlyph > span {
+  display: grid;
+  width: 100%;
+  gap: 0.12rem;
+  text-align: center;
+}
+
+.clusterGlyph strong {
+  overflow: hidden;
+  font-size: 0.58rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clusterGlyph small {
+  color: #91a199;
+  font-size: 0.49rem;
+}
+
+.clusterLayer[data-near="true"] .clusterGlyph {
+  min-height: 48px;
+  opacity: 0.42;
+  background: rgb(6 14 12 / 46%);
+}
+
+.clusterLayer[data-near="true"] .clusterGlyph > i {
+  display: none;
+}
+
+.clusterLayer[data-near="true"] .clusterGlyph:hover,
+.clusterLayer[data-near="true"] .clusterGlyph:focus-visible {
+  opacity: 1;
+}
+
+.universeCamera {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgb(5 12 10 / 86%);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 28%);
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+.universeCamera button,
+.focusControls button,
+.focusActions button,
+.inspectorTop button,
+.emptyState button {
+  min-height: 32px;
+  padding: 0.42rem 0.58rem;
+  border: 1px solid rgb(231 243 237 / 9%);
+  border-radius: 7px;
+  background: rgb(255 255 255 / 3%);
+  color: #aab7b1;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.58rem;
+}
+
+.universeCamera button:hover,
+.focusControls button:hover:not(:disabled),
+.focusActions button:hover,
+.inspectorTop button:hover,
+.emptyState button:hover {
+  border-color: rgb(125 222 190 / 32%);
+  color: #edf8f4;
+}
+
+.universeCamera output {
+  min-width: 42px;
+  color: #91a199;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+  text-align: center;
+}
+
+.lodStatus {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgb(232 244 238 / 8%);
+  border-radius: 999px;
+  background: rgb(5 12 10 / 74%);
+  color: #91a199;
+  font: 0.51rem var(--font-geist-mono, ui-monospace, monospace);
+  pointer-events: none;
+}
+
+.clusterOverlay > header,
+.focusHeader {
+  position: absolute;
+  z-index: 7;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 2.5vw, 2.2rem);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(rgb(6 14 12 / 94%), rgb(6 14 12 / 74%));
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+.clusterOverlay > header p,
+.focusHeader p {
+  margin: 0 0 0.3rem;
+  color: #83ddbe;
+  font: 650 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.12em;
+}
+
+.clusterOverlay > header h3,
+.focusHeader h3 {
+  margin: 0;
+  color: #f0f3e9;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  font-weight: 530;
+  letter-spacing: -0.04em;
+}
+
+.clusterOverlay > header h3:focus-visible,
+.focusHeader h3:focus-visible {
+  outline: 2px solid #83ddbe;
+  outline-offset: 4px;
+}
+
+.clusterOverlay > header span {
+  color: #b3a47f;
+  font-size: 0.55rem;
+}
+
+.moleculeSelectors {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  display: flex;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.35rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgb(5 12 10 / 82%);
+  list-style: none;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.moleculeSelectors li {
+  display: grid;
+  flex: 1 0 min(220px, 32vw);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem;
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.moleculeSelectors li[data-selected="true"] {
+  border-color: rgb(126 228 193 / 42%);
+  background: rgb(64 139 114 / 15%);
+}
+
+.moleculeSelectors button {
+  display: flex;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 2%);
+  color: #e0e8e4;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.moleculeSelectors .moleculeFocusButton {
+  width: auto;
+  min-width: 52px;
+  justify-content: center;
+  padding-inline: 0.45rem;
+  color: #a8c1b7;
+  font: 650 0.5rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.moleculeSelectors .moleculeSelectButton[aria-pressed="true"] {
+  background: rgb(107 218 181 / 10%);
+  color: #effcf7;
+}
+
+.moleculeSelectors button:hover,
+.moleculeSelectors button:focus-visible {
+  border-color: rgb(131 221 190 / 30%);
+  background: rgb(131 221 190 / 7%);
+}
+
+.moleculeSelectors strong {
+  overflow: hidden;
+  font-size: 0.64rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moleculeSelectors small {
+  margin-left: auto;
+  color: #77877f;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.moleculeSelectors i,
+.inspectorTop span i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #748078;
+}
+
+.moleculeSelectors i[data-tone="verified"],
+.inspectorTop span[data-tone="verified"] i { background: #70deb7; }
+.moleculeSelectors i[data-tone="supported"],
+.inspectorTop span[data-tone="supported"] i { background: #72b9ff; }
+.moleculeSelectors i[data-tone="pending"],
+.moleculeSelectors i[data-tone="predicted"],
+.inspectorTop span[data-tone="pending"] i,
+.inspectorTop span[data-tone="predicted"] i { background: #efb45f; }
+
+.emptyState {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.2rem;
+  transform: translate(-50%, -50%);
+  justify-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgb(6 14 12 / 92%);
+  pointer-events: auto;
+}
+
+.focusOverlay {
+  z-index: 6;
+}
+
+.focusOverlay[data-inspector="open"] .focusHeader,
+.focusOverlay[data-inspector="open"] .focusControls,
+.focusOverlay[data-inspector="open"] .provenanceBanner {
+  right: 310px;
+}
+
+.focusActions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.focusControls {
+  position: absolute;
+  z-index: 8;
+  top: 82px;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 51px;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.65rem;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  background: rgb(7 15 13 / 88%);
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+.focusControls > div {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 9px;
+  background: rgb(0 0 0 / 22%);
+}
+
+.focusControls > div:last-child {
+  margin-left: auto;
+}
+
+.focusControls button[aria-pressed="true"] {
+  border-color: rgb(117 224 188 / 43%);
+  background: rgb(52 130 104 / 31%);
+  color: #d5faed;
+}
+
+.focusControls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.36;
+}
+
+.provenanceBanner {
+  position: absolute;
+  z-index: 7;
+  top: 133px;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 31px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid rgb(233 244 238 / 7%);
+  background: rgb(7 15 13 / 76%);
+  pointer-events: auto;
+}
+
+.provenanceBanner strong {
+  color: #9ce6cd;
+  font: 650 0.51rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.08em;
+}
+
+.provenanceBanner span {
+  color: #8d8068;
+  font-size: 0.53rem;
+}
+
+.inspector {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 310px;
+  padding: 1rem;
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+  background: rgb(10 21 18 / 95%);
+  pointer-events: auto;
+  backdrop-filter: blur(16px);
+}
+
+.inspectorTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+
+.inspectorTop span {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.4rem;
+  overflow: hidden;
+  color: #a1aea7;
+  font-size: 0.56rem;
+  text-overflow: ellipsis;
+}
+
+.inspectorKicker {
+  margin: 0 0 0.35rem;
+  color: #91a199;
+  font: 650 0.5rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.12em;
+}
+
+.inspector h4 {
+  margin: 0;
+  color: #eff3e8;
+  font-size: 1.35rem;
+  font-weight: 540;
+  letter-spacing: -0.04em;
+}
+
+.atomSelection {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem;
+  border: 1px solid rgb(117 224 188 / 17%);
+  border-radius: 8px;
+  background: rgb(117 224 188 / 5%);
+  color: #92a299;
+  font-size: 0.58rem;
+}
+
+.atomSelection strong {
+  color: #a7ead4;
+}
+
+@media (max-width: 900px) {
+  .focusOverlay[data-inspector="open"] .focusHeader,
+  .focusOverlay[data-inspector="open"] .focusControls,
+  .focusOverlay[data-inspector="open"] .provenanceBanner {
+    right: 270px;
+  }
+
+  .inspector {
+    width: 270px;
+  }
+
+  .clusterGlyph {
+    width: 130px;
+  }
+}
+
+@media (max-width: 720px) {
+  .exploreStage,
+  .sceneTelemetry {
+    min-height: 590px;
+  }
+
+  .sharedScene,
+  .sceneHidden {
+    --molecular-scene-height: 590px;
+  }
+
+  .focusOverlay[data-inspector="open"] .focusHeader,
+  .focusOverlay[data-inspector="open"] .focusControls,
+  .focusOverlay[data-inspector="open"] .provenanceBanner {
+    right: 0;
+  }
+
+  .inspector {
+    top: 208px;
+    width: min(88vw, 310px);
+  }
+
+  .focusHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .focusControls {
+    top: 108px;
+  }
+
+  .provenanceBanner {
+    top: 159px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .twoDStage,
+  .missingStructure {
+    inset-block-start: 208px;
+  }
+}
+
+/* Light editorial chrome around the intentionally dark molecular stage. */
+.universe {
+  --ink: #13213c;
+  --muted: #5f6d83;
+  --faint: #718097;
+  --line: #dce3ed;
+  --panel: #ffffff;
+  border-color: #dce3ed;
+  background: #fff;
+  color: #13213c;
+  box-shadow: 0 24px 60px rgb(27 45 78 / 10%);
+}
+.eyebrow { color: #d95d1a; }
+.header h2 { color: #13213c; }
+.description { color: #5f6d83; }
+.headerSummary span { border-color: #dce3ed; background: #f5f7fb; color: #627088; }
+.headerSummary strong { color: #1e2d49; }
+.headerSummary span[data-level="focus"] { border-color: #bed0f5; background: #f0f4ff; }
+.toolbar { border-color: #dce3ed; background: #f8f9fc; }
+.searchField label,
+.controlLabel { color: #46556d; }
+.searchIcon { border-color: #6f7d93; }
+.searchIcon::after { background: #6f7d93; }
+.searchControl input { border-color: #cfd8e6; background: #fff; color: #253553; }
+.searchControl input::placeholder { color: #738097; }
+.searchControl input:focus-visible { border-color: #2457d6; box-shadow: 0 0 0 3px rgb(36 87 214 / 13%); }
+.clearButton { color: #5e6d84; }
+.clearButton:hover { background: #e9eef6; color: #172744; }
+.lensButton { border-color: #d4dce8; background: #fff; color: #536078; }
+.lensButton:hover { border-color: #8ba9e8; color: #1f4ab5; }
+.lensButton[aria-pressed="true"] { border-color: #2457d6; background: #edf2ff; color: #173f9f; }
+.lensDisclosureButton { border-color: #cfd8e6; background: #fff; color: #263653; }
+.lensDisclosureButton span { color: #64738a; }
+.lensDisclosureButton i { color: #2457d6; }
+.lensDrawer { border-color: #cfd8e6; background: rgb(255 255 255 / 98%); box-shadow: 0 24px 50px rgb(36 55 88 / 18%); }
+.lensDescription,
+.lensTechnical { color: #637188; }
+.lensMeaning { color: #33425d; }
+.lensMeaning strong { color: #172744; }
+.lensCaveat { color: #87451f; }
+.lensCaveat strong { color: #a44714; }
+.breadcrumb { border-color: #dce3ed; background: #fff; color: #68768c; }
+.breadcrumb button { color: #536078; }
+.breadcrumb button:hover,
+.breadcrumb button[aria-current="page"],
+.breadcrumb > span[aria-current="page"] { color: #2457d6; }
+.breadcrumb p { color: #68768c; }
+
+.exploreStage,
+.sceneTelemetry,
+.twoDStage {
+  background-color: #0d172b;
+  background-image:
+    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 14%), transparent 43%),
+    linear-gradient(rgb(112 145 210 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(112 145 210 / 5%) 1px, transparent 1px);
+}
+.nearClusterNavigation,
+.universeCamera,
+.moleculeSelectors,
+.lodStatus,
+.moleculeHoverLabel { border-color: rgb(184 202 236 / 18%); background: rgb(12 25 48 / 88%); }
+.nearClusterNavigation button { border-color: rgb(201 214 240 / 16%); color: #d6e0f2; }
+.nearClusterNavigation button:hover,
+.nearClusterNavigation button:focus-visible { border-color: #5f89df; background: rgb(36 87 214 / 24%); color: #fff; }
+.nearClusterNavigation button:focus-visible { outline-color: #7fa0e7; }
+.clusterGlyph { background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 90%), rgb(12 25 48 / 72%) 68%); }
+.clusterGlyph:hover,
+.clusterGlyph:focus-visible { background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 83%), rgb(12 25 48 / 84%) 70%); }
+.clusterGlyph > i { box-shadow: none; }
+.clusterLayer[data-near="true"] .clusterGlyph { background: rgb(12 25 48 / 66%); }
+.universeCamera button,
+.focusControls button,
+.focusActions button,
+.inspectorTop button,
+.emptyState button { border-color: rgb(210 222 244 / 16%); color: #c7d3e8; }
+.universeCamera button:hover,
+.focusControls button:hover:not(:disabled),
+.focusActions button:hover,
+.emptyState button:hover { border-color: #5f89df; color: #fff; }
+.lodStatus,
+.universeCamera output,
+.moleculeHoverLabel { color: #b4c1d8; }
+
+.clusterOverlay > header,
+.focusHeader { border-color: rgb(196 211 238 / 16%); background: linear-gradient(rgb(12 25 48 / 96%), rgb(12 25 48 / 82%)); }
+.clusterOverlay > header p,
+.focusHeader p { color: #ff9b5c; }
+.clusterOverlay > header h3,
+.focusHeader h3 { color: #f7f9fd; }
+.clusterOverlay > header h3:focus-visible,
+.focusHeader h3:focus-visible { outline-color: #7fa0e7; }
+.clusterOverlay > header span { color: #ddbd9f; }
+.moleculeSelectors li[data-selected="true"] { border-color: #6f96e6; background: rgb(36 87 214 / 16%); }
+.moleculeSelectors button { color: #eef3fb; }
+.moleculeSelectors .moleculeSelectButton[aria-pressed="true"] { background: rgb(36 87 214 / 18%); color: #fff; }
+.moleculeSelectors button:hover,
+.moleculeSelectors button:focus-visible { border-color: #5f89df; background: rgb(36 87 214 / 12%); }
+.moleculeSelectors small { color: #aebbd2; }
+.focusControls { border-color: rgb(196 211 238 / 16%); background: rgb(12 25 48 / 92%); }
+.focusControls > div { background: rgb(0 0 0 / 24%); }
+.focusControls button[aria-pressed="true"] { border-color: #6f96e6; background: rgb(36 87 214 / 36%); color: #fff; }
+.provenanceBanner { border-color: rgb(196 211 238 / 14%); background: rgb(12 25 48 / 86%); }
+.provenanceBanner strong { color: #9bb8f0; }
+.provenanceBanner span { color: #d3b393; }
+.missingStructure { background: rgb(13 23 43 / 94%); color: #f5f7fb; }
+
+.inspector { border-color: #dce3ed; background: rgb(255 255 255 / 97%); color: #13213c; }
+.inspectorTop span { color: #536078; }
+.inspectorTop button { border-color: #cfd8e6; background: #f3f6fb; color: #263653; }
+.inspectorKicker { color: #d95d1a; }
+.inspector h4 { color: #172744; }
+.formula { color: #2457d6; }
+.summary { color: #536078; }
+.regulatoryEvidence { border-color: #bed0f5; background: #f1f5ff; }
+.regulatoryEvidence p { color: #1f4ab5; }
+.regulatoryEvidence strong { color: #172744; }
+.regulatoryEvidence span,
+.regulatoryEvidence small { color: #536078; }
+.regulatoryEvidence a,
+.provenanceList a { color: #2457d6; text-decoration-color: rgb(36 87 214 / 35%); }
+.provenanceList,
+.lensValues,
+.provenanceList > div,
+.lensValues > div { border-color: #dce3ed; }
+.provenanceList dt,
+.lensValues dt { color: #64738a; }
+.provenanceList dd,
+.lensValues dd { color: #263653; }
+.provenanceWarning { border-color: #f3c4a8; background: #fff6f0; color: #77442a; }
+.lensValues > div[data-active="true"] { background: #edf2ff; }
+.lensValues > div[data-active="true"] dt,
+.lensValues > div[data-active="true"] dd { color: #1f4ab5; }
+.atomSelection { border-color: #bed0f5; background: #f1f5ff; color: #536078; }
+.atomSelection strong { color: #2457d6; }
+.footer { border-color: #dce3ed; background: #fff; color: #64738a; }
+.footer kbd { border-color: #cfd8e6; background: #f3f6fb; color: #263653; }
+.universe button:focus-visible,
+.universe a:focus-visible,
+.universe input:focus-visible { outline-color: #2457d6; }
+
+/* Student-first atlas additions. Region labels share the projection coordinate
+   system with the real molecular scene; they never substitute for structure. */
+.studentHint {
+  display: block;
+  margin-top: 0.32rem;
+  color: #54647b;
+  font-size: 0.62rem;
+}
+
+.exploreStage[data-flight="active"] .sceneTelemetry {
+  filter: saturate(1.08) brightness(1.04);
+}
+.exploreStage[data-flight="active"]::after {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, rgb(10 25 52 / 16%));
+  content: "";
+  pointer-events: none;
+}
+
+.nearClusterWorld {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  transition: transform 140ms ease-out;
+}
+
+.nearClusterRegions {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nearClusterRegions li {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.nearClusterRegions button {
+  position: relative;
+  display: grid;
+  min-width: 112px;
+  max-width: 180px;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.42rem 0.48rem;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: #f1f5fc;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.nearClusterRegions button::before {
+  position: absolute;
+  z-index: -1;
+  inset: -80% -18%;
+  clip-path: polygon(8% 31%, 30% 8%, 72% 13%, 96% 42%, 81% 84%, 42% 96%, 11% 75%);
+  background:
+    radial-gradient(circle at 48% 45%, color-mix(in srgb, var(--accent), transparent 76%), transparent 64%),
+    rgb(10 24 48 / 44%);
+  content: "";
+  opacity: 0.78;
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+
+.nearClusterRegions button > span {
+  width: 3px;
+  height: 18px;
+  border-radius: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent), transparent 22%);
+}
+
+.nearClusterRegions strong {
+  overflow: hidden;
+  font-size: 0.58rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nearClusterRegions small {
+  color: #afbdd4;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.nearClusterRegions button:hover,
+.nearClusterRegions button:focus-visible {
+  transform: translateY(-2px);
+}
+
+.nearClusterRegions button:hover::before,
+.nearClusterRegions button:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.compareToolbar {
+  position: absolute;
+  z-index: 8;
+  top: 94px;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.62rem 0.72rem;
+  border: 1px solid rgb(194 210 238 / 18%);
+  border-radius: 11px;
+  background: rgb(12 25 48 / 88%);
+  color: #f0f4fb;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.compareToolbar > div { display: grid; gap: 0.16rem; }
+.compareToolbar strong { font-size: 0.62rem; }
+.compareToolbar span { color: #aab8ce; font-size: 0.54rem; }
+.compareToolbar button,
+.compareOverlay button,
+.compareSelectButton {
+  min-height: 34px;
+  padding: 0.46rem 0.62rem;
+  border: 1px solid #628ce2;
+  border-radius: 8px;
+  background: rgb(36 87 214 / 28%);
+  color: #fff;
+  cursor: pointer;
+  font: 650 0.56rem var(--font-geist-sans, Arial, sans-serif);
+}
+.compareToolbar button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+.moleculeSelectors li { grid-template-columns: minmax(0, 1fr) auto auto; }
+.moleculeSelectors .compareSelectButton {
+  width: 36px;
+  min-width: 36px;
+  justify-content: center;
+  padding: 0;
+}
+.moleculeSelectors li[data-compare="true"] { box-shadow: inset 0 0 0 1px #ff9b5c; }
+
+.compareOverlay {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  pointer-events: none;
+}
+
+.compareOverlay > header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 88px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 2.5vw, 2.2rem);
+  border-bottom: 1px solid rgb(196 211 238 / 16%);
+  background: linear-gradient(rgb(12 25 48 / 96%), rgb(12 25 48 / 78%));
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+.compareOverlay > header p { margin: 0 0 0.25rem; color: #ff9b5c; font: 650 0.52rem var(--font-geist-mono, monospace); }
+.compareOverlay > header h3 { margin: 0; color: #fff; font-size: clamp(1.25rem, 2vw, 2rem); font-weight: 540; letter-spacing: -0.04em; }
+.compareOverlay > header span { color: #b4c1d8; font-size: 0.57rem; }
+.compareOverlay > header button { min-width: 104px; }
+
+.compareScaffold {
+  position: absolute;
+  top: 102px;
+  left: 1rem;
+  display: grid;
+  max-width: min(470px, calc(100% - 2rem));
+  gap: 0.16rem;
+  padding: 0.58rem 0.7rem;
+  border: 1px solid rgb(255 155 92 / 25%);
+  border-radius: 9px;
+  background: rgb(26 31 47 / 84%);
+  color: #fff;
+  pointer-events: auto;
+}
+.compareScaffold span { color: #d6ae91; font-size: 0.51rem; }
+.compareScaffold strong { font-size: 0.63rem; }
+.compareScaffold > small { color: #aebbd2; font-size: 0.51rem; line-height: 1.4; }
+.compareMaskLegend { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.2rem 0; }
+.compareMaskLegend span { display: inline-flex; align-items: center; gap: 0.28rem; color: #d7e0ef; }
+.compareMaskLegend span::before { width: 8px; height: 8px; border-radius: 2px; background: #2ad3a1; box-shadow: 0 0 10px rgb(42 211 161 / 48%); content: ""; }
+.compareMaskLegend span[data-mask="changed"]::before { background: #ff6d42; box-shadow: 0 0 10px rgb(255 109 66 / 48%); }
+
+.compareCards {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.42rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+.compareCards li {
+  display: grid;
+  min-width: 0;
+  gap: 0.2rem;
+  padding: 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 58%);
+  border-radius: 12px;
+  background: rgb(12 25 48 / 89%);
+  box-shadow: 0 12px 34px rgb(0 0 0 / 26%);
+  backdrop-filter: blur(12px);
+}
+.compareCards li > span { color: #ffac78; font: 0.5rem var(--font-geist-mono, monospace); }
+.compareCards li > strong { overflow: hidden; color: #fff; font-size: 0.7rem; text-overflow: ellipsis; white-space: nowrap; }
+.compareCards li > small { min-height: 2em; color: #aebbd2; font-size: 0.54rem; line-height: 1.35; }
+.compareCards li > p { display: grid; min-height: 2.4em; gap: 0.12rem; margin: 0; color: #ffd3c4; font: 0.5rem var(--font-geist-mono, monospace); line-height: 1.35; }
+.compareCards li > p span { color: #ff8b68; font-family: var(--font-geist-sans, sans-serif); font-weight: 680; }
+.compareCards li > div { display: flex; gap: 0.3rem; margin-top: 0.25rem; }
+.compareCards li > div button:first-child { flex: 1; }
+.compareCards li > div button:last-child { width: 34px; padding: 0; }
+.compareMessage { position: absolute; top: 102px; right: 1rem; margin: 0; color: #ffd0b5; font-size: 0.58rem; }
+
+.passportGrid {
+  display: grid;
+  gap: 0;
+  margin: 1rem 0;
+  border-top: 1px solid #dce3ed;
+}
+.passportGrid > div { display: grid; gap: 0.28rem; padding: 0.7rem 0; border-bottom: 1px solid #dce3ed; }
+.passportGrid dt { color: #64738a; font-size: 0.55rem; }
+.passportGrid dd { margin: 0; color: #263653; font-size: 0.65rem; line-height: 1.45; overflow-wrap: anywhere; }
+.learningLinks { display: grid; gap: 0.45rem; margin: 0 0 1rem; }
+.learningLinks > div { padding: 0.65rem; border: 1px solid #dbe4f1; border-radius: 9px; background: #f6f8fc; }
+.learningLinks span { color: #1f4ab5; font-size: 0.54rem; font-weight: 700; }
+.learningLinks p { margin: 0.3rem 0 0; color: #536078; font-size: 0.62rem; line-height: 1.45; }
+.sourcesDrawer { padding: 0.7rem; border: 1px solid #dce3ed; border-radius: 9px; color: #536078; }
+.sourcesDrawer summary { cursor: pointer; color: #263653; font-size: 0.62rem; font-weight: 650; }
+.sourcesDrawer a { display: block; margin-top: 0.55rem; color: #2457d6; font-size: 0.58rem; overflow-wrap: anywhere; }
+
+.universe[data-presentation-mode="student"] .inspector { width: 360px; }
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 360px; }
+
+@media (max-width: 900px) {
+  .compareCards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .universe[data-presentation-mode="student"] .inspector { width: 300px; }
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 300px; }
+}
+
+@media (max-width: 720px) {
+  .nearClusterRegions button { min-width: 96px; max-width: 132px; padding: 0.42rem 0.5rem; }
+  .nearClusterRegions strong { font-size: 0.52rem; }
+  .compareToolbar { top: 116px; right: 0.55rem; left: 0.55rem; justify-content: space-between; }
+  .compareCards { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 210px; overflow-y: auto; }
+  .universe[data-presentation-mode="student"] .inspector { top: 208px; width: min(92vw, 330px); }
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 0; }
+}
+
+/* Full-catalog index navigation stays outside the bounded molecular scene. */
+.searchField {
+  position: relative;
+  z-index: 35;
+  min-width: 0;
+}
+
+.searchLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.searchLabelRow > button {
+  margin: 0 0 0.3rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2457d6;
+  cursor: pointer;
+  font-size: 0.56rem;
+  font-weight: 680;
+}
+
+.indexedResults {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  left: 0;
+  z-index: 80;
+  overflow: hidden;
+  border: 1px solid #ccd7e7;
+  border-radius: 13px;
+  background: #fff;
+  color: #1d2d49;
+  box-shadow: 0 22px 55px rgb(18 35 68 / 22%);
+}
+
+.indexedResults > header,
+.indexedResults > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  background: #f4f7fc;
+}
+
+.indexedResults > header { border-bottom: 1px solid #dce3ed; }
+.indexedResults > header strong { color: #263653; font-size: 0.63rem; }
+.indexedResults > header span { color: #758198; font: 0.54rem var(--font-geist-mono, monospace); }
+.indexedResults > p { margin: 0; padding: 1rem 0.8rem; color: #647188; font-size: 0.65rem; line-height: 1.45; }
+.indexedResults[data-indexed-status="error"] > p { color: #a14a22; }
+
+.indexedResults > ul {
+  display: grid;
+  max-height: min(410px, 54vh);
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.indexedResults li { min-width: 0; }
+.indexedResults li > button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 0.14rem;
+  padding: 0.62rem 0.65rem;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #273752;
+  cursor: pointer;
+  text-align: left;
+}
+.indexedResults li > button:hover,
+.indexedResults li > button:focus-visible { background: #edf3ff; }
+.indexedResults li strong { overflow: hidden; font-size: 0.68rem; text-overflow: ellipsis; white-space: nowrap; }
+.indexedResults li span { color: #50617d; font: 0.54rem var(--font-geist-mono, monospace); }
+.indexedResults li small { overflow: hidden; color: #7a879b; font-size: 0.54rem; text-overflow: ellipsis; white-space: nowrap; }
+.indexedResults > footer { border-top: 1px solid #dce3ed; }
+.indexedResults > footer button {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid #cfd9e8;
+  border-radius: 7px;
+  background: #fff;
+  color: #35578f;
+  cursor: pointer;
+  font-size: 0.56rem;
+  font-weight: 680;
+}
+.indexedResults > footer button:disabled { cursor: not-allowed; opacity: 0.38; }
+
+.similarMolecules,
+.passportActions { margin: 0 0 1rem; }
+.similarMolecules > span,
+.passportActions > span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #1f4ab5;
+  font-size: 0.54rem;
+  font-weight: 700;
+}
+.similarMolecules ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+.similarMolecules button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 0.15rem;
+  padding: 0.55rem;
+  border: 1px solid #dbe4f1;
+  border-radius: 9px;
+  background: #f7f9fd;
+  color: #2e405e;
+  cursor: pointer;
+  text-align: left;
+}
+.similarMolecules button:hover { border-color: #9bb5e9; background: #eef3ff; }
+.similarMolecules strong { overflow: hidden; font-size: 0.59rem; text-overflow: ellipsis; white-space: nowrap; }
+.similarMolecules small { color: #718097; font-size: 0.51rem; }
+.similarMolecules em { color: #637188; font: normal 0.48rem var(--font-geist-mono, monospace); }
+.similarMolecules > p { margin: 0.25rem 0 0.5rem; color: #64738a; font-size: 0.54rem; line-height: 1.45; }
+.similarMolecules > small { display: block; margin-top: 0.4rem; color: #6a778c; font-size: 0.54rem; line-height: 1.4; }
+.passportActions > div { display: grid; gap: 0.35rem; }
+.passportActions button {
+  min-height: 35px;
+  padding: 0.52rem 0.65rem;
+  border: 1px solid #cbd8ee;
+  border-radius: 8px;
+  background: #edf3ff;
+  color: #214ca8;
+  cursor: pointer;
+  font-size: 0.58rem;
+  font-weight: 690;
+  text-align: left;
+}
+.passportActions button:hover { border-color: #7799df; background: #e5edff; }
+
+@media (max-width: 720px) {
+  .indexedResults { position: fixed; top: 158px; right: 0.75rem; left: 0.75rem; }
+  .similarMolecules ul { grid-template-columns: 1fr; }
+}

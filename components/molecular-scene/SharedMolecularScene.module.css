@@ -1,0 +1,173 @@
+.scene {
+  position: relative;
+  min-width: 0;
+  min-height: var(--molecular-scene-height, 520px);
+  overflow: hidden;
+  border: 1px solid rgb(218 243 235 / 11%);
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 42%, rgb(69 139 120 / 12%), transparent 46%),
+    #07100f;
+  color: #eef8f4;
+}
+
+.scene *,
+.scene *::before,
+.scene *::after {
+  box-sizing: border-box;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.canvas:focus-visible {
+  outline: 2px solid #72e3bf;
+  outline-offset: -4px;
+}
+
+.state {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.42rem;
+  padding: 2rem;
+  background: rgb(7 16 15 / 88%);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.state strong {
+  font-size: 0.88rem;
+}
+
+.state small {
+  max-width: 440px;
+  color: #92a69f;
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.error strong {
+  color: #ffb0ac;
+}
+
+.partialStatus {
+  position: absolute;
+  z-index: 3;
+  top: 0.8rem;
+  right: 0.8rem;
+  display: grid;
+  width: min(430px, calc(100% - 1.6rem));
+  gap: 0.24rem;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid rgb(255 192 124 / 32%);
+  border-radius: 10px;
+  background: rgb(18 18 13 / 88%);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 24%);
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.partialStatus strong {
+  color: #ffd09a;
+  font-size: 0.76rem;
+}
+
+.partialStatus small {
+  overflow-wrap: anywhere;
+  color: #c5d2cd;
+  font-size: 0.64rem;
+  line-height: 1.42;
+}
+
+.loader {
+  width: 25px;
+  height: 25px;
+  border: 2px solid rgb(114 227 191 / 18%);
+  border-top-color: #72e3bf;
+  border-radius: 50%;
+  animation: molecular-scene-spin 780ms linear infinite;
+}
+
+.atomReadout {
+  position: absolute;
+  z-index: 2;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  display: grid;
+  min-width: 175px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.12rem 0.48rem;
+  padding: 0.54rem 0.68rem;
+  border: 1px solid rgb(218 243 235 / 13%);
+  border-radius: 10px;
+  background: rgb(5 11 10 / 78%);
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.atomReadout span {
+  grid-column: 1 / -1;
+  color: #72e3bf;
+  font-size: 0.5rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+}
+
+.atomReadout strong {
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+.atomReadout small {
+  overflow: hidden;
+  color: #92a69f;
+  font-size: 0.61rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes molecular-scene-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    animation: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .scene {
+    min-height: var(--molecular-scene-height, 430px);
+  }
+}

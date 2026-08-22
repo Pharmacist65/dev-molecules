@@ -1,0 +1,1048 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "u",
+  "records": [
+    {
+      "id": "molecule:imported:ubrogepant-ddooftlhjsmhln-zqhrpcgssa-n",
+      "preferredName": "Ubrogepant",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 68748835,
+        "inchiKey": "DDOOFTLHJSMHLN-ZQHRPCGSSA-N",
+        "connectivityKey": "DDOOFTLHJSMHLN",
+        "stereochemicalKey": "ZQHRPCGSSA",
+        "molecularFormula": "C29H26F3N5O3",
+        "molecularWeight": 549.5,
+        "canonicalSmiles": "CC1C(CC(C(=O)N1CC(F)(F)F)NC(=O)C2=CC3=C(CC4(C3)C5=C(NC4=O)N=CC=C5)N=C2)C6=CC=CC=C6",
+        "isomericSmiles": "C[C@@H]1[C@@H](C[C@@H](C(=O)N1CC(F)(F)F)NC(=O)C2=CC3=C(C[C@@]4(C3)C5=C(NC4=O)N=CC=C5)N=C2)C6=CC=CC=C6",
+        "structureSourceFormSmiles": "C[C@@H]1[C@@H](C[C@H](NC(=O)C2=CN=C3C[C@]4(CC3=C2)C(=O)NC2=NC=CC=C42)C(=O)N1CC(F)(F)F)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DDOOFTLHJSMHLN",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DDOOFTLHJSMHLN-ZQHRPCGSSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:ddooftlhjsmhln-zqhrpcgssa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5361",
+        "sourceName": "ubrogepant",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5361",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5361",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ubrogepant",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-68748835-2d.sdf",
+          "sha256": "38e502c5f439d0a41b1b47c7f802a62d030085b42438a50c39d5368b191e47bc",
+          "byteLength": 9322,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/68748835/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-68748835-3d.sdf",
+          "sha256": "6a4018ac0e999fbcdb4359d6bf7017b20d6ef79a416cc422098ec1751e030708",
+          "byteLength": 9525,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/68748835/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ulipristal-acetate-oollafolcsjhre-zhakmvslsa-n",
+      "preferredName": "Ulipristal Acetate",
+      "aliases": [
+        "ulipristal"
+      ],
+      "identity": {
+        "pubChemCid": 130904,
+        "inchiKey": "OOLLAFOLCSJHRE-ZHAKMVSLSA-N",
+        "connectivityKey": "OOLLAFOLCSJHRE",
+        "stereochemicalKey": "ZHAKMVSLSA",
+        "molecularFormula": "C30H37NO4",
+        "molecularWeight": 475.6,
+        "canonicalSmiles": "CC(=O)C1(CCC2C1(CC(C3=C4CCC(=O)C=C4CCC23)C5=CC=C(C=C5)N(C)C)C)OC(=O)C",
+        "isomericSmiles": "CC(=O)[C@]1(CC[C@@H]2[C@@]1(C[C@@H](C3=C4CCC(=O)C=C4CC[C@@H]23)C5=CC=C(C=C5)N(C)C)C)OC(=O)C",
+        "structureSourceFormSmiles": "CN(C)C1=CC=C(C=C1)[C@H]1C[C@@]2(C)[C@@H](CC[C@]2(OC(C)=O)C(C)=O)[C@@H]2CCC3=CC(=O)CCC3=C12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:OOLLAFOLCSJHRE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:OOLLAFOLCSJHRE-ZHAKMVSLSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:oollafolcsjhre-zhakmvslsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4166",
+        "sourceName": "ulipristal",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4166",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4166",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ulipristal",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-130904-2d.sdf",
+          "sha256": "10e9e96e02c44bdd20655e30f9d1d6a965c0578e2804e0a0d0da4625858c3f8a",
+          "byteLength": 9549,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/130904/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-130904-3d.sdf",
+          "sha256": "dcaf42c43f5fe7453d87d14bfc3c3d33c4de7363135dcc155caa3e2501cc4d48",
+          "byteLength": 9993,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/130904/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:umbralisib-iuvcfhhaehncft-inizcteosa-n",
+      "preferredName": "Umbralisib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 72950888,
+        "inchiKey": "IUVCFHHAEHNCFT-INIZCTEOSA-N",
+        "connectivityKey": "IUVCFHHAEHNCFT",
+        "stereochemicalKey": "INIZCTEOSA",
+        "molecularFormula": "C31H24F3N5O3",
+        "molecularWeight": 571.5,
+        "canonicalSmiles": "CC(C)OC1=C(C=C(C=C1)C2=NN(C3=NC=NC(=C23)N)C(C)C4=C(C(=O)C5=C(O4)C=CC(=C5)F)C6=CC(=CC=C6)F)F",
+        "isomericSmiles": "C[C@@H](C1=C(C(=O)C2=C(O1)C=CC(=C2)F)C3=CC(=CC=C3)F)N4C5=NC=NC(=C5C(=N4)C6=CC(=C(C=C6)OC(C)C)F)N",
+        "structureSourceFormSmiles": "C[C@@H](C1=C(C(=O)C2=C(O1)C=CC(=C2)F)C3=CC(=CC=C3)F)N4C5=NC=NC(=C5C(=N4)C6=CC(=C(C=C6)OC(C)C)F)N",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:IUVCFHHAEHNCFT",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:IUVCFHHAEHNCFT-INIZCTEOSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:iuvcfhhaehncft-inizcteosa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5441",
+        "sourceName": "umbralisib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5441",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5441",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=umbralisib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-72950888-2d.sdf",
+          "sha256": "d5653680b8a0e970afeeff047da0686022aebdb1ad346f27d260d5393da85f4e",
+          "byteLength": 9106,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/72950888/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-72950888-3d.sdf",
+          "sha256": "23753d9e70ffd28a63da6844f7c9034516299246f9e2666a5459c77298896ed1",
+          "byteLength": 9251,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/72950888/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:umeclidinium-fvtwtvqxnajtqp-uhfffaoysa-n",
+      "preferredName": "Umeclidinium",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 11519070,
+        "inchiKey": "FVTWTVQXNAJTQP-UHFFFAOYSA-N",
+        "connectivityKey": "FVTWTVQXNAJTQP",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C29H34NO2+",
+        "molecularWeight": 428.6,
+        "canonicalSmiles": "C1C[N+]2(CCC1(CC2)C(C3=CC=CC=C3)(C4=CC=CC=C4)O)CCOCC5=CC=CC=C5",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(C1=CC=CC=C1)(C1=CC=CC=C1)C12CC[N+](CCOCC3=CC=CC=C3)(CC1)CC2",
+        "chargeLayer": "q+1"
+      },
+      "parentEntity": {
+        "id": "parent:FVTWTVQXNAJTQP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FVTWTVQXNAJTQP-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fvtwtvqxnajtqp-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4816",
+        "sourceName": "umeclidinium",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4816",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4816",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=umeclidinium",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-11519070-2d.sdf",
+          "sha256": "d6ecb21e0a3ae45acf6835b340e0729b7a7b6d0b7e2baa5e35ffd7a4604842cc",
+          "byteLength": 8464,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11519070/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-11519070-3d.sdf",
+          "sha256": "3d0f226372c8346822c0eeffd6c1ed62fcba253eef860ab3ef16598a836b8f34",
+          "byteLength": 9606,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11519070/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:undecylenic-acid-frpzmmhwlsifaz-uhfffaoysa-n",
+      "preferredName": "Undecylenic Acid",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5634,
+        "inchiKey": "FRPZMMHWLSIFAZ-UHFFFAOYSA-N",
+        "connectivityKey": "FRPZMMHWLSIFAZ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C11H20O2",
+        "molecularWeight": 184.27,
+        "canonicalSmiles": "C=CCCCCCCCCC(=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(=O)CCCCCCCCC=C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FRPZMMHWLSIFAZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FRPZMMHWLSIFAZ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:frpzmmhwlsifaz-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3446",
+        "sourceName": "undecylenic acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3446",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3446",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=undecylenic%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5634-2d.sdf",
+          "sha256": "f430bfe0d98785e68595c92964468befee73442bd03744710c3902c165d48f9f",
+          "byteLength": 4604,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5634/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5634-3d.sdf",
+          "sha256": "1dd429f67b2ee4e6a0e990244bb4fa47b42508cc1685a3a82373479715177943",
+          "byteLength": 6509,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5634/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:upadacitinib-wyqfjhhdokwshr-mnovxskesa-n",
+      "preferredName": "Upadacitinib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 58557659,
+        "inchiKey": "WYQFJHHDOKWSHR-MNOVXSKESA-N",
+        "connectivityKey": "WYQFJHHDOKWSHR",
+        "stereochemicalKey": "MNOVXSKESA",
+        "molecularFormula": "C17H19F3N6O",
+        "molecularWeight": 380.4,
+        "canonicalSmiles": "CCC1CN(CC1C2=CN=C3N2C4=C(NC=C4)N=C3)C(=O)NCC(F)(F)F",
+        "isomericSmiles": "CC[C@@H]1CN(C[C@@H]1C2=CN=C3N2C4=C(NC=C4)N=C3)C(=O)NCC(F)(F)F",
+        "structureSourceFormSmiles": "CC[C@@H]1CN(C[C@@H]1C1=CN=C2C=NC3=C(C=CN3)N12)C(=O)NCC(F)(F)F",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WYQFJHHDOKWSHR",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WYQFJHHDOKWSHR-MNOVXSKESA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:wyqfjhhdokwshr-mnovxskesa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5346",
+        "sourceName": "upadacitinib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5346",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5346",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=upadacitinib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-58557659-2d.sdf",
+          "sha256": "e35586bddec4072728bbfd94ab2ed6468365d174fdcdd95016ca21c151a25b87",
+          "byteLength": 7010,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/58557659/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-58557659-3d.sdf",
+          "sha256": "4736ab0cc5b24b71bbb6267377d80647fb91b3db454745785e02da0cacced6a7",
+          "byteLength": 6778,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/58557659/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:uracil-mustard-idpukcwigueadi-uhfffaoysa-n",
+      "preferredName": "Uracil Mustard",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 6194,
+        "inchiKey": "IDPUKCWIGUEADI-UHFFFAOYSA-N",
+        "connectivityKey": "IDPUKCWIGUEADI",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C8H11Cl2N3O2",
+        "molecularWeight": 252.09,
+        "canonicalSmiles": "C1=C(C(=O)NC(=O)N1)N(CCCl)CCCl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "ClCCN(CCCl)C1=CNC(=O)NC1=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:IDPUKCWIGUEADI",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:IDPUKCWIGUEADI-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:idpukcwigueadi-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2795",
+        "sourceName": "uracil mustard",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2795",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2795",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=uracil%20mustard",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6194-2d.sdf",
+          "sha256": "066558d2d0303d77bd60ccb20aa6ea856a685d979b8af0968e1dd6a325b66cdf",
+          "byteLength": 4294,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6194/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6194-3d.sdf",
+          "sha256": "7e09a10362b85ae6f81828d2fb217ca27595f15d3a5c1bf698b9b47d3a3fd980",
+          "byteLength": 4495,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6194/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:urea-c-13-xsqukjjjfzcrtk-oubtzvsysa-n",
+      "preferredName": "Urea C-13",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 636363,
+        "inchiKey": "XSQUKJJJFZCRTK-OUBTZVSYSA-N",
+        "connectivityKey": "XSQUKJJJFZCRTK",
+        "stereochemicalKey": "OUBTZVSYSA",
+        "molecularFormula": "CH4N2O",
+        "molecularWeight": 61.048,
+        "canonicalSmiles": "C(=O)(N)N",
+        "isomericSmiles": "[13C](=O)(N)N",
+        "structureSourceFormSmiles": "N[13C](N)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XSQUKJJJFZCRTK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XSQUKJJJFZCRTK-OUBTZVSYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xsqukjjjfzcrtk-oubtzvsysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4323",
+        "sourceName": "UREA C-13",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4323",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4323",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=UREA%20C-13",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-636363-2d.sdf",
+          "sha256": "2689ce08324cac48b2566c2b0687816663ae02f7e886fee715494a26e02d3aa3",
+          "byteLength": 2316,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/636363/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-636363-3d.sdf",
+          "sha256": "c3b267aec9e31964eab27814fc9448186262aa003647e0ce0cf6bb536c9f6e92",
+          "byteLength": 1854,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/636363/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:urea-c-14-xsqukjjjfzcrtk-njfspnsnsa-n",
+      "preferredName": "Urea C-14",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 11457650,
+        "inchiKey": "XSQUKJJJFZCRTK-NJFSPNSNSA-N",
+        "connectivityKey": "XSQUKJJJFZCRTK",
+        "stereochemicalKey": "NJFSPNSNSA",
+        "molecularFormula": "CH4N2O",
+        "molecularWeight": 62.048,
+        "canonicalSmiles": "C(=O)(N)N",
+        "isomericSmiles": "[14C](=O)(N)N",
+        "structureSourceFormSmiles": "N[14C](N)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XSQUKJJJFZCRTK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XSQUKJJJFZCRTK-NJFSPNSNSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xsqukjjjfzcrtk-njfspnsnsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5147",
+        "sourceName": "UREA C 14",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5147",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5147",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=UREA%20C%2014",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-11457650-2d.sdf",
+          "sha256": "73eef2fe0aae8759b9fb0a0534b1ab10003813061ce2dcdd97a18f588f461eb3",
+          "byteLength": 2318,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11457650/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-11457650-3d.sdf",
+          "sha256": "bb2ebb45ee1a619d4160c16b42c55e0548e21ec6a0fdc87aa60c4b76205956c5",
+          "byteLength": 1858,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11457650/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:urea-xsqukjjjfzcrtk-uhfffaoysa-n",
+      "preferredName": "Urea",
+      "aliases": [
+        "carbamide"
+      ],
+      "identity": {
+        "pubChemCid": 1176,
+        "inchiKey": "XSQUKJJJFZCRTK-UHFFFAOYSA-N",
+        "connectivityKey": "XSQUKJJJFZCRTK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "CH4N2O",
+        "molecularWeight": 60.056,
+        "canonicalSmiles": "C(=O)(N)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NC(N)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XSQUKJJJFZCRTK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XSQUKJJJFZCRTK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xsqukjjjfzcrtk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4264",
+        "sourceName": "carbamide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4264",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4264",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=carbamide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-1176-2d.sdf",
+          "sha256": "ec591061d95de369f2d37f632df4d50bc7a279bc7ea2947e3d21c37cfcf949dc",
+          "byteLength": 2162,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/1176/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-1176-3d.sdf",
+          "sha256": "e27449aaa68c2d0acc6422f0d7530581267f45941cbb34604597d677a2d4eb85",
+          "byteLength": 1832,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/1176/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ursodeoxycholic-acid-rudatbohqwojdd-uzvsrgjwsa-n",
+      "preferredName": "Ursodeoxycholic Acid",
+      "aliases": [
+        "ursodiol"
+      ],
+      "identity": {
+        "pubChemCid": 31401,
+        "inchiKey": "RUDATBOHQWOJDD-UZVSRGJWSA-N",
+        "connectivityKey": "RUDATBOHQWOJDD",
+        "stereochemicalKey": "UZVSRGJWSA",
+        "molecularFormula": "C24H40O4",
+        "molecularWeight": 392.6,
+        "canonicalSmiles": "CC(CCC(=O)O)C1CCC2C1(CCC3C2C(CC4C3(CCC(C4)O)C)O)C",
+        "isomericSmiles": "C[C@H](CCC(=O)O)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2[C@H](C[C@H]4[C@@]3(CC[C@H](C4)O)C)O)C",
+        "structureSourceFormSmiles": "C[C@H](CCC(O)=O)[C@H]1CC[C@H]2[C@@H]3[C@@H](O)C[C@@H]4C[C@H](O)CC[C@]4(C)[C@H]3CC[C@]12C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:RUDATBOHQWOJDD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:RUDATBOHQWOJDD-UZVSRGJWSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:rudatbohqwojdd-uzvsrgjwsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2797",
+        "sourceName": "ursodiol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2797",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2797",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ursodiol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-31401-2d.sdf",
+          "sha256": "531340a934f0f23b2cdb4cf3dbbd868f112a7c9563303463862a92c498740642",
+          "byteLength": 9231,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31401/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-31401-3d.sdf",
+          "sha256": "28f096c70a38541053f44d5dd042acfcd76d7eb61ec1a3095729413ce860bae0",
+          "byteLength": 9172,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31401/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}
