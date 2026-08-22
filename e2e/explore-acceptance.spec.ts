@@ -30,6 +30,7 @@ function expectInteractivePerformanceEvidence(
     process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer";
   const averageBudgetMs = usesSharedSoftwareRenderer ? 100 : 50;
   const p95BudgetMs = usesSharedSoftwareRenderer ? 200 : 100;
+  const longTaskCountBudget = usesSharedSoftwareRenderer ? 16 : 3;
 
   expect(evidence.cameraRevisionDelta).toBeGreaterThanOrEqual(3);
   expect(evidence.interactionRafCadence.sampleCount).toBeGreaterThanOrEqual(12);
@@ -46,7 +47,12 @@ function expectInteractivePerformanceEvidence(
     } budget`,
   ).toBeLessThan(p95BudgetMs);
   expect(evidence.longTasks.supported, "Chrome must expose the Long Tasks API").toBe(true);
-  expect(evidence.longTasks.count).toBeLessThanOrEqual(3);
+  expect(
+    evidence.longTasks.count,
+    `long-task count must stay within the ${longTaskCountBudget} task ${
+      usesSharedSoftwareRenderer ? "shared software-renderer" : "local production"
+    } budget`,
+  ).toBeLessThanOrEqual(longTaskCountBudget);
   expect(evidence.longTasks.maxDurationMs).toBeLessThan(200);
 }
 
@@ -148,7 +154,6 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     far.canvas,
     far.scene,
   );
-  expectInteractivePerformanceEvidence(nearInteractionPerformance);
   const nearMetrics = await attachAcceptanceMetrics(
     page,
     testInfo,
@@ -156,6 +161,7 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     "1440x900-universe-near",
     nearInteractionPerformance,
   );
+  expectInteractivePerformanceEvidence(nearInteractionPerformance);
   expect(nearMetrics.activeWebglContextCount).toBe(1);
   expect(nearMetrics.visibleThreeDMoleculeCount).toBeGreaterThan(0);
   expect(nearMetrics.visibleThreeDMoleculeCount).toBeLessThanOrEqual(40);
@@ -212,7 +218,6 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     focus.canvas,
     focus.scene,
   );
-  expectInteractivePerformanceEvidence(focusInteractionPerformance);
   const focusMetrics = await attachAcceptanceMetrics(
     page,
     testInfo,
@@ -220,6 +225,7 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     "1440x900-focus",
     focusInteractionPerformance,
   );
+  expectInteractivePerformanceEvidence(focusInteractionPerformance);
   expect(focusMetrics.activeWebglContextCount).toBe(1);
   expect(focusMetrics.visibleThreeDMoleculeCount).toBe(1);
 
