@@ -1,0 +1,508 @@
+.family {
+  --family-ink: var(--ink, #19211d);
+  --family-muted: var(--muted, #647069);
+  --family-paper: var(--paper, #f6f4ec);
+  --family-surface: var(--surface, #fffdf7);
+  --family-line: color-mix(in srgb, var(--family-ink) 15%, transparent);
+  --family-accent: var(--accent, #bb5b31);
+  width: min(100%, 1480px);
+  margin-inline: auto;
+  color: var(--family-ink);
+}
+
+.family *,
+.family *::before,
+.family *::after {
+  box-sizing: border-box;
+}
+
+.hero {
+  display: grid;
+  min-height: min(760px, 82vh);
+  align-content: end;
+  padding: clamp(3rem, 8vw, 8rem) clamp(1rem, 5vw, 5rem) clamp(3rem, 6vw, 6rem);
+  border-bottom: 1px solid var(--family-line);
+  background:
+    radial-gradient(circle at 82% 22%, color-mix(in srgb, var(--family-accent) 13%, transparent), transparent 30%),
+    linear-gradient(145deg, color-mix(in srgb, var(--family-surface) 95%, transparent), var(--family-paper));
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--family-accent);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kindList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.kindList span,
+.memberships small {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--family-line);
+  border-radius: 999px;
+  color: var(--family-muted);
+  font-size: 0.62rem;
+}
+
+.hero > h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.28fr) minmax(0, 1fr);
+  max-width: 880px;
+  gap: clamp(1rem, 4vw, 4rem);
+  margin-top: clamp(2rem, 5vw, 5rem);
+}
+
+.overview h2,
+.overview p {
+  margin: 0;
+}
+
+.overview h2 {
+  color: var(--family-muted);
+  font-size: 0.68rem;
+  font-weight: 720;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.overview > p {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.55;
+}
+
+.section {
+  padding: clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 5rem);
+  border-bottom: 1px solid var(--family-line);
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.sectionHeading > span {
+  color: var(--family-accent);
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 0.9rem;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.sectionHeading button {
+  min-height: 42px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--family-ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--family-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.7rem;
+}
+
+.sectionHeading button:focus-visible,
+.representativeGrid a:focus-visible,
+.learningPath a:focus-visible,
+.sources summary:focus-visible,
+.tableScroller:focus-visible {
+  outline: 2px solid var(--family-accent);
+  outline-offset: 3px;
+}
+
+.hierarchyGrid,
+.factGrid,
+.gapGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--family-line);
+  border-left: 1px solid var(--family-line);
+}
+
+.hierarchyGrid > article,
+.factGrid > article,
+.gapGrid > article {
+  min-width: 0;
+  padding: clamp(1.2rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--family-line);
+  border-bottom: 1px solid var(--family-line);
+}
+
+.hierarchyGrid h3,
+.factGrid h3,
+.gapGrid h3 {
+  margin: 0 0 1.3rem;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hierarchyPath {
+  display: grid;
+  gap: 0;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hierarchyPath li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(42px, auto) minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 0.7rem 0 0.7rem 1rem;
+  border-left: 1px solid color-mix(in srgb, var(--family-accent) 55%, transparent);
+  color: var(--family-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.hierarchyPath li::before {
+  position: absolute;
+  top: 1.05rem;
+  left: -3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--family-accent);
+  content: "";
+}
+
+.hierarchyPath small {
+  color: var(--family-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+}
+
+.factList {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--family-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.sources {
+  margin-top: 1.2rem;
+  color: var(--family-muted);
+  font-size: 0.66rem;
+}
+
+.sources summary {
+  width: fit-content;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--family-muted) 35%, transparent);
+  text-underline-offset: 3px;
+}
+
+.sources ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.7rem 0 0;
+  padding-left: 1rem;
+}
+
+.sources li {
+  line-height: 1.45;
+}
+
+.sources a {
+  color: inherit;
+}
+
+.sources small {
+  margin-left: 0.4rem;
+  opacity: 0.7;
+}
+
+.limitation {
+  font-style: italic;
+}
+
+.missing,
+.boundary,
+.loading {
+  margin: 0;
+  color: var(--family-muted);
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.representativeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 1px;
+  background: var(--family-line);
+  border: 1px solid var(--family-line);
+}
+
+.representativeGrid > article {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  padding: 1rem;
+  background: var(--family-surface);
+}
+
+.structureCard {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+}
+
+.structureCard > div,
+.structureCard canvas {
+  width: 100%;
+  height: 220px;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+
+.structureCard > span {
+  color: var(--family-muted);
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.4rem;
+}
+
+.representativeGrid h3 {
+  margin: 1.2rem 0 0.25rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.representativeGrid p {
+  margin: 0;
+  color: var(--family-muted);
+  font-size: 0.7rem;
+}
+
+.memberships {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.representativeGrid > article > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--family-line);
+  color: var(--family-accent);
+  font-size: 0.7rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.boundary {
+  max-width: 70ch;
+  margin-bottom: 1.2rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--family-accent);
+}
+
+.tableScroller {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--family-line);
+}
+
+.comparisonTable,
+.fingerprintTable {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--family-surface);
+  font-size: 0.72rem;
+}
+
+.comparisonTable th,
+.comparisonTable td,
+.fingerprintTable th,
+.fingerprintTable td {
+  min-width: 120px;
+  padding: 0.9rem;
+  border-right: 1px solid var(--family-line);
+  border-bottom: 1px solid var(--family-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparisonTable thead th,
+.fingerprintTable thead th {
+  background: color-mix(in srgb, var(--family-paper) 76%, white);
+  color: var(--family-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.comparisonTable tbody th,
+.fingerprintTable tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--family-surface);
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.comparisonTable td[data-availability="missing"] {
+  color: var(--family-muted);
+  font-style: italic;
+}
+
+.fingerprintTable td {
+  color: var(--family-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.gapGrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.gapGrid ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--family-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.gapGrid p {
+  color: var(--family-muted);
+  font-size: 0.75rem;
+}
+
+.learningPath {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--family-line);
+  border: 1px solid var(--family-line);
+  list-style: none;
+  counter-reset: learning;
+}
+
+.learningPath li {
+  counter-increment: learning;
+  background: var(--family-surface);
+}
+
+.learningPath a {
+  display: grid;
+  min-height: 140px;
+  align-content: space-between;
+  padding: 1.25rem;
+  color: var(--family-ink);
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.learningPath a::before {
+  color: var(--family-accent);
+  content: counter(learning, decimal-leading-zero);
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.62rem;
+}
+
+.learningPath a span {
+  justify-self: end;
+  color: var(--family-accent);
+}
+
+@media (max-width: 880px) {
+  .hierarchyGrid,
+  .factGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 660px;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    min-height: 580px;
+  }
+
+  .overview {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeading {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .sectionHeading button {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .structureCard,
+  .structureCard > div,
+  .structureCard canvas {
+    height: 190px;
+    min-height: 190px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .family *,
+  .family *::before,
+  .family *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
