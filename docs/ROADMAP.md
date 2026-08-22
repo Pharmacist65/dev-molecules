@@ -19,7 +19,8 @@ The current vertical slice implements:
 - six source-aware synthesis challenge types with domain-derived validation;
 - ten nomenclature topics, ten exercises, and six deterministic interaction types;
 - a guided builder, device-local teaching progress, and fail-closed evidence cards;
-- typecheck, lint, production build, Node tests, and Playwright gates in CI.
+- a public GitHub Pages delivery adapter over the same application shell;
+- typecheck, lint, server/static production builds, Node tests, and Playwright gates in CI.
 
 This baseline is not a production scientific publication. The synthesis atom correspondence, educational classification wording, and parts of the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or general-purpose chemical editor.
 
@@ -39,7 +40,7 @@ Stabilize the repository and hosted build as a reproducible engineering artifact
 **Acceptance gate**
 
 - A clean clone on Node `22.23.2` passes every documented command.
-- Hosted and local production builds expose the same core journeys.
+- Public GitHub Pages and local production builds expose the same core journeys; server-only capabilities fail closed to their documented local equivalent.
 - No secret, private structure, generated credential, or personal path is present in the public tree or history.
 - Critical keyboard paths and readable focus states pass manual and automated review.
 - Deployment ownership, access policy, and rollback evidence are recorded.

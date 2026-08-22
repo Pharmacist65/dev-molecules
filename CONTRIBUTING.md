@@ -17,8 +17,10 @@ Run the complete local gate before requesting review:
 npm run typecheck
 npm run lint
 npm run build
+npm run build:pages
 node --test tests/*.test.mjs
 npx playwright test
+npm run e2e:pages
 git diff --check
 ```
 

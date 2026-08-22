@@ -573,6 +573,19 @@ const enMessages = {
   "status.unknown": "Unknown",
   "status.conflicting": "Conflicting evidence",
   "status.rejected": "Rejected",
+  "status.atomMapping.reviewed": "Reviewed",
+  "status.atomMapping.draft": "Draft — expert review pending",
+  "status.atomMapping.notMapped": "Not mapped",
+  "status.atomMapping.notApplicable": "Not applicable",
+  "status.evidence.directExperimental": "Direct experimental evidence",
+  "status.evidence.regulatory": "Regulatory source",
+  "status.evidence.curatedDatabase": "Curated database record",
+  "status.evidence.literatureReported": "Reported in the literature",
+  "status.evidence.analogSupported": "Supported by analog evidence",
+  "status.evidence.computed": "Computed result",
+  "status.evidence.modelPredicted": "Model prediction",
+  "status.evidence.educationalSimplification": "Educational simplification",
+  "status.evidence.noEvidence": "No evidence",
 } as const;
 
 export type TranslationKey = keyof typeof enMessages;
@@ -1151,6 +1164,19 @@ const trMessages = {
   "status.unknown": "Bilinmiyor",
   "status.conflicting": "Çelişkili kanıt",
   "status.rejected": "Reddedildi",
+  "status.atomMapping.reviewed": "İncelendi",
+  "status.atomMapping.draft": "Taslak — uzman incelemesi bekliyor",
+  "status.atomMapping.notMapped": "Eşlenmedi",
+  "status.atomMapping.notApplicable": "Uygulanamaz",
+  "status.evidence.directExperimental": "Doğrudan deneysel kanıt",
+  "status.evidence.regulatory": "Düzenleyici kurum kaynağı",
+  "status.evidence.curatedDatabase": "Küratörlü veri tabanı kaydı",
+  "status.evidence.literatureReported": "Literatürde bildirilmiş",
+  "status.evidence.analogSupported": "Analog kanıtıyla desteklenmiş",
+  "status.evidence.computed": "Hesaplanmış sonuç",
+  "status.evidence.modelPredicted": "Model tahmini",
+  "status.evidence.educationalSimplification": "Eğitim amaçlı sadeleştirme",
+  "status.evidence.noEvidence": "Kanıt yok",
 } satisfies MessageDictionary;
 
 export const messages: Readonly<Record<Locale, MessageDictionary>> = {

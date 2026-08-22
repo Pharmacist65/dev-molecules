@@ -2,6 +2,10 @@
 
 import { useMemo, useState } from "react";
 
+import {
+  getAtomMappingStatusLabel,
+  getEvidenceLevelLabel,
+} from "@/lib/application/synthesis-status-presentation";
 import { moleculeById } from "@/lib/data/catalog";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
 import {
@@ -204,7 +208,9 @@ export function SynthesisTheatre({
         <div className={theatre.reactionStage}>
           <div className={theatre.reactionTopline}>
             <span>{t("common.stepOf", { current: activeStep.order, total: story.steps.length })}</span>
-            <span>{t("synthesis.atomMapping")} · {activeStep.atomMappingStatus}</span>
+            <span>
+              {t("synthesis.atomMapping")} · {getAtomMappingStatusLabel(activeStep.atomMappingStatus, locale)}
+            </span>
           </div>
 
           <div className={theatre.reactionCanvas} aria-label={activeStepContent.changeSummary}>
@@ -260,7 +266,10 @@ export function SynthesisTheatre({
             </div>
           ) : null}
           <dl>
-            <div><dt>{t("common.evidence")}</dt><dd>{activeStep.evidenceLevel}</dd></div>
+            <div>
+              <dt>{t("common.evidence")}</dt>
+              <dd>{getEvidenceLevelLabel(activeStep.evidenceLevel, locale)}</dd>
+            </div>
             <div><dt>{t("common.review")}</dt><dd>{t("synthesis.mappingDraft")}</dd></div>
             <div><dt>{t("common.sources")}</dt><dd>{activeStep.sourceIds.length}</dd></div>
           </dl>

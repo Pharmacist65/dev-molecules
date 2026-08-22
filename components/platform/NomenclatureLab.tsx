@@ -1,7 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+import {
+  persistNomenclatureProgress,
+  readPersistedNomenclatureProgress,
+  type PersistedNomenclatureProgress,
+} from "@/lib/application/nomenclature-progress";
 import {
   nomenclatureExerciseByTopicId,
   nomenclatureExercises,
@@ -38,6 +43,19 @@ const interactionTranslationKeys: Readonly<
   "full-name-construction": "nomenclature.interaction.fullNameConstruction",
 };
 
+const nomenclatureProgressScope = {
+  topicIds: nomenclatureTopics.map((topic) => topic.id),
+  exerciseIds: nomenclatureExercises.map((exercise) => exercise.id),
+} as const;
+
+function getWindowStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
 function responseForExercise(
   exercise: NomenclatureExercise,
   selectedOptionIds: readonly string[],
@@ -61,6 +79,7 @@ export function NomenclatureLab({
   );
   const [attempts, setAttempts] = useState(0);
   const [correctAttempts, setCorrectAttempts] = useState(0);
+  const [hasRestoredProgress, setHasRestoredProgress] = useState(false);
 
   const topicIndex = Math.max(
     0,
@@ -77,6 +96,75 @@ export function NomenclatureLab({
     [exercise],
   );
 
+  const orderedCompletedExerciseIds = useMemo(
+    () =>
+      nomenclatureExercises
+        .map((candidate) => candidate.id)
+        .filter((exerciseId) => completedExerciseIds.has(exerciseId)),
+    [completedExerciseIds],
+  );
+  const percentComplete = Math.round(
+    (orderedCompletedExerciseIds.length / nomenclatureExercises.length) * 100,
+  );
+  const persistedProgress = useMemo<PersistedNomenclatureProgress>(
+    () => ({
+      currentTopicId: topic?.id ?? nomenclatureTopics[0]?.id ?? "",
+      completedExerciseIds: orderedCompletedExerciseIds,
+      attempts,
+      correctAttempts,
+    }),
+    [attempts, correctAttempts, orderedCompletedExerciseIds, topic?.id],
+  );
+  const progressSnapshot = useMemo<NomenclatureProgressSnapshot>(
+    () => ({
+      currentExerciseId:
+        exercise?.id ?? nomenclatureExercises[0]?.id ?? "",
+      completedExerciseIds: orderedCompletedExerciseIds,
+      attempts,
+      correctAttempts,
+      percentComplete,
+    }),
+    [
+      attempts,
+      correctAttempts,
+      exercise?.id,
+      orderedCompletedExerciseIds,
+      percentComplete,
+    ],
+  );
+
+  useEffect(() => {
+    const restoreTimer = window.setTimeout(() => {
+      const restored = readPersistedNomenclatureProgress(
+        getWindowStorage(),
+        nomenclatureProgressScope,
+      );
+      if (restored) {
+        setTopicId(restored.currentTopicId);
+        setCompletedExerciseIds(new Set(restored.completedExerciseIds));
+        setAttempts(restored.attempts);
+        setCorrectAttempts(restored.correctAttempts);
+      }
+      setHasRestoredProgress(true);
+    }, 0);
+    return () => window.clearTimeout(restoreTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!hasRestoredProgress) return;
+    persistNomenclatureProgress(
+      getWindowStorage(),
+      persistedProgress,
+      nomenclatureProgressScope,
+    );
+    onProgressChange?.(progressSnapshot);
+  }, [
+    hasRestoredProgress,
+    onProgressChange,
+    persistedProgress,
+    progressSnapshot,
+  ]);
+
   if (!topic || !exercise) return null;
 
   const activeExercise = exercise;
@@ -85,9 +173,6 @@ export function NomenclatureLab({
   const hasResponse = Array.isArray(response)
     ? response.length > 0
     : String(response).trim().length > 0;
-  const percentComplete = Math.round(
-    (completedExerciseIds.size / nomenclatureExercises.length) * 100,
-  );
 
   function resetAttempt() {
     setSelectedOptionIds([]);
@@ -128,15 +213,6 @@ export function NomenclatureLab({
     setAttempts(nextAttempts);
     setCorrectAttempts(nextCorrectAttempts);
     setCompletedExerciseIds(nextCompleted);
-    onProgressChange?.({
-      currentExerciseId: activeExercise.id,
-      completedExerciseIds: [...nextCompleted],
-      attempts: nextAttempts,
-      correctAttempts: nextCorrectAttempts,
-      percentComplete: Math.round(
-        (nextCompleted.size / nomenclatureExercises.length) * 100,
-      ),
-    });
   }
 
   function goToNextTopic() {

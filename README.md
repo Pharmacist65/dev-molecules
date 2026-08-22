@@ -2,7 +2,31 @@
 
 Dev Molecules is a bilingual, evidence-aware molecular learning environment for exploring drug structures, reading non-operational synthesis narratives, practising nomenclature, and keeping educational conclusions separate from scientific verification.
 
-[Public source repository](https://github.com/Pharmacist65/dev-molecules) · [Access-controlled hosted preview](https://dev-molecules.sedecio.chatgpt.site/) (owner access required)
+[Live application](https://pharmacist65.github.io/dev-molecules/) · [Public source repository](https://github.com/Pharmacist65/dev-molecules)
+
+**Release status:** Public Vertical Slice v0.1 — a reviewable engineering and educational MVP, not a completed university platform or scientifically peer-reviewed publication.
+
+## Product snapshots
+
+All screenshots below come from the same static GitHub Pages build exercised by the browser acceptance suite.
+
+### Explore — sourced molecular universe
+
+| Turkish | English |
+| --- | --- |
+| ![Explore molecular universe in Turkish](docs/assets/screenshots/explore-tr.webp) | ![Explore molecular universe in English](docs/assets/screenshots/explore-en.webp) |
+
+### Learn — Synthesis Theatre
+
+| Turkish | English |
+| --- | --- |
+| ![Synthesis Theatre in Turkish](docs/assets/screenshots/synthesis-tr.webp) | ![Synthesis Theatre in English](docs/assets/screenshots/synthesis-en.webp) |
+
+### Learn — Nomenclature Lab
+
+| Turkish | English |
+| --- | --- |
+| ![Nomenclature Lab in Turkish](docs/assets/screenshots/nomenclature-tr.webp) | ![Nomenclature Lab in English](docs/assets/screenshots/nomenclature-en.webp) |
 
 ## What is implemented
 
@@ -56,14 +80,16 @@ Run the same core gates used by CI:
 npm run typecheck
 npm run lint
 npm run build
+npm run build:pages
 node --test tests/*.test.mjs
 npx playwright test
+npm run e2e:pages
 npm audit --audit-level=high
 npm audit --omit=dev --audit-level=high
 git diff --check
 ```
 
-The GitHub Actions workflow runs the production-dependency audit, type checking, linting, a production build, Node test suites, and Playwright browser acceptance tests on pushes to `main` and pull requests. Tests cover structure parsing and provenance, product/form identity boundaries, deterministic lens projection, bounded level-of-detail policy, the shared scene adapter, TR/EN parity, synthesis provenance and challenge scoring, nomenclature scoring, fail-closed evidence behavior, and real-browser interaction.
+The GitHub Actions workflow runs the production-dependency audit, type checking, linting, both production builds, Node test suites, and Playwright browser acceptance tests on pushes to `main` and pull requests. A push is published to GitHub Pages only after the server-capable and static-browser gates pass. Tests cover structure parsing and provenance, product/form identity boundaries, deterministic lens projection, bounded level-of-detail policy, the shared scene adapter, TR/EN parity, synthesis provenance and challenge scoring, nomenclature scoring, fail-closed evidence behavior, real-browser interaction, and the `/dev-molecules/` project base path.
 
 ## Architecture and project policy
 
@@ -75,6 +101,8 @@ The GitHub Actions workflow runs the production-dependency audit, type checking,
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)
 - [CI workflow](.github/workflows/quality.yml)
+- [Deployment](docs/DEPLOYMENT.md)
+- [Changelog](CHANGELOG.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 Key boundaries:
@@ -92,9 +120,13 @@ lib/structure/                    V2000 parsing and element presentation rules
 public/structures/pubchem/        checked-in source SDF assets
 tests/                            domain, data, renderer, SSR, and API checks
 e2e/                              Playwright production-bundle acceptance tests
+e2e-pages/                        GitHub Pages base-path and static-runtime acceptance
+deployment/github-pages/          static entry document; product UI remains shared
 ```
 
-The deployment configuration targets the Sites/Cloudflare runtime. No persistent database or object store is configured in the current repository slice; catalog, curriculum, and provenance records are checked-in data. The package is marked private for package-manager publication, and no project license has been declared. Review [Third-party notices](THIRD_PARTY_NOTICES.md) before redistribution.
+The public application is a static GitHub Pages build. It imports the same product shell and checked-in scientific records as the server-capable Sites/Cloudflare build; it does not fork product behavior. Because GitHub Pages has no server runtime, Discover uses the same curated, fail-closed local evidence-card path and never receives an API secret. No persistent database or object store is configured in the current repository slice.
+
+This repository is publicly reviewable but is **not currently offered under an open-source project license**. Repository visibility must not be interpreted as a license grant. Checked-in PubChem SDF redistribution remains explicitly subject to the source-rights review recorded in the roadmap and scientific governance documents. Review [Deployment](docs/DEPLOYMENT.md) and [Third-party notices](THIRD_PARTY_NOTICES.md) before redistribution.
 
 ## Türkçe kısa özet
 

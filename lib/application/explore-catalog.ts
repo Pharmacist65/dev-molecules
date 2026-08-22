@@ -87,6 +87,16 @@ export interface ExploreCatalogView {
   readonly projections: readonly LensProjection[];
 }
 
+export function resolvePublicAssetPath(
+  publicPath: string,
+  assetBasePath = "/",
+) {
+  const normalizedBase = assetBasePath.endsWith("/")
+    ? assetBasePath
+    : `${assetBasePath}/`;
+  return `${normalizedBase}${publicPath.replace(/^\/+/, "")}`;
+}
+
 interface LensDefinition {
   readonly id: string;
   readonly axis: MoleculeClassificationAxis;
@@ -192,6 +202,7 @@ function evidenceLabel(
 export function createExploreCatalogView(
   records: readonly MoleculeRecord[],
   locale: Locale = "tr",
+  assetBasePath = "/",
 ): ExploreCatalogView {
   const inputVersion = `seed-catalog-2026-08-21:${records.length}`;
   const projections = LENS_DEFINITIONS.map((definition) =>
@@ -270,8 +281,8 @@ export function createExploreCatalogView(
       accent: ACCENTS[stableHash(record.id) % ACCENTS.length] ?? ACCENTS[0],
       structure: {
         pubChemCid: record.identity.pubChemCid,
-        threeDUrl: threeD.publicPath,
-        twoDUrl: twoD.publicPath,
+        threeDUrl: resolvePublicAssetPath(threeD.publicPath, assetBasePath),
+        twoDUrl: resolvePublicAssetPath(twoD.publicPath, assetBasePath),
         sourceLabel: `${threeD.sourceProvider} · ${threeD.sourceExternalId}`,
         sourceHref: threeD.sourceUrl,
         sourceId: threeD.sourceId,

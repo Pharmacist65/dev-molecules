@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import type { MentorEvidenceCard } from "@/lib/application/evidence-card";
+import {
+  createLocalEvidenceCard,
+  type MentorEvidenceCard,
+} from "@/lib/application/evidence-card";
 import { moleculeCatalog } from "@/lib/data/catalog";
 import type { MoleculeRecord } from "@/lib/domain";
 import { useI18n, type TranslationKey, type Translator } from "@/lib/i18n";
@@ -28,6 +31,8 @@ const evidenceStatusKeys: Readonly<Record<string, TranslationKey>> = {
   unknown: "status.unknown",
 };
 
+const usesStaticEvidence = import.meta.env.VITE_STATIC_EVIDENCE === "true";
+
 function presentEvidenceStatus(value: string, t: Translator) {
   const key = evidenceStatusKeys[value];
   return key ? t(key) : t("status.unknown");
@@ -52,16 +57,29 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
     setError("");
     setCard(null);
     try {
-      const response = await fetch("/api/evidence", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ moleculeId: molecule.id, question, locale }),
-      });
-      const payload = (await response.json()) as MentorEvidenceCard | { error?: string };
-      if (!response.ok || !("cardId" in payload)) {
-        throw new Error(t("discover.cardError"));
+      if (usesStaticEvidence) {
+        const localCard = createLocalEvidenceCard(molecule.id, question, locale);
+        if (!localCard) throw new Error(t("discover.cardError"));
+        setCard(localCard);
+        return;
       }
-      setCard(payload);
+
+      try {
+        const response = await fetch("/api/evidence", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ moleculeId: molecule.id, question, locale }),
+        });
+        const payload = (await response.json()) as MentorEvidenceCard | { error?: string };
+        if (!response.ok || !("cardId" in payload)) {
+          throw new Error(t("discover.cardError"));
+        }
+        setCard(payload);
+      } catch {
+        const localCard = createLocalEvidenceCard(molecule.id, question, locale);
+        if (!localCard) throw new Error(t("discover.cardError"));
+        setCard(localCard);
+      }
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : t("discover.cardError"));
     } finally {

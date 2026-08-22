@@ -12,6 +12,22 @@ const { evaluateNomenclatureAttempt } = await tsImport(
   "../lib/domain/nomenclature.ts",
   import.meta.url,
 );
+const {
+  NOMENCLATURE_PROGRESS_STORAGE_KEY,
+  NOMENCLATURE_PROGRESS_STORAGE_VERSION,
+  decodeNomenclatureProgress,
+  encodeNomenclatureProgress,
+  persistNomenclatureProgress,
+  readPersistedNomenclatureProgress,
+} = await tsImport(
+  "../lib/application/nomenclature-progress.ts",
+  import.meta.url,
+);
+
+const nomenclatureProgressScope = {
+  topicIds: nomenclatureTopics.map((topic) => topic.id),
+  exerciseIds: nomenclatureExercises.map((exercise) => exercise.id),
+};
 
 const interactionKinds = new Set(
   nomenclatureExercises.map((exercise) => exercise.kind),
@@ -202,4 +218,131 @@ test("empty responses fail closed with locale-specific guidance", () => {
   assert.notEqual(turkish.feedback, english.feedback);
   assert.equal(turkish.explanation, "");
   assert.equal(english.misconception, "");
+});
+
+test("versioned nomenclature progress codec round-trips only learning state", () => {
+  const progress = {
+    currentTopicId: nomenclatureTopics[3].id,
+    completedExerciseIds: [
+      nomenclatureExercises[0].id,
+      nomenclatureExercises[2].id,
+    ],
+    attempts: 7,
+    correctAttempts: 2,
+  };
+
+  const serialized = encodeNomenclatureProgress(
+    progress,
+    nomenclatureProgressScope,
+  );
+  assert.ok(serialized);
+  assert.deepEqual(JSON.parse(serialized), {
+    version: NOMENCLATURE_PROGRESS_STORAGE_VERSION,
+    ...progress,
+  });
+  assert.deepEqual(
+    decodeNomenclatureProgress(serialized, nomenclatureProgressScope),
+    progress,
+  );
+  assert.doesNotMatch(
+    serialized,
+    /answer|evaluation|structure|claim/iu,
+    "persistence must remain isolated from answers and scientific state",
+  );
+});
+
+test("nomenclature progress codec rejects malformed, stale, and out-of-scope records", () => {
+  const validEnvelope = {
+    version: NOMENCLATURE_PROGRESS_STORAGE_VERSION,
+    currentTopicId: nomenclatureTopics[0].id,
+    completedExerciseIds: [nomenclatureExercises[0].id],
+    attempts: 2,
+    correctAttempts: 1,
+  };
+  const invalidRecords = [
+    null,
+    [],
+    { ...validEnvelope, version: 2 },
+    { ...validEnvelope, currentTopicId: "topic:not-in-curriculum" },
+    { ...validEnvelope, completedExerciseIds: ["exercise:not-in-curriculum"] },
+    {
+      ...validEnvelope,
+      completedExerciseIds: [
+        nomenclatureExercises[0].id,
+        nomenclatureExercises[0].id,
+      ],
+    },
+    { ...validEnvelope, attempts: -1 },
+    { ...validEnvelope, attempts: 1.5 },
+    { ...validEnvelope, correctAttempts: 3 },
+    { ...validEnvelope, unexpected: true },
+  ];
+
+  assert.equal(
+    decodeNomenclatureProgress("not-json", nomenclatureProgressScope),
+    null,
+  );
+  assert.equal(decodeNomenclatureProgress(null, nomenclatureProgressScope), null);
+  for (const record of invalidRecords) {
+    assert.equal(
+      decodeNomenclatureProgress(
+        JSON.stringify(record),
+        nomenclatureProgressScope,
+      ),
+      null,
+      JSON.stringify(record),
+    );
+  }
+});
+
+test("device-local nomenclature storage restores valid state and fails safely", () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value),
+  };
+  const progress = {
+    currentTopicId: nomenclatureTopics[1].id,
+    completedExerciseIds: [nomenclatureExercises[0].id],
+    attempts: 2,
+    correctAttempts: 1,
+  };
+
+  assert.equal(
+    persistNomenclatureProgress(
+      storage,
+      progress,
+      nomenclatureProgressScope,
+    ),
+    true,
+  );
+  assert.ok(values.has(NOMENCLATURE_PROGRESS_STORAGE_KEY));
+  assert.deepEqual(
+    readPersistedNomenclatureProgress(storage, nomenclatureProgressScope),
+    progress,
+  );
+
+  const blockedStorage = {
+    getItem() {
+      throw new Error("storage unavailable");
+    },
+    setItem() {
+      throw new Error("storage unavailable");
+    },
+  };
+  assert.equal(
+    readPersistedNomenclatureProgress(
+      blockedStorage,
+      nomenclatureProgressScope,
+    ),
+    null,
+  );
+  assert.equal(
+    persistNomenclatureProgress(
+      blockedStorage,
+      progress,
+      nomenclatureProgressScope,
+    ),
+    false,
+  );
 });

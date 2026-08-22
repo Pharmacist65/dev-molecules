@@ -4,7 +4,7 @@
 
 Dev Molecules is one product shell with independently governed scientific, learning, and rendering boundaries. React may compose those boundaries, but it is not allowed to manufacture chemistry, evidence status, scoring rules, or source provenance.
 
-The current repository is a stateless React 19/vinext application configured for Sites/Cloudflare delivery. It uses checked-in seed data and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
+The current repository is a stateless React 19 application with two delivery adapters around the same product shell: vinext for the server-capable Sites/Cloudflare runtime and a standalone Vite entry for static GitHub Pages delivery. It uses checked-in seed data and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
 
 ## Current dependency direction
 
@@ -59,7 +59,7 @@ See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
 The nomenclature domain contains ten ordered topics, ten source-referenced exercises, and six interaction contracts. A pure evaluator handles single choice, multiple choice, and normalized text answers in TR and EN. It grades only the curated answer contract; it does not infer chemical identity or validate arbitrary names.
 
-Progress is device-local UI state. It is a learning measure and cannot change evidence or review status.
+Progress is device-local UI state. Nomenclature persistence stores only a versioned current-topic ID, completed exercise IDs, and aggregate attempt counts; it excludes answers, structures, evaluations, and scientific claims. Learning progress cannot change evidence or review status.
 
 ### Build, Teach, and Discover
 
@@ -70,6 +70,16 @@ Progress is device-local UI state. It is a learning measure and cannot change ev
 ### Evidence and optional narration
 
 Evidence records separate evidence level from verification status and require stable source IDs. The evidence endpoint creates a curated local card first. If an external narrator is configured, it receives the user's question and only the allow-listed evidence context, then must return a strict schema whose cited source IDs resolve to the supplied set. Missing credentials, provider errors, invalid output, or citation failures return the curated card instead of unsupported prose. A deployment enabling this path must disclose the external-processing boundary and obtain any required consent.
+
+The static GitHub Pages adapter has no API runtime and therefore invokes the same curated local card builder directly. This is an explicit deployment capability boundary, not a simulated network endpoint. The Pages bundle contains no provider credential, GitHub token, or external narration path.
+
+## Delivery adapters
+
+`app/` remains the vinext entry for local development and server-capable hosting. `deployment/github-pages/` is a thin client entry that mounts the same `DevMoleculesApp`; it contains no duplicate chemistry, curriculum, evidence, or UI implementation. `vite.pages.config.ts` sets the GitHub project base path, copies the checked-in public assets, and emits `dist-pages/`.
+
+The application view model resolves only public asset fetch paths against `import.meta.env.BASE_URL`. Canonical domain `publicPath` records remain unchanged and continue to identify the checked-in asset. Hash navigation keeps Universe, cluster, and molecule-focus links inside the single static document.
+
+The GitHub workflow validates both delivery adapters. Repository code runs without deployment credentials; the final Pages deployment job receives only `pages: write` and `id-token: write` after the quality and browser jobs succeed. See [Deployment](DEPLOYMENT.md).
 
 ## Localization architecture
 
@@ -145,9 +155,11 @@ The local and CI gate is:
 npm run typecheck
 npm run lint
 npm run build
+npm run build:pages
 node --test tests/*.test.mjs
 npx playwright test
+npm run e2e:pages
 npm audit --omit=dev --audit-level=high
 ```
 
-Unit and fixture tests cover domain invariants, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, renderer contracts, bounded LOD/cache behavior, and representative 500-record selection policy. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, and fixed-size visual captures. These checks are acceptance evidence, not a scientific peer review or GPU benchmark.
+Unit and fixture tests cover domain invariants, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, renderer contracts, bounded LOD/cache behavior, and representative 500-record selection policy. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. These checks are acceptance evidence, not a scientific peer review or GPU benchmark.

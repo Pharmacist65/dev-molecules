@@ -46,7 +46,7 @@ function DevMoleculesWorkspace() {
   const [nomenclatureProgress, setNomenclatureProgress] = useState<NomenclatureProgressSnapshot | null>(null);
 
   const exploreCatalogView = useMemo(
-    () => createExploreCatalogView(moleculeCatalog, locale),
+    () => createExploreCatalogView(moleculeCatalog, locale, import.meta.env.BASE_URL),
     [locale],
   );
   const activeModeDefinition = modes.find((mode) => mode.id === activeMode) ?? modes[0];

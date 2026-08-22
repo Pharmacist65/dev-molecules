@@ -267,5 +267,69 @@ test("Nomenclature Lab exposes ten topics and explains both incorrect and correc
   expect(await correctFeedback.locator("p").count()).toBeGreaterThanOrEqual(3);
   await expect(lab.getByTestId("nomenclature-next")).toBeVisible();
 
+  await lab.getByTestId("nomenclature-next").click();
+  await expect(topics.nth(0)).toHaveAttribute("data-complete", "true");
+  await expect(topics.nth(1)).toHaveAttribute("aria-current", "step");
+  await expect(lab.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "10");
+
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const serialized = window.localStorage.getItem(
+          "dev-molecules:nomenclature-progress",
+        );
+        return serialized ? JSON.parse(serialized) : null;
+      }),
+    )
+    .toEqual({
+      version: 1,
+      currentTopicId: "topic:functional-groups",
+      completedExerciseIds: ["nomenclature:parent-chain:2-methylpentane"],
+      attempts: 2,
+      correctAttempts: 1,
+    });
+
+  await page.reload({ waitUntil: "domcontentloaded" });
+  const restoredModeButtons = await openLearn(page);
+  await page
+    .getByRole("tab", { name: "Nomenclature Lab", exact: true })
+    .click();
+  await expect(nomenclatureRoot(page)).toBeVisible();
+  const restoredTopics = nomenclatureRoot(page).locator(
+    '[data-testid^="nomenclature-topic-"]',
+  );
+  await expect(restoredTopics.nth(0)).toHaveAttribute("data-complete", "true");
+  await expect(restoredTopics.nth(1)).toHaveAttribute("aria-current", "step");
+  await expect(nomenclatureRoot(page).getByRole("progressbar")).toHaveAttribute(
+    "aria-valuenow",
+    "10",
+  );
+
+  await nomenclatureRoot(page).locator("fieldset button").nth(2).click();
+  await nomenclatureRoot(page).getByTestId("nomenclature-check").click();
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const serialized = window.localStorage.getItem(
+          "dev-molecules:nomenclature-progress",
+        );
+        return serialized ? JSON.parse(serialized) : null;
+      }),
+    )
+    .toEqual({
+      version: 1,
+      currentTopicId: "topic:functional-groups",
+      completedExerciseIds: ["nomenclature:parent-chain:2-methylpentane"],
+      attempts: 3,
+      correctAttempts: 1,
+    });
+
+  await restoredModeButtons.nth(3).click();
+  const restoredSummary = page.getByText("Nomenclature learning summary", {
+    exact: true,
+  });
+  await expect(restoredSummary).toBeVisible();
+  await expect(restoredSummary.locator("../..")).toContainText("10%");
+
   expectCleanRuntime(telemetry);
 });
