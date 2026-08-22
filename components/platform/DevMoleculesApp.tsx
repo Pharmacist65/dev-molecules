@@ -1,47 +1,56 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { MoleculeUniverse } from "@/components/universe";
 import { createExploreCatalogView } from "@/lib/application/explore-catalog";
 import { moleculeById, moleculeCatalog } from "@/lib/data/catalog";
-import type { MoleculeId } from "@/lib/domain";
+import { learningMissions } from "@/lib/data/learning-missions";
+import type { MoleculeId, NomenclatureProgressSnapshot } from "@/lib/domain";
+import { I18nProvider, useI18n, type TranslationKey } from "@/lib/i18n";
 
 import { EvidenceMentor } from "./EvidenceMentor";
 import { GuidedBuilder } from "./GuidedBuilder";
 import { InstructorStudio } from "./InstructorStudio";
 import { MissionStudio } from "./MissionStudio";
+import { NomenclatureLab } from "./NomenclatureLab";
 import { SynthesisTheatre } from "./SynthesisTheatre";
 import styles from "./platform.module.css";
 
 type PlatformMode = "explore" | "learn" | "build" | "teach" | "discover";
+type LearnArea = "synthesis" | "nomenclature";
 
 const modes: readonly {
   id: PlatformMode;
-  label: string;
+  labelKey: TranslationKey;
   eyebrow: string;
-  description: string;
+  descriptionKey: TranslationKey;
 }[] = [
-  { id: "explore", label: "Explore", eyebrow: "01", description: "Molecular Universe" },
-  { id: "learn", label: "Learn", eyebrow: "02", description: "Synthesis & Missions" },
-  { id: "build", label: "Build", eyebrow: "03", description: "Guided Workbench" },
-  { id: "teach", label: "Teach", eyebrow: "04", description: "Instructor Studio" },
-  { id: "discover", label: "Discover", eyebrow: "05", description: "Private Sandbox" },
+  { id: "explore", labelKey: "nav.explore", eyebrow: "01", descriptionKey: "nav.exploreDescription" },
+  { id: "learn", labelKey: "nav.learn", eyebrow: "02", descriptionKey: "nav.learnDescription" },
+  { id: "build", labelKey: "nav.build", eyebrow: "03", descriptionKey: "nav.buildDescription" },
+  { id: "teach", labelKey: "nav.teach", eyebrow: "04", descriptionKey: "nav.teachDescription" },
+  { id: "discover", labelKey: "nav.discover", eyebrow: "05", descriptionKey: "nav.discoverDescription" },
 ] as const;
-
-const exploreCatalogView = createExploreCatalogView(moleculeCatalog);
 
 function BrandMark() {
   return <span className={styles.brandMark} aria-hidden="true"><i /><i /><i /></span>;
 }
 
-export function DevMoleculesApp() {
+function DevMoleculesWorkspace() {
+  const { locale, setLocale, t } = useI18n();
   const [activeMode, setActiveMode] = useState<PlatformMode>("explore");
+  const [learnArea, setLearnArea] = useState<LearnArea>("synthesis");
   const [selectedId, setSelectedId] = useState<string>(moleculeCatalog[0]?.id ?? "");
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<string>>(new Set());
+  const [nomenclatureProgress, setNomenclatureProgress] = useState<NomenclatureProgressSnapshot | null>(null);
 
-  const selectedMolecule =
-    moleculeById.get(selectedId as MoleculeId) ?? moleculeCatalog[0];
+  const exploreCatalogView = useMemo(
+    () => createExploreCatalogView(moleculeCatalog, locale),
+    [locale],
+  );
+  const activeModeDefinition = modes.find((mode) => mode.id === activeMode) ?? modes[0];
+  const selectedMolecule = moleculeById.get(selectedId as MoleculeId) ?? moleculeCatalog[0];
 
   useEffect(() => {
     let restoreTimer: number | undefined;
@@ -49,13 +58,10 @@ export function DevMoleculesApp() {
       const saved = window.localStorage.getItem("dev-molecules:completed-missions");
       if (saved) {
         const restored = JSON.parse(saved) as string[];
-        restoreTimer = window.setTimeout(
-          () => setCompletedMissionIds(new Set(restored)),
-          0,
-        );
+        restoreTimer = window.setTimeout(() => setCompletedMissionIds(new Set(restored)), 0);
       }
     } catch {
-      // Device-local progress is optional; the product remains usable without it.
+      // Device-local progress is optional; scientific state never depends on it.
     }
     return () => {
       if (restoreTimer !== undefined) window.clearTimeout(restoreTimer);
@@ -69,7 +75,7 @@ export function DevMoleculesApp() {
         JSON.stringify([...completedMissionIds]),
       );
     } catch {
-      // Storage can be unavailable in private browsing; no scientific state depends on it.
+      // Storage may be unavailable in private browsing.
     }
   }, [completedMissionIds]);
 
@@ -77,13 +83,29 @@ export function DevMoleculesApp() {
     setCompletedMissionIds((current) => new Set([...current, missionId]));
   }
 
+  function openMoleculeFocus(moleculeId: string) {
+    setSelectedId(moleculeId);
+    setActiveMode("explore");
+    const separatorIndex = Math.max(moleculeId.lastIndexOf(":"), moleculeId.lastIndexOf("/"));
+    const slug = separatorIndex >= 0 ? moleculeId.slice(separatorIndex + 1) : moleculeId;
+    window.requestAnimationFrame(() => {
+      window.history.pushState(null, "", `#molecule/${encodeURIComponent(slug)}`);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    });
+  }
+
   return (
-    <div className={styles.app}>
+    <div className={styles.app} data-locale={locale}>
       <header className={styles.topbar}>
-        <button className={styles.brand} type="button" onClick={() => setActiveMode("explore")}>
-          <BrandMark /><span>DEV MOLECULES</span><em>FOUNDATION</em>
+        <button
+          className={styles.brand}
+          type="button"
+          aria-label={t("shell.brandHomeLabel")}
+          onClick={() => setActiveMode("explore")}
+        >
+          <BrandMark /><span>DEV MOLECULES</span><em>{t("shell.brandTagline")}</em>
         </button>
-        <nav className={styles.modeNav} aria-label="Platform modülleri">
+        <nav className={styles.modeNav} aria-label={t("nav.platformModules")}>
           {modes.map((mode) => (
             <button
               key={mode.id}
@@ -92,14 +114,24 @@ export function DevMoleculesApp() {
               aria-pressed={activeMode === mode.id}
               onClick={() => setActiveMode(mode.id)}
             >
-              <span>{mode.eyebrow}</span>{mode.label}
+              <span>{mode.eyebrow}</span>{t(mode.labelKey)}
             </button>
           ))}
         </nav>
         <div className={styles.topStatus}>
-          <span><i /> Yapı kaynakları bağlı</span>
-          <button type="button" onClick={() => setActiveMode("teach")} aria-label="İlerleme özetini aç">
-            {completedMissionIds.size}/5
+          <span><i /> {t("shell.structureSourcesConnected")}</span>
+          <div className={styles.languageSwitcher} role="group" aria-label={t("locale.selectorLabel")}>
+            <button type="button" aria-pressed={locale === "tr"} aria-label={t("locale.switchToTurkish")} onClick={() => setLocale("tr")}>TR</button>
+            <button type="button" aria-pressed={locale === "en"} aria-label={t("locale.switchToEnglish")} onClick={() => setLocale("en")}>EN</button>
+          </div>
+          <button
+            className={styles.progressButton}
+            type="button"
+            onClick={() => setActiveMode("teach")}
+            aria-label={t("learn.progressLabel", { completed: completedMissionIds.size, total: learningMissions.length })}
+          >
+            <span>{t("shell.learningProgress")}</span>
+            <strong>{completedMissionIds.size}/{learningMissions.length}</strong>
           </button>
         </div>
       </header>
@@ -107,10 +139,10 @@ export function DevMoleculesApp() {
       <main>
         <div className={styles.modeBanner}>
           <div>
-            <span>{modes.find((mode) => mode.id === activeMode)?.eyebrow}</span>
-            <strong>{modes.find((mode) => mode.id === activeMode)?.description}</strong>
+            <span>{activeModeDefinition.eyebrow}</span>
+            <strong>{t(activeModeDefinition.descriptionKey)}</strong>
           </div>
-          <p>Ölçeklenebilir katalog · Kaynaklı yapı verisi · Eğitim amaçlı</p>
+          <p>{t("shell.platformPromise")}</p>
         </div>
 
         {activeMode === "explore" ? (
@@ -118,11 +150,11 @@ export function DevMoleculesApp() {
             <MoleculeUniverse
               molecules={exploreCatalogView.molecules}
               lenses={exploreCatalogView.lenses}
-              initialLensId="scaffold"
+              initialLensId="therapeutic"
               initialSelectedId={selectedId}
-              eyebrow="EXPLORE / MOLECULAR UNIVERSE"
-              title="İlaç moleküllerinin 3B evrenini keşfet."
-              description="Kaynaklı SDF atom ve bağ kayıtlarını; tedavi alanı, hedef ailesi ve yapısal iskelet lensleriyle incele."
+              eyebrow={t("explore.eyebrow")}
+              title={t("explore.title")}
+              description={t("explore.description")}
               onMoleculeSelect={(molecule) => setSelectedId(molecule.id)}
             />
           </div>
@@ -130,37 +162,54 @@ export function DevMoleculesApp() {
 
         {activeMode === "learn" && selectedMolecule ? (
           <div className={styles.workspacePage}>
-            <SynthesisTheatre selectedMoleculeId={selectedMolecule.id} onSelectMolecule={setSelectedId} />
-            <MissionStudio completedMissionIds={completedMissionIds} onComplete={completeMission} />
+            <div className={styles.learnNav} role="tablist" aria-label={t("learn.subnavAria")}>
+              <button type="button" role="tab" aria-selected={learnArea === "synthesis"} onClick={() => setLearnArea("synthesis")}>{t("learn.synthesisTab")}</button>
+              <button type="button" role="tab" aria-selected={learnArea === "nomenclature"} onClick={() => setLearnArea("nomenclature")}>{t("learn.nomenclatureTab")}</button>
+            </div>
+            {learnArea === "synthesis" ? (
+              <>
+                <SynthesisTheatre
+                  selectedMoleculeId={selectedMolecule.id}
+                  onSelectMolecule={setSelectedId}
+                  onOpenMoleculeFocus={openMoleculeFocus}
+                />
+                <MissionStudio completedMissionIds={completedMissionIds} onComplete={completeMission} />
+              </>
+            ) : (
+              <NomenclatureLab locale={locale} onProgressChange={setNomenclatureProgress} />
+            )}
           </div>
         ) : null}
 
         {activeMode === "build" && selectedMolecule ? (
-          <div className={styles.workspacePage}>
-            <GuidedBuilder molecule={selectedMolecule} />
-          </div>
+          <div className={styles.workspacePage}><GuidedBuilder molecule={selectedMolecule} /></div>
         ) : null}
 
         {activeMode === "teach" ? (
           <div className={styles.workspacePage}>
-            <InstructorStudio completedMissionIds={completedMissionIds} />
+            <InstructorStudio
+              completedMissionIds={completedMissionIds}
+              nomenclatureProgress={nomenclatureProgress}
+            />
           </div>
         ) : null}
 
         {activeMode === "discover" && selectedMolecule ? (
-          <div className={styles.workspacePage}>
-            <EvidenceMentor molecule={selectedMolecule} onSelectMolecule={setSelectedId} />
-          </div>
+          <div className={styles.workspacePage}><EvidenceMentor molecule={selectedMolecule} onSelectMolecule={setSelectedId} /></div>
         ) : null}
       </main>
 
       <footer className={styles.globalFooter}>
-        <span>Dev Molecules · Pharmaceutical molecular learning environment</span>
-        <span>Not clinical, laboratory or patent advice</span>
-        <span>Identity data verified · Teaching interpretations pending expert review</span>
+        <span>{t("shell.footerProduct")}</span>
+        <span>{t("shell.footerNotAdvice")}</span>
+        <span>{t("shell.footerEvidenceBoundary")}</span>
       </footer>
     </div>
   );
+}
+
+export function DevMoleculesApp() {
+  return <I18nProvider><DevMoleculesWorkspace /></I18nProvider>;
 }
 
 export default DevMoleculesApp;

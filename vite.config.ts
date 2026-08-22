@@ -1,15 +1,16 @@
 import { sites } from "@openai/sites-vite-plugin";
 import vinext from "vinext";
 import { defineConfig } from "vite";
-import hostingConfig from "./.openai/hosting.json";
+import hostingConfig from "./.openai/hosting.json" with { type: "json" };
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
 const { d1, r2 } = hostingConfig;
 
-// macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
-const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
+// Opt into polling only in development environments whose filesystem watcher
+// cannot deliver native events. Production builds do not use this setting.
+const usePolling = process.env.DEV_USE_POLLING === "true";
 
 const localBindingConfig = {
   main: "./worker/index.ts",
@@ -44,7 +45,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
-    server: isCodexSeatbeltSandbox
+    server: usePolling
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,
     plugins: [

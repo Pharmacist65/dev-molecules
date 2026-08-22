@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { getStructureProvenancePresentation } from "../lib/application/structure-presentation.ts";
+import { tsImport } from "tsx/esm/api";
+
+const { getStructureProvenancePresentation } = await tsImport(
+  "../lib/application/structure-presentation.ts",
+  import.meta.url,
+);
 
 test("structure provenance wording distinguishes computed, broad experimental and bound-pose origins", () => {
   assert.equal(

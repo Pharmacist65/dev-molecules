@@ -11,7 +11,7 @@ The initial small data slice is an implementation and validation seed only. It i
 The complete platform preserves five distinct modes:
 
 1. **Explore — Molecular Universe:** navigate medicines through therapeutic class, scaffold, target, mechanism, approval era, origin, metabolite and structural-similarity lenses.
-2. **Learn — Synthesis Theatre:** follow source-linked synthesis routes step by step, including atom continuity, bond changes, learning explanations and alternative routes.
+2. **Learn — Synthesis Theatre and Nomenclature Lab:** follow source-linked synthesis routes step by step, then practise the ten-part naming curriculum through deterministic, explanatory exercises.
 3. **Build — Molecule Workbench:** use a guided fragment builder for learners and a precise 2D editor with live 3D preview for advanced users.
 4. **Teach — Instructor Studio:** create courses, missions and assessments; assign work; review misconceptions and learner progress.
 5. **Discover — Research Sandbox:** privately compare user designs with known identities, analogs, synthesis evidence and biological evidence. This mode remains experimental and visually separate from verified education content.
@@ -51,7 +51,7 @@ The first slice proves the complete product loop with a deliberately small, cohe
 - five guided missions covering recognition, scaffold building, repair, synthesis ordering and evidence reading;
 - a guided builder, not yet a full research-grade sketching suite;
 - structured example AI evidence cards before open-ended AI answers;
-- a simple learner progress summary and instructor export.
+- a simple device-local learner progress summary; instructor export remains a planned capability.
 
 The slice is successful only if users understand why molecules are related, can complete the learning loop, and can distinguish evidence from prediction. Seed counts must never leak into product copy or schemas as permanent limits.
 

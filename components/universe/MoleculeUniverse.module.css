@@ -2055,3 +2055,140 @@
     inset-block-start: 208px;
   }
 }
+
+/* Light editorial chrome around the intentionally dark molecular stage. */
+.universe {
+  --ink: #13213c;
+  --muted: #5f6d83;
+  --faint: #718097;
+  --line: #dce3ed;
+  --panel: #ffffff;
+  border-color: #dce3ed;
+  background: #fff;
+  color: #13213c;
+  box-shadow: 0 24px 60px rgb(27 45 78 / 10%);
+}
+.eyebrow { color: #d95d1a; }
+.header h2 { color: #13213c; }
+.description { color: #5f6d83; }
+.headerSummary span { border-color: #dce3ed; background: #f5f7fb; color: #627088; }
+.headerSummary strong { color: #1e2d49; }
+.headerSummary span[data-level="focus"] { border-color: #bed0f5; background: #f0f4ff; }
+.toolbar { border-color: #dce3ed; background: #f8f9fc; }
+.searchField label,
+.controlLabel { color: #46556d; }
+.searchIcon { border-color: #6f7d93; }
+.searchIcon::after { background: #6f7d93; }
+.searchControl input { border-color: #cfd8e6; background: #fff; color: #253553; }
+.searchControl input::placeholder { color: #738097; }
+.searchControl input:focus-visible { border-color: #2457d6; box-shadow: 0 0 0 3px rgb(36 87 214 / 13%); }
+.clearButton { color: #5e6d84; }
+.clearButton:hover { background: #e9eef6; color: #172744; }
+.lensButton { border-color: #d4dce8; background: #fff; color: #536078; }
+.lensButton:hover { border-color: #8ba9e8; color: #1f4ab5; }
+.lensButton[aria-pressed="true"] { border-color: #2457d6; background: #edf2ff; color: #173f9f; }
+.lensDescription,
+.lensTechnical { color: #637188; }
+.lensMeaning { color: #33425d; }
+.lensMeaning strong { color: #172744; }
+.lensCaveat { color: #87451f; }
+.lensCaveat strong { color: #a44714; }
+.breadcrumb { border-color: #dce3ed; background: #fff; color: #68768c; }
+.breadcrumb button { color: #536078; }
+.breadcrumb button:hover,
+.breadcrumb button[aria-current="page"],
+.breadcrumb > span[aria-current="page"] { color: #2457d6; }
+.breadcrumb p { color: #68768c; }
+
+.exploreStage,
+.sceneTelemetry,
+.twoDStage {
+  background-color: #0d172b;
+  background-image:
+    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 14%), transparent 43%),
+    linear-gradient(rgb(112 145 210 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(112 145 210 / 5%) 1px, transparent 1px);
+}
+.nearClusterNavigation,
+.universeCamera,
+.moleculeSelectors,
+.lodStatus,
+.moleculeHoverLabel { border-color: rgb(184 202 236 / 18%); background: rgb(12 25 48 / 88%); }
+.nearClusterNavigation button { border-color: rgb(201 214 240 / 16%); color: #d6e0f2; }
+.nearClusterNavigation button:hover,
+.nearClusterNavigation button:focus-visible { border-color: #5f89df; background: rgb(36 87 214 / 24%); color: #fff; }
+.nearClusterNavigation button:focus-visible { outline-color: #7fa0e7; }
+.clusterGlyph { background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 90%), rgb(12 25 48 / 72%) 68%); }
+.clusterGlyph:hover,
+.clusterGlyph:focus-visible { background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 83%), rgb(12 25 48 / 84%) 70%); }
+.clusterGlyph > i { box-shadow: none; }
+.clusterLayer[data-near="true"] .clusterGlyph { background: rgb(12 25 48 / 66%); }
+.universeCamera button,
+.focusControls button,
+.focusActions button,
+.inspectorTop button,
+.emptyState button { border-color: rgb(210 222 244 / 16%); color: #c7d3e8; }
+.universeCamera button:hover,
+.focusControls button:hover:not(:disabled),
+.focusActions button:hover,
+.emptyState button:hover { border-color: #5f89df; color: #fff; }
+.lodStatus,
+.universeCamera output,
+.moleculeHoverLabel { color: #b4c1d8; }
+
+.clusterOverlay > header,
+.focusHeader { border-color: rgb(196 211 238 / 16%); background: linear-gradient(rgb(12 25 48 / 96%), rgb(12 25 48 / 82%)); }
+.clusterOverlay > header p,
+.focusHeader p { color: #ff9b5c; }
+.clusterOverlay > header h3,
+.focusHeader h3 { color: #f7f9fd; }
+.clusterOverlay > header h3:focus-visible,
+.focusHeader h3:focus-visible { outline-color: #7fa0e7; }
+.clusterOverlay > header span { color: #ddbd9f; }
+.moleculeSelectors li[data-selected="true"] { border-color: #6f96e6; background: rgb(36 87 214 / 16%); }
+.moleculeSelectors button { color: #eef3fb; }
+.moleculeSelectors .moleculeSelectButton[aria-pressed="true"] { background: rgb(36 87 214 / 18%); color: #fff; }
+.moleculeSelectors button:hover,
+.moleculeSelectors button:focus-visible { border-color: #5f89df; background: rgb(36 87 214 / 12%); }
+.moleculeSelectors small { color: #aebbd2; }
+.focusControls { border-color: rgb(196 211 238 / 16%); background: rgb(12 25 48 / 92%); }
+.focusControls > div { background: rgb(0 0 0 / 24%); }
+.focusControls button[aria-pressed="true"] { border-color: #6f96e6; background: rgb(36 87 214 / 36%); color: #fff; }
+.provenanceBanner { border-color: rgb(196 211 238 / 14%); background: rgb(12 25 48 / 86%); }
+.provenanceBanner strong { color: #9bb8f0; }
+.provenanceBanner span { color: #d3b393; }
+.missingStructure { background: rgb(13 23 43 / 94%); color: #f5f7fb; }
+
+.inspector { border-color: #dce3ed; background: rgb(255 255 255 / 97%); color: #13213c; }
+.inspectorTop span { color: #536078; }
+.inspectorTop button { border-color: #cfd8e6; background: #f3f6fb; color: #263653; }
+.inspectorKicker { color: #d95d1a; }
+.inspector h4 { color: #172744; }
+.formula { color: #2457d6; }
+.summary { color: #536078; }
+.regulatoryEvidence { border-color: #bed0f5; background: #f1f5ff; }
+.regulatoryEvidence p { color: #1f4ab5; }
+.regulatoryEvidence strong { color: #172744; }
+.regulatoryEvidence span,
+.regulatoryEvidence small { color: #536078; }
+.regulatoryEvidence a,
+.provenanceList a { color: #2457d6; text-decoration-color: rgb(36 87 214 / 35%); }
+.provenanceList,
+.lensValues,
+.provenanceList > div,
+.lensValues > div { border-color: #dce3ed; }
+.provenanceList dt,
+.lensValues dt { color: #64738a; }
+.provenanceList dd,
+.lensValues dd { color: #263653; }
+.provenanceWarning { border-color: #f3c4a8; background: #fff6f0; color: #77442a; }
+.lensValues > div[data-active="true"] { background: #edf2ff; }
+.lensValues > div[data-active="true"] dt,
+.lensValues > div[data-active="true"] dd { color: #1f4ab5; }
+.atomSelection { border-color: #bed0f5; background: #f1f5ff; color: #536078; }
+.atomSelection strong { color: #2457d6; }
+.footer { border-color: #dce3ed; background: #fff; color: #64738a; }
+.footer kbd { border-color: #cfd8e6; background: #f3f6fb; color: #263653; }
+.universe button:focus-visible,
+.universe a:focus-visible,
+.universe input:focus-visible { outline-color: #2457d6; }

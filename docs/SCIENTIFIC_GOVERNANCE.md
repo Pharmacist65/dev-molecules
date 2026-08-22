@@ -1,107 +1,149 @@
 # Dev Molecules — Scientific Governance
 
-## Scope of governance
+## Scope
 
-Scientific status belongs to a specific versioned claim, measurement, structure, synthesis route or learning item. It does not certify an entire molecule, source, AI response or product screen. “Verified” in one context never implies safe, effective, novel, patentable or clinically useful.
+Scientific status belongs to one versioned claim, structure record, source extraction, synthesis interpretation, measurement, or learning item. It does not certify an entire molecule, route, source, screen, or application.
 
-The first small dataset follows the same governance rules as the future full catalog. Seed content may be small; scientific shortcuts may not become permanent behavior.
+No status in Dev Molecules implies that a structure is safe, effective, novel, patentable, manufacturable, or suitable for clinical or laboratory use. Seed content follows the same rules intended for a larger catalog.
 
-## Publication states
+## Verification states used by the codebase
 
-### Pending
+| State | Meaning | Publication boundary |
+| --- | --- | --- |
+| `verified` | The item passed the recorded higher-assurance rule for its item type. | Eligible only within its stated scope; it does not transfer to related claims. |
+| `expert-reviewed` | A qualified reviewer checked identity/source alignment, wording, evidence class, and interpretation for the declared use. | Eligible for that reviewed use, with reviewer metadata and limitations. |
+| `source-supported` | A direct source and locator support the scoped source assertion. Expert scientific interpretation may still be pending. | May support a clearly labelled source-reported reading; must never be presented as expert-reviewed or verified. |
+| `pending-review` | Imported, editorial, user-entered, or materially changed content awaiting qualified review. | May appear only with an explicit pending/educational boundary; ineligible as reviewed scientific truth. |
+| `predicted` | A model or computation produced a hypothesis or estimate. | Must remain visibly predicted and cannot be promoted automatically. |
+| `conflicting` | Eligible records disagree or cannot yet be reconciled. | The conflict is the result; the application must not choose a convenient conclusion. |
+| `unknown` | The named sources/rules do not support an assessment. | Show unknown/unavailable. Do not interpolate. |
 
-Imported, user-entered, model-generated or materially changed content that has not completed qualified human review.
+Only `verified` and `expert-reviewed` satisfy the general reviewed-content predicate. `source-supported` is deliberately separate.
 
-- May appear in reviewer tools or the private Discovery Sandbox with a prominent pending/predicted label.
-- Must not appear as canonical educational truth.
-- AI and import jobs can create only this state.
+The synthesis route review model adds a scoped workflow status: `source-audited-pending-expert-review`. The three current stories use that status. Their patent document, example locator, named inputs, and named product connectivity were audited; their editorial atom correspondence and pedagogical wording still require a named synthetic-chemistry reviewer.
 
-### Reviewed
+## Status transitions
 
-A qualified reviewer has checked identity, source alignment, wording, evidence class and educational interpretation for the stated use.
-
-- May be published in learning and exploration surfaces with reviewer, date and source metadata.
-- May still contain uncertainty or conflicting evidence.
-- Material source or content changes return the item to pending.
-
-### Verified
-
-A higher-assurance claim has passed the verification rule defined for its claim type. Normally this requires primary-source traceability plus an independent second review or an approved authoritative record.
-
-- Verification criteria must be recorded, not inferred from the label.
-- A verified reported synthesis route means the route is faithfully represented from its source; it does not guarantee reproducibility in every laboratory.
-- A verified biological measurement means the measurement is faithfully represented; it does not prove clinical efficacy.
-
-## Allowed transitions
+The target controlled workflow is:
 
 ```text
-pending -> reviewed -> verified
-pending <- reviewed <- verified   (demotion/correction)
-any state -> withdrawn            (retained in audit history, not published)
+draft/import/model output -> pending-review
+pending-review -> expert-reviewed -> verified
+expert-reviewed/verified -> pending-review     material change or revalidation
+any state -> conflicting                       unresolved eligible disagreement
+any state -> withdrawn                         correction, rights, or safety action
 ```
 
-- Importers and AI may create or update pending drafts only.
-- Scientific reviewers may promote to reviewed within their declared expertise.
-- Designated verifiers may promote to verified under the item-type verification rule.
-- Conflicts, upstream corrections, license changes or failed revalidation trigger demotion or withdrawal.
-- No status transition deletes its prior version, rationale or actor.
+- Importers, automated tools, and models may create or update pending or predicted records only.
+- A reviewer may promote only within recorded expertise and review scope.
+- A verifier may promote only under a documented item-type verification rule.
+- Material content, source, identity, or tool-version changes invalidate the prior promotion for the changed item.
+- Demotion, conflict, correction, and withdrawal retain the prior version, actor, date, and rationale.
+
+The current checked-in-data slice validates states and presentation rules but does not yet provide a persistent review/audit service. That service is a roadmap requirement; repository history is not a substitute for a scientific audit log.
 
 ## Required provenance
 
-Every publishable claim or route must include:
+Every publishable scientific assertion must be able to retain:
 
 - stable item and version IDs;
-- canonical subject identity and representation;
-- exact claim or structured measurement;
-- source ID, source version, publisher and direct locator;
+- canonical subject ID and relevant representation/form boundary;
+- exact structured claim, measurement, or transformation statement;
+- source ID, publisher, external ID, version/date, and direct record locator;
 - retrieval/import date and extraction method;
-- evidence type: reported experiment, curated database assertion, computed result, model prediction, analogy or expert interpretation;
-- experimental/model distinction and applicable conditions;
-- license, attribution and redistribution record;
-- review status, reviewer role, decision date and rationale;
-- conflicts, superseded versions and corrections.
+- evidence class: reported experiment, regulatory record, curated database assertion, computed result, prediction, analogy, or educational interpretation;
+- experimental/computed/predicted distinction and applicable scope;
+- license, attribution, and redistribution status;
+- verification state, reviewer role, decision date, and rationale;
+- limitations, conflicts, superseded versions, and corrections.
 
-Claims without resolvable provenance are ineligible for reviewed or verified publication. A citation to a broad homepage is not sufficient when a direct record, figure, table, section or dataset row exists.
+A broad homepage or search-result URL is insufficient when an exact record, patent example, section, figure, table, or dataset row is available. Unresolvable provenance makes content ineligible for reviewed or verified publication.
 
 ## Identity and representation rules
 
-- Molecular entity, stereoisomer, salt/solvate/ester, active ingredient, product and approval record remain distinct.
-- Computed conformers, experimental poses, model-generated poses and user-edited conformations carry explicit origin labels.
-- Structure normalization retains original input, normalized output, tool/version and warnings.
+- Molecular entity, stereoisomer, salt/solvate/ester, active ingredient, product, and approval record remain distinct.
+- Approval is scoped to an exact product/application/action and explicit chemical form; it is not inherited by a normalized parent CID.
+- Original input, normalized representation, tool/version, source ID, and warnings must remain traceable.
+- A PubChem-computed conformer is not an experimental crystal structure or protein-bound pose.
+- A 2D layout and a 3D conformer are different source records, not interchangeable proof.
 - “No exact match” means only that no match was found in the named sources and versions under the stated identity rules.
+- Missing or invalid structure data never authorizes generated atoms, bonds, stereochemistry, or identity.
 
 ## Synthesis governance
 
-Every route states whether it is literature-reported, patent-reported, teaching-simplified or AI-proposed. Each step carries atom mapping and a transformation explanation appropriate to its learning level.
+Every route declares one of: literature-reported, patent-reported, educational simplification, or AI-proposed. Presentation must also expose source anchors, route version, review state, stereochemistry scope, limitations, and whether operational details are included.
 
-- Pending/AI-proposed routes cannot visually resemble reviewed reported routes.
-- The default educational view teaches transformation logic and must not become uncontrolled operational laboratory guidance.
-- Advanced details require the appropriate audience, hazard context and source traceability.
-- Atom mapping, stereochemical outcome and route narration require qualified review before educational publication.
+### Current educational safety boundary
 
-## AI fail-closed policy
+The current synthesis stories intentionally include:
 
-AI is an explanation and orchestration layer, not a scientific authority.
+- cited named materials and parent connectivity;
+- reaction-class and transformation explanations;
+- formed/broken bond annotations;
+- source-associated SMILES for 2D teaching diagrams;
+- draft named-atom correspondence;
+- exact primary-document links and human-resolvable example locators.
 
-- It may summarize only claims that pass evidence eligibility for the requested surface.
-- It must return a typed evidence card before optional prose.
-- Each material statement must resolve to the claim IDs and direct sources supplied to the model.
-- Missing, conflicting or ineligible evidence produces **unknown/unavailable**, not interpolation.
-- Output is rejected if a citation is missing, does not support the claim, or the response schema fails.
-- AI cannot promote status, overwrite human review, approve a route, declare novelty or expose a private project.
-- Analog evidence must be labelled as analog evidence; predictions must be labelled as predictions.
-- User or retrieved text cannot modify system evidence rules or tool authorization.
+They intentionally omit:
 
-The AI must not author conclusions such as “this molecule can be synthesized,” “this molecule is safe,” “this molecule treats a disease,” “you discovered a new drug,” or “this structure is patentable.” A precisely scoped regulatory indication or reported experimental result may be rendered separately as a sourced evidence claim; it must not be converted into a broader AI conclusion. In the Discovery Sandbox, the default language is hypothesis-oriented.
+- amounts or equivalents;
+- apparatus and setup;
+- solvent, concentration, temperature, pressure, pH, or duration;
+- work-up, purification, yield, scale, and execution sequence;
+- claims of reproducibility, safety, manufacturing suitability, or clinical performance.
+
+The external primary patent documents may contain operational information. Dev Molecules links to those third-party documents for provenance but does not reproduce that material as an application protocol.
+
+A route can pass the narrow source-reported presentation gate while its atom map remains draft. This means the source assertion is supported; it does **not** mean the editorial mapping is expert-reviewed, the procedure is reproducible, or the route is recommended.
+
+See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
+
+## Nomenclature and learning governance
+
+The nomenclature curriculum is `curated-educational` content tied to IUPAC references and, where relevant, exact product records. Deterministic answer evaluation demonstrates consistency with the checked-in key; it is not independent scientific verification.
+
+- A correct learning response changes progress only.
+- Learning scores cannot change molecular identity, evidence, or review state.
+- Accepted systematic-name answers must be reviewed when curriculum content changes.
+- Generic, systematic, chemical-form, and product/brand names remain separate concepts.
+- The current curriculum needs named subject-matter and instructional review before institutional publication.
+
+## External narration fail-closed policy
+
+An external narration model is an optional explanation layer, not a scientific authority.
+
+- The application assembles a curated evidence card before requesting prose.
+- The model receives only supplied, scoped findings and source records.
+- Output must satisfy a strict response schema.
+- Every cited source ID must resolve to the request's allow-list.
+- Missing credentials, provider failure, invalid JSON/schema, or citation failure returns the curated fallback card.
+- The model cannot promote review state, overwrite source records, approve a route, infer novelty, or expose private content.
+- Analog, computed, and predicted evidence must remain labelled as such.
+
+When external narration is configured, the question and curated evidence context cross the local application boundary. A production deployment must disclose the provider, purpose, retention settings, and consent basis; private or unpublished structures must not enter this path without an explicitly reviewed data contract.
+
+The application must reject unsupported conclusions such as “this molecule can be synthesized,” “this molecule is safe,” “this structure is patentable,” or “this molecule treats a disease.” A precisely scoped reported or regulatory assertion may be displayed as its own sourced claim; it must not be generalized by narration.
 
 ## Review operations
 
-- Reviewer identity, expertise and conflicts of interest are recorded.
-- High-impact corrections can be reported from every scientific screen.
-- Corrections create a new version, re-run dependent projections and invalidate affected AI caches.
-- Source/license updates are monitored; revoked rights withdraw affected presentation while retaining internal audit records where lawful.
-- Periodic sampling checks reviewed content for source drift and model-generated wording drift.
+The production review system must record reviewer identity, declared expertise, conflicts of interest, item version, source set, rationale, and decision scope.
+
+- Scientific screens must provide a correction/report path.
+- Corrections create a new version and invalidate dependent projections, cached narration, and affected teaching content.
+- Source and reuse-status changes can demote or withdraw presentation while preserving lawful audit history.
+- Periodic sampling must test source drift, link resolution, translation drift, and model-generated wording drift.
+- Review in one locale must check that the other locale preserves the same scope and uncertainty.
 
 ## Release gate
 
-No milestone may publish scientific content unless all visible items have valid state labels, direct provenance and eligible licenses; pending content is isolated and unmistakable; AI fail-closed tests pass; and a named qualified reviewer has signed off the included synthesis and biological interpretations.
+Scientific content is eligible for release only when:
+
+- every visible item has a correct verification label and resolvable provenance;
+- source and reuse status are recorded;
+- pending, predicted, conflicting, and unknown content are unmistakable;
+- synthesis views preserve the non-operational boundary;
+- fail-closed tests pass;
+- localized copy preserves scientific scope in TR and EN;
+- and a named qualified reviewer has signed off each item type that is presented as expert-reviewed or verified.
+
+Until that gate is met, the content must remain explicitly educational, source-supported, pending, predicted, conflicting, or unknown according to its actual state.

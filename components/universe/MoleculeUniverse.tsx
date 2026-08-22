@@ -28,6 +28,12 @@ import {
   selectSceneMoleculeIds,
   type ExploreLodLevel,
 } from "@/lib/explore";
+import {
+  useI18n,
+  type Locale,
+  type TranslationKey,
+  type Translator,
+} from "@/lib/i18n";
 
 import styles from "./MoleculeUniverse.module.css";
 
@@ -170,15 +176,23 @@ function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
-function normalizeSearchValue(value: string) {
-  return value.trim().toLocaleLowerCase("tr-TR");
+function normalizeSearchValue(value: string, locale: Locale) {
+  return value.trim().toLocaleLowerCase(locale);
 }
 
-function getLensValue(molecule: UniverseMolecule, lensId: string) {
-  return molecule.lensValues?.[lensId] ?? molecule.category ?? "Sınıflandırılmamış";
+function getLensValue(
+  molecule: UniverseMolecule,
+  lensId: string,
+  unclassifiedLabel: string,
+) {
+  return molecule.lensValues?.[lensId] ?? molecule.category ?? unclassifiedLabel;
 }
 
-function moleculeMatchesSearch(molecule: UniverseMolecule, normalizedQuery: string) {
+function moleculeMatchesSearch(
+  molecule: UniverseMolecule,
+  normalizedQuery: string,
+  locale: Locale,
+) {
   return [
     molecule.name,
     molecule.formula,
@@ -193,8 +207,27 @@ function moleculeMatchesSearch(molecule: UniverseMolecule, normalizedQuery: stri
   ]
     .filter(Boolean)
     .join(" ")
-    .toLocaleLowerCase("tr-TR")
+    .toLocaleLowerCase(locale)
     .includes(normalizedQuery);
+}
+
+const VERIFICATION_STATUS_KEYS: Readonly<Record<string, TranslationKey>> = {
+  verified: "status.verified",
+  "pending-review": "status.pendingReview",
+  "expert-review-required": "status.expertReviewRequired",
+  "educational-only": "status.educationalOnly",
+  "source-verified": "status.sourceVerified",
+  "source-supported": "status.sourceSupported",
+  predicted: "status.predicted",
+  unknown: "status.unknown",
+  conflicting: "status.conflicting",
+  rejected: "status.rejected",
+};
+
+function presentVerificationStatus(status: string | undefined, t: Translator) {
+  if (!status) return t("common.notSpecified");
+  const key = VERIFICATION_STATUS_KEYS[status];
+  return key ? t(key) : t("status.unknown");
 }
 
 function getMoleculeSlug(id: string) {
@@ -218,15 +251,44 @@ function cameraZoom(camera: MolecularSceneCamera) {
 
 export function MoleculeUniverse({
   molecules,
-  lenses = DEFAULT_UNIVERSE_LENSES,
+  lenses: providedLenses,
   initialLensId,
   initialSelectedId,
-  eyebrow = "MOLECULE UNIVERSE",
-  title = "Moleküllerin içinde gezinin.",
-  description = "Kaynaklı yapıları tek bir moleküler sahnede keşfedin.",
+  eyebrow,
+  title,
+  description,
   className,
   onMoleculeSelect,
 }: MoleculeUniverseProps) {
+  const { locale, t } = useI18n();
+  const localizedDefaultLenses = useMemo<readonly UniverseLens[]>(
+    () => [
+      {
+        id: "therapeutic",
+        label: t("explore.lens.therapeutic"),
+        description: t("explore.lens.therapeuticDescription"),
+        verificationStatus: "pending-review",
+      },
+      {
+        id: "target",
+        label: t("explore.lens.target"),
+        description: t("explore.lens.targetDescription"),
+        verificationStatus: "pending-review",
+      },
+      {
+        id: "scaffold",
+        label: t("explore.lens.scaffold"),
+        description: t("explore.lens.scaffoldDescription"),
+        verificationStatus: "pending-review",
+      },
+    ],
+    [t],
+  );
+  const lenses = providedLenses ?? localizedDefaultLenses;
+  const resolvedEyebrow = eyebrow ?? t("explore.eyebrow");
+  const resolvedTitle = title ?? t("explore.defaultTitle");
+  const resolvedDescription = description ?? t("explore.defaultDescription");
+  const unclassifiedLabel = t("catalog.classification.unclassified");
   const headingId = useId();
   const searchId = useId();
   const lensDescriptionId = useId();
@@ -262,22 +324,22 @@ export function MoleculeUniverse({
 
   const activeLens = lenses.find((lens) => lens.id === lensId) ?? lenses[0];
   const activeLensId = activeLens?.id ?? lensId;
-  const normalizedQuery = normalizeSearchValue(query);
+  const normalizedQuery = normalizeSearchValue(query, locale);
   const visibleMolecules = useMemo(() => {
     if (!normalizedQuery) return [...molecules];
     return molecules.filter((molecule) =>
-      moleculeMatchesSearch(molecule, normalizedQuery),
+      moleculeMatchesSearch(molecule, normalizedQuery, locale),
     );
-  }, [molecules, normalizedQuery]);
+  }, [locale, molecules, normalizedQuery]);
 
   const clusters = useMemo<UniverseCluster[]>(() => {
     const grouped = new Map<string, UniverseMolecule[]>();
     for (const molecule of visibleMolecules) {
-      const name = getLensValue(molecule, activeLensId);
+      const name = getLensValue(molecule, activeLensId, unclassifiedLabel);
       grouped.set(name, [...(grouped.get(name) ?? []), molecule]);
     }
     return [...grouped.entries()]
-      .sort(([left], [right]) => left.localeCompare(right, "tr"))
+      .sort(([left], [right]) => left.localeCompare(right, locale))
       .flatMap(([name, groupedMolecules]) => {
         const coordinates = groupedMolecules
           .map((molecule) => molecule.coordinates?.[activeLensId])
@@ -293,7 +355,7 @@ export function MoleculeUniverse({
           },
         }];
       });
-  }, [activeLensId, visibleMolecules]);
+  }, [activeLensId, locale, unclassifiedLabel, visibleMolecules]);
   const unprojectedMoleculeCount = visibleMolecules.filter(
     (molecule) => !molecule.coordinates?.[activeLensId],
   ).length;
@@ -305,17 +367,18 @@ export function MoleculeUniverse({
       ? (visibleMolecules[0]?.id ?? null)
       : null;
   const selectedClusterName = selectedMolecule
-    ? getLensValue(selectedMolecule, activeLensId)
+    ? getLensValue(selectedMolecule, activeLensId, unclassifiedLabel)
     : null;
   const effectiveClusterName = level === "focus" ? selectedClusterName : clusterName;
   const clusterMolecules = useMemo(
     () =>
       effectiveClusterName
         ? visibleMolecules.filter(
-            (molecule) => getLensValue(molecule, activeLensId) === effectiveClusterName,
+            (molecule) =>
+              getLensValue(molecule, activeLensId, unclassifiedLabel) === effectiveClusterName,
           )
         : [],
-    [activeLensId, effectiveClusterName, visibleMolecules],
+    [activeLensId, effectiveClusterName, unclassifiedLabel, visibleMolecules],
   );
   const effectiveClusterSelectedId =
     clusterSelectedId && clusterMolecules.some((molecule) => molecule.id === clusterSelectedId)
@@ -456,7 +519,8 @@ export function MoleculeUniverse({
 
   function enterCluster(name: string) {
     const firstMolecule = visibleMolecules.find(
-      (molecule) => getLensValue(molecule, activeLensId) === name,
+      (molecule) =>
+        getLensValue(molecule, activeLensId, unclassifiedLabel) === name,
     );
     setClusterName(name);
     setClusterSelectedId(firstMolecule?.id ?? null);
@@ -470,7 +534,7 @@ export function MoleculeUniverse({
 
   function openMolecule(molecule: UniverseMolecule) {
     setSelectedId(molecule.id);
-    setClusterName(getLensValue(molecule, activeLensId));
+    setClusterName(getLensValue(molecule, activeLensId, unclassifiedLabel));
     setLevel("focus");
     setSceneCamera(undefined);
     setDimension("3d");
@@ -488,10 +552,10 @@ export function MoleculeUniverse({
   }
 
   function updateQuery(nextQuery: string) {
-    const nextNormalizedQuery = normalizeSearchValue(nextQuery);
+    const nextNormalizedQuery = normalizeSearchValue(nextQuery, locale);
     const nextMatches = nextNormalizedQuery
       ? molecules.filter((molecule) =>
-          moleculeMatchesSearch(molecule, nextNormalizedQuery),
+          moleculeMatchesSearch(molecule, nextNormalizedQuery, locale),
         )
       : [];
     const nextSearchFitId = nextMatches.length === 1 ? nextMatches[0]?.id ?? null : null;
@@ -614,7 +678,7 @@ export function MoleculeUniverse({
         if (!molecule) return;
         setSelectedId(molecule.id);
         setClusterSelectedId(molecule.id);
-        setClusterName(getLensValue(molecule, activeLensId));
+        setClusterName(getLensValue(molecule, activeLensId, unclassifiedLabel));
         setLevel("focus");
         setSceneCamera(undefined);
         setDimension("3d");
@@ -653,7 +717,26 @@ export function MoleculeUniverse({
       window.removeEventListener("popstate", syncFromHash);
       window.removeEventListener("hashchange", syncFromHash);
     };
-  }, [activeLensId, lenses, molecules]);
+  }, [activeLensId, lenses, molecules, unclassifiedLabel]);
+
+  useEffect(() => {
+    if (level !== "cluster" || !selectedMolecule) return;
+    const localizedClusterName = getLensValue(
+      selectedMolecule,
+      activeLensId,
+      unclassifiedLabel,
+    );
+    if (localizedClusterName === clusterName) return;
+    const frame = window.requestAnimationFrame(() => {
+      setClusterName(localizedClusterName);
+      window.history.replaceState(
+        null,
+        "",
+        `#cluster/${encodeURIComponent(activeLensId)}/${encodeURIComponent(localizedClusterName)}`,
+      );
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeLensId, clusterName, level, locale, selectedMolecule, unclassifiedLabel]);
 
   const focusHeadingSelectionId = level === "focus" ? selectedId : null;
 
@@ -683,10 +766,15 @@ export function MoleculeUniverse({
 
   const levelAnnouncement =
     level === "universe"
-      ? `Universe görünümü. ${clusters.length} küme.`
+      ? t("explore.universeAnnouncement", { count: clusters.length })
       : level === "cluster"
-        ? `${effectiveClusterName ?? "Küme"} cluster görünümü. ${clusterMolecules.length} molekül.`
-        : `${selectedMolecule?.name ?? "Molekül"} focus görünümü.`;
+        ? t("explore.clusterAnnouncement", {
+            name: effectiveClusterName ?? t("explore.level.cluster"),
+            count: clusterMolecules.length,
+          })
+        : t("explore.focusAnnouncement", {
+            name: selectedMolecule?.name ?? t("explore.level.focus"),
+          });
   const provenanceBanner = getStructureProvenancePresentation({
     dimension,
     origin:
@@ -701,7 +789,19 @@ export function MoleculeUniverse({
       dimension === "2d"
         ? selectedMolecule?.structure?.twoDSourceId
         : selectedMolecule?.structure?.sourceId,
-  });
+  }, locale);
+  const threeDProvenance = getStructureProvenancePresentation({
+    dimension: "3d",
+    origin: selectedMolecule?.structure?.originLabel,
+    sourceLabel: selectedMolecule?.structure?.sourceLabel,
+    sourceId: selectedMolecule?.structure?.sourceId,
+  }, locale);
+  const twoDProvenance = getStructureProvenancePresentation({
+    dimension: "2d",
+    origin: selectedMolecule?.structure?.twoDOriginLabel,
+    sourceLabel: selectedMolecule?.structure?.twoDSourceLabel,
+    sourceId: selectedMolecule?.structure?.twoDSourceId,
+  }, locale);
   const threeDControlsDisabled =
     dimension === "2d" ||
     selectedStructureMissing ||
@@ -711,36 +811,55 @@ export function MoleculeUniverse({
     <section className={rootClassName} aria-labelledby={headingId} data-explore-level={level}>
       <header className={styles.header}>
         <div className={styles.headingBlock}>
-          <p className={styles.eyebrow}>{eyebrow}</p>
-          <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1}>{title}</h2>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.eyebrow}>{resolvedEyebrow}</p>
+          <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1}>{resolvedTitle}</h2>
+          <p className={styles.description}>{resolvedDescription}</p>
         </div>
-        <div className={styles.headerSummary} aria-label="Atlas özeti">
-          <span><strong>{visibleMolecules.length}</strong> / {molecules.length} molekül</span>
-          <span><strong>{clusters.length}</strong> küme</span>
-          <span><strong>{level === "universe" ? "Universe" : level === "cluster" ? "Cluster" : "Focus"}</strong></span>
+        <div className={styles.headerSummary} aria-label={t("explore.atlasSummary")}>
+          <span>{t("explore.moleculeCount", {
+            visible: visibleMolecules.length,
+            total: molecules.length,
+          })}</span>
+          <span>{t("explore.clusterCount", { count: clusters.length })}</span>
+          <span>
+            <strong>
+              {level === "universe"
+                ? t("explore.level.universe")
+                : level === "cluster"
+                  ? t("explore.level.cluster")
+                  : t("explore.level.focus")}
+            </strong>
+          </span>
         </div>
       </header>
 
       <div className={styles.toolbar}>
         <div className={styles.searchField}>
-          <label htmlFor={searchId}>Molekül ara</label>
+          <label htmlFor={searchId}>{t("explore.searchLabel")}</label>
           <div className={styles.searchControl}>
             <span className={styles.searchIcon} aria-hidden="true" />
             <input
               id={searchId}
               type="search"
               value={query}
-              placeholder="İsim, formül, grup veya kaynak"
+              placeholder={t("explore.searchPlaceholder")}
               autoComplete="off"
               onChange={(event) => updateQuery(event.target.value)}
             />
-            {query ? <button type="button" className={styles.clearButton} onClick={() => updateQuery("")}>Temizle</button> : null}
+            {query ? (
+              <button
+                type="button"
+                className={styles.clearButton}
+                onClick={() => updateQuery("")}
+              >
+                {t("common.clear")}
+              </button>
+            ) : null}
           </div>
         </div>
         <div className={styles.lensPanel}>
-          <span className={styles.controlLabel}>Kümelenme lensi</span>
-          <div className={styles.lensButtons} role="group" aria-label="Kümelenme lensi" aria-describedby={lensNarrativeIds}>
+          <span className={styles.controlLabel}>{t("explore.lensLabel")}</span>
+          <div className={styles.lensButtons} role="group" aria-label={t("explore.lensLabel")} aria-describedby={lensNarrativeIds}>
             {lenses.map((lens) => (
               <button key={lens.id} type="button" className={styles.lensButton} aria-pressed={lens.id === activeLensId} onClick={() => changeLens(lens.id)}>
                 {lens.label}
@@ -755,38 +874,48 @@ export function MoleculeUniverse({
             data-lens-announcement={activeLensId}
           >
             <span id={lensDescriptionId} className={styles.lensDescription}>
-              {activeLens?.description ?? "Kategorik yerleşim"}
+              {activeLens?.description ?? t("explore.lens.categoricalPlacement")}
             </span>
             <span id={lensMeaningId} className={styles.lensMeaning}>
-              <strong>Temsil ettiği:</strong> {activeLens?.meaning ?? "Kategorik katalog yerleşimi."}
+              <strong>{t("explore.lens.represents")}</strong>{" "}
+              {activeLens?.meaning ?? t("explore.lens.categoricalPlacement")}
             </span>
             <span id={lensCaveatId} className={styles.lensCaveat}>
-              <strong>Temsil etmediği:</strong> {activeLens?.doesNotMean ?? "Yerleşim bilimsel yakınlık veya doğrulanmış etki hükmü değildir."}
+              <strong>{t("explore.lens.doesNotRepresent")}</strong>{" "}
+              {activeLens?.doesNotMean ?? t("explore.lens.caveat")}
             </span>
           </div>
           {activeLens?.algorithmVersion || activeLens?.inputHash ? (
             <span className={styles.lensTechnical}>
-              {activeLens.algorithm ?? "projection"} · {activeLens.algorithmVersion ?? "sürüm belirtilmedi"} · {activeLens.inputHash ?? "girdi özeti belirtilmedi"}
+              {activeLens.algorithm ?? t("explore.lens.projection")} ·{" "}
+              {activeLens.algorithmVersion ?? t("explore.lens.versionMissing")} ·{" "}
+              {activeLens.inputHash ?? t("explore.lens.inputHashMissing")}
             </span>
           ) : null}
           {unprojectedMoleculeCount > 0 ? (
             <span className={styles.lensTechnical} role="status">
-              {unprojectedMoleculeCount} kayıt için bu lensin projeksiyonu yok; sahnede konum uydurulmadı.
+              {t("explore.lens.unprojected", { count: unprojectedMoleculeCount })}
             </span>
           ) : null}
         </div>
       </div>
 
-      <nav className={styles.breadcrumb} aria-label="Explore görünüm yolu">
-        <button type="button" onClick={showUniverse} aria-current={level === "universe" ? "page" : undefined}>Universe</button>
+      <nav className={styles.breadcrumb} aria-label={t("explore.breadcrumbLabel")}>
+        <button type="button" onClick={showUniverse} aria-current={level === "universe" ? "page" : undefined}>
+          {t("explore.level.universe")}
+        </button>
         {level !== "universe" && effectiveClusterName ? <><span>/</span><button type="button" onClick={() => enterCluster(effectiveClusterName)} aria-current={level === "cluster" ? "page" : undefined}>{effectiveClusterName}</button></> : null}
         {level === "focus" && selectedMolecule ? <><span>/</span><span aria-current="page">{selectedMolecule.name}</span></> : null}
         <p>{activeLens?.label}</p>
       </nav>
 
       <p className={styles.srOnly} aria-live="polite">{levelAnnouncement}</p>
-      <ul className={styles.srOnly} aria-label="Molekül kanıt durumları">
-        {visibleMolecules.map((molecule) => <li key={molecule.id}>{molecule.name}: {molecule.evidenceLabel ?? "Kanıt durumu belirtilmedi"}</li>)}
+      <ul className={styles.srOnly} aria-label={t("explore.evidenceStatuses")}>
+        {visibleMolecules.map((molecule) => (
+          <li key={molecule.id}>
+            {molecule.name}: {molecule.evidenceLabel ?? t("explore.evidenceStatusMissing")}
+          </li>
+        ))}
       </ul>
 
       <div className={styles.exploreStage} data-level={level}>
@@ -842,7 +971,13 @@ export function MoleculeUniverse({
                 : sceneCamera
             }
             interactionMode={level === "universe" ? "pan" : interactionMode}
-            ariaLabel={level === "focus" ? `${selectedMolecule?.name ?? "Molekül"} etkileşimli 3B yapısı` : "Tek bağlamlı 3B moleküler Explore sahnesi"}
+            ariaLabel={
+              level === "focus"
+                ? t("explore.focusSceneAria", {
+                    name: selectedMolecule?.name ?? t("explore.level.focus"),
+                  })
+                : t("explore.sceneAria")
+            }
             onSceneReady={(port) => {
               scenePortRef.current = port;
               setTelemetry((current) => ({
@@ -883,8 +1018,8 @@ export function MoleculeUniverse({
 
           {selectedStructureMissing ? (
             <div className={styles.missingStructure} role="alert">
-              <strong>Doğrulanabilir yapı bulunamadı</strong>
-              <p>Sahte veya tahmini atom ve bağ geometrisi üretilmedi.</p>
+              <strong>{t("explore.missingStructureTitle")}</strong>
+              <p>{t("explore.missingStructureBody")}</p>
             </div>
           ) : null}
 
@@ -896,20 +1031,32 @@ export function MoleculeUniverse({
               {unavailableSceneMolecules.length > 0 ? (
                 <div>
                   <strong>
-                    {unavailableSceneMolecules.length} kayıt için doğrulanabilir 3B yapı yok
+                    {t("explore.missing3dRecords", {
+                      count: unavailableSceneMolecules.length,
+                    })}
                   </strong>
                   <span>
-                    {unavailableSceneMolecules.map((molecule) => molecule.name).join(", ")}. Sahte geometri üretilmedi.
+                    {t("explore.noInventedGeometry", {
+                      names: unavailableSceneMolecules
+                        .map((molecule) => molecule.name)
+                        .join(", "),
+                    })}
                   </span>
                 </div>
               ) : null}
               {unprojectedSceneMolecules.length > 0 ? (
                 <div>
                   <strong>
-                    {unprojectedSceneMolecules.length} kayıt için aktif lens projeksiyonu yok
+                    {t("explore.missingProjectionRecords", {
+                      count: unprojectedSceneMolecules.length,
+                    })}
                   </strong>
                   <span>
-                    {unprojectedSceneMolecules.map((molecule) => molecule.name).join(", ")}. Bilimsel görünen konum uydurulmadı.
+                    {t("explore.noInventedPlacement", {
+                      names: unprojectedSceneMolecules
+                        .map((molecule) => molecule.name)
+                        .join(", "),
+                    })}
                   </span>
                 </div>
               ) : null}
@@ -934,18 +1081,29 @@ export function MoleculeUniverse({
                         type="button"
                         className={styles.clusterGlyph}
                         style={{ "--x": `${cluster.position.x}%`, "--y": `${cluster.position.y}%`, "--accent": cluster.molecules[0]?.accent ?? "#8be1c4" } as ClusterStyle}
-                        aria-label={`${cluster.name} kümesi, ${cluster.molecules.length} molekül`}
+                        aria-label={t("explore.clusterAria", {
+                          name: cluster.name,
+                          count: cluster.molecules.length,
+                        })}
                         onClick={() => enterCluster(cluster.name)}
                         onKeyDown={(event) => navigateSelectors(event, clusters.map((item) => `cluster:${item.name}`), index)}
                       >
                         <i aria-hidden="true"><b /><b /><b /></i>
-                        <span><strong>{cluster.name}</strong><small>{cluster.molecules.length} molekül</small></span>
+                        <span>
+                          <strong>{cluster.name}</strong>
+                          <small>
+                            {t("explore.moleculeCount", {
+                              visible: cluster.molecules.length,
+                              total: cluster.molecules.length,
+                            })}
+                          </small>
+                        </span>
                       </button>
                     );
                   })}
                 </div>
               ) : (
-                <ul className={styles.nearClusterNavigation} aria-label="Yakın LOD küme seçimi">
+                <ul className={styles.nearClusterNavigation} aria-label={t("explore.clusterNearNavigation")}>
                   {clusters.map((cluster, index) => {
                     const selectorId = `cluster:${cluster.name}`;
                     return (
@@ -953,7 +1111,10 @@ export function MoleculeUniverse({
                         <button
                           ref={(node) => { if (node) selectorRefs.current.set(selectorId, node); else selectorRefs.current.delete(selectorId); }}
                           type="button"
-                          aria-label={`${cluster.name} kümesi, ${cluster.molecules.length} molekül`}
+                          aria-label={t("explore.clusterAria", {
+                            name: cluster.name,
+                            count: cluster.molecules.length,
+                          })}
                           onClick={() => enterCluster(cluster.name)}
                           onKeyDown={(event) => navigateSelectors(event, clusters.map((item) => `cluster:${item.name}`), index)}
                         >
@@ -969,21 +1130,39 @@ export function MoleculeUniverse({
                   {telemetry.hoveredAtom.moleculeName} · {telemetry.hoveredAtom.element}{telemetry.hoveredAtom.atomIndex + 1}
                 </output>
               ) : null}
-              <div className={styles.universeCamera} role="group" aria-label="Universe yakınlaştırma">
-                <button type="button" aria-label="Uzaklaştır" onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button>
+              <div className={styles.universeCamera} role="group" aria-label={t("explore.universeZoom")}>
+                <button type="button" aria-label={t("explore.zoomOut")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button>
                 <output>{Math.round(universeZoom * 100)}%</output>
-                <button type="button" aria-label="Yakınlaştır" onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, -180))}>+</button>
-                <button type="button" onClick={resetCamera}>Ortala</button>
+                <button type="button" aria-label={t("explore.zoomIn")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, -180))}>+</button>
+                <button type="button" onClick={resetCamera}>{t("explore.center")}</button>
               </div>
-              <p className={styles.lodStatus}>{lodLevel === "far" ? "Uzak LOD · yapı dosyaları henüz yüklenmedi" : `${sceneVisibleIds.length} kaynaklı SDF 3B kaydı · tek WebGL bağlamı`}</p>
+              <p className={styles.lodStatus}>
+                {lodLevel === "far"
+                  ? t("explore.lodFar")
+                  : t("explore.lodNear", { count: sceneVisibleIds.length })}
+              </p>
             </div>
           ) : null}
 
           {level === "cluster" ? (
             <div className={styles.clusterOverlay}>
-              <header><p>{activeLens?.label} / CLUSTER</p><h3 ref={clusterHeadingRef} tabIndex={-1}>{effectiveClusterName ?? "Küme"}</h3><span>Eğitim sınıflandırması · {activeLens?.verificationStatus ?? "inceleme durumu belirtilmedi"}</span></header>
+              <header>
+                <p>{activeLens?.label} / {t("explore.level.cluster")}</p>
+                <h3 ref={clusterHeadingRef} tabIndex={-1}>
+                  {effectiveClusterName ?? t("explore.level.cluster")}
+                </h3>
+                <span>
+                  {t("explore.educationalClassification")} ·{" "}
+                  {presentVerificationStatus(activeLens?.verificationStatus, t)}
+                </span>
+              </header>
               {clusterMolecules.length > 0 ? (
-                <ul className={styles.moleculeSelectors} aria-label={`${effectiveClusterName} molekülleri`}>
+                <ul
+                  className={styles.moleculeSelectors}
+                  aria-label={t("explore.clusterMoleculesAria", {
+                    name: effectiveClusterName ?? t("explore.level.cluster"),
+                  })}
+                >
                   {clusterMolecules.map((molecule, index) => {
                     const selectorId = `molecule:${molecule.id}`;
                     const isSelected = molecule.id === effectiveClusterSelectedId;
@@ -993,79 +1172,140 @@ export function MoleculeUniverse({
                           ref={(node) => { if (node) selectorRefs.current.set(selectorId, node); else selectorRefs.current.delete(selectorId); }}
                           type="button"
                           className={styles.moleculeSelectButton}
-                          aria-label={`${molecule.name} molekülünü seç`}
+                          aria-label={t("explore.selectMoleculeAria", { name: molecule.name })}
                           aria-pressed={isSelected}
                           onClick={() => selectClusterMolecule(molecule)}
                           onKeyDown={(event) => navigateSelectors(event, clusterMolecules.map((item) => `molecule:${item.id}`), index)}
                         >
                           <strong>{molecule.name}</strong>
-                          <small>{molecule.formula ?? "Formül belirtilmedi"}</small>
+                          <small>{molecule.formula ?? t("explore.formulaMissing")}</small>
                           <i data-tone={molecule.evidenceTone ?? "unknown"} />
                         </button>
                         <button
                           type="button"
                           className={styles.moleculeFocusButton}
-                          aria-label={`${molecule.name}, focus görünümünü aç`}
+                          aria-label={t("explore.openFocusAria", { name: molecule.name })}
                           onClick={() => openMolecule(molecule)}
                         >
-                          Focus
+                          {t("explore.level.focus")}
                         </button>
                       </li>
                     );
                   })}
                 </ul>
-              ) : <div className={styles.emptyState}><strong>Eşleşen molekül yok</strong><button type="button" onClick={() => setQuery("")}>Aramayı temizle</button></div>}
+              ) : (
+                <div className={styles.emptyState}>
+                  <strong>{t("explore.noMatches")}</strong>
+                  <button type="button" onClick={() => setQuery("")}>
+                    {t("explore.clearSearch")}
+                  </button>
+                </div>
+              )}
             </div>
           ) : null}
 
           {level === "focus" && selectedMolecule ? (
             <div className={styles.focusOverlay} data-inspector={inspectorOpen ? "open" : "closed"}>
               <header className={styles.focusHeader}>
-                <div><p>MOLECULE FOCUS / {selectedMolecule.formula ?? "FORMÜL BELİRTİLMEDİ"}</p><h3 ref={focusHeadingRef} tabIndex={-1}>{selectedMolecule.name}</h3></div>
-                <div className={styles.focusActions}><button type="button" onClick={showCluster}>Kümeye dön</button><button ref={inspectorToggleRef} type="button" aria-expanded={inspectorOpen} aria-controls="molecule-focus-inspector" onClick={() => setInspectorOpen((current) => !current)}>{inspectorOpen ? "Bilgi panelini kapat" : "Bilgi panelini aç"}</button></div>
+                <div>
+                  <p>
+                    {t("explore.level.focus")} /{" "}
+                    {selectedMolecule.formula ?? t("explore.formulaMissing")}
+                  </p>
+                  <h3 ref={focusHeadingRef} tabIndex={-1}>{selectedMolecule.name}</h3>
+                </div>
+                <div className={styles.focusActions}>
+                  <button type="button" onClick={showCluster}>
+                    {t("explore.backToCluster")}
+                  </button>
+                  <button
+                    ref={inspectorToggleRef}
+                    type="button"
+                    aria-expanded={inspectorOpen}
+                    aria-controls="molecule-focus-inspector"
+                    onClick={() => setInspectorOpen((current) => !current)}
+                  >
+                    {inspectorOpen
+                      ? t("explore.closeInfoPanel")
+                      : t("explore.openInfoPanel")}
+                  </button>
+                </div>
               </header>
               <div className={styles.focusControls}>
-                <div role="group" aria-label="Boyut"><button type="button" aria-pressed={dimension === "3d"} onClick={() => changeDimension("3d")}>3B</button><button type="button" aria-pressed={dimension === "2d"} disabled={!selectedMolecule.structure?.twoDUrl} onClick={() => changeDimension("2d")}>2B</button></div>
-                <div role="group" aria-label="Gösterim"><button type="button" disabled={threeDControlsDisabled} aria-pressed={representation === "ball-and-stick"} onClick={() => setRepresentation("ball-and-stick")}>Top + çubuk</button><button type="button" disabled={threeDControlsDisabled} aria-pressed={representation === "space-filling"} onClick={() => setRepresentation("space-filling")}>Uzay dolgu</button></div>
-                <div role="group" aria-label="Kamera aracı"><button type="button" disabled={threeDControlsDisabled} aria-pressed={interactionMode === "rotate"} onClick={() => setInteractionMode("rotate")}>Döndür</button><button type="button" disabled={threeDControlsDisabled} aria-pressed={interactionMode === "pan"} onClick={() => setInteractionMode("pan")}>Kaydır</button></div>
-                <button type="button" disabled={selectedStructureMissing} aria-pressed={showHydrogens} onClick={() => setShowHydrogens((current) => !current)}>H {showHydrogens ? "açık" : "kapalı"}</button>
-                <div role="group" aria-label="Yakınlaştırma"><button type="button" disabled={threeDControlsDisabled} aria-label="Uzaklaştır" onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button><button type="button" disabled={threeDControlsDisabled} aria-label="Yakınlaştır" onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, -180))}>+</button><button type="button" disabled={threeDControlsDisabled} onClick={resetCamera}>Ortala</button></div>
+                <div role="group" aria-label={t("explore.dimension")}><button type="button" aria-pressed={dimension === "3d"} onClick={() => changeDimension("3d")}>{t("viewer.dimension3dShort")}</button><button type="button" aria-pressed={dimension === "2d"} disabled={!selectedMolecule.structure?.twoDUrl} onClick={() => changeDimension("2d")}>{t("viewer.dimension2dShort")}</button></div>
+                <div role="group" aria-label={t("explore.representation")}><button type="button" disabled={threeDControlsDisabled} aria-pressed={representation === "ball-and-stick"} onClick={() => setRepresentation("ball-and-stick")}>{t("explore.ballAndStick")}</button><button type="button" disabled={threeDControlsDisabled} aria-pressed={representation === "space-filling"} onClick={() => setRepresentation("space-filling")}>{t("explore.spaceFilling")}</button></div>
+                <div role="group" aria-label={t("explore.cameraTool")}><button type="button" disabled={threeDControlsDisabled} aria-pressed={interactionMode === "rotate"} onClick={() => setInteractionMode("rotate")}>{t("explore.rotate")}</button><button type="button" disabled={threeDControlsDisabled} aria-pressed={interactionMode === "pan"} onClick={() => setInteractionMode("pan")}>{t("explore.pan")}</button></div>
+                <button type="button" disabled={selectedStructureMissing} aria-pressed={showHydrogens} onClick={() => setShowHydrogens((current) => !current)}>{showHydrogens ? t("explore.hydrogensOn") : t("explore.hydrogensOff")}</button>
+                <div role="group" aria-label={t("explore.zoomControls")}><button type="button" disabled={threeDControlsDisabled} aria-label={t("explore.zoomOut")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button><button type="button" disabled={threeDControlsDisabled} aria-label={t("explore.zoomIn")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, -180))}>+</button><button type="button" disabled={threeDControlsDisabled} onClick={resetCamera}>{t("explore.center")}</button></div>
               </div>
               <div className={styles.provenanceBanner} data-dimension={dimension}>
                 <strong>{provenanceBanner.heading}</strong>
                 <span>{provenanceBanner.note}</span>
               </div>
               {inspectorOpen ? (
-                <aside id="molecule-focus-inspector" className={styles.inspector} aria-label={`${selectedMolecule.name} bilgi paneli`}>
-                  <div className={styles.inspectorTop}><span data-tone={selectedMolecule.evidenceTone ?? "unknown"}><i />{selectedMolecule.evidenceLabel ?? "Kanıt durumu belirtilmedi"}</span><button type="button" aria-label="Bilgi panelini kapat" onClick={closeInspectorAndRestoreFocus}>Kapat</button></div>
-                  <p className={styles.inspectorKicker}>SECONDARY INSPECTOR</p><h4>{selectedMolecule.name}</h4><p className={styles.formula}>{selectedMolecule.formula ?? "Formül belirtilmedi"}</p><p className={styles.summary}>{selectedMolecule.summary ?? "Eğitim özeti eklenmedi."}</p>
+                <aside
+                  id="molecule-focus-inspector"
+                  className={styles.inspector}
+                  aria-label={t("explore.infoPanelAria", { name: selectedMolecule.name })}
+                >
+                  <div className={styles.inspectorTop}>
+                    <span data-tone={selectedMolecule.evidenceTone ?? "unknown"}>
+                      <i />
+                      {selectedMolecule.evidenceLabel ?? t("explore.evidenceStatusMissing")}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label={t("explore.closeInfoPanel")}
+                      onClick={closeInspectorAndRestoreFocus}
+                    >
+                      {t("common.close")}
+                    </button>
+                  </div>
+                  <p className={styles.inspectorKicker}>{t("common.details")}</p>
+                  <h4>{selectedMolecule.name}</h4>
+                  <p className={styles.formula}>
+                    {selectedMolecule.formula ?? t("explore.formulaMissing")}
+                  </p>
+                  <p className={styles.summary}>
+                    {selectedMolecule.summary ?? t("explore.summaryMissing")}
+                  </p>
                   {selectedMolecule.regulatoryProduct ? (
-                    <section className={styles.regulatoryEvidence} aria-label="FDA ürün ve form kanıtı">
-                      <p>FDA ÜRÜN/FORM BAĞLANTISI</p>
+                    <section className={styles.regulatoryEvidence} aria-label={t("explore.regulatoryEvidenceAria")}>
+                      <p>{t("explore.regulatoryConnection")}</p>
                       <strong>{selectedMolecule.regulatoryProduct.brandName}</strong>
                       <span>
                         <a href={selectedMolecule.regulatoryProduct.sourceHref} target="_blank" rel="noreferrer">
-                          {selectedMolecule.regulatoryProduct.applicationNumber} / ürün {selectedMolecule.regulatoryProduct.productNumber}
+                          {selectedMolecule.regulatoryProduct.applicationNumber} /{" "}
+                          {t("explore.productNumber", {
+                            number: selectedMolecule.regulatoryProduct.productNumber,
+                          })}
                         </a>
                         {" · "}{selectedMolecule.regulatoryProduct.activeIngredientName}
                       </span>
                       <small>
-                        {selectedMolecule.regulatoryProduct.chemicalFormId} üzerinden bağlı · ORIG/1/AP {selectedMolecule.regulatoryProduct.actionDate} · {selectedMolecule.regulatoryProduct.verificationStatus}
+                        {t("explore.linkedThrough", {
+                          form: selectedMolecule.regulatoryProduct.chemicalFormId,
+                        })}{" · "}
+                        ORIG/1/AP {selectedMolecule.regulatoryProduct.actionDate} ·{" "}
+                        {presentVerificationStatus(
+                          selectedMolecule.regulatoryProduct.verificationStatus,
+                          t,
+                        )}
                       </small>
                     </section>
                   ) : null}
                   <dl className={styles.provenanceList}>
-                    <div><dt>3B kaynak</dt><dd>{selectedMolecule.structure?.sourceHref ? <a href={selectedMolecule.structure.sourceHref} target="_blank" rel="noreferrer">{selectedMolecule.structure.sourceLabel ?? "Kaynak"}</a> : selectedMolecule.structure?.sourceLabel ?? "Belirtilmedi"}</dd></div>
-                    <div><dt>3B köken</dt><dd>{selectedMolecule.structure?.originLabel ?? "Belirtilmedi"}</dd></div>
-                    <div><dt>3B dosya bütünlüğü</dt><dd>{selectedMolecule.structure?.reviewStatus ?? "Belirtilmedi"}</dd></div>
+                    <div><dt>{t("explore.source3d")}</dt><dd>{selectedMolecule.structure?.sourceHref ? <a href={selectedMolecule.structure.sourceHref} target="_blank" rel="noreferrer">{selectedMolecule.structure.sourceLabel ?? t("common.source")}</a> : selectedMolecule.structure?.sourceLabel ?? t("common.notSpecified")}</dd></div>
+                    <div><dt>{t("explore.origin3d")}</dt><dd>{threeDProvenance.heading}</dd></div>
+                    <div><dt>{t("explore.integrity3d")}</dt><dd>{presentVerificationStatus(selectedMolecule.structure?.reviewStatus, t)}</dd></div>
                   </dl>
                   <dl className={styles.provenanceList}>
-                    <div><dt>İki boyutlu kaynak</dt><dd>{selectedMolecule.structure?.twoDSourceHref ? <a href={selectedMolecule.structure.twoDSourceHref} target="_blank" rel="noreferrer">{selectedMolecule.structure.twoDSourceLabel ?? "Kaynak"}</a> : selectedMolecule.structure?.twoDSourceLabel ?? "Belirtilmedi"}</dd></div>
-                    <div><dt>İki boyutlu köken</dt><dd>{selectedMolecule.structure?.twoDOriginLabel ?? "Belirtilmedi"}</dd></div>
-                    <div><dt>2B dosya bütünlüğü</dt><dd>{selectedMolecule.structure?.twoDReviewStatus ?? "Belirtilmedi"}</dd></div>
+                    <div><dt>{t("explore.source2d")}</dt><dd>{selectedMolecule.structure?.twoDSourceHref ? <a href={selectedMolecule.structure.twoDSourceHref} target="_blank" rel="noreferrer">{selectedMolecule.structure.twoDSourceLabel ?? t("common.source")}</a> : selectedMolecule.structure?.twoDSourceLabel ?? t("common.notSpecified")}</dd></div>
+                    <div><dt>{t("explore.origin2d")}</dt><dd>{twoDProvenance.heading}</dd></div>
+                    <div><dt>{t("explore.integrity2d")}</dt><dd>{presentVerificationStatus(selectedMolecule.structure?.twoDReviewStatus, t)}</dd></div>
                   </dl>
-                  <dl className={styles.lensValues}>{lenses.map((lens) => <div key={lens.id} data-active={lens.id === activeLensId ? "true" : "false"}><dt>{lens.label}</dt><dd>{getLensValue(selectedMolecule, lens.id)}</dd></div>)}</dl>
-                  {telemetry.selectedAtom ? <p className={styles.atomSelection}>Seçili atom: <strong>{telemetry.selectedAtom.element}{telemetry.selectedAtom.atomIndex + 1}</strong></p> : null}
+                  <dl className={styles.lensValues}>{lenses.map((lens) => <div key={lens.id} data-active={lens.id === activeLensId ? "true" : "false"}><dt>{lens.label}</dt><dd>{getLensValue(selectedMolecule, lens.id, unclassifiedLabel)}</dd></div>)}</dl>
+                  {telemetry.selectedAtom ? <p className={styles.atomSelection}>{t("explore.selectedAtom")} <strong>{telemetry.selectedAtom.element}{telemetry.selectedAtom.atomIndex + 1}</strong></p> : null}
                 </aside>
               ) : null}
             </div>
@@ -1073,7 +1313,11 @@ export function MoleculeUniverse({
         </div>
       </div>
 
-      <footer className={styles.footer}><span><kbd>Esc</kbd> geri dön</span><span><kbd>←</kbd><kbd>→</kbd> seçimler arasında gezin</span><span>{activeLens?.doesNotMean ?? "Yerleşim bilimsel yakınlık veya doğrulanmış etki hükmü değildir."}</span></footer>
+      <footer className={styles.footer}>
+        <span><kbd>Esc</kbd> {t("explore.keyboardBack")}</span>
+        <span><kbd>←</kbd><kbd>→</kbd> {t("explore.keyboardNavigate")}</span>
+        <span>{activeLens?.doesNotMean ?? t("explore.lens.caveat")}</span>
+      </footer>
     </section>
   );
 }

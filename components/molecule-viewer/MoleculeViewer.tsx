@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import { getStructureProvenancePresentation } from "@/lib/application/structure-presentation";
+import { useI18n } from "@/lib/i18n";
 import type { MoleculeStructure, SdfAtom } from "@/lib/structure/sdf";
 
 import styles from "./MoleculeViewer.module.css";
@@ -116,6 +117,7 @@ export function MoleculeViewer({
   onAtomSelect,
   onStructureLoad,
 }: MoleculeViewerProps) {
+  const { locale, t } = useI18n();
   const hasThreeDStructure = structureUrl.trim().length > 0;
   const hasTwoDStructure = Boolean(twoDStructureUrl?.trim());
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -390,25 +392,25 @@ export function MoleculeViewer({
   const statusAtom = selectedAtom ?? hoveredAtom;
   const activeSourceLabel =
     dimension === "2d"
-      ? (twoDSourceLabel ?? "2B kaynak etiketi belirtilmedi")
+      ? (twoDSourceLabel ?? t("viewer.sourceMissing"))
       : sourceLabel;
   const activeOriginLabel =
-    dimension === "2d" ? (twoDOriginLabel ?? "2B köken belirtilmedi") : originLabel;
+    dimension === "2d" ? (twoDOriginLabel ?? t("common.notSpecified")) : originLabel;
   const activeSourceHref = dimension === "2d" ? twoDSourceHref : sourceHref;
   const activePresentation = getStructureProvenancePresentation({
     dimension,
     origin: activeOriginLabel,
     sourceLabel: activeSourceLabel,
-  });
+  }, locale);
   const canvasInstruction =
     dimension === "3d"
-      ? "Sürükleyerek döndürün; kaydırma aracı veya Shift ile sürükleyerek taşıyın. Tekerlek ile yakınlaştırın."
-      : "Sürükleyerek taşıyın; tekerlek ile yakınlaştırın.";
+      ? t("viewer.canvasInstruction3d")
+      : t("viewer.canvasInstruction2d");
 
   return (
     <section
       className={[styles.viewer, className].filter(Boolean).join(" ")}
-      aria-label={`${moleculeName} molekül görüntüleyicisi`}
+      aria-label={t("viewer.viewerAria", { name: moleculeName })}
     >
       <header className={styles.header}>
         <div className={styles.identity}>
@@ -419,8 +421,8 @@ export function MoleculeViewer({
             <small className={styles.originNote}>{activePresentation.note}</small>
           </div>
         </div>
-        <div className={styles.provenance} aria-label="Yapı kaynağı">
-          <span>{activeOriginLabel}</span>
+        <div className={styles.provenance} aria-label={t("viewer.structureSource")}>
+          <span>{activePresentation.heading}</span>
           {activeSourceHref ? (
             <a href={activeSourceHref} target="_blank" rel="noreferrer">
               {activeSourceLabel}
@@ -431,34 +433,34 @@ export function MoleculeViewer({
         </div>
       </header>
 
-      <div className={styles.toolbar} aria-label="Molekül görünüm kontrolleri">
-        <div className={styles.segment} role="group" aria-label="Boyut">
+      <div className={styles.toolbar} aria-label={t("viewer.controls")}>
+        <div className={styles.segment} role="group" aria-label={t("viewer.dimension")}>
           <button
             type="button"
             aria-pressed={dimension === "3d"}
             onClick={() => setDimension("3d")}
           >
-            3B
+            {t("viewer.dimension3dShort")}
           </button>
           <button
             type="button"
             aria-pressed={dimension === "2d"}
             disabled={!hasTwoDStructure}
-            title={hasTwoDStructure ? "2B yapıyı göster" : "2B yapı kaynağı yok"}
+            title={hasTwoDStructure ? t("viewer.show2d") : t("viewer.no2dSource")}
             onClick={() => setDimension("2d")}
           >
-            2B
+            {t("viewer.dimension2dShort")}
           </button>
         </div>
 
-        <div className={styles.segment} role="group" aria-label="Gösterim biçimi">
+        <div className={styles.segment} role="group" aria-label={t("viewer.representation")}>
           <button
             type="button"
             aria-pressed={representation === "ball-and-stick"}
             disabled={dimension === "2d"}
             onClick={() => setRepresentation("ball-and-stick")}
           >
-            Top + çubuk
+            {t("explore.ballAndStick")}
           </button>
           <button
             type="button"
@@ -466,25 +468,25 @@ export function MoleculeViewer({
             disabled={dimension === "2d"}
             onClick={() => setRepresentation("space-filling")}
           >
-            Uzay dolgu
+            {t("explore.spaceFilling")}
           </button>
         </div>
 
-        <div className={styles.segment} role="group" aria-label="Etkileşim aracı">
+        <div className={styles.segment} role="group" aria-label={t("viewer.interactionTool")}>
           <button
             type="button"
             aria-pressed={interactionTool === "rotate"}
             disabled={dimension === "2d"}
             onClick={() => setInteractionTool("rotate")}
           >
-            Döndür
+            {t("explore.rotate")}
           </button>
           <button
             type="button"
             aria-pressed={interactionTool === "pan" || dimension === "2d"}
             onClick={() => setInteractionTool("pan")}
           >
-            Kaydır
+            {t("explore.pan")}
           </button>
         </div>
 
@@ -494,7 +496,7 @@ export function MoleculeViewer({
           aria-pressed={showHydrogens}
           onClick={toggleHydrogens}
         >
-          H {showHydrogens ? "açık" : "kapalı"}
+          {showHydrogens ? t("explore.hydrogensOn") : t("explore.hydrogensOff")}
         </button>
         <button
           type="button"
@@ -502,18 +504,18 @@ export function MoleculeViewer({
           aria-pressed={showLabels}
           onClick={() => setShowLabels((current) => !current)}
         >
-          Etiket {showLabels ? "açık" : "kapalı"}
+          {showLabels ? t("viewer.labelsOn") : t("viewer.labelsOff")}
         </button>
 
-        <div className={styles.zoomControls} role="group" aria-label="Yakınlaştırma">
-          <button type="button" aria-label="Uzaklaştır" onClick={() => updateZoom(1 / 1.15)}>
+        <div className={styles.zoomControls} role="group" aria-label={t("explore.zoomControls")}>
+          <button type="button" aria-label={t("explore.zoomOut")} onClick={() => updateZoom(1 / 1.15)}>
             −
           </button>
-          <button type="button" aria-label="Yakınlaştır" onClick={() => updateZoom(1.15)}>
+          <button type="button" aria-label={t("explore.zoomIn")} onClick={() => updateZoom(1.15)}>
             +
           </button>
           <button type="button" onClick={resetView}>
-            Ortala
+            {t("explore.center")}
           </button>
         </div>
       </div>
@@ -524,7 +526,13 @@ export function MoleculeViewer({
           className={styles.canvas}
           tabIndex={0}
           aria-describedby={`${descriptionId} ${statusId}`}
-          aria-label={`${moleculeName}, ${dimension === "3d" ? "üç boyutlu" : "iki boyutlu"} atom ve bağ modeli`}
+          aria-label={t("viewer.modelAria", {
+            name: moleculeName,
+            dimension:
+              dimension === "3d"
+                ? t("viewer.dimension3dSpoken")
+                : t("viewer.dimension2dSpoken"),
+          })}
           onKeyDown={handleKeyDown}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -538,38 +546,43 @@ export function MoleculeViewer({
           }}
           onWheel={handleWheel}
         >
-          {moleculeName} için gerçek SDF koordinatlarından atom ve bağ görünümü.
+          {t("viewer.modelAria", {
+            name: moleculeName,
+            dimension:
+              dimension === "3d"
+                ? t("viewer.dimension3dSpoken")
+                : t("viewer.dimension2dSpoken"),
+          })}
         </canvas>
 
         <p id={descriptionId} className={styles.srOnly}>
-          {canvasInstruction} Artı ve eksi tuşları yakınlaştırır, sıfır görünümü ortalar,
-          köşeli parantez tuşları atomlar arasında ilerler.
+          {canvasInstruction} {t("viewer.keyboardInstructions")}
         </p>
 
         {activeResource.status === "loading" ? (
           <div className={styles.stateOverlay} role="status">
             <span className={styles.loader} aria-hidden="true" />
-            <strong>Yapı yükleniyor</strong>
-            <small>SDF atom ve bağ kayıtları okunuyor…</small>
+            <strong>{t("viewer.loadingStructure")}</strong>
+            <small>{t("viewer.readingSdf")}</small>
           </div>
         ) : null}
 
         {activeResource.status === "idle" ? (
           <div className={styles.stateOverlay} role="alert">
             <span className={styles.errorMark} aria-hidden="true">!</span>
-            <strong>Yapı kaynağı belirtilmedi</strong>
-            <small>Sahte veya tahmini geometri üretilmedi.</small>
+            <strong>{t("viewer.sourceMissing")}</strong>
+            <small>{t("viewer.sourceMissingBody")}</small>
           </div>
         ) : null}
 
         {activeResource.status === "error" ? (
           <div className={styles.stateOverlay} role="alert">
             <span className={styles.errorMark} aria-hidden="true">!</span>
-            <strong>Yapı gösterilemiyor</strong>
-            <small>{activeResource.error}</small>
-            <small>Sahte veya tahmini geometri üretilmedi.</small>
+            <strong>{t("viewer.cannotDisplay")}</strong>
+            <small>{t("viewer.structuresLoadError")}</small>
+            <small>{t("viewer.sourceMissingBody")}</small>
             <button type="button" onClick={activeResource.retry}>
-              Yeniden dene
+              {t("viewer.retryLoad")}
             </button>
           </div>
         ) : null}
@@ -583,7 +596,9 @@ export function MoleculeViewer({
         <div id={statusId} className={styles.atomStatus} aria-live="polite">
           {statusAtom ? (
             <>
-              <span>{selectedAtom ? "SEÇİLİ ATOM" : "ATOM"}</span>
+              <span>
+                {selectedAtom ? t("viewer.selectedAtom") : t("viewer.atomLabel")}
+              </span>
               <strong>
                 {statusAtom.element}
                 {statusAtom.index + 1}
@@ -595,7 +610,7 @@ export function MoleculeViewer({
               </small>
             </>
           ) : (
-            <small>Bir atomun üzerine gelin veya seçmek için tıklayın.</small>
+            <small>{t("viewer.atomInstruction")}</small>
           )}
         </div>
       </div>

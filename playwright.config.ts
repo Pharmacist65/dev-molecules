@@ -6,6 +6,7 @@ const testPort = Number.isInteger(requestedPort) && requestedPort > 0 && request
   : 3100;
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${testPort}`;
 const managesWebServer = !process.env.PLAYWRIGHT_BASE_URL;
+const requestedBrowser = process.env.PLAYWRIGHT_BROWSER;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -24,10 +25,10 @@ export default defineConfig({
   ],
   use: {
     ...devices["Desktop Chrome"],
-    channel: "chrome",
+    channel: requestedBrowser === "chromium" ? undefined : "chrome",
     baseURL,
     viewport: { width: 1440, height: 900 },
-    colorScheme: "dark",
+    colorScheme: "light",
     contextOptions: {
       reducedMotion: "reduce",
     },

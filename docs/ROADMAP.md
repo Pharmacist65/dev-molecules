@@ -2,133 +2,169 @@
 
 ## Roadmap rule
 
-The full platform remains the committed north star: Explore, Learn, Build, Teach and the experimental Discover workspace all stay in scope. Milestones sequence risk; they do not redefine the product into a permanently small demo.
+Explore, Learn, Build, Teach, and Discover remain the product north star. Milestones sequence scientific, technical, and operational risk; they do not redefine the platform as a permanently small demo.
 
-The initial 12–20 molecule seed is **not the final product scope**. It exists to prove the identity model, learning loop, evidence controls and interaction architecture before catalog expansion.
+The 15-molecule catalog, three synthesis stories, and ten nomenclature topics are seed content. No schema, renderer, curriculum, or test may treat those counts as a product ceiling.
 
-## M0 — Product and scientific foundation
+## Current repository baseline
 
-Deliver the domain vocabulary, scope/non-goals, source registry, license ledger, evidence states, reviewer roles, privacy policy and first curriculum hypothesis.
+The current vertical slice implements:
 
-**Acceptance gate**
+- a bilingual TR/EN product shell with all five modes;
+- Universe → cluster → molecule focus navigation;
+- checked-in, source-labelled PubChem 2D/3D SDF assets for 15 catalog identities;
+- a single shared Three.js scene with bounded progressive level of detail;
+- exact Drugs@FDA product/form/action anchors for the seed catalog;
+- three non-operational, direct-patent-anchored synthesis stories;
+- six source-aware synthesis challenge types with domain-derived validation;
+- ten nomenclature topics, ten exercises, and six deterministic interaction types;
+- a guided builder, device-local teaching progress, and fail-closed evidence cards;
+- typecheck, lint, production build, Node tests, and Playwright gates in CI.
 
-- Molecular entity, stereoisomer, form, product and approval identities are unambiguous.
-- Pending/reviewed/verified transitions and AI fail-closed rules are approved.
-- Every intended seed field has a known source and license disposition.
-- One qualified scientific co-reviewer and one target-course pilot partner are identified.
-- The first vertical slice has measurable learning objectives and success metrics.
+This baseline is not a production scientific publication. The synthesis atom correspondence, educational classification wording, and parts of the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or general-purpose chemical editor.
 
-## M1 — Full-scope product shell and vertical slice
+## R1 — Public engineering release
 
-Create a recognizable desktop-first platform shell containing all five modes while implementing one coherent end-to-end learning journey:
+Stabilize the repository and hosted build as a reproducible engineering artifact.
 
-- 12–20 approved small-molecule active ingredients;
-- two exploration lenses and list/search fallback;
-- molecule passport with 2D/3D representation labels;
-- three reviewer-ready synthesis stories;
-- guided fragment building and five learning missions;
-- structured example evidence cards;
-- learner progress summary and basic instructor export;
-- Discover visible only as an explicitly experimental/private boundary, not a discovery claim.
+**Deliverables**
 
-**Acceptance gate**
-
-- A learner can move from Explore -> Learn -> Build -> evidence interpretation without losing molecule identity or source context.
-- Spatial proximity always explains its lens.
-- Scientific content is provenance-linked and no pending item appears as reviewed truth.
-- Keyboard-accessible navigation works without the spatial canvas.
-- Target users complete the core journey and can explain the intended molecular relationship.
-- Seed limits are configuration/content limits, not hard-coded platform limits.
-
-## M2 — Production identity, catalog and learning core
-
-Build durable ingestion, normalization, provenance, review and projection pipelines. Expand toward approximately 100 approved small molecules, 20–30 detailed passports, 10–15 reviewed synthesis narratives and 20–30 missions.
+- clean public history with no secrets or personal filesystem references;
+- reproducible `npm ci` build and branch-protected quality workflow;
+- tested TR/EN navigation and fixed-size visual acceptance captures;
+- dependency/license inventory and an explicit project-license decision;
+- accessibility and production performance baselines for the implemented journeys;
+- documented deployment, rollback, and incident-reporting path.
 
 **Acceptance gate**
 
-- Duplicate, salt, stereochemistry and source-conflict fixtures pass.
-- Imports cannot overwrite reviewed content.
-- All published claims resolve to direct sources and current license records.
-- Expanded fixtures meet atlas and molecule-view performance budgets.
-- Scientific reviewers can promote, demote, correct and withdraw content with an audit trail.
+- A clean clone on Node `22.13.0` passes every documented command.
+- Hosted and local production builds expose the same core journeys.
+- No secret, private structure, generated credential, or personal path is present in the public tree or history.
+- Critical keyboard paths and readable focus states pass manual and automated review.
+- Deployment ownership, access policy, and rollback evidence are recorded.
 
-## M3 — Evidence-grounded AI mentor
+## R2 — Qualified scientific and educational review
 
-Connect structure validation, exact identity lookup, analog search, synthesis evidence and biological evidence through typed tools. Generate evidence cards first and optional explanatory prose second.
+Turn source-audited educational drafts into reviewer-owned content without weakening the current fail-closed boundaries.
 
-**Acceptance gate**
+**Deliverables**
 
-- Golden-set tests contain no unsupported high-impact conclusions or fabricated citations.
-- Every material response statement resolves to eligible claim IDs.
-- Missing/conflicting evidence returns unknown or conflicting.
-- Analog, prediction and experiment are never conflated.
-- AI cannot change review status or access another user’s private design.
-- Latency and cost are measured per tool path before broad rollout.
-
-## M4 — Workbench and curriculum depth
-
-Expand Guided Builder; add a precise 2D expert editor with live 3D preview, version branching, stereochemistry controls, reusable course packs and deeper synthesis/evidence missions.
+- named synthetic-chemistry review of route boundaries, transformation wording, stereochemistry scope, and draft atom correspondence;
+- named organic-nomenclature/education review of the ten-topic curriculum and accepted answers;
+- named pharmacology/editorial review of therapeutic-area, target-profile, and scaffold labels;
+- resolved reuse status for each published source-backed field and asset;
+- versioned correction, demotion, withdrawal, and dependent-cache invalidation procedures.
 
 **Acceptance gate**
 
-- 2D and 3D representations preserve identity and stereochemistry across edits.
-- Invalid structures receive actionable learning feedback without being silently repaired.
-- Educational scores remain separate from scientific evidence.
-- Reviewer-approved content supports the targeted curriculum sequence.
-- Learner testing shows measurable improvement and repeat use relative to the initial material.
+- Every published scientific interpretation resolves to a direct source, reviewer identity/role, decision date, and scope.
+- `source-supported` is never displayed as equivalent to `expert-reviewed` or `verified`.
+- Review of one claim type does not promote an entire molecule, route, screen, or curriculum.
+- Corrected content retains prior version and rationale in an auditable record.
 
-## M5 — Instructor Studio and university pilot
+## R3 — Durable identity, catalog, and content services
 
-Add courses, cohorts, assignments, rubrics, progress/misconception views, content reporting, institution-private course material and appropriate export/integration boundaries.
+Replace checked-in seed registries as the only operational store with durable, versioned ingestion and review services.
 
-**Acceptance gate**
+**Deliverables**
 
-- Role and tenant isolation tests pass.
-- An instructor can assign, review and repeat a real course activity without developer assistance.
-- Learner privacy and institution content ownership are documented and enforced.
-- Pilot measures learning gain, completion, repeat use and instructor preparation time.
-- At least one pilot partner commits to another teaching cycle before institution features expand.
-
-## M6 — Approved small-molecule universe expansion
-
-Scale ingestion, review operations, search, lens projections and curriculum coverage toward the full intended approved small-molecule catalog, with jurisdiction and source-version awareness.
+- explicit schemas for molecular entities, stereoisomers, salts/solvates/esters, products, approvals, sources, claims, routes, lessons, and reviews;
+- raw-import staging before normalization;
+- immutable artifact storage for structure files and source snapshots;
+- versioned chemical-tool ports for normalization, valence checks, fingerprints, similarity, conformers, and atom mapping;
+- rebuildable search and Explore projection indexes.
 
 **Acceptance gate**
 
-- Coverage is reported by defined jurisdiction/source, never marketed as vague “all drugs.”
-- Content-review throughput and correction operations are sustainable.
-- Atlas performance uses progressive level of detail at expanded scale.
-- Every new lens has a scientific definition, versioned inputs and user comprehension evidence.
-- Data-license obligations remain traceable field by field.
+- Duplicate, stereochemistry, salt/form, source-conflict, and withdrawal fixtures pass.
+- Imports cannot overwrite reviewed content or silently merge incompatible identities.
+- Every derived index can be rebuilt from authoritative records.
+- Tenant authorization is enforced server-side before private data exists.
+- Representative-scale catalog tests meet documented latency, memory, WebGL-context, and asset-fetch budgets.
 
-## M7 — Private Discovery Beta
+## R4 — Learning and curriculum depth
 
-Open the separate Research Sandbox to invited researchers: private projects, design version history, exact/analog search, proposed synthesis routes, target/bioactivity evidence cards, collaboration and reviewer status.
+Expand Learn and Build from the current vertical slice into reviewer-approved course material.
+
+**Deliverables**
+
+- additional reviewed synthesis narratives and versioned challenges;
+- deeper nomenclature sequences with prerequisites, misconception tracking, and accessible non-spatial alternatives;
+- a precise 2D editor behind a replaceable chemical-tool port, with source-labelled 3D preview;
+- reusable course packs, learning objectives, rubrics, and content-version pinning;
+- learning analytics that remain separate from evidence and scientific review state.
+
+**Acceptance gate**
+
+- 2D/3D edits preserve identity, charge, stereochemistry, and original input history.
+- Invalid structures receive educational feedback without silent repair.
+- Each scored activity has deterministic answers, explanation, misconception model, and content version.
+- A target learner cohort demonstrates measurable improvement against a defined pre/post instrument.
+
+## R5 — Instructor Studio and university pilot
+
+Add courses, cohorts, assignments, rubrics, institution-private material, exports, and privacy controls only after the content and identity foundations are reviewable.
+
+**Acceptance gate**
+
+- Role, tenant, export, deletion, and institution-content ownership tests pass.
+- An instructor can assign, review, revise, and repeat a real activity without developer assistance.
+- Learner consent, retention, and analytics boundaries are documented and enforced.
+- The pilot measures learning gain, completion, repeat use, and instructor preparation time.
+- A pilot partner commits to another teaching cycle before institution-specific scope expands.
+
+## R6 — Evidence-grounded narration
+
+Extend the current curated-card-first endpoint into typed structure, identity, synthesis, and biological evidence tools. Explanatory prose remains optional and comes after evidence assembly.
+
+**Acceptance gate**
+
+- Golden-set tests contain no fabricated citation or unsupported high-impact conclusion.
+- Every material statement resolves to an eligible claim and direct source.
+- Missing, conflicting, analog, computed, and predicted evidence remain visibly distinct.
+- External narration cannot change review status or access another user’s private data.
+- Latency, failure rate, cost, and fallback rate are measured per tool path.
+
+## R7 — Approved small-molecule catalog expansion
+
+Expand ingestion, review operations, search, lens projections, and curriculum coverage toward a clearly defined approved small-molecule universe.
+
+**Acceptance gate**
+
+- Coverage is reported by jurisdiction, source, version, identity rule, and review status—never as vague “all drugs.”
+- New lens definitions record their algorithm, inputs, meaning, non-meaning, and comprehension evidence.
+- Atlas loading remains bounded through progressive level of detail at representative scale.
+- Correction throughput and source/license monitoring are operationally sustainable.
+
+## R8 — Private Discovery Beta
+
+Open private projects, versioned designs, exact/analog search, proposed routes, evidence cards, and collaboration to invited research users.
 
 **Acceptance gate**
 
 - Designs are private by default; sharing and training use require explicit consent.
-- Model proposals are unmistakably predicted and not experimentally tested.
-- “Not found” never becomes novelty or patentability language.
-- Research users accept the evidence/uncertainty model in supervised pilots.
-- Security, audit, export and deletion behavior pass institution review.
+- Proposed routes and model outputs are unmistakably predicted and untested.
+- “Not found” never becomes novelty, patentability, safety, efficacy, or synthesizability language.
+- Security, audit, export, deletion, and incident-response behavior pass institution review.
 
-## M8 — Additional modality universes
+## R9 — Additional modality universes
 
-Add peptides, oligonucleotides, proteins/antibodies, natural products or radiopharmaceuticals only through modality-specific identity, visualization, evidence and governance models.
+Add peptides, oligonucleotides, proteins/antibodies, natural products, or radiopharmaceuticals only through modality-specific identity, visualization, evidence, and governance models.
 
 **Acceptance gate**
 
-- The small-molecule universe is operationally stable.
-- Each new modality has named expert ownership and source/license coverage.
+- The small-molecule platform is operationally stable first.
+- Each modality has named expert ownership and source/license coverage.
 - No modality is forced into incompatible small-molecule assumptions.
-- Cross-universe relationships remain explicit, sourced and reversible.
+- Cross-universe relationships are explicit, sourced, versioned, and reversible.
 
-## Gates that apply to every milestone
+## Gates that apply to every release
 
-- **Scientific:** status, provenance, uncertainty and reviewer eligibility are visible and correct.
-- **Product:** the milestone solves a measured user job, not only a visual showcase.
-- **Technical:** migrations, domain invariants, accessibility and representative-scale performance pass.
-- **Privacy:** private designs and institution data remain isolated and auditable.
-- **Commercial:** expansion follows real pilot commitment and repeat use, not compliments or molecule counts.
-- **Rollback:** content, model, importer and projection versions can be demoted or withdrawn without corrupting prior audit history.
+- **Scientific:** provenance, scope, uncertainty, and review eligibility are visible and correct.
+- **Product:** the release solves a measured learner or educator job, not only a visual showcase.
+- **Technical:** domain invariants, accessibility, production build, representative-scale performance, and rollback pass.
+- **Localization:** TR and EN have exact key/content parity, correct language metadata, and no silent cross-language fallback.
+- **Privacy:** private designs, questions, learner data, and institution content remain isolated and auditable.
+- **Security:** secrets and private material remain outside source, logs, screenshots, and issue reports.
+- **Operations:** content, model, importer, asset, and projection revisions can be demoted or withdrawn without corrupting prior audit history.

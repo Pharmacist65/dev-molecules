@@ -17,6 +17,12 @@ const exploreRoot = (page: Page) => page.locator("[data-explore-level]").first()
 const sceneRoot = (page: Page) => page.locator("[data-active-webgl-contexts]").first();
 const sceneCanvas = (page: Page) => page.locator("canvas[data-molecular-scene-canvas]").first();
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem("dev-molecules:locale", "tr");
+  });
+});
+
 function expectInteractivePerformanceEvidence(
   evidence: Awaited<ReturnType<typeof measureInteractiveCanvasPerformance>>,
 ) {
@@ -82,7 +88,9 @@ async function openFirstCluster(page: Page) {
 }
 
 async function openFirstMolecule(page: Page) {
-  const molecule = page.getByRole("button", { name: /focus görünümünü aç/i }).first();
+  const molecule = page
+    .getByRole("button", { name: /odak görünümünü aç|open focus view/i })
+    .first();
   await expect(molecule).toBeVisible();
   await molecule.click();
   await expect(page).toHaveURL(/#molecule\//);
@@ -175,8 +183,14 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     "data-structure-origin",
     "computed-3d-conformer",
   );
-  await expect(page.getByText("PUBCHEM HESAPLANMIŞ 3B KONFORMER", { exact: true })).toBeVisible();
-  await expect(page.getByText(/Deneysel kristal veya protein-bound pose değildir/i)).toBeVisible();
+  await expect(
+    page
+      .locator('[data-dimension="3d"]')
+      .getByText("PUBCHEM HESAPLANMIŞ 3B KONFORMER", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/deneysel.*(?:kristal yapı|crystal structure).*(?:proteine bağlı poz|protein-bound pose)/i),
+  ).toBeVisible();
   await captureAcceptanceScreenshot(page, "1440x900-molecule-focus.png");
   const focusInteractionPerformance = await measureInteractiveCanvasPerformance(
     page,
@@ -237,7 +251,11 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
     "true",
   );
   await expect(page.locator('[data-structure-origin="database-2d-record"]').first()).toBeVisible();
-  await expect(page.getByText("PUBCHEM CANONICAL 2B KAYIT", { exact: true })).toBeVisible();
+  await expect(
+    page
+      .locator('[data-dimension="2d"]')
+      .getByText("PUBCHEM CANONICAL 2B KAYIT", { exact: true }),
+  ).toBeVisible();
   await expect(
     page.getByRole("group", { name: /Gösterim|Representation/i }).getByRole("button").first(),
   ).toBeDisabled();
@@ -265,7 +283,7 @@ test("shared 3D scene covers Universe, Cluster and full Focus interaction", asyn
   await page.keyboard.press("Escape");
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "universe");
 
-  const search = page.getByRole("searchbox", { name: /Molekül ara/i });
+  const search = page.getByRole("searchbox", { name: /Molekül ara|Search molecules/i });
   await search.fill("Celecoxib");
   await expect(sceneRoot(page)).toHaveAttribute("data-lod-level", "near");
   await expect(sceneRoot(page)).toHaveAttribute("data-visible-count", "1");
@@ -342,16 +360,16 @@ test("all five product modes remain reachable and dispose the Explore context", 
     maximumVisibleMolecules: 0,
   });
 
-  const navigation = page.getByRole("navigation", { name: "Platform modülleri" });
-  for (const mode of ["Learn", "Build", "Teach", "Discover"] as const) {
-    const button = navigation.getByRole("button", { name: new RegExp(mode, "i") });
+  const navigation = page.getByRole("navigation", { name: /Platform bölümleri|Platform sections/i });
+  for (const mode of [/Öğren|Learn/i, /Oluştur|Build/i, /Eğit|Teach/i, /Araştır|Discover/i]) {
+    const button = navigation.getByRole("button", { name: mode });
     await button.click();
     await expect(button).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator("main")).toBeVisible();
     await expect(page.locator("canvas[data-molecular-scene-canvas]")).toHaveCount(0);
   }
 
-  const exploreButton = navigation.getByRole("button", { name: /Explore/i });
+  const exploreButton = navigation.getByRole("button", { name: /Keşfet|Explore/i });
   await exploreButton.click();
   await expect(exploreButton).toHaveAttribute("aria-pressed", "true");
   await expect(sceneRoot(page)).toHaveAttribute("data-active-webgl-contexts", "1");

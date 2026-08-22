@@ -3,6 +3,7 @@ import {
   regulatoryProductSeeds,
   regulatorySourceId,
 } from "./regulatory-approvals";
+import { synthesisSourceRegistry } from "./synthesis-sources";
 
 const RETRIEVED_AT = "2026-08-21";
 
@@ -105,6 +106,7 @@ export const sourceRegistry: readonly SourceReference[] = [
     dailyMedSearchSource(slug, name),
   ]),
   ...regulatoryProductSeeds.map(drugsFdaProductSource),
+  ...synthesisSourceRegistry,
   {
     id: "source:dev-molecules-educational-draft-001",
     provider: "Dev Molecules editorial queue",

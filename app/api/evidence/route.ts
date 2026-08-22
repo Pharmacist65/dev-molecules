@@ -1,4 +1,5 @@
 import { createLocalEvidenceCard } from "@/lib/application/evidence-card";
+import { parseLocale } from "@/lib/i18n";
 
 const responseSchema = {
   type: "object",
@@ -31,6 +32,34 @@ interface OrchestratedOutput {
     readonly sourceIds: readonly string[];
   }[];
   readonly limitations: readonly string[];
+}
+
+type SupportedLocale = "tr" | "en";
+
+const apiErrors: Record<SupportedLocale, {
+  readonly invalidBody: string;
+  readonly missingFields: string;
+  readonly moleculeNotFound: string;
+}> = {
+  tr: {
+    invalidBody: "Geçersiz istek gövdesi.",
+    missingFields: "moleculeId ve question alanları gereklidir.",
+    moleculeNotFound: "Molekül kaydı bulunamadı.",
+  },
+  en: {
+    invalidBody: "Invalid request body.",
+    missingFields: "moleculeId and question are required.",
+    moleculeNotFound: "Molecule record not found.",
+  },
+};
+
+function resolveRequestLocale(request: Request, explicitLocale?: string): SupportedLocale {
+  const acceptedLocale = request.headers
+    .get("accept-language")
+    ?.split(",", 1)[0]
+    ?.split(";", 1)[0]
+    ?.trim();
+  return parseLocale(explicitLocale) ?? parseLocale(acceptedLocale) ?? "tr";
 }
 
 function extractOutputText(payload: unknown): string | null {
@@ -81,29 +110,37 @@ function isSafeOrchestratedOutput(
 }
 
 export async function POST(request: Request) {
-  let body: { moleculeId?: string; question?: string };
+  let body: { moleculeId?: string; question?: string; locale?: string };
   try {
-    body = (await request.json()) as { moleculeId?: string; question?: string };
+    body = (await request.json()) as { moleculeId?: string; question?: string; locale?: string };
   } catch {
-    return Response.json({ error: "Geçersiz istek gövdesi." }, { status: 400 });
+    const locale = resolveRequestLocale(request);
+    return Response.json({ error: apiErrors[locale].invalidBody }, { status: 400 });
   }
 
   const moleculeId = body.moleculeId?.trim();
   const question = body.question?.trim().slice(0, 800);
+  const locale = resolveRequestLocale(request, body.locale);
   if (!moleculeId || !question) {
     return Response.json(
-      { error: "moleculeId ve question alanları gereklidir." },
+      { error: apiErrors[locale].missingFields },
       { status: 400 },
     );
   }
 
-  const localCard = createLocalEvidenceCard(moleculeId, question);
+  const localCard = createLocalEvidenceCard(moleculeId, question, locale);
   if (!localCard) {
-    return Response.json({ error: "Molekül kaydı bulunamadı." }, { status: 404 });
+    return Response.json({ error: apiErrors[locale].moleculeNotFound }, { status: 404 });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
+  const evidenceApiToken = process.env.EVIDENCE_API_TOKEN;
+  const aiNarrationEnabled =
+    process.env.ENABLE_OPENAI_EVIDENCE === "true" &&
+    Boolean(apiKey) &&
+    Boolean(evidenceApiToken) &&
+    request.headers.get("authorization") === `Bearer ${evidenceApiToken}`;
+  if (!aiNarrationEnabled || !apiKey) {
     return Response.json(localCard, {
       headers: { "x-dev-molecules-mode": "curated-fallback" },
     });
@@ -136,7 +173,8 @@ export async function POST(request: Request) {
         instructions:
           "You are the Dev Molecules evidence narrator. Use only the supplied curated context. " +
           "Never infer novelty, patentability, safety, efficacy or synthesizability. " +
-          "Missing evidence must remain unknown. Every explanation may cite only supplied sourceIds.",
+          "Missing evidence must remain unknown. Every explanation may cite only supplied sourceIds. " +
+          `Write every user-facing field in ${locale === "tr" ? "Turkish" : "English"}.`,
         input: `User question: ${question}\n\nCurated context:\n${JSON.stringify(groundedContext)}`,
         text: {
           format: {

@@ -2,128 +2,152 @@
 
 ## Architectural intent
 
-Dev Molecules is one product shell with independently governed domains. The web experience may combine them, but no UI component, AI model or imported dataset becomes the scientific source of truth.
+Dev Molecules is one product shell with independently governed scientific, learning, and rendering boundaries. React may compose those boundaries, but it is not allowed to manufacture chemistry, evidence status, scoring rules, or source provenance.
 
-The current project shell is a React/vinext application intended for Sites/Cloudflare delivery. Domain logic must remain portable and testable outside framework components. Persistence bindings are activated only when their milestone requires them; schemas must not assume the initial seed is the final catalog.
+The current repository is a stateless React 19/vinext application configured for Sites/Cloudflare delivery. It uses checked-in seed data and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
 
-## Dependency direction
+## Current dependency direction
 
 ```text
-Web UI -> Application use cases -> Domain services -> Ports
-                                                -> Evidence policy
-Adapters (D1/R2/search/chemical tools/AI/providers) implement ports
+React product shell
+  ├─ application view-model composition
+  │    └─ typed domain rules and validators
+  │          └─ checked-in data registries / provider ports
+  ├─ localization runtime and typed localized content
+  └─ rendering adapters
+       ├─ shared Three.js 3D scene
+       └─ dynamically loaded SmilesDrawer 2D schemes
+
+Source SDF / SMILES / regulatory records / patent anchors
+  └─ provenance and review state
+       └─ eligible presentation or explicit unavailable state
 ```
 
-- UI renders view models and submits commands; it does not decide scientific status.
-- Application use cases coordinate authorization, domain operations and audit events.
-- Domain services own identity, route, learning, scoring and evidence invariants.
-- Adapters may fail or be replaced without weakening domain rules.
-- Evidence policy is consulted before any scientific claim is shown as reviewed or verified.
+- `lib/domain/` owns identity, evidence, structure, synthesis, nomenclature, challenge, and learning contracts.
+- `lib/application/` turns domain/data records into deterministic UI-facing models; it does not promote review status.
+- `lib/data/` composes the seed catalog, source registry, synthesis stories, challenges, nomenclature curriculum, and provider adapters.
+- `components/` renders those contracts and sends user attempts back to pure evaluators.
+- Rendering engines consume validated structure records. They are not sources of molecular identity or scientific truth.
 
-## Bounded domains
+This direction is tested. Application consumers do not import a family-specific fixture directly, and chemistry/scoring policies remain usable outside React.
+
+## Product domains
 
 ### Identity and Catalog
 
-Owns molecular entities, stereoisomers, salts/solvates/esters, active ingredients, products, approvals, synonyms and canonical external identifiers. It is the only domain allowed to merge or separate chemical identities. Regulatory approval attaches to an exact product/application and explicit `ChemicalForm`; it is never copied onto a normalized parent CID merely because that parent is related to a marketed salt or formulation.
+The catalog distinguishes normalized molecular entities, explicit chemical forms, regulatory products, approvals, external identifiers, structures, and educational classifications. Regulatory approval is attached to an exact Drugs@FDA `application + product + action` record and explicit `ChemicalForm`; it is not copied to a related normalized PubChem parent.
+
+The current seed contains 15 molecules from more than one family. This is coverage for the implemented vertical slice, not a schema ceiling or a claim to contain every approved drug.
 
 ### Explore
 
-Owns lens definitions, precomputed coordinates, clusters, level-of-detail representations and navigation. A lens is a named projection over catalog/evidence data, not a new scientific fact. Every coordinate set stores its algorithm, input version and meaning.
+Explore owns lens definitions, versioned categorical projections, clusters, progressive level of detail, stable hash navigation, keyboard/list access, and the Universe → cluster → focus transition.
 
-### Synthesis
+The current therapeutic-area, target-profile, and curated-scaffold lenses are deterministic categorical layouts. Their screen distance is explicitly **not** a fingerprint/Tanimoto score, binding measurement, clinical similarity, or efficacy claim. Localized labels never change canonical category inputs or coordinates.
 
-Owns routes, steps, atom mappings, precursors, transformations, conditions visibility, route type and review state. A molecule may have many routes. Proposed and reported routes cannot share the same presentation status.
+### Synthesis and Synthesis Learning
 
-### Learning and Games
+The synthesis domain owns route type, version, direct source anchors, materials, ordered steps, reaction classes, bond changes, named-atom correspondence, stereochemistry scope, review state, limitations, and the non-operational safety contract.
 
-Owns learning objectives, lessons, challenges, answer models, hints, attempts and educational scoring. Scores cannot write biological or discovery claims.
+The three current stories are patent-reported educational readings. Primary-source locators are audited, while editorial atom maps remain draft and require named synthetic-chemistry review. `canPresentAsSourceReported` is a fail-closed presentation gate: it requires an eligible route type, eligible source status, a direct HTTPS document and locator, matching source IDs, and `operationalDetailsIncluded === false`.
 
-### Workbench
+Challenge answer keys are not trusted blindly. Pure domain evaluators derive the expected answer from the referenced route, step, material role, bond changes, and provenance status; inconsistent configuration returns an invalid state.
 
-Owns user designs, versions, branches, fragments and 2D/3D representations. It calls chemical validation through a port. Designs are tenant-private by default.
+See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
-### Evidence
+### Nomenclature Learning
 
-Owns sources, source versions, claims, measurements, provenance, evidence class, conflicts, review decisions and audit history. All other domains reference evidence claim IDs rather than copying conclusions into free text.
+The nomenclature domain contains ten ordered topics, ten source-referenced exercises, and six interaction contracts. A pure evaluator handles single choice, multiple choice, and normalized text answers in TR and EN. It grades only the curated answer contract; it does not infer chemical identity or validate arbitrary names.
 
-### AI Orchestration
+Progress is device-local UI state. It is a learning measure and cannot change evidence or review status.
 
-Owns prompts, tool calls, response schemas, citation resolution, refusal/fail-closed behavior and evaluation results. It can create pending assessments but cannot promote scientific content to reviewed or verified.
+### Build, Teach, and Discover
 
-### Teaching
+- Build owns guided educational fragment choices. A completed exercise is not synthesis evidence.
+- Teach summarizes device-local progress and surfaces scientific review queues. There is no institution backend in this slice.
+- Discover assembles curated evidence cards for a selected catalog identity. This slice has no durable store for user-created or research content, and missing evidence remains unknown.
 
-Owns institutions, courses, cohorts, assignments, attempts, rubrics and progress summaries. It consumes published learning content; it cannot silently edit canonical scientific content.
+### Evidence and optional narration
 
-### Discovery Sandbox
+Evidence records separate evidence level from verification status and require stable source IDs. The evidence endpoint creates a curated local card first. If an external narrator is configured, it receives the user's question and only the allow-listed evidence context, then must return a strict schema whose cited source IDs resolve to the supplied set. Missing credentials, provider errors, invalid output, or citation failures return the curated card instead of unsupported prose. A deployment enabling this path must disclose the external-processing boundary and obtain any required consent.
 
-Owns private research projects and evidence assessments for user designs. It consumes Workbench and Evidence services and always labels hypotheses, predictions and missing evidence. It never publishes into the reviewed catalog without a separate review workflow.
+## Localization architecture
 
-## Data boundaries
+The locale contract is `"tr" | "en"` and the default is Turkish. The runtime resolves locale in this order:
 
-- **Relational operational data:** Drizzle-compatible SQLite/D1 tables for identities, relationships, claims, reviews, lessons, assignments and audit events.
-- **Large immutable artifacts:** object storage such as R2 for SDF/MOL/PDB files, source snapshots, generated conformers and rendered assets. Store hashes and metadata in the relational database.
-- **Derived search/index data:** exact identifiers, structure fingerprints, text indexes, vectors and spatial coordinates are rebuildable projections. They are never authoritative records.
-- **Chemical computation:** structure normalization, valence checks, fingerprints, similarity, conformer generation and atom mapping live behind versioned chemical-tool ports.
-- **External sources:** every importer stages raw records and provenance before normalization. Imports never overwrite reviewed claims directly.
-- **Regulatory anchors:** Drugs@FDA records retain exact application/product/action identifiers, linked chemical form, dataset/retrieval dates, resolvable API and human URLs, review scope and a canonical snapshot hash. `ORIG/1/AP` is a product-application action, not automatically the active moiety's first historical approval.
+1. persisted browser preference;
+2. supported browser language;
+3. Turkish fallback.
 
-Canonical identity should retain source IDs plus normalized representations such as canonical/isomeric SMILES and InChIKey where scientifically appropriate. Equality rules must state whether stereochemistry, charge, isotope and salt form participate.
+`I18nProvider` updates `<html lang>`, persists selection under `dev-molecules:locale`, and exposes typed translation, interpolation, plural, and number helpers. The English message map defines the compile-time key union; the Turkish map must satisfy the same dictionary. Tests require exact key and placeholder parity and prohibit runtime fallback into the other language.
 
-## Evidence and AI request flow
+Synthesis uses a separate, stable-ID localized overlay for stories, steps, materials, atom labels, and limitations. Nomenclature records carry paired TR/EN educational text. SMILES, SDF records, formulas, molecule IDs, source IDs, evidence enums, route types, and projection inputs are not translated.
+
+See [Localization](LOCALIZATION.md).
+
+## Molecular rendering boundaries
+
+### Shared Three.js scene
+
+`MolecularScenePort` separates React navigation from the Three.js implementation. One adapter owns one `WebGLRenderer` and therefore one WebGL context for Explore. Universe, cluster, and focus update the same scene instead of opening a viewer for every molecule.
+
+The explicit level-of-detail policy is:
+
+- **Far Universe:** cluster glyphs; no structure download fan-out.
+- **Near Universe:** a maximum of 40 visible source structures.
+- **Cluster:** the selected cluster in the shared scene.
+- **Focus:** one high-detail interactive structure.
+
+The adapter uses source SDF coordinates, instanced atom/bond geometry, a cache bounded to 40 parsed or in-flight structures, demand-driven rendering, and deterministic disposal. Ball-and-stick and space-filling representations, rotate/pan/zoom/reset, hydrogen visibility, and atom hover/selection are scene operations rather than alternate scientific records.
+
+Runtime loading requires a valid 3D SDF. When a PubChem CID expectation is present, the file CID must match. A malformed, 2D-only, missing, or identity-mismatched file cannot become 3D geometry. Partial multi-record failure retains valid structures and reports failed identities; total failure is explicit.
+
+### SmilesDrawer client boundary
+
+Synthesis reaction schemes use `SmilesStructure`, a client component that dynamically imports `smiles-drawer`. Dynamic loading keeps the browser-only parser/renderer outside server execution and avoids adding another WebGL context. It renders source-associated SMILES to SVG. Parse or import failure exposes the original SMILES string; it never substitutes a decorative molecule or generated connectivity.
+
+SmilesDrawer is a presentation adapter. The underlying material ID, SMILES, source ID, role, and review state remain in typed data.
+
+## Structure and source data
+
+Each seed catalog identity has checked-in PubChem 2D and 3D SDF records:
 
 ```text
-User structure or question
-  -> structure parser/validator
-  -> canonical identity and exact-match lookup
-  -> analog and evidence retrieval
-  -> synthesis/biology adapters when allowed
-  -> evidence eligibility filter
-  -> LLM explanation using a strict response schema
-  -> citation and claim validator
-  -> evidence card or fail-closed “unknown” result
+public/structures/pubchem/cid-{CID}-2d.sdf
+public/structures/pubchem/cid-{CID}-3d.sdf
 ```
 
-The model never receives authority to invent a missing source, infer novelty from absence, convert an analog observation into direct evidence, or relabel prediction as experiment. If schema, citation or eligibility validation fails, the user sees an unavailable/unknown state rather than a best guess.
+The provider endpoint represented by those assets is:
 
-## Web and interaction boundary
+```text
+https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/record/SDF?record_type=2d|3d
+```
 
-- Keep molecule viewers and editors behind adapter components so 3Dmol.js, Mol*, Ketcher or alternatives can change.
-- Explore uses a four-stage, explicit level-of-detail contract:
-  - **Far Universe:** cluster glyphs and categorical topology; no structure asset fan-out.
-  - **Near Universe:** at most 40 visible, low-detail 3D molecular structures from source XYZ coordinates.
-  - **Cluster:** the selected cluster in one shared, medium-detail 3D scene.
-  - **Focus:** one high-detail, fully interactive 3D molecular structure.
-- Explore owns at most one active WebGL context. Universe, Cluster and Focus reuse one molecular-scene adapter; opening a viewer per molecule or rendering one WebGL canvas per card is prohibited.
-- The WebGL adapter batches repeated atom and bond geometry, lazy-loads only visible structures, keeps a bounded cache and disposes GPU resources on unmount.
-- Runtime structure loading requires a 3D SDF record before rendering. Optional provider-specific identity expectations (for example PubChem CID) are checked when supplied without making the adapter provider-specific.
-- A failed structure never produces fallback atoms/bonds. Partial multi-molecule loads retain successful geometry and identify each failed record; an all-failed load is blocking and explicit.
-- Rendering is demand-driven: an idle scene does not retain a continuous animation loop.
-- A 2D canonical structure canvas and an accessible list/search surface remain available without weakening the 3D provenance contract.
-- Preserve keyboard-accessible list/search navigation beside the spatial atlas.
-- Do not serialize authoritative scientific status into client-only state.
-- Keep route and molecule URLs stable enough for teaching references and source review.
-- Avoid framework-specific code inside chemistry, evidence and scoring rules.
+PubChem 3D records are computed conformers, not experimental crystal structures or protein-bound poses. Tests validate file identity, atoms, bonds, formula, InChIKey, coordinate dimension, provenance fields, and directional 2D stereo bonds.
 
-### Molecular scene adapter boundary
+Drugs@FDA anchors retain exact application/product/action identifiers, linked form, dataset and retrieval dates, official record URLs, review scope, and reproducible normalized hashes. The recorded `ORIG/1/AP` date is the selected product application's action date; it is not presented as the active moiety's first historical approval.
 
-`MolecularScenePort` separates React navigation from the rendering engine. Its implementation owns structure loading, visible-set changes, LOD, camera, focus, representation, hydrogen visibility, atom highlighting, resizing and deterministic disposal. The initial implementation uses Three.js with instanced sphere/cylinder meshes, a perspective camera, depth buffering and source SDF coordinates. Three.js is a replaceable adapter, never a scientific source of truth.
+## Security and privacy boundary
 
-Lens projections are derived artifacts. Each coordinate set stores a projection ID, algorithm and algorithm version, input version/hash, generation time, coordinate system, meaning, non-meaning statement, provenance and review status. Categorical layouts must say that proximity is categorical layout—not chemical similarity. Structural similarity wording is ineligible until a versioned fingerprint/similarity pipeline exists.
+- No client-only flag may be treated as authorization for future persisted data.
+- User designs, uploads, and research assessments are private by default.
+- Public catalog data, future institution content, and future private research data require distinct authorization domains.
+- Imported or retrieved text is untrusted input to any external narration tool.
+- Secrets, private keys, populated environment files, patient data, and unpublished structures are prohibited from the repository.
 
-## Security and privacy
+See [Security policy](../SECURITY.md).
 
-- Enforce tenant and project authorization in server-side use cases, not only in UI state.
-- Default user designs, uploads and assessments to private.
-- Separate public catalog data, institution-owned course content and private research data.
-- Record explicit consent for sharing or training; absence of consent means no use.
-- Treat imported documents and retrieved text as untrusted input to AI tools.
-- Log scientific status changes, data exports and privileged review actions.
+## Quality strategy
 
-## Quality gates
+The local and CI gate is:
 
-- Unit tests for identity normalization, state transitions, scoring and evidence eligibility.
-- Fixture-based tests for stereochemistry, salts, duplicate identities and conflicting sources.
-- Render and interaction tests for 2D/3D consistency and spatial lens labels.
-- Golden-set AI tests for citation resolution, uncertainty language and forbidden conclusions.
-- Migration tests before any persistent schema release.
-- Performance budgets for atlas loading and 3D activation, measured with expanded—not only seed—fixtures.
+```bash
+npm run typecheck
+npm run lint
+npm run build
+node --test tests/*.test.mjs
+npx playwright test
+npm audit --omit=dev --audit-level=high
+```
+
+Unit and fixture tests cover domain invariants, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, renderer contracts, bounded LOD/cache behavior, and representative 500-record selection policy. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, and fixed-size visual captures. These checks are acceptance evidence, not a scientific peer review or GPU benchmark.

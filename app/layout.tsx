@@ -7,9 +7,9 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const title = "Dev Molecules — Pharmaceutical Molecular Universe";
+const title = "Dev Molecules — Evidence-aware molecular learning";
 const description =
-  "İlaç moleküllerini, sentez mantığını, öğrenme görevlerini ve bilimsel kanıtı aynı uzaysal ortamda keşfedin.";
+  "Explore sourced molecular structures, non-operational synthesis stories, nomenclature and scientific evidence in Turkish or English.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const forwardedProto = requestHeaders.get("x-forwarded-proto")?.split(",")[0]?.trim();
   const protocol = forwardedProto || (host.startsWith("localhost") ? "http" : "https");
   const metadataBase = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og.png", metadataBase).toString();
+  const socialImage = new URL("/og-v2.png", metadataBase).toString();
 
   return {
     metadataBase,
@@ -28,13 +28,12 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     icons: {
       icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-      shortcut: "/favicon.ico",
     },
     openGraph: {
       title,
       description,
       type: "website",
-      images: [{ url: socialImage, width: 1733, height: 909, alt: "Dev Molecules molecular universe" }],
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Dev Molecules evidence-aware learning environment" }],
     },
     twitter: {
       card: "summary_large_image",
@@ -47,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
     </html>
   );

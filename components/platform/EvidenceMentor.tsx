@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { MentorEvidenceCard } from "@/lib/application/evidence-card";
 import { moleculeCatalog } from "@/lib/data/catalog";
 import type { MoleculeRecord } from "@/lib/domain";
+import { useI18n, type TranslationKey, type Translator } from "@/lib/i18n";
 
 import styles from "./platform.module.css";
 
@@ -13,13 +14,38 @@ interface EvidenceMentorProps {
   readonly onSelectMolecule: (moleculeId: string) => void;
 }
 
+const evidenceStatusKeys: Readonly<Record<string, TranslationKey>> = {
+  "curated-fallback": "status.curatedFallback",
+  "openai-orchestrated": "status.openaiOrchestrated",
+  "valid-record": "status.validRecord",
+  "exact-curated-match": "status.exactCuratedMatch",
+  "educational-story-only": "status.educationalStoryOnly",
+  "not-assessed": "status.notAssessed",
+  "not-found": "status.notFound",
+  verified: "status.verified",
+  "source-supported": "status.sourceSupported",
+  pending: "status.pending",
+  unknown: "status.unknown",
+};
+
+function presentEvidenceStatus(value: string, t: Translator) {
+  const key = evidenceStatusKeys[value];
+  return key ? t(key) : t("status.unknown");
+}
+
 export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorProps) {
-  const [question, setQuestion] = useState(
-    "Bu kayıt için elimizde hangi kimlik ve sentez kanıtı var?",
-  );
+  const { locale, t } = useI18n();
+  const defaultQuestion = t("discover.defaultQuestion");
+  const previousDefaultRef = useRef(defaultQuestion);
+  const [question, setQuestion] = useState(defaultQuestion);
   const [card, setCard] = useState<MentorEvidenceCard | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setQuestion((current) => current === previousDefaultRef.current ? defaultQuestion : current);
+    previousDefaultRef.current = defaultQuestion;
+  }, [defaultQuestion]);
 
   async function analyze() {
     setLoading(true);
@@ -29,19 +55,15 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
       const response = await fetch("/api/evidence", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ moleculeId: molecule.id, question }),
+        body: JSON.stringify({ moleculeId: molecule.id, question, locale }),
       });
       const payload = (await response.json()) as MentorEvidenceCard | { error?: string };
       if (!response.ok || !("cardId" in payload)) {
-        throw new Error(
-          "error" in payload && payload.error
-            ? payload.error
-            : "Kanıt kartı üretilemedi.",
-        );
+        throw new Error(t("discover.cardError"));
       }
       setCard(payload);
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Kanıt kartı üretilemedi.");
+      setError(reason instanceof Error ? reason.message : t("discover.cardError"));
     } finally {
       setLoading(false);
     }
@@ -51,23 +73,20 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
     <section className={styles.featureSection} aria-labelledby="discover-heading">
       <div className={styles.featureHeader}>
         <div>
-          <p className={styles.kicker}>DISCOVER / PRIVATE EVIDENCE SANDBOX</p>
-          <h1 id="discover-heading">Ask the evidence. Never ask for certainty it cannot hold.</h1>
-          <p>
-            Kimlik, sentez ve biyolojik kanıt ayrı değerlendirilir. “Bulunamadı”
-            hiçbir zaman “yeni” veya “patentlenebilir” olarak yorumlanmaz.
-          </p>
+          <p className={styles.kicker}>{t("discover.eyebrow")}</p>
+          <h1 id="discover-heading">{t("discover.title")}</h1>
+          <p>{t("discover.description")}</p>
         </div>
-        <div className={styles.privatePill}><i /> PRIVATE BY DEFAULT</div>
+        <div className={styles.privatePill}><i /> {t("discover.privateByDefault")}</div>
       </div>
 
       <div className={styles.evidenceWorkspace}>
         <div className={styles.evidenceComposer}>
           <div className={styles.composerTopline}>
-            <span>RESEARCH QUESTION</span><span>FAIL-CLOSED</span>
+            <span>{t("discover.researchQuestion")}</span><span>{t("discover.failClosed")}</span>
           </div>
           <label>
-            Catalog identity
+            {t("discover.catalogIdentity")}
             <select
               value={molecule.id}
               onChange={(event) => {
@@ -84,13 +103,13 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
           </label>
 
           <div className={styles.structureInput}>
-            <span>CANONICAL SMILES / CURATED RECORD</span>
+            <span>CANONICAL SMILES / {t("discover.curatedRecord")}</span>
             <code>{molecule.identity.canonicalSmiles}</code>
-            <small>This field is sourced from the selected identity record; it is not user-edited in this foundation flow.</small>
+            <small>{t("discover.curatedRecordNotice")}</small>
           </div>
 
           <label>
-            Evidence question
+            {t("discover.evidenceQuestion")}
             <textarea
               value={question}
               maxLength={800}
@@ -98,15 +117,15 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
             />
           </label>
 
-          <div className={styles.suggestionRow} aria-label="Önerilen sorular">
-            {["Kimlik doğrulaması nedir?", "Sentez anlatısı doğrulanmış mı?", "Hangi kanıt eksik?"].map((suggestion) => (
+          <div className={styles.suggestionRow} aria-label={t("discover.suggestedQuestions")}>
+            {[t("discover.suggestion.identity"), t("discover.suggestion.synthesis"), t("discover.suggestion.missing")].map((suggestion) => (
               <button key={suggestion} type="button" onClick={() => setQuestion(suggestion)}>{suggestion}</button>
             ))}
           </div>
 
           <button className={styles.analyzeButton} type="button" disabled={loading || !question.trim()} onClick={analyze}>
             <span>{loading ? "···" : "✦"}</span>
-            {loading ? "Building evidence card" : "Generate evidence card"}
+            {loading ? t("discover.generatingCard") : t("discover.generateCard")}
           </button>
           {error ? <p className={styles.errorMessage} role="alert">{error}</p> : null}
         </div>
@@ -115,9 +134,9 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
           {!card ? (
             <div className={styles.emptyEvidence}>
               <span aria-hidden="true">⌁</span>
-              <h2>Evidence card waiting</h2>
-              <p>Önce yapı kaydı ve kaynaklar kontrol edilir; AI varsa yalnız bu bağlamı açıklar.</p>
-              <div><i /> No unsupported prose is shown before validation.</div>
+              <h2>{t("discover.cardWaiting")}</h2>
+              <p>{t("discover.cardWaitingBody")}</p>
+              <div><i /> {t("discover.noUnsupportedProse")}</div>
             </div>
           ) : (
             <EvidenceCardView card={card} />
@@ -129,21 +148,22 @@ export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorPro
 }
 
 function EvidenceCardView({ card }: { readonly card: MentorEvidenceCard }) {
+  const { t } = useI18n();
   return (
     <article className={styles.evidenceCard}>
       <header>
         <div>
-          <span>EVIDENCE CARD</span>
+          <span>{t("discover.evidenceCard")}</span>
           <h2>{card.moleculeName}</h2>
         </div>
-        <div className={styles.modeBadge} data-mode={card.mode}>{card.mode}</div>
+        <div className={styles.modeBadge} data-mode={card.mode}>{presentEvidenceStatus(card.mode, t)}</div>
       </header>
 
       <div className={styles.statusMatrix}>
-        <div><span>Structure</span><strong>{card.structuralStatus}</strong></div>
-        <div><span>Identity</span><strong>{card.identityStatus}</strong></div>
-        <div><span>Synthesis</span><strong>{card.synthesisStatus}</strong></div>
-        <div><span>Biology</span><strong>{card.biologicalStatus}</strong></div>
+        <div><span>{t("discover.structure")}</span><strong>{presentEvidenceStatus(card.structuralStatus, t)}</strong></div>
+        <div><span>{t("discover.identity")}</span><strong>{presentEvidenceStatus(card.identityStatus, t)}</strong></div>
+        <div><span>{t("discover.synthesis")}</span><strong>{presentEvidenceStatus(card.synthesisStatus, t)}</strong></div>
+        <div><span>{t("discover.biology")}</span><strong>{presentEvidenceStatus(card.biologicalStatus, t)}</strong></div>
       </div>
 
       <p className={styles.cardSummary}>{card.summary}</p>
@@ -151,16 +171,16 @@ function EvidenceCardView({ card }: { readonly card: MentorEvidenceCard }) {
       <div className={styles.findingList}>
         {card.findings.map((finding) => (
           <div key={finding.label}>
-            <span className={styles.findingStatus} data-status={finding.status}><i /> {finding.status}</span>
+            <span className={styles.findingStatus} data-status={finding.status}><i /> {presentEvidenceStatus(finding.status, t)}</span>
             <strong>{finding.label}</strong>
             <p>{finding.value}</p>
-            <small>{finding.sourceIds.length ? finding.sourceIds.join(" · ") : "No eligible source for a claim"}</small>
+            <small>{finding.sourceIds.length ? finding.sourceIds.join(" · ") : t("discover.noEligibleClaimSource")}</small>
           </div>
         ))}
       </div>
 
       <div className={styles.sourceList}>
-        <span className={styles.smallLabel}>RESOLVED SOURCES</span>
+        <span className={styles.smallLabel}>{t("discover.resolvedSources")}</span>
         {card.sources.map((source, index) => (
           <a key={source.id} href={source.url ?? undefined} target={source.url ? "_blank" : undefined} rel="noreferrer">
             <span>{String(index + 1).padStart(2, "0")}</span>
@@ -171,7 +191,7 @@ function EvidenceCardView({ card }: { readonly card: MentorEvidenceCard }) {
       </div>
 
       <footer>
-        <strong>LIMITATIONS</strong>
+        <strong>{t("common.limitations")}</strong>
         <ul>{card.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul>
       </footer>
     </article>

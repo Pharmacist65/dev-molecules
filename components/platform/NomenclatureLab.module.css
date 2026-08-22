@@ -1,0 +1,832 @@
+.lab {
+  --lab-ink: #13233f;
+  --lab-muted: #647089;
+  --lab-line: #dce1e8;
+  --lab-paper: #fffefa;
+  --lab-wash: #f4f5f7;
+  --lab-blue: #255fc5;
+  --lab-blue-soft: #eaf1ff;
+  --lab-orange: #dc642d;
+  --lab-orange-soft: #fff0e8;
+  margin: 1rem 0 4rem;
+  overflow: hidden;
+  border: 1px solid var(--lab-line);
+  border-radius: 26px;
+  background: var(--lab-paper);
+  color: var(--lab-ink);
+  box-shadow: 0 20px 55px rgb(28 43 69 / 9%);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(2rem, 6vw, 7rem);
+  padding: clamp(1.7rem, 4vw, 3.8rem);
+  border-bottom: 1px solid var(--lab-line);
+  background:
+    linear-gradient(115deg, rgb(255 255 255 / 88%), rgb(246 248 252 / 92%)),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgb(19 35 63 / 3%) 47px 48px);
+}
+
+.headerCopy {
+  max-width: 890px;
+}
+
+.eyebrow,
+.panelLabel,
+.curriculumTopline,
+.lessonHeading > p,
+.formulaCard small,
+.reasoningGrid small {
+  margin: 0;
+  color: var(--lab-blue);
+  font: 700 0.65rem/1.2 var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.14em;
+}
+
+.header h2 {
+  max-width: 850px;
+  margin: 0.8rem 0 0;
+  color: var(--lab-ink);
+  font-size: clamp(2.3rem, 4.4vw, 4.9rem);
+  font-weight: 560;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.intro {
+  max-width: 720px;
+  margin: 1.15rem 0 0;
+  color: var(--lab-muted);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+.scopeBadge {
+  display: grid;
+  max-width: 390px;
+  flex: 0 0 340px;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  padding: 1.05rem;
+  border: 1px solid #efc9b8;
+  border-radius: 14px;
+  background: var(--lab-orange-soft);
+}
+
+.scopeBadge > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--lab-orange);
+  color: #fff;
+  font: 720 0.62rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.scopeBadge strong {
+  color: #9d4520;
+  font: 720 0.61rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.scopeBadge p {
+  margin: 0.45rem 0 0;
+  color: #805c4e;
+  font-size: 0.66rem;
+  line-height: 1.55;
+}
+
+.labGrid {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.72fr) minmax(500px, 1.7fr) minmax(250px, 0.72fr);
+  min-height: 760px;
+}
+
+.curriculum,
+.referencePanel {
+  min-width: 0;
+  background: #f7f8fa;
+}
+
+.curriculum {
+  border-right: 1px solid var(--lab-line);
+}
+
+.curriculumTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.35rem 0.85rem;
+  color: var(--lab-muted);
+  font-size: 0.57rem;
+  letter-spacing: 0.11em;
+}
+
+.curriculumTopline strong {
+  color: var(--lab-ink);
+  font-size: 0.65rem;
+}
+
+.progressTrack {
+  height: 3px;
+  margin: 0 1.35rem 0.9rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dfe3e9;
+}
+
+.progressTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lab-blue);
+  transition: width 220ms ease;
+}
+
+.topicList {
+  display: grid;
+}
+
+.topicList button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: 28px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.15rem;
+  border: 0;
+  border-top: 1px solid rgb(19 35 63 / 7%);
+  background: transparent;
+  color: var(--lab-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.topicList button > span {
+  color: #98a1b1;
+  font: 0.59rem var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.topicList button div {
+  display: grid;
+  min-width: 0;
+  gap: 0.22rem;
+}
+
+.topicList button strong {
+  overflow: hidden;
+  color: #3c4960;
+  font-size: 0.73rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topicList button small {
+  overflow: hidden;
+  color: #8a94a5;
+  font-size: 0.54rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topicList button i {
+  color: var(--lab-blue);
+  font-style: normal;
+  text-align: right;
+}
+
+.topicList button:hover {
+  background: #eef1f6;
+}
+
+.topicList button[aria-current="step"] {
+  background: var(--lab-blue-soft);
+  box-shadow: inset 3px 0 var(--lab-blue);
+}
+
+.topicList button[aria-current="step"] strong,
+.topicList button[aria-current="step"] > span {
+  color: var(--lab-blue);
+}
+
+.topicList button[data-complete="true"] > span {
+  color: var(--lab-blue);
+}
+
+.workspace {
+  min-width: 0;
+  background: var(--lab-paper);
+}
+
+.workspaceTopline {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--lab-line);
+  color: var(--lab-muted);
+  font: 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workspaceTopline span:last-child {
+  color: var(--lab-blue);
+}
+
+.phaseRail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--lab-line);
+  background: #fafbfc;
+}
+
+.phaseRail span {
+  position: relative;
+  padding: 0.9rem 1rem;
+  border-right: 1px solid var(--lab-line);
+  color: #a1a9b6;
+  font: 0.53rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.07em;
+  text-align: center;
+}
+
+.phaseRail span:last-child {
+  border-right: 0;
+}
+
+.phaseRail span[data-active="true"] {
+  color: var(--lab-blue);
+  background: #f7faff;
+}
+
+.phaseRail span[data-active="true"]::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--lab-blue);
+  content: "";
+}
+
+.lesson {
+  padding: clamp(1.5rem, 3vw, 2.7rem);
+}
+
+.lessonHeading > p {
+  color: var(--lab-orange);
+  font-size: 0.57rem;
+}
+
+.lessonHeading h3 {
+  margin: 0.55rem 0 0;
+  color: var(--lab-ink);
+  font-size: clamp(1.55rem, 2.7vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.lessonHeading > span {
+  display: block;
+  max-width: 690px;
+  margin-top: 0.55rem;
+  color: var(--lab-muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.formulaCard {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  align-content: center;
+  gap: 1.2rem;
+  margin: 1.55rem 0;
+  padding: 1.5rem;
+  border: 1px solid #cbd8ec;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle, rgb(37 95 197 / 10%) 0 0.7px, transparent 0.9px) 0 0 / 24px 24px,
+    #f7faff;
+  text-align: center;
+}
+
+.formulaCard small {
+  color: var(--lab-blue);
+  font-size: 0.56rem;
+}
+
+.formulaCard pre {
+  max-width: 100%;
+  margin: 0;
+  overflow: auto;
+  color: var(--lab-ink);
+  font: 650 clamp(1.15rem, 2.6vw, 2rem)/1.45 var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.015em;
+  white-space: pre;
+}
+
+.questionBlock {
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--lab-line);
+}
+
+.questionBlock h4 {
+  margin: 0;
+  color: var(--lab-ink);
+  font-size: 1.08rem;
+  font-weight: 660;
+}
+
+.questionBlock > p {
+  margin: 0.45rem 0 1.1rem;
+  color: var(--lab-muted);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.options button {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--lab-line);
+  border-radius: 10px;
+  background: #fff;
+  color: #3c4960;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.73rem;
+  text-align: left;
+}
+
+.options button span {
+  color: #9ca5b3;
+}
+
+.options button:hover {
+  border-color: #9db7e5;
+  background: #f8faff;
+}
+
+.options button[data-selected="true"] {
+  border-color: var(--lab-blue);
+  background: var(--lab-blue-soft);
+  color: #174992;
+}
+
+.options button[data-selected="true"] span {
+  color: var(--lab-blue);
+}
+
+.textResponse {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.textResponse span {
+  color: var(--lab-muted);
+  font: 0.59rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.textResponse input {
+  width: 100%;
+  min-height: 54px;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--lab-line);
+  border-radius: 10px;
+  outline: 0;
+  background: #fff;
+  color: var(--lab-ink);
+  font: 0.85rem var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.textResponse input:focus {
+  border-color: var(--lab-blue);
+  box-shadow: 0 0 0 3px rgb(37 95 197 / 12%);
+}
+
+.answerActions,
+.feedbackActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.hintButton,
+.checkButton,
+.feedbackActions button {
+  min-height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: 650 0.66rem var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.hintButton {
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--lab-blue);
+  text-decoration: underline;
+  text-decoration-color: rgb(37 95 197 / 35%);
+  text-underline-offset: 3px;
+}
+
+.checkButton,
+.feedbackActions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0 1rem;
+  border: 1px solid var(--lab-blue);
+  background: var(--lab-blue);
+  color: #fff;
+}
+
+.checkButton:disabled {
+  border-color: #c7ccd4;
+  background: #dfe2e7;
+  color: #858e9c;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid var(--lab-orange);
+  background: var(--lab-orange-soft);
+}
+
+.hint strong {
+  color: #9d4520;
+  font-size: 0.66rem;
+}
+
+.hint p {
+  margin: 0.35rem 0 0;
+  color: #7a5849;
+  font-size: 0.69rem;
+  line-height: 1.55;
+}
+
+.feedback {
+  margin-top: 1.4rem;
+  overflow: hidden;
+  border: 1px solid #c9d7ee;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.feedback[data-state="incorrect"] {
+  border-color: #efc6b4;
+  background: #fffaf7;
+}
+
+.feedbackTitle {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+}
+
+.feedbackTitle > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--lab-blue);
+  color: #fff;
+  font-weight: 800;
+}
+
+.feedback[data-state="incorrect"] .feedbackTitle > span {
+  background: var(--lab-orange);
+}
+
+.feedbackTitle strong {
+  color: var(--lab-ink);
+  font-size: 0.79rem;
+}
+
+.feedbackTitle p {
+  margin: 0.3rem 0 0;
+  color: var(--lab-muted);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.reasoningGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid currentcolor;
+  border-color: rgb(37 95 197 / 14%);
+}
+
+.reasoningGrid > div {
+  padding: 1rem 1.1rem;
+  border-right: 1px solid rgb(37 95 197 / 14%);
+}
+
+.reasoningGrid > div:last-child {
+  border-right: 0;
+}
+
+.reasoningGrid small {
+  color: var(--lab-blue);
+  font-size: 0.54rem;
+}
+
+.feedback[data-state="incorrect"] .reasoningGrid small {
+  color: var(--lab-orange);
+}
+
+.reasoningGrid p {
+  margin: 0.45rem 0 0;
+  color: #566178;
+  font-size: 0.67rem;
+  line-height: 1.55;
+}
+
+.feedbackActions {
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0.8rem 1.1rem;
+  border-top: 1px solid rgb(37 95 197 / 14%);
+}
+
+.feedback[data-state="incorrect"] .feedbackActions button {
+  border-color: var(--lab-orange);
+  background: var(--lab-orange);
+}
+
+.referencePanel {
+  padding: 1.35rem;
+  border-left: 1px solid var(--lab-line);
+}
+
+.panelLabel {
+  color: var(--lab-muted);
+  font-size: 0.57rem;
+}
+
+.referencePanel > p {
+  margin: 0.7rem 0 1.2rem;
+  color: var(--lab-muted);
+  font-size: 0.67rem;
+  line-height: 1.6;
+}
+
+.referenceList {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.referenceList a {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 15px;
+  gap: 0.55rem;
+  padding: 0.9rem;
+  border: 1px solid var(--lab-line);
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.referenceList a:hover {
+  border-color: #9db7e5;
+  background: #f8faff;
+}
+
+.referenceList a > span,
+.referenceList a i {
+  color: var(--lab-blue);
+  font: 0.57rem var(--font-geist-mono), ui-monospace, monospace;
+  font-style: normal;
+}
+
+.referenceList a div {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.referenceList strong {
+  color: #37445a;
+  font-size: 0.64rem;
+  line-height: 1.4;
+}
+
+.referenceList small {
+  color: #8993a4;
+  font-size: 0.55rem;
+  line-height: 1.4;
+}
+
+.progressSummary {
+  display: grid;
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--lab-ink);
+  color: #fff;
+}
+
+.progressSummary span {
+  color: #b9c6da;
+  font: 0.56rem var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.progressSummary strong {
+  margin-top: 0.45rem;
+  font-size: 2.2rem;
+  font-weight: 560;
+  letter-spacing: -0.05em;
+}
+
+.progressSummary small {
+  margin-top: 0.25rem;
+  color: #aebbd0;
+  font-size: 0.6rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.topicList button:focus-visible,
+.options button:focus-visible,
+.hintButton:focus-visible,
+.checkButton:focus-visible,
+.feedbackActions button:focus-visible,
+.referenceList a:focus-visible {
+  outline: 3px solid rgb(37 95 197 / 35%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1180px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scopeBadge {
+    width: min(100%, 600px);
+    max-width: none;
+    box-sizing: border-box;
+    flex-basis: auto;
+  }
+
+  .labGrid {
+    grid-template-columns: minmax(210px, 0.65fr) minmax(500px, 1.5fr);
+  }
+
+  .referencePanel {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(200px, 0.7fr) 1.8fr minmax(160px, 0.55fr);
+    align-items: start;
+    gap: 1rem;
+    border-top: 1px solid var(--lab-line);
+    border-left: 0;
+  }
+
+  .referencePanel > p,
+  .progressSummary {
+    margin: 0;
+  }
+
+  .referenceList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .lab {
+    border-radius: 18px;
+  }
+
+  .header {
+    padding: 1.4rem;
+  }
+
+  .header h2 {
+    font-size: clamp(2.1rem, 12vw, 3.2rem);
+  }
+
+  .labGrid {
+    display: block;
+  }
+
+  .curriculum {
+    overflow: hidden;
+    border-right: 0;
+    border-bottom: 1px solid var(--lab-line);
+  }
+
+  .topicList {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .topicList button {
+    min-width: 210px;
+    scroll-snap-align: start;
+    border-right: 1px solid rgb(19 35 63 / 7%);
+  }
+
+  .topicList button[aria-current="step"] {
+    box-shadow: inset 0 -3px var(--lab-blue);
+  }
+
+  .workspaceTopline {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+  }
+
+  .phaseRail span {
+    padding: 0.75rem 0.45rem;
+    font-size: 0.47rem;
+  }
+
+  .lesson {
+    padding: 1.25rem;
+  }
+
+  .formulaCard {
+    min-height: 145px;
+  }
+
+  .options,
+  .reasoningGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .reasoningGrid > div {
+    border-right: 0;
+    border-bottom: 1px solid rgb(37 95 197 / 14%);
+  }
+
+  .reasoningGrid > div:last-child {
+    border-bottom: 0;
+  }
+
+  .referencePanel {
+    display: block;
+  }
+
+  .referencePanel > p,
+  .referenceList,
+  .progressSummary {
+    margin-top: 0.8rem;
+  }
+
+  .referenceList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressTrack span {
+    transition: none;
+  }
+}

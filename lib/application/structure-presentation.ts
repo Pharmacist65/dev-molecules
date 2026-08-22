@@ -1,3 +1,7 @@
+import { translate } from "../i18n/core";
+import type { Locale } from "../i18n/locale";
+import type { TranslationKey } from "../i18n/messages";
+
 export type StructurePresentationDimension = "2d" | "3d";
 
 export interface StructureProvenancePresentationInput {
@@ -18,53 +22,63 @@ export function getStructureProvenancePresentation({
   origin,
   sourceLabel,
   sourceId,
-}: StructureProvenancePresentationInput): StructureProvenancePresentation {
+}: StructureProvenancePresentationInput, locale: Locale = "tr"): StructureProvenancePresentation {
   const isPubChem = /pubchem/i.test([sourceLabel, sourceId].filter(Boolean).join(" "));
 
+  const present = (
+    headingKey: TranslationKey,
+    noteKey: TranslationKey,
+  ): StructureProvenancePresentation => ({
+    heading: translate(locale, headingKey),
+    note: translate(locale, noteKey),
+  });
+
   if (dimension === "2d") {
-    return {
-      heading: isPubChem ? "PUBCHEM CANONICAL 2B KAYIT" : "CANONICAL 2B KAYIT",
-      note: "İki boyutlu veritabanı yerleşimidir; 3B kökenden türetilmez.",
-    };
+    return present(
+      isPubChem
+        ? "viewer.presentation.2dPubChemHeading"
+        : "viewer.presentation.2dCanonicalHeading",
+      "viewer.presentation.2dNote",
+    );
   }
 
   switch (origin) {
     case "computed-3d-conformer":
-      return {
-        heading: isPubChem
-          ? "PUBCHEM HESAPLANMIŞ 3B KONFORMER"
-          : "HESAPLANMIŞ 3B KONFORMER",
-        note: "Deneysel kristal veya protein-bound pose değildir.",
-      };
+      return present(
+        isPubChem
+          ? "viewer.presentation.computedPubChemHeading"
+          : "viewer.presentation.computedHeading",
+        "viewer.presentation.computedNote",
+      );
     case "experimental-structure":
-      return {
-        heading: "DENEYSEL 3B YAPI",
-        note: "Bu genel köken etiketi protein-bound pose anlamına gelmez; doğrudan kaynağı inceleyin.",
-      };
+      return present(
+        "viewer.presentation.experimentalHeading",
+        "viewer.presentation.experimentalNote",
+      );
     case "experimental-bound-pose":
-      return {
-        heading: "DENEYSEL BAĞLI POZ",
-        note: "Deneysel bağlı-poz iddiası yalnız doğrudan kaynak ve inceleme kaydıyla birlikte gösterilir.",
-      };
+      return present(
+        "viewer.presentation.boundPoseHeading",
+        "viewer.presentation.boundPoseNote",
+      );
     case "user-supplied":
-      return {
-        heading: "İÇE AKTARILMIŞ 3B KAYIT",
-        note: "Köken ve doğrulama durumu kullanıcı kaydından ayrı izlenir.",
-      };
+      return present(
+        "viewer.presentation.importedHeading",
+        "viewer.presentation.importedNote",
+      );
     case "model-generated":
-      return {
-        heading: "MODEL TARAFINDAN ÜRETİLMİŞ KONFORMER",
-        note: "Deneysel olarak doğrulanmış bir yapı değildir.",
-      };
+      return present(
+        "viewer.presentation.modelHeading",
+        "viewer.presentation.modelNote",
+      );
     case "user-edited-conformation":
-      return {
-        heading: "KULLANICI TARAFINDAN DÜZENLENMİŞ KONFORMASYON",
-        note: "Kullanıcı düzenlemesi deneysel doğrulama olarak yorumlanamaz.",
-      };
+      return present(
+        "viewer.presentation.editedHeading",
+        "viewer.presentation.editedNote",
+      );
     default:
-      return {
-        heading: "3B YAPI KÖKENİ İNCELEMEDE",
-        note: "Köken doğrulanmadan deneysel yapı olarak yorumlanamaz.",
-      };
+      return present(
+        "viewer.presentation.unknownHeading",
+        "viewer.presentation.unknownNote",
+      );
   }
 }

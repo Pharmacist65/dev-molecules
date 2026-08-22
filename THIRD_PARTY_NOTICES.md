@@ -7,6 +7,12 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
 - **three 0.185.1** — Three.js Authors — MIT License
   Project: <https://github.com/mrdoob/three.js>
   Purpose: the shared WebGL molecular scene, perspective camera, depth-tested atom spheres and bond cylinders. The package has no runtime dependencies.
+- **smiles-drawer 2.4.1** — Daniel Probst and Reymond Group — MIT License
+  Project: <https://github.com/reymond-group/smilesDrawer>
+  Purpose: deterministic client-side parsing and two-dimensional depiction of source-linked SMILES in Synthesis Theatre. It does not generate or validate synthetic routes.
+- **chroma-js 2.6.0** — Gregor Aisch — BSD-3-Clause AND Apache-2.0 Licenses
+  Project: <https://github.com/gka/chroma.js>
+  Purpose: transitive color utility used by `smiles-drawer`.
 
 ## Development and verification
 
@@ -17,4 +23,4 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
   Project: <https://github.com/DefinitelyTyped/DefinitelyTyped>
   Purpose: compile-time TypeScript declarations only.
 
-The lockfile pins exact versions. `npm audit --omit=dev` reports zero production vulnerabilities for this dependency set as checked on 2026-08-21. Development-tool advisories are reviewed separately and are not silently force-upgraded across the Sites/vinext compatibility boundary.
+The lockfile pins exact direct versions. Both `npm audit` and `npm audit --omit=dev` report zero known vulnerabilities for this dependency set as checked on 2026-08-22. Toolchain upgrades are compatibility-tested rather than forced across the Sites/vinext boundary.

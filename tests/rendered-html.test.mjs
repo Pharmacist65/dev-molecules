@@ -36,23 +36,23 @@ test("server-renders the Dev Molecules product shell", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Dev Molecules — Pharmaceutical Molecular Universe<\/title>/i);
+  assert.match(html, /<title>Dev Molecules — Evidence-aware molecular learning<\/title>/i);
   assert.match(html, /DEV MOLECULES/);
-  assert.match(html, /Molecular Universe/);
+  assert.match(html, /ÖĞRENME PLATFORMU/);
   assert.match(html, /Yapı kaynakları bağlı/);
-  assert.match(html, /3B evrenini keşfet/);
-  assert.match(html, /Explore/);
-  assert.match(html, /Learn/);
-  assert.match(html, /Build/);
-  assert.match(html, /Teach/);
-  assert.match(html, /Discover/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|Building your site/i);
-  assert.match(html, /property="og:image" content="https:\/\/molecules\.example\/og\.png"/i);
+  assert.match(html, /İlaç moleküllerinin üç boyutlu evrenini keşfet/);
+  assert.match(html, />Keşfet<\/button>/);
+  assert.match(html, />Öğren<\/button>/);
+  assert.match(html, />Oluştur<\/button>/);
+  assert.match(html, />Eğit<\/button>/);
+  assert.match(html, />Araştır<\/button>/);
+  assert.doesNotMatch(html, /Your site is taking shape|Building your site/i);
+  assert.match(html, /property="og:image" content="https:\/\/molecules\.example\/og-v2\.png"/i);
 });
 
 test("ships a bespoke social card", async () => {
-  await access(new URL("../public/og.png", import.meta.url));
-  const image = await readFile(new URL("../public/og.png", import.meta.url));
+  await access(new URL("../public/og-v2.png", import.meta.url));
+  const image = await readFile(new URL("../public/og-v2.png", import.meta.url));
   assert.ok(image.byteLength > 100_000);
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
 });
@@ -89,11 +89,35 @@ test("rejects evidence requests for an unknown catalog identity", async () => {
     new Request("https://molecules.example/api/evidence", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ moleculeId: "molecule:unknown", question: "Assess" }),
+      body: JSON.stringify({
+        moleculeId: "molecule:unknown",
+        question: "Assess",
+        locale: "en",
+      }),
     }),
     env,
     context,
   );
 
   assert.equal(response.status, 404);
+  assert.deepEqual(await response.json(), { error: "Molecule record not found." });
+});
+
+test("localizes malformed evidence requests from Accept-Language", async () => {
+  const worker = await getWorker();
+  const response = await worker.fetch(
+    new Request("https://molecules.example/api/evidence", {
+      method: "POST",
+      headers: {
+        "accept-language": "en-US,en;q=0.9",
+        "content-type": "application/json",
+      },
+      body: "{not-json",
+    }),
+    env,
+    context,
+  );
+
+  assert.equal(response.status, 400);
+  assert.deepEqual(await response.json(), { error: "Invalid request body." });
 });

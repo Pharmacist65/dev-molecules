@@ -10,6 +10,8 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 
+import { useI18n } from "@/lib/i18n";
+
 import styles from "./SharedMolecularScene.module.css";
 import {
   DEFAULT_MOLECULAR_SCENE_CAMERA,
@@ -74,13 +76,15 @@ export function SharedMolecularScene({
   camera,
   interactionMode = "rotate",
   className,
-  ariaLabel = "Etkileşimli üç boyutlu moleküler sahne",
+  ariaLabel,
   onAtomSelect,
   onAtomHover,
   onCameraChange,
   onSceneReady,
   onStatusChange,
 }: SharedMolecularSceneProps) {
+  const { t } = useI18n();
+  const resolvedAriaLabel = ariaLabel ?? t("viewer.sceneAria");
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const adapterRef = useRef<ThreeJsMolecularSceneAdapter | null>(null);
@@ -194,7 +198,7 @@ export function SharedMolecularScene({
         if (alive) setActiveContexts(getActiveMolecularSceneContextCount());
       });
     } catch (reason) {
-      const message = reason instanceof Error ? reason.message : "WebGL context kurulamadı";
+      const message = reason instanceof Error ? reason.message : t("viewer.webglError");
       queueMicrotask(() => {
         if (!alive) return;
         publishStatus({
@@ -272,14 +276,14 @@ export function SharedMolecularScene({
           status: loadedMoleculeCount > 0 ? "partial" : "error",
           loadedMoleculeCount,
           visibleMoleculeCount: requestedCount,
-          error: reason instanceof Error ? reason.message : "Moleküler yapılar yüklenemedi",
+          error: reason instanceof Error ? reason.message : t("viewer.structuresLoadError"),
         });
       });
 
     return () => {
       cancelled = true;
     };
-  }, [focusedMoleculeId, molecules, publishStatus, visibleMoleculeIds]);
+  }, [focusedMoleculeId, molecules, publishStatus, t, visibleMoleculeIds]);
 
   useEffect(() => {
     adapterRef.current?.setLevelOfDetail(levelOfDetail);
@@ -556,7 +560,7 @@ export function SharedMolecularScene({
         ref={canvasRef}
         className={styles.canvas}
         tabIndex={0}
-        aria-label={ariaLabel}
+        aria-label={resolvedAriaLabel}
         aria-describedby={instructionsId}
         aria-keyshortcuts="[ ] Enter Space"
         data-molecular-scene-canvas="true"
@@ -578,45 +582,47 @@ export function SharedMolecularScene({
         }}
         onKeyDown={handleKeyDown}
       >
-        Kaynak SDF XYZ koordinatlarından oluşturulan etkileşimli 3B atom ve bağ sahnesi.
+        {t("viewer.canvasFallback")}
       </canvas>
 
       <p id={instructionsId} className={styles.srOnly}>
         {interactionMode === "pan"
-          ? "Sahneyi kaydırmak için sürükleyin."
-          : "Sahneyi döndürmek için sürükleyin; Shift ile sürüklemek sahneyi kaydırır."}
-        {" "}Tekerlek, artı ve eksi tuşları yakınlaştırır. Ok tuşları aktif araca göre kamerayı
-        hareket ettirir. Sol ve sağ köşeli parantez tuşları görünür gerçek SDF atomları
-        arasında dolaşır; Enter veya Boşluk vurgulanan atomu seçer.
+          ? t("viewer.dragToPan")
+          : t("viewer.dragToRotate")}
+        {" "}{t("viewer.keyboardInstructions")}
       </p>
 
       {sceneStatus === "loading" ? (
         <div className={styles.state} role="status">
           <span className={styles.loader} aria-hidden="true" />
-          <strong>Kaynaklı SDF yapıları yükleniyor</strong>
-          <small>SDF atomları ve bağları tek 3B sahnede hazırlanıyor…</small>
+          <strong>{t("viewer.loadingTitle")}</strong>
+          <small>{t("viewer.loadingBody")}</small>
         </div>
       ) : null}
 
       {sceneStatus === "error" ? (
         <div className={`${styles.state} ${styles.error}`} role="alert">
-          <strong>Doğrulanabilir yapı yüklenemedi</strong>
-          <small>{error}</small>
-          <small>Sahte atom veya bağ geometrisi üretilmedi.</small>
+          <strong>{t("viewer.errorTitle")}</strong>
+          <small>{t("viewer.structuresLoadError")}</small>
+          <small>{t("viewer.errorNoFabrication")}</small>
         </div>
       ) : null}
 
       {sceneStatus === "partial" ? (
         <div className={styles.partialStatus} role="status" aria-live="polite">
-          <strong>Bazı doğrulanabilir yapılar yüklenemedi</strong>
-          <small>{error}</small>
-          <small>Başarılı yapılar gösteriliyor; başarısız kayıtlar için geometri üretilmedi.</small>
+          <strong>{t("viewer.partialTitle")}</strong>
+          <small>{error ? t("viewer.structuresLoadError") : null}</small>
+          <small>{t("viewer.partialBody")}</small>
         </div>
       ) : null}
 
       {announcedAtom ? (
         <output className={styles.atomReadout} aria-live="polite">
-          <span>{announcedAtomIsCandidate ? "KLAVYE ATOM ADAYI" : "SEÇİLİ ATOM"}</span>
+          <span>
+            {announcedAtomIsCandidate
+              ? t("viewer.keyboardAtomCandidate")
+              : t("viewer.selectedAtom")}
+          </span>
           <strong>
             {announcedAtom.element}
             {announcedAtom.atomIndex + 1}

@@ -4,14 +4,27 @@ import { moleculeCatalog } from "@/lib/data/catalog";
 import { learningMissions } from "@/lib/data/learning-missions";
 import { sourceRegistry } from "@/lib/data/sources";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
+import type { NomenclatureProgressSnapshot } from "@/lib/domain";
+import { useI18n, type TranslationKey } from "@/lib/i18n";
 
 import styles from "./platform.module.css";
 
+const missionTitleKeys: Readonly<Record<string, TranslationKey>> = {
+  "mission:find-propranolol": "missions.find.title",
+  "mission:beta-profile-classification": "missions.classify.title",
+  "mission:active-moiety-versus-form": "missions.forms.title",
+  "mission:propranolol-route-order": "missions.route.title",
+  "mission:evidence-boundaries": "missions.boundaries.title",
+};
+
 export function InstructorStudio({
   completedMissionIds,
+  nomenclatureProgress,
 }: {
   readonly completedMissionIds: ReadonlySet<string>;
+  readonly nomenclatureProgress: NomenclatureProgressSnapshot | null;
 }) {
+  const { t } = useI18n();
   const completion = Math.round(
     (completedMissionIds.size / Math.max(learningMissions.length, 1)) * 100,
   );
@@ -26,8 +39,7 @@ export function InstructorStudio({
       scope: "device-local foundation learner progress",
       completedMissionIds: [...completedMissionIds],
       totalMissions: learningMissions.length,
-      scientificNotice:
-        "Mission completion is an educational signal, not a clinical or scientific judgment.",
+      scientificNotice: t("shell.footerNotAdvice"),
     };
     const url = URL.createObjectURL(
       new Blob([JSON.stringify(report, null, 2)], { type: "application/json" }),
@@ -43,46 +55,44 @@ export function InstructorStudio({
     <section className={styles.featureSection} aria-labelledby="teach-heading">
       <div className={styles.featureHeader}>
         <div>
-          <p className={styles.kicker}>TEACH / INSTRUCTOR STUDIO</p>
-          <h1 id="teach-heading">See learning progress without manufacturing scientific scores.</h1>
-          <p>
-            Bu temel sürüm cihaz-yerel görev ilerlemesini, içerik inceleme
-            durumundan ayrı gösterir. Kurum ve öğrenci verisi henüz sunucuya yazılmaz.
-          </p>
+          <p className={styles.kicker}>{t("teach.eyebrow")}</p>
+          <h1 id="teach-heading">{t("teach.title")}</h1>
+          <p>{t("teach.description")}</p>
         </div>
-        <button className={styles.exportButton} type="button" onClick={exportProgress}>Export learner summary <span>↓</span></button>
+        <button className={styles.exportButton} type="button" onClick={exportProgress}>{t("teach.exportSummary")} <span>↓</span></button>
       </div>
 
       <div className={styles.metricGrid}>
-        <article><span>LEARNER COMPLETION</span><strong>{completion}%</strong><div><i style={{ width: `${completion}%` }} /></div><small>{completedMissionIds.size} of {learningMissions.length} missions</small></article>
-        <article><span>CATALOG SEED</span><strong>{moleculeCatalog.length}</strong><p>source-linked identities</p><small>Two families; seed is not the catalog ceiling</small></article>
-        <article><span>SYNTHESIS STORIES</span><strong>{synthesisStories.length}</strong><p>reviewer-ready drafts</p><small>0 currently expert-verified</small></article>
-        <article><span>SOURCE REGISTRY</span><strong>{reviewedSources}/{sourceRegistry.length}</strong><p>verified source records</p><small>License and review gates remain visible</small></article>
+        <article><span>{t("teach.learnerCompletion")}</span><strong>{completion}%</strong><div><i style={{ width: `${completion}%` }} /></div><small>{t("teach.missionsCompleted", { completed: completedMissionIds.size, total: learningMissions.length })}</small></article>
+        <article><span>{t("teach.catalogSeed")}</span><strong>{moleculeCatalog.length}</strong><p>{t("teach.sourceLinkedIdentities")}</p><small>{t("teach.seedNotCeiling")}</small></article>
+        <article><span>{t("teach.synthesisStories")}</span><strong>{synthesisStories.length}</strong><p>{t("teach.reviewerReadyDrafts")}</p><small>{t("teach.expertVerifiedCount", { count: synthesisStories.filter((story) => story.verification.status === "expert-reviewed").length })}</small></article>
+        <article><span>{t("teach.sourceRegistry")}</span><strong>{reviewedSources}/{sourceRegistry.length}</strong><p>{t("teach.verifiedSourceRecords")}</p><small>{t("teach.reviewGatesVisible")}</small></article>
       </div>
 
       <div className={styles.instructorGrid}>
         <div className={styles.assignmentPanel}>
-          <div className={styles.panelHeading}><div><span className={styles.smallLabel}>COURSE PACK</span><h2>Beta-blocker structure & evidence</h2></div><span>DEVICE LOCAL</span></div>
-          <div className={styles.assignmentTable} role="table" aria-label="Görev ilerlemesi">
-            <div className={styles.tableHead} role="row"><span>Mission</span><span>Level</span><span>Review</span><span>Progress</span></div>
+          <div className={styles.panelHeading}><div><span className={styles.smallLabel}>{t("teach.coursePack")}</span><h2>{t("teach.courseTitle")}</h2></div><span>{t("teach.deviceLocal")}</span></div>
+          <div className={styles.assignmentTable} role="table" aria-label={t("teach.assignmentProgressAria")}>
+            <div className={styles.tableHead} role="row"><span>{t("teach.mission")}</span><span>{t("teach.level")}</span><span>{t("teach.review")}</span><span>{t("teach.progress")}</span></div>
             {learningMissions.map((mission) => (
               <div key={mission.id} className={styles.tableRow} role="row">
-                <span><strong>{mission.title}</strong><small>{mission.kind}</small></span>
-                <span>{mission.level}</span>
-                <span>{mission.verification.status}</span>
-                <span data-complete={completedMissionIds.has(mission.id)}>{completedMissionIds.has(mission.id) ? "Completed" : "Not started"}</span>
+                <span><strong>{missionTitleKeys[mission.id] ? t(missionTitleKeys[mission.id]) : mission.title}</strong><small>{t(`missions.level.${mission.level}` as TranslationKey)}</small></span>
+                <span>{t(`missions.level.${mission.level}` as TranslationKey)}</span>
+                <span>{t("status.pendingReview")}</span>
+                <span data-complete={completedMissionIds.has(mission.id)}>{completedMissionIds.has(mission.id) ? t("common.completed") : t("common.notStarted")}</span>
               </div>
             ))}
           </div>
         </div>
 
         <aside className={styles.reviewQueue}>
-          <span className={styles.smallLabel}>SCIENTIFIC REVIEW QUEUE</span>
-          <h2>Publication remains fail-closed</h2>
-          <div className={styles.queueItem}><span>01</span><div><strong>Synthesis narratives</strong><small>Named synthetic chemistry reviewer required</small></div><i>3 pending</i></div>
-          <div className={styles.queueItem}><span>02</span><div><strong>Catalog classifications</strong><small>Pharmacology sign-off required</small></div><i>{moleculeCatalog.length} pending</i></div>
-          <div className={styles.queueItem}><span>03</span><div><strong>Mission wording</strong><small>Pharmacy educator review required</small></div><i>5 pending</i></div>
-          <div className={styles.queuePolicy}><b>PUBLISHING RULE</b><p>Pending içerik, doğrulanmış bilimsel gerçek görünümüyle yayımlanamaz.</p></div>
+          <span className={styles.smallLabel}>{t("teach.reviewQueue")}</span>
+          <h2>{t("teach.publishFailClosed")}</h2>
+          <div className={styles.queueItem}><span>01</span><div><strong>{t("teach.synthesisNarratives")}</strong><small>{t("teach.chemistryReviewerRequired")}</small></div><i>{t("teach.pendingCount", { count: synthesisStories.length })}</i></div>
+          <div className={styles.queueItem}><span>02</span><div><strong>{t("teach.catalogClassifications")}</strong><small>{t("teach.pharmacologyReviewRequired")}</small></div><i>{t("teach.pendingCount", { count: moleculeCatalog.length })}</i></div>
+          <div className={styles.queueItem}><span>03</span><div><strong>{t("teach.missionWording")}</strong><small>{t("teach.educatorReviewRequired")}</small></div><i>{t("teach.pendingCount", { count: learningMissions.length })}</i></div>
+          {nomenclatureProgress ? <div className={styles.queueItem}><span>04</span><div><strong>{t("teach.nomenclatureSummary")}</strong><small>{t("teach.topicsCompleted", { count: nomenclatureProgress.completedExerciseIds.length })}</small></div><i>{nomenclatureProgress.percentComplete}%</i></div> : null}
+          <div className={styles.queuePolicy}><b>{t("teach.publishingRule")}</b><p>{t("teach.publishingRuleBody")}</p></div>
         </aside>
       </div>
     </section>

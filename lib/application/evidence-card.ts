@@ -2,6 +2,7 @@ import { moleculeById } from "@/lib/data/catalog";
 import { sourceById } from "@/lib/data/sources";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
 import type { MoleculeId } from "@/lib/domain";
+import { getSynthesisStoryContent, type Locale } from "@/lib/i18n";
 
 export interface EvidenceCardFinding {
   readonly label: string;
@@ -22,6 +23,7 @@ export interface MentorEvidenceCard {
   readonly cardId: string;
   readonly generatedAt: string;
   readonly mode: "curated-fallback" | "openai-orchestrated";
+  readonly locale: Locale;
   readonly moleculeId: string;
   readonly moleculeName: string;
   readonly question: string;
@@ -41,11 +43,15 @@ export interface MentorEvidenceCard {
 export function createLocalEvidenceCard(
   moleculeId: string,
   question: string,
+  locale: Locale = "tr",
 ): MentorEvidenceCard | null {
   const molecule = moleculeById.get(moleculeId as MoleculeId);
   if (!molecule) return null;
 
   const story = synthesisStories.find((item) => item.moleculeId === molecule.id);
+  const localizedStory = story
+    ? getSynthesisStoryContent(locale, story.id)
+    : null;
   const sourceIds = Array.from(
     new Set([
       ...molecule.identity.sourceIds,
@@ -71,6 +77,7 @@ export function createLocalEvidenceCard(
     cardId: `evidence-card:${molecule.id}:${Date.now()}`,
     generatedAt: new Date().toISOString(),
     mode: "curated-fallback",
+    locale,
     moleculeId: molecule.id,
     moleculeName: molecule.identity.preferredName,
     question,
@@ -79,19 +86,25 @@ export function createLocalEvidenceCard(
     synthesisStatus: story ? "educational-story-only" : "not-assessed",
     biologicalStatus: "not-assessed",
     confidence: "source-supported",
-    summary: story
-      ? `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı ve uzman incelemesi bekleyen, operasyonel ayrıntı içermeyen bir eğitim sentez hikâyesi mevcut.`
-      : `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı mevcut; sentez ve biyolojik kanıt bu kartta değerlendirilmedi.`,
+    summary: locale === "tr"
+      ? story
+        ? `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı ve uzman incelemesi bekleyen, operasyonel ayrıntı içermeyen bir eğitim sentez hikâyesi mevcut.`
+        : `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı mevcut; sentez ve biyolojik kanıt bu kartta değerlendirilmedi.`
+      : story
+        ? `${molecule.identity.preferredName} has a verified identity record and a non-operational educational synthesis story pending named expert review.`
+        : `${molecule.identity.preferredName} has a verified identity record; synthesis and biological evidence were not assessed in this card.`,
     findings: [
       {
-        label: "Kimlik",
+        label: locale === "tr" ? "Kimlik" : "Identity",
         value: `PubChem CID ${molecule.identity.pubChemCid} · ${molecule.identity.inchiKey}`,
         status: "verified",
         sourceIds: molecule.identity.sourceIds,
       },
       {
-        label: "Stereokimya",
-        value: molecule.stereochemistry.summary,
+        label: locale === "tr" ? "Stereokimya" : "Stereochemistry",
+        value: locale === "tr"
+          ? "Katalogdaki stereokimya açıklaması kimlik kaydından ayrı bir inceleme durumuyla izlenir."
+          : "The catalog stereochemistry annotation is tracked with a review status separate from the identity record.",
         status:
           molecule.stereochemistry.verification.status === "verified"
             ? "verified"
@@ -101,24 +114,34 @@ export function createLocalEvidenceCard(
         sourceIds: molecule.identity.sourceIds,
       },
       {
-        label: "Sentez anlatısı",
-        value: story?.summary ?? "Bu molekül için henüz kürate edilmiş anlatı yok.",
+        label: locale === "tr" ? "Sentez anlatısı" : "Synthesis narrative",
+        value: localizedStory?.summary ?? (locale === "tr"
+          ? "Bu molekül için henüz kontrollü bir anlatı yok."
+          : "No curated narrative is available for this molecule yet."),
         status: story ? "pending" : "unknown",
         sourceIds: story?.sourceIds ?? [],
       },
       {
-        label: "Biyolojik hüküm",
-        value: "Bu veri dilimi klinik etkililik veya güvenlik hükmü üretmez.",
+        label: locale === "tr" ? "Biyolojik hüküm" : "Biological conclusion",
+        value: locale === "tr"
+          ? "Bu veri dilimi klinik etkililik veya güvenlik hükmü üretmez."
+          : "This data slice does not produce a clinical efficacy or safety conclusion.",
         status: "unknown",
         sourceIds: [],
       },
     ],
     sources,
-    limitations: [
-      "Kimlik kaydı; tuz, ürün, doz veya klinik kullanım kaydıyla aynı değildir.",
-      "Eğitim sentez hikâyesi laboratuvar protokolü değildir ve uzman incelemesi bekler.",
-      "Veritabanında bulunmaması yenilik, patentlenebilirlik veya sentezlenebilirlik kanıtı değildir.",
-    ],
+    limitations: locale === "tr"
+      ? [
+          "Kimlik kaydı; tuz, ürün, doz veya klinik kullanım kaydıyla aynı değildir.",
+          "Eğitim sentez hikâyesi laboratuvar protokolü değildir ve uzman incelemesi bekler.",
+          "Veritabanında bulunmaması yenilik, patentlenebilirlik veya sentezlenebilirlik kanıtı değildir.",
+        ]
+      : [
+          "An identity record is not the same as a salt, product, dose, or clinical-use record.",
+          "An educational synthesis story is not a laboratory protocol and remains subject to expert review.",
+          "Absence from a database is not evidence of novelty, patentability, or synthesizability.",
+        ],
     notFoundIsNoveltyEvidence: false,
     notClinicalOrPatentAdvice: true,
   };

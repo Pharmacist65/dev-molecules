@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { useI18n } from "@/lib/i18n";
 import type { MoleculeStructure } from "@/lib/structure/sdf";
 
 import styles from "./MoleculeViewer.module.css";
@@ -23,6 +24,7 @@ export function MoleculeStructurePreview({
   showHydrogens = false,
   onLoad,
 }: MoleculeStructurePreviewProps) {
+  const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resource = useSdfResource(structureUrl.trim() ? structureUrl : null);
   const [size, setSize] = useState({ width: 1, height: 1 });
@@ -75,23 +77,23 @@ export function MoleculeStructurePreview({
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label={`${moleculeName} gerçek 2B atom ve bağ yapısı`}
+        aria-label={t("viewer.previewAria", { name: moleculeName })}
       >
-        {moleculeName} için SDF koordinatlarından iki boyutlu yapı.
+        {t("viewer.previewAria", { name: moleculeName })}
       </canvas>
       {resource.status === "loading" ? (
         <span className={styles.previewState} role="status">
-          Yapı yükleniyor…
+          {t("viewer.previewLoading")}
         </span>
       ) : null}
       {resource.status === "idle" ? (
         <span className={`${styles.previewState} ${styles.previewError}`} role="status">
-          Yapı kaynağı yok
+          {t("viewer.previewMissing")}
         </span>
       ) : null}
       {resource.status === "error" ? (
         <span className={`${styles.previewState} ${styles.previewError}`} role="status">
-          Yapı verisi okunamadı
+          {t("viewer.previewError")}
         </span>
       ) : null}
     </div>

@@ -4,6 +4,8 @@ export * from "./evidence";
 export * from "./ids";
 export * from "./learning";
 export * from "./molecule";
+export * from "./nomenclature";
 export * from "./structure";
 export * from "./synthesis";
+export * from "./synthesis-challenge";
 export * from "./validators";

@@ -1,68 +1,56 @@
 # Dev Molecules
 
-Dev Molecules, ilaç moleküllerini kaynak, kanıt durumu ve eğitim bağlamıyla birlikte keşfetmek için geliştirilen desktop-first bir moleküler öğrenme platformudur. Ürün kabuğu Explore, Learn, Build, Teach ve Discover modlarını tek bir kimlik akışında birleştirir.
+Dev Molecules is a bilingual, evidence-aware molecular learning environment for exploring drug structures, reading non-operational synthesis narratives, practising nomenclature, and keeping educational conclusions separate from scientific verification.
 
-## Çalışan dikey dilim
+[Public source repository](https://github.com/Pharmacist65/dev-molecules) · [Access-controlled hosted preview](https://dev-molecules.sedecio.chatgpt.site/) (owner access required)
 
-- Explore içinde Universe → cluster → molecule focus geçişi
-- PubChem PUG REST kayıtlarından yerel olarak önbelleğe alınmış gerçek 2B ve 3B SDF yapıları
-- Universe, cluster ve molecule focus boyunca tek ortak Three.js/WebGL sahnesi
-- Uzak Universe seviyesinde yapı indirmeyen cluster glyph LOD; yakında gerçek SDF koordinatlı düşük ayrıntılı 3B yapılar
-- Cluster seviyesinde aynı sahnede seçilebilir gerçek 3B moleküller; focus seviyesinde yüksek ayrıntılı tek yapı
-- Tek aktif WebGL context, element/bağ bazlı instancing, demand-driven render ve 40 kayıtla sınırlı lazy structure cache
-- Ball-and-stick ve space-filling gösterimleri
-- Döndürme, kaydırma, yakınlaştırma, ortalama/sıfırlama ve hidrojen görünürlüğü
-- Mouse/touch pan, wheel/pinch zoom ve kamera durumunu koruyan dış kontroller
-- Atom hover/seçimi, element etiketi ve 2B/3B geçişi
-- Boyuta özgü yapı kaynağı, origin ve review durumu
-- Arama, üç kümelenme lensi, klavye gezinmesi, breadcrumb ve kalıcı hash bağlantıları
-- Learn, Build, Teach ve private-by-default Discover temel akışları
+## What is implemented
 
-## Yapı verisi
+The product shell keeps five modes available in one desktop-first experience:
 
-Seed katalog 10 beta-bloker ve kimyasal/terapötik olarak farklı 5 NSAID olmak üzere 15 küçük molekül kimliği içerir. Bu sayı şema veya ürün tavanı değildir ve bütün onaylı ilaçların yüklendiği anlamına gelmez. Her kayıt, exact Drugs@FDA `application_number + product_number + ORIG/1/AP` kanıtına sahiptir; onay bağlantısı PubChem parent CID'sine değil, katalogdaki açık kimyasal forma bağlanır. Örneğin propranolol kaydı `form:propranolol:hydrochloride`, diclofenac kaydı `form:diclofenac:sodium` üzerinden ürün kanıtına bağlanır.
+- **Explore** — Universe → cluster → molecule focus navigation over 15 seed records. It uses checked-in PubChem 2D/3D SDF assets, a shared Three.js scene, progressive level of detail, explicit structure provenance, and exact Drugs@FDA product/form anchors.
+- **Learn** — two distinct workspaces: **Synthesis Theatre** and **Nomenclature Lab**. The theatre contains three direct-patent-anchored, non-operational stories for propranolol, atenolol, and carvedilol, plus six source-aware challenge types. The lab contains ten addressable topics, ten curated exercises, and six deterministic interaction types.
+- **Build** — a guided educational fragment-building exercise. Completion is a learning result, not evidence that a laboratory synthesis is possible.
+- **Teach** — device-local progress and review-queue views. Learning progress is kept separate from scientific review status.
+- **Discover** — an explicitly experimental, private-by-default evidence workspace. Missing evidence fails closed and never becomes novelty, efficacy, patentability, or synthesizability.
 
-Regülasyon snapshot'ları Drugs@FDA'nın 2026-08-20 veri sürümünden 2026-08-21 tarihinde doğrulandı. Her kayıtta insan tarafından okunabilir application URL'si, exact API sorgusu, product/form ilişkisi, action tarihi, review kapsamı ve yeniden üretilebilir normalize SHA-256 özeti saklanır. Action tarihi seçilen product application'ın ORIG/1/AP tarihidir; etkin maddenin ilk tarihsel onayı olarak sunulmaz.
+Turkish and English are complete product locales. The language preference is stored in the browser, the document language is updated at runtime, and changing language does not change molecular IDs, evidence states, or Explore topology. See [Localization](docs/LOCALIZATION.md).
 
-Her katalog kimliği için iki kaynak yapı dosyası tutulur:
+The seed count is test data, not a catalog or schema ceiling.
 
-```text
-public/structures/pubchem/cid-{CID}-2d.sdf
-public/structures/pubchem/cid-{CID}-3d.sdf
-```
+## Scientific boundary
 
-Kaynak endpoint:
+Dev Molecules is educational software, not clinical, laboratory, regulatory, or patent advice.
 
-```text
-https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/record/SDF?record_type=2d|3d
-```
+- A source link does not by itself make an interpretation expert-reviewed or verified.
+- `source-supported`, `pending-review`, `predicted`, `conflicting`, and `unknown` remain distinct states.
+- The three synthesis stories expose transformation logic and direct source locators, but omit quantities, apparatus, conditions, duration, work-up, yield, and other operational laboratory parameters.
+- Draft atom correspondence and educational classifications remain visibly review-gated.
+- A missing structure or source produces an explicit unavailable state; the application does not invent atoms, bonds, routes, or claims.
+- The current slice does not persist designs or research questions. Any deployment that enables optional external narration must disclose that processing boundary and obtain the required consent before sending a question to the provider.
 
-3B kayıtlar PubChem tarafından hesaplanmış conformer'lardır; deneysel kristal veya protein-bound pose olarak sunulmaz. 2B ve 3B asset kimliği, CID eşleşmesi, atom/bağ blokları, molekül formülü, InChIKey ve coordinate dimension testlerle doğrulanır. Kimlik/yapı doğrulaması ile tedavi alanı, hedef ve scaffold eğitim sınıflamalarının review durumu birbirinden ayrıdır; sınıflandırmalar bu dilimde `pending-review` olarak görünür.
+Read [Scientific governance](docs/SCIENTIFIC_GOVERNANCE.md) and [Synthesis provenance](docs/SYNTHESIS_PROVENANCE.md) before changing scientific content.
 
-Runtime sahne yükleyicisi 3B dimension'ı her kaynakta zorunlu tutar. PubChem CID beklentisi sağlandığında response içindeki CID de kesin eşleşmelidir; PubChem dışı private/experimental 3B SDF kayıtları source-agnostic kimlik sözleşmesiyle desteklenir. Hatalı veya 2B kayıt 3B geometriye dönüşmez; kısmi yüklemede başarılı yapılar korunur ve başarısız kimlikler açıkça listelenir.
+## Run locally
 
-Explore lensleri sürümlü ve deterministiktir. Tedavi alanı ile hedef lensleri kategorik yerleşimdir; scaffold lensi kürate edilmiş iskelet ailesini gösterir. Bu koordinatlar fiziksel mesafe, docking sonucu, fingerprint/Tanimoto benzerliği veya klinik yakınlık iddiası değildir.
-
-## Çalıştırma
-
-Gereksinim: Node.js `>=22.13.0`.
+Requirement: Node.js `>=22.13.0`.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Uygulama: `http://localhost:3000/`
-
-Kalıcı Explore bağlantıları:
+Open `http://localhost:3000/`. Stable Explore hashes include:
 
 ```text
 http://localhost:3000/#universe
 http://localhost:3000/#molecule/propranolol
-http://localhost:3000/#cluster/scaffold/{encoded-cluster-name}
+http://localhost:3000/#cluster/therapeutic/Cardiovascular
 ```
 
-## Kalite kapıları
+## Quality gates
+
+Run the same core gates used by CI:
 
 ```bash
 npm run typecheck
@@ -70,36 +58,44 @@ npm run lint
 npm run build
 node --test tests/*.test.mjs
 npx playwright test
+npm audit --audit-level=high
+npm audit --omit=dev --audit-level=high
+git diff --check
 ```
 
-Testler SDF parsing, gerçek fixture bütünlüğü, PubChem provenance, Drugs@FDA product/form approval bağlantıları ve snapshot hash'leri, generic katalog/provider, sürümlü lens projeksiyonu, 500 metadata kayıtlı LOD/cache planı, WebGL scene adapter sözleşmesi, directional stereo bond rendering, server-rendered ürün kabuğu, evidence API'nin fail-closed davranışı ve gerçek tarayıcı Explore akışını kapsar. E2E ölçümü idle rAF cadence'i ile gerçek drag/wheel etkileşim cadence'ini ayrı raporlar; bunlar GPU benchmark iddiası değildir.
+The GitHub Actions workflow runs the production-dependency audit, type checking, linting, a production build, Node test suites, and Playwright browser acceptance tests on pushes to `main` and pull requests. Tests cover structure parsing and provenance, product/form identity boundaries, deterministic lens projection, bounded level-of-detail policy, the shared scene adapter, TR/EN parity, synthesis provenance and challenge scoring, nomenclature scoring, fail-closed evidence behavior, and real-browser interaction.
 
-## Mimari sınırlar
+## Architecture and project policy
 
-- React bileşenleri kimya, evidence veya verification kararı üretmez.
-- Yapı bulunamadığında sahte atom ya da rastgele bağ üretilmez.
-- Kimlik doğrulaması ile eğitim sınıflamasının review durumu ayrı gösterilir.
-- `not found`, yenilik, patentlenebilirlik veya sentezlenebilirlik sonucu değildir.
-- Kullanıcı tasarımları varsayılan olarak özeldir.
-- AI çıktısı typed, citation-checked ve fail-closed olmadan bilimsel iddia olarak yayınlanamaz.
-- Repo içine secret, signing key veya doldurulmuş `.env` eklenmez.
+- [Architecture](docs/ARCHITECTURE.md)
+- [Roadmap and acceptance gates](docs/ROADMAP.md)
+- [Scientific governance](docs/SCIENTIFIC_GOVERNANCE.md)
+- [Localization](docs/LOCALIZATION.md)
+- [Synthesis provenance](docs/SYNTHESIS_PROVENANCE.md)
+- [Security policy](SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+- [CI workflow](.github/workflows/quality.yml)
+- [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-Ayrıntılar:
-
-- [Mimari](docs/ARCHITECTURE.md)
-- [Yol haritası ve kabul kapıları](docs/ROADMAP.md)
-
-## Başlıca dizinler
+Key boundaries:
 
 ```text
-components/universe/          Explore seviye ve LOD deneyimi
-components/molecular-scene/   Tek context'li Three.js sahne portu ve adaptörü
-components/molecule-viewer/   SDF tabanlı 2B/3B canvas viewer
-lib/domain/                   Kimlik, yapı, evidence ve doğrulama modelleri
-lib/data/                     Seed katalog ve yapı provider adapter'ları
-lib/data/regulatory-approvals.ts Exact Drugs@FDA product/form kanıtları
-lib/structure/                V2000 parser ve element görsel kuralları
-public/structures/pubchem/    Kaynaklı yerel SDF assetleri
-tests/                        Domain, asset, renderer, SSR ve API kontrolleri
-e2e/                          Playwright üretim-bundle kabul testleri
+app/                              application entry points and evidence endpoint
+components/universe/              Explore navigation and level-of-detail orchestration
+components/molecular-scene/       shared Three.js scene port and adapter
+components/platform/              five-mode learning and evidence surfaces
+lib/domain/                       typed chemistry, evidence, learning, and scoring rules
+lib/application/                  deterministic view-model composition
+lib/data/                         seed catalogs, source registries, and curricula
+lib/i18n/                         typed TR/EN runtime and localized content overlays
+lib/structure/                    V2000 parsing and element presentation rules
+public/structures/pubchem/        checked-in source SDF assets
+tests/                            domain, data, renderer, SSR, and API checks
+e2e/                              Playwright production-bundle acceptance tests
 ```
+
+The deployment configuration targets the Sites/Cloudflare runtime. No persistent database or object store is configured in the current repository slice; catalog, curriculum, and provenance records are checked-in data. The package is marked private for package-manager publication, and no project license has been declared. Review [Third-party notices](THIRD_PARTY_NOTICES.md) before redistribution.
+
+## Türkçe kısa özet
+
+Dev Molecules; ilaç yapılarını kaynak ve inceleme durumlarıyla keşfetmeyi, operasyonel laboratuvar tarifi vermeden sentez mantığını okumayı ve IUPAC adlandırma alıştırmaları yapmayı sağlayan TR/EN bir öğrenme ortamıdır. Explore, Learn, Build, Teach ve Discover modları aynı ürün kabuğunda çalışır. Mevcut 15 molekül, üç sentez hikâyesi ve on adlandırma konusu yalnızca başlangıç içeriğidir; bilimsel doğruluk, kaynak çözümleme ve gizlilik kuralları katalog büyüdükçe de korunmalıdır.

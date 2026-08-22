@@ -9,6 +9,12 @@ import {
   type LensProjection,
   type LensProjectionCoordinate,
 } from "@/lib/explore";
+import type { Locale } from "@/lib/i18n";
+
+import {
+  localizeExploreClassification,
+  localizeExploreSummary,
+} from "./explore-copy";
 
 export type ExploreEvidenceTone =
   | "verified"
@@ -84,10 +90,12 @@ export interface ExploreCatalogView {
 interface LensDefinition {
   readonly id: string;
   readonly axis: MoleculeClassificationAxis;
-  readonly label: string;
-  readonly description: string;
-  readonly meaning: string;
-  readonly doesNotMean: string;
+  readonly copy: Readonly<Record<Locale, {
+    readonly label: string;
+    readonly description: string;
+    readonly meaning: string;
+    readonly doesNotMean: string;
+  }>>;
 }
 
 const GENERATED_AT = "2026-08-21T00:00:00.000Z";
@@ -97,40 +105,40 @@ const LENS_DEFINITIONS: readonly LensDefinition[] = [
   {
     id: "therapeutic",
     axis: "therapeutic-area",
-    label: "Tedavi alanı",
-    description: "Kaynak ve review durumu taşıyan tedavi alanı kategorileri.",
-    meaning: "Aynı kürate edilmiş tedavi alanı etiketine sahip kayıtlar aynı bölgeyi paylaşır.",
-    doesNotMean: "Ekran yakınlığı klinik benzerlik, etkililik veya ortak endikasyon kanıtı değildir.",
+    copy: {
+      tr: { label: "Tedavi alanı", description: "Kaynak ve inceleme durumu taşıyan tedavi alanı kategorileri.", meaning: "Aynı kürate edilmiş tedavi alanı etiketine sahip kayıtlar aynı bölgeyi paylaşır.", doesNotMean: "Ekran yakınlığı klinik benzerlik, etkililik veya ortak endikasyon kanıtı değildir." },
+      en: { label: "Therapeutic area", description: "Therapeutic-area categories with source and review status.", meaning: "Records with the same curated therapeutic-area label share one region.", doesNotMean: "Screen proximity is not evidence of clinical similarity, efficacy, or a shared indication." },
+    },
   },
   {
     id: "target",
     axis: "target-profile",
-    label: "Hedef ailesi",
-    description: "Review-gated hedef profili kategorilerinin deterministik yerleşimi.",
-    meaning: "Aynı kürate edilmiş hedef profili etiketi kayıtları aynı bölgeye yerleştirir.",
-    doesNotMean: "Ekran mesafesi bağlanma gücü, seçicilik veya biyolojik etki ölçümü değildir.",
+    copy: {
+      tr: { label: "Hedef ailesi", description: "İnceleme kapılı hedef profili kategorilerinin deterministik yerleşimi.", meaning: "Aynı kürate edilmiş hedef profili etiketi kayıtları aynı bölgeye yerleştirir.", doesNotMean: "Ekran mesafesi bağlanma gücü, seçicilik veya biyolojik etki ölçümü değildir." },
+      en: { label: "Target family", description: "Deterministic placement of review-controlled target-profile categories.", meaning: "Records with the same curated target-profile label share one region.", doesNotMean: "Screen distance is not a measurement of binding strength, selectivity, or biological effect." },
+    },
   },
   {
     id: "scaffold",
     axis: "structural-family",
-    label: "Kürate edilmiş iskelet ailesi",
-    description: "İnsan tarafından adlandırılmış scaffold ailelerinin kategorik görünümü.",
-    meaning: "Aynı kürate edilmiş yapısal aile etiketi kayıtları aynı bölgeyi paylaşır.",
-    doesNotMean: "Bu sürüm fingerprint, Tanimoto veya nicel yapısal benzerlik hesabı değildir.",
+    copy: {
+      tr: { label: "Kürate edilmiş iskelet ailesi", description: "İnsan tarafından adlandırılmış iskelet ailelerinin kategorik görünümü.", meaning: "Aynı kürate edilmiş yapısal aile etiketi kayıtları aynı bölgeyi paylaşır.", doesNotMean: "Bu sürüm fingerprint, Tanimoto veya nicel yapısal benzerlik hesabı değildir." },
+      en: { label: "Curated scaffold family", description: "Categorical view of human-authored scaffold families.", meaning: "Records with the same curated structural-family label share one region.", doesNotMean: "This version does not calculate fingerprints, Tanimoto scores, or quantitative structural similarity." },
+    },
   },
 ] as const;
 
 const ACCENTS = [
-  "#c8ff62",
-  "#69e7da",
-  "#ffb86b",
-  "#85a8ff",
-  "#db91ff",
-  "#ff8f83",
-  "#73dfb7",
-  "#f2d36f",
-  "#a8dcff",
-  "#b9f38b",
+  "#4f7fe4",
+  "#f47a32",
+  "#7d5fd0",
+  "#2f6bb2",
+  "#dc5d7d",
+  "#e49b32",
+  "#6579bd",
+  "#b45cbe",
+  "#3b88a8",
+  "#d86b42",
 ] as const;
 
 function stableHash(value: string) {
@@ -161,24 +169,29 @@ function evidenceTone(statuses: readonly VerificationStatus[]): ExploreEvidenceT
   return "unknown";
 }
 
-function evidenceLabel(record: MoleculeRecord, statuses: readonly VerificationStatus[]) {
+function evidenceLabel(
+  record: MoleculeRecord,
+  statuses: readonly VerificationStatus[],
+  locale: Locale,
+) {
   const identityStatus = record.identity.verification.status;
   const identityLabel =
     identityStatus === "verified" || identityStatus === "expert-reviewed"
-      ? "Kimlik doğrulandı"
-      : "Kimlik incelemede";
+      ? locale === "tr" ? "Kimlik doğrulandı" : "Identity verified"
+      : locale === "tr" ? "Kimlik incelemede" : "Identity under review";
   const classificationsReviewed = statuses
     .slice(1)
     .every((status) => status === "verified" || status === "expert-reviewed");
   return `${identityLabel} · ${
     classificationsReviewed
-      ? "sınıflandırmalar gözden geçirildi"
-      : "eğitim sınıflandırmaları incelemede"
+      ? locale === "tr" ? "sınıflandırmalar gözden geçirildi" : "classifications reviewed"
+      : locale === "tr" ? "eğitim sınıflandırmaları incelemede" : "educational classifications under review"
   }`;
 }
 
 export function createExploreCatalogView(
   records: readonly MoleculeRecord[],
+  locale: Locale = "tr",
 ): ExploreCatalogView {
   const inputVersion = `seed-catalog-2026-08-21:${records.length}`;
   const projections = LENS_DEFINITIONS.map((definition) =>
@@ -189,8 +202,8 @@ export function createExploreCatalogView(
         algorithmVersion: ALGORITHM_VERSION,
         inputVersion,
         generatedAt: GENERATED_AT,
-        meaning: definition.meaning,
-        doesNotMean: definition.doesNotMean,
+        meaning: definition.copy[locale].meaning,
+        doesNotMean: definition.copy[locale].doesNotMean,
         verificationStatus: "pending-review",
       },
       records.map((record) => ({
@@ -205,16 +218,16 @@ export function createExploreCatalogView(
     if (!projection) throw new Error(`Missing projection for lens ${definition.id}`);
     return {
       id: definition.id,
-      label: definition.label,
-      description: definition.description,
+      label: definition.copy[locale].label,
+      description: definition.copy[locale].description,
       projectionId: projection.projectionId,
       algorithm: projection.algorithm,
       algorithmVersion: projection.algorithmVersion,
       inputVersion: projection.inputVersion,
       inputHash: projection.inputHash,
       generatedAt: projection.generatedAt,
-      meaning: projection.meaning,
-      doesNotMean: projection.doesNotMean,
+      meaning: definition.copy[locale].meaning,
+      doesNotMean: definition.copy[locale].doesNotMean,
       coordinateSystem: projection.coordinateSystem,
       verificationStatus: projection.verificationStatus,
     };
@@ -224,7 +237,7 @@ export function createExploreCatalogView(
     const lensValues = Object.fromEntries(
       LENS_DEFINITIONS.map((definition) => [
         definition.id,
-        classificationLabel(record, definition.axis),
+        localizeExploreClassification(classificationLabel(record, definition.axis), locale),
       ]),
     );
     const coordinates = Object.fromEntries(
@@ -249,10 +262,10 @@ export function createExploreCatalogView(
       name: record.identity.preferredName,
       formula: record.identity.molecularFormula,
       category: lensValues.target,
-      summary: record.educationalProfile.summary,
+      summary: localizeExploreSummary(record.id, record.educationalProfile.summary, locale),
       lensValues,
       coordinates,
-      evidenceLabel: evidenceLabel(record, statuses),
+      evidenceLabel: evidenceLabel(record, statuses, locale),
       evidenceTone: evidenceTone(statuses),
       accent: ACCENTS[stableHash(record.id) % ACCENTS.length] ?? ACCENTS[0],
       structure: {
