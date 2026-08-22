@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "q",
+  "records": [
+    {
+      "id": "molecule:imported:quazepam-ikmpwmzbzsaonz-uhfffaoysa-n",
+      "preferredName": "Quazepam",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4999,
+        "inchiKey": "IKMPWMZBZSAONZ-UHFFFAOYSA-N",
+        "connectivityKey": "IKMPWMZBZSAONZ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H11ClF4N2S",
+        "molecularWeight": 386.8,
+        "canonicalSmiles": "C1C(=S)N(C2=C(C=C(C=C2)Cl)C(=N1)C3=CC=CC=C3F)CC(F)(F)F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "FC1=C(C=CC=C1)C1=NCC(=S)N(CC(F)(F)F)C2=CC=C(Cl)C=C12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:IKMPWMZBZSAONZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:IKMPWMZBZSAONZ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ikmpwmzbzsaonz-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2336",
+        "sourceName": "quazepam",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2336",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2336",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quazepam",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4999-2d.sdf",
+          "sha256": "1b1203fbf1d10dd3d64737488d08a40c30ce1449879ddf4185958948430c17c5",
+          "byteLength": 5605,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4999/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4999-3d.sdf",
+          "sha256": "3c660903608bfd5ee1941f64d609ad082a3a5e0c144214de9e59badabdfa6504",
+          "byteLength": 6102,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4999/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quetiapine-urkomymaxpyinw-uhfffaoysa-n",
+      "preferredName": "Quetiapine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5002,
+        "inchiKey": "URKOMYMAXPYINW-UHFFFAOYSA-N",
+        "connectivityKey": "URKOMYMAXPYINW",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C21H25N3O2S",
+        "molecularWeight": 383.5,
+        "canonicalSmiles": "C1CN(CCN1CCOCCO)C2=NC3=CC=CC=C3SC4=CC=CC=C42",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OCCOCCN1CCN(CC1)C1=NC2=CC=CC=C2SC2=CC=CC=C12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:URKOMYMAXPYINW",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:URKOMYMAXPYINW-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:urkomymaxpyinw-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2337",
+        "sourceName": "quetiapine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2337",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2337",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quetiapine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5002-2d.sdf",
+          "sha256": "84306f8a682608c5f7d57b358bfa6d1c651960b8d7a59eaa90cd054c6b33253c",
+          "byteLength": 6994,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5002/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5002-3d.sdf",
+          "sha256": "75b18f8c038eea28187f361fdc44745d11d229cd4e05e14d5db8cc33e6a77d5c",
+          "byteLength": 7847,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5002/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quinapril-jsdrrtoadppchy-hsqywudlsa-n",
+      "preferredName": "Quinapril",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 54892,
+        "inchiKey": "JSDRRTOADPPCHY-HSQYWUDLSA-N",
+        "connectivityKey": "JSDRRTOADPPCHY",
+        "stereochemicalKey": "HSQYWUDLSA",
+        "molecularFormula": "C25H30N2O5",
+        "molecularWeight": 438.5,
+        "canonicalSmiles": "CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N2CC3=CC=CC=C3CC2C(=O)O",
+        "isomericSmiles": "CCOC(=O)[C@H](CCC1=CC=CC=C1)N[C@@H](C)C(=O)N2CC3=CC=CC=C3C[C@H]2C(=O)O",
+        "structureSourceFormSmiles": "CCOC(=O)[C@H](CCC1=CC=CC=C1)N[C@@H](C)C(=O)N1CC2=CC=CC=C2C[C@H]1C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:JSDRRTOADPPCHY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:JSDRRTOADPPCHY-HSQYWUDLSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:jsdrrtoadppchy-hsqywudlsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2340",
+        "sourceName": "quinapril",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2340",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2340",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quinapril",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-54892-2d.sdf",
+          "sha256": "8cfff4b2ad5ddeed7c72d03572de3692dac4f49899ed9e603cda650594c57fda",
+          "byteLength": 8352,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54892/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-54892-3d.sdf",
+          "sha256": "d6578d8a1eb57da6e2e090a693a4e1f9e00c294e5362aa994e1464cd8b1eae16",
+          "byteLength": 8559,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54892/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quinestrol-pwzuuysistundw-vafbsoegsa-n",
+      "preferredName": "Quinestrol",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 9046,
+        "inchiKey": "PWZUUYSISTUNDW-VAFBSOEGSA-N",
+        "connectivityKey": "PWZUUYSISTUNDW",
+        "stereochemicalKey": "VAFBSOEGSA",
+        "molecularFormula": "C25H32O2",
+        "molecularWeight": 364.5,
+        "canonicalSmiles": "CC12CCC3C(C1CCC2(C#C)O)CCC4=C3C=CC(=C4)OC5CCCC5",
+        "isomericSmiles": "C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@]2(C#C)O)CCC4=C3C=CC(=C4)OC5CCCC5",
+        "structureSourceFormSmiles": "C[C@]12CC[C@H]3[C@@H](CCC4=C3C=CC(OC3CCCC3)=C4)[C@@H]1CC[C@@]2(O)C#C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:PWZUUYSISTUNDW",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:PWZUUYSISTUNDW-VAFBSOEGSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:pwzuuysistundw-vafbsoegsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2342",
+        "sourceName": "quinestrol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2342",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2342",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quinestrol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-9046-2d.sdf",
+          "sha256": "835b0c267e102dd7dd41e23deed9fa8bf3b514d9591f455986d870dc50e1469c",
+          "byteLength": 8082,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9046/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-9046-3d.sdf",
+          "sha256": "03fd04b0e817bd468473897b334ac2d62ed5a5d9a2ad2c3d2dd227b104c80cc3",
+          "byteLength": 8822,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9046/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quinethazone-agmmtxlniqsrcg-uhfffaoysa-n",
+      "preferredName": "Quinethazone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 6307,
+        "inchiKey": "AGMMTXLNIQSRCG-UHFFFAOYSA-N",
+        "connectivityKey": "AGMMTXLNIQSRCG",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C10H12ClN3O3S",
+        "molecularWeight": 289.74,
+        "canonicalSmiles": "CCC1NC2=CC(=C(C=C2C(=O)N1)S(=O)(=O)N)Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCC1NC(=O)C2=CC(=C(Cl)C=C2N1)S(N)(=O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:AGMMTXLNIQSRCG",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:AGMMTXLNIQSRCG-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:agmmtxlniqsrcg-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2343",
+        "sourceName": "quinethazone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2343",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2343",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quinethazone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6307-2d.sdf",
+          "sha256": "16283332c453c9d42ac5e0e41469761526e76df1dc0bde393a2d494b3f790f70",
+          "byteLength": 4846,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6307/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6307-3d.sdf",
+          "sha256": "dda5e1b10bba159730201fc417ebfee8c3b73fdb083046a075c6588917aa1775",
+          "byteLength": 5469,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6307/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quinidine-louprkontzgtke-lhhvklhasa-n",
+      "preferredName": "Quinidine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 441074,
+        "inchiKey": "LOUPRKONTZGTKE-LHHVKLHASA-N",
+        "connectivityKey": "LOUPRKONTZGTKE",
+        "stereochemicalKey": "LHHVKLHASA",
+        "molecularFormula": "C20H24N2O2",
+        "molecularWeight": 324.4,
+        "canonicalSmiles": "COC1=CC2=C(C=CN=C2C=C1)C(C3CC4CCN3CC4C=C)O",
+        "isomericSmiles": "COC1=CC2=C(C=CN=C2C=C1)[C@@H]([C@H]3C[C@@H]4CCN3C[C@@H]4C=C)O",
+        "structureSourceFormSmiles": "COC1=CC=C2N=CC=C([C@H](O)[C@H]3C[C@@H]4CC[N@]3C[C@@H]4C=C)C2=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LOUPRKONTZGTKE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LOUPRKONTZGTKE-LHHVKLHASA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:louprkontzgtke-lhhvklhasa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2346",
+        "sourceName": "quinidine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2346",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2346",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quinidine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-441074-2d.sdf",
+          "sha256": "9ce00e004ef832c7542636933a3ba41b03718a2c014d87da2942e831ebc7de15",
+          "byteLength": 6823,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/441074/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-441074-3d.sdf",
+          "sha256": "3ef7051054855cdf9969e893c5d31725a445ecb146cdfc1cbc9284e56712ec17",
+          "byteLength": 7156,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/441074/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:quinine-louprkontzgtke-wzblmqshsa-n",
+      "preferredName": "Quinine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3034034,
+        "inchiKey": "LOUPRKONTZGTKE-WZBLMQSHSA-N",
+        "connectivityKey": "LOUPRKONTZGTKE",
+        "stereochemicalKey": "WZBLMQSHSA",
+        "molecularFormula": "C20H24N2O2",
+        "molecularWeight": 324.4,
+        "canonicalSmiles": "COC1=CC2=C(C=CN=C2C=C1)C(C3CC4CCN3CC4C=C)O",
+        "isomericSmiles": "COC1=CC2=C(C=CN=C2C=C1)[C@H]([C@@H]3C[C@@H]4CCN3C[C@@H]4C=C)O",
+        "structureSourceFormSmiles": "COC1=CC=C2N=CC=C([C@@H](O)[C@@H]3C[C@@H]4CC[N@]3C[C@@H]4C=C)C2=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LOUPRKONTZGTKE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LOUPRKONTZGTKE-WZBLMQSHSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:louprkontzgtke-wzblmqshsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4523",
+        "sourceName": "quinine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4523",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4523",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=quinine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3034034-2d.sdf",
+          "sha256": "2524116a57072de9ead9289bb645f1a7a9eeca076119f3cde342cfbdfe366ab6",
+          "byteLength": 6825,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3034034/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3034034-3d.sdf",
+          "sha256": "10c7947247fc381a2ab7c39c5b0f98e48c30b4330390aa05d9985192c1568404",
+          "byteLength": 7424,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3034034/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

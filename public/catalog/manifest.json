@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-22T03:14:07.118Z",
+  "scope": {
+    "label": "All rows in the selected DrugCentral FDA list evaluated against exact DrugCentral and PubChem structure evidence",
+    "jurisdictions": [
+      "US"
+    ],
+    "candidateCount": 2331,
+    "exhaustive": false,
+    "sourceSelectionExhaustive": true,
+    "selectionPolicy": "Every one of the 2331 source FDA-list rows is evaluated. Import requires a complete same-ID DrugCentral structure, one exact PubChem InChIKey match, and verified local 2D/3D SDF assets.",
+    "exclusions": [
+      "The selected DrugCentral FDA list is evaluated exhaustively, but it is not asserted to be the complete global approved-drug universe.",
+      "Rows without a complete same-ID small-molecule structure, one exact PubChem identity, or both verified SDF dimensions fail closed and remain in the unresolved report.",
+      "DrugCentral list membership does not prove an FDA application, product, dosage form, salt, parent, or active-moiety relationship; those fields remain unresolved.",
+      "Biologics and mixtures without a source-proven single chemical identity are not converted into synthetic small molecules.",
+      "EMA and PMDA direct snapshots are not configured in this version."
+    ]
+  },
+  "recordCount": 1552,
+  "searchIndex": "search-index.v1.json",
+  "reports": {
+    "coverage": "reports/coverage.json",
+    "unresolved": "reports/unresolved.json"
+  },
+  "projections": {
+    "therapeutic": "projections/therapeutic.json"
+  },
+  "shards": [
+    {
+      "id": "alphabetic:a",
+      "dimension": "alphabetic",
+      "label": "a",
+      "path": "shards/alphabetic/a.json",
+      "count": 108
+    },
+    {
+      "id": "alphabetic:b",
+      "dimension": "alphabetic",
+      "label": "b",
+      "path": "shards/alphabetic/b.json",
+      "count": 85
+    },
+    {
+      "id": "alphabetic:c",
+      "dimension": "alphabetic",
+      "label": "c",
+      "path": "shards/alphabetic/c.json",
+      "count": 146
+    },
+    {
+      "id": "alphabetic:d",
+      "dimension": "alphabetic",
+      "label": "d",
+      "path": "shards/alphabetic/d.json",
+      "count": 116
+    },
+    {
+      "id": "alphabetic:e",
+      "dimension": "alphabetic",
+      "label": "e",
+      "path": "shards/alphabetic/e.json",
+      "count": 82
+    },
+    {
+      "id": "alphabetic:f",
+      "dimension": "alphabetic",
+      "label": "f",
+      "path": "shards/alphabetic/f.json",
+      "count": 65
+    },
+    {
+      "id": "alphabetic:g",
+      "dimension": "alphabetic",
+      "label": "g",
+      "path": "shards/alphabetic/g.json",
+      "count": 31
+    },
+    {
+      "id": "alphabetic:h",
+      "dimension": "alphabetic",
+      "label": "h",
+      "path": "shards/alphabetic/h.json",
+      "count": 39
+    },
+    {
+      "id": "alphabetic:i",
+      "dimension": "alphabetic",
+      "label": "i",
+      "path": "shards/alphabetic/i.json",
+      "count": 59
+    },
+    {
+      "id": "alphabetic:k",
+      "dimension": "alphabetic",
+      "label": "k",
+      "path": "shards/alphabetic/k.json",
+      "count": 6
+    },
+    {
+      "id": "alphabetic:l",
+      "dimension": "alphabetic",
+      "label": "l",
+      "path": "shards/alphabetic/l.json",
+      "count": 75
+    },
+    {
+      "id": "alphabetic:m",
+      "dimension": "alphabetic",
+      "label": "m",
+      "path": "shards/alphabetic/m.json",
+      "count": 118
+    },
+    {
+      "id": "alphabetic:n",
+      "dimension": "alphabetic",
+      "label": "n",
+      "path": "shards/alphabetic/n.json",
+      "count": 67
+    },
+    {
+      "id": "alphabetic:o",
+      "dimension": "alphabetic",
+      "label": "o",
+      "path": "shards/alphabetic/o.json",
+      "count": 43
+    },
+    {
+      "id": "alphabetic:other",
+      "dimension": "alphabetic",
+      "label": "other",
+      "path": "shards/alphabetic/other.json",
+      "count": 51
+    },
+    {
+      "id": "alphabetic:p",
+      "dimension": "alphabetic",
+      "label": "p",
+      "path": "shards/alphabetic/p.json",
+      "count": 150
+    },
+    {
+      "id": "alphabetic:q",
+      "dimension": "alphabetic",
+      "label": "q",
+      "path": "shards/alphabetic/q.json",
+      "count": 7
+    },
+    {
+      "id": "alphabetic:r",
+      "dimension": "alphabetic",
+      "label": "r",
+      "path": "shards/alphabetic/r.json",
+      "count": 53
+    },
+    {
+      "id": "alphabetic:s",
+      "dimension": "alphabetic",
+      "label": "s",
+      "path": "shards/alphabetic/s.json",
+      "count": 70
+    },
+    {
+      "id": "alphabetic:t",
+      "dimension": "alphabetic",
+      "label": "t",
+      "path": "shards/alphabetic/t.json",
+      "count": 128
+    },
+    {
+      "id": "alphabetic:u",
+      "dimension": "alphabetic",
+      "label": "u",
+      "path": "shards/alphabetic/u.json",
+      "count": 11
+    },
+    {
+      "id": "alphabetic:v",
+      "dimension": "alphabetic",
+      "label": "v",
+      "path": "shards/alphabetic/v.json",
+      "count": 28
+    },
+    {
+      "id": "alphabetic:w",
+      "dimension": "alphabetic",
+      "label": "w",
+      "path": "shards/alphabetic/w.json",
+      "count": 1
+    },
+    {
+      "id": "alphabetic:x",
+      "dimension": "alphabetic",
+      "label": "x",
+      "path": "shards/alphabetic/x.json",
+      "count": 1
+    },
+    {
+      "id": "alphabetic:z",
+      "dimension": "alphabetic",
+      "label": "z",
+      "path": "shards/alphabetic/z.json",
+      "count": 12
+    },
+    {
+      "id": "therapeutic:unclassified",
+      "dimension": "therapeutic",
+      "label": "unclassified",
+      "path": "shards/therapeutic/unclassified.json",
+      "count": 1552
+    }
+  ],
+  "structureLoading": "per-molecule-lazy",
+  "cachePolicy": {
+    "strategy": "bounded-lru",
+    "defaultMaxEntries": 24
+  },
+  "adapterCapabilities": [
+    {
+      "adapter": "drugcentral-approved",
+      "status": "used"
+    },
+    {
+      "adapter": "drugcentral-structures",
+      "status": "used"
+    },
+    {
+      "adapter": "pubchem-pug-rest",
+      "status": "used"
+    },
+    {
+      "adapter": "openfda-drugsfda",
+      "status": "available"
+    },
+    {
+      "adapter": "ema-future",
+      "status": "future"
+    },
+    {
+      "adapter": "pmda-future",
+      "status": "future"
+    }
+  ]
+}

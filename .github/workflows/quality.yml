@@ -1,0 +1,93 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run catalog:validate
+      - run: npm run build
+      - run: node --test tests/*.test.mjs
+
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npx playwright test
+        env:
+          PLAYWRIGHT_BROWSER: chromium
+          PLAYWRIGHT_PERFORMANCE_PROFILE: shared-software-renderer
+      - run: npm run build:pages
+      - run: npm run e2e:pages
+        env:
+          PLAYWRIGHT_BROWSER: chromium
+      - name: Validate GitHub Pages artifact boundary
+        run: |
+          test -s dist-pages/index.html
+          test -d dist-pages/assets
+          test -s dist-pages/structures/pubchem/cid-4946-3d.sdf
+          test -z "$(find dist-pages -type f \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.p8' -o -name '*.key' -o -name '*.p12' -o -name '*.jks' -o -name '*.keystore' \) -print -quit)"
+          test -z "$(find dist-pages -type d -name server -print -quit)"
+          if grep -RIlE \
+            --include='*.html' --include='*.js' --include='*.css' --include='*.json' --include='*.svg' --include='*.sdf' --include='*.txt' --include='*.map' \
+            '(/Users/[^/[:space:]]+/|[A-Za-z]:\\Users\\[^\\[:space:]]+\\|https://[^/[:space:]]*\.chatgpt\.site|BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY|OPENAI_API_KEY|EVIDENCE_API_TOKEN|api\.openai\.com|/api/evidence|github_pat_|gh[pousr]_)' \
+            dist-pages
+          then
+            echo 'Forbidden private, secret, or server-only marker found in Pages artifact.' >&2
+            exit 1
+          fi
+      - name: Upload GitHub Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          path: dist-pages
+          retention-days: 1
+
+  pages-deploy:
+    if: github.event_name == 'push'
+    needs: [checks, browser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5

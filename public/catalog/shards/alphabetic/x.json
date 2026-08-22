@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "x",
+  "records": [
+    {
+      "id": "molecule:imported:xylometazoline-hucjfaomupxhdk-uhfffaoysa-n",
+      "preferredName": "Xylometazoline",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5709,
+        "inchiKey": "HUCJFAOMUPXHDK-UHFFFAOYSA-N",
+        "connectivityKey": "HUCJFAOMUPXHDK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H24N2",
+        "molecularWeight": 244.37,
+        "canonicalSmiles": "CC1=CC(=CC(=C1CC2=NCCN2)C)C(C)(C)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1=CC(=CC(C)=C1CC1=NCCN1)C(C)(C)C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:HUCJFAOMUPXHDK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HUCJFAOMUPXHDK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:hucjfaomupxhdk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3658",
+        "sourceName": "xylometazoline",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3658",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3658",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=xylometazoline",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5709-2d.sdf",
+          "sha256": "3f703d78319f865414ecc23484a6479c86dba0174d76a9859615b24ca62b6cbc",
+          "byteLength": 5912,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5709/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5709-3d.sdf",
+          "sha256": "5797e0c0a83bed3a5a1022719456e919c8918ddf1d53d05973b5967851ce5afd",
+          "byteLength": 7059,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5709/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

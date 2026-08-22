@@ -1,0 +1,435 @@
+.map {
+  overflow: hidden;
+  border: 1px solid #dce3ed;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 82% 4%, rgb(36 87 214 / 10%), transparent 28rem),
+    #fff;
+  color: #13213c;
+  box-shadow: 0 24px 60px rgb(27 45 78 / 9%);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.55fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding: clamp(2rem, 5vw, 4.8rem);
+  border-bottom: 1px solid #e0e6ef;
+}
+
+.hero > div > span {
+  color: #d95d1a;
+  font: 750 0.62rem var(--font-geist-mono, monospace);
+  letter-spacing: 0.15em;
+}
+
+.hero h1 {
+  max-width: 880px;
+  margin: 0.72rem 0 0;
+  font-size: clamp(2.5rem, 5.4vw, 5.5rem);
+  font-weight: 520;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.hero > div > p {
+  max-width: 760px;
+  margin: 1.2rem 0 0;
+  color: #5d6c83;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.continueCard {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.25rem;
+  border: 1px solid #ccd8ea;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 16px 40px rgb(25 53 104 / 9%);
+}
+
+.continueCard > span {
+  color: #d95d1a;
+  font: 750 0.56rem var(--font-geist-mono, monospace);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.continueCard strong {
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.continueCard button,
+.lessonRow button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.68rem 0.9rem;
+  border: 1px solid #2457d6;
+  border-radius: 9px;
+  background: #2457d6;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.67rem;
+  font-weight: 740;
+}
+
+.continueCard button:hover,
+.lessonRow button:hover {
+  background: #173fa8;
+}
+
+.continueCard button i,
+.lessonRow button i {
+  font-style: normal;
+}
+
+.path {
+  position: relative;
+  display: grid;
+  max-width: 1260px;
+  gap: 1.1rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4.8rem);
+  list-style: none;
+}
+
+.path::before {
+  position: absolute;
+  top: clamp(3rem, 6vw, 5.8rem);
+  bottom: clamp(3rem, 6vw, 5.8rem);
+  left: calc(clamp(2rem, 5vw, 4.8rem) + 27px);
+  width: 1px;
+  background: linear-gradient(#2457d6, #bcc9dd 82%, transparent);
+  content: "";
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 1.1rem;
+}
+
+.marker {
+  z-index: 1;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  align-self: start;
+  border: 1px solid #c9d4e5;
+  border-radius: 50%;
+  background: #fff;
+  color: #2457d6;
+  box-shadow: 0 8px 22px rgb(34 69 127 / 10%);
+  font: 750 0.64rem var(--font-geist-mono, monospace);
+}
+
+.marker i {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  margin: -38px -38px 0 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #2457d6;
+  color: #fff;
+  font: 750 0.55rem/15px var(--font-geist-sans, Arial, sans-serif);
+  text-align: center;
+}
+
+.stage[data-recommended="true"] .marker {
+  border-color: #2457d6;
+  background: #2457d6;
+  color: #fff;
+  box-shadow: 0 10px 30px rgb(36 87 214 / 25%);
+}
+
+.stage[data-availability="planned"] .marker {
+  border-style: dashed;
+  color: #77859a;
+  box-shadow: none;
+}
+
+.stageCard {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.6vw, 2.2rem);
+  border: 1px solid #dde4ed;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgb(26 45 78 / 6%);
+}
+
+.stage[data-recommended="true"] .stageCard {
+  border-color: #b7c8ed;
+  box-shadow: 0 18px 42px rgb(36 87 214 / 11%);
+}
+
+.stage[data-availability="planned"] .stageCard {
+  border-style: dashed;
+  background: #fafbfc;
+}
+
+.stageCard > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stageCard > header div > span {
+  color: #2457d6;
+  font: 740 0.57rem var(--font-geist-mono, monospace);
+  letter-spacing: 0.1em;
+}
+
+.stageCard h2 {
+  margin: 0.42rem 0 0;
+  font-size: clamp(1.45rem, 2.5vw, 2.35rem);
+  font-weight: 570;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.stageCard > header > small {
+  flex: 0 0 auto;
+  padding: 0.42rem 0.58rem;
+  border: 1px solid #c9d7ef;
+  border-radius: 999px;
+  background: #eef3ff;
+  color: #2457d6;
+  font-size: 0.55rem;
+  font-weight: 750;
+}
+
+.stageCard > header > small[data-status="planned"] {
+  border-color: #d7dde6;
+  background: #f2f4f7;
+  color: #69778b;
+}
+
+.purpose {
+  max-width: 800px;
+  margin: 0.9rem 0 1.4rem;
+  color: #5c6a80;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.progressBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e7ebf1;
+  border-bottom: 1px solid #e7ebf1;
+}
+
+.progressBlock > div:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  grid-column: 1 / -1;
+}
+
+.progressBlock span,
+.lessonRow span,
+.stageCard > footer > span {
+  color: #6d7b90;
+  font: 700 0.55rem var(--font-geist-mono, monospace);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.progressBlock strong {
+  color: #2457d6;
+  font: 750 0.76rem var(--font-geist-mono, monospace);
+}
+
+.progressTrack {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edf5;
+}
+
+.progressTrack i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2457d6, #6a8ee9);
+}
+
+.progressBlock > small {
+  color: #6b788b;
+  font-size: 0.56rem;
+  white-space: nowrap;
+}
+
+.lessonRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1.2rem;
+  padding: 1.25rem 0;
+}
+
+.lessonRow > div {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lessonRow strong {
+  max-width: 720px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.stage[data-availability="planned"] .lessonRow button {
+  border-color: #a8b3c4;
+  background: transparent;
+  color: #263653;
+}
+
+.stageCard > footer {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.stageCard > footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stageCard > footer li {
+  padding: 0.38rem 0.55rem;
+  border: 1px solid #dbe3ee;
+  border-radius: 999px;
+  background: #f5f7fa;
+  color: #43536c;
+  font-size: 0.6rem;
+  font-weight: 650;
+}
+
+.stageCard > footer p {
+  margin: 0.25rem 0 0;
+  color: #778397;
+  font-size: 0.63rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .map {
+    border-radius: 20px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.25rem, 12vw, 3.35rem);
+  }
+
+  .hero > div > p {
+    font-size: 0.78rem;
+  }
+
+  .continueCard {
+    padding: 1rem;
+  }
+
+  .continueCard button {
+    width: 100%;
+  }
+
+  .path {
+    gap: 0.85rem;
+    padding: 1.5rem 0.85rem 1.75rem;
+  }
+
+  .path::before {
+    top: 2.2rem;
+    bottom: 2.5rem;
+    left: 27px;
+  }
+
+  .stage {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .marker {
+    width: 34px;
+    height: 34px;
+    font-size: 0.54rem;
+  }
+
+  .marker i {
+    width: 16px;
+    height: 16px;
+    margin: -25px -25px 0 0;
+    font-size: 0.48rem;
+    line-height: 12px;
+  }
+
+  .stageCard {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .stageCard > header {
+    align-items: flex-start;
+    gap: 0.55rem;
+  }
+
+  .stageCard h2 {
+    font-size: 1.38rem;
+    line-height: 1.08;
+  }
+
+  .stageCard > header > small {
+    padding: 0.32rem 0.42rem;
+    font-size: 0.48rem;
+  }
+
+  .purpose {
+    margin-bottom: 1rem;
+    font-size: 0.72rem;
+  }
+
+  .progressBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .progressBlock > small {
+    white-space: normal;
+  }
+
+  .lessonRow {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  .lessonRow button {
+    width: 100%;
+  }
+}
