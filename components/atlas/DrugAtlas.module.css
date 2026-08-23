@@ -570,9 +570,13 @@
    the first viewport at the supported 125% and 150% zoom equivalents. */
 @media (max-height: 720px) and (min-width: 721px) {
   .atlas[data-atlas-view="spatial"] .viewTabs button {
-    min-height: 64px;
-    gap: 0.18rem;
-    padding-block: 0.55rem;
+    min-height: 56px;
+    gap: 0;
+    padding-block: 0.45rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .viewTabs button span {
+    display: none;
   }
 
   .atlas[data-atlas-view="spatial"] .viewTabs strong {

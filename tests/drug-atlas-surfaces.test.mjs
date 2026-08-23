@@ -155,6 +155,10 @@ test("Browse is static while Spatial and MoleculeUniverse stay behind a lazy bra
   );
   assert.match(
     css,
-    /@media \(max-height: 720px\) and \(min-width: 721px\)[\s\S]*\.atlas\[data-atlas-view="spatial"\]\s+\.viewTabs button\s*\{[^}]*min-height:\s*64px/s,
+    /@media \(max-height: 720px\) and \(min-width: 721px\)[\s\S]*\.atlas\[data-atlas-view="spatial"\]\s+\.viewTabs button\s*\{[^}]*min-height:\s*56px/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-height: 720px\) and \(min-width: 721px\)[\s\S]*\.atlas\[data-atlas-view="spatial"\]\s+\.viewTabs button span\s*\{[^}]*display:\s*none/s,
   );
 });
