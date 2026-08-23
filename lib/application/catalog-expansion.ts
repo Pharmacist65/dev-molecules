@@ -369,7 +369,30 @@ export function mergeCatalogExpansionIntoExplore(
         },
         molecules.map((molecule) => ({
           id: molecule.id,
-          category: molecule.lensValues[lens.id] ?? molecule.category ?? "Unclassified",
+          category: molecule.lensKeys[lens.id] ?? "unclassified",
+        })),
+      ),
+    );
+  const reviewerCategorical = seed.lenses
+    .filter((lens) => lens.id !== "structural-similarity")
+    .map((lens) =>
+      createCategoricalLensProjection(
+        {
+          lensId: lens.id,
+          projectionId: `projection:${lens.id}:catalog-expansion-reviewer-v1`,
+          algorithmVersion: "categorical-layout@1.0.0",
+          inputVersion,
+          generatedAt: expansion.manifest.generatedAt,
+          meaning: lens.meaning,
+          doesNotMean: lens.doesNotMean,
+          verificationStatus: "pending-review",
+        },
+        molecules.map((molecule) => ({
+          id: molecule.id,
+          category:
+            molecule.reviewerLensKeys?.[lens.id]
+            ?? molecule.lensKeys[lens.id]
+            ?? "unclassified",
         })),
       ),
     );
@@ -395,11 +418,21 @@ export function mergeCatalogExpansionIntoExplore(
     }),
   );
   const projections: readonly LensProjection[] = [...categorical, structural];
+  const reviewerProjections: readonly LensProjection[] = [
+    ...reviewerCategorical,
+    structural,
+  ];
   const projectionByLens = new Map(projections.map((projection) => [projection.lensId, projection]));
   const updatedMolecules = molecules.map((molecule) => ({
     ...molecule,
     coordinates: Object.fromEntries(
       projections.flatMap((projection) => {
+        const coordinate = projection.coordinates[molecule.id];
+        return coordinate ? [[projection.lensId, coordinate] as const] : [];
+      }),
+    ),
+    reviewerCoordinates: Object.fromEntries(
+      reviewerProjections.flatMap((projection) => {
         const coordinate = projection.coordinates[molecule.id];
         return coordinate ? [[projection.lensId, coordinate] as const] : [];
       }),

@@ -88,9 +88,9 @@ export function resolveExploreClusterLabelLayout(
   const minimumHorizontalSeparation = clamp(
     24 * ((16 / 9) / viewportAspect),
     20,
-    36,
+    38,
   );
-  const minimumVerticalSeparation = 11;
+  const minimumVerticalSeparation = 20;
   const labelHalfWidth = minimumHorizontalSeparation / 2;
   const labelHalfHeight = minimumVerticalSeparation / 2;
   const maximumRadius = Math.max(4, Math.ceil(Math.sqrt(anchors.length)) + 2);
@@ -119,8 +119,8 @@ export function resolveExploreClusterLabelLayout(
     const candidate = offsets
       .map((offset) => ({
         id: anchor.id,
-        x: clamp(anchor.x + offset.x, 6, 94),
-        y: clamp(anchor.y + offset.y, 8, 92),
+        x: clamp(anchor.x + offset.x, labelHalfWidth, 100 - labelHalfWidth),
+        y: clamp(anchor.y + offset.y, labelHalfHeight, 100 - labelHalfHeight),
       }))
       .find((next) => {
         const key = `${next.x.toFixed(4)}:${next.y.toFixed(4)}`;
@@ -165,15 +165,20 @@ export function countExploreClusterLabelCollisions(
   const minimumHorizontalSeparation = clamp(
     24 * ((16 / 9) / viewportAspect),
     20,
-    36,
+    38,
   );
-  const minimumVerticalSeparation = 11;
+  const minimumVerticalSeparation = 20;
   const labelHalfWidth = minimumHorizontalSeparation / 2;
   const labelHalfHeight = minimumVerticalSeparation / 2;
   let collisions = 0;
   for (let left = 0; left < labels.length; left += 1) {
     const label = labels[left]!;
-    if (label.x < 6 || label.x > 94 || label.y < 8 || label.y > 92) collisions += 1;
+    if (
+      label.x < labelHalfWidth
+      || label.x > 100 - labelHalfWidth
+      || label.y < labelHalfHeight
+      || label.y > 100 - labelHalfHeight
+    ) collisions += 1;
     for (let right = left + 1; right < labels.length; right += 1) {
       if (
         withinCollisionBox(

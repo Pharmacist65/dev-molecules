@@ -128,7 +128,8 @@
   box-shadow: 0 1.2rem 4rem rgb(28 54 47 / 8%);
 }
 
-.ketcherFrame > div { min-height: inherit; }
+.ketcherFrame { height: clamp(36rem, 68vh, 52rem); }
+.ketcherFrame > div { height: 100%; }
 
 .editorLoading,
 .routeLoading {
@@ -272,6 +273,7 @@
   .ketcherFrame,
   .editorLoading,
   .routeLoading { min-height: 33rem; border-radius: 0.65rem; }
+  .ketcherFrame { height: 33rem; }
   .analysisGrid,
   .compareLayout { grid-template-columns: 1fr; }
   .compareLayout > fieldset,

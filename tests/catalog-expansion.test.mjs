@@ -67,6 +67,23 @@ test("Explore merges the bounded representative window with exact-CID deduplicat
   assert.equal(new Set(merged.molecules.map((molecule) => molecule.id)).size, 53);
   assert.equal(merged.lenses.at(-1)?.id, "structural-similarity");
   assert.equal(Object.keys(merged.projections.at(-1)?.coordinates ?? {}).length, 53);
+  assert.ok(
+    merged.molecules.every(
+      (molecule) =>
+        Object.keys(molecule.coordinates).length === 4 &&
+        Object.keys(molecule.reviewerCoordinates).length === 4,
+    ),
+    "merged Student and Reviewer projections must use complete, separate coordinate frames",
+  );
+
+  const propranolol = merged.molecules.find((molecule) => molecule.id === "molecule:propranolol");
+  assert.ok(propranolol);
+  assert.doesNotMatch(JSON.stringify(propranolol.lensAliases), /cardiovascular/i);
+  assert.ok(propranolol.reviewerLensAliases.therapeutic.includes("cardiovascular"));
+  assert.notDeepEqual(
+    propranolol.coordinates.therapeutic,
+    propranolol.reviewerCoordinates.therapeutic,
+  );
 
   const acetaminophen = merged.molecules.find((molecule) => molecule.name === "Acetaminophen");
   assert.ok(acetaminophen);

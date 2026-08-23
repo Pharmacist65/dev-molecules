@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { tsImport } from "tsx/esm/api";
@@ -24,10 +25,128 @@ test("every checked-in regression molecule has a source-derived systematic name 
     assert.ok(profile.systematicName, `${molecule.id} systematic name`);
     assert.ok(profile.functionalGroups.length > 0, `${molecule.id} functional groups`);
     assert.equal(profile.functionalGroupsStatus, "computed-unreviewed");
-    assert.doesNotMatch(profile.scaffoldFamily, /not yet|other structural/i);
-    assert.ok(profile.drugClass.length > 0);
-    assert.ok(profile.mechanismSummary.length > 0);
+    assert.equal(profile.scaffoldFamily, "Classification review in progress");
+    assert.equal(profile.scaffoldDetail, "Classification review in progress");
+    assert.equal(profile.drugClass, "Classification review in progress");
+    assert.match(profile.mechanismSummary, /review is in progress/i);
+    assert.match(profile.nomenclatureLesson, /computed, unreviewed/i);
   }
+});
+
+test("Student presentation withholds every pending internal classification while Reviewer retains its audit record", async () => {
+  const english = createExploreCatalogView(moleculeCatalog, "en");
+  const turkish = createExploreCatalogView(moleculeCatalog, "tr");
+
+  for (const [index, molecule] of english.molecules.entries()) {
+    assert.deepEqual(
+      ["therapeutic", "target", "scaffold"].map((lensId) => molecule.lensValues[lensId]),
+      Array(3).fill("Classification review in progress"),
+      molecule.id,
+    );
+    assert.deepEqual(
+      ["therapeutic", "target", "scaffold"].map((lensId) => molecule.lensKeys[lensId]),
+      Array(3).fill("classification-review-in-progress"),
+      molecule.id,
+    );
+    assert.match(molecule.lensValues["structural-similarity"], /computed.*unreviewed/i);
+    assert.match(molecule.summary, /review is in progress/i);
+
+    for (const classification of moleculeCatalog[index].classifications) {
+      const studentSurface = JSON.stringify({
+        summary: molecule.summary,
+        lensValues: molecule.lensValues,
+        lensAliases: molecule.lensAliases,
+        coordinates: molecule.coordinates,
+        studentProfile: molecule.studentProfile,
+      });
+      assert.ok(
+        !studentSurface.includes(classification.label),
+        `${molecule.id} must not expose draft label ${classification.label} to Student`,
+      );
+    }
+
+    const reviewerTarget = molecule.classificationEvidence.target;
+    assert.equal(reviewerTarget.verificationStatus, "pending-review");
+    assert.ok(reviewerTarget.value);
+    assert.ok(reviewerTarget.label);
+    assert.ok(reviewerTarget.sourceIds.length > 0);
+    assert.ok(reviewerTarget.verificationNote);
+    assert.equal(
+      molecule.reviewerLensValues.target,
+      reviewerTarget.label,
+      `${molecule.id} Reviewer lens must retain the explicitly gated raw value`,
+    );
+
+    const turkishMolecule = turkish.molecules[index];
+    assert.equal(
+      turkishMolecule.lensValues.target,
+      "Sınıflandırma incelemesi sürüyor",
+    );
+    assert.doesNotMatch(
+      JSON.stringify({
+        lensValues: turkishMolecule.lensValues,
+        studentProfile: turkishMolecule.studentProfile,
+      }),
+      /pending-review|source:dev-molecules|nonselective-beta|beta1-selective/,
+    );
+  }
+
+  const universe = await readFile(
+    new URL("../components/universe/MoleculeUniverse.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(universe, /presentationMode === "reviewer"[\s\S]*reviewerLensValues/);
+  assert.match(universe, /lensAliases: molecule\.reviewerLensAliases \?\? molecule\.lensAliases/);
+  assert.match(universe, /coordinates: molecule\.reviewerCoordinates \?\? molecule\.coordinates/);
+  assert.match(universe, /ReviewerClassificationEvidence/);
+  assert.match(universe, /evidence\.sourceIds\.join/);
+  assert.match(universe, /evidence\.verificationNote/);
+});
+
+test("Student categorical aliases and coordinates are independent of pending draft labels", () => {
+  const baseline = createExploreCatalogView(moleculeCatalog, "en");
+  const mutatedDrafts = moleculeCatalog.map((molecule, moleculeIndex) =>
+    moleculeIndex === 0
+      ? {
+          ...molecule,
+          classifications: molecule.classifications.map((classification) => ({
+            ...classification,
+            value: `internal-mutated-${classification.value}`,
+            label: `INTERNAL MUTATED ${classification.label}`,
+          })),
+        }
+      : molecule,
+  );
+  const mutated = createExploreCatalogView(mutatedDrafts, "en");
+  const mutatedById = new Map(mutated.molecules.map((molecule) => [molecule.id, molecule]));
+
+  for (const molecule of baseline.molecules) {
+    const changed = mutatedById.get(molecule.id);
+    assert.ok(changed);
+    assert.deepEqual(
+      changed.lensAliases,
+      molecule.lensAliases,
+      `${molecule.id} Student aliases must not encode pending drafts`,
+    );
+    assert.deepEqual(
+      changed.coordinates,
+      molecule.coordinates,
+      `${molecule.id} Student coordinates must not encode pending drafts`,
+    );
+  }
+
+  const mutatedFirst = mutated.molecules[0];
+  assert.ok(
+    mutatedFirst.reviewerLensAliases.therapeutic.some((alias) =>
+      alias.startsWith("INTERNAL MUTATED")),
+    "Reviewer aliases retain the raw draft audit path",
+  );
+  assert.ok(
+    baseline.molecules.some((molecule, index) =>
+      JSON.stringify(mutated.molecules[index].reviewerCoordinates.therapeutic) !==
+        JSON.stringify(molecule.reviewerCoordinates.therapeutic)),
+    "Reviewer coordinates retain the raw draft audit projection",
+  );
 });
 
 test("computed motif hints conservatively avoid double-labelling amide nitrogen as amine", () => {
@@ -50,7 +169,7 @@ test("functional-group labels are localized without changing the detected set", 
   assert.ok(turkish.includes("Ester"));
 });
 
-test("structural lens uses one locale-stable key for each shared displayed family", () => {
+test("Student structural lens exposes only a locale-stable computed-unreviewed region", () => {
   const turkish = createExploreCatalogView(moleculeCatalog, "tr");
   const english = createExploreCatalogView(moleculeCatalog, "en");
   const englishById = new Map(english.molecules.map((molecule) => [molecule.id, molecule]));
@@ -74,6 +193,7 @@ test("structural lens uses one locale-stable key for each shared displayed famil
   for (const [label, keys] of keysByDisplayedFamily) {
     assert.equal(keys.size, 1, `${label} must render as one structural cluster`);
   }
+  assert.deepEqual([...keysByDisplayedFamily.keys()], ["Hesaplanmış yapısal görünüm · incelenmemiş"]);
 });
 
 test("route availability is stated narrowly and does not imply missing synthesis knowledge", () => {

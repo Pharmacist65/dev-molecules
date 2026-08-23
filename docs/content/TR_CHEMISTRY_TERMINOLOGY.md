@@ -11,7 +11,7 @@ Bu sözlük Student ve Expert arayüzlerinde kullanılan temel terimleri sabitle
 | agonist | agonist | Etkileşim türü; hedef veya assay bağlamıyla gösterilir. |
 | antagonist | antagonist | Etkileşim türü; hedef veya assay bağlamıyla gösterilir. |
 | aromatic ring | aromatik halka | “aromatik” koku anlamında kullanılmaz. |
-| assay | deney sistemi | Expert yüzeyinde “assay” kaynak terimi parantez içinde korunabilir. |
+| assay | deney sistemi | Gelecekteki kaynak-yoğun teknik yüzeylerde “assay” kaynak terimi parantez içinde korunabilir; mevcut Expert tercihi ek bir assay yüzeyi açmaz. |
 | bioavailability | biyoyararlanım | Route/form koşulu olmadan sayısal değer gösterilmez. |
 | bond | bağ | Tekli, çiftli ve üçlü bağ. |
 | bridged ring | köprülü halka | “bridged system” → “köprülü halka sistemi”. |

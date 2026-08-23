@@ -50,13 +50,14 @@ The following values stay stable across locales:
 The following content is localized:
 
 - navigation, controls, accessibility labels, loading/error states, and evidence boundaries;
-- Explore summaries and the display labels for canonical classification values;
+- Home, Atlas Browse/Spatial, Dossier, Academy, Lab, Instructor, and locked Reviewer copy;
+- Spatial summaries and the display labels for canonical classification values;
 - Synthesis Atlas route, source-scope, material, transformation, mechanism, limitation, and safety narration;
 - Atlas challenge prompts, options, and feedback;
 - Nomenclature Academy sections, prompts, hints, options, explanations, violated rules, solution steps, and source labels;
-- Build, Teach, and Discover instructional copy.
+- Student/Expert presentation labels and all explicit unavailable/coverage-gap explanations.
 
-Legacy synthesis-story localization lives in a stable-ID overlay in `lib/i18n/synthesis-content.ts`. Synthesis Atlas, Nomenclature Academy, and challenge records use paired `{ tr, en }` educational text while pure evaluators consume canonical IDs. Catalog identities, source paths, and search tokens remain canonical rather than translated.
+Legacy synthesis-story localization lives in a stable-ID overlay in `lib/i18n/synthesis-content.ts`. Synthesis Atlas, the eight-module Academy map, Nomenclature Academy, and challenge records use paired `{ tr, en }` educational text while pure evaluators consume canonical IDs. Catalog identities, source paths, and search tokens remain canonical rather than translated.
 
 Changing language must not move a molecule, change a source, promote a verification state, change a challenge answer, or alter the scientific subject.
 
@@ -78,7 +79,7 @@ Run:
 
 ```bash
 npm run typecheck
-node --test tests/i18n.test.mjs tests/nomenclature-academy.test.mjs tests/synthesis-atlas.test.mjs
+node --test tests/i18n.test.mjs tests/nomenclature-academy.test.mjs tests/academy-v2.test.mjs tests/synthesis-atlas.test.mjs tests/role-experience.test.mjs
 npm run build
 npx playwright test
 ```
@@ -89,6 +90,7 @@ Manual browser review must verify:
 - `<html lang>` matches the selected locale;
 - the preference survives reload;
 - source URLs, IDs, formulas, and evidence states remain semantically unchanged;
+- Student copy and the Dossier-only Expert preference remain localized while Reviewer remains a separate locked authorization surface;
 - no Turkish prose appears in the English journey and no English prose appears in the Turkish journey, except proper nouns, source titles, standardized chemical terminology, or deliberately untranslated identifiers;
 - text expansion does not obscure the molecular scene, reaction scheme, feedback, or source locator.
 

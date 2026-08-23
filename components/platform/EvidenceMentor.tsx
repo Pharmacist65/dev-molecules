@@ -6,9 +6,10 @@ import {
   createLocalEvidenceCard,
   type MentorEvidenceCard,
 } from "@/lib/application/evidence-card";
+import { presentEvidenceStatus } from "@/lib/application/evidence-status-presentation";
 import { moleculeCatalog } from "@/lib/data/catalog";
 import type { MoleculeRecord } from "@/lib/domain";
-import { useI18n, type TranslationKey, type Translator } from "@/lib/i18n";
+import { useI18n } from "@/lib/i18n";
 
 import styles from "./platform.module.css";
 
@@ -17,25 +18,7 @@ interface EvidenceMentorProps {
   readonly onSelectMolecule: (moleculeId: string) => void;
 }
 
-const evidenceStatusKeys: Readonly<Record<string, TranslationKey>> = {
-  "curated-fallback": "status.curatedFallback",
-  "valid-record": "status.validRecord",
-  "exact-curated-match": "status.exactCuratedMatch",
-  "educational-story-only": "status.educationalStoryOnly",
-  "not-assessed": "status.notAssessed",
-  "not-found": "status.notFound",
-  verified: "status.verified",
-  "source-supported": "status.sourceSupported",
-  pending: "status.pending",
-  unknown: "status.unknown",
-};
-
 const usesStaticEvidence = import.meta.env.VITE_STATIC_EVIDENCE === "true";
-
-function presentEvidenceStatus(value: string, t: Translator) {
-  const key = evidenceStatusKeys[value];
-  return key ? t(key) : t("status.unknown");
-}
 
 export function EvidenceMentor({ molecule, onSelectMolecule }: EvidenceMentorProps) {
   const { locale, t } = useI18n();

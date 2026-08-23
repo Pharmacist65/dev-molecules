@@ -144,6 +144,39 @@ test("available family claims fail closed without provenance", () => {
   assert.ok(issues.some((issue) => issue.path === "family.overview.sources"));
 });
 
+test("an empty kind list is valid only for a fully fail-closed candidate review set", () => {
+  const candidateReviewSet = {
+    ...family,
+    kinds: [],
+    overview: missing(),
+    classifications: [],
+    sharedMechanism: missing(),
+    primaryTargetFamilies: missing(),
+    sharedStructuralMotifs: missing(),
+    representatives: family.representatives.map((drug) => ({
+      ...drug,
+      memberships: [],
+    })),
+  };
+  assert.deepEqual(validateDrugFamilyPageModel(candidateReviewSet), []);
+
+  const membershipClaimWithoutKind = {
+    ...candidateReviewSet,
+    representatives: [
+      {
+        ...candidateReviewSet.representatives[0],
+        memberships: family.representatives[0].memberships,
+      },
+      candidateReviewSet.representatives[1],
+    ],
+  };
+  assert.ok(
+    validateDrugFamilyPageModel(membershipClaimWithoutKind).some(
+      (issue) => issue.path === "family.kinds",
+    ),
+  );
+});
+
 test("Family Page exposes hierarchy, explicit gaps, source details, and lazy 3D", async () => {
   const [component, css] = await Promise.all([
     readFile(new URL("../components/atlas/FamilyPage.tsx", import.meta.url), "utf8"),

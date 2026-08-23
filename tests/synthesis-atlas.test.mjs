@@ -324,6 +324,10 @@ test("route presentation never promotes source-context reconstruction to source-
     getSynthesisAtlasRoutePresentation(contextRoute),
     "source-context-reconstruction",
   );
+  assert.doesNotMatch(contextRoute.title.en, /reported route/i);
+  assert.doesNotMatch(contextRoute.title.tr, /bildirilen rota/i);
+  assert.match(contextRoute.title.en, /source-context.*reconstruction/i);
+  assert.match(contextRoute.title.tr, /kaynak bağlamlı.*rekonstrüksiyon/i);
   assert.equal(getSynthesisAtlasRoutePresentation(directRoute), "source-reported");
 
   const declaredGap = {
@@ -413,4 +417,15 @@ test("atlas content is bilingual, non-operational and the source drawer starts c
   );
   assert.match(component, /<details[^>]*data-source-drawer[^>]*>/);
   assert.doesNotMatch(component, /<details[^>]*\bopen(?:=|\s|>)/);
+  assert.match(component, /data-route-presentation=\{routePresentation\}/);
+  assert.match(
+    component,
+    /routePresentation === "source-context-reconstruction"[\s\S]*labels\.sourceContextReconstruction/,
+  );
+  assert.match(
+    component,
+    /reportedPresentation === "source-reported"[\s\S]*labels\.reported/,
+    "the Source-reported tab label must remain behind the direct-source presentation gate",
+  );
+  assert.doesNotMatch(component, /<h2>\{route\.title\[locale\]\}<\/h2>/);
 });

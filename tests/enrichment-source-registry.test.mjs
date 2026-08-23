@@ -47,4 +47,8 @@ test("current build-enabled sources preserve an explicit redistribution decision
     assert.ok(policy.versionPolicy.length > 20);
     assert.ok(policy.limitation.length > 20);
   }
+  assert.equal(
+    getEnrichmentSourcePolicy("PubChemStructureAdapter").redistribution,
+    "bundle-source-records-with-policy-notice",
+  );
 });

@@ -4,7 +4,7 @@
 
 Dev Molecules is one product shell with independently governed scientific, learning, and rendering boundaries. React may compose those boundaries, but it is not allowed to manufacture chemistry, evidence status, scoring rules, or source provenance.
 
-The current repository is a stateless React 19 application with two delivery adapters around the same product shell: Vinext for provider-neutral server-capable regression verification and a standalone Vite entry for static GitHub Pages delivery. It combines curated regression fixtures with generated static catalog shards and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
+The current repository is a server-stateless React 19 application with two delivery adapters around the same product shell: Vinext for provider-neutral server-capable regression verification and a standalone Vite entry for static GitHub Pages delivery. It combines curated regression fixtures with generated static catalog shards and structure assets; explicit locale, presentation, and learning-progress state can remain device-local, but no persistent server database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
 
 ## Current dependency direction
 
@@ -16,7 +16,8 @@ React product shell
   ├─ localization runtime and typed localized content
   └─ rendering adapters
        ├─ shared Three.js 3D scene
-       └─ dynamically loaded SmilesDrawer 2D schemes
+       ├─ dynamically loaded SmilesDrawer 2D schemes
+       └─ route-lazy Ketcher standalone editor and worker/WASM
 
 Source SDF / SMILES / regulatory records / patent anchors
   └─ provenance and review state
@@ -39,6 +40,12 @@ This direction is tested. Application consumers do not import a family-specific 
 
 ## Product domains
 
+### Routing and presentation
+
+The primary route model is Home / Drug Atlas / Academy / Lab. Instructor and Reviewer are secondary workspaces rather than equal learner-navigation items. Retired Explore/Learn/Build/Teach/Discover top-level hashes resolve through compatibility mappings; molecule, cluster, and comparison hashes preserve the established Spatial Atlas state.
+
+Student and Expert are exhaustive learner preferences over the same scientific record. Student is the shared public science presentation. Expert currently changes only curated Drug Dossiers to open in Reference mode by default; Home, Atlas, Academy, Synthesis, and Lab keep the same learner-safe fields, source drawers, comparisons, and explicit local exports. Reviewer access is intentionally absent from that union. It requires a separate `ScientificReviewerAdapter` with authentication, authorization, record listing, audited writes, version/hash checks, and persistence. The public application injects no adapter and remains locked.
+
 ### Identity and Catalog
 
 The catalog distinguishes normalized molecular entities, explicit chemical forms, regulatory products, approvals, external identifiers, structures, and educational classifications. Curated regression-fixture approval is attached to an exact Drugs@FDA `application + product + action` record and explicit `ChemicalForm`; it is not copied to a related normalized PubChem parent. Generated catalog approval entries use a separate, narrower DrugCentral FDA-list-membership contract.
@@ -47,17 +54,23 @@ The checked `drugcentral-fda-pubchem-eligible-v1` snapshot evaluates all 2,331 r
 
 Generated approval entries represent DrugCentral FDA-list membership only. Application, product, and commercial-form linkage remains explicitly unresolved for all 2,331 source rows until exact openFDA enrichment is selected and succeeds. One display-name form/stereo conflict remains separate, and two multicomponent forms retain unresolved parent relations. The openFDA adapter is available but unused in this snapshot; direct EMA and PMDA adapters remain future work.
 
-### Explore
+The enrichment registry records ten source policies but enables only DrugCentral identity/list data and PubChem structures in the public build. The current readiness artifact reports zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles. A source policy or adapter interface is not scientific coverage.
 
-Explore owns lens definitions, versioned projections, spatial clusters, progressive level of detail, stable hash navigation, keyboard/list access, camera transitions, and Universe → cluster → focus/compare state.
+### Drug Atlas and Dossier
+
+Drug Atlas Browse is the default structure-index surface. It searches and pages all 1,552 imported records in the checked snapshot, then hydrates one shard/entity and the requested 2D/3D asset through bounded caches. Spatial is optional and lazy; it owns lens definitions, versioned projections, spatial clusters, progressive level of detail, stable hash navigation, keyboard/list access, camera transitions, and Universe → cluster → focus/compare state.
 
 Therapeutic-area, target-profile, and curated-scaffold lenses are deterministic categorical layouts. Their screen distance is explicitly **not** a fingerprint/Tanimoto score, binding measurement, clinical similarity, or efficacy claim. The separate structural lens hashes one-, two-, and three-token canonical-SMILES paths into 512 bits and calculates Tanimoto similarity. It is versioned as `canonical-smiles-path-fingerprint@1.0.0`; it is not ECFP, pharmacology, clinical equivalence, route similarity, or a patent relationship. Localized labels never change canonical inputs, scores, or coordinates.
+
+The current `DrugDossier` resolves only `moleculeCatalog`, the 15 curated seed records. Every dossier has Story and Reference presentations and independently calculated coverage indicators. Imported records outside that seed do not inherit fixture claims; they receive an unavailable dossier state. The checked repository has no presentable target interactions, no quantitative ADME fields, and no reviewed metabolite edges. Curated exact product/form administration contexts can be shown without being relabelled as ADME measurement evidence.
+
+The family domain and component validate parallel classification paths, provenance, representatives, comparison rows, and coverage gaps without forcing exclusive membership. The public route now exposes two deliberately bounded review workspaces—beta-adrenergic blockers and NSAIDs—with four exact PubChem identity/2D representatives each. Their canonical-SMILES fingerprint matrix is computed and unreviewed; classifications, shared mechanism, target families, motifs, and sourced comparison rows remain explicit gaps. This is not a curated production family dataset.
 
 ### Synthesis and Synthesis Learning
 
 The synthesis domain owns route type, version, direct source anchors, materials, ordered steps, reaction classes, bond changes, named-atom correspondence, stereochemistry scope, review state, limitations, and the non-operational safety contract.
 
-Synthesis Atlas contains six routes over propranolol, atenolol, and carvedilol: one foundational-education and one source-reported route per molecule. Together they contain 40 structure-backed materials, 20 conceptual transformations, and 12 curated mechanism teaching records. The reported atenolol and carvedilol routes provide five- and six-transformation paths respectively. The two complete electron-flow mappings originate in foundational transformations and anchor to actual 2D atoms/bonds. They remain bound to those material contexts; incompatible reported steps stay closed, while unmapped movements remain textual and draw no decorative arrows.
+Synthesis Atlas contains six routes over propranolol, atenolol, and carvedilol: one foundational-education and one reported-kind route per molecule. Together they contain 40 structure-backed materials, 20 conceptual transformations, and 12 curated mechanism teaching records. Three routes are direct-source supported and three are source-context supported. Only the Atenolol and Carvedilol reported-kind routes qualify for strict source-reported presentation; the Propranolol reported-kind route remains a source-context reconstruction. The reported Atenolol and Carvedilol routes provide five- and six-transformation paths respectively. The two complete electron-flow mappings originate in foundational transformations and anchor to actual 2D atoms/bonds. They remain bound to those material contexts; incompatible reported steps stay closed, while unmapped movements remain textual and draw no decorative arrows.
 
 Primary-source locators are audited, while mechanism arrows and atom/bond interpretation remain curated educational annotations requiring qualified review. `getSynthesisAtlasSourceGate` fails closed unless direct HTTPS documents, locators, step/source resolution, and the non-operational safety contract are present. `canPresentSynthesisAtlasRouteAsReported` additionally requires a reported route with no declared evidence gap. Route, step, and mechanism navigation is deterministic; a mechanism layer opens only for an explicitly curated, source-gated step.
 
@@ -65,7 +78,9 @@ Challenge answer keys are not trusted blindly. Pure domain evaluators derive the
 
 See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
-### Nomenclature Learning
+### Academy and Nomenclature Learning
+
+The Academy route composes eight modules from real destination and progress contracts. Structure Language, Organic Nomenclature, Pharmaceutical Nomenclature, Synthesis Atlas, and Drug Review Project are available. Pharmacology and ADME are coverage-dependent shells. Standalone Reaction Mechanisms is planned; it routes learners to the nearest eligible Synthesis Atlas content rather than fabricating a curriculum.
 
 The Nomenclature Academy domain contains eight ordered curriculum sections and 22 source-referenced exercises over 20 parseable structure records. Sixteen concrete response/widget contracts cover choice, atom/bond selection, ordered sequences, structure construction/choice, stereochemical assignment, and normalized text answers in TR and EN. A pure evaluator grades only the curated answer contract; it does not infer chemical identity or validate arbitrary names.
 
@@ -73,21 +88,24 @@ A typed local chemical-tool adapter supports four curated name↔structure recor
 
 Progress is device-local UI state. Nomenclature persistence stores only a versioned current-topic ID, completed exercise IDs, and aggregate attempt counts; it excludes answers, structures, evaluations, and scientific claims. Learning progress cannot change evidence or review status.
 
-### Build, Teach, and Discover
+### Lab and role workspaces
 
-- Build owns guided educational fragment choices. A completed exercise is not synthesis evidence.
-- Teach summarizes device-local progress and surfaces scientific review queues. There is no institution backend in this slice.
-- Discover assembles curated evidence cards for a selected catalog identity. This slice has no durable store for user-created or research content, and missing evidence remains unknown.
+- Lab loads Ketcher `3.17.2` only on its route. Ketcher standalone returns SMILES, molfile, and InChIKey locally; exact identity lookup uses the static catalog index. Local project export is explicit. No account, upload, or persistent project store is configured.
+- Lab comparison uses the versioned path fingerprint against the curated seed and labels results computed/unreviewed. The evidence workspace assembles curated local cards; public model generation is disabled. Research Sandbox is visibly unavailable.
+- Instructor composes device-local lesson packages from current Academy exercises and source-gated Synthesis challenges. A progress report requires a connected device-local snapshot. There is no learner identity, server sync, LMS, automatic delivery, or cohort backend.
+- Reviewer is not a presentation setting. Its injected port must authorize before listing records, validate provenance and expected version/hash before actions, and return an audit receipt. The public app passes `adapter={null}`.
 
 ### Evidence and optional narration
 
-Evidence records separate evidence level from verification status and require stable source IDs. The evidence endpoint creates a curated local card first. If an external narrator is configured, it receives the user's question and only the allow-listed evidence context, then must return a strict schema whose cited source IDs resolve to the supplied set. Missing credentials, provider errors, invalid output, or citation failures return the curated card instead of unsupported prose. A deployment enabling this path must disclose the external-processing boundary and obtain any required consent.
+Evidence records separate evidence level from verification status and require stable source IDs. The current evidence endpoint returns only a curated local card and does not invoke an external narrator. Any future narrator is an acceptance requirement rather than a present adapter: it must receive only allow-listed evidence context, return a strict schema with resolvable claim/source IDs, fail closed to the curated card, and disclose the external-processing boundary with any required consent.
 
-The static GitHub Pages adapter has no API runtime and therefore invokes the same curated local card builder directly. This is an explicit deployment capability boundary, not a simulated network endpoint. The Pages bundle contains no provider credential, GitHub token, or external narration path.
+The static GitHub Pages adapter has no API runtime and therefore invokes the same curated local card builder inside Lab. This is an explicit deployment capability boundary, not a simulated network endpoint. The Pages bundle contains no provider credential, GitHub token, reviewer adapter, research API, or external narration path.
 
 ## Delivery adapters
 
-`app/` remains the vinext entry for local development and server-capable hosting. `deployment/github-pages/` is a thin client entry that mounts the same `DevMoleculesApp`; it contains no duplicate chemistry, curriculum, evidence, or UI implementation. `vite.pages.config.ts` sets the GitHub project base path, copies the checked-in public assets—including catalog manifest, shards, reports, and structure assets—and emits `dist-pages/`.
+`app/` remains the Vinext entry for local development and a Cloudflare worker-capable production build. `deployment/github-pages/` is a thin client entry that mounts the same `DevMoleculesApp`; it contains no duplicate chemistry, curriculum, evidence, or UI implementation. `vite.pages.config.ts` sets the GitHub project base path, copies the checked-in public assets—including catalog manifest, shards, reports, and structure assets—and emits `dist-pages/`. The Pages build also emits the route-lazy Ketcher code, worker, and WASM needed by the on-device editor.
+
+Both Vite configurations replace only Ketcher's required `global` and `process.env.NODE_ENV` compile-time identifiers. They do not polyfill the full `process` object or expose build-machine environment variables. The Vinext build externalizes explicit Ketcher packages only for server consumers while bundling the real browser editor for the client route.
 
 The application view model resolves only public asset fetch paths against `import.meta.env.BASE_URL`. Canonical domain `publicPath` records remain unchanged and continue to identify the checked-in asset. Hash navigation keeps Universe, cluster, and molecule-focus links inside the single static document.
 
@@ -122,7 +140,7 @@ The explicit level-of-detail policy is:
 
 The adapter uses source SDF coordinates, instanced atom/bond geometry, measured post-scale molecule extents, deterministic collision resolution, whole-layout camera fitting, a cache bounded to 40 parsed or in-flight structures, demand-driven rendering, and deterministic disposal. Ball-and-stick and space-filling representations, rotate/pan/zoom/reset, hydrogen visibility, and atom hover/selection are scene operations rather than alternate scientific records.
 
-The generated-catalog resident metadata window is separately bounded and stratified. A modal, paginated catalog surface searches and browses all 1,552 imported records; selecting an off-window result hydrates only its shard/entity and requested SDF through bounded caches. Generated records whose therapeutic projection is explicitly unclassified stay outside the default spatial map while remaining searchable, pageable, and directly openable.
+The generated-catalog resident metadata window is separately bounded and stratified. The default Atlas Browse surface searches and pages all 1,552 imported records; selecting an off-window result hydrates only its shard/entity and requested SDF through bounded caches. Generated records whose therapeutic projection is explicitly unclassified stay outside the default spatial map while remaining searchable and pageable.
 
 Runtime loading requires a valid 3D SDF. When a PubChem CID expectation is present, the file CID must match. A malformed, 2D-only, missing, or identity-mismatched file cannot become 3D geometry. Partial multi-record failure retains valid structures and reports failed identities; total failure is explicit.
 
@@ -165,17 +183,20 @@ See [Security policy](../SECURITY.md).
 
 ## Quality strategy
 
-The local and CI gate is:
+The full local pre-release gate is:
 
 ```bash
 npm run typecheck
 npm run lint
+npm run catalog:validate
+npm run catalog:report
 npm run build
 npm run build:pages
 node --test tests/*.test.mjs
 npx playwright test
 npm run e2e:pages
 npm audit --omit=dev --audit-level=high
+git diff --check
 ```
 
-Unit and fixture tests cover domain invariants, catalog adapters/normalization/shards/caches, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, structural similarity, renderer contracts, and bounded LOD behavior. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. These checks are acceptance evidence, not a scientific peer review, catalog exhaustiveness proof, or GPU benchmark.
+Unit and fixture tests cover domain invariants, catalog adapters/normalization/shards/caches, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, structural similarity, renderer contracts, and bounded LOD behavior. Playwright exercises production bundles, routed product journeys, real scene interactions, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. Focused Node tests also cover Atlas/Dossier, the eight-module Academy, synthesis readiness, Ketcher runtime contracts, device-local Instructor behavior, and fail-closed Reviewer authorization. These checks are acceptance evidence, not scientific peer review, a catalog-exhaustiveness proof, or a universal GPU benchmark.

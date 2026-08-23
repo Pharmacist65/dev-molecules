@@ -30,12 +30,12 @@ import styles from "./CatalogBrowseDrawer.module.css";
 type LoadState =
   | { readonly status: "idle" | "loading"; readonly page: CatalogBrowseWindow | null }
   | { readonly status: "ready"; readonly page: CatalogBrowseWindow }
-  | { readonly status: "error"; readonly page: CatalogBrowseWindow | null; readonly message: string };
+  | { readonly status: "error"; readonly page: CatalogBrowseWindow | null };
 
 type SelectionState =
   | { readonly status: "idle" }
   | { readonly status: "loading"; readonly recordId: string }
-  | { readonly status: "error"; readonly message: string };
+  | { readonly status: "error" };
 
 export type CatalogBrowseSelectionHandler = (
   record: CatalogBrowseRecord,
@@ -153,12 +153,11 @@ export function CatalogBrowseDrawer({
           if (requestSequence !== requestSequenceRef.current) return;
           setLoadState({ status: "ready", page });
         })
-        .catch((error: unknown) => {
+        .catch(() => {
           if (requestSequence !== requestSequenceRef.current) return;
           setLoadState({
             status: "error",
             page: null,
-            message: error instanceof Error ? error.message : copy.unavailable,
           });
         });
     }, delay);
@@ -277,11 +276,10 @@ export function CatalogBrowseDrawer({
       if (selectionSequence !== selectionSequenceRef.current) return;
       setSelectionState({ status: "idle" });
       onOpenChange(false);
-    } catch (error) {
+    } catch {
       if (selectionSequence !== selectionSequenceRef.current) return;
       setSelectionState({
         status: "error",
-        message: error instanceof Error ? error.message : copy.unavailable,
       });
     }
   };
@@ -370,7 +368,6 @@ export function CatalogBrowseDrawer({
             {loadState.status === "error" ? (
               <div className={styles.message} role="alert" data-tone="error">
                 <strong>{copy.unavailable}</strong>
-                <span>{loadState.message}</span>
                 <button type="button" onClick={() => setRetryRevision((value) => value + 1)}>
                   {copy.retry}
                 </button>
@@ -423,7 +420,7 @@ export function CatalogBrowseDrawer({
 
             {selectionState.status === "error" ? (
               <p className={styles.selectionError} role="alert">
-                {selectionState.message}
+                {copy.unavailable}
               </p>
             ) : null}
 

@@ -8,14 +8,14 @@ const { countExploreClusterLabelCollisions, resolveExploreClusterLabelLayout } =
   import.meta.url,
 );
 
-const collides = (left, right, horizontal = 20, vertical = 11) =>
+const collides = (left, right, horizontal = 20, vertical = 20) =>
   Math.abs(left.x - right.x) < horizontal && Math.abs(left.y - right.y) < vertical;
 
 const coversAvoidanceZone = (
   label,
   zone,
   labelHalfWidth = 12,
-  labelHalfHeight = 5.5,
+  labelHalfHeight = 10,
 ) =>
   Math.abs(label.x - zone.x) < labelHalfWidth + (zone.radiusX ?? 6) + 1.5
   && Math.abs(label.y - zone.y) < labelHalfHeight + (zone.radiusY ?? 5) + 1.5;
@@ -76,6 +76,19 @@ test("cluster label layout is deterministic and preserves caller order", () => {
     new Map(first.map((item) => [item.id, { x: item.x, y: item.y }])),
     new Map(reordered.map((item) => [item.id, { x: item.x, y: item.y }])),
   );
+});
+
+test("narrow cluster label layout reserves the enlarged control footprint", () => {
+  const anchors = [
+    { id: "a", x: 50, y: 50 },
+    { id: "b", x: 51, y: 50 },
+    { id: "c", x: 49, y: 51 },
+    { id: "d", x: 50, y: 49 },
+  ];
+  const placed = resolveExploreClusterLabelLayout(anchors, 1);
+
+  assert.equal(countExploreClusterLabelCollisions(placed, 1), 0);
+  assert.ok(placed.every(({ x, y }) => x >= 19 && x <= 81 && y >= 10 && y <= 90));
 });
 
 test("cluster label layout rejects invalid coordinate contracts", () => {

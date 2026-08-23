@@ -47,7 +47,7 @@ async function openFullCatalogResult(
   recordId: string,
 ): Promise<Locator> {
   await page.getByRole("button", {
-    name: /Tüm kataloğa göz at|Browse full catalog/i,
+    name: /Yapı indeksine göz at|Browse structure index/i,
   }).click();
   const drawer = page.locator('[data-catalog-browse-drawer="true"]');
   await expect(drawer).toBeVisible();
@@ -218,7 +218,7 @@ test("full-index search creates reload-safe molecule and compare permalinks", as
   expectCleanRuntime(telemetry);
 });
 
-test("cluster permalinks restore their exact lens and cluster and reject invalid routes", async ({ page }) => {
+test("cluster permalinks restore the public neutral cluster and reject raw draft labels", async ({ page }) => {
   const telemetry = watchRuntime(page);
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
   await expect(page.locator('[data-catalog-status="ready"][data-catalog-records="1552"]'))
@@ -234,13 +234,17 @@ test("cluster permalinks restore their exact lens and cluster and reject invalid
     .getByRole("button", { name: /Yapısal benzerlik|Structural similarity/i, exact: true })
     .click();
   const structuralClusterLabels = await clusterButtons.locator("strong").allTextContents();
-  expect(structuralClusterLabels.length).toBeGreaterThan(1);
-  expect(new Set(structuralClusterLabels).size).toBe(structuralClusterLabels.length);
-  await expect(clusterButtons.nth(1)).toBeVisible();
-  await clusterButtons.nth(1).click();
+  expect(structuralClusterLabels).toHaveLength(1);
+  expect(structuralClusterLabels[0]).toMatch(
+    /Hesaplanmış yapısal görünüm · incelenmemiş|Computed structural view · unreviewed/i,
+  );
+  await expect(clusterButtons.first()).toBeVisible();
+  await clusterButtons.first().click();
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
   const exactClusterUrl = page.url();
-  expect(exactClusterUrl).toMatch(/#cluster\//);
+  expect(exactClusterUrl).toMatch(
+    /#cluster\/structural-similarity\/computed-structural-view-unreviewed$/,
+  );
   const selectedBeforeReload = await sceneRoot(page).getAttribute("data-selected-molecule");
   expect(selectedBeforeReload).toBeTruthy();
 
@@ -255,8 +259,8 @@ test("cluster permalinks restore their exact lens and cluster and reject invalid
   await page.goto("/#cluster/therapeutic/Cardiovascular", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page).toHaveURL(/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
+  await expect(page).toHaveURL(/#universe$/);
+  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "universe");
 
   await page.evaluate(() => {
     window.localStorage.setItem("dev-molecules:locale", "en");
@@ -264,13 +268,8 @@ test("cluster permalinks restore their exact lens and cluster and reject invalid
   await page.goto("/#cluster/therapeutic/Kardiyovask%C3%BCler", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page).toHaveURL(/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
-  await expect(sceneRoot(page)).toHaveAttribute("data-scene-status", /^(?:ready|partial)$/);
-  await page.waitForLoadState("networkidle");
-  await page.reload({ waitUntil: "domcontentloaded" });
-  await expect(page).toHaveURL(/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
+  await expect(page).toHaveURL(/#universe$/);
+  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "universe");
 
   await page.goto("/#cluster/not-a-lens/Cardiovascular", { waitUntil: "domcontentloaded" });
   await expect(page).toHaveURL(/#universe$/);
@@ -321,20 +320,18 @@ test("an imported Metformin identity never falls back to Propranolol in curated 
   await (await openFullCatalogResult(page, "Metformin", METFORMIN_ID)).click();
   await expect(sceneRoot(page)).toHaveAttribute("data-selected-molecule", METFORMIN_ID);
 
-  await page.getByRole("button", { name: /03 Oluştur|03 Build/i }).click();
-  const buildUnavailable = page.locator('[data-curated-workflow="unavailable"]');
-  await expect(buildUnavailable).toBeVisible();
-  await expect(buildUnavailable).toContainText("Metformin");
-  await expect(buildUnavailable).toContainText("4091");
-  await expect(buildUnavailable).not.toContainText("Propranolol");
+  await page.goto(`/#drug/${METFORMIN_SLUG}`, { waitUntil: "domcontentloaded" });
+  const dossierUnavailable = page.locator('[data-dossier-unavailable="true"]');
+  await expect(dossierUnavailable).toBeVisible();
+  await expect(dossierUnavailable).not.toContainText("Propranolol");
 
-  await buildUnavailable.getByRole("button", { name: /Explore'a dön|Return to Explore/i }).click();
-  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "focus");
-  await page.getByRole("button", { name: /05 Araştır|05 Discover/i }).click();
-  const discoverUnavailable = page.locator('[data-curated-workflow="unavailable"]');
-  await expect(discoverUnavailable).toBeVisible();
-  await expect(discoverUnavailable).toContainText("Metformin");
-  await expect(discoverUnavailable).not.toContainText("Propranolol");
+  await page.goto(`/#academy/synthesis/${METFORMIN_SLUG}/overview`, {
+    waitUntil: "domcontentloaded",
+  });
+  const synthesisUnavailable = page.locator('[data-curated-workflow="unavailable"]');
+  await expect(synthesisUnavailable).toBeVisible();
+  await expect(synthesisUnavailable).toContainText(METFORMIN_SLUG);
+  await expect(synthesisUnavailable).not.toContainText("Propranolol");
 });
 
 test("camera-only updates retain molecular data and mesh batches when visible membership is unchanged", async ({ page }) => {
@@ -648,7 +645,7 @@ async function dragOpenUniverseCanvas(
   await page.mouse.up();
 }
 
-test("student-first Explore covers spatial Universe, comparison, Passport and Reviewer evidence", async ({ page }, testInfo) => {
+test("student-first Explore covers spatial Universe, comparison, Passport and the Expert boundary", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.emulateMedia({ reducedMotion: "no-preference" });
   const telemetry = watchRuntime(page);
@@ -683,7 +680,10 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   });
   await expect(regionList).toBeVisible();
   const regionButtons = regionList.getByRole("button");
-  expect(await regionButtons.count()).toBeGreaterThan(1);
+  await expect(regionButtons).toHaveCount(1);
+  await expect(regionButtons.first().locator("strong")).toHaveText(
+    /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
+  );
   const regionCenters = await regionButtons.evaluateAll((buttons) =>
     buttons.map((button) => {
       const bounds = button.getBoundingClientRect();
@@ -695,8 +695,8 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   );
   expect(
     new Set(regionCenters.map(({ x, y }) => `${x}:${y}`)).size,
-    "cluster-region controls must occupy distinct spatial coordinates",
-  ).toBeGreaterThan(1);
+    "the public pending-classification map must expose one neutral region",
+  ).toBe(1);
 
   const regionWorld = regionList.locator("..");
   const panTransformBefore = await regionWorld.getAttribute("style");
@@ -770,22 +770,25 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   expect(await readMolecularSceneOperationCounts(near.canvas)).toEqual(
     settledOperationsBeforePan,
   );
-  await expect
-    .poll(() => near.scene.getAttribute("data-visible-molecules"), {
-      message: "the settled Universe camera must refresh its bounded viewport membership once",
-      timeout: 5_000,
-    })
-    .not.toBe(settledMembershipBeforePan);
-  await expect
-    .poll(() => readMolecularSceneOperationCounts(near.canvas), {
-      message: "the settled Universe camera must perform exactly one visibility rebuild",
-      timeout: 5_000,
-    })
-    .toEqual({
-      loadMolecules: settledOperationsBeforePan.loadMolecules,
-      updateVisibleMolecules: settledOperationsBeforePan.updateVisibleMolecules + 1,
-      rebuildScene: settledOperationsBeforePan.rebuildScene + 1,
-    });
+  // A balanced eight-record sample may legitimately retain the same members
+  // after this second pan. The dedicated coalescing test above forces a
+  // membership boundary; here we assert that settling performs either no work
+  // for an unchanged set or exactly one bounded visibility rebuild.
+  await page.waitForTimeout(750);
+  const settledMembershipAfterPan = await near.scene.getAttribute(
+    "data-visible-molecules",
+  );
+  const settledOperationsAfterPan = await readMolecularSceneOperationCounts(
+    near.canvas,
+  );
+  const membershipChanged = settledMembershipAfterPan !== settledMembershipBeforePan;
+  expect(settledOperationsAfterPan).toEqual({
+    loadMolecules: settledOperationsBeforePan.loadMolecules,
+    updateVisibleMolecules:
+      settledOperationsBeforePan.updateVisibleMolecules + (membershipChanged ? 1 : 0),
+    rebuildScene:
+      settledOperationsBeforePan.rebuildScene + (membershipChanged ? 1 : 0),
+  });
   const nearMetrics = await attachAcceptanceMetrics(
     page,
     testInfo,
@@ -893,19 +896,17 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   await settingsButton.click();
   const settings = page.locator("#platform-settings");
   const studentModeButton = settings.getByRole("button", {
-    name: /Öğrenci modu|Student mode/i,
+    name: /Öğrenci görünümü|Student view/i,
   });
   const reviewerModeButton = settings.getByRole("button", {
-    name: /Reviewer Mode|Reviewer mode/i,
+    name: /Uzman görünümü|Expert view/i,
   });
   await expect(studentModeButton).toHaveAttribute("aria-pressed", "true");
   await reviewerModeButton.click();
-  await expect(focus.root).toHaveAttribute("data-presentation-mode", "reviewer");
-  await expect(settings).toHaveCount(0);
-  await settingsButton.click();
-  const activeReviewerModeButton = page
-    .locator("#platform-settings")
-    .getByRole("button", { name: /Reviewer Mode|Reviewer mode/i });
+  await expect(focus.root).toHaveAttribute("data-presentation-mode", "student");
+  const activeReviewerModeButton = settings.getByRole("button", {
+    name: /Uzman görünümü|Expert view/i,
+  });
   await expect(activeReviewerModeButton).toHaveAttribute("aria-pressed", "true");
   await settingsButton.click();
   await expect(page.locator("#platform-settings")).toHaveCount(0);
@@ -914,32 +915,32 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   });
   await reviewerLensDisclosure.click();
   await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "true");
-  await expect(page.getByText(/curated-categorical-layout/i)).toBeVisible();
-  await expect(page.getByText(/fnv1a32:[0-9a-f]{8}/i)).toBeVisible();
-  await expect(passport.getByText(/3B kaynak|3D source/i)).toBeVisible();
-  await expect(
-    passport.getByRole("link", { name: /PubChem PUG REST.*CID \d+/i }).first(),
-  ).toBeVisible();
+  await expect(page.getByText(/curated-categorical-layout/i)).toHaveCount(0);
+  await expect(page.getByText(/fnv1a32:[0-9a-f]{8}/i)).toHaveCount(0);
+  await reviewerLensDisclosure.click();
+  await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "false");
+  await expect(collapsedStudentSourceLink).toBeHidden();
 
   await page
     .getByRole("button", { name: /Dili İngilizce yap|Switch language to English/i })
     .click();
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeVisible();
-  await expect(focus.root).toHaveAttribute("data-presentation-mode", "reviewer");
-  await expect(passport.getByText("3D source", { exact: true })).toBeVisible();
+  await expect(focus.root).toHaveAttribute("data-presentation-mode", "student");
+  await expect(page.getByText(/curated-categorical-layout|fnv1a32:/i)).toHaveCount(0);
   await page
     .getByRole("button", { name: /Switch language to Turkish|Dili Türkçe yap/i })
     .click();
   await expect(page.getByRole("button", { name: "Ayarlar", exact: true })).toBeVisible();
 
+  await studentSources.locator("summary").click();
+  await expect(studentSources).toHaveAttribute("open", "");
+  await expect(collapsedStudentSourceLink).toBeVisible();
   await expect(
-    page
-      .locator('[data-dimension="3d"]')
-      .getByText("PUBCHEM HESAPLANMIŞ 3B KONFORMER", { exact: true }),
-  ).toBeVisible();
+    page.getByText("PUBCHEM HESAPLANMIŞ 3B KONFORMER", { exact: true }),
+  ).toHaveCount(0);
   await expect(
     page.getByText(/deneysel.*(?:kristal yapı|crystal structure).*(?:proteine bağlı poz|protein-bound pose)/i),
-  ).toBeVisible();
+  ).toHaveCount(0);
   await captureAcceptanceScreenshot(page, "1440x900-molecule-focus.png");
   const focusInteractionPerformance = await measureInteractiveCanvasPerformance(
     page,
@@ -1001,10 +1002,8 @@ test("student-first Explore covers spatial Universe, comparison, Passport and Re
   );
   await expect(page.locator('[data-structure-origin="database-2d-record"]').first()).toBeVisible();
   await expect(
-    page
-      .locator('[data-dimension="2d"]')
-      .getByText("PUBCHEM CANONICAL 2B KAYIT", { exact: true }),
-  ).toBeVisible();
+    page.getByText("PUBCHEM CANONICAL 2B KAYIT", { exact: true }),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("group", { name: /Gösterim|Representation/i }).getByRole("button").first(),
   ).toBeDisabled();
@@ -1095,7 +1094,7 @@ test("missing 3D asset fails closed without generated geometry", async ({ page }
   expectCleanRuntime(telemetry);
 });
 
-test("all five product modes remain reachable and dispose the Explore context", async ({ page }) => {
+test("the four primary product areas remain reachable and dispose the Spatial context", async ({ page }) => {
   const telemetry = watchRuntime(page);
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
   await expectExploreScene(page, {
@@ -1105,18 +1104,20 @@ test("all five product modes remain reachable and dispose the Explore context", 
     maximumVisibleMolecules: 40,
   });
 
-  const navigation = page.getByRole("navigation", { name: /Platform bölümleri|Platform sections/i });
-  for (const mode of [/Öğren|Learn/i, /Oluştur|Build/i, /Eğit|Teach/i, /Araştır|Discover/i]) {
-    const button = navigation.getByRole("button", { name: mode });
+  const navigation = page.getByRole("navigation", { name: /Ana navigasyon|Primary navigation/i });
+  await expect(navigation.getByRole("button")).toHaveCount(4);
+  for (const area of [/Ana Sayfa|Home/i, /Akademi|Academy/i, /Laboratuvar|Lab/i]) {
+    const button = navigation.getByRole("button", { name: area, exact: true });
     await button.click();
-    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(button).toHaveAttribute("aria-current", "page");
     await expect(page.locator("main")).toBeVisible();
     await expect(page.locator("canvas[data-molecular-scene-canvas]")).toHaveCount(0);
   }
 
-  const exploreButton = navigation.getByRole("button", { name: /Keşfet|Explore/i });
-  await exploreButton.click();
-  await expect(exploreButton).toHaveAttribute("aria-pressed", "true");
+  const atlasButton = navigation.getByRole("button", { name: /İlaç Atlası|Drug Atlas/i, exact: true });
+  await atlasButton.click();
+  await expect(atlasButton).toHaveAttribute("aria-current", "page");
+  await page.getByRole("tab", { name: /Mekânsal|Spatial/i }).click();
   await expect(sceneRoot(page)).toHaveAttribute("data-active-webgl-contexts", "1");
   expectCleanRuntime(telemetry);
 });

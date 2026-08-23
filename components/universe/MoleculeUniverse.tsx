@@ -49,6 +49,10 @@ import {
   type ExploreLodLevel,
 } from "@/lib/explore";
 import {
+  isReviewedVerification,
+  type VerificationStatus,
+} from "@/lib/domain/evidence";
+import {
   useI18n,
   type Locale,
   type TranslationKey,
@@ -94,6 +98,15 @@ export interface UniverseMoleculeStructure {
   twoDReviewStatus?: string;
 }
 
+export interface UniverseClassificationEvidence {
+  axis: string;
+  value: string;
+  label: string;
+  verificationStatus: VerificationStatus;
+  verificationNote?: string;
+  sourceIds: readonly string[];
+}
+
 export interface UniverseMolecule {
   id: string;
   name: string;
@@ -103,8 +116,12 @@ export interface UniverseMolecule {
   summary?: string;
   lensValues?: Readonly<Record<string, string>>;
   lensKeys?: Readonly<Record<string, string>>;
+  reviewerLensValues?: Readonly<Record<string, string>>;
+  reviewerLensKeys?: Readonly<Record<string, string>>;
   lensAliases?: Readonly<Record<string, readonly string[]>>;
+  reviewerLensAliases?: Readonly<Record<string, readonly string[]>>;
   coordinates?: Readonly<Record<string, { x: number; y: number }>>;
+  reviewerCoordinates?: Readonly<Record<string, { x: number; y: number }>>;
   evidenceLabel?: string;
   evidenceTone?: MoleculeEvidenceTone;
   accent?: string;
@@ -119,6 +136,7 @@ export interface UniverseMolecule {
     synthesisScope: string;
     nomenclatureLesson: string;
   };
+  classificationEvidence?: Readonly<Record<string, UniverseClassificationEvidence>>;
   structuralNeighbors?: readonly {
     id: string;
     score: number;
@@ -213,6 +231,12 @@ type ExploreStageStyle = CSSProperties & {
   "--explore-stage-viewport-height": string;
 };
 
+type NearClusterWorldStyle = CSSProperties & {
+  "--label-camera-pan-x": string;
+  "--label-camera-pan-y": string;
+  "--label-camera-zoom": string;
+};
+
 const DEFAULT_TELEMETRY: SceneTelemetry = {
   status: "idle",
   loadedCount: 0,
@@ -261,13 +285,13 @@ const VIEWPORT_SELECTION_SETTLE_MS = 650;
 
 const indexedCatalogCopy = {
   tr: {
-    browse: "Tüm kataloğa göz at",
-    results: "Tam katalog sonuçları",
+    browse: "Yapı indeksine göz at",
+    results: "İndekslenmiş yapı kayıtları",
     loading: "Katalog indeksi aranıyor…",
     hydrating: "Yapı kaydı yükleniyor…",
-    typeMore: "Tam katalogda aramak için en az iki karakter yaz.",
+    typeMore: "Yapı indeksinde aramak için en az iki karakter yaz.",
     unavailable: "Katalog araması şu anda kullanılamıyor.",
-    noResults: "Tam katalogda eşleşme bulunamadı.",
+    noResults: "İndekslenmiş yapı kayıtlarında eşleşme bulunamadı.",
     previous: "Önceki",
     next: "Sonraki",
     resultMeta: "CID {cid} · {formula}",
@@ -295,13 +319,13 @@ const indexedCatalogCopy = {
     comparisonBoundary: "SDF yerel bağ çevresi maskesi; kesin maksimum ortak alt yapı veya etki benzerliği iddiası değildir.",
   },
   en: {
-    browse: "Browse full catalog",
-    results: "Full catalog results",
+    browse: "Browse structure index",
+    results: "Indexed structure records",
     loading: "Searching the catalog index…",
     hydrating: "Loading the structure record…",
-    typeMore: "Type at least two characters to search the full catalog.",
+    typeMore: "Type at least two characters to search the structure index.",
     unavailable: "Catalog search is currently unavailable.",
-    noResults: "No match was found in the full catalog.",
+    noResults: "No match was found in the indexed structure records.",
     previous: "Previous",
     next: "Next",
     resultMeta: "CID {cid} · {formula}",
@@ -446,6 +470,39 @@ function presentVerificationStatus(status: string | undefined, t: Translator) {
   return key ? t(key) : t("status.unknown");
 }
 
+function ReviewerClassificationEvidence({
+  evidence,
+  fallback,
+  fallbackStatus,
+  t,
+}: {
+  readonly evidence?: UniverseClassificationEvidence;
+  readonly fallback: string;
+  readonly fallbackStatus?: string;
+  readonly t: Translator;
+}) {
+  if (!evidence) {
+    return (
+      <>
+        <span>{fallback}</span><br />
+        <small>{presentVerificationStatus(fallbackStatus, t)}</small>
+      </>
+    );
+  }
+  return (
+    <>
+      <span>{evidence.label} · <code>{evidence.value}</code></span><br />
+      <small>
+        {presentVerificationStatus(evidence.verificationStatus, t)} ·{" "}
+        {evidence.sourceIds.length > 0
+          ? evidence.sourceIds.join(" · ")
+          : t("common.notSpecified")}
+      </small>
+      {evidence.verificationNote ? <><br /><small>{evidence.verificationNote}</small></> : null}
+    </>
+  );
+}
+
 function getMoleculeSlug(id: string) {
   const separatorIndex = Math.max(id.lastIndexOf(":"), id.lastIndexOf("/"));
   return separatorIndex >= 0 ? id.slice(separatorIndex + 1) : id;
@@ -466,7 +523,7 @@ function cameraZoom(camera: MolecularSceneCamera) {
 }
 
 export function MoleculeUniverse({
-  molecules,
+  molecules: providedMolecules,
   lenses: providedLenses,
   initialLensId,
   initialSelectedId,
@@ -481,6 +538,19 @@ export function MoleculeUniverse({
   onMoleculeSelect,
 }: MoleculeUniverseProps) {
   const { locale, t } = useI18n();
+  const molecules = useMemo(
+    () => presentationMode === "reviewer"
+      ? providedMolecules.map((molecule) => ({
+          ...molecule,
+          category: molecule.reviewerLensValues?.target ?? molecule.category,
+          lensValues: molecule.reviewerLensValues ?? molecule.lensValues,
+          lensKeys: molecule.reviewerLensKeys ?? molecule.lensKeys,
+          lensAliases: molecule.reviewerLensAliases ?? molecule.lensAliases,
+          coordinates: molecule.reviewerCoordinates ?? molecule.coordinates,
+        }))
+      : providedMolecules,
+    [presentationMode, providedMolecules],
+  );
   const catalogCopy = indexedCatalogCopy[locale];
   const localizedDefaultLenses = useMemo<readonly UniverseLens[]>(
     () => [
@@ -560,6 +630,7 @@ export function MoleculeUniverse({
   const [comparisonAnalysis, setComparisonAnalysis] =
     useState<MolecularSceneComparisonAnalysis | null>(null);
   const [sceneViewportAspect, setSceneViewportAspect] = useState(16 / 9);
+  const [sceneViewportWidth, setSceneViewportWidth] = useState(1_440);
   const [sceneFirstViewportHeight, setSceneFirstViewportHeight] = useState<number | null>(null);
   const [browserViewportKey, setBrowserViewportKey] = useState("initial");
   const [flightActive, setFlightActive] = useState(false);
@@ -580,7 +651,7 @@ export function MoleculeUniverse({
   const [inspectorOpen, setInspectorOpen] = useState(true);
   const [telemetry, setTelemetry] = useState<SceneTelemetry>(DEFAULT_TELEMETRY);
   const universeVisibleSampleSize =
-    sceneViewportAspect < 1.2
+    sceneViewportWidth <= 540
       ? NARROW_UNIVERSE_VISIBLE_SAMPLE_SIZE
       : UNIVERSE_VISIBLE_SAMPLE_SIZE;
   const sceneViewportKey = browserViewportKey;
@@ -666,7 +737,10 @@ export function MoleculeUniverse({
       if (stage.dataset.level !== "universe") return;
       const width = entry?.contentRect.width ?? 0;
       const height = entry?.contentRect.height ?? 0;
-      if (width > 0 && height > 0) setSceneViewportAspect(width / height);
+      if (width > 0 && height > 0) {
+        setSceneViewportAspect(width / height);
+        setSceneViewportWidth(width);
+      }
       updateFirstViewportHeight();
     });
     observer.observe(stage);
@@ -734,6 +808,11 @@ export function MoleculeUniverse({
     for (const molecule of molecules) {
       const cid = molecule.structure?.pubChemCid;
       if (!cid) continue;
+      const evidence = molecule.classificationEvidence?.[activeLensId];
+      if (
+        presentationMode !== "reviewer"
+        && (!evidence || !isReviewedVerification(evidence.verificationStatus))
+      ) continue;
       const key = getLensKey(molecule, activeLensId, unclassifiedLabel);
       if (key === "unclassified") continue;
       const label = getLensValue(molecule, activeLensId, unclassifiedLabel).trim();
@@ -744,7 +823,7 @@ export function MoleculeUniverse({
       else if (!existing) labels.set(cid, label);
     }
     return labels;
-  }, [activeLensId, molecules, unclassifiedLabel]);
+  }, [activeLensId, molecules, presentationMode, unclassifiedLabel]);
   const classifyCatalogHit = useCallback(
     (hit: IndexedCatalogHit) => {
       const label = knownCatalogClassificationByCid.get(hit.pubChemCid);
@@ -1101,7 +1180,12 @@ export function MoleculeUniverse({
           ? CLUSTER_VISIBLE_SAMPLE_SIZE
           : universeVisibleSampleSize,
       minimumPerGroup: level === "universe" ? 2 : 1,
-      maximumPerGroup: level === "universe" ? 4 : CLUSTER_VISIBLE_SAMPLE_SIZE,
+      maximumPerGroup:
+        level === "universe"
+          ? clusters.length <= 1
+            ? universeVisibleSampleSize
+            : 4
+          : CLUSTER_VISIBLE_SAMPLE_SIZE,
       maximumGroups:
         level === "universe"
           ? Math.max(1, Math.floor(universeVisibleSampleSize / 2))
@@ -1114,6 +1198,7 @@ export function MoleculeUniverse({
   }, [
     effectiveClusterSelectedId,
     activeLensId,
+    clusters.length,
     eligibleIds,
     intendedSceneCandidates,
     level,
@@ -2371,7 +2456,14 @@ export function MoleculeUniverse({
                   })}
                 </div>
               ) : (
-                <div className={styles.nearClusterWorld}>
+                <div
+                  className={styles.nearClusterWorld}
+                  style={{
+                    "--label-camera-pan-x": `${universePan.x}px`,
+                    "--label-camera-pan-y": `${universePan.y}px`,
+                    "--label-camera-zoom": String(universeZoom),
+                  } as NearClusterWorldStyle}
+                >
                   <ul className={styles.nearClusterRegions} aria-label={t("explore.clusterNearNavigation")}>
                     {displayedClusters.map((cluster, index) => {
                       const selectorId = `cluster:${cluster.name}`;
@@ -2683,15 +2775,42 @@ export function MoleculeUniverse({
                     </div>
                     <div>
                       <dt>{t("explore.scaffoldFamily")}</dt>
-                      <dd>{selectedMolecule.studentProfile?.scaffoldFamily ?? t("common.notSpecified")}</dd>
+                      <dd>
+                        {presentationMode === "reviewer" ? (
+                          <ReviewerClassificationEvidence
+                            evidence={selectedMolecule.classificationEvidence?.scaffold}
+                            fallback={selectedMolecule.studentProfile?.scaffoldFamily ?? t("common.notSpecified")}
+                            fallbackStatus="pending-review"
+                            t={t}
+                          />
+                        ) : selectedMolecule.studentProfile?.scaffoldFamily ?? t("common.notSpecified")}
+                      </dd>
                     </div>
                     <div>
                       <dt>{catalogCopy.scaffoldDetail}</dt>
-                      <dd>{selectedMolecule.studentProfile?.scaffoldDetail ?? t("common.notSpecified")}</dd>
+                      <dd>
+                        {presentationMode === "reviewer" ? (
+                          <ReviewerClassificationEvidence
+                            evidence={selectedMolecule.classificationEvidence?.scaffold}
+                            fallback={selectedMolecule.studentProfile?.scaffoldDetail ?? t("common.notSpecified")}
+                            fallbackStatus="pending-review"
+                            t={t}
+                          />
+                        ) : selectedMolecule.studentProfile?.scaffoldDetail ?? t("common.notSpecified")}
+                      </dd>
                     </div>
                     <div>
                       <dt>{t("explore.drugClass")}</dt>
-                      <dd>{selectedMolecule.studentProfile?.drugClass ?? t("common.notSpecified")}</dd>
+                      <dd>
+                        {presentationMode === "reviewer" ? (
+                          <ReviewerClassificationEvidence
+                            evidence={selectedMolecule.classificationEvidence?.["pharmacologic-class"]}
+                            fallback={selectedMolecule.studentProfile?.drugClass ?? t("common.notSpecified")}
+                            fallbackStatus="pending-review"
+                            t={t}
+                          />
+                        ) : selectedMolecule.studentProfile?.drugClass ?? t("common.notSpecified")}
+                      </dd>
                     </div>
                   </dl>
                   <section className={styles.similarMolecules} data-neighbor-scope="resident-window">
@@ -2772,7 +2891,21 @@ export function MoleculeUniverse({
                         <div><dt>{t("explore.origin2d")}</dt><dd>{twoDProvenance.heading}</dd></div>
                         <div><dt>{t("explore.integrity2d")}</dt><dd>{presentVerificationStatus(selectedMolecule.structure?.twoDReviewStatus, t)}</dd></div>
                       </dl>
-                      <dl className={styles.lensValues}>{lenses.map((lens) => <div key={lens.id} data-active={lens.id === activeLensId ? "true" : "false"}><dt>{lens.label}</dt><dd>{getLensValue(selectedMolecule, lens.id, unclassifiedLabel)}</dd></div>)}</dl>
+                      <dl className={styles.lensValues}>
+                        {lenses.map((lens) => (
+                          <div key={lens.id} data-active={lens.id === activeLensId ? "true" : "false"}>
+                            <dt>{lens.label}</dt>
+                            <dd>
+                              <ReviewerClassificationEvidence
+                                evidence={selectedMolecule.classificationEvidence?.[lens.id]}
+                                fallback={getLensValue(selectedMolecule, lens.id, unclassifiedLabel)}
+                                fallbackStatus={lens.verificationStatus}
+                                t={t}
+                              />
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
                     </>
                   ) : (
                     <details className={styles.sourcesDrawer}>

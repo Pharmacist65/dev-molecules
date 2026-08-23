@@ -4,7 +4,10 @@ import { useMemo, useState } from "react";
 
 import { AdmePanel, DrugJourney, MetaboliteGraph } from "@/components/adme";
 import { PharmacologyPanel } from "@/components/pharmacology";
-import { createDrugDossierByIdOrSlug } from "@/lib/application/dossier";
+import {
+  createDrugDossierByIdOrSlug,
+  getDossierLearningAvailability,
+} from "@/lib/application/dossier";
 import type {
   DossierCoverageDimension,
   DossierCoverageStatus,
@@ -53,8 +56,11 @@ const copy = {
     learningBody: "Yalnız çalışan ve kaynak sınırı tanımlı öğrenme alanları açılır.",
     synthesis: "Sentez dersine git",
     nomenclature: "Nomenklatür dersine git",
+    noRelatedLessons: "Bu molekül için ilaç-özel ders bağlantısı henüz kaynak sınırını geçmedi.",
+    formula: "FORMÜL",
+    molarMass: "MOLAR KÜTLE",
     unavailableSection: "Bu bölümün ilaç-özel içeriği henüz kaynaklandırılmadı.",
-    sourcesHint: "Kaynak drawer'ı bilimsel ayrıntıları varsayılan görünümden ayrı tutar.",
+    sourcesHint: "Kaynak çekmecesi bilimsel ayrıntıları varsayılan görünümden ayrı tutar.",
     storySteps: ["Kimlik", "Kimya", "Aile", "Hedef ve mekanizma", "Vücuttaki yolculuk", "ADME", "Metabolitler", "Sentez", "Nomenklatür", "Karşılaştırma"],
     tabs: {
       overview: "Genel Bakış",
@@ -83,6 +89,9 @@ const copy = {
     learningBody: "Only working learning areas with explicit source boundaries are opened.",
     synthesis: "Open synthesis lesson",
     nomenclature: "Open nomenclature lesson",
+    noRelatedLessons: "No drug-specific lesson link has passed its source boundary for this molecule yet.",
+    formula: "FORMULA",
+    molarMass: "MOLAR MASS",
     unavailableSection: "Drug-specific content for this section is not sourced yet.",
     sourcesHint: "The sources drawer keeps scientific detail secondary to the default reading view.",
     storySteps: ["Identity", "Chemistry", "Family", "Target and mechanism", "Drug journey", "ADME", "Metabolites", "Synthesis", "Nomenclature", "Comparison"],
@@ -182,6 +191,9 @@ function LearningLinks({
   readonly onOpenNomenclature?: (moleculeId: string) => void;
 }) {
   const labels = copy[locale];
+  const availability = getDossierLearningAvailability(dossier);
+  const canOpenSynthesis = availability.synthesis && Boolean(onOpenSynthesis);
+  const canOpenNomenclature = availability.nomenclature && Boolean(onOpenNomenclature);
   return (
     <section className={styles.learningLinks}>
       <div>
@@ -190,8 +202,9 @@ function LearningLinks({
         <p>{labels.learningBody}</p>
       </div>
       <div>
-        {onOpenSynthesis ? <button type="button" onClick={() => onOpenSynthesis(dossier.moleculeId)}>{labels.synthesis} <i>↗</i></button> : null}
-        {onOpenNomenclature ? <button type="button" onClick={() => onOpenNomenclature(dossier.moleculeId)}>{labels.nomenclature} <i>↗</i></button> : null}
+        {canOpenSynthesis ? <button type="button" onClick={() => onOpenSynthesis?.(dossier.moleculeId)}>{labels.synthesis} <i>↗</i></button> : null}
+        {canOpenNomenclature ? <button type="button" onClick={() => onOpenNomenclature?.(dossier.moleculeId)}>{labels.nomenclature} <i>↗</i></button> : null}
+        {!canOpenSynthesis && !canOpenNomenclature ? <p>{labels.noRelatedLessons}</p> : null}
       </div>
     </section>
   );
@@ -245,8 +258,8 @@ export function DrugDossier({
             {dossier.aliases.length > 0 ? <small>{labels.aliases}: {dossier.aliases.join(" · ")}</small> : null}
           </div>
           <dl>
-            <div><dt>FORMULA</dt><dd>{dossier.chemistry.molecularFormula.value}</dd></div>
-            <div><dt>MOLAR MASS</dt><dd>{dossier.chemistry.molecularWeight.value} {dossier.chemistry.molecularWeight.unit}</dd></div>
+            <div><dt>{labels.formula}</dt><dd>{dossier.chemistry.molecularFormula.value}</dd></div>
+            <div><dt>{labels.molarMass}</dt><dd>{dossier.chemistry.molecularWeight.value} {dossier.chemistry.molecularWeight.unit}</dd></div>
             <div><dt>PubChem CID</dt><dd>{dossier.sourceRecord.identity.pubChemCid}</dd></div>
           </dl>
         </div>

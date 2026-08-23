@@ -656,6 +656,13 @@ export function SynthesisAtlas({
         : routePresentation === "foundational-education"
           ? labels.foundational
           : labels.blockedGate;
+  const routeTitle = routePresentation === "source-context-reconstruction"
+    ? `${moleculeLabels[route.moleculeId] ?? route.moleculeId}: ${labels.sourceContextReconstruction}`
+    : routePresentation === "declared-gap-reconstruction"
+      ? `${moleculeLabels[route.moleculeId] ?? route.moleculeId}: ${labels.declaredGapReconstruction}`
+      : routePresentation === "unavailable"
+        ? `${moleculeLabels[route.moleculeId] ?? route.moleculeId}: ${labels.unavailableRoute}`
+        : route.title[locale];
 
   return (
     <section
@@ -663,6 +670,7 @@ export function SynthesisAtlas({
       aria-labelledby="synthesis-atlas-heading"
       data-synthesis-atlas={route.id}
       data-route-kind={route.kind}
+      data-route-presentation={routePresentation}
       data-route-direction="interactive"
       data-atlas-level="route-step-mechanism"
       data-route-step-count={route.transformations.length}
@@ -713,7 +721,7 @@ export function SynthesisAtlas({
         </div>
         <div>
           <span data-source-gate={sourceGate}>{sourceGateLabel} · {route.transformations.length} {labels.transformations}</span>
-          <h2>{route.title[locale]}</h2>
+          <h2>{routeTitle}</h2>
           <p>{route.summary[locale]}</p>
           <small>{route.startBoundary[locale]}</small>
         </div>

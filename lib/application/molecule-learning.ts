@@ -1,3 +1,7 @@
+import {
+  isReviewedVerification,
+  type VerificationStatus,
+} from "../domain/evidence";
 import { getPrimaryClassification, type MoleculeRecord } from "../domain/molecule";
 import type { Locale } from "../i18n/locale";
 import { pubChemSystematicNameByCid } from "../data/pubchem-systematic-names";
@@ -105,6 +109,22 @@ export function getCuratedScaffoldFamily(scaffoldLabel: string, locale: Locale) 
   return CURATED_SCAFFOLD_FAMILY_LABELS[getCuratedScaffoldFamilyKey(scaffoldLabel)][locale];
 }
 
+/**
+ * Student-facing classifications fail closed. Draft labels stay available to
+ * Reviewer presentation through the catalog evidence view, but are never
+ * repeated here until their verification state is reviewed.
+ */
+export function presentLearningClassification(
+  label: string | undefined,
+  status: VerificationStatus | undefined,
+  locale: Locale,
+) {
+  if (label && status && isReviewedVerification(status)) return label;
+  return locale === "tr"
+    ? "Sınıflandırma incelemesi sürüyor"
+    : "Classification review in progress";
+}
+
 export function createStudentMoleculeProfile(
   record: MoleculeRecord,
   locale: Locale,
@@ -112,7 +132,16 @@ export function createStudentMoleculeProfile(
   const structural = getPrimaryClassification(record, "structural-family");
   const pharmacologic = getPrimaryClassification(record, "pharmacologic-class");
   const target = getPrimaryClassification(record, "target-profile");
-  const scaffoldDetail = structural?.label ?? (locale === "tr" ? "Henüz sınıflandırılmadı" : "Not yet classified");
+  const scaffoldDetail = presentLearningClassification(
+    structural?.label,
+    structural?.verification.status,
+    locale,
+  );
+  const scaffoldFamily = presentLearningClassification(
+    structural ? getCuratedScaffoldFamily(structural.label, locale) : undefined,
+    structural?.verification.status,
+    locale,
+  );
   const functionalGroups = identifyFunctionalGroups(record.identity.canonicalSmiles, locale);
   const routeAvailable = [
     "molecule:propranolol",
@@ -124,16 +153,20 @@ export function createStudentMoleculeProfile(
     systematicName: pubChemSystematicNameByCid[record.identity.pubChemCid],
     functionalGroups,
     functionalGroupsStatus: "computed-unreviewed",
-    scaffoldFamily: getCuratedScaffoldFamily(scaffoldDetail, locale),
+    scaffoldFamily,
     scaffoldDetail,
-    drugClass: pharmacologic?.label ?? (locale === "tr" ? "Sınıf kürasyonu bekliyor" : "Class curation pending"),
-    mechanismSummary: target
+    drugClass: presentLearningClassification(
+      pharmacologic?.label,
+      pharmacologic?.verification.status,
+      locale,
+    ),
+    mechanismSummary: target && isReviewedVerification(target.verification.status)
       ? locale === "tr"
-        ? `${target.label} bağlamında yapısal ve farmakolojik karşılaştırma.`
-        : `Structural and pharmacological comparison in the ${target.label} context.`
+        ? `${target.label} bağlamında gözden geçirilmiş öğrenme özeti.`
+        : `Reviewed learning summary in the ${target.label} context.`
       : locale === "tr"
-        ? "Etki mekanizması dersi henüz kürate edilmedi."
-        : "The mechanism lesson has not yet been curated.",
+        ? "Etki mekanizması incelemesi sürüyor; öğrenci görünümünde taslak hedef özeti gösterilmez."
+        : "Mechanism review is in progress; no draft target summary is shown in Student view.",
     synthesisScope: routeAvailable
       ? locale === "tr"
         ? "Sentez Atlası'nda kaynak bağlantılı eğitim rotası var."
@@ -144,8 +177,8 @@ export function createStudentMoleculeProfile(
     nomenclatureLesson:
       functionalGroups.length > 0
         ? locale === "tr"
-          ? `${functionalGroups.slice(0, 3).join(", ")} motiflerini yapı üzerinde incele.`
-          : `Inspect ${functionalGroups.slice(0, 3).join(", ")} motifs on the structure.`
+          ? `Hesaplanmış, incelenmemiş motif ipucu: ${functionalGroups.slice(0, 3).join(", ")}.`
+          : `Computed, unreviewed motif hint: ${functionalGroups.slice(0, 3).join(", ")}.`
         : locale === "tr"
           ? "Yapı dili dersi hazırlanıyor."
           : "The structure-language lesson is being prepared.",

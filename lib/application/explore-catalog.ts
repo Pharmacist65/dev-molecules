@@ -21,6 +21,7 @@ import {
   createStudentMoleculeProfile,
   getCuratedScaffoldFamily,
   getCuratedScaffoldFamilyKey,
+  presentLearningClassification,
   type StudentMoleculeProfile,
 } from "./molecule-learning";
 
@@ -56,12 +57,25 @@ export interface ExploreMoleculeView {
   readonly summary?: string;
   readonly lensValues: Readonly<Record<string, string>>;
   readonly lensKeys: Readonly<Record<string, string>>;
+  /** Raw draft values are switched in only by the Reviewer presentation. */
+  readonly reviewerLensValues?: Readonly<Record<string, string>>;
+  readonly reviewerLensKeys?: Readonly<Record<string, string>>;
   readonly lensAliases: Readonly<Record<string, readonly string[]>>;
+  readonly reviewerLensAliases?: Readonly<Record<string, readonly string[]>>;
   readonly coordinates: Readonly<Record<string, LensProjectionCoordinate>>;
+  readonly reviewerCoordinates?: Readonly<Record<string, LensProjectionCoordinate>>;
   readonly evidenceLabel: string;
   readonly evidenceTone: ExploreEvidenceTone;
   readonly accent: string;
   readonly studentProfile: StudentMoleculeProfile;
+  readonly classificationEvidence?: Readonly<Record<string, {
+    readonly axis: MoleculeClassificationAxis;
+    readonly value: string;
+    readonly label: string;
+    readonly verificationStatus: VerificationStatus;
+    readonly verificationNote?: string;
+    readonly sourceIds: readonly string[];
+  }>>;
   readonly structuralNeighbors: readonly {
     readonly id: string;
     readonly score: number;
@@ -133,24 +147,24 @@ const LENS_DEFINITIONS: readonly LensDefinition[] = [
     id: "therapeutic",
     axis: "therapeutic-area",
     copy: {
-      tr: { label: "Tedavi alanı", description: "Kaynak ve inceleme durumu taşıyan tedavi alanı kategorileri.", meaning: "Aynı kürate edilmiş tedavi alanı etiketine sahip kayıtlar aynı bölgeyi paylaşır.", doesNotMean: "Ekran yakınlığı klinik benzerlik, etkililik veya ortak endikasyon kanıtı değildir." },
-      en: { label: "Therapeutic area", description: "Therapeutic-area categories with source and review status.", meaning: "Records with the same curated therapeutic-area label share one region.", doesNotMean: "Screen proximity is not evidence of clinical similarity, efficacy, or a shared indication." },
+      tr: { label: "Tedavi alanı", description: "İnceleme kapılı tedavi alanı kategorileri.", meaning: "Öğrenci görünümü incelenmemiş taslak etiketleri tek nötr inceleme durumuna kapatır; Reviewer durum ve kaynağı ayrı gösterir.", doesNotMean: "Ekran yakınlığı klinik benzerlik, etkililik veya ortak endikasyon kanıtı değildir." },
+      en: { label: "Therapeutic area", description: "Review-gated therapeutic-area categories.", meaning: "Student view collapses unreviewed draft labels into one neutral review state; Reviewer exposes status and provenance separately.", doesNotMean: "Screen proximity is not evidence of clinical similarity, efficacy, or a shared indication." },
     },
   },
   {
     id: "target",
     axis: "target-profile",
     copy: {
-      tr: { label: "Hedef ailesi", description: "İnceleme kapılı hedef profili kategorilerinin deterministik yerleşimi.", meaning: "Aynı kürate edilmiş hedef profili etiketi kayıtları aynı bölgeye yerleştirir.", doesNotMean: "Ekran mesafesi bağlanma gücü, seçicilik veya biyolojik etki ölçümü değildir." },
-      en: { label: "Target family", description: "Deterministic placement of review-controlled target-profile categories.", meaning: "Records with the same curated target-profile label share one region.", doesNotMean: "Screen distance is not a measurement of binding strength, selectivity, or biological effect." },
+      tr: { label: "Hedef ailesi", description: "İnceleme kapılı hedef profili kategorilerinin deterministik yerleşimi.", meaning: "Öğrenci görünümü incelenmemiş hedef taslaklarını sınıf gerçeği olarak göstermez; Reviewer ham değer, durum ve kaynağı ayrı sunar.", doesNotMean: "Ekran mesafesi bağlanma gücü, seçicilik veya biyolojik etki ölçümü değildir." },
+      en: { label: "Target family", description: "Deterministic placement of review-gated target-profile categories.", meaning: "Student view never presents unreviewed target drafts as class facts; Reviewer exposes raw value, status, and provenance separately.", doesNotMean: "Screen distance is not a measurement of binding strength, selectivity, or biological effect." },
     },
   },
   {
     id: "scaffold",
     axis: "structural-family",
     copy: {
-      tr: { label: "Kürate edilmiş iskelet ailesi", description: "İnsan tarafından adlandırılmış iskelet ailelerinin kategorik görünümü.", meaning: "Aynı kürate edilmiş yapısal aile etiketi kayıtları aynı bölgeyi paylaşır.", doesNotMean: "Bu sürüm fingerprint, Tanimoto veya nicel yapısal benzerlik hesabı değildir." },
-      en: { label: "Curated scaffold family", description: "Categorical view of human-authored scaffold families.", meaning: "Records with the same curated structural-family label share one region.", doesNotMean: "This version does not calculate fingerprints, Tanimoto scores, or quantitative structural similarity." },
+      tr: { label: "İskelet ailesi", description: "İnceleme kapılı, insan tarafından yazılmış iskelet etiketleri.", meaning: "Öğrenci görünümü incelenmemiş iskelet taslaklarını gizler; Reviewer bunları durum ve kaynakla inceleyebilir.", doesNotMean: "Bu kategorik mercek fingerprint, Tanimoto veya nicel yapısal benzerlik hesabı değildir." },
+      en: { label: "Scaffold family", description: "Review-gated, human-authored scaffold labels.", meaning: "Student view withholds unreviewed scaffold drafts; Reviewer may inspect them with status and provenance.", doesNotMean: "This categorical lens does not calculate fingerprints, Tanimoto scores, or quantitative structural similarity." },
     },
   },
 ] as const;
@@ -183,6 +197,19 @@ function classificationLabel(record: MoleculeRecord, axis: MoleculeClassificatio
 
 function classificationKey(record: MoleculeRecord, axis: MoleculeClassificationAxis) {
   return getPrimaryClassification(record, axis)?.value ?? "unclassified";
+}
+
+function learningClassificationKey(
+  record: MoleculeRecord,
+  axis: MoleculeClassificationAxis,
+) {
+  const classification = getPrimaryClassification(record, axis);
+  return classification && (
+    classification.verification.status === "verified" ||
+    classification.verification.status === "expert-reviewed"
+  )
+    ? classification.value
+    : "classification-review-in-progress";
 }
 
 function classificationStatus(record: MoleculeRecord, axis: MoleculeClassificationAxis) {
@@ -220,17 +247,31 @@ function evidenceLabel(
   }`;
 }
 
+function learningSummary(record: MoleculeRecord, locale: Locale) {
+  const status = record.educationalProfile.verification.status;
+  if (status === "verified" || status === "expert-reviewed") {
+    return localizeExploreSummary(
+      record.id,
+      record.educationalProfile.summary,
+      locale,
+    );
+  }
+  return locale === "tr"
+    ? "Eğitim özeti incelemesi sürüyor; öğrenci görünümünde iç taslak bilimsel anlatı gösterilmez."
+    : "Educational summary review is in progress; no internal-draft scientific narrative is shown in Student view.";
+}
+
 export function createExploreCatalogView(
   records: readonly MoleculeRecord[],
   locale: Locale = "tr",
   assetBasePath = "/",
 ): ExploreCatalogView {
   const inputVersion = `catalog-snapshot-2026-08-22:${records.length}`;
-  const categoricalProjections = LENS_DEFINITIONS.map((definition) =>
+  const studentCategoricalProjections = LENS_DEFINITIONS.map((definition) =>
     createCategoricalLensProjection(
       {
         lensId: definition.id,
-        projectionId: `projection:${definition.id}:categorical-v1`,
+        projectionId: `projection:${definition.id}:student-review-gated-v1`,
         algorithmVersion: ALGORITHM_VERSION,
         inputVersion,
         generatedAt: GENERATED_AT,
@@ -240,7 +281,25 @@ export function createExploreCatalogView(
       },
       records.map((record) => ({
         id: record.id,
-        category: classificationLabel(record, definition.axis),
+        category: learningClassificationKey(record, definition.axis),
+      })),
+    ),
+  );
+  const reviewerCategoricalProjections = LENS_DEFINITIONS.map((definition) =>
+    createCategoricalLensProjection(
+      {
+        lensId: definition.id,
+        projectionId: `projection:${definition.id}:reviewer-draft-audit-v1`,
+        algorithmVersion: ALGORITHM_VERSION,
+        inputVersion,
+        generatedAt: GENERATED_AT,
+        meaning: definition.copy[locale].meaning,
+        doesNotMean: definition.copy[locale].doesNotMean,
+        verificationStatus: "pending-review",
+      },
+      records.map((record) => ({
+        id: record.id,
+        category: classificationKey(record, definition.axis),
       })),
     ),
   );
@@ -273,12 +332,16 @@ export function createExploreCatalogView(
     })),
   );
   const projections: readonly LensProjection[] = [
-    ...categoricalProjections,
+    ...studentCategoricalProjections,
+    structuralProjection,
+  ];
+  const reviewerProjections: readonly LensProjection[] = [
+    ...reviewerCategoricalProjections,
     structuralProjection,
   ];
 
   const lenses: ExploreLensView[] = LENS_DEFINITIONS.map((definition, index) => {
-    const projection = categoricalProjections[index];
+    const projection = studentCategoricalProjections[index];
     if (!projection) throw new Error(`Missing projection for lens ${definition.id}`);
     return {
       id: definition.id,
@@ -314,14 +377,61 @@ export function createExploreCatalogView(
 
   const molecules: ExploreMoleculeView[] = records.map((record) => {
     const studentProfile = createStudentMoleculeProfile(record, locale);
+    const classificationEvidence = Object.fromEntries(
+      [
+        ...LENS_DEFINITIONS.map((definition) => [definition.id, definition.axis] as const),
+        ["pharmacologic-class", "pharmacologic-class"] as const,
+      ].flatMap(([key, axis]) => {
+        const classification = getPrimaryClassification(record, axis);
+        return classification
+          ? [[key, {
+              axis,
+              value: classification.value,
+              label: localizeExploreClassification(classification.label, locale),
+              verificationStatus: classification.verification.status,
+              verificationNote: classification.verification.note,
+              sourceIds: classification.sourceIds,
+            }] as const]
+          : [];
+      }),
+    );
     const lensValues = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => [
+        definition.id,
+        presentLearningClassification(
+          localizeExploreClassification(classificationLabel(record, definition.axis), locale),
+          classificationStatus(record, definition.axis),
+          locale,
+        ),
+      ] as const),
+      [
+        STRUCTURAL_LENS_ID,
+        locale === "tr"
+          ? "Hesaplanmış yapısal görünüm · incelenmemiş"
+          : "Computed structural view · unreviewed",
+      ] as const,
+    ]);
+    const lensKeys = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => [
+        definition.id,
+        learningClassificationKey(record, definition.axis),
+      ] as const),
+      [STRUCTURAL_LENS_ID, "computed-structural-view-unreviewed"] as const,
+    ]);
+    const reviewerLensValues = Object.fromEntries([
       ...LENS_DEFINITIONS.map((definition) => [
         definition.id,
         localizeExploreClassification(classificationLabel(record, definition.axis), locale),
       ] as const),
-      [STRUCTURAL_LENS_ID, studentProfile.scaffoldFamily] as const,
+      [
+        STRUCTURAL_LENS_ID,
+        getCuratedScaffoldFamily(
+          classificationLabel(record, "structural-family"),
+          locale,
+        ),
+      ] as const,
     ]);
-    const lensKeys = Object.fromEntries([
+    const reviewerLensKeys = Object.fromEntries([
       ...LENS_DEFINITIONS.map((definition) => [
         definition.id,
         classificationKey(record, definition.axis),
@@ -333,10 +443,39 @@ export function createExploreCatalogView(
     ]);
     const lensAliases = Object.fromEntries([
       ...LENS_DEFINITIONS.map((definition) => {
+        const status = classificationStatus(record, definition.axis);
         const sourceLabel = classificationLabel(record, definition.axis);
         return [
           definition.id,
           [...new Set([
+            presentLearningClassification(
+              localizeExploreClassification(sourceLabel, "tr"),
+              status,
+              "tr",
+            ),
+            presentLearningClassification(
+              localizeExploreClassification(sourceLabel, "en"),
+              status,
+              "en",
+            ),
+          ])],
+        ] as const;
+      }),
+      [
+        STRUCTURAL_LENS_ID,
+        [
+          "Hesaplanmış yapısal görünüm · incelenmemiş",
+          "Computed structural view · unreviewed",
+        ],
+      ] as const,
+    ]);
+    const reviewerLensAliases = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => {
+        const sourceLabel = classificationLabel(record, definition.axis);
+        return [
+          definition.id,
+          [...new Set([
+            classificationKey(record, definition.axis),
             sourceLabel,
             localizeExploreClassification(sourceLabel, "tr"),
             localizeExploreClassification(sourceLabel, "en"),
@@ -361,6 +500,12 @@ export function createExploreCatalogView(
         return coordinate ? [[projection.lensId, coordinate] as const] : [];
       }),
     );
+    const reviewerCoordinates = Object.fromEntries(
+      reviewerProjections.flatMap((projection) => {
+        const coordinate = projection.coordinates[record.id];
+        return coordinate ? [[projection.lensId, coordinate] as const] : [];
+      }),
+    );
     const statuses = [
       record.identity.verification.status,
       ...LENS_DEFINITIONS.map((definition) =>
@@ -378,15 +523,20 @@ export function createExploreCatalogView(
       canonicalSmiles: record.identity.canonicalSmiles,
       formula: record.identity.molecularFormula,
       category: lensValues.target,
-      summary: localizeExploreSummary(record.id, record.educationalProfile.summary, locale),
+      summary: learningSummary(record, locale),
       lensValues,
       lensKeys,
+      reviewerLensValues,
+      reviewerLensKeys,
       lensAliases,
+      reviewerLensAliases,
       coordinates,
+      reviewerCoordinates,
       evidenceLabel: evidenceLabel(record, statuses, locale),
       evidenceTone: evidenceTone(statuses),
       accent: ACCENTS[stableHash(record.id) % ACCENTS.length] ?? ACCENTS[0],
       studentProfile,
+      classificationEvidence,
       structuralNeighbors: getNearestStructuralNeighbors(
         structuralProjection,
         record.id,

@@ -29,6 +29,8 @@
     "catalog:build": "node --import tsx scripts/catalog/cli.mts build",
     "catalog:validate": "node --import tsx scripts/catalog/cli.mts validate",
     "catalog:report": "node --import tsx scripts/catalog/cli.mts report",
+    "licenses:generate": "node --import tsx scripts/generate-third-party-notices.mts",
+    "licenses:check": "node --import tsx scripts/generate-third-party-notices.mts --check",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },

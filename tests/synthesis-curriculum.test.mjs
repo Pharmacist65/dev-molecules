@@ -5,6 +5,7 @@ import { tsImport } from "tsx/esm/api";
 
 const {
   buildSynthesisCurriculumReadiness,
+  canOpenSynthesisCurriculumMolecule,
   resolveSynthesisCurriculumSelection,
   synthesisCurriculumReadiness,
 } = await tsImport(
@@ -100,6 +101,13 @@ test("a broken direct-document gate closes the route and prevents curriculum sel
     moleculeId: null,
     reason: "none-ready",
   });
+  assert.equal(canOpenSynthesisCurriculumMolecule(sourceRoute.moleculeId, readiness), false);
+});
+
+test("route selection accepts only an exact source-gated curriculum molecule", () => {
+  assert.equal(canOpenSynthesisCurriculumMolecule("molecule:carvedilol"), true);
+  assert.equal(canOpenSynthesisCurriculumMolecule("molecule:unknown"), false);
+  assert.equal(canOpenSynthesisCurriculumMolecule(undefined), false);
 });
 
 test("the twelve-drug milestone is not a schema ceiling", () => {

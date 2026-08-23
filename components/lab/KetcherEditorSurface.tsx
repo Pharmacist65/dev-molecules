@@ -2,6 +2,7 @@
 
 import {
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -16,6 +17,7 @@ import { StandaloneStructServiceProvider } from "ketcher-standalone/dist/binaryW
 
 import type { LabStructureSnapshot } from "@/lib/application/lab";
 
+import { scheduleKetcherFitAfterLayout } from "./ketcher-fit";
 import styles from "./LabHub.module.css";
 
 export interface KetcherEditorHandle {
@@ -31,6 +33,11 @@ interface KetcherEditorSurfaceProps {
   readonly onError?: (message: string) => void;
 }
 
+const localizedEditorError = (locale: "tr" | "en"): string =>
+  locale === "tr"
+    ? "Yerel yapı işlemi tamamlanamadı."
+    : "The local structure operation could not be completed.";
+
 export const KetcherEditorSurface = forwardRef<
   KetcherEditorHandle,
   KetcherEditorSurfaceProps
@@ -40,25 +47,45 @@ export const KetcherEditorSurface = forwardRef<
 ) {
   const provider = useMemo(() => new StandaloneStructServiceProvider(), []);
   const [ketcher, setKetcher] = useState<Ketcher | null>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const cancelFitRef = useRef<() => void>(() => undefined);
   const loadedInitialRef = useRef(false);
+
+  const fitAfterLayout = useCallback((instance: Ketcher) => {
+    const frame = frameRef.current;
+    if (!frame) return;
+    cancelFitRef.current();
+    cancelFitRef.current = scheduleKetcherFitAfterLayout(instance, frame);
+  }, []);
 
   useEffect(() => {
     onReadyChange?.(Boolean(ketcher));
   }, [ketcher, onReadyChange]);
 
+  useEffect(
+    () => () => {
+      cancelFitRef.current();
+    },
+    [],
+  );
+
   useEffect(() => {
     if (!ketcher || loadedInitialRef.current) return;
+    let active = true;
     loadedInitialRef.current = true;
-    void ketcher.setMolecule(initialStructure).catch((error: unknown) => {
-      onError?.(
-        error instanceof Error
-          ? error.message
-          : locale === "tr"
-            ? "Başlangıç yapısı yüklenemedi."
-            : "The initial structure could not be loaded.",
-      );
-    });
-  }, [initialStructure, ketcher, locale, onError]);
+    void ketcher
+      .setMolecule(initialStructure, { needZoom: true })
+      .then(() => {
+        if (active) fitAfterLayout(ketcher);
+      })
+      .catch(() => {
+        onError?.(localizedEditorError(locale));
+      });
+    return () => {
+      active = false;
+      cancelFitRef.current();
+    };
+  }, [fitAfterLayout, initialStructure, ketcher, locale, onError]);
 
   useImperativeHandle(
     ref,
@@ -76,17 +103,20 @@ export const KetcherEditorSurface = forwardRef<
       async importStructure(structure: string) {
         if (!ketcher) throw new Error("Ketcher is not ready.");
         await ketcher.setMolecule(structure, { needZoom: true });
+        fitAfterLayout(ketcher);
       },
       async clear() {
         if (!ketcher) throw new Error("Ketcher is not ready.");
+        cancelFitRef.current();
         await ketcher.setMolecule("");
       },
     }),
-    [ketcher],
+    [fitAfterLayout, ketcher],
   );
 
   return (
     <div
+      ref={frameRef}
       className={styles.ketcherFrame}
       data-ketcher-editor="standalone"
       data-ketcher-ready={ketcher ? "true" : "false"}
@@ -101,7 +131,7 @@ export const KetcherEditorSurface = forwardRef<
           help: { hidden: true },
           about: { hidden: true },
         }}
-        errorHandler={(message) => onError?.(message)}
+        errorHandler={() => onError?.(localizedEditorError(locale))}
         onInit={(instance) => setKetcher(instance)}
       />
     </div>

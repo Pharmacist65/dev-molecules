@@ -2154,6 +2154,15 @@
   }
 }
 
+/* The full 15px description remains available at ordinary heights. At short
+   desktop zoom-equivalent viewports, the title and controls carry the same
+   task context while this supporting sentence yields room to the real scene. */
+@media (max-height: 720px) and (min-width: 721px) {
+  .description {
+    display: none;
+  }
+}
+
 /* Light editorial chrome around the intentionally dark molecular stage. */
 .universe {
   --ink: #13213c;
@@ -2799,4 +2808,167 @@
 @media (max-width: 720px) {
   .indexedResults { position: fixed; top: 158px; right: 0.75rem; left: 0.75rem; }
   .similarMolecules ul { grid-template-columns: 1fr; }
+}
+
+/* Spatial Atlas critical readability contract. These learner-facing controls
+   stay at a 13px minimum at the default 16px root size; dense molecular-canvas
+   and SDF-internal labels intentionally retain their compact renderer scale. */
+.eyebrow {
+  font-size: 0.8125rem;
+}
+
+.description {
+  font-size: 0.9375rem;
+}
+
+.headerSummary span {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.headerSummary strong {
+  font-size: 0.875rem;
+}
+
+.searchField label,
+.controlLabel,
+.searchLabelRow > button {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.searchLabelRow {
+  flex-wrap: wrap;
+  row-gap: 0.18rem;
+}
+
+.searchControl input {
+  min-height: 44px;
+  font-size: 0.875rem;
+}
+
+.clearButton {
+  min-height: 36px;
+  font-size: 0.8125rem;
+}
+
+.lensDisclosureButton {
+  min-height: 52px;
+}
+
+.lensDisclosureButton span {
+  font-size: 0.8125rem;
+}
+
+.lensDisclosureButton strong {
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.lensButton {
+  min-height: 42px;
+  font-size: 0.8125rem;
+}
+
+.lensDescription,
+.lensMeaning,
+.lensCaveat,
+.studentHint {
+  font-size: 0.9375rem;
+}
+
+.lensDescription {
+  overflow: visible;
+  line-height: 1.4;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.breadcrumb {
+  min-height: 44px;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.axisLabel {
+  font-size: 0.8125rem;
+}
+
+.clusterGlyph strong,
+.clusterGlyph small,
+.nearClusterRegions strong,
+.nearClusterRegions small {
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+.clusterGlyph {
+  min-height: 112px;
+}
+
+.nearClusterRegions button {
+  min-height: 32px;
+}
+
+.universeCamera button {
+  min-height: 40px;
+  padding-inline: 0.72rem;
+  font-size: 0.8125rem;
+}
+
+.universeCamera output {
+  min-width: 52px;
+  font-size: 0.8125rem;
+}
+
+.lodStatus {
+  max-width: calc(100% - 15rem);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.stageStatus {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.footer {
+  min-height: 48px;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.indexedResults > header strong,
+.indexedResults > header span,
+.indexedResults li strong,
+.indexedResults li span,
+.indexedResults li small,
+.indexedResults > footer button {
+  font-size: 0.8125rem;
+}
+
+.indexedResults > p {
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 720px) {
+  .lodStatus {
+    right: 0.75rem;
+    bottom: 4.65rem;
+    max-width: none;
+    border-radius: 10px;
+  }
+
+  .universeCamera {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    justify-content: flex-end;
+    overflow-x: auto;
+  }
+
+  .nearClusterRegions button {
+    min-width: 104px;
+    max-width: 132px;
+  }
 }

@@ -34,6 +34,8 @@ test.describe("student mobile experience", () => {
 
     const scene = page.locator('[data-active-webgl-contexts="1"]').first();
     await expect(scene).toHaveAttribute("data-scene-status", "ready");
+    await expect(scene).toHaveAttribute("data-scene-sample-count", "6");
+    await expect(scene).toHaveAttribute("data-visible-molecule-count", "6");
     const sceneBox = await scene.boundingBox();
     expect(sceneBox, "the mobile molecular scene must have layout dimensions").not.toBeNull();
     if (sceneBox) {
@@ -66,29 +68,29 @@ test.describe("student mobile experience", () => {
     expectCleanRuntime(telemetry);
   });
 
-  test("keeps the six-stage map and Synthesis Atlas usable at 390px", async ({ page }) => {
+  test("keeps the eight-module Academy and Synthesis Atlas usable at 390px", async ({ page }) => {
     const telemetry = watchRuntime(page);
-    await page.goto("/#universe", { waitUntil: "domcontentloaded" });
-    await page.getByRole("button", { name: /02 Öğren|02 Learn/i }).click();
-    await expect(page.locator("[data-learning-journey-map]")).toBeVisible();
-    await expect(page.locator("[data-learning-journey-map] > ol > li")).toHaveCount(6);
+    await page.goto("/#academy", { waitUntil: "domcontentloaded" });
+    const academy = page.locator('[data-academy-learning-map="eight-modules"]');
+    await expect(academy).toBeVisible();
+    await expect(academy.locator("[data-academy-module]")).toHaveCount(8);
     await expectNoHorizontalOverflow(page);
     await captureAcceptanceScreenshot(page, "student-learning-map-390x844.png");
 
-    await page
-      .getByRole("button", { name: /Sentez Atlası'nı aç|Open Synthesis Atlas/i })
-      .first()
-      .click();
-    await expect(page.getByRole("heading", {
-      name: /Bir molekülü.*dönüşüm|Think through a molecule/i,
-    })).toBeVisible();
+    await page.goto("/#academy/synthesis/propranolol/overview", {
+      waitUntil: "domcontentloaded",
+    });
+    const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
+    await expect(synthesis).toBeVisible();
+    await synthesis.getByRole("button", { name: /Rota dersini aç|Open route lesson/i }).first().click();
+    await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await captureAcceptanceScreenshot(page, "student-synthesis-atlas-390x844.png");
     expectCleanRuntime(telemetry);
   });
 });
 
-test("catalog delivery failure is explicit and never masquerades as the full catalog", async ({ page }) => {
+test("catalog delivery failure is explicit and never masquerades as the complete drug universe", async ({ page }) => {
   await page.addInitScript(() => {
     window.localStorage.setItem("dev-molecules:locale", "tr");
     window.localStorage.setItem("dev-molecules:presentation-mode", "student");
@@ -102,11 +104,12 @@ test("catalog delivery failure is explicit and never masquerades as the full cat
   await expect(app).toBeVisible();
   await expect(app).toHaveAttribute("data-catalog-records", "15");
   const alert = page.locator('[data-catalog-fallback="true"]');
-  await expect(alert).toContainText(/Tam katalog kullanılamıyor|Full catalog unavailable/i);
+  await expect(alert).toContainText(/Yapı indeksi kullanılamıyor|Structure index unavailable/i);
   await expect(alert).toContainText(/15/);
   await expect(page.locator('[data-indexed-search="disabled"]')).toBeVisible();
 
   await page.getByRole("button", { name: /Ayarlar|Settings/i }).click();
-  await page.getByRole("button", { name: /Reviewer Mode/i }).click();
-  await expect(alert.locator("code")).toContainText(/503|Catalog|katalog/i);
+  await page.getByRole("button", { name: /Uzman görünümü|Expert view/i }).click();
+  await expect(alert.locator("code")).toHaveCount(0);
+  await expect(alert).not.toContainText(/503|Catalog manifest request failed/i);
 });

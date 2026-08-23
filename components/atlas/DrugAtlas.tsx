@@ -36,35 +36,35 @@ const LazyAtlasSpatialView = lazy(() => import("./AtlasSpatialView"));
 type LoadState =
   | { readonly status: "loading"; readonly page: DrugAtlasWindow | null }
   | { readonly status: "ready"; readonly page: DrugAtlasWindow }
-  | { readonly status: "error"; readonly page: null; readonly message: string };
+  | { readonly status: "error"; readonly page: null };
 
 const copyByLocale = {
   tr: {
     eyebrow: "Yaşayan Moleküler Atlas",
     title: "İlaç Atlası",
-    description: "Onaylı küçük molekülleri isim, formül veya PubChem CID ile ara; yalnız mevcut ve kaynaklanmış içerik katmanlarını gör.",
+    description: "Seçilmiş DrugCentral FDA-listesi kaynak kesitindeki 2.331 satırın tamamından kesin kimlik ve eksiksiz 2B/3B yapı eşlemesiyle çözülen 1.552 moleküler kaydı ara. Bu indeks FDA ürün veya başvuru evreni değildir.",
     browse: "Göz at",
     spatial: "Mekânsal",
-    browseDescription: "Tam katalog · alfabetik, sayfalı ve klavye erişilebilir",
+    browseDescription: "1.552 yapı-bütün indeks kaydı · alfabetik, sayfalı ve klavye erişilebilir",
     spatialDescription: "Sınırlı temsilî 3B örneklem",
-    searchLabel: "Tam ilaç kataloğunda ara",
+    searchLabel: "1.552 yapı-bütün indeks kaydında ara",
     searchPlaceholder: "İlaç adı, etken madde, formül veya CID",
     clear: "Aramayı temizle",
-    allRecords: "Tüm kayıtlar",
+    allRecords: "Yapı-bütün indeks",
     filters: "Kaynaklı filtreler",
     all: "Tümü",
     loading: "Katalog indeksi yükleniyor…",
     unavailable: "Katalog şu anda yüklenemedi.",
     retry: "Yeniden dene",
     queryHint: "Aramak için en az iki karakter yaz.",
-    empty: "Tam katalogda eşleşme bulunamadı.",
+    empty: "Yapı-bütün indekste eşleşme bulunamadı.",
     previous: "Önceki",
     next: "Sonraki",
     resultRange: "{start}–{end} / {total} kayıt",
-    resultSearch: "{shown} sonuç · tam katalog {total} kayıt",
+    resultSearch: "{shown} sonuç · yapı-bütün indekste {total} kayıt",
     classification: "Sınıf",
     coverage: "İçerik kapsamı",
-    identityCoverage: "Kimlik indeksli",
+    identityCoverage: "Kimlik ve yapı indeksli",
     openDrug: "İlaç dosyasını aç",
     thumbnailWaiting: "2B sırada",
     thumbnailLoading: "2B yükleniyor",
@@ -73,34 +73,34 @@ const copyByLocale = {
     spatialLoading: "Mekânsal atlas yükleniyor…",
     spatialUnavailable: "Bu yayında 3B örneklem yapılandırılmadı.",
     spatialScope: "3B örneklem",
-    spatialBoundary: "Tam katalog değildir; sahne okunabilirlik için yalnız temsilî yapıları yükler.",
+    spatialBoundary: "FDA ürün veya başvuru evreni değildir; sahne 1.552 kayıtlık yapı-bütün indeksten yalnız temsilî yapıları yükler.",
   },
   en: {
     eyebrow: "Living Molecular Atlas",
     title: "Drug Atlas",
-    description: "Search approved small molecules by name, formula, or PubChem CID, and see only the content layers that actually exist and are sourced.",
+    description: "Search 1,552 molecular records resolved by exact identity and complete 2D/3D structure matching from all 2,331 rows in the selected DrugCentral FDA-list source slice. This index is not an FDA product or application universe.",
     browse: "Browse",
     spatial: "Spatial",
-    browseDescription: "Complete catalog · alphabetic, paginated, keyboard accessible",
+    browseDescription: "1,552 structure-complete index records · alphabetic, paginated, keyboard accessible",
     spatialDescription: "Bounded representative 3D sample",
-    searchLabel: "Search the complete drug catalog",
+    searchLabel: "Search 1,552 structure-complete index records",
     searchPlaceholder: "Drug, active ingredient, formula, or CID",
     clear: "Clear search",
-    allRecords: "All records",
+    allRecords: "Structure-complete index",
     filters: "Source-backed filters",
     all: "All",
     loading: "Loading the catalog index…",
     unavailable: "The catalog could not be loaded.",
     retry: "Try again",
     queryHint: "Enter at least two characters to search.",
-    empty: "No match was found in the complete catalog.",
+    empty: "No match was found in the structure-complete index.",
     previous: "Previous",
     next: "Next",
     resultRange: "Records {start}–{end} of {total}",
-    resultSearch: "{shown} results · {total} records in the complete catalog",
+    resultSearch: "{shown} results · {total} records in the structure-complete index",
     classification: "Class",
     coverage: "Content coverage",
-    identityCoverage: "Identity indexed",
+    identityCoverage: "Identity and structure indexed",
     openDrug: "Open drug dossier",
     thumbnailWaiting: "2D queued",
     thumbnailLoading: "Loading 2D",
@@ -109,7 +109,7 @@ const copyByLocale = {
     spatialLoading: "Loading the spatial atlas…",
     spatialUnavailable: "No 3D sample is configured in this publication.",
     spatialScope: "3D sample",
-    spatialBoundary: "This is not the full catalog; the scene loads only representative structures for legibility.",
+    spatialBoundary: "This is not an FDA product or application universe; the scene loads only representative structures from the 1,552-record structure-complete index.",
   },
 } as const;
 
@@ -203,12 +203,11 @@ export function DrugAtlas({
             setLoadState({ status: "ready", page });
           }
         })
-        .catch((error: unknown) => {
+        .catch(() => {
           if (requestSequence === requestSequenceRef.current) {
             setLoadState({
               status: "error",
               page: null,
-              message: error instanceof Error ? error.message : copy.unavailable,
             });
           }
         });
@@ -395,7 +394,6 @@ export function DrugAtlas({
             {loadState.status === "error" ? (
               <div className={styles.message} role="alert">
                 <strong>{copy.unavailable}</strong>
-                <span>{loadState.message}</span>
                 <button type="button" onClick={() => setRetryRevision((value) => value + 1)}>
                   {copy.retry}
                 </button>

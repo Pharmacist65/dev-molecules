@@ -35,7 +35,7 @@ const evidenceLevels = [
   "no-evidence",
 ];
 
-test("Student and Expert are exhaustive presentation depths, never reviewer aliases", () => {
+test("Student and Dossier-only Expert are exhaustive learner preferences, never reviewer aliases", () => {
   assert.deepEqual(Object.keys(learnerPresentationContracts).sort(), ["expert", "student"]);
   assert.equal(learnerPresentationContracts.student.mode, "student");
   assert.equal(learnerPresentationContracts.student.rawScientificEnums, false);
@@ -43,8 +43,12 @@ test("Student and Expert are exhaustive presentation depths, never reviewer alia
   assert.equal(learnerPresentationContracts.student.export, "unavailable");
   assert.equal(learnerPresentationContracts.expert.mode, "expert");
   assert.equal(learnerPresentationContracts.expert.rawScientificEnums, false);
-  assert.equal(learnerPresentationContracts.expert.measurements, "value-unit-conditions");
-  assert.equal(learnerPresentationContracts.expert.assayContext, "visible");
+  assert.equal(learnerPresentationContracts.expert.narrative, "dossier-reference-default");
+  assert.equal(learnerPresentationContracts.expert.sourceDetail, "same-as-student");
+  assert.equal(learnerPresentationContracts.expert.measurements, "same-implemented-fields");
+  assert.equal(learnerPresentationContracts.expert.assayContext, "same-implemented-fields");
+  assert.equal(learnerPresentationContracts.expert.comparison, "same-guided-comparison");
+  assert.equal(learnerPresentationContracts.expert.export, "same-local-lab-export");
   assert.ok(!Object.hasOwn(learnerPresentationContracts, "reviewer"));
 
   for (const locale of ["tr", "en"]) {
@@ -53,8 +57,27 @@ test("Student and Expert are exhaustive presentation depths, never reviewer alia
     assert.ok(student.label.length > 5);
     assert.ok(expert.label.length > 5);
     assert.notEqual(student.description, expert.description);
+    assert.match(expert.description, /Drug Dossiers|İlaç Dosyalarını/);
     assert.notEqual(student.exportLabel, expert.exportLabel);
   }
+});
+
+test("anonymous Expert depth never enters Reviewer scientific presentation", async () => {
+  const app = await readFile(
+    new URL("../components/platform/DevMoleculesApp.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(app, /const presentationMode: ExplorePresentationMode = "student"/);
+  assert.doesNotMatch(
+    app,
+    /experienceMode === "expert" \? "reviewer" : "student"/,
+  );
+  assert.match(
+    app,
+    /initialMode=\{experienceMode === "expert" \? "reference" : "story"\}/,
+  );
+  assert.doesNotMatch(app, /explore\.catalogFallbackReviewer/);
 });
 
 test("every scientific presentation enum has TR/EN copy and raw values do not become labels", () => {

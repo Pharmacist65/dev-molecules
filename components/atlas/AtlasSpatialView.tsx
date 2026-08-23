@@ -27,7 +27,6 @@ export function AtlasSpatialView({
       <MoleculeUniverse
         {...configuration.universe}
         catalogRecordCount={configuration.catalogCount}
-        presentationMode="student"
       />
     </section>
   );

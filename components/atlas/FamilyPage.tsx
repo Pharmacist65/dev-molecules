@@ -11,7 +11,6 @@ import {
 } from "@/lib/application/family-page";
 import type {
   DrugClassificationSystem,
-  DrugFamilyKind,
   DrugFamilyPageModel,
   FamilyComparisonFieldId,
   FamilyEvidenceField,
@@ -27,76 +26,74 @@ const LazyAtlasSpatialView = lazy(() => import("./AtlasSpatialView"));
 
 const copyByLocale = {
   tr: {
-    eyebrow: "İlaç Ailesi",
-    overview: "Aile görünümü",
-    hierarchy: "Sınıflandırma hiyerarşisi",
-    sharedMechanism: "Ortak farmakolojik mekanizma",
-    primaryTargets: "Birincil hedef aileleri",
-    sharedMotifs: "Ortak yapısal motifler",
-    representatives: "Temsilî ilaçlar",
+    eyebrow: "Aday Kayıt İncelemesi",
+    overview: "İnceleme seti sınırı",
+    hierarchy: "Üyelik / sınıflandırma durumu",
+    sharedMechanism: "Ortak mekanizma kanıt durumu",
+    primaryTargets: "Ortak hedef kanıt durumu",
+    sharedMotifs: "Ortak yapısal motif kanıt durumu",
+    candidateIdentities: "Aday kimlikler",
     compare2d: "2B karşılaştırma",
-    explore3d: "Temsilî yapıları 3B incele",
+    explore3d: "Aday yapıları 3B incele",
     hide3d: "3B görünümü kapat",
-    spatialLoading: "Temsilî 3B yapılar yükleniyor…",
-    spatialScope: "Aile 3B örneklemi",
-    spatialBoundary: "Yalnız temsilî yapılar; aile üyelerinin tamamı değildir.",
+    spatialLoading: "Aday 3B yapılar yükleniyor…",
+    spatialScope: "Aday kayıt 3B örneklemi",
+    spatialBoundary: "Yalnız seçilmiş aday kimlikler; bu sette üyelik kurulmamıştır.",
     fingerprint: "Yapısal fingerprint karşılaştırması",
     fingerprintBoundary: "Hesaplanmış ve incelenmemiştir; farmakolojik veya klinik benzerlik anlamına gelmez.",
     fingerprintMissing: "Karşılaştırma için en az iki kaynaklı canonical SMILES gerekir.",
     comparison: "Kaynaklı karşılaştırma matrisi",
-    comparisonEmpty: "En az iki ilaçta karşılaştırılabilir kaynaklı alan bulunmuyor.",
+    comparisonEmpty: "En az iki aday kimlikte karşılaştırılabilir kaynaklı alan bulunmuyor.",
     coverage: "Açık veri boşlukları",
     coverageComplete: "Bu karşılaştırma alanları için açık boşluk yok.",
     missing: "Kürate edilmedi",
     source: "Kaynak ve sınırlar",
-    noHierarchy: "Bu aile için kaynaklı bir sınıflandırma yolu henüz eklenmedi.",
+    noHierarchy: "Bu aday seti için kaynaklı üyelik veya sınıflandırma yolu eklenmedi. Set üyeliği kurulmamıştır.",
     openDrug: "İlaç dosyası",
     learning: "Öğrenme yolu",
-    noLearning: "Bu aile için öğrenme yolu henüz kürate edilmedi.",
+    noLearning: "Bu aday inceleme seti için öğrenme yolu henüz kürate edilmedi.",
     formula: "Moleküler formül",
+    identitySource: "PubChem kimlik kaydı",
+    structureSource: "PubChem 2B SDF kaynağı",
     atc: "Terapötik / ATC",
     pharmacological: "Farmakolojik mekanizma",
     scaffold: "Kimyasal / scaffold",
-    therapeuticKind: "Terapötik aile",
-    pharmacologicalKind: "Farmakolojik aile",
-    scaffoldKind: "Kimyasal scaffold ailesi",
-    tableDrug: "İlaç",
+    tableDrug: "Aday kimlik",
   },
   en: {
-    eyebrow: "Drug Family",
-    overview: "Family overview",
-    hierarchy: "Classification hierarchy",
-    sharedMechanism: "Shared pharmacological mechanism",
-    primaryTargets: "Primary target families",
-    sharedMotifs: "Shared structural motifs",
-    representatives: "Representative drugs",
+    eyebrow: "Candidate Record Review",
+    overview: "Review-set boundary",
+    hierarchy: "Membership / classification status",
+    sharedMechanism: "Shared-mechanism evidence status",
+    primaryTargets: "Shared-target evidence status",
+    sharedMotifs: "Shared structural-motif evidence status",
+    candidateIdentities: "Candidate identities",
     compare2d: "2D comparison",
-    explore3d: "Explore representatives in 3D",
+    explore3d: "Explore candidate structures in 3D",
     hide3d: "Close 3D view",
-    spatialLoading: "Loading representative 3D structures…",
-    spatialScope: "Family 3D sample",
-    spatialBoundary: "Representative structures only; not every member of the family.",
+    spatialLoading: "Loading candidate 3D structures…",
+    spatialScope: "Candidate-record 3D sample",
+    spatialBoundary: "Selected candidate identities only; membership is not established in this set.",
     fingerprint: "Structural fingerprint comparison",
     fingerprintBoundary: "Computed and unreviewed; it does not imply pharmacological or clinical similarity.",
     fingerprintMissing: "At least two source-backed canonical SMILES are required for comparison.",
     comparison: "Source-backed comparison matrix",
-    comparisonEmpty: "No source-backed field is comparable across at least two drugs.",
+    comparisonEmpty: "No source-backed field is comparable across at least two candidate identities.",
     coverage: "Explicit data gaps",
     coverageComplete: "No explicit gap remains in these comparison fields.",
     missing: "Not curated",
     source: "Sources and limitations",
-    noHierarchy: "No source-backed classification path has been added for this family yet.",
+    noHierarchy: "No source-backed membership or classification path has been added for this candidate set. Set membership is not established.",
     openDrug: "Drug dossier",
     learning: "Learning pathway",
-    noLearning: "No learning pathway has been curated for this family yet.",
+    noLearning: "No learning pathway has been curated for this candidate review set yet.",
     formula: "Molecular formula",
+    identitySource: "PubChem identity record",
+    structureSource: "PubChem 2D SDF source",
     atc: "Therapeutic / ATC",
     pharmacological: "Pharmacological mechanism",
     scaffold: "Chemical / scaffold",
-    therapeuticKind: "Therapeutic family",
-    pharmacologicalKind: "Pharmacological family",
-    scaffoldKind: "Chemical scaffold family",
-    tableDrug: "Drug",
+    tableDrug: "Candidate identity",
   },
 } as const;
 
@@ -214,12 +211,6 @@ function systemLabel(
   return copy.scaffold;
 }
 
-function kindLabel(kind: DrugFamilyKind, copy: typeof copyByLocale[Locale]) {
-  if (kind === "therapeutic") return copy.therapeuticKind;
-  if (kind === "pharmacological") return copy.pharmacologicalKind;
-  return copy.scaffoldKind;
-}
-
 function ComparisonTable({
   rows,
   family,
@@ -313,9 +304,6 @@ export function FamilyPage({
     >
       <header className={styles.hero}>
         <span className={styles.eyebrow}>{copy.eyebrow}</span>
-        <div className={styles.kindList}>
-          {family.kinds.map((kind) => <span key={kind}>{kindLabel(kind, copy)}</span>)}
-        </div>
         <h1>{localize(family.name, locale)}</h1>
         <div className={styles.overview}>
           <h2>{copy.overview}</h2>
@@ -376,7 +364,7 @@ export function FamilyPage({
       <section className={styles.section}>
         <header className={styles.sectionHeading}>
           <span>03</span>
-          <h2>{copy.representatives}</h2>
+          <h2>{copy.candidateIdentities}</h2>
           {spatial ? (
             <button type="button" onClick={() => setShowSpatial((value) => !value)} aria-expanded={showSpatial}>
               {showSpatial ? copy.hide3d : copy.explore3d}
@@ -407,6 +395,22 @@ export function FamilyPage({
                 </div>
                 <h3>{drug.name}</h3>
                 <p>{copy.formula} · {drug.formula}</p>
+                <div className={styles.recordSources}>
+                  <a
+                    href={`https://pubchem.ncbi.nlm.nih.gov/compound/${drug.pubChemCid}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {copy.identitySource} · CID {drug.pubChemCid}<span aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    href={`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${drug.pubChemCid}/record/SDF?record_type=2d`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {copy.structureSource}<span aria-hidden="true">↗</span>
+                  </a>
+                </div>
                 <div className={styles.memberships}>
                   {drug.memberships.flatMap((membership) =>
                     membership.labels.map((label, index) => (
@@ -416,7 +420,7 @@ export function FamilyPage({
                     )),
                   )}
                 </div>
-                <a href={getDrugHref(drug.slug)}>{copy.openDrug}<span aria-hidden="true">→</span></a>
+                <a className={styles.drugLink} href={getDrugHref(drug.slug)}>{copy.openDrug}<span aria-hidden="true">→</span></a>
               </article>
             ))}
           </div>

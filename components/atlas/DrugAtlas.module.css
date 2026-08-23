@@ -25,6 +25,13 @@
   border-bottom: 1px solid var(--atlas-line);
 }
 
+/* Spatial is an interaction surface, not a second editorial landing page. The
+   Atlas title remains the tablist's accessible name while the spatial view
+   gives the real molecular scene the first viewport. */
+.atlas[data-atlas-view="spatial"] .hero {
+  display: none;
+}
+
 .eyebrow {
   display: block;
   margin-bottom: 1rem;
@@ -445,7 +452,7 @@
 }
 
 .spatial {
-  padding: clamp(1rem, 3vw, 3rem);
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
 .spatialBoundary {
@@ -455,7 +462,7 @@
   gap: 1rem;
   margin: 0 0 1rem;
   color: var(--atlas-muted);
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   line-height: 1.45;
 }
 
@@ -554,6 +561,30 @@
 
   .spatialBoundary {
     display: grid;
+  }
+}
+
+/* Browser zoom reduces the effective viewport height before the Spatial scene
+   is mounted. Keep the Atlas switcher and its honest scope note, but compress
+   that duplicate navigation chrome so the complete fitted canvas remains in
+   the first viewport at the supported 125% and 150% zoom equivalents. */
+@media (max-height: 720px) and (min-width: 721px) {
+  .atlas[data-atlas-view="spatial"] .viewTabs button {
+    min-height: 64px;
+    gap: 0.18rem;
+    padding-block: 0.55rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .viewTabs strong {
+    font-size: 1.05rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .spatial {
+    padding-block: 0.5rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .spatialBoundary {
+    margin-bottom: 0.5rem;
   }
 }
 

@@ -14,26 +14,18 @@ test.use({ locale: "tr-TR" });
 
 async function openLearn(page: Page) {
   const platformNavigation = page.getByRole("navigation", {
-    name: /Platform bölümleri|Platform sections/i,
+    name: /Ana navigasyon|Primary navigation/i,
   });
   const modeButtons = platformNavigation.getByRole("button");
 
-  await expect(modeButtons).toHaveCount(5);
-  await modeButtons.nth(1).click();
-  await expect(modeButtons.nth(1)).toHaveAttribute("aria-pressed", "true");
+  await expect(modeButtons).toHaveCount(4);
+  const academyButton = platformNavigation.getByRole("button", {
+    name: /Akademi|Academy/i,
+    exact: true,
+  });
+  await academyButton.click();
+  await expect(academyButton).toHaveAttribute("aria-current", "page");
   return modeButtons;
-}
-
-async function openJourney(
-  page: Page,
-  title: string | RegExp,
-  buttonName: string | RegExp,
-) {
-  const card = page
-    .getByRole("heading", { name: title })
-    .locator("xpath=ancestor::li[1]");
-  await expect(card).toBeVisible();
-  await card.getByRole("button", { name: buttonName }).click();
 }
 
 async function switchToEnglish(page: Page) {
@@ -66,21 +58,23 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
   await expect(page.locator("html")).toHaveAttribute("lang", "tr");
   await openLearn(page);
 
-  const learningMap = page.locator("[data-learning-journey-map]");
+  const learningMap = page.locator('[data-academy-learning-map="eight-modules"]');
   await expect(
     learningMap.getByRole("heading", {
-      name: "Molekülü okumaktan savunmaya, altı adım.",
+      name: "Yapıyı okumaktan kanıtı savunmaya.",
       exact: true,
     }),
   ).toBeVisible();
-  await expect(learningMap.locator('[data-testid^="learning-stage-"]')).toHaveCount(6);
+  await expect(learningMap.locator("[data-academy-module]")).toHaveCount(8);
   for (const title of [
-    "Yapı Dili",
-    "Organik Adlandırma",
-    "Farmasötik Adlandırma",
+    "Yapının Dili",
+    "Organik Nomenklatür",
+    "Farmasötik Nomenklatür",
+    "Farmakoloji",
+    "ADME",
     "Reaksiyon Mekanizmaları",
     "Sentez Atlası",
-    "İlaç Molekülü İnceleme Projesi",
+    "İlaç İnceleme Projesi",
   ]) {
     await expect(learningMap.getByRole("heading", { name: title, exact: true })).toBeVisible();
   }
@@ -90,7 +84,7 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
   await switchToEnglish(page);
   await expect(
     learningMap.getByRole("heading", {
-      name: "Six stages from reading a molecule to defending a review.",
+      name: "From reading structure to defending evidence.",
       exact: true,
     }),
   ).toBeVisible();
@@ -98,9 +92,11 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
     "Structure Language",
     "Organic Nomenclature",
     "Pharmaceutical Nomenclature",
+    "Pharmacology",
+    "ADME",
     "Reaction Mechanisms",
     "Synthesis Atlas",
-    "Drug Molecule Review Project",
+    "Drug Review Project",
   ]) {
     await expect(learningMap.getByRole("heading", { name: title, exact: true })).toBeVisible();
   }
@@ -113,7 +109,7 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
   await expect(localeRoot(page)).toHaveAttribute("data-locale", "en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await openLearn(page);
-  await expect(page.locator("[data-learning-journey-map]")).toBeVisible();
+  await expect(page.locator('[data-academy-learning-map="eight-modules"]')).toBeVisible();
 
   expectCleanRuntime(telemetry);
 });
@@ -125,8 +121,11 @@ test("Synthesis Atlas exposes three molecules and the six-step reported Carvedil
   const telemetry = watchRuntime(page);
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
   await switchToEnglish(page);
-  await openLearn(page);
-  await openJourney(page, "Synthesis Atlas", "Open Synthesis Atlas");
+  await page.goto("/#academy/synthesis/propranolol/overview", {
+    waitUntil: "domcontentloaded",
+  });
+  const synthesisHub = page.locator('[data-synthesis-academy="phase-6"]');
+  await synthesisHub.getByRole("button", { name: "Open route lesson" }).first().click();
 
   const synthesis = synthesisRoot(page);
   await expect(synthesis).toBeVisible();
@@ -256,10 +255,10 @@ test("Nomenclature Academy provides eight sections, twenty-two exercises, SVG fe
 }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   const telemetry = watchRuntime(page);
-  await page.goto("/#universe", { waitUntil: "domcontentloaded" });
+  await page.goto("/#academy/nomenclature/pharmaceutical", {
+    waitUntil: "domcontentloaded",
+  });
   await switchToEnglish(page);
-  await openLearn(page);
-  await openJourney(page, "Pharmaceutical Nomenclature", "Open Academy");
 
   const academy = academyRoot(page);
   await expect(academy).toBeVisible();
@@ -311,8 +310,6 @@ test("Nomenclature Academy provides eight sections, twenty-two exercises, SVG fe
   await captureAcceptanceScreenshot(page, "learn-nomenclature-academy-en-1920x1080.png");
 
   await page.reload({ waitUntil: "domcontentloaded" });
-  await openLearn(page);
-  await openJourney(page, "Pharmaceutical Nomenclature", "Open Academy");
   const restoredAcademy = academyRoot(page);
   await expect(restoredAcademy.getByText("Exercise 2 / 22", { exact: true })).toBeVisible();
   await expect(restoredAcademy.getByRole("progressbar")).toHaveAttribute(

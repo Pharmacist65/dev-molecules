@@ -6,13 +6,13 @@ Synthesis Atlas is a bilingual, structure-backed reading of source-linked transf
 
 The current Atlas contains six routes for three molecules. These counts are curriculum coverage, not a route or molecule ceiling.
 
-| Molecule | Foundational route | Source-reported route | Reported transformations |
+| Molecule | Foundational route | Reported-kind route presentation | Reported transformations |
 | --- | --- | --- | ---: |
-| Propranolol | foundational epoxide opening | reported chlorohydrin/form route | 3 |
-| Atenolol | foundational glycidyl-ether route | protected-amine route | 5 |
-| Carvedilol | foundational two-fragment route | full-core protected route | 6 |
+| Propranolol | foundational epoxide opening | source-context reconstruction | 3 |
+| Atenolol | foundational glycidyl-ether route | directly source-reported | 5 |
+| Carvedilol | foundational two-fragment route | directly source-reported | 6 |
 
-Across all foundational and reported views, the Atlas contains 40 source-associated material records, 20 conceptual transformations, and 12 curated mechanism teaching records. Every material has a parseable SMILES representation used for real 2D rendering. Two foundational transformations define the complete electron-flow mappings anchored to actual 2D atoms/bonds. Those mappings remain bound to their own material contexts; incompatible reported steps expose no mechanism layer.
+Across all foundational and reported-kind views, the Atlas contains 40 source-associated material records, 20 conceptual transformations, and 12 curated mechanism teaching records. Every material has a parseable SMILES representation used for real 2D rendering. Two foundational transformations define the complete electron-flow mappings anchored to actual 2D atoms/bonds. Those mappings remain bound to their own material contexts; incompatible reported steps expose no mechanism layer.
 
 ## Primary-source anchors
 
@@ -39,7 +39,7 @@ The repository links to these third-party documents; it does not copy the PDFs i
 
 A route with a declared step-level evidence gap returns `partial-with-declared-gap`. `canPresentSynthesisAtlasRouteAsReported` returns true only for a `reported` route whose source gate is `source-supported`. Foundational routes may be source-supported educational compositions, but they are not relabelled as source-reported routes.
 
-All six current routes pass the internal source gate. That result verifies data shape, direct-document resolution, and declared scope. It does not prove independent chemical correctness, reproducibility, optimality, safety, scalability, or manufacturing suitability.
+All six current routes pass a non-blocked internal source gate: three are `source-supported` and three are `context-supported`. Only two reported-kind routes satisfy the stricter direct-source presentation predicate. That result verifies data shape, direct-document resolution, evidence-state consistency, and declared scope. It does not prove independent chemical correctness, reproducibility, optimality, safety, scalability, or manufacturing suitability.
 
 ## Route, step, and mechanism levels
 
@@ -90,6 +90,7 @@ Challenge success changes learning state only. It cannot promote a route, transf
 node --test tests/synthesis-atlas.test.mjs
 node --test tests/synthesis-provenance.test.mjs
 node --test tests/synthesis-challenges.test.mjs
+node --test tests/synthesis-curriculum.test.mjs
 ```
 
-These tests validate route/material/step resolution, parseable 2D structures, five-plus reported paths, direct source documents and locators, fail-closed source gates, forward/retro navigation, mechanism eligibility, the two atom-anchored foundational transformations, no-decorative-arrow behavior for unmapped moves, non-operational data shape, bilingual content, and route-bound challenge evaluation. They establish internal consistency and provenance shape; they do not replace review by a qualified synthetic chemist or educator.
+These tests validate route/material/step resolution, parseable 2D structures, five-plus reported paths, direct source documents and locators, fail-closed source gates, the two strict source-reported presentations, Propranolol's source-context reconstruction, forward/retro navigation, mechanism eligibility, the two atom-anchored foundational transformations, no-decorative-arrow behavior for unmapped moves, non-operational data shape, bilingual content, and route-bound challenge evaluation. They establish internal consistency and provenance shape; they do not replace review by a qualified synthetic chemist or educator.

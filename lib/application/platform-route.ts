@@ -9,6 +9,7 @@ export type PlatformSection =
   | "reviewer";
 
 export type AtlasView = "browse" | "spatial";
+export type SynthesisAcademyView = "overview" | "atlas";
 export type AcademyArea =
   | "home"
   | "module"
@@ -130,7 +131,7 @@ export function parsePlatformHash(rawHash: string): PlatformRoute {
     },
     build: { section: "lab", canonicalHash: "#lab" },
     teach: { section: "instructor", canonicalHash: "#instructor" },
-    discover: { section: "reviewer", canonicalHash: "#reviewer" },
+    discover: { section: "lab", canonicalHash: "#lab" },
   };
   if (legacyTopLevel[head]) return legacyTopLevel[head];
 
@@ -159,4 +160,13 @@ export function getDrugHash(slug: string): string {
   const normalized = slug.trim();
   if (!normalized || normalized.length > SAFE_SEGMENT_LIMIT) return "#atlas";
   return `#drug/${encodeURIComponent(normalized)}`;
+}
+
+export function getSynthesisAcademyHash(
+  slug: string,
+  view: SynthesisAcademyView = "overview",
+): string {
+  const normalized = slug.trim();
+  if (!normalized || normalized.length > SAFE_SEGMENT_LIMIT) return "#academy";
+  return `#academy/synthesis/${encodeURIComponent(normalized)}/${view}`;
 }

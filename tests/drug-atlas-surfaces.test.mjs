@@ -45,7 +45,7 @@ function createNavigator() {
   };
 }
 
-test("Drug Atlas reads a bounded page while preserving the exact complete-index count", async () => {
+test("Drug Atlas reads a bounded page while preserving the exact structure-index count", async () => {
   const navigator = createNavigator();
   const page = await loadDrugAtlasWindow(navigator, {
     pageSize: 24,
@@ -129,10 +129,32 @@ test("Browse is static while Spatial and MoleculeUniverse stay behind a lazy bra
   assert.doesNotMatch(barrel, /AtlasSpatialView/);
   assert.match(spatial, /from "@\/components\/universe"/);
   assert.match(spatial, /<MoleculeUniverse/);
+  assert.doesNotMatch(
+    spatial,
+    /presentationMode="student"/,
+    "Spatial must preserve the host Student/Expert presentation mode",
+  );
   assert.match(thumbnail, /IntersectionObserver/);
   assert.match(thumbnail, /navigator\s*\.hydrate\(entityId\)/);
   assert.match(atlas, /role="tablist"/);
   assert.match(atlas, /ArrowDown/);
+  assert.match(atlas, /2,331 rows/);
+  assert.match(atlas, /1,552 molecular records/);
+  assert.match(atlas, /not an FDA product or application universe/i);
+  assert.doesNotMatch(
+    atlas,
+    /approved small molecules|onaylı küçük moleküller|complete catalog|tam katalog|full catalog/i,
+  );
+  assert.doesNotMatch(atlas, /error instanceof Error \? error\.message/);
+  assert.doesNotMatch(atlas, /loadState\.message/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(
+    css,
+    /\.atlas\[data-atlas-view="spatial"\]\s+\.hero\s*\{[^}]*display:\s*none/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-height: 720px\) and \(min-width: 721px\)[\s\S]*\.atlas\[data-atlas-view="spatial"\]\s+\.viewTabs button\s*\{[^}]*min-height:\s*64px/s,
+  );
 });

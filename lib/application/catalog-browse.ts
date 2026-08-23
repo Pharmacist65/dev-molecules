@@ -91,13 +91,13 @@ export interface CatalogBrowseLabels {
 
 const labelsByLocale: Readonly<Record<Locale, CatalogBrowseLabels>> = {
   tr: {
-    eyebrow: "Explore · Katalog",
-    title: "Molekül kataloğuna göz at",
+    eyebrow: "Keşfet · Yapı indeksi",
+    title: "Moleküler yapı indeksine göz at",
     description:
-      "Tam katalog aranabilir bir indekstir. 3B sahne, performans ve okunabilirlik için bunun yalnızca sınırlı bir örneklemini gösterir.",
+      "1.552 kayıtlık yapı-bütün indeks aranabilir. 3B sahne, performans ve okunabilirlik için bunun yalnızca sınırlı bir örneklemini gösterir; bu bir FDA ürün veya başvuru evreni değildir.",
     close: "Kataloğu kapat",
     scope: "Katalog ve 3B sahne kapsamı",
-    catalogCount: "Tam katalog",
+    catalogCount: "Yapı-bütün indeks",
     sceneCount: "3B sahne örneklemi",
     searchLabel: "Katalogda ara",
     searchPlaceholder: "İsim, formül veya CID yaz",
@@ -109,7 +109,7 @@ const labelsByLocale: Readonly<Record<Locale, CatalogBrowseLabels>> = {
     unavailable: "Katalog şu anda yüklenemedi.",
     queryHint: "Aramak için en az iki karakter yaz.",
     emptyBrowse: "Bu katalog sayfasında kayıt yok.",
-    emptySearch: "Tam katalogda eşleşme bulunamadı.",
+    emptySearch: "Yapı-bütün indekste eşleşme bulunamadı.",
     classification: "Sınıflandırma",
     unclassified: "Sınıflandırılmamış",
     openStructure: "3B yapıyı aç",
@@ -122,12 +122,12 @@ const labelsByLocale: Readonly<Record<Locale, CatalogBrowseLabels>> = {
   },
   en: {
     eyebrow: "Explore · Catalog",
-    title: "Browse the molecule catalog",
+    title: "Browse the molecular structure index",
     description:
-      "The full catalog is a searchable index. For performance and legibility, the 3D scene shows only a bounded sample of it.",
+      "The 1,552-record structure-complete index is searchable. For performance and legibility, the 3D scene shows only a bounded sample; this is not an FDA product or application universe.",
     close: "Close catalog",
     scope: "Catalog and 3D scene scope",
-    catalogCount: "Full catalog",
+    catalogCount: "Structure-complete index",
     sceneCount: "3D scene sample",
     searchLabel: "Search the catalog",
     searchPlaceholder: "Enter a name, formula, or CID",
@@ -139,7 +139,7 @@ const labelsByLocale: Readonly<Record<Locale, CatalogBrowseLabels>> = {
     unavailable: "The catalog could not be loaded.",
     queryHint: "Enter at least two characters to search.",
     emptyBrowse: "There are no records on this catalog page.",
-    emptySearch: "No match was found in the full catalog.",
+    emptySearch: "No match was found in the structure-complete index.",
     classification: "Classification",
     unclassified: "Unclassified",
     openStructure: "Open 3D structure",

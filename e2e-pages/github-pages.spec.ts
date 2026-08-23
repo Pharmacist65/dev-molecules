@@ -25,7 +25,7 @@ async function openFullCatalogResult(
   recordId: string,
 ): Promise<Locator> {
   await page.getByRole("button", {
-    name: /Tüm kataloğa göz at|Browse full catalog/i,
+    name: /Yapı indeksine göz at|Browse structure index/i,
   }).click();
   const drawer = page.locator('[data-catalog-browse-drawer="true"]');
   await expect(drawer).toBeVisible();
@@ -37,7 +37,7 @@ async function openFullCatalogResult(
   return result;
 }
 
-test("project-base deployment loads structures and uses the curated static evidence path", async ({ page }) => {
+test("project-base deployment loads structures and the source-gated Academy routes", async ({ page }) => {
   const consoleErrors: string[] = [];
   const pageErrors: string[] = [];
   const failedRequests: string[] = [];
@@ -93,22 +93,21 @@ test("project-base deployment loads structures and uses the curated static evide
     .poll(() => requestedUrls.filter((url) => /\/dev-molecules\/structures\/.*-2d\.sdf$/i.test(url)).length)
     .toBeGreaterThan(0);
 
-  await page.getByRole("button", { name: /Araştır|Discover/i }).click();
-  await page.getByRole("button", { name: /Kanıt kartı oluştur|Generate evidence card/i }).click();
-  await expect(page.getByText(/Kontrollü yedek yanıt|Curated fallback/i).first()).toBeVisible();
+  await page.goto("./#academy/synthesis/propranolol/overview", {
+    waitUntil: "domcontentloaded",
+  });
+  const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
+  await expect(synthesis).toBeVisible();
+  await synthesis
+    .getByRole("button", { name: /Rota dersini aç|Open route lesson/i })
+    .first()
+    .click();
+  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
 
-  await page.getByRole("button", { name: /02 Öğren|02 Learn/i }).click();
-  await page
-    .getByRole("button", { name: /Sentez Atlası'nı aç|Open Synthesis Atlas/i })
-    .first()
-    .click();
-  await expect(page.getByRole("heading", { name: /Bir molekülü, dönüşümler boyunca düşün|Think through a molecule/i })).toBeVisible();
-  await page.getByRole("button", { name: /Öğrenme haritasına dön|Back to learning map/i }).click();
-  await page
-    .getByRole("button", { name: /Akademiyi aç|Open Academy/i })
-    .first()
-    .click();
-  await expect(page.getByRole("heading", { name: /İlaç Nomenklatürü Akademisi|Pharmaceutical Nomenclature Academy/i })).toBeVisible();
+  await page.goto("./#academy/nomenclature/pharmaceutical", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page.getByTestId("nomenclature-academy")).toBeVisible();
 
   expect(requestedUrls.some((url) => /\/api\/evidence(?:\?|$)/.test(url))).toBe(false);
   expect(
@@ -166,7 +165,7 @@ test("project-base indexed overlap aliases stay on reviewed Atenolol and Metopro
   }
 });
 
-test("project-base cluster permalinks restore exactly and reject invalid routes", async ({ page }) => {
+test("project-base public-neutral cluster permalinks restore and reject raw draft labels", async ({ page }) => {
   await page.addInitScript(() => {
     if (!window.localStorage.getItem("dev-molecules:locale")) {
       window.localStorage.setItem("dev-molecules:locale", "tr");
@@ -179,9 +178,21 @@ test("project-base cluster permalinks restore exactly and reject invalid routes"
   const clusterButtons = page.getByRole("button", {
     name: /kümesi,?\s*\d+\s*molekül|cluster,?\s*\d+\s*molecules?/i,
   });
-  await expect(clusterButtons.nth(1)).toBeVisible();
-  await clusterButtons.nth(1).click();
+  await page
+    .getByRole("button", { name: /Kümelenme merceği|Clustering lens/i })
+    .click();
+  await page
+    .getByRole("button", { name: /Yapısal benzerlik|Structural similarity/i, exact: true })
+    .click();
+  await expect(clusterButtons).toHaveCount(1);
+  await expect(clusterButtons.first().locator("strong")).toHaveText(
+    /Hesaplanmış yapısal görünüm · incelenmemiş|Computed structural view · unreviewed/i,
+  );
+  await clusterButtons.first().click();
   const exactClusterUrl = page.url();
+  expect(exactClusterUrl).toMatch(
+    /\/dev-molecules\/#cluster\/structural-similarity\/computed-structural-view-unreviewed$/,
+  );
   await expect(page.locator('[data-explore-level="cluster"]')).toBeVisible();
 
   await page.reload({ waitUntil: "domcontentloaded" });
@@ -192,8 +203,8 @@ test("project-base cluster permalinks restore exactly and reject invalid routes"
   await page.goto("./#cluster/therapeutic/Cardiovascular", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page).toHaveURL(/\/dev-molecules\/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(page.locator('[data-explore-level="cluster"]')).toBeVisible();
+  await expect(page).toHaveURL(/\/dev-molecules\/#universe$/);
+  await expect(page.locator('[data-explore-level="universe"]')).toBeVisible();
 
   await page.evaluate(() => {
     window.localStorage.setItem("dev-molecules:locale", "en");
@@ -201,16 +212,8 @@ test("project-base cluster permalinks restore exactly and reject invalid routes"
   await page.goto("./#cluster/therapeutic/Kardiyovask%C3%BCler", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page).toHaveURL(/\/dev-molecules\/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(page.locator('[data-explore-level="cluster"]')).toBeVisible();
-  await expect(page.locator('[data-scene-status]').first()).toHaveAttribute(
-    "data-scene-status",
-    /^(?:ready|partial)$/,
-  );
-  await page.waitForLoadState("networkidle");
-  await page.reload({ waitUntil: "domcontentloaded" });
-  await expect(page).toHaveURL(/\/dev-molecules\/#cluster\/therapeutic\/cardiovascular$/);
-  await expect(page.locator('[data-explore-level="cluster"]')).toBeVisible();
+  await expect(page).toHaveURL(/\/dev-molecules\/#universe$/);
+  await expect(page.locator('[data-explore-level="universe"]')).toBeVisible();
 
   await page.goto("./#cluster/not-a-lens/Cardiovascular", {
     waitUntil: "domcontentloaded",

@@ -122,11 +122,14 @@ export function CatalogSearch({
         : status === "ready" && results.length === 0
           ? t("search.noResults")
           : "";
+  const searchLabel = t("search.label");
+  const searchPlaceholder =
+    variant === "hero" ? searchLabel : t("search.placeholder");
 
   return (
     <div className={styles.root} data-variant={variant}>
       <form className={styles.form} role="search" onSubmit={submit}>
-        <label className={styles.label} htmlFor={inputId}>{t("search.label")}</label>
+        <label className={styles.label} htmlFor={inputId}>{searchLabel}</label>
         <div className={styles.field}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="10.8" cy="10.8" r="6.6" />
@@ -143,7 +146,7 @@ export function CatalogSearch({
             aria-expanded={listOpen}
             aria-activedescendant={activeIndex >= 0 ? `${listboxId}-${activeIndex}` : undefined}
             autoComplete="off"
-            placeholder={t("search.placeholder")}
+            placeholder={searchPlaceholder}
             onChange={(event) => setQuery(event.currentTarget.value)}
             onKeyDown={handleKeyDown}
           />

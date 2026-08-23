@@ -219,6 +219,9 @@ test("TR and EN copy explicitly distinguish catalog records from the 3D sample",
   const en = getCatalogBrowseLabels("en");
   assert.match(tr.description, /3B sahne.*sınırlı bir örneklemini/i);
   assert.match(en.description, /3D scene.*bounded sample/i);
+  assert.match(tr.description, /1\.552 kayıtlık yapı-bütün indeks/i);
+  assert.match(en.description, /1,552-record structure-complete index/i);
+  assert.doesNotMatch(`${tr.description} ${en.description}`, /tam katalog|full catalog/i);
   assert.equal(tr.unclassified, "Sınıflandırılmamış");
   assert.equal(en.unclassified, "Unclassified");
 });
@@ -235,6 +238,8 @@ test("drawer contract includes modal semantics, focus return, Escape, and a mobi
   assert.match(component, /event\.key === "Escape"/);
   assert.match(component, /focusBeforeOpen\.focus\(\)/);
   assert.match(component, /focusableSelector/);
+  assert.doesNotMatch(component, /error instanceof Error \? error\.message/);
+  assert.doesNotMatch(component, /loadState\.message|selectionState\.message/);
   assert.match(css, /@media \(max-width: 640px\)/);
   assert.match(css, /height: min\(92dvh, 800px\)/);
 });

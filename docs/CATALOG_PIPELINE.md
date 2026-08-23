@@ -22,6 +22,9 @@ Current checked-in coverage uses `drugcentral-fda-pubchem-eligible-v1.json` (sna
 | Multicomponent parent relations unresolved | 2 |
 | Product/application links unresolved | 2,331 |
 | Therapeutic classifications still unresolved | 1,552 |
+| Active public-build identity/structure adapters | 2 |
+| Configured enrichment snapshots | 0 |
+| Classification / pharmacology / ADME enrichment | 0 / 0 / 0 |
 
 The 779 unresolved rows are partitioned by stage: 473 lack a complete same-ID DrugCentral identity structure, 111 do not resolve to one exact unique PubChem CID, and 195 do not have a verified complete 2D/3D pair. Every unresolved row retains `failClosed: true`; the build does not substitute a name-to-structure fallback, placeholder identity, or fake structure. A source name may only disambiguate PubChem CIDs that already share the exact source InChIKey.
 
@@ -39,6 +42,8 @@ The 15 original curated molecules remain regression fixtures and educational anc
 | `pmda-future` | future | no direct PMDA snapshot configured |
 
 An imported approval listing currently says only that the selected identity is present in the DrugCentral FDA list. `applicationNumber`, `productId`, and commercial-product linkage remain unresolved for all 2,331 rows. The pipeline does not infer these fields from names. Selecting the openFDA adapter in a later snapshot will require exact application, product, ingredient, form, and jurisdiction matching before promotion.
+
+The separate enrichment source registry records policy for DrugCentral target data, ChEMBL, Guide to PHARMACOLOGY, DailyMed, openFDA SPL, ATC/DDD, ClinPGx, and BindingDB. None has a configured enrichment snapshot in this release. ATC/DDD is additionally blocked for public bundling pending a compatible rights decision. An adapter policy is release governance, not a populated scientific dataset.
 
 ## Data flow
 
@@ -58,7 +63,7 @@ form- and stereochemistry-aware normalization
        ↓
 static manifest, search index, shards, projections, reports, and assets
        ↓
-base-path-aware lazy client / Explore merge
+base-path-aware lazy client / Atlas merge
 ```
 
 React components do not parse source registries or decide chemical identity. Adapters and normalization live in `lib/catalog/`; reproducible command entry points live in `scripts/catalog/`; generated browser assets live in `public/catalog/`.
@@ -85,6 +90,7 @@ The deduplication key includes the full PubChem InChIKey, source-form SMILES, an
 ```bash
 npm run catalog:download
 npm run catalog:normalize
+npm run catalog:enrich
 npm run catalog:build
 npm run catalog:validate
 npm run catalog:report
@@ -94,6 +100,7 @@ npm run catalog:report
 - `catalog:download -- --dry-run` reports the full selected-source evaluation without writing.
 - `catalog:download -- --refresh` retrieves the configured DrugCentral sources, resolves every structurally eligible InChIKey through PubChem, downloads exact complete 2D/3D pairs, and rewrites the source snapshot. This is the only normal catalog command that requires network access.
 - `catalog:normalize` runs form/stereo-aware normalization against the checked snapshot and prints counts without producing public shards.
+- `catalog:enrich` regenerates `enrichment-readiness.json` from the source-policy registry. With no configured enrichment snapshot it reports zero classification, pharmacology, and ADME coverage; it does not manufacture records.
 - `catalog:build` regenerates the manifest, compact search index, reports, projections, and shards from the checked snapshot.
 - `catalog:validate` checks manifest/index/shard counts, uniqueness, safe asset paths, byte lengths, SHA-256 digests, PubChem CIDs, and 2D InChIKeys for every generated structure; orphan or partial SDF files fail validation.
 - `catalog:report` prints the source scope and exact coverage totals.
@@ -110,6 +117,7 @@ public/catalog/
     therapeutic.json
   reports/
     coverage.json
+    enrichment-readiness.json
     unresolved.json
   shards/
     alphabetic/
@@ -130,12 +138,13 @@ The static client first loads the manifest and compact search index. It resolves
 
 All public paths are resolved against the deployment base. Local and server-capable builds use `/`; the GitHub project site uses `/dev-molecules/`. The same static files therefore work without an API server or client secret.
 
-Explore loads a deterministic, stratified resident metadata window of at most 40 generated records and leaves structure assets lazy. That metadata window is separate from the default eight-structure 3D overview. Full-index search and paging work across all 1,552 records; selecting a result resolves one shard/entity and one requested structure through bounded caches instead of adding the record to the prior Universe sample.
+Spatial Atlas loads a deterministic, stratified resident metadata window of at most 40 generated records and leaves structure assets lazy. That metadata window is separate from the default eight-structure 3D overview. Browse search and paging work across all 1,552 records; selecting a result resolves one shard/entity and one requested structure through bounded caches instead of adding the record to the prior Universe sample.
 
 ## Evidence files
 
 - [Manifest](../public/catalog/manifest.json)
 - [Coverage report](../public/catalog/reports/coverage.json)
+- [Enrichment readiness report](../public/catalog/reports/enrichment-readiness.json)
 - [Unresolved report](../public/catalog/reports/unresolved.json)
 - [Search index](../public/catalog/search-index.v1.json)
 - [Checked source snapshot](../scripts/catalog/source-snapshots/drugcentral-fda-pubchem-eligible-v1.json)
@@ -145,6 +154,7 @@ Explore loads a deterministic, stratified resident metadata window of at most 40
 - The selected DrugCentral source is exhaustively evaluated, but DrugCentral list membership is not the complete FDA product/application universe.
 - The source FDA list is mediated through DrugCentral, not a direct FDA application/product snapshot.
 - openFDA parsing exists but current records have not been enriched with it.
+- The enrichment registry is policy-complete for its declared adapters, but zero enrichment snapshots are configured and classification/pharmacology/ADME enrichment counts are all zero.
 - Direct EMA and PMDA sources are not configured.
 - All generated therapeutic groups are unresolved.
 - PubChem 3D files are computed conformers, not experimental structures or bound poses.

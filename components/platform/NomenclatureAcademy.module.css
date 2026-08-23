@@ -7,6 +7,9 @@
   --academy-orange: #e46b31;
   --academy-orange-soft: #fff2eb;
   --academy-green: #178769;
+  --academy-body-size: 1rem;
+  --academy-secondary-size: 0.875rem;
+  --academy-ui-label-size: 0.8125rem;
   margin: 1rem 0 4rem;
   overflow: hidden;
   border: 1px solid var(--academy-line);
@@ -38,7 +41,7 @@
 .optionGrid legend {
   margin: 0;
   color: var(--academy-blue);
-  font: 700 0.62rem/1.25 var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size)/1.25 var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
@@ -58,7 +61,7 @@
   max-width: 720px;
   margin-top: 1rem;
   color: var(--academy-muted);
-  font-size: 0.92rem;
+  font-size: var(--academy-body-size);
   line-height: 1.65;
 }
 
@@ -71,7 +74,7 @@
 .heroProgress > span,
 .heroProgress small {
   color: var(--academy-muted);
-  font: 0.6rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -113,7 +116,7 @@
   display: block;
   padding: 1.25rem 1.2rem 0.9rem;
   color: var(--academy-muted);
-  font-size: 0.56rem;
+  font-size: var(--academy-ui-label-size);
 }
 
 .sectionRail nav {
@@ -149,7 +152,7 @@
 
 .sectionRail nav button > span {
   color: #94a0b3;
-  font: 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .sectionRail nav button div {
@@ -163,14 +166,14 @@
 .sectionRail nav button b {
   overflow: hidden;
   color: #3a4962;
-  font-size: 0.7rem;
+  font-size: var(--academy-secondary-size);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .sectionRail nav button small {
   color: #8b97aa;
-  font: 0.53rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .sectionRail nav button i {
@@ -190,7 +193,7 @@
 .conceptPanel summary {
   color: var(--academy-blue);
   cursor: pointer;
-  font: 700 0.62rem/1.25 var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size)/1.25 var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.13em;
   list-style-position: outside;
   text-transform: uppercase;
@@ -212,7 +215,7 @@
   position: relative;
   padding-left: 0.9rem;
   color: #5d6a80;
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.45;
 }
 
@@ -232,7 +235,7 @@
   padding-top: 0.8rem;
   border-top: 1px solid var(--academy-line);
   color: var(--academy-muted);
-  font-size: 0.6rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.55;
 }
 
@@ -249,7 +252,7 @@
   padding: 0 1.5rem;
   border-bottom: 1px solid var(--academy-line);
   color: var(--academy-muted);
-  font: 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
@@ -278,7 +281,7 @@
   border-radius: 7px;
   background: #fff;
   color: #44536b;
-  font: 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .lesson {
@@ -296,7 +299,7 @@
 
 .lessonHeader small {
   color: var(--academy-orange);
-  font: 700 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -313,14 +316,14 @@
   max-width: 680px;
   margin: 0.65rem 0 0;
   color: var(--academy-muted);
-  font-size: 0.76rem;
+  font-size: var(--academy-body-size);
   line-height: 1.6;
 }
 
 .lessonHeader > span {
   flex: 0 0 auto;
   color: #8b97aa;
-  font: 0.62rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .structureStage {
@@ -345,7 +348,7 @@
 
 .stageLabel small {
   color: var(--academy-muted);
-  font-size: 0.58rem;
+  font-size: var(--academy-ui-label-size);
 }
 
 .graphFigure,
@@ -368,7 +371,7 @@
 .smilesStructure figcaption {
   max-width: 620px;
   color: var(--academy-muted);
-  font-size: 0.62rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.45;
   text-align: center;
 }
@@ -377,7 +380,7 @@
   max-width: 100%;
   overflow-wrap: anywhere;
   color: #8c472a;
-  font-size: 0.63rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .visibleBond {
@@ -499,7 +502,7 @@
   max-width: 760px;
   margin: 0.5rem 0 1.1rem;
   color: var(--academy-muted);
-  font-size: 0.72rem;
+  font-size: var(--academy-body-size);
   line-height: 1.55;
 }
 
@@ -539,7 +542,7 @@
   color: #3d4c65;
   cursor: pointer;
   font: inherit;
-  font-size: 0.72rem;
+  font-size: var(--academy-secondary-size);
   text-align: left;
 }
 
@@ -570,7 +573,7 @@
   border-radius: 50%;
   background: var(--academy-blue);
   color: #fff;
-  font: 700 0.55rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .optionGrid button:disabled {
@@ -610,7 +613,7 @@
   display: block;
   padding: 0.7rem;
   border-top: 1px solid var(--academy-line);
-  font-size: 0.67rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .textAnswer {
@@ -627,7 +630,7 @@
   border-radius: 10px;
   outline: 0;
   color: var(--academy-ink);
-  font: 0.84rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .textAnswer input:focus {
@@ -664,7 +667,7 @@
 .locantPlacement > span,
 .builderPreview > b {
   color: var(--academy-blue);
-  font: 700 0.6rem/1.3 var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size)/1.3 var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -703,7 +706,7 @@
 .bondOrderEditor > p {
   margin: 0.45rem 0 0.8rem;
   color: var(--academy-muted);
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .bondOrderEditor > div {
@@ -722,7 +725,7 @@
   background: #fff;
   color: #40506a;
   cursor: pointer;
-  font: 650 0.68rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 650 var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .bondOrderEditor button {
@@ -790,7 +793,7 @@
 .locantPlacement p {
   margin: 0;
   color: #4f617b;
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .locantPlacement strong {
@@ -802,7 +805,7 @@
   border-radius: 50%;
   background: var(--academy-orange);
   color: #fff;
-  font: 750 0.75rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 750 var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .priorityRanking ol {
@@ -833,11 +836,11 @@
   border-radius: 50%;
   background: var(--academy-blue);
   color: #fff;
-  font: 700 0.58rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .priorityRanking li > b {
-  font-size: 0.72rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .priorityRanking li > div {
@@ -900,7 +903,7 @@
 .builderPreview > p {
   margin: 0.65rem 0 0;
   color: #8a5a45;
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.5;
 }
 
@@ -922,7 +925,7 @@
 .stereoWidget > small {
   margin: 0;
   color: var(--academy-muted);
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.5;
 }
 
@@ -939,7 +942,7 @@
 }
 
 .stereoWidget output {
-  font: 650 0.65rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 650 var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
   text-align: right;
 }
 
@@ -982,7 +985,7 @@
 
 .selectionSummary > span {
   color: var(--academy-blue);
-  font: 700 0.55rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 700 var(--academy-ui-label-size) var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -990,7 +993,7 @@
 .selectionSummary > b {
   overflow: hidden;
   color: #34445e;
-  font: 0.64rem var(--font-geist-mono), ui-monospace, monospace;
+  font: var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1006,7 +1009,7 @@
   background: transparent;
   color: var(--academy-blue);
   cursor: pointer;
-  font-size: 0.58rem;
+  font-size: var(--academy-secondary-size);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -1030,7 +1033,7 @@
   min-height: 42px;
   border-radius: 9px;
   cursor: pointer;
-  font: 680 0.65rem var(--font-geist-mono), ui-monospace, monospace;
+  font: 680 var(--academy-secondary-size) var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .hintButton {
@@ -1070,13 +1073,13 @@
 
 .hint b {
   color: #a04924;
-  font-size: 0.65rem;
+  font-size: var(--academy-ui-label-size);
 }
 
 .hint p {
   margin: 0.35rem 0 0;
   color: #7c5c4e;
-  font-size: 0.68rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.55;
 }
 
@@ -1116,13 +1119,13 @@
 }
 
 .feedback > header b {
-  font-size: 0.78rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .feedback > header p {
   margin: 0.3rem 0 0;
   color: var(--academy-muted);
-  font-size: 0.68rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.5;
 }
 
@@ -1147,7 +1150,7 @@
 
 .feedbackBody small {
   color: var(--academy-green);
-  font-size: 0.53rem;
+  font-size: var(--academy-ui-label-size);
 }
 
 .feedback[data-state="incorrect"] .feedbackBody small {
@@ -1157,7 +1160,7 @@
 .feedbackBody p,
 .feedbackBody li {
   color: #59677c;
-  font-size: 0.66rem;
+  font-size: var(--academy-secondary-size);
   line-height: 1.55;
 }
 
@@ -1200,14 +1203,14 @@
   width: fit-content;
   color: var(--academy-blue);
   cursor: pointer;
-  font-size: 0.65rem;
+  font-size: var(--academy-secondary-size);
   font-weight: 700;
 }
 
 .sources > p {
   margin: 0.65rem 0;
   color: var(--academy-muted);
-  font-size: 0.62rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .sources ul {
@@ -1235,12 +1238,12 @@
 }
 
 .sources a b {
-  font-size: 0.62rem;
+  font-size: var(--academy-secondary-size);
 }
 
 .sources a span {
   color: var(--academy-muted);
-  font-size: 0.56rem;
+  font-size: var(--academy-ui-label-size);
 }
 
 .sectionRail button:focus-visible,

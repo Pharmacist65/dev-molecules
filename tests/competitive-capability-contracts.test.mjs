@@ -329,20 +329,35 @@ test("benchmark documents preserve the required products, fields, and matrix col
   assert.match(strategy, /^### Universal Molecule Lookup$/m);
 });
 
-test("the current parity matrix does not promote contract-only work to shipped", async () => {
+test("the parity matrix ships only evidence-complete flows, never contract-only work", async () => {
   const matrix = await readFile(
     new URL("../docs/product/FEATURE_PARITY_MATRIX.md", import.meta.url),
     "utf8",
   );
-  const statuses = matrix
+  const rows = matrix
     .split("\n")
-    .filter((line) => line.startsWith("|") && !line.startsWith("| ---") && !line.startsWith("| Benchmark"))
-    .map((line) => line.split("|").at(-2)?.trim());
-  assert.ok(statuses.length >= 30);
-  assert.ok(
-    statuses.every((status) =>
-      ["partial", "planned", "intentionally out of scope"].includes(status),
-    ),
+    .filter((line) =>
+      line.startsWith("|") &&
+      !line.startsWith("| ---") &&
+      !line.startsWith("| Benchmark"),
+    );
+  assert.ok(rows.length >= 30);
+
+  const approvedDrugSearch = rows.find((line) =>
+    line.includes("Common/generic approved-drug search"),
   );
-  assert.equal(statuses.includes("shipped"), false);
+  assert.ok(approvedDrugSearch);
+  assert.equal(approvedDrugSearch.split("|").at(-2)?.trim(), "shipped");
+  assert.match(approvedDrugSearch, /e2e\/dev-molecules-v2\.spec\.ts/);
+  assert.match(approvedDrugSearch, /docs\/assets\/screenshots\/(?:home-en|atlas-browse)\.png/);
+
+  for (const row of rows.filter((line) =>
+    /contract only|contracts only|port and display eligibility gate exist|ports exist/i.test(line),
+  )) {
+    assert.notEqual(
+      row.split("|").at(-2)?.trim(),
+      "shipped",
+      `contract-only row must remain unshipped: ${row}`,
+    );
+  }
 });

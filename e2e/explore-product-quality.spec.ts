@@ -41,16 +41,7 @@ const OUTSIDE_INITIAL_CATALOG_RECORDS = [
 ] as const;
 
 const CATALOG_TOTAL = 1_552;
-const INITIAL_SAMPLE_MINIMUM = 6;
-const INITIAL_SAMPLE_MAXIMUM = 10;
-const NEAR_SAMPLE_MAXIMUM = 12;
-const PAIN_REGION_IDS = new Set([
-  "molecule:aspirin",
-  "molecule:ibuprofen",
-  "molecule:naproxen",
-  "molecule:diclofenac",
-  "molecule:celecoxib",
-]);
+const DESKTOP_SCENE_SAMPLE_SIZE = 8;
 
 function catalogApp(page: Page) {
   return page.locator("[data-catalog-status][data-catalog-records]").first();
@@ -181,18 +172,12 @@ test.describe("Explore product-quality acceptance", () => {
     expect(await readNumericAttribute(canvas, "data-pick-atom-count")).toBe(
       atomPickCountBeforeHover,
     );
-    const unclassifiedLabelCount = await nearClusterList(page)
-      .getByRole("button", {
-        name: /Sınıflandırılmamış|Unclassified|kürasyon bekliyor|curation pending/i,
-      })
-      .count();
+    const publicClusterLabels = await nearClusterList(page)
+      .locator("strong")
+      .allTextContents();
     const importedIdsInMainMap = initialVisibleIds.filter((id) =>
       id.startsWith("molecule:imported:"),
     );
-    const initialRegionCounts = {
-      pain: initialVisibleIds.filter((id) => PAIN_REGION_IDS.has(id)).length,
-      cardiovascular: initialVisibleIds.filter((id) => !PAIN_REGION_IDS.has(id)).length,
-    };
 
     const qualityEvidence = {
       catalogTotal,
@@ -205,9 +190,8 @@ test.describe("Explore product-quality acceptance", () => {
         "data-active-webgl-contexts",
       ),
       mainMapVisibleIds: initialVisibleIds,
-      unclassifiedLabelCount,
+      publicClusterLabels,
       importedIdsInMainMap,
-      initialRegionCounts,
       rendererSpatialQuality,
       spatialQuality,
       moleculeHover: {
@@ -233,16 +217,18 @@ test.describe("Explore product-quality acceptance", () => {
       catalogTotal,
       "the catalog total and rendered teaching sample must be distinct",
     ).toBeGreaterThan(initialSampleCount);
-    expect.soft(initialSampleCount, "initial 3D sample must contain at least six structures")
-      .toBeGreaterThanOrEqual(INITIAL_SAMPLE_MINIMUM);
-    expect.soft(initialSampleCount, "initial 3D sample must contain at most ten structures")
-      .toBeLessThanOrEqual(INITIAL_SAMPLE_MAXIMUM);
+    expect.soft(
+      initialSampleCount,
+      "the desktop public overview must retain its bounded eight-structure sample",
+    ).toBe(DESKTOP_SCENE_SAMPLE_SIZE);
     expect.soft(
       initialSceneSampleCount,
       "the requested scene sample and visible renderer sample must agree",
     ).toBe(initialSampleCount);
-    expect.soft(nearSampleCount, "near LOD must remain bounded to twelve structures")
-      .toBeLessThanOrEqual(NEAR_SAMPLE_MAXIMUM);
+    expect.soft(
+      nearSampleCount,
+      "near LOD must restore the bounded eight-structure desktop sample",
+    ).toBe(DESKTOP_SCENE_SAMPLE_SIZE);
     expect.soft(await exploreCanvas(page).count(), "Explore must own exactly one WebGL canvas")
       .toBe(1);
     expect.soft(await readNumericAttribute(scene, "data-active-webgl-contexts"))
@@ -294,17 +280,16 @@ test.describe("Explore product-quality acceptance", () => {
       "each region name must render at no less than 8px",
     ).toBeGreaterThanOrEqual(8);
     expect.soft(
-      unclassifiedLabelCount,
-      "unclassified records must stay outside the primary spatial 3D map",
-    ).toBe(0);
+      publicClusterLabels,
+      "pending draft classifications must collapse into one neutral public region",
+    ).toHaveLength(1);
+    expect.soft(publicClusterLabels[0]).toMatch(
+      /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
+    );
     expect.soft(
       importedIdsInMainMap,
       "source-matched but unclassified imports must not receive invented map positions",
     ).toEqual([]);
-    expect.soft(
-      initialRegionCounts,
-      "the default overview must retain two to four representatives per visible region",
-    ).toEqual({ pain: 4, cardiovascular: 4 });
   });
 
   test("lazily opens three non-initial catalog records in 3D and 2D without losing the Universe camera", async ({
@@ -333,7 +318,7 @@ test.describe("Explore product-quality acceptance", () => {
     }
 
     const browseButton = page.getByRole("button", {
-      name: /Tüm kataloğa göz at|Browse full catalog/i,
+      name: /Yapı indeksine göz at|Browse structure index/i,
     });
     const catalogDrawer = page.locator('[data-catalog-browse-drawer="true"]');
     await attachScreenshot(page, testInfo, "explore-lazy-catalog-before");
@@ -363,7 +348,7 @@ test.describe("Explore product-quality acceptance", () => {
         );
         await expect(catalogDrawer).toHaveAttribute(
           "data-scene-sample-count",
-          /^(?:[6-9]|10)$/,
+          String(DESKTOP_SCENE_SAMPLE_SIZE),
         );
         await expect(catalogDrawer).toHaveAttribute(
           "data-catalog-result-count",
@@ -485,7 +470,7 @@ test.describe("Explore product-quality acceptance", () => {
     await waitForExploreReady(page);
 
     const browseButton = page.getByRole("button", {
-      name: /Tüm kataloğa göz at|Browse full catalog/i,
+      name: /Yapı indeksine göz at|Browse structure index/i,
     });
     await browseButton.click();
     const drawer = page.locator('[data-catalog-browse-drawer="true"]');
@@ -495,11 +480,18 @@ test.describe("Explore product-quality acceptance", () => {
     const catalogSearch = drawer.getByRole("searchbox", {
       name: /Katalogda ara|Search the catalog/i,
     });
-    await catalogSearch.fill("Kardiyovasküler");
+    await catalogSearch.fill("Propranolol");
     await expect
       .poll(() => readNumericAttribute(drawer, "data-catalog-result-count"))
-      .toBeGreaterThanOrEqual(2);
-    await expect(drawer.locator('[data-classification-status="known"]').first()).toBeVisible();
+      .toBeGreaterThanOrEqual(1);
+    const neutralClassification = drawer
+      .locator('[data-classification-status="unclassified"]')
+      .first();
+    await expect(neutralClassification).toBeVisible();
+    await expect(neutralClassification).toContainText(
+      /Sınıflandırılmamış|Unclassified/i,
+    );
+    await expect(drawer.locator('[data-classification-status="known"]')).toHaveCount(0);
     await catalogSearch.fill("");
     await expect(drawer.locator("[data-catalog-record]").first()).toBeVisible();
 
@@ -664,20 +656,16 @@ test.describe("Explore product-quality acceptance", () => {
           "data-label-collision-count",
         ),
       };
-      const visibleIds = ((await scene.getAttribute("data-visible-molecules")) ?? "")
-        .split(",")
-        .filter(Boolean);
-      const regionCounts = {
-        pain: visibleIds.filter((id) => PAIN_REGION_IDS.has(id)).length,
-        cardiovascular: visibleIds.filter((id) => !PAIN_REGION_IDS.has(id)).length,
-      };
+      const publicClusterLabels = await nearClusterList(page)
+        .locator("strong")
+        .allTextContents();
       measurements.push({
         ...qualityCase,
         effectiveViewport,
         overflow,
         canvasBox,
         renderer,
-        regionCounts,
+        publicClusterLabels,
         spatialQuality,
       });
       await expect(scene).toHaveAttribute("data-active-webgl-contexts", "1");
@@ -700,11 +688,8 @@ test.describe("Explore product-quality acceptance", () => {
     for (const measurement of measurements) {
       expect.soft(
         measurement.renderer.visibleMoleculeCount,
-        `${measurement.name} must show six to ten real structures`,
-      ).toBeGreaterThanOrEqual(INITIAL_SAMPLE_MINIMUM);
-      expect.soft(measurement.renderer.visibleMoleculeCount).toBeLessThanOrEqual(
-        INITIAL_SAMPLE_MAXIMUM,
-      );
+        `${measurement.name} must preserve its exact bounded scene sample`,
+      ).toBe(measurement.name.startsWith("390x844") ? 6 : DESKTOP_SCENE_SAMPLE_SIZE);
       expect.soft(measurement.renderer.sceneSampleCount).toBe(
         measurement.renderer.visibleMoleculeCount,
       );
@@ -716,12 +701,11 @@ test.describe("Explore product-quality acceptance", () => {
       }).toEqual({ overlap: 0, clipped: 0, labelCollision: 0 });
       expect.soft(measurement.renderer.visibleLabelCount).toBeGreaterThan(0);
       expect.soft(
-        measurement.regionCounts,
-        `${measurement.name} must preserve the curated two-region composition`,
-      ).toEqual(
-        measurement.name.startsWith("390x844")
-          ? { pain: 3, cardiovascular: 3 }
-          : { pain: 4, cardiovascular: 4 },
+        measurement.publicClusterLabels,
+        `${measurement.name} must retain one neutral public review region`,
+      ).toHaveLength(1);
+      expect.soft(measurement.publicClusterLabels[0]).toMatch(
+        /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
       );
       expect.soft({
         overlap: measurement.spatialQuality.overlap,

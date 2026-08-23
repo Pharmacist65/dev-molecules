@@ -4,6 +4,10 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
 
 ## Runtime
 
+- **react 19.2.8** and **react-dom 19.2.8** — Meta Platforms, Inc. and affiliates — MIT License
+  Project: <https://react.dev/>
+  Purpose: the client application, component lifecycle, accessibility state,
+  and DOM rendering boundary.
 - **three 0.185.1** — Three.js Authors — MIT License
   Project: <https://github.com/mrdoob/three.js>
   Purpose: the shared WebGL molecular scene, perspective camera, depth-tested atom spheres and bond cylinders. The package has no runtime dependencies.
@@ -29,7 +33,13 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
   Project: <https://github.com/DefinitelyTyped/DefinitelyTyped>
   Purpose: compile-time TypeScript declarations only.
 
-The lockfile pins exact direct versions. Both `npm audit` and `npm audit --omit=dev` report zero known vulnerabilities for this dependency set as checked on 2026-08-23. Toolchain upgrades are compatibility-tested rather than forced across the Vinext/worker boundary.
+The lockfile pins exact direct versions. The generated public
+`THIRD_PARTY_NOTICES.txt` appends the license/copyright files for the complete
+non-development npm dependency closure, including Ketcher's transitive browser
+packages. Both `npm audit` and `npm audit --omit=dev` report zero known
+vulnerabilities for this dependency set as checked on 2026-08-23. Toolchain
+upgrades are compatibility-tested rather than forced across the Vinext/worker
+boundary.
 
 ## Data and scientific-content notices
 
@@ -43,4 +53,4 @@ The DrugCentral-derived portions of `scripts/catalog/source-snapshots/` and `pub
 
 ### PubChem structure records
 
-Two- and three-dimensional SDF records are retrieved from [PubChem PUG REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) by exact CID after identity matching. The catalog retains PubChem CID, source URL, retrieval metadata and content hashes. NCBI's [data and copyright policies](https://www.ncbi.nlm.nih.gov/home/about/policies/) apply; NCBI cannot grant rights in third-party submitted content. Institutional redistribution review therefore remains a documented release boundary.
+Two- and three-dimensional SDF records are retrieved from [PubChem PUG REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) by exact CID after identity matching. The catalog retains PubChem CID, source URL, retrieval metadata and content hashes. The public prototype's project-level decision is to bundle those exact source records with this policy notice so the static application can preserve identity-checked, fail-closed rendering. NCBI's [data and copyright policies](https://www.ncbi.nlm.nih.gov/home/about/policies/) apply; NCBI cannot grant rights in third-party submitted content. This distribution decision is not a representation that NCBI or Dev Molecules cleared rights in every third-party submission, and institutional adopters must perform their own review.

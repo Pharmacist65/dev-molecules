@@ -12,6 +12,7 @@ export type EnrichmentAdapterId =
 
 export type RedistributionDecision =
   | "bundle-with-attribution"
+  | "bundle-source-records-with-policy-notice"
   | "build-time-derived-fields-only"
   | "link-only"
   | "blocked-pending-permission";
@@ -53,12 +54,12 @@ export const enrichmentSourcePolicies: readonly EnrichmentSourcePolicy[] = [
     licenseName: "NCBI database policy; submitter rights may vary",
     licenseUrl: "https://www.ncbi.nlm.nih.gov/home/about/policies/",
     access: "api",
-    redistribution: "build-time-derived-fields-only",
+    redistribution: "bundle-source-records-with-policy-notice",
     requiresAttribution: true,
     requiresShareAlike: false,
     enabledForPublicBuild: true,
     versionPolicy: "Pin CID, InChIKey, request URL, capture timestamp and asset digest.",
-    limitation: "NCBI cannot grant rights it does not hold in third-party submissions; redistribution remains reviewable.",
+    limitation: "The public prototype bundles exact SDF source records with CID, request, digest, and policy notice. NCBI cannot grant rights it does not hold in third-party submissions; this project decision is not a representation that submitter rights were cleared.",
   },
   {
     adapter: "DrugCentralTargetAdapter",

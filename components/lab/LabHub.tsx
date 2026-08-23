@@ -3,11 +3,13 @@
 import { lazy, Suspense, useMemo, useState } from "react";
 
 import { createLocalEvidenceCard } from "@/lib/application/evidence-card";
+import { presentEvidenceStatus } from "@/lib/application/evidence-status-presentation";
 import {
   createCanonicalSmilesPathFingerprint,
   tanimotoSimilarity,
 } from "@/lib/explore";
 import { moleculeCatalog } from "@/lib/data/catalog";
+import { createTranslator } from "@/lib/i18n";
 
 import styles from "./LabHub.module.css";
 
@@ -27,7 +29,7 @@ const content = {
     builder: "Molekül Oluşturucu",
     compare: "Molekülleri Karşılaştır",
     evidence: "Kanıt Çalışma Alanı",
-    sandbox: "Araştırma Sandbox'ı",
+    sandbox: "Araştırma Deneme Alanı",
     local: "Cihazda çalışan",
     computed: "Hesaplanmış · incelenmemiş",
     compareTitle: "İki–dört kürate edilmiş yapıyı karşılaştır",
@@ -38,9 +40,10 @@ const content = {
     chooseDrug: "Katalog kimliği",
     source: "Kaynaklar",
     limitations: "Sınırlar",
-    sandboxTitle: "Private Research Beta",
-    sandboxBody: "Bu yüzey public sürümde etkin değildir. Sunucu tarafı API, kimlik doğrulama, özel depolama, kota, audit ve açık onay olmadan araştırma üretimi açılmaz.",
+    sandboxTitle: "Özel Araştırma Betası",
+    sandboxBody: "Bu yüzey herkese açık sürümde etkin değildir. Sunucu tarafı API, kimlik doğrulama, özel depolama, kota, denetim ve açık onay olmadan araştırma üretimi açılmaz.",
     unavailable: "Şu an kullanılamıyor",
+    privateBeta: "Özel beta",
     required: "Açılmadan önce gereken sınırlar",
     editorLoading: "2B editör rotası yükleniyor…",
   },
@@ -65,6 +68,7 @@ const content = {
     sandboxTitle: "Private Research Beta",
     sandboxBody: "This surface is not enabled in the public build. Research generation remains unavailable without a server-side API, authentication, private storage, quotas, audit, and explicit consent.",
     unavailable: "Unavailable now",
+    privateBeta: "Private beta",
     required: "Boundaries required before launch",
     editorLoading: "Loading the 2D editor route…",
   },
@@ -83,7 +87,7 @@ export function LabHub({ locale, initialArea = "builder" }: LabHubProps) {
     { id: "builder", label: t.builder, badge: t.local },
     { id: "compare", label: t.compare, badge: t.computed },
     { id: "evidence", label: t.evidence, badge: t.local },
-    { id: "sandbox", label: t.sandbox, badge: "Private beta" },
+    { id: "sandbox", label: t.sandbox, badge: t.privateBeta },
   ];
 
   return (
@@ -192,6 +196,7 @@ function LocalComparison({ locale }: { readonly locale: "tr" | "en" }) {
 
 function LocalEvidenceWorkspace({ locale }: { readonly locale: "tr" | "en" }) {
   const t = content[locale];
+  const translate = createTranslator(locale);
   const [moleculeId, setMoleculeId] = useState<string>(moleculeCatalog[0]?.id ?? "");
   const card = useMemo(
     () =>
@@ -216,11 +221,11 @@ function LocalEvidenceWorkspace({ locale }: { readonly locale: "tr" | "en" }) {
       </label>
       {card ? (
         <article className={styles.localEvidenceCard}>
-          <header><div><span>{card.mode}</span><h3>{card.moleculeName}</h3></div><strong>{card.identityStatus}</strong></header>
+          <header><div><span>{presentEvidenceStatus(card.mode, translate)}</span><h3>{card.moleculeName}</h3></div><strong>{presentEvidenceStatus(card.identityStatus, translate)}</strong></header>
           <p>{card.summary}</p>
           <div className={styles.findings}>
             {card.findings.map((finding) => (
-              <div key={finding.label}><span>{finding.status}</span><strong>{finding.label}</strong><p>{finding.value}</p></div>
+              <div key={finding.label}><span>{presentEvidenceStatus(finding.status, translate)}</span><strong>{finding.label}</strong><p>{finding.value}</p></div>
             ))}
           </div>
           <details>

@@ -10,17 +10,12 @@ async function openAcademy(page: Page) {
   await page.addInitScript(() => {
     window.localStorage.setItem("dev-molecules:locale", "tr");
   });
-  await page.goto("/#universe", { waitUntil: "domcontentloaded" });
+  await page.goto("/#academy/nomenclature/organic", { waitUntil: "domcontentloaded" });
   const localeRoot = page.locator("[data-locale]").first();
   if (await localeRoot.getAttribute("data-locale") !== "tr") {
     await page.getByRole("button", { name: /Switch language to Turkish|Dili Türkçe yap/i }).click();
     await expect(localeRoot).toHaveAttribute("data-locale", "tr");
   }
-  const navigation = page.getByRole("navigation", {
-    name: /Platform bölümleri|Platform sections/i,
-  });
-  await navigation.getByRole("button").nth(1).click();
-  await page.getByRole("button", { name: /Akademiyi aç|Open Academy/i }).first().click();
   await expect(page.getByTestId("nomenclature-academy")).toBeVisible();
 }
 

@@ -27,7 +27,7 @@ const copy = {
   tr: {
     eyebrow: "Molekül Oluşturucu · cihazda çalışır",
     title: "Gerçek 2B yapı çalışma alanı",
-    body: "Ketcher standalone, yapıyı bu tarayıcıda işler. Yalnız siz dışa aktarırsanız bir dosya oluşur; public sürüm özel bulut depolaması sunmaz.",
+    body: "Bağımsız Ketcher, yapıyı bu tarayıcıda işler. Yalnız siz dışa aktarırsanız bir dosya oluşur; herkese açık sürüm özel bulut depolaması sunmaz.",
     loading: "Ketcher ve yerel kimya motoru yükleniyor…",
     inspect: "Yapıyı doğrula ve eşleştir",
     export: "Yerel proje dışa aktar",
@@ -35,7 +35,7 @@ const copy = {
     ready: "Editör hazır",
     pending: "Editör hazırlanıyor",
     exact: "Katalogda tam kimlik eşleşmesi",
-    none: "Tam katalog kimliği eşleşmedi",
+    none: "İndekslenmiş kayıtlarda kesin kimlik eşleşmesi yok",
     ambiguous: "Kimlik birden fazla kayda çözüldü; sonuç kapalı tutuldu",
     notNovel: "Eşleşme bulunmaması yenilik, patentlenebilirlik, biyolojik etkinlik veya sentezlenebilirlik kanıtı değildir.",
     similarity: "Hesaplanan yapısal yakınlık",
@@ -53,7 +53,7 @@ const copy = {
     ready: "Editor ready",
     pending: "Preparing editor",
     exact: "Exact catalog identity match",
-    none: "No exact catalog identity match",
+    none: "No exact identity match in the indexed records",
     ambiguous: "Identity resolved to multiple records; result withheld",
     notNovel: "No match is not evidence of novelty, patentability, biological activity, or synthesizability.",
     similarity: "Computed structural proximity",
@@ -100,8 +100,8 @@ export function KetcherWorkspace({ locale }: { readonly locale: "tr" | "en" }) {
       setSnapshot(nextSnapshot);
       setIdentityMatch(nextMatch);
       setSimilarity(nextSimilarity);
-    } catch (reason) {
-      setError(reason instanceof Error ? reason.message : t.error);
+    } catch {
+      setError(t.error);
       setSnapshot(null);
       setIdentityMatch(null);
       setSimilarity([]);

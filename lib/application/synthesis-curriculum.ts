@@ -367,6 +367,16 @@ export const buildSynthesisCurriculumReadiness = (
 
 export const synthesisCurriculumReadiness = buildSynthesisCurriculumReadiness();
 
+export const canOpenSynthesisCurriculumMolecule = (
+  moleculeId: string | null | undefined,
+  readiness: SynthesisCurriculumReadiness = synthesisCurriculumReadiness,
+): boolean => Boolean(
+  moleculeId && readiness.flagships.some(
+    (entry) =>
+      entry.moleculeId === moleculeId && entry.status === "curated-route-available",
+  ),
+);
+
 export const resolveSynthesisCurriculumSelection = (
   requestedMoleculeId: string | null | undefined,
   readiness: SynthesisCurriculumReadiness = synthesisCurriculumReadiness,
@@ -377,7 +387,7 @@ export const resolveSynthesisCurriculumSelection = (
   );
   if (
     requestedMoleculeId &&
-    available.some((entry) => entry.moleculeId === requestedMoleculeId)
+    canOpenSynthesisCurriculumMolecule(requestedMoleculeId, readiness)
   ) {
     return { moleculeId: requestedMoleculeId, reason: "requested-ready" };
   }

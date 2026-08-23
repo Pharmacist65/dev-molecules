@@ -6,7 +6,7 @@ The public application is served at:
 
 <https://pharmacist65.github.io/dev-molecules/>
 
-It is a GitHub project site, so every application asset must remain under the `/dev-molecules/` base path. Explore navigation uses URL hashes and therefore works without server-side route rewrites.
+It is a GitHub project site, so every application asset must remain under the `/dev-molecules/` base path. Home, Atlas, Dossier, Academy, Lab, Instructor, Reviewer, and legacy Spatial navigation use URL hashes and therefore work without server-side route rewrites.
 
 ## Build boundary
 
@@ -15,11 +15,19 @@ The repository has two production adapters around one product implementation:
 - `npm run build` produces the provider-neutral Vinext/worker build used for server-capable regression verification.
 - `npm run build:pages` produces the static GitHub Pages artifact in `dist-pages/`.
 
-The Pages entry imports `DevMoleculesApp` directly. It does not copy the product shell, scientific records, scoring rules, or rendering implementation. The static build prefixes checked-in structure-asset and catalog requests with the project base path while leaving canonical domain asset records unchanged.
+The Pages entry imports `DevMoleculesApp` directly. It does not copy the product shell, scientific records, scoring rules, or rendering implementation. The static build prefixes checked-in structure-asset and catalog requests with the project base path while leaving canonical domain asset records unchanged. It also emits the route-lazy Ketcher browser chunk, worker, and WASM used by the on-device Lab.
 
-`public/catalog/` is copied into the Pages artifact. The browser loads a compact manifest/search index, then bounded metadata shards and individual SDF assets on demand. The checked `drugcentral-fda-pubchem-eligible-v1` source evaluates 2,331 rows and publishes 1,552 records with 3,104 PubChem SDF assets. Its 25 alphabetic shards, one `unclassified` therapeutic shard, and coverage/unresolved reports remain directly inspectable; no catalog API, database, or secret is required. Explore searches the complete static index while keeping only a bounded resident metadata/structure window.
+`public/catalog/` is copied into the Pages artifact. The browser loads a compact manifest/search index, then bounded metadata shards and individual SDF assets on demand. The checked `drugcentral-fda-pubchem-eligible-v1` source evaluates 2,331 rows and publishes 1,552 records with 3,104 PubChem SDF assets. Its 25 alphabetic shards, one `unclassified` therapeutic shard, coverage/unresolved reports, and enrichment-readiness report remain directly inspectable; no catalog API, database, or secret is required. Atlas Browse searches the complete static index while the optional Spatial Atlas keeps only a bounded resident metadata/structure window.
 
-GitHub Pages cannot execute `/api/evidence`. In that deployment, Discover calls the existing curated `createLocalEvidenceCard` application service directly. It produces the same fail-closed evidence content that the server endpoint uses as its baseline; card timestamps and IDs are generated when the user requests the card. No model-provider credential, GitHub credential, or user research content is placed in the client bundle.
+The Pages root also publishes `THIRD_PARTY_NOTICES.txt`, generated from the
+complete non-development npm dependency closure plus the DrugCentral and
+PubChem data notices. PubChem SDF redistribution is recorded as an explicit
+public-prototype project decision with CID/request/digest provenance; it is not
+a claim that NCBI cleared rights in every third-party submission.
+
+GitHub Pages cannot execute `/api/evidence`. In that deployment, Lab's Evidence Workspace calls the curated `createLocalEvidenceCard` application service directly. It produces the same fail-closed evidence content that the server endpoint uses as its baseline. No model-provider credential, GitHub credential, reviewer adapter, private research API, or user research content is placed in the client bundle.
+
+Ketcher standalone processes structures in the browser. The public host does not upload or persist the edited structure; a local JSON file is created only after an explicit user export. Research Sandbox remains unavailable, and Reviewer Console remains locked because the static host injects no authenticated, audited adapter.
 
 ## CI and least privilege
 
@@ -40,15 +48,18 @@ Repository Pages settings must use **GitHub Actions** as the build source. No pe
 npm ci
 npm run typecheck
 npm run lint
+npm run catalog:validate
+npm run catalog:report
 npm run build
 npm run build:pages
-npm run catalog:validate
 node --test tests/*.test.mjs
 npx playwright test
 npm run e2e:pages
+npm audit --omit=dev --audit-level=high
+git diff --check
 ```
 
-The Pages test opens the production artifact at `/dev-molecules/`, loads real PubChem 3D and 2D SDF records through the project base path, verifies a direct molecule-focus hash, requires one WebGL context, generates a curated Discover card without an API request, and fails on console, page, or network errors. `catalog:validate` separately verifies every generated shard and exactly 3,104 referenced catalog structure assets before release; orphan or partial SDF files fail validation.
+The browser gates open production artifacts at `/dev-molecules/`, exercise base-path hashes, load real PubChem 3D and 2D SDF records, require the bounded Spatial renderer to retain one WebGL context, and verify the serverless curated-evidence boundary without an API request. The Dev Molecules 2.0 suite also covers the four-section shell, 1,552-record Browse boundary, Dossier gaps, eight-module Academy, synthesis counts, the real Ketcher runtime, device-local Instructor composition, locked Reviewer behavior, and mobile overflow. `catalog:validate` separately verifies every generated shard and exactly 3,104 referenced catalog structure assets before release; orphan or partial SDF files fail validation.
 
 ## Release and rollback
 

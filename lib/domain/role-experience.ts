@@ -24,18 +24,19 @@ export interface StudentPresentationDepth {
 
 export interface ExpertPresentationDepth {
   readonly mode: "expert";
-  readonly narrative: "reference-dense";
-  readonly sourceDetail: "citation-and-drawer";
-  readonly measurements: "value-unit-conditions";
-  readonly assayContext: "visible";
-  readonly comparison: "multi-record";
-  readonly export: "available-when-source-complete";
+  readonly narrative: "dossier-reference-default";
+  readonly sourceDetail: "same-as-student";
+  readonly measurements: "same-implemented-fields";
+  readonly assayContext: "same-implemented-fields";
+  readonly comparison: "same-guided-comparison";
+  readonly export: "same-local-lab-export";
   readonly rawScientificEnums: false;
 }
 
 /**
- * Student and Expert are presentation depths over the same evidence. Reviewer
- * access is intentionally absent: it is a separate authorization boundary.
+ * Student and Expert are learner preferences over the same evidence. Expert's
+ * current shipped effect is the curated-Dossier default only. Reviewer access
+ * is intentionally absent: it is a separate authorization boundary.
  */
 export type LearnerPresentationDepth =
   | StudentPresentationDepth

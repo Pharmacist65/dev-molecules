@@ -24,6 +24,31 @@ import {
 
 export type DossierLocale = "tr" | "en";
 
+export interface DossierLearningAvailability {
+  readonly synthesis: boolean;
+  readonly nomenclature: boolean;
+}
+
+const isOpenCoverageStatus = (
+  status: DossierCoverageIndicator["status"],
+): boolean => status === "reviewed" || status === "source-supported";
+
+export function getDossierLearningAvailability(
+  dossier: Pick<DrugDossierRecord, "coverage">,
+): DossierLearningAvailability {
+  const statusByDimension = new Map(
+    dossier.coverage.map((item) => [item.dimension, item.status]),
+  );
+  return {
+    synthesis: isOpenCoverageStatus(
+      statusByDimension.get("synthesis") ?? "unavailable",
+    ),
+    nomenclature: isOpenCoverageStatus(
+      statusByDimension.get("nomenclature") ?? "unavailable",
+    ),
+  };
+}
+
 const scientificTypeForSource = (kind: SourceKind): EvidenceLevel => {
   if (kind === "regulatory-label") return "regulatory";
   if (kind === "curated-database") return "curated-database";
@@ -259,11 +284,11 @@ export function createDrugDossier(
       synthesisStory ? "Kaynak denetimli eğitim rotası mevcut; uzman inceleme durumu ayrıca korunur." : "Bu ilaç için kürate edilmiş rota henüz yok.",
       synthesisStory ? "A source-audited educational route is available; its expert-review boundary remains visible." : "No curated route is available for this drug yet.",
     ), synthesisStory ? 1 : 0, null),
-    coverage("nomenclature", systematicName ? "source-supported" : "unavailable", localized(
+    coverage("nomenclature", "unavailable", localized(
       locale,
-      systematicName ? "Kaynaklı sistematik ad mevcut; ilaç-özel etkileşimli çözümleme ayrı kapsamdır." : "İlaç-özel nomenklatür çözümlemesi henüz yok.",
-      systematicName ? "A sourced systematic name is available; drug-specific interactive decomposition is separate coverage." : "No drug-specific nomenclature decomposition is available yet.",
-    ), systematicName ? 1 : 0, null),
+      systematicName ? "Kaynaklı sistematik ad kimya özetinde gösterilir; ilaç-özel etkileşimli nomenklatür dersi henüz yok." : "İlaç-özel nomenklatür çözümlemesi henüz yok.",
+      systematicName ? "The sourced systematic name appears in the chemistry summary; no drug-specific interactive nomenclature lesson is available yet." : "No drug-specific nomenclature decomposition is available yet.",
+    ), 0, null),
     coverage("learning", synthesisStory ? "source-supported" : "pending-review", localized(
       locale,
       "Derin öğrenme içeriği katalog genişliğinden ayrı kürate edilir.",

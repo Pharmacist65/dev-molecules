@@ -10,20 +10,24 @@ The 15 curated molecule fixtures, 1,552-record generated catalog, six Synthesis 
 
 The current vertical slice implements:
 
-- a bilingual TR/EN product shell with all five modes;
-- Student Mode by default with a secondary Reviewer Mode under Settings;
-- Universe → spatial cluster → molecule focus/compare navigation;
+- a bilingual TR/EN Home / Drug Atlas / Academy / Lab product shell that preserves Explore, Learn, Build, Teach, and Discover as capabilities rather than equal navigation tabs;
+- Student by default and an Expert preference whose current effect is limited to the curated Dossier default; Reviewer is a separate, locked authorization domain;
+- a Browse surface over the 1,552 imported structure records in the checked snapshot and an optional lazy Spatial Atlas with Universe → cluster → molecule focus/compare navigation;
 - a single shared Three.js scene with bounded progressive level of detail and 2–4 molecule comparison;
-- four versioned Explore lenses, including a scoped canonical-SMILES path fingerprint/Tanimoto lens that is explicitly not ECFP or clinical similarity;
+- four versioned Spatial lenses, including a scoped canonical-SMILES path fingerprint/Tanimoto lens that is explicitly not ECFP or clinical similarity;
 - an all-row static pipeline over the selected 2,331-row DrugCentral FDA list: 1,858 complete same-ID structures, 1,747 exact PubChem resolutions, 1,552 imported 2D/3D pairs, 779 explicit unresolved rows, 25 alphabetic shards, one `unclassified` therapeutic shard, and 3,104 PubChem SDF assets;
-- 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors;
-- six non-operational Synthesis Atlas routes over three molecules, including five- and six-transformation source-reported paths, two atom-anchored mechanism mappings defined by foundational transformations, and fail-closed/no-decorative-arrow behavior for incompatible or unmapped steps;
+- 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors and the current deep-Dossier seed;
+- Story/Reference Dossier surfaces whose classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review coverage fail independently;
+- an eight-module Academy map: five available modules, two coverage-dependent modules, and one planned standalone module;
+- six non-operational Synthesis Atlas routes over three molecules, 20 transformations, 12 mechanism records, two strictly source-reported route presentations, and fail-closed/no-decorative-arrow behavior for incompatible or unmapped steps;
 - eight Nomenclature Academy sections with 22 exercises over 20 parseable structures and 16 concrete response/widget types;
-- a guided builder, device-local teaching progress, and fail-closed evidence cards;
+- a route-lazy, on-device Ketcher 3.17.2 editor with exact static-catalog identity matching and explicit local JSON export;
+- a device-local Instructor package/progress-export boundary and an adapter-gated Reviewer Console;
 - a public GitHub Pages delivery adapter over the same application shell;
+- typed competitive capability contracts and a parity gate that does not call contract-only work shipped;
 - typecheck, lint, server/static production builds, Node tests, and Playwright gates in CI.
 
-This baseline is not a production scientific publication or the exact FDA application/product universe. All 1,552 generated therapeutic classifications remain unresolved; all 2,331 product/application links remain unresolved; one display-name form/stereo conflict stays separate; and two multicomponent parent relations remain unresolved. openFDA enrichment is available but not selected; EMA and PMDA are future adapters. Synthesis mechanisms, educational classification wording, and the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or general-purpose chemical editor.
+This baseline is not a production scientific publication or the exact FDA application/product universe. All 1,552 generated therapeutic classifications remain unresolved; all 2,331 product/application links remain unresolved; one display-name form/stereo conflict stays separate; and two multicomponent parent relations remain unresolved. The enrichment report has zero configured snapshots and zero classification, pharmacology, or ADME enrichment. The 15-record Dossier seed has no reviewed target interactions, no quantitative ADME fields, and no reviewed metabolite edges. openFDA enrichment is not configured; EMA and PMDA remain future sources. Synthesis mechanisms, educational classification wording, and the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or research project store.
 
 ## R1 — Public engineering release
 
@@ -93,7 +97,7 @@ Expand Learn and Build from the current vertical slice into reviewer-approved co
 
 - qualified review and expansion of the current six Atlas routes and versioned challenges;
 - deeper Academy sequences beyond the current eight-section/22-exercise curriculum, with prerequisites, misconception tracking, and accessible non-spatial alternatives;
-- a precise 2D editor behind a replaceable chemical-tool port, with source-labelled 3D preview;
+- hardening of the current Ketcher 2D editor behind its adapter, including validated import/export boundaries, identity-preserving history, and a source-labelled 3D preview;
 - reusable course packs, learning objectives, rubrics, and content-version pinning;
 - learning analytics that remain separate from evidence and scientific review state.
 
@@ -106,7 +110,7 @@ Expand Learn and Build from the current vertical slice into reviewer-approved co
 
 ## R5 — Instructor Studio and university pilot
 
-Add courses, cohorts, assignments, rubrics, institution-private material, exports, and privacy controls only after the content and identity foundations are reviewable.
+Extend the current device-local lesson-package composer into courses, cohorts, assignments, rubrics, institution-private material, governed exports, and privacy controls only after the content and identity foundations are reviewable.
 
 **Acceptance gate**
 

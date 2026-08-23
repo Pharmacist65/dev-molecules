@@ -32,12 +32,15 @@ import {
   DEFAULT_PLATFORM_ROUTE,
   getDrugHash,
   getPrimaryNavigationSection,
+  getSynthesisAcademyHash,
   parsePlatformHash,
   type PlatformRoute,
   type PlatformSection,
 } from "@/lib/application/platform-route";
+import { canOpenSynthesisCurriculumMolecule } from "@/lib/application/synthesis-curriculum";
 import type { CatalogNormalizedEntity } from "@/lib/catalog";
 import { moleculeById, moleculeCatalog } from "@/lib/data/catalog";
+import { createDrugFamilyPage } from "@/lib/data/family-pages";
 import { learningMissions } from "@/lib/data/learning-missions";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
 import type { MoleculeId, NomenclatureProgressSnapshot } from "@/lib/domain";
@@ -58,6 +61,9 @@ const DrugAtlas = lazy(() =>
 );
 const DrugDossier = lazy(() =>
   import("@/components/dossier").then((module) => ({ default: module.DrugDossier })),
+);
+const FamilyPage = lazy(() =>
+  import("@/components/atlas/FamilyPage").then((module) => ({ default: module.FamilyPage })),
 );
 const AcademyHub = lazy(() =>
   import("@/components/academy").then((module) => ({ default: module.AcademyHub })),
@@ -183,13 +189,14 @@ function DevMoleculesWorkspace() {
     useState<readonly CatalogNormalizedEntity[]>([]);
   const [catalogLoadStatus, setCatalogLoadStatus] =
     useState<"loading" | "ready" | "fallback">("loading");
-  const [catalogLoadError, setCatalogLoadError] = useState("");
   const [selectedId, setSelectedId] = useState<string>(moleculeCatalog[0]?.id ?? "");
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<string>>(new Set());
   const [nomenclatureProgress, setNomenclatureProgress] =
     useState<NomenclatureProgressSnapshot | null>(null);
-  const presentationMode: ExplorePresentationMode =
-    experienceMode === "expert" ? "reviewer" : "student";
+  // Anonymous learner depth never grants the separate Reviewer capability.
+  // Expert currently receives the denser Dossier reference layout only; raw
+  // draft classifications and reviewer diagnostics remain authorization-gated.
+  const presentationMode: ExplorePresentationMode = "student";
   const instructorProgressSnapshot = useMemo<InstructorProgressSnapshot | null>(
     () => nomenclatureProgress
       ? {
@@ -204,6 +211,12 @@ function DevMoleculesWorkspace() {
   );
 
   const assetBasePath = import.meta.env.BASE_URL;
+  const activeFamilyPage = useMemo(
+    () => route.section === "family" && route.familyId
+      ? createDrugFamilyPage(route.familyId, assetBasePath)
+      : null,
+    [assetBasePath, route.familyId, route.section],
+  );
   const seedExploreCatalogView = useMemo(
     () => createExploreCatalogView(moleculeCatalog, locale, assetBasePath),
     [assetBasePath, locale],
@@ -308,7 +321,7 @@ function DevMoleculesWorkspace() {
       taskMoleculeIds: LEARNING_TASK_MOLECULE_IDS,
       onOpenSynthesis: (molecule) => {
         setSelectedId(molecule.id);
-        navigate(`#academy/synthesis/${encodeURIComponent(getMoleculeSlug(molecule.id))}/overview`);
+        navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id)));
       },
       onOpenNomenclature: (molecule) => {
         setSelectedId(molecule.id);
@@ -316,7 +329,7 @@ function DevMoleculesWorkspace() {
       },
       onOpenTasks: (molecule) => {
         setSelectedId(molecule.id);
-        navigate(`#academy/synthesis/${encodeURIComponent(getMoleculeSlug(molecule.id))}/overview`);
+        navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id)));
         window.requestAnimationFrame(() => {
           document.getElementById("missions-heading")?.scrollIntoView({ block: "start" });
         });
@@ -325,10 +338,17 @@ function DevMoleculesWorkspace() {
     [navigate],
   );
 
-  const selectedMolecule = moleculeById.get(selectedId as MoleculeId);
-  const selectedExploreMolecule = exploreCatalogView.molecules.find(
-    (molecule) => molecule.id === selectedId,
-  );
+  const requestedSynthesisMolecule =
+    route.section === "academy" && route.academyArea === "synthesis" && route.slug
+      ? moleculeCatalog.find(
+          (molecule) => getMoleculeSlug(molecule.id) === route.slug,
+        )
+      : undefined;
+  const synthesisRouteMolecule =
+    requestedSynthesisMolecule &&
+    canOpenSynthesisCurriculumMolecule(requestedSynthesisMolecule.id)
+      ? requestedSynthesisMolecule
+      : undefined;
   const featuredExploreMolecule =
     seedExploreCatalogView.molecules.find(
       (molecule) => molecule.name.toLocaleLowerCase("en").includes("celecoxib"),
@@ -392,14 +412,10 @@ function DevMoleculesWorkspace() {
       .then((expansion) => {
         if (cancelled) return;
         setCatalogExpansion(expansion);
-        setCatalogLoadError("");
         setCatalogLoadStatus("ready");
       })
-      .catch((reason: unknown) => {
+      .catch(() => {
         if (cancelled) return;
-        setCatalogLoadError(
-          reason instanceof Error ? reason.message : t("explore.catalogFallbackUnknownError"),
-        );
         setCatalogLoadStatus("fallback");
       });
     return () => {
@@ -457,14 +473,22 @@ function DevMoleculesWorkspace() {
     navigate(`#molecule/${encodeURIComponent(getMoleculeSlug(moleculeId))}`);
   }
 
-  const unavailableWorkflow = (
+  function selectSynthesisMolecule(moleculeId: string) {
+    if (!canOpenSynthesisCurriculumMolecule(moleculeId)) return;
+    const molecule = moleculeById.get(moleculeId as MoleculeId);
+    if (!molecule) return;
+    setSelectedId(molecule.id);
+    navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id), "atlas"));
+  }
+
+  const unavailableSynthesisRoute = (
     <CuratedWorkflowUnavailable
       eyebrow={t("workflow.unavailableEyebrow")}
       title={t("workflow.unavailableTitle", {
-        name: selectedExploreMolecule?.name ?? t("workflow.unknownMolecule"),
+        name: route.slug ?? t("workflow.unknownMolecule"),
       })}
       description={t("workflow.unavailableDescription", {
-        cid: selectedExploreMolecule?.structure.pubChemCid ?? t("common.notSpecified"),
+        cid: t("common.notSpecified"),
       })}
       actionLabel={t("workflow.returnToExplore")}
       onReturnToAtlas={() => navigate("#atlas")}
@@ -617,9 +641,6 @@ function DevMoleculesWorkspace() {
                   <strong>{t("explore.catalogFallbackTitle")}</strong>
                   <p>{t("explore.catalogFallbackBody", { count: exploreCatalogView.molecules.length })}</p>
                 </div>
-                {presentationMode === "reviewer" ? (
-                  <code>{t("explore.catalogFallbackReviewer", { error: catalogLoadError })}</code>
-                ) : null}
               </div>
             ) : null}
             <Suspense fallback={loading}>
@@ -658,15 +679,15 @@ function DevMoleculesWorkspace() {
           <div className={styles.workspacePage}>
             <Suspense fallback={loading}>
               {route.academyArea === "synthesis" ? (
-                selectedMolecule ? (
+                synthesisRouteMolecule ? (
                   <>
                     <SynthesisAcademyHub
                       locale={locale}
-                      selectedMoleculeId={selectedMolecule.id}
-                      initialMoleculeId={selectedMolecule.id}
+                      selectedMoleculeId={synthesisRouteMolecule.id}
+                      initialMoleculeId={synthesisRouteMolecule.id}
                       initialView={route.routeId === "atlas" ? "atlas" : "curriculum"}
                       presentationMode={presentationMode}
-                      onSelectMolecule={setSelectedId}
+                      onSelectMolecule={selectSynthesisMolecule}
                       onOpenMoleculeFocus={openMoleculeFocus}
                       onOpenDrugDossier={(moleculeId) => {
                         setSelectedId(moleculeId);
@@ -679,7 +700,7 @@ function DevMoleculesWorkspace() {
                       onComplete={completeMission}
                     />
                   </>
-                ) : unavailableWorkflow
+                ) : unavailableSynthesisRoute
               ) : (
                 <AcademyHub
                   locale={locale}
@@ -701,11 +722,9 @@ function DevMoleculesWorkspace() {
                         getMoleculeSlug(record.id) === getMoleculeSlug(moleculeIdOrSlug),
                     );
                     if (molecule) setSelectedId(molecule.id);
-                    navigate(
-                      `#academy/synthesis/${encodeURIComponent(
-                        getMoleculeSlug(molecule?.id ?? moleculeIdOrSlug),
-                      )}/overview`,
-                    );
+                    navigate(getSynthesisAcademyHash(
+                      getMoleculeSlug(molecule?.id ?? moleculeIdOrSlug),
+                    ));
                   }}
                 />
               )}
@@ -748,19 +767,15 @@ function DevMoleculesWorkspace() {
           <div className={styles.workspacePage}>
             <Suspense fallback={loading}>
               <DrugDossier
-                key={`${route.slug}:${presentationMode}`}
+                key={`${route.slug}:${experienceMode}`}
                 moleculeIdOrSlug={route.slug ?? ""}
                 locale={locale}
                 assetBasePath={assetBasePath}
-                initialMode={presentationMode === "reviewer" ? "reference" : "story"}
+                initialMode={experienceMode === "expert" ? "reference" : "story"}
                 onBackToAtlas={() => navigate("#atlas")}
                 onOpenSynthesis={(moleculeId) => {
                   setSelectedId(moleculeId);
-                  navigate(`#academy/synthesis/${encodeURIComponent(getMoleculeSlug(moleculeId))}/overview`);
-                }}
-                onOpenNomenclature={(moleculeId) => {
-                  setSelectedId(moleculeId);
-                  navigate("#academy/nomenclature/foundations");
+                  navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId)));
                 }}
               />
             </Suspense>
@@ -769,13 +784,19 @@ function DevMoleculesWorkspace() {
 
         {route.section === "family" ? (
           <div className={styles.workspacePage}>
-            <CuratedWorkflowUnavailable
-              eyebrow={t("family.loadingEyebrow")}
-              title={t("family.integrationTitle", { name: route.familyId ?? t("common.notSpecified") })}
-              description={t("family.integrationDescription")}
-              actionLabel={t("workflow.returnToExplore")}
-              onReturnToAtlas={() => navigate("#atlas")}
-            />
+            {activeFamilyPage ? (
+              <Suspense fallback={loading}>
+                <FamilyPage family={activeFamilyPage} locale={locale} />
+              </Suspense>
+            ) : (
+              <CuratedWorkflowUnavailable
+                eyebrow={t("family.loadingEyebrow")}
+                title={t("family.integrationTitle", { name: route.familyId ?? t("common.notSpecified") })}
+                description={t("family.integrationDescription")}
+                actionLabel={t("workflow.returnToExplore")}
+                onReturnToAtlas={() => navigate("#atlas")}
+              />
+            )}
           </div>
         ) : null}
       </main>

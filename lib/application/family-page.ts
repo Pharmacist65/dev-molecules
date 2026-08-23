@@ -100,8 +100,18 @@ export function validateDrugFamilyPageModel(
     issues.push({ path: "family", message: "A family needs a stable ID and slug." });
   }
   issues.push(...validateLocalizedText(family.name, "family.name"));
-  if (family.kinds.length === 0) {
-    issues.push({ path: "family.kinds", message: "A family needs at least one declared kind." });
+  const hasMembershipClaim =
+    family.classifications.length > 0 ||
+    family.representatives.some((drug) => drug.memberships.length > 0) ||
+    family.overview.availability === "available" ||
+    family.sharedMechanism.availability === "available" ||
+    family.primaryTargetFamilies.availability === "available" ||
+    family.sharedStructuralMotifs.availability === "available";
+  if (family.kinds.length === 0 && hasMembershipClaim) {
+    issues.push({
+      path: "family.kinds",
+      message: "A page with family claims needs at least one declared kind.",
+    });
   }
   issues.push(...validateEvidenceField(family.overview, "family.overview"));
   issues.push(...validateEvidenceField(family.sharedMechanism, "family.sharedMechanism"));

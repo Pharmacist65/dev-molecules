@@ -7,6 +7,9 @@
   --atlas-line: #dce3ed;
   --atlas-surface: #ffffff;
   --atlas-soft: #f3f6fb;
+  --atlas-body-size: 1rem;
+  --atlas-secondary-size: 0.875rem;
+  --atlas-ui-label-size: 0.8125rem;
   width: 100%;
   margin-top: 1rem;
   overflow: hidden;
@@ -44,7 +47,7 @@
   display: block;
   margin-bottom: 0.65rem;
   color: #80a8ff;
-  font: 700 0.66rem/1.2 var(--font-geist-mono), monospace;
+  font: 700 var(--atlas-ui-label-size)/1.2 var(--font-geist-mono), monospace;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -63,7 +66,7 @@
   max-width: 720px;
   margin: 0.9rem 0 0;
   color: #c8d5ef;
-  font-size: clamp(0.9rem, 1.2vw, 1.08rem);
+  font-size: clamp(var(--atlas-body-size), 1.2vw, 1.08rem);
   line-height: 1.58;
 }
 
@@ -75,7 +78,7 @@
   border-radius: 999px;
   background: rgb(255 255 255 / 8%);
   color: #d6e1f4;
-  font-size: 0.68rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 600;
   line-height: 1.35;
   text-align: center;
@@ -108,7 +111,7 @@
   box-shadow: inset 0 -3px var(--atlas-orange);
   color: var(--atlas-navy);
 }
-.moleculeTabs span { color: #9aa5b6; font: 600 0.62rem var(--font-geist-mono), monospace; }
+.moleculeTabs span { color: #9aa5b6; font: 600 var(--atlas-ui-label-size) var(--font-geist-mono), monospace; }
 .moleculeTabs strong { font-size: 0.95rem; }
 
 .routeIntro {
@@ -138,7 +141,7 @@
   background: transparent;
   color: #667188;
   cursor: pointer;
-  font-size: 0.76rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 650;
   text-align: left;
 }
@@ -163,7 +166,7 @@
   line-height: 1.02;
 }
 .routeIntro p { max-width: 850px; margin: 0.9rem 0; color: #59667c; line-height: 1.65; }
-.routeIntro small { color: #8791a3; font-size: 0.73rem; }
+.routeIntro small { color: #8791a3; font-size: var(--atlas-secondary-size); }
 
 .atlasToolbar {
   display: grid;
@@ -191,7 +194,7 @@
   background: rgb(255 255 255 / 4%);
   color: #aebbd2;
   cursor: pointer;
-  font-size: 0.66rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 650;
 }
 
@@ -205,7 +208,7 @@
 .zoomControls output {
   width: 42px;
   color: #8796ad;
-  font: 0.63rem var(--font-geist-mono), monospace;
+  font: var(--atlas-secondary-size) var(--font-geist-mono), monospace;
   text-align: center;
 }
 
@@ -245,7 +248,7 @@
 .materialNode {
   position: absolute;
   width: 208px;
-  min-height: 176px;
+  min-height: 188px;
   padding: 0.55rem 0.65rem 0.65rem;
   transform: translate(-50%, -50%);
   overflow: hidden;
@@ -266,7 +269,7 @@
   border-radius: 5px;
   background: #edf3ff;
   color: #3961b7;
-  font: 700 0.51rem var(--font-geist-mono), monospace;
+  font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -277,19 +280,19 @@
 .nodeStructure figcaption {
   overflow: hidden;
   color: #26334c;
-  font-size: 0.68rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 680;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.nodeStructure code { display: block; overflow: hidden; font-size: 0.52rem; text-overflow: ellipsis; }
+.nodeStructure code { display: block; overflow: hidden; font-size: var(--atlas-secondary-size); text-overflow: ellipsis; }
 
 .stepNode {
   position: absolute;
   z-index: 3;
   display: grid;
-  width: 154px;
-  min-height: 106px;
+  width: 174px;
+  min-height: 124px;
   align-content: center;
   gap: 0.2rem;
   padding: 0.55rem 0.65rem;
@@ -304,10 +307,10 @@
 }
 .stepNode:hover { border-color: #7da4ef; }
 .stepNode[data-active="true"] { border-color: #ff9a57; box-shadow: 0 0 0 3px rgb(244 122 50 / 15%); }
-.stepNode b { color: #ff9a57; font: 700 0.58rem var(--font-geist-mono), monospace; }
-.stepNode span { font-size: 0.62rem; font-weight: 700; line-height: 1.25; }
-.stepNode small { color: #98a9c3; font-size: 0.52rem; line-height: 1.25; }
-.stepNode em { color: #6f88ad; font: normal 0.48rem/1.25 var(--font-geist-mono), monospace; }
+.stepNode b { color: #ff9a57; font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace; }
+.stepNode span { font-size: var(--atlas-secondary-size); font-weight: 700; line-height: 1.25; }
+.stepNode small { color: #98a9c3; font-size: var(--atlas-ui-label-size); line-height: 1.35; }
+.stepNode em { color: #6f88ad; font: normal var(--atlas-ui-label-size)/1.35 var(--font-geist-mono), monospace; }
 
 .routeHint {
   position: absolute;
@@ -319,7 +322,7 @@
   border-radius: 8px;
   background: rgb(4 13 29 / 72%);
   color: #8ea0bc;
-  font-size: 0.62rem;
+  font-size: var(--atlas-secondary-size);
   backdrop-filter: blur(10px);
 }
 
@@ -371,7 +374,7 @@
   border-radius: 999px;
   background: #eef9f4;
   color: #237153;
-  font-size: 0.59rem;
+  font-size: var(--atlas-ui-label-size);
   font-weight: 700;
 }
 .evidenceBadge[data-evidence="source-context"] { border-color: #c9d8f4; background: #f1f5fd; color: #365d9e; }
@@ -392,7 +395,7 @@
   display: block;
   margin-bottom: 0.55rem;
   color: #7b8699;
-  font: 700 0.55rem var(--font-geist-mono), monospace;
+  font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -412,7 +415,7 @@
 .detailStructure svg,
 .mechanismStructure svg { display: block; width: 100%; height: 150px; }
 .detailStructure figcaption,
-.mechanismStructure figcaption { font-size: 0.66rem; font-weight: 650; }
+.mechanismStructure figcaption { font-size: var(--atlas-secondary-size); font-weight: 650; }
 
 .stepFacts,
 .mechanismRoles {
@@ -435,20 +438,20 @@
   display: block;
   margin-bottom: 0.5rem;
   color: #8490a2;
-  font: 650 0.56rem var(--font-geist-mono), monospace;
+  font: 650 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .stepFacts strong,
-.mechanismRoles strong { color: #26344d; font-size: 0.75rem; font-weight: 620; line-height: 1.5; }
+.mechanismRoles strong { color: #26344d; font-size: var(--atlas-secondary-size); font-weight: 620; line-height: 1.5; }
 
 .changeLedger { padding: 1.35rem clamp(1.25rem, 3vw, 2.3rem); }
-.changeLedger > header > span { color: var(--atlas-blue); font-size: 0.66rem; font-weight: 750; text-transform: uppercase; }
+.changeLedger > header > span { color: var(--atlas-blue); font-size: var(--atlas-ui-label-size); font-weight: 750; text-transform: uppercase; }
 .changeLedger > div { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.9rem; }
 .changeLedger article { padding: 1rem; border-radius: 13px; background: var(--atlas-soft); }
-.changeLedger h3 { margin: 0 0 0.7rem; color: var(--atlas-navy); font-size: 0.75rem; }
+.changeLedger h3 { margin: 0 0 0.7rem; color: var(--atlas-navy); font-size: var(--atlas-body-size); }
 .changeLedger ul { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
-.changeLedger li { color: #566279; font-size: 0.7rem; line-height: 1.45; }
+.changeLedger li { color: #566279; font-size: var(--atlas-secondary-size); line-height: 1.5; }
 .bondChanges li span {
   display: inline-block;
   min-width: 65px;
@@ -457,7 +460,7 @@
   border-radius: 5px;
   background: #e6f5ee;
   color: #237153;
-  font: 650 0.51rem var(--font-geist-mono), monospace;
+  font: 650 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
   text-align: center;
 }
 .bondChanges li[data-change="broken"] span { background: #fff0e8; color: #ae5123; }
@@ -480,7 +483,7 @@
   background: #fff;
   color: #40506b;
   cursor: pointer;
-  font-size: 0.68rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 700;
 }
 .stepActions button:nth-child(2),
@@ -495,7 +498,7 @@
   border-radius: 7px;
   background: #fff2ea;
   color: #b95620;
-  font-size: 0.61rem;
+  font-size: var(--atlas-ui-label-size);
 }
 .mechanismStructures {
   position: relative;
@@ -542,21 +545,21 @@
   border-radius: 50%;
   background: var(--atlas-navy);
   color: #fff;
-  font: 0.61rem var(--font-geist-mono), monospace;
+  font: var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
 }
-.electronFlow li > p { margin: 0; color: #5d687b; font-size: 0.69rem; line-height: 1.5; }
+.electronFlow li > p { margin: 0; color: #5d687b; font-size: var(--atlas-body-size); line-height: 1.5; }
 .electronFlow li > small {
   grid-column: 2 / -1;
   color: #8a5a3f;
-  font-size: 0.62rem;
+  font-size: var(--atlas-secondary-size);
   line-height: 1.45;
 }
 .electronDiagram { display: grid; grid-template-columns: 1fr 100px 1fr; align-items: center; gap: 0.35rem; }
-.electronDiagram strong { color: #35435c; font-size: 0.64rem; line-height: 1.35; text-align: center; }
+.electronDiagram strong { color: #35435c; font-size: var(--atlas-secondary-size); line-height: 1.35; text-align: center; }
 .electronDiagram > span { color: var(--atlas-orange); font-size: 1.2rem; text-align: center; }
 .mechanismError { margin: 0 2.3rem 2rem; padding: 1rem; border-left: 3px solid var(--atlas-orange); background: #fff5ee; }
 .mechanismError span { color: #a84f21; }
-.mechanismError p { margin: 0; color: #6e5142; font-size: 0.72rem; line-height: 1.5; }
+.mechanismError p { margin: 0; color: #6e5142; font-size: var(--atlas-secondary-size); line-height: 1.5; }
 .mechanismUnavailable { padding: 1rem; border: 1px solid #efcfbb; border-radius: 12px; background: #fff4ed; color: #9e4b20; }
 
 .sourceDrawer {
@@ -571,7 +574,7 @@
   padding: 1rem 1.2rem;
   color: #34435c;
   cursor: pointer;
-  font-size: 0.72rem;
+  font-size: var(--atlas-secondary-size);
   font-weight: 720;
   list-style: none;
 }
@@ -584,21 +587,21 @@
   border-radius: 50%;
   background: #eaf0fc;
   color: var(--atlas-blue);
-  font: 0.58rem var(--font-geist-mono), monospace;
+  font: var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
 }
 .sourceDrawerBody { padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--atlas-line); }
-.sourceDrawerBody > p { color: #7a8496; font-size: 0.68rem; }
+.sourceDrawerBody > p { color: #7a8496; font-size: var(--atlas-secondary-size); }
 .sourceDrawerBody ol { display: grid; gap: 0.8rem; margin: 1rem 0; padding: 0; list-style: none; counter-reset: source; }
 .sourceDrawerBody ol > li { padding: 1rem; border: 1px solid var(--atlas-line); border-radius: 12px; counter-increment: source; }
-.sourceDrawerBody a { color: var(--atlas-blue); font-size: 0.73rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.sourceDrawerBody a { color: var(--atlas-blue); font-size: var(--atlas-secondary-size); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .sourceDrawerBody dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.8rem 0 0; }
 .sourceDrawerBody dl div { margin: 0; }
-.sourceDrawerBody dt { margin-bottom: 0.3rem; color: #8994a6; font: 0.53rem var(--font-geist-mono), monospace; text-transform: uppercase; }
-.sourceDrawerBody dd { margin: 0; color: #58657a; font-size: 0.66rem; line-height: 1.5; }
+.sourceDrawerBody dt { margin-bottom: 0.3rem; color: #8994a6; font: var(--atlas-ui-label-size) var(--font-geist-mono), monospace; text-transform: uppercase; }
+.sourceDrawerBody dd { margin: 0; color: #58657a; font-size: var(--atlas-secondary-size); line-height: 1.5; }
 .sourceDrawerBody > section { margin-top: 1rem; }
-.sourceDrawerBody h3 { margin: 0 0 0.5rem; color: var(--atlas-navy); font-size: 0.7rem; }
-.sourceDrawerBody ul { margin: 0; padding-left: 1.1rem; color: #647087; font-size: 0.67rem; line-height: 1.55; }
-.sourceDrawerBody section p { margin: 0; color: #647087; font-size: 0.67rem; line-height: 1.55; }
+.sourceDrawerBody h3 { margin: 0 0 0.5rem; color: var(--atlas-navy); font-size: var(--atlas-body-size); }
+.sourceDrawerBody ul { margin: 0; padding-left: 1.1rem; color: #647087; font-size: var(--atlas-secondary-size); line-height: 1.55; }
+.sourceDrawerBody section p { margin: 0; color: #647087; font-size: var(--atlas-secondary-size); line-height: 1.55; }
 
 .challengeHeader h2 { max-width: 710px; }
 .challengeTabs { display: flex; gap: 0.35rem; }
@@ -609,11 +612,11 @@
   background: #fff;
   color: #657188;
   cursor: pointer;
-  font-size: 0.59rem;
+  font-size: var(--atlas-secondary-size);
 }
 .challengeTabs button[aria-selected="true"] { border-color: var(--atlas-blue); background: #edf3ff; color: var(--atlas-blue); }
 .challengeBody { padding: clamp(1.25rem, 3vw, 2.3rem); }
-.challengeBody > p:first-child { max-width: 800px; margin: 0 0 1rem; color: #46536b; font-size: 0.85rem; font-weight: 620; line-height: 1.55; }
+.challengeBody > p:first-child { max-width: 800px; margin: 0 0 1rem; color: #46536b; font-size: var(--atlas-body-size); font-weight: 620; line-height: 1.55; }
 .choiceOptions { display: grid; gap: 0.55rem; }
 .choiceOptions button {
   display: flex;
@@ -626,7 +629,7 @@
   background: #fff;
   color: #4c5970;
   cursor: pointer;
-  font-size: 0.72rem;
+  font-size: var(--atlas-secondary-size);
   text-align: left;
 }
 .choiceOptions button i { width: 14px; height: 14px; border: 2px solid #b9c4d4; border-radius: 50%; }
@@ -644,9 +647,9 @@
   border-radius: 10px;
   background: #f8faff;
   color: #45536a;
-  font-size: 0.7rem;
+  font-size: var(--atlas-secondary-size);
 }
-.orderOptions li > b { color: var(--atlas-orange); font: 700 0.61rem var(--font-geist-mono), monospace; }
+.orderOptions li > b { color: var(--atlas-orange); font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace; }
 .orderOptions li > div { display: flex; gap: 0.25rem; }
 .orderOptions button {
   width: 30px;
@@ -659,7 +662,7 @@
 }
 .orderOptions button:disabled { opacity: 0.28; }
 .challengeActions { display: flex; gap: 0.55rem; margin-top: 1rem; }
-.challengeFeedback { margin: 1rem 0 0; padding: 0.85rem 1rem; border-radius: 10px; font-size: 0.72rem; line-height: 1.5; }
+.challengeFeedback { margin: 1rem 0 0; padding: 0.85rem 1rem; border-radius: 10px; font-size: var(--atlas-secondary-size); line-height: 1.5; }
 .challengeFeedback[data-result="correct"] { background: #eaf8f1; color: #226b4f; }
 .challengeFeedback[data-result="incorrect"] { background: #fff1e8; color: #9e4b20; }
 .challengeFeedback[data-result="invalid"] { background: #f2f4f8; color: #626e82; }

@@ -6,6 +6,7 @@ import { tsImport } from "tsx/esm/api";
 
 const {
   createDrugDossierByIdOrSlug,
+  getDossierLearningAvailability,
   resolveDossierMolecule,
 } = await tsImport("../lib/application/dossier/index.ts", import.meta.url);
 
@@ -25,6 +26,7 @@ test("reviewed identity and structure do not elevate missing scientific layers",
   assert.equal(coverage.get("classification"), "pending-review");
   assert.equal(coverage.get("pharmacology"), "unavailable");
   assert.equal(coverage.get("adme"), "unavailable");
+  assert.equal(coverage.get("nomenclature"), "unavailable");
   assert.equal(dossier.pharmacology.targets.length, 0);
   assert.equal(dossier.metabolites.edges.length, 0);
   assert.match(dossier.metabolites.unavailableReason, /does not mean/i);
@@ -32,6 +34,20 @@ test("reviewed identity and structure do not elevate missing scientific layers",
   assert.ok(
     dossier.chemistry.structures.every((structure) =>
       structure.publicPath.startsWith("/dev-molecules/structures/")),
+  );
+});
+
+test("drug-specific lesson links fail closed against dossier coverage", () => {
+  const propranolol = createDrugDossierByIdOrSlug("propranolol", "en");
+  const celecoxib = createDrugDossierByIdOrSlug("celecoxib", "en");
+  assert.ok(propranolol);
+  assert.ok(celecoxib);
+
+  assert.equal(getDossierLearningAvailability(propranolol).nomenclature, false);
+  assert.equal(getDossierLearningAvailability(celecoxib).nomenclature, false);
+  assert.equal(
+    getDossierLearningAvailability(celecoxib).synthesis,
+    celecoxib.coverage.find((item) => item.dimension === "synthesis")?.status === "source-supported",
   );
 });
 
@@ -58,4 +74,7 @@ test("dossier UI contract keeps sources closed and exposes story/reference modes
   assert.match(dossierComponent, /aria-pressed=\{mode === "story"\}/);
   assert.match(dossierComponent, /aria-pressed=\{mode === "reference"\}/);
   assert.match(dossierComponent, /data-reference-tab=\{activeTab\}/);
+  assert.match(dossierComponent, /getDossierLearningAvailability\(dossier\)/);
+  assert.doesNotMatch(dossierComponent, /<dt>FORMULA<\/dt>/);
+  assert.doesNotMatch(dossierComponent, /<dt>MOLAR MASS<\/dt>/);
 });

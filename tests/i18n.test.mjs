@@ -154,6 +154,30 @@ test("required Turkish product terminology is explicit and consistent", () => {
   assert.equal(messages.tr["explore.level.focus"], "Odak");
 });
 
+test("Home and Atlas copy state the exact source-slice boundary without approval-universe claims", () => {
+  const english = [
+    messages.en["home.description"],
+    messages.en["shell.searchDialogDescription"],
+    messages.en["explore.catalogFallbackBody"],
+  ].join(" ");
+  const turkish = [
+    messages.tr["home.description"],
+    messages.tr["shell.searchDialogDescription"],
+    messages.tr["explore.catalogFallbackBody"],
+  ].join(" ");
+
+  assert.match(english, /2,331 rows/);
+  assert.match(english, /1,552-record structure-complete molecular index/);
+  assert.match(english, /not an FDA product or application universe/i);
+  assert.match(turkish, /2\.331 satır/);
+  assert.match(turkish, /1\.552 kayıtlık yapı-bütün moleküler indeks/);
+  assert.match(turkish, /FDA ürün veya başvuru evreni değildir/i);
+  assert.doesNotMatch(
+    `${english} ${turkish}`,
+    /approved small-molecule|onaylı küçük molekül|complete catalog|tam katalog|full catalog|tüm katalog/i,
+  );
+});
+
 test("translation never falls back to the other language at runtime", () => {
   const tr = createTranslator("tr");
   const en = createTranslator("en");

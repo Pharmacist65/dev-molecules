@@ -30,26 +30,18 @@
 .eyebrow {
   margin-bottom: 1rem;
   color: var(--family-accent);
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 750;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.kindList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-.kindList span,
 .memberships small {
   padding: 0.3rem 0.55rem;
   border: 1px solid var(--family-line);
   border-radius: 999px;
   color: var(--family-muted);
-  font-size: 0.62rem;
+  font-size: 0.82rem;
 }
 
 .hero > h1 {
@@ -77,7 +69,7 @@
 
 .overview h2 {
   color: var(--family-muted);
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   font-weight: 720;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -125,7 +117,7 @@
   color: var(--family-ink);
   cursor: pointer;
   font: inherit;
-  font-size: 0.7rem;
+  font-size: 0.84rem;
 }
 
 .sectionHeading button:focus-visible,
@@ -159,7 +151,7 @@
 .factGrid h3,
 .gapGrid h3 {
   margin: 0 0 1.3rem;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -181,7 +173,7 @@
   padding: 0.7rem 0 0.7rem 1rem;
   border-left: 1px solid color-mix(in srgb, var(--family-accent) 55%, transparent);
   color: var(--family-muted);
-  font-size: 0.75rem;
+  font-size: 0.86rem;
   line-height: 1.45;
 }
 
@@ -208,14 +200,14 @@
   margin: 0;
   padding-left: 1.1rem;
   color: var(--family-muted);
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   line-height: 1.55;
 }
 
 .sources {
   margin-top: 1.2rem;
   color: var(--family-muted);
-  font-size: 0.66rem;
+  font-size: 0.82rem;
 }
 
 .sources summary {
@@ -255,7 +247,7 @@
 .loading {
   margin: 0;
   color: var(--family-muted);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-style: italic;
   line-height: 1.6;
 }
@@ -310,7 +302,24 @@
 .representativeGrid p {
   margin: 0;
   color: var(--family-muted);
-  font-size: 0.7rem;
+  font-size: 0.84rem;
+}
+
+.recordSources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  margin-top: 0.6rem;
+}
+
+.recordSources a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--family-muted);
+  font-size: 0.82rem;
+  text-underline-offset: 3px;
 }
 
 .memberships {
@@ -320,7 +329,7 @@
   margin-top: 1rem;
 }
 
-.representativeGrid > article > a {
+.representativeGrid > article > .drugLink {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -329,7 +338,7 @@
   padding-top: 0.9rem;
   border-top: 1px solid var(--family-line);
   color: var(--family-accent);
-  font-size: 0.7rem;
+  font-size: 0.84rem;
   font-weight: 720;
   text-decoration: none;
 }
@@ -353,7 +362,7 @@
   min-width: 720px;
   border-collapse: collapse;
   background: var(--family-surface);
-  font-size: 0.72rem;
+  font-size: 0.84rem;
 }
 
 .comparisonTable th,
@@ -372,7 +381,7 @@
 .fingerprintTable thead th {
   background: color-mix(in srgb, var(--family-paper) 76%, white);
   color: var(--family-muted);
-  font-size: 0.62rem;
+  font-size: 0.82rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -409,13 +418,13 @@
   margin: 0;
   padding-left: 1rem;
   color: var(--family-muted);
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   line-height: 1.45;
 }
 
 .gapGrid p {
   color: var(--family-muted);
-  font-size: 0.75rem;
+  font-size: 0.86rem;
 }
 
 .learningPath {
@@ -451,7 +460,7 @@
   color: var(--family-accent);
   content: counter(learning, decimal-leading-zero);
   font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.62rem;
+  font-size: 0.82rem;
 }
 
 .learningPath a span {

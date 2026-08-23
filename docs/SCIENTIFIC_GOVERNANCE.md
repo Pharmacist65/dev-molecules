@@ -80,13 +80,16 @@ The checked `drugcentral-fda-pubchem-eligible-v1` snapshot evaluates all 2,331 r
 - Two multicomponent source forms retain explicitly unresolved parent relations; no parent identity is invented.
 - Product/application linkage remains explicitly unresolved for all 2,331 source rows.
 - All 1,552 generated therapeutic classifications remain unresolved in one `unclassified` therapeutic shard.
-- openFDA enrichment is implemented as an adapter but is not selected; EMA and PMDA are not configured.
+- The enrichment-readiness artifact has two active identity/structure adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles.
+- openFDA enrichment is not configured; EMA and PMDA are not configured.
+
+The deep Dossier is currently limited to the 15 curated seed records. A generated catalog identity outside that seed cannot inherit curated fixture claims. It receives an unavailable Dossier state until independently source-resolved content exists. Within the seed, there is no presentable target-interaction dataset, no quantitative ADME field, and no reviewed metabolite edge. Exact product/form route context may be displayed only as context; it is not absorption, exposure, metabolism, or excretion evidence.
 
 See [Catalog pipeline](CATALOG_PIPELINE.md).
 
 ## Synthesis governance
 
-Every synthesis record declares a route kind. Legacy stories distinguish literature-reported, patent-reported, educational simplification, and AI-proposed. Synthesis Atlas distinguishes foundational-education and reported routes, then gates each transformation as direct-source, source-context, or an explicit evidence gap. Presentation must expose source anchors, route version, stereochemistry scope, limitations, and whether operational details are included.
+Every synthesis record declares a route kind. Legacy stories distinguish literature-reported, patent-reported, educational simplification, and AI-proposed. Synthesis Atlas distinguishes foundational-education and reported-kind routes, then gates each transformation as direct-source, source-context, or an explicit evidence gap. Route kind does not determine presentation: the current six routes split into three direct-source-supported and three source-context-supported gates, and only the Atenolol and Carvedilol reported-kind routes qualify for strict source-reported presentation. Propranolol remains a source-context reconstruction. Presentation must expose source anchors, route version, stereochemistry scope, limitations, and whether operational details are included.
 
 ### Current educational safety boundary
 
@@ -116,7 +119,7 @@ See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
 ## Nomenclature and learning governance
 
-The eight-section Nomenclature Academy is `curated-educational` content tied to IUPAC references and, where relevant, exact product records. Its 22 exercises use 20 parseable structure records and 16 concrete response/widget types. Deterministic grading against curated answer contracts is not independent scientific verification.
+The eight-module Academy map separates available, coverage-dependent, and planned learning routes. It cannot count a module complete when only a route shell or missing scientific coverage exists. The eight-section Nomenclature Academy is `curated-educational` content tied to IUPAC references and, where relevant, exact product records. Its 22 exercises use 20 parseable structure records and 16 concrete response/widget types. Deterministic grading against curated answer contracts is not independent scientific verification.
 
 - A correct learning response changes progress only.
 - Learning scores cannot change molecular identity, evidence, or review state.
@@ -139,7 +142,17 @@ An external narration model is an optional explanation layer, not a scientific a
 
 When external narration is configured, the question and curated evidence context cross the local application boundary. A production deployment must disclose the provider, purpose, retention settings, and consent basis; private or unpublished structures must not enter this path without an explicitly reviewed data contract.
 
+The public static Lab uses the curated local evidence-card builder and has model generation disabled. Its Research Sandbox is unavailable. The presence of typed AI evidence contracts does not mean a live model path is shipped.
+
 The application must reject unsupported conclusions such as “this molecule can be synthesized,” “this molecule is safe,” “this structure is patentable,” or “this molecule treats a disease.” A precisely scoped reported or regulatory assertion may be displayed as its own sourced claim; it must not be generalized by narration.
+
+## User structures and role boundaries
+
+- Ketcher standalone processes the current structure in the browser. The public application has no upload endpoint, account store, or persistent project database; a JSON artifact exists only after explicit local export.
+- An exact catalog non-match means only that the current static index did not return one exact InChIKey. It cannot become a novelty, patentability, activity, or synthesizability conclusion.
+- Instructor Studio may package current learning-task IDs and a connected device-local progress snapshot. It cannot create learner identities, deliver assignments, or promote scientific content.
+- Expert is a learner preference whose current shipped effect is the curated-Dossier default, not scientific authorization.
+- Reviewer Console must remain locked unless a host injects an authenticated, authorized, audit-backed adapter. Local settings, Instructor access, or a public hash route cannot open it.
 
 ## Review operations
 

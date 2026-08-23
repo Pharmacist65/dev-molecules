@@ -7,6 +7,7 @@ import { tsImport } from "tsx/esm/api";
 const {
   getDrugHash,
   getPrimaryNavigationSection,
+  getSynthesisAcademyHash,
   parsePlatformHash,
 } = await tsImport("../lib/application/platform-route.ts", import.meta.url);
 
@@ -51,7 +52,10 @@ test("retired top-level modes redirect deterministically without erasing spatial
   assert.equal(parsePlatformHash("#learn").canonicalHash, "#academy");
   assert.equal(parsePlatformHash("#build").canonicalHash, "#lab");
   assert.equal(parsePlatformHash("#teach").canonicalHash, "#instructor");
-  assert.equal(parsePlatformHash("#discover").canonicalHash, "#reviewer");
+  assert.deepEqual(parsePlatformHash("#discover"), {
+    section: "lab",
+    canonicalHash: "#lab",
+  });
 
   for (const hash of [
     "#universe",
@@ -73,6 +77,11 @@ test("malformed entity routes fail closed to a known page", () => {
   assert.equal(parsePlatformHash("#unknown").canonicalHash, "#home");
   assert.equal(getDrugHash(""), "#atlas");
   assert.equal(getDrugHash("celecoxib"), "#drug/celecoxib");
+  assert.equal(getSynthesisAcademyHash(""), "#academy");
+  assert.equal(
+    getSynthesisAcademyHash("carvedilol", "atlas"),
+    "#academy/synthesis/carvedilol/atlas",
+  );
   assert.equal(
     getPrimaryNavigationSection(parsePlatformHash("#drug/celecoxib")),
     "atlas",
