@@ -194,4 +194,8 @@ test("Family Page exposes hierarchy, explicit gaps, source details, and lazy 3D"
   assert.match(component, /aria-expanded=\{showSpatial\}/);
   assert.match(css, /overflow-x: auto/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /--family-ink:\s*var\(--color-text-on-ivory/u);
+  assert.match(css, /--family-muted:\s*var\(--color-text-muted-on-ivory/u);
+  assert.match(css, /background-color:\s*var\(--family-surface\)/u);
+  assert.match(css, /background-image:\s*var\(--surface-reading/u);
 });

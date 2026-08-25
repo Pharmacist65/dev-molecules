@@ -7,7 +7,8 @@ Last reviewed: 2026-08-25
 
 | Context | Required asset |
 | --- | --- |
-| Product navigation on dark | `molevren-lockup-horizontal-dark.svg` |
+| Product navigation on dark | `molevren-header-lockup-dark.svg` plus the adjacent HTML brand line |
+| Large horizontal signature on dark | `molevren-lockup-horizontal-dark.svg` |
 | Ivory editorial or print surface | `molevren-lockup-horizontal-light.svg` |
 | Narrow marketing composition | matching stacked lockup |
 | Compact product control, 24–64 px | `molevren-symbol-flat.svg` |
@@ -39,11 +40,14 @@ clear-space area.
 - Flat standalone symbol: 24 px digital / 8 mm print.
 - Metallic standalone symbol: 96 px digital / 24 mm print.
 - Horizontal lockup: 220 px digital / 55 mm print.
+- Header lockup: 228 px digital with a separate 11–12 px HTML brand line.
 - Stacked lockup: 150 px digital / 38 mm print.
 - Monochrome lockup: 160 px digital / 40 mm print.
 
 Below these lockup sizes, use the standalone flat symbol and an adjacent HTML
-product label if a name is required. Never squeeze the tagline into a micro UI.
+product label if a name is required. The product header keeps the three-part
+brand line as real HTML text so it remains legible and responsive; never
+squeeze the tagline into a micro SVG.
 
 ## Backgrounds
 
@@ -112,4 +116,3 @@ When the adjacent text already says Molevren, treat the symbol as decorative
 Linked home marks require a locale-aware accessible name such as “Molevren ana
 görünümünü aç” or “Open the Molevren home view.” Inline SVGs must not expose
 unlabelled path noise to assistive technology.
-

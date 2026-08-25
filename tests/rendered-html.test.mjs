@@ -39,7 +39,7 @@ test("server-renders Molevren as the default public brand with technical platfor
   const publicShell = html.split("<!--$-->")[0];
   assert.match(html, /<title>Molevren — Pharmaceutical Molecular Atlas &amp; Academy<\/title>/i);
   assert.match(publicShell, /data-working-brand="molevren"/);
-  assert.match(publicShell, /molevren-lockup-horizontal-dark\.svg/);
+  assert.match(publicShell, /molevren-header-lockup-dark\.svg/);
   assert.match(publicShell, /<strong>MOLEVREN<\/strong>/);
   assert.match(publicShell, /Molevren, Dev Molecules platformu üzerinde geliştirilmiştir\./);
   assert.doesNotMatch(publicShell, />DEV MOLECULES</);

@@ -1307,7 +1307,7 @@
 .app[data-working-brand="molevren"] > .topbar {
   position: sticky;
   z-index: var(--z-navigation);
-  min-height: 78px;
+  min-height: 92px;
   padding-inline: var(--space-page-inline);
   border-bottom: var(--border-subtle-dark);
   background: rgb(5 10 22 / 84%);
@@ -1317,23 +1317,49 @@
 
 .app[data-working-brand="molevren"] .brand {
   min-width: 0;
+  min-height: 52px;
+  border-radius: var(--radius-sm);
   color: var(--color-text-on-dark);
+}
+
+.app[data-working-brand="molevren"] .brand:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.brandSignature {
+  display: grid;
+  width: clamp(244px, 18vw, 288px);
+  min-width: 0;
+  gap: 1px;
 }
 
 .brandLockup {
   display: block;
-  width: clamp(158px, 13vw, 204px);
+  width: 100%;
   height: auto;
+  aspect-ratio: 820 / 146;
+}
+
+.brandLine {
+  color: var(--color-brand-line);
+  font-family: var(--font-family-ui);
+  font-size: clamp(0.6875rem, 0.75vw, 0.75rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.1em;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .brandSymbol {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 }
 
 .app[data-working-brand="molevren"] .primaryNav {
-  min-height: 78px;
+  min-height: 92px;
 }
 
 .app[data-working-brand="molevren"] .primaryNav button {
@@ -1521,10 +1547,16 @@
 
 @media (max-width: 1120px) {
   .app[data-working-brand="molevren"] > .topbar {
+    min-height: 0;
     padding-top: var(--space-2);
   }
 
+  .brandSignature {
+    width: clamp(228px, 32vw, 260px);
+  }
+
   .app[data-working-brand="molevren"] .primaryNav {
+    min-height: 52px;
     border-top-color: var(--border-color-on-dark);
   }
 }
@@ -1534,7 +1566,7 @@
     padding-inline: var(--space-3);
   }
 
-  .brandLockup { display: none; }
+  .brandSignature { display: none; }
   .brandSymbol { display: block; }
 
   .app[data-working-brand="molevren"] .workspacePage {

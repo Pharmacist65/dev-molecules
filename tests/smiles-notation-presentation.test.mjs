@@ -2,28 +2,113 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { tsImport } from "tsx/esm/api";
+
 const readSource = (path) => readFile(new URL(path, import.meta.url), "utf8");
 
-test("SMILES presentation preserves raw notation while explaining local stereo markers", async () => {
-  const [panel, css] = await Promise.all([
+const {
+  createSmilesNotationPresentation,
+  DAYLIGHT_SMILES_ISOMERISM_URL,
+  OPENSMILES_SPECIFICATION_URL,
+} = await tsImport("../lib/application/smiles-notation-presentation.ts", import.meta.url);
+
+test("SMILES presentation distinguishes atom stereo, directional bonds, and missing source fields", () => {
+  const atomStereo = createSmilesNotationPresentation({
+    canonicalSmiles: "CC(O)F",
+    isomericSmiles: "C[C@H](O)F",
+    locale: "tr",
+  });
+  assert.equal(atomStereo.hasIsomericSmiles, true);
+  assert.equal(atomStereo.hasAtomStereo, true);
+  assert.equal(atomStereo.hasDirectionalBondMarkers, false);
+  assert.equal(atomStereo.copy.guideTitle, "SMILES nedir?");
+  assert.match(atomStereo.copy.stereoQuestion, /@ = R, @@ = S mi\?/u);
+  assert.match(atomStereo.copy.absoluteConfiguration, /Cahn–Ingold–Prelog \(CIP\)/u);
+
+  const doubleBondStereo = createSmilesNotationPresentation({
+    canonicalSmiles: "FC=CF",
+    isomericSmiles: "F/C=C/F",
+    locale: "en",
+  });
+  assert.equal(doubleBondStereo.hasIsomericSmiles, true);
+  assert.equal(doubleBondStereo.hasAtomStereo, false);
+  assert.equal(doubleBondStereo.hasDirectionalBondMarkers, true);
+  assert.match(doubleBondStereo.copy.bondStereo, /directional-bond markers/u);
+  assert.match(doubleBondStereo.copy.bondStereo, /neither marker alone is a direct E or Z label/u);
+
+  const explicitChiralClass = createSmilesNotationPresentation({
+    canonicalSmiles: "F[Po](Cl)(Br)I",
+    isomericSmiles: "F[Po@SP1](Cl)(Br)I",
+    locale: "en",
+  });
+  assert.equal(explicitChiralClass.hasAtomStereo, true);
+  assert.match(explicitChiralClass.copy.stereoAnswer, /stereochemical class/u);
+  assert.match(explicitChiralClass.copy.tetrahedralContext, /non-tetrahedral/u);
+
+  const alleneLike = createSmilesNotationPresentation({
+    canonicalSmiles: "OC(Cl)=[C@]=C(C)F",
+    isomericSmiles: null,
+    locale: "en",
+  });
+  assert.equal(alleneLike.hasIsomericSmiles, false);
+  assert.equal(alleneLike.hasAtomStereo, true);
+  assert.match(alleneLike.copy.stereoAnswer, /not fixed R\/S labels/u);
+
+  const combined = createSmilesNotationPresentation({
+    canonicalSmiles: "CC=CC(O)F",
+    isomericSmiles: "C/C=C/[C@H](O)F",
+    locale: "tr",
+  });
+  assert.equal(combined.hasAtomStereo, true);
+  assert.equal(combined.hasDirectionalBondMarkers, true);
+  assert.match(combined.copy.statusAtomAndBond, /atom stereokimyası ve yönlü bağ/u);
+
+  const missing = createSmilesNotationPresentation({
+    canonicalSmiles: "CCO",
+    isomericSmiles: null,
+    locale: "tr",
+  });
+  assert.equal(missing.hasIsomericSmiles, false);
+  assert.match(missing.copy.missing, /tek başına molekülün akiral olduğunu/u);
+  assert.equal(OPENSMILES_SPECIFICATION_URL, "https://opensmiles.org/opensmiles.html");
+  assert.match(DAYLIGHT_SMILES_ISOMERISM_URL, /daylight\.com/u);
+});
+
+test("SMILES UI preserves exact notation while teaching the notation before exposing strings", async () => {
+  const [panel, presentation, css] = await Promise.all([
     readSource("../components/chemistry/SmilesNotationPanel.tsx"),
+    readSource("../lib/application/smiles-notation-presentation.ts"),
     readSource("../components/chemistry/SmilesNotationPanel.module.css"),
   ]);
 
   assert.match(panel, /navigator\.clipboard\.writeText\(value\)/u);
   assert.match(panel, /Values are deliberately copied and rendered without trimming or normalizing/u);
-  assert.match(panel, /yerel komşu sırasına göre stereokimyasal yönelimi kodlar; doğrudan R veya S anlamına gelmez/u);
-  assert.match(panel, /local neighbour order in that traversal; they do not directly mean R or S/u);
+  assert.match(panel, /createSmilesNotationPresentation\(\{[\s\S]*canonicalSmiles,[\s\S]*isomericSmiles,[\s\S]*locale,[\s\S]*\}\)/u);
+  assert.doesNotMatch(panel, /const copyByLocale/u);
+  assert.match(presentation, /Simplified Molecular Input Line Entry System/u);
+  assert.match(presentation, /@ = R, @@ = S mi\?/u);
+  assert.match(presentation, /Does @ mean R and @@ mean S\?/u);
+  assert.match(presentation, /N\[C@\]\(Br\)\(O\)C/u);
+  assert.match(presentation, /C\[C@@\]\(Br\)\(O\)N/u);
+  assert.doesNotMatch(presentation, /kaynakta kanonik|canonical at source/iu);
+  assert.doesNotMatch(presentation, /Ham kaynak|raw source|aynen kopyala|copy exactly|not substituted/iu);
   assert.match(panel, /<code className=\{styles\.marker\}>@<\/code>/u);
   assert.match(panel, /<code className=\{styles\.marker\}>@@<\/code>/u);
+  assert.match(panel, /<h3 id=\{guideTitleId\}>\{labels\.guideTitle\}<\/h3>/u);
+  assert.match(panel, /presentation\.hasAtomStereo/u);
+  assert.match(panel, /presentation\.hasDirectionalBondMarkers/u);
+  assert.match(panel, /<code className=\{styles\.marker\}>\{"\\\\"\}<\/code>/u);
   assert.match(panel, /mode === "student" \? \([\s\S]+<details className=\{styles\.rawDetails\}>/u);
   assert.match(panel, /<details className=\{styles\.rawDetails\}>[\s\S]+\{rawFields\}[\s\S]+\{copyStatus\}[\s\S]+<\/details>/u);
   assert.match(panel, /mode === "reference" \? \([\s\S]+\{rawFields\}[\s\S]+\{copyStatus\}/u);
   assert.match(panel, /data-field-status="missing"/u);
-  assert.match(panel, /The connectivity \/ canonical SMILES is not substituted for it/u);
   assert.doesNotMatch(panel, /isomericSmiles\s*\?\?\s*canonicalSmiles/u);
+  assert.doesNotMatch(panel, /\.trim\(\)|\.normalize\(|\.replace\(/u);
 
   assert.match(css, /\.panel \.marker\s*\{[\s\S]+display: inline/u);
+  assert.match(css, /\.notationTypes\s*\{[\s\S]+grid-template-columns: repeat\(2/u);
+  assert.match(css, /\.markerLegend\s*\{[\s\S]+grid-template-columns: repeat\(2/u);
+  assert.match(css, /@media \(max-width: 620px\)[\s\S]+\.notationTypes,[\s\S]+grid-template-columns: 1fr/u);
   assert.match(css, /\.panel \.rawCode\s*\{[\s\S]+width: 100%/u);
   assert.match(css, /\.panel \.rawCode\s*\{[\s\S]+overflow-x: auto/u);
   assert.match(css, /\.panel \.rawCode\s*\{[\s\S]+white-space: pre/u);
@@ -33,7 +118,7 @@ test("SMILES presentation preserves raw notation while explaining local stereo m
   assert.match(panel, /tabIndex=\{0\}/u);
   assert.match(panel, /aria-labelledby=\{labelId\}/u);
   assert.match(css, /\.panel \.rawCode:focus-visible/u);
-  assert.doesNotMatch(css, /\.orientation small\s*\{[\s\S]*?color: var\(--color-text-faint-on-ivory\)/u);
+  assert.doesNotMatch(css, /\.guideHeader p\s*\{[\s\S]*?color: var\(--color-text-faint-on-ivory\)/u);
   assert.doesNotMatch(css, /\.copyStatus\s*\{[\s\S]*?color: var\(--color-text-faint-on-ivory\)/u);
 });
 

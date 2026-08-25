@@ -12,6 +12,7 @@ const color = {
   paperIvory: "#FFFDF7",
   coolGray: "#A5ADB8",
   moleTeal: "#00B3C6",
+  brandLine: "#AFC4FF",
   textOnDark: "#FFFDF7",
   textMutedOnDark: "rgb(246 241 232 / 72%)",
   textFaintOnDark: "rgb(246 241 232 / 52%)",

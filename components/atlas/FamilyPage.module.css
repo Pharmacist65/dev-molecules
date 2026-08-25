@@ -1,12 +1,14 @@
 .family {
-  --family-ink: var(--ink, #19211d);
-  --family-muted: var(--muted, #647069);
-  --family-paper: var(--paper, #f6f4ec);
-  --family-surface: var(--surface, #fffdf7);
-  --family-line: color-mix(in srgb, var(--family-ink) 15%, transparent);
-  --family-accent: var(--accent, #bb5b31);
+  --family-ink: var(--color-text-on-ivory);
+  --family-muted: var(--color-text-muted-on-ivory);
+  --family-paper: var(--surface-ivory);
+  --family-surface: var(--surface-paper);
+  --family-line: var(--border-color-on-ivory);
+  --family-accent: var(--color-metallic-orange);
   width: min(100%, 1480px);
   margin-inline: auto;
+  background-color: var(--family-surface);
+  background-image: var(--surface-reading);
   color: var(--family-ink);
 }
 

@@ -4,6 +4,12 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+import {
+  createSmilesNotationPresentation,
+  DAYLIGHT_SMILES_ISOMERISM_URL,
+  OPENSMILES_SPECIFICATION_URL,
+} from "@/lib/application/smiles-notation-presentation";
+
 import styles from "./SmilesNotationPanel.module.css";
 
 export type SmilesNotationMode = "student" | "story" | "reference";
@@ -21,53 +27,6 @@ type CopyState =
   | { readonly kind: "copied"; readonly field: SmilesField }
   | { readonly kind: "failed"; readonly field: SmilesField };
 
-const copyByLocale = {
-  tr: {
-    canonical: "Bağlantı / kanonik SMILES",
-    isomeric: "Stereokimyasal (izomerik) SMILES",
-    stereoPresent: "Stereokimyasal gösterim var",
-    stereoMissing: "Kaynaklı stereokimyasal SMILES yok",
-    explanationLead: "SMILES içindeki",
-    explanationBody:
-      "işaretleri, dizimdeki yerel komşu sırasına göre stereokimyasal yönelimi kodlar; doğrudan R veya S anlamına gelmez.",
-    interpretation:
-      "Mutlak konfigürasyonu yapı görünümü ve kaynaklı stereokimya alanıyla birlikte okuyun.",
-    openRaw: "Ham kaynak SMILES dizilerini aç",
-    rawGroup: "Ham kaynak SMILES dizileri",
-    missing:
-      "Bu kayıtta kaynaklı stereokimyasal SMILES alanı yoktur. Bağlantı / kanonik SMILES onun yerine kullanılmaz.",
-    copyCanonical: "Bağlantı / kanonik SMILES dizisini aynen kopyala",
-    copyIsomeric: "Stereokimyasal SMILES dizisini aynen kopyala",
-    copy: "Aynen kopyala",
-    copyHint: "Kopyalama, kaynak dizisini değiştirmeden panoya aktarır.",
-    copiedCanonical: "Bağlantı / kanonik SMILES aynen kopyalandı.",
-    copiedIsomeric: "Stereokimyasal SMILES aynen kopyalandı.",
-    copyFailed: "Kopyalama başarısız oldu; kaynak metin değiştirilmedi.",
-  },
-  en: {
-    canonical: "Connectivity / canonical SMILES",
-    isomeric: "Stereochemical (isomeric) SMILES",
-    stereoPresent: "Stereochemical notation present",
-    stereoMissing: "No sourced stereochemical SMILES",
-    explanationLead: "In SMILES,",
-    explanationBody:
-      "markers encode stereochemical orientation relative to the local neighbour order in that traversal; they do not directly mean R or S.",
-    interpretation:
-      "Read absolute configuration together with the structure view and the sourced stereochemistry field.",
-    openRaw: "Open the raw source SMILES strings",
-    rawGroup: "Raw source SMILES strings",
-    missing:
-      "This record has no source-backed stereochemical SMILES field. The connectivity / canonical SMILES is not substituted for it.",
-    copyCanonical: "Copy the connectivity / canonical SMILES exactly",
-    copyIsomeric: "Copy the stereochemical SMILES exactly",
-    copy: "Copy exactly",
-    copyHint: "Copy transfers the source string without changing it.",
-    copiedCanonical: "Connectivity / canonical SMILES copied exactly.",
-    copiedIsomeric: "Stereochemical SMILES copied exactly.",
-    copyFailed: "Copy failed; the source text was not changed.",
-  },
-} as const;
-
 /**
  * Presents raw SMILES as source notation, not as a human-readable name.
  * Values are deliberately copied and rendered without trimming or normalizing.
@@ -78,13 +37,20 @@ export function SmilesNotationPanel({
   locale,
   mode,
 }: SmilesNotationPanelProps) {
-  const labels = copyByLocale[locale];
+  const presentation = createSmilesNotationPresentation({
+    canonicalSmiles,
+    isomericSmiles,
+    locale,
+  });
+  const labels = presentation.copy;
   const statusId = useId();
+  const guideTitleId = useId();
   const canonicalLabelId = useId();
   const isomericLabelId = useId();
   const clearStatusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [copyState, setCopyState] = useState<CopyState>({ kind: "idle" });
-  const hasIsomericSmiles = isomericSmiles !== null && isomericSmiles.length > 0;
+  const { hasIsomericSmiles } = presentation;
+  const hasNotationMarkers = presentation.hasAtomStereo || presentation.hasDirectionalBondMarkers;
 
   useEffect(() => () => {
     if (clearStatusTimer.current !== null) clearTimeout(clearStatusTimer.current);
@@ -107,7 +73,7 @@ export function SmilesNotationPanel({
   };
 
   const statusMessage = copyState.kind === "idle"
-    ? labels.copyHint
+    ? ""
     : copyState.kind === "failed"
       ? labels.copyFailed
       : copyState.field === "canonical"
@@ -127,7 +93,7 @@ export function SmilesNotationPanel({
             aria-label={field === "canonical" ? labels.copyCanonical : labels.copyIsomeric}
             onClick={() => void copyExactValue(field, value)}
           >
-            {labels.copy}
+            {labels.copyButton}
           </button>
         </div>
         <code
@@ -158,9 +124,9 @@ export function SmilesNotationPanel({
   );
 
   const rawFields = (
-    <div className={styles.fields} role="group" aria-label={labels.rawGroup}>
+    <div className={styles.fields} role="group" aria-label={labels.notationGroup}>
       {renderField("canonical", canonicalSmiles, labels.canonical)}
-      {hasIsomericSmiles
+      {isomericSmiles !== null && isomericSmiles.length > 0
         ? renderField("isomeric", isomericSmiles, labels.isomeric)
         : (
             <div className={styles.missing} data-smiles-field="isomeric" data-field-status="missing">
@@ -177,23 +143,97 @@ export function SmilesNotationPanel({
       data-smiles-notation={mode}
       data-isomeric-smiles={hasIsomericSmiles ? "present" : "missing"}
     >
-      <div className={styles.orientation}>
-        <span className={styles.badge} data-status={hasIsomericSmiles ? "present" : "missing"}>
+      <section className={styles.guide} aria-labelledby={guideTitleId}>
+        <header className={styles.guideHeader}>
+          <span>{labels.guideEyebrow}</span>
+          <h3 id={guideTitleId}>{labels.guideTitle}</h3>
+          <p>{labels.definition}</p>
+        </header>
+
+        <div className={styles.notationTypes}>
+          <article>
+            <h4>{labels.canonical}</h4>
+            <p>{labels.canonicalMeaning}</p>
+          </article>
+          <article>
+            <h4>{labels.isomeric}</h4>
+            <p>{labels.isomericMeaning}</p>
+          </article>
+        </div>
+
+        <span
+          className={styles.badge}
+          data-status={hasIsomericSmiles || hasNotationMarkers ? "present" : "missing"}
+        >
           <i aria-hidden="true" />
-          {hasIsomericSmiles ? labels.stereoPresent : labels.stereoMissing}
+          {presentation.hasAtomStereo
+            ? presentation.hasDirectionalBondMarkers
+              ? labels.statusAtomAndBond
+              : labels.statusAtom
+            : presentation.hasDirectionalBondMarkers
+              ? labels.statusBond
+              : hasIsomericSmiles
+                ? labels.statusPresent
+                : labels.statusMissing}
         </span>
-        <p>
-          {labels.explanationLead}{" "}
-          <code className={styles.marker}>@</code>{" / "}
-          <code className={styles.marker}>@@</code>{" "}
-          {labels.explanationBody}
+
+        {presentation.hasAtomStereo ? (
+          <section className={styles.stereoLesson} aria-label={labels.stereoQuestion}>
+            <h4>{labels.stereoQuestion}</h4>
+            <p>{labels.stereoAnswer}</p>
+            <dl className={styles.markerLegend}>
+              <div>
+                <dt><code className={styles.marker}>@</code></dt>
+                <dd>{labels.atMeaning}</dd>
+              </div>
+              <div>
+                <dt><code className={styles.marker}>@@</code></dt>
+                <dd>{labels.atAtMeaning}</dd>
+              </div>
+            </dl>
+            <p className={styles.tetrahedralContext}>{labels.tetrahedralContext}</p>
+            <p className={styles.absoluteRule}>{labels.absoluteConfiguration}</p>
+            {mode === "story" ? null : (
+              <details className={styles.exampleDetails}>
+                <summary>{labels.exampleSummary}</summary>
+                <div>
+                  <p>{labels.exampleIntro}</p>
+                  <div className={styles.exampleStrings} aria-label={labels.exampleSummary}>
+                    {presentation.equivalentTetrahedralExamples.map((example) => (
+                      <code key={example}>{example}</code>
+                    ))}
+                  </div>
+                  <p>{labels.exampleConclusion}</p>
+                </div>
+              </details>
+            )}
+          </section>
+        ) : null}
+
+        {presentation.hasDirectionalBondMarkers ? (
+          <p className={styles.bondStereo}>
+            <code className={styles.marker}>/</code>{" "}
+            <code className={styles.marker}>{"\\"}</code>{" "}
+            {labels.bondStereo}
+          </p>
+        ) : null}
+
+        {!hasIsomericSmiles ? <p className={styles.missingExplanation}>{labels.missing}</p> : null}
+
+        <p className={styles.sourcesLine}>
+          <span>{labels.notationSources}:</span>{" "}
+          <a href={OPENSMILES_SPECIFICATION_URL} target="_blank" rel="noreferrer">
+            {labels.openSmilesSource}
+          </a>{" · "}
+          <a href={DAYLIGHT_SMILES_ISOMERISM_URL} target="_blank" rel="noreferrer">
+            {labels.daylightSource}
+          </a>
         </p>
-        <small>{labels.interpretation}</small>
-      </div>
+      </section>
 
       {mode === "student" ? (
         <details className={styles.rawDetails}>
-          <summary>{labels.openRaw}</summary>
+          <summary>{labels.openNotation}</summary>
           {rawFields}
           {copyStatus}
         </details>

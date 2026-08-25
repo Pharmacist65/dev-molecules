@@ -14,6 +14,7 @@ const productionAssets = [
   "brand/molevren-symbol-flat.svg",
   "brand/molevren-symbol-metallic.svg",
   "brand/molevren-wordmark.svg",
+  "brand/molevren-header-lockup-dark.svg",
   "brand/molevren-lockup-horizontal-light.svg",
   "brand/molevren-lockup-horizontal-dark.svg",
   "brand/molevren-lockup-stacked-light.svg",
@@ -272,7 +273,10 @@ test("metadata and localized copy preserve the TR/EN Molevren brand hierarchy", 
   assert.notEqual(messages.tr["brand.descriptor"], messages.en["brand.descriptor"]);
   assert.notEqual(messages.tr["home.title"], messages.en["home.title"]);
   assert.match(appSource, /`\$\{MOLEVREN_BRAND\.publicName\} — \$\{t\("brand\.descriptor"\)\}`/u);
-  assert.match(appSource, /getMolevrenAssetUrl\(assetBasePath, "horizontalDark"\)/u);
+  assert.match(appSource, /getMolevrenAssetUrl\(assetBasePath, "headerDark"\)/u);
+  assert.match(appSource, /className=\{styles\.brandLine\} data-brand-line="true">\{t\("brand\.line"\)\}/u);
+  assert.match(shellStyles, /\.brandSignature\s*\{[\s\S]*width: clamp\(244px, 18vw, 288px\)/u);
+  assert.match(shellStyles, /\.brandLine\s*\{[\s\S]*font-size: clamp\(0\.6875rem, 0\.75vw, 0\.75rem\)/u);
   assert.match(appSource, /getMolevrenAssetUrl\(assetBasePath, "symbolFlat"\)/u);
   assert.match(shellStyles, /\.app\[data-working-brand="molevren"\] > \.topbar\s*\{[\s\S]*background:\s*rgb\(5 10 22 \/ 84%\)/u);
 });
@@ -281,7 +285,7 @@ test("the default public HTML exposes Molevren and confines Dev Molecules to tec
   const html = await getRenderedHtml();
   const publicShell = html.split("<!--$-->")[0];
   assert.match(publicShell, /data-working-brand="molevren"/u);
-  assert.match(publicShell, /molevren-lockup-horizontal-dark\.svg/u);
+  assert.match(publicShell, /molevren-header-lockup-dark\.svg/u);
   assert.match(publicShell, /<strong>MOLEVREN<\/strong>/u);
   assert.match(publicShell, /Molevren, Dev Molecules platformu üzerinde geliştirilmiştir\./u);
   assert.doesNotMatch(publicShell, />DEV MOLECULES</u);

@@ -1,15 +1,102 @@
 .panel {
   display: grid;
   min-width: 0;
-  gap: var(--space-4);
+  gap: var(--space-5);
   color: var(--color-text-on-ivory);
   font-family: var(--font-family-ui);
 }
 
-.orientation {
+.guide {
   display: grid;
   min-width: 0;
+  gap: var(--space-4);
+  padding: clamp(var(--space-4), 2vw, var(--space-6));
+  border: var(--border-subtle-ivory);
+  border-left: var(--border-width-emphasis) solid var(--color-parliament-blue);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-knowledge-cobalt) 5%, transparent), transparent 56%),
+    var(--surface-ivory);
+}
+
+.guideHeader {
+  display: grid;
   gap: var(--space-2);
+}
+
+.guideHeader > span {
+  color: var(--color-deep-copper);
+  font-size: var(--font-size-ui-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-ui);
+  text-transform: uppercase;
+}
+
+.guideHeader h3,
+.guideHeader p,
+.notationTypes h4,
+.notationTypes p,
+.stereoLesson h4,
+.stereoLesson p,
+.markerLegend,
+.markerLegend dd,
+.exampleDetails p,
+.bondStereo,
+.missingExplanation,
+.sourcesLine {
+  margin: 0;
+}
+
+.guideHeader h3 {
+  color: var(--color-deep-navy);
+  font-family: var(--font-family-display);
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+  line-height: var(--line-height-heading);
+}
+
+.guideHeader p {
+  max-width: 78ch;
+  color: var(--color-text-on-ivory);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.notationTypes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.notationTypes article {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-md);
+  background: var(--surface-paper);
+}
+
+.notationTypes h4 {
+  color: var(--color-parliament-blue);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-ui);
+}
+
+.notationTypes p,
+.stereoLesson p,
+.markerLegend dd,
+.exampleDetails p,
+.bondStereo,
+.missingExplanation {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
 }
 
 .badge {
@@ -48,8 +135,6 @@
   box-shadow: none;
 }
 
-.orientation p,
-.orientation small,
 .missing p,
 .copyStatus {
   margin: 0;
@@ -58,12 +143,121 @@
   line-height: var(--line-height-body);
 }
 
-.orientation p {
-  max-width: 66ch;
+.stereoLesson {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width-hairline) solid var(--border-color-blue);
+  border-radius: var(--radius-md);
+  background: var(--surface-paper);
 }
 
-.orientation small {
+.stereoLesson h4 {
+  color: var(--color-deep-navy);
+  font-family: var(--font-family-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+}
+
+.stereoLesson p strong {
+  color: var(--color-deep-navy);
+}
+
+.markerLegend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.markerLegend > div {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-sm);
+  background: var(--surface-ivory);
+}
+
+.markerLegend dt {
+  min-width: 2.5rem;
+}
+
+.absoluteRule {
+  padding: var(--space-3) var(--space-4);
+  border-left: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  background: color-mix(in srgb, var(--color-metallic-orange) 7%, var(--surface-paper));
+}
+
+.tetrahedralContext {
+  padding: var(--space-3) var(--space-4);
+  border-left: var(--border-width-emphasis) solid var(--color-knowledge-cobalt);
+  background: var(--surface-ivory);
+}
+
+.exampleDetails {
+  border-top: var(--border-subtle-ivory);
+}
+
+.exampleDetails summary {
+  width: fit-content;
+  padding-top: var(--space-3);
+  color: var(--color-parliament-blue);
+  cursor: pointer;
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-ui);
+}
+
+.exampleDetails > div {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+}
+
+.exampleStrings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.exampleStrings code {
+  min-width: 0;
+  overflow-x: auto;
+  padding: var(--space-3);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius-sm);
+  background: var(--surface-glass-dark-strong);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-chemical);
+  white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.bondStereo,
+.missingExplanation {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface-paper);
+}
+
+.sourcesLine {
   color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-ui-label);
+  line-height: var(--line-height-body);
+}
+
+.sourcesLine span {
+  font-weight: var(--font-weight-semibold);
+}
+
+.sourcesLine a {
+  color: var(--color-parliament-blue);
+  text-underline-offset: 0.18em;
 }
 
 .panel .marker {
@@ -165,6 +359,8 @@
 
 .fieldHeader button:focus-visible,
 .rawDetails summary:focus-visible,
+.exampleDetails summary:focus-visible,
+.sourcesLine a:focus-visible,
 .panel .rawCode:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
@@ -214,6 +410,16 @@
 }
 
 @media (max-width: 620px) {
+  .notationTypes,
+  .markerLegend,
+  .exampleStrings {
+    grid-template-columns: 1fr;
+  }
+
+  .guide {
+    padding: var(--space-4);
+  }
+
   .fieldHeader {
     align-items: flex-start;
     flex-direction: column;

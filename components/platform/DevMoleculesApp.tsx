@@ -639,16 +639,25 @@ function DevMoleculesWorkspace() {
             <>
               {/* GitHub Pages serves the production SVG directly; next/image
                   would make this reversible shell depend on a Next loader. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className={styles.brandLockup}
-                src={getMolevrenAssetUrl(assetBasePath, "horizontalDark")}
-                alt=""
-              />
+              <span className={styles.brandSignature} data-brand-signature="desktop">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className={styles.brandLockup}
+                  data-brand-lockup="desktop"
+                  src={getMolevrenAssetUrl(assetBasePath, "headerDark")}
+                  width="820"
+                  height="146"
+                  alt=""
+                />
+                <span className={styles.brandLine} data-brand-line="true">{t("brand.line")}</span>
+              </span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className={styles.brandSymbol}
+                data-brand-symbol="mobile"
                 src={getMolevrenAssetUrl(assetBasePath, "symbolFlat")}
+                width="128"
+                height="128"
                 alt=""
               />
             </>

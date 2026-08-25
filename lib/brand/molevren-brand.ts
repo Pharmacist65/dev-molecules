@@ -22,6 +22,7 @@ export const MOLEVREN_BRAND = {
     symbolFlat: "brand/molevren-symbol-flat.svg",
     symbolMetallic: "brand/molevren-symbol-metallic.svg",
     wordmark: "brand/molevren-wordmark.svg",
+    headerDark: "brand/molevren-header-lockup-dark.svg",
     horizontalLight: "brand/molevren-lockup-horizontal-light.svg",
     horizontalDark: "brand/molevren-lockup-horizontal-dark.svg",
     stackedLight: "brand/molevren-lockup-stacked-light.svg",
@@ -44,4 +45,3 @@ export function getMolevrenAssetUrl(
   const normalizedBase = basePath.endsWith("/") ? basePath : `${basePath}/`;
   return `${normalizedBase}${MOLEVREN_BRAND.assets[asset]}`;
 }
-
