@@ -1,6 +1,7 @@
 "use client";
 
 import { MoleculeStructurePreview, MoleculeViewer } from "@/components/molecule-viewer";
+import { SmilesNotationPanel } from "@/components/chemistry/SmilesNotationPanel";
 import type { BasicMolecularRecord as BasicMolecularRecordModel } from "@/lib/application/basic-molecular-record";
 import { getDrugHash } from "@/lib/application/platform-route";
 import type { Locale } from "@/lib/i18n";
@@ -29,6 +30,7 @@ const copyByLocale = {
     cid: "PubChem CID",
     canonicalSmiles: "Canonical SMILES",
     isomericSmiles: "Isomeric SMILES",
+    smilesNotation: "SMILES yapı gösterimi",
     inchiKey: "InChIKey",
     properties: "Temel fizikokimyasal özellikler",
     propertiesDescription: "Değerler, bu CID ile eşleşen PubChem kaynak kaydındaki açık alanlardan alınır; bağımsız doğrulama değildir.",
@@ -99,6 +101,7 @@ const copyByLocale = {
     cid: "PubChem CID",
     canonicalSmiles: "Canonical SMILES",
     isomericSmiles: "Isomeric SMILES",
+    smilesNotation: "SMILES structure notation",
     inchiKey: "InChIKey",
     properties: "Basic physicochemical properties",
     propertiesDescription: "Values are copied from explicit fields in the PubChem source record matched to this CID; they are not independently verified.",
@@ -280,10 +283,17 @@ export function BasicMolecularRecord({
             <div><dt>{copy.formula}</dt><dd>{record.identity.molecularFormula}</dd></div>
             <div><dt>{copy.cid}</dt><dd>{record.identity.pubChemCid}</dd></div>
             <div><dt>{copy.inchiKey}</dt><dd><code>{record.identity.inchiKey}</code></dd></div>
-            <div><dt>{copy.canonicalSmiles}</dt><dd><code>{record.identity.canonicalSmiles}</code></dd></div>
-            {record.identity.isomericSmiles ? (
-              <div><dt>{copy.isomericSmiles}</dt><dd><code>{record.identity.isomericSmiles}</code></dd></div>
-            ) : null}
+            <div className={styles.smilesIdentity} data-basic-record-smiles="student">
+              <dt>{copy.smilesNotation}</dt>
+              <dd>
+                <SmilesNotationPanel
+                  canonicalSmiles={record.identity.canonicalSmiles}
+                  isomericSmiles={record.identity.isomericSmiles}
+                  locale={locale}
+                  mode="student"
+                />
+              </dd>
+            </div>
           </dl>
         </section>
 

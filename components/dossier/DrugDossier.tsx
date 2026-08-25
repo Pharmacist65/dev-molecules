@@ -321,7 +321,7 @@ export function DrugDossier({
           <ol className={styles.storyRail} aria-label={labels.story}>
             {labels.storySteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}
           </ol>
-          <ChemistryOverview dossier={dossier} locale={locale} />
+          <ChemistryOverview dossier={dossier} locale={locale} smilesMode="student" />
           <ClassificationSummary dossier={dossier} locale={locale} />
           <PharmacologyPanel profile={dossier.pharmacology} locale={locale} />
           {hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}
@@ -352,8 +352,8 @@ export function DrugDossier({
             ))}
           </nav>
           <div className={styles.referencePanel} data-reference-tab={activeTab}>
-            {activeTab === "overview" ? <><ChemistryOverview dossier={dossier} locale={locale} compact /><ClassificationSummary dossier={dossier} locale={locale} /></> : null}
-            {activeTab === "chemistry" ? <ChemistryOverview dossier={dossier} locale={locale} /> : null}
+            {activeTab === "overview" ? <><ChemistryOverview dossier={dossier} locale={locale} compact smilesMode="story" /><ClassificationSummary dossier={dossier} locale={locale} /></> : null}
+            {activeTab === "chemistry" ? <ChemistryOverview dossier={dossier} locale={locale} smilesMode="reference" /> : null}
             {activeTab === "pharmacology" ? <PharmacologyPanel profile={dossier.pharmacology} locale={locale} /> : null}
             {activeTab === "adme" ? <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert />{hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}{dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}</> : null}
             {activeTab === "synthesis" ? <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={synthesisAction} /> : null}

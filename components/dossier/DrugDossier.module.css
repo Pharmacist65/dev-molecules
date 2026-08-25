@@ -787,3 +787,887 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* MOLEVREN Phase A — premium Dossier reading system. */
+.dossier {
+  --ink: var(--color-text-on-ivory);
+  --muted: var(--color-text-muted-on-ivory);
+  --forest: var(--color-parliament-blue);
+  --paper: var(--surface-ivory);
+  --line: var(--border-color-on-ivory);
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 92rem);
+  overflow: clip;
+  color: var(--color-text-on-ivory);
+  border-inline: var(--border-subtle-ivory);
+  background: var(--surface-reading);
+  box-shadow: var(--shadow-elevated);
+  font-family: var(--font-family-ui);
+}
+
+.dossierHeader {
+  position: relative;
+  isolation: isolate;
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  overflow: hidden;
+  padding: clamp(var(--space-5), 3vw, var(--space-10)) var(--space-page-inline) clamp(var(--space-16), 8vw, var(--space-24));
+  color: var(--color-text-on-dark);
+  border-bottom: var(--border-width-hairline) solid var(--border-color-orange);
+  background:
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--color-knowledge-cobalt) 34%, transparent), transparent 26rem),
+    radial-gradient(circle at 14% 90%, color-mix(in srgb, var(--color-parliament-blue) 50%, transparent), transparent 34rem),
+    var(--gradient-midnight-stage);
+}
+
+.dossierHeader::before {
+  position: absolute;
+  z-index: -1;
+  inset: clamp(var(--space-8), 7vw, var(--space-20)) clamp(var(--space-4), 5vw, var(--space-16)) auto auto;
+  width: min(44vw, 36rem);
+  aspect-ratio: 1.28;
+  content: "";
+  border: var(--border-width-hairline) solid color-mix(in srgb, var(--color-orange-highlight) 38%, transparent);
+  border-radius: 48% 52% 42% 58%;
+  opacity: 0.48;
+  transform: rotate(-12deg);
+}
+
+.dossierHeader::after {
+  position: absolute;
+  z-index: -1;
+  top: 27%;
+  right: -8%;
+  width: min(48vw, 42rem);
+  height: var(--border-width-hairline);
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--color-metallic-orange), transparent);
+  opacity: 0.7;
+  transform: rotate(23deg);
+  transform-origin: center;
+}
+
+.headerActions {
+  position: relative;
+  z-index: var(--z-content);
+  min-width: 0;
+}
+
+.headerActions > button,
+.headerActions div button {
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted-on-dark);
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--surface-glass-dark) 82%, transparent);
+  box-shadow: var(--shadow-inset-highlight);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-semibold);
+  transition:
+    color var(--motion-duration-ui) var(--motion-ease-standard),
+    border-color var(--motion-duration-ui) var(--motion-ease-standard),
+    background var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.headerActions > button:hover,
+.headerActions div button:hover,
+.headerActions div button[aria-pressed="true"] {
+  color: var(--color-text-on-dark);
+  border-color: var(--border-color-orange);
+  background: color-mix(in srgb, var(--color-parliament-blue) 38%, var(--surface-glass-dark));
+}
+
+.headerActions div button[aria-pressed="true"] {
+  box-shadow: inset 0 -2px var(--color-metallic-orange), var(--shadow-inset-highlight);
+}
+
+.headerActions div {
+  min-width: 0;
+  border-color: var(--border-color-on-dark);
+  background: color-mix(in srgb, var(--surface-glass-dark-strong) 52%, transparent);
+  backdrop-filter: blur(var(--blur-md));
+}
+
+.identityHero {
+  position: relative;
+  z-index: var(--z-content);
+  grid-template-columns: minmax(0, 1.55fr) minmax(17rem, 0.55fr);
+  gap: clamp(var(--space-8), 7vw, var(--space-24));
+  align-items: end;
+}
+
+.identityHero > div,
+.identityHero dl {
+  min-width: 0;
+}
+
+.identityHero > div > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-brand-line);
+}
+
+.identityHero h1 {
+  max-width: 12ch;
+  margin-top: var(--space-4);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-size: clamp(3.5rem, 9vw, 8.4rem);
+  font-weight: var(--font-weight-display);
+  letter-spacing: -0.045em;
+  line-height: 0.84;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.identityHero p {
+  max-width: 50rem;
+  margin-top: var(--space-6);
+  color: var(--color-text-muted-on-dark);
+  font-size: clamp(var(--font-size-body), 1.5vw, var(--font-size-subtitle));
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+.identityHero small {
+  max-width: 58rem;
+  margin-top: var(--space-4);
+  color: var(--color-text-faint-on-dark);
+  line-height: var(--line-height-ui);
+  overflow-wrap: anywhere;
+}
+
+.identityHero dl {
+  padding: var(--space-3) var(--space-5);
+  border: var(--border-subtle-dark);
+  border-top-color: var(--border-color-orange);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-glass-dark-strong) 78%, transparent);
+  box-shadow: var(--shadow-panel), var(--shadow-inset-highlight);
+  backdrop-filter: blur(var(--blur-lg));
+}
+
+.identityHero dl div {
+  min-width: 0;
+  padding-block: var(--space-4);
+  border-color: var(--border-color-on-dark);
+}
+
+.identityHero dt {
+  flex: 0 0 auto;
+  color: var(--color-text-faint-on-dark);
+  font-family: var(--font-family-ui);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.identityHero dd {
+  min-width: 0;
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-chemical);
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.clinicalBoundary {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-muted-on-dark);
+  border-color: var(--border-color-on-dark);
+  background: color-mix(in srgb, var(--surface-glass-dark) 76%, transparent);
+  font-family: var(--font-family-ui);
+  line-height: var(--line-height-ui);
+}
+
+.availabilityOverview {
+  position: relative;
+  z-index: var(--z-elevated);
+  margin-top: calc(var(--space-8) * -1);
+  padding: 0 var(--space-page-inline);
+  background: transparent;
+}
+
+.availabilityOverview .coverage {
+  gap: var(--space-5);
+  padding: clamp(var(--space-4), 2.2vw, var(--space-6));
+  border: var(--border-subtle-ivory);
+  border-top: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--surface-paper) 94%, transparent);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(var(--blur-md));
+}
+
+.coverage header {
+  grid-template-columns: minmax(0, 0.45fr) minmax(18rem, 1fr);
+  align-items: end;
+  gap: var(--space-5);
+}
+
+.coverage h2 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-heading);
+}
+
+.coverage header p {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-body);
+}
+
+.availabilityOverview .coverage ul {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.coverage li {
+  min-width: 0;
+  padding: var(--space-3);
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-paper) 82%, transparent);
+}
+
+.coverage li > i {
+  background: var(--color-cool-gray);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-cool-gray) 16%, transparent);
+}
+
+.coverage li[data-status="reviewed"] > i {
+  background: var(--color-mole-teal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-mole-teal) 16%, transparent);
+}
+
+.coverage li[data-status="source-supported"] > i {
+  background: var(--color-knowledge-cobalt);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-knowledge-cobalt) 14%, transparent);
+}
+
+.coverage li[data-status="pending-review"] > i {
+  background: var(--color-metallic-orange);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-metallic-orange) 15%, transparent);
+}
+
+.coverage li[data-status="unavailable"] {
+  color: var(--color-text-faint-on-ivory);
+  border-color: var(--border-color-on-ivory);
+  background: color-mix(in srgb, var(--surface-ivory) 72%, transparent);
+}
+
+.coverage small {
+  color: var(--color-text-muted-on-ivory);
+  line-height: var(--line-height-ui);
+}
+
+.storyMode,
+.referencePanel {
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  padding: clamp(var(--space-10), 5vw, var(--space-20)) var(--space-page-inline) var(--space-section-block);
+  background: var(--surface-reading);
+}
+
+.storyRail {
+  grid-template-columns: repeat(10, minmax(8.5rem, 1fr));
+  padding-bottom: var(--space-3);
+  scrollbar-color: var(--color-metallic-orange) var(--surface-ivory);
+}
+
+.storyRail li {
+  min-height: 5rem;
+  padding: var(--space-4) var(--space-3);
+  color: var(--color-text-muted-on-ivory);
+  border-color: var(--border-color-on-ivory-strong);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-paper) 78%, transparent), transparent);
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-ui);
+}
+
+.storyRail li:first-child {
+  color: var(--color-parliament-blue);
+  border-top-color: var(--color-metallic-orange);
+}
+
+.storyRail span {
+  color: var(--color-deep-copper);
+  font-family: var(--font-family-mono);
+}
+
+.chemistry {
+  position: relative;
+  gap: var(--space-6);
+  overflow: hidden;
+  padding: clamp(var(--space-5), 3vw, var(--space-10));
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-2xl);
+  background:
+    linear-gradient(90deg, var(--color-metallic-orange), var(--color-parliament-blue) 58%, transparent) top / 100% var(--border-width-emphasis) no-repeat,
+    var(--surface-paper);
+  box-shadow: var(--shadow-panel);
+}
+
+.chemistry > header > span,
+.forms > span,
+.descriptorBoundary > span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.chemistry h2 {
+  max-width: 25ch;
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: var(--line-height-heading);
+  text-wrap: balance;
+}
+
+.chemistryGrid {
+  grid-template-columns: minmax(20rem, 1.12fr) minmax(18rem, 0.88fr);
+  gap: var(--space-content-gap);
+}
+
+.structureStage {
+  border-color: var(--border-color-on-ivory-strong);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--color-knowledge-cobalt) 10%, transparent), transparent 20rem),
+    var(--surface-paper);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) color-mix(in srgb, var(--color-parliament-blue) 8%, transparent);
+}
+
+.chemistryFacts dl {
+  border-color: var(--border-color-on-ivory-strong);
+}
+
+.chemistryFacts dl div {
+  min-width: 0;
+  padding-block: var(--space-4);
+  border-color: var(--border-color-on-ivory);
+}
+
+.chemistryFacts dt,
+.forms small,
+.descriptorBoundary p {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.chemistryFacts dd {
+  color: var(--color-text-on-ivory);
+  font-size: var(--font-size-body);
+}
+
+.forms,
+.descriptorBoundary {
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-ivory) 70%, transparent);
+}
+
+.forms li {
+  min-width: 0;
+  border-color: var(--border-color-on-ivory);
+}
+
+.classificationSummary {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(var(--space-6), 4vw, var(--space-12));
+  color: var(--color-text-on-dark);
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-2xl);
+  background:
+    radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--color-metallic-orange) 15%, transparent), transparent 18rem),
+    var(--gradient-parliament-depth);
+  box-shadow: var(--shadow-elevated);
+}
+
+.classificationSummary > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.classificationSummary p {
+  color: var(--color-text-muted-on-dark);
+}
+
+.classificationSummary li {
+  color: var(--color-text-on-dark);
+  border-color: var(--border-color-on-dark-strong);
+  background: color-mix(in srgb, var(--surface-glass-dark) 58%, transparent);
+}
+
+.sectionCoverageMessage {
+  gap: var(--space-6);
+  min-width: 0;
+  padding: var(--space-5) var(--space-6);
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-paper) 86%, transparent);
+  box-shadow: var(--shadow-subtle);
+}
+
+.sectionCoverageMessage span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.sectionCoverageMessage h2 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+}
+
+.sectionCoverageMessage p {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.sectionCoverageMessage[data-coverage-state="unavailable"] {
+  padding-block: var(--space-4);
+  border-color: var(--border-color-on-ivory-strong);
+  background: color-mix(in srgb, var(--surface-ivory) 74%, transparent);
+  box-shadow: none;
+}
+
+.sectionCoverageMessage > button {
+  min-height: 2.875rem;
+  color: var(--color-text-on-dark);
+  border: var(--border-width-hairline) solid var(--border-color-orange);
+  background: var(--gradient-parliament-depth);
+  box-shadow: var(--shadow-subtle);
+  font-weight: var(--font-weight-semibold);
+}
+
+.referenceMode {
+  min-width: 0;
+  background: var(--surface-reading);
+  font-size: var(--font-size-body);
+}
+
+.referenceTabs {
+  position: sticky;
+  z-index: var(--z-sticky);
+  top: 0;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-page-inline);
+  border-color: var(--border-color-on-dark);
+  background: color-mix(in srgb, var(--surface-glass-dark-strong) 96%, transparent);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(var(--blur-lg));
+  scrollbar-color: var(--color-metallic-orange) var(--color-deep-navy);
+}
+
+.referenceTabs button {
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted-on-dark);
+  border-bottom-width: var(--border-width-emphasis);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-semibold);
+}
+
+.referenceTabs button:hover,
+.referenceTabs button[aria-pressed="true"] {
+  color: var(--color-text-on-dark);
+  border-bottom-color: var(--color-metallic-orange);
+  background: color-mix(in srgb, var(--color-parliament-blue) 22%, transparent);
+}
+
+.referenceTabs button[data-tab-availability="unavailable"] {
+  color: var(--color-text-faint-on-dark);
+}
+
+.referenceTabs button[data-tab-availability="unavailable"][aria-pressed="true"] {
+  color: var(--color-text-muted-on-dark);
+}
+
+.referencePanel {
+  min-width: 0;
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-body);
+}
+
+.referencePanel :global([role="table"]),
+.referencePanel :global([role="row"]),
+.referencePanel :global([role="cell"]),
+.referencePanel :global([role="columnheader"]) {
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-body);
+}
+
+.referencePanel .chemistryFacts dd,
+.referencePanel .chemistryFacts small {
+  font-family: var(--font-family-ui);
+}
+
+.referencePanel .chemistryFacts dl div:nth-child(2) dd,
+.referencePanel .chemistryFacts dl div:nth-child(3) dd {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-chemical);
+}
+
+.sourcesTab {
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-xl);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-panel);
+}
+
+.sourcesTab > p,
+.referenceUnavailable > p {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.sourcesDrawer {
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-lg);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-subtle);
+}
+
+.sourcesDrawer summary {
+  min-height: 3.5rem;
+  color: var(--color-text-on-ivory);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sourcesDrawer summary i {
+  color: var(--color-metallic-orange);
+  transition: transform var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.sourceBody {
+  border-color: var(--border-color-on-ivory);
+}
+
+.sourceBody > p,
+.sourceBody small,
+.sourceBody li p {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.sourceBody li {
+  border-color: var(--border-color-on-ivory);
+}
+
+.sourceBody li > span {
+  color: var(--color-deep-copper);
+  font-family: var(--font-family-mono);
+}
+
+.sourceBody a {
+  color: var(--color-parliament-blue);
+}
+
+.dossierFooter {
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-page-inline) var(--space-16);
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.dossierFooter > ul {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.unavailableDossier {
+  position: relative;
+  width: min(100%, 72rem);
+  min-height: 20rem;
+  margin-inline: auto;
+  padding: clamp(var(--space-8), 7vw, var(--space-20)) var(--space-page-inline);
+  color: var(--color-text-on-dark);
+  border: var(--border-subtle-dark);
+  border-top: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  background: var(--gradient-midnight-stage);
+  box-shadow: var(--shadow-elevated);
+  font-family: var(--font-family-ui);
+}
+
+.unavailableDossier > button {
+  color: var(--color-text-on-dark);
+  border-color: var(--border-color-on-dark-strong);
+}
+
+.unavailableDossier > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+}
+
+.unavailableDossier h1 {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+}
+
+.unavailableDossier p {
+  color: var(--color-text-muted-on-dark);
+}
+
+/* Imported evidence panels inherit the Dossier surface without changing their data contracts. */
+.storyMode :global([data-pharmacology-coverage]),
+.referencePanel :global([data-pharmacology-coverage]),
+.storyMode :global([data-adme-measurements]),
+.referencePanel :global([data-adme-measurements]) {
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-family-ui);
+}
+
+.storyMode :global([data-empty-coverage]),
+.referencePanel :global([data-empty-coverage]) {
+  padding: var(--space-4) var(--space-5);
+  border-color: var(--border-color-on-ivory-strong);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-ivory) 74%, transparent);
+  box-shadow: none;
+}
+
+.storyMode :global([data-empty-coverage]) h2,
+.referencePanel :global([data-empty-coverage]) h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-display);
+}
+
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage),
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) {
+  color: var(--color-text-on-ivory);
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-panel);
+  font-family: var(--font-family-ui);
+}
+
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage) > header > span,
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) > header > span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage) > header h2,
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) > header h2 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: var(--line-height-heading);
+}
+
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage) > header p,
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) > header p,
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage) small,
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) small {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.storyMode > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage) > :is(div, aside),
+.referencePanel > section:not(.chemistry):not(.classificationSummary):not(.sectionCoverageMessage):not(.sourcesTab) > :is(div, aside) {
+  border-color: var(--border-color-on-ivory);
+  background: color-mix(in srgb, var(--surface-ivory) 62%, transparent);
+}
+
+.storyMode :global([role="table"]),
+.referencePanel :global([role="table"]) {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+}
+
+.storyMode :global([role="row"]),
+.referencePanel :global([role="row"]) {
+  border-color: var(--border-color-on-ivory);
+}
+
+.storyMode :global([role="row"]):first-child,
+.referencePanel :global([role="row"]):first-child {
+  color: var(--color-text-muted-on-ivory);
+  background: color-mix(in srgb, var(--color-parliament-blue) 7%, var(--surface-ivory));
+}
+
+.storyMode :global([data-phase]),
+.referencePanel :global([data-phase]),
+.storyMode :global([data-adme-context-only]),
+.referencePanel :global([data-adme-context-only]) {
+  color: var(--color-text-on-ivory);
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+}
+
+.storyMode :global([data-evidence="available"])::after,
+.referencePanel :global([data-evidence="available"])::after {
+  background: var(--color-mole-teal);
+}
+
+.storyMode :global([data-evidence="unavailable"])::after,
+.referencePanel :global([data-evidence="unavailable"])::after {
+  background: var(--color-cool-gray);
+}
+
+.dossier :where(button, a, summary):focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.dossierHeader :where(button, a):focus-visible,
+.referenceTabs button:focus-visible,
+.unavailableDossier button:focus-visible {
+  outline-color: var(--focus-ring-color-on-dark);
+}
+
+@media (max-width: 900px) {
+  .identityHero,
+  .chemistryGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .identityHero dl {
+    max-width: 36rem;
+  }
+
+  .coverage header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .availabilityOverview .coverage ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .dossier {
+    width: 100%;
+    border-inline: 0;
+    box-shadow: none;
+  }
+
+  .dossierHeader {
+    gap: var(--space-8);
+    padding: var(--space-4) var(--space-4) var(--space-16);
+  }
+
+  .headerActions {
+    gap: var(--space-3);
+  }
+
+  .headerActions > button {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .headerActions div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .headerActions div button {
+    min-width: 0;
+    padding-inline: var(--space-2);
+  }
+
+  .identityHero {
+    gap: var(--space-8);
+  }
+
+  .identityHero h1 {
+    max-width: 100%;
+    font-size: clamp(3.1rem, 18vw, 5.6rem);
+    line-height: 0.88;
+  }
+
+  .identityHero dl {
+    width: 100%;
+    padding-inline: var(--space-4);
+  }
+
+  .identityHero dl div {
+    align-items: start;
+  }
+
+  .identityHero dd {
+    max-width: 58%;
+  }
+
+  .clinicalBoundary {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .availabilityOverview {
+    margin-top: calc(var(--space-6) * -1);
+    padding-inline: var(--space-4);
+  }
+
+  .availabilityOverview .coverage ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .storyMode,
+  .referencePanel {
+    gap: var(--space-8);
+    padding: var(--space-10) var(--space-4) var(--space-16);
+  }
+
+  .storyRail {
+    margin-inline: calc(var(--space-4) * -1);
+    padding-inline: var(--space-4);
+  }
+
+  .chemistry {
+    padding: var(--space-5) var(--space-4);
+    border-radius: var(--radius-xl);
+  }
+
+  .structureStage,
+  .structureStage > *,
+  .chemistry[data-compact="true"] .structureStage,
+  .chemistry[data-compact="true"] .structureStage > * {
+    min-height: 21rem;
+  }
+
+  .classificationSummary {
+    border-radius: var(--radius-xl);
+  }
+
+  .sectionCoverageMessage {
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .sectionCoverageMessage > button {
+    width: 100%;
+  }
+
+  .referenceTabs {
+    padding-inline: var(--space-4);
+  }
+
+  .referencePanel :global([role="row"]) {
+    min-width: 0;
+  }
+
+  .sourceBody li {
+    grid-template-columns: var(--space-8) minmax(0, 1fr);
+  }
+
+  .unavailableDossier {
+    min-height: 17rem;
+    padding: var(--space-10) var(--space-4);
+  }
+}

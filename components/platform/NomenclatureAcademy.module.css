@@ -1431,3 +1431,466 @@
     transition: none;
   }
 }
+
+/* MOLEVREN Phase A — the question and manipulable structure lead; navigation
+   and provenance remain quieter supporting layers. */
+.academy {
+  --academy-ink: var(--color-text-on-ivory);
+  --academy-muted: var(--color-text-muted-on-ivory);
+  --academy-line: var(--border-color-on-ivory);
+  --academy-blue: var(--color-parliament-blue);
+  --academy-blue-soft: color-mix(in srgb, var(--color-knowledge-cobalt) 9%, var(--surface-paper));
+  --academy-orange: var(--color-metallic-orange);
+  --academy-orange-soft: color-mix(in srgb, var(--color-metallic-orange) 8%, var(--surface-paper));
+  --academy-body-size: var(--font-size-body);
+  --academy-secondary-size: var(--font-size-secondary);
+  --academy-ui-label-size: var(--font-size-ui-label);
+  position: relative;
+  isolation: isolate;
+  max-width: 100%;
+  margin: var(--space-4) 0 var(--space-16);
+  overflow: hidden;
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-2xl);
+  background: var(--gradient-midnight-stage);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-floating), var(--shadow-inset-highlight);
+  font-family: var(--font-family-ui);
+}
+
+.academy > .hero {
+  border-color: var(--border-color-on-dark);
+  background:
+    radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--color-knowledge-cobalt) 23%, transparent), transparent 28rem),
+    var(--gradient-glass-dark);
+}
+
+.hero > div:first-child > p {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.hero h2 {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.hero > div:first-child > span,
+.heroProgress > span,
+.heroProgress small {
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+}
+
+.heroProgress strong {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-display);
+}
+
+.heroProgress > div {
+  height: 6px;
+  background: var(--border-color-on-dark);
+}
+
+.heroProgress i {
+  background: linear-gradient(90deg, var(--color-parliament-blue), var(--color-metallic-orange));
+}
+
+.academyLayout {
+  min-width: 0;
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+}
+
+.sectionRail {
+  min-width: 0;
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.sectionRail > strong,
+.conceptPanel summary {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.sectionRail nav {
+  border-color: var(--border-color-on-ivory);
+}
+
+.sectionRail nav button {
+  min-height: 52px;
+  border-color: var(--border-color-on-ivory);
+  color: var(--color-text-muted-on-ivory);
+  transition:
+    background var(--motion-duration-ui) var(--motion-ease-standard),
+    color var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.sectionRail nav button:hover {
+  background: color-mix(in srgb, var(--color-knowledge-cobalt) 7%, var(--surface-ivory));
+}
+
+.sectionRail nav button[aria-current="step"] {
+  background: var(--gradient-parliament-depth);
+  color: var(--color-text-on-dark);
+  box-shadow: inset 3px 0 var(--color-metallic-orange);
+}
+
+.sectionRail nav button b,
+.sectionRail nav button > span,
+.sectionRail nav button small {
+  color: inherit;
+  font-size: var(--font-size-secondary);
+}
+
+.sectionRail nav button i {
+  color: var(--color-metallic-orange);
+}
+
+.sectionRail nav button[aria-current="step"] b,
+.sectionRail nav button[aria-current="step"] > span {
+  color: var(--color-text-on-dark);
+}
+
+.conceptPanel {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+}
+
+.conceptPanel li,
+.conceptPanel p {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+}
+
+.conceptPanel li::before,
+.conceptPanel summary::marker {
+  color: var(--color-metallic-orange);
+  background: var(--color-metallic-orange);
+}
+
+.workspace {
+  min-width: 0;
+  background: var(--surface-paper);
+}
+
+.exerciseTopline {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+  color: var(--color-text-muted-on-ivory);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.exerciseTopline b {
+  color: var(--color-parliament-blue);
+}
+
+.exercisePicker select {
+  min-height: 42px;
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.lesson {
+  min-width: 0;
+  max-width: 1100px;
+  color: var(--color-text-on-ivory);
+}
+
+.lessonHeader small {
+  color: var(--color-deep-copper);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.lessonHeader h3 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-heading);
+}
+
+.lessonHeader p,
+.lessonHeader > span,
+.challenge > p,
+.selectionSummary,
+.sources > p {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-body);
+}
+
+.structureStage {
+  margin: var(--space-6) 0;
+  border-color: var(--border-color-blue);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-knowledge-cobalt) 8%, transparent) 0 0.7px, transparent 0.9px) 0 0 / 24px 24px,
+    var(--surface-editor);
+  box-shadow: var(--shadow-panel), inset 0 3px var(--color-metallic-orange);
+}
+
+.stageLabel {
+  min-height: 52px;
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.stageLabel span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.stageLabel small {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+}
+
+.graphFigure,
+.smilesStructure {
+  min-height: 320px;
+  padding: var(--space-4);
+}
+
+.graphFigure svg,
+.smilesStructure svg {
+  width: min(100%, 720px);
+  height: 300px;
+}
+
+.graphFigure figcaption,
+.smilesStructure figcaption,
+.smilesStructure code {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+}
+
+.visibleBond {
+  stroke: var(--color-deep-navy);
+}
+
+.wedgeBond {
+  fill: var(--color-deep-navy);
+}
+
+.atomNode > circle {
+  fill: var(--surface-paper);
+  stroke: var(--color-deep-navy);
+}
+
+.atomNode > text {
+  fill: var(--color-deep-navy);
+  font-family: var(--font-family-mono);
+}
+
+.bondLayer g[data-selected="true"] .visibleBond {
+  stroke: var(--color-metallic-orange);
+  stroke-width: 5;
+}
+
+.bondLayer g[data-selected="true"] .wedgeBond {
+  fill: var(--color-metallic-orange);
+}
+
+.bondLayer g[data-correct="true"] .visibleBond {
+  stroke: var(--academy-green);
+  stroke-width: 5;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--academy-green) 48%, transparent));
+}
+
+.bondLayer g[data-correct="true"] .wedgeBond {
+  fill: var(--academy-green);
+}
+
+.atomNode[data-selected="true"] > circle {
+  fill: var(--color-metallic-orange);
+  stroke: var(--color-deep-copper);
+}
+
+.atomNode[data-correct="true"] > circle {
+  fill: var(--academy-green);
+  stroke: color-mix(in srgb, var(--academy-green) 72%, var(--color-deep-navy));
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--academy-green) 48%, transparent));
+}
+
+.atomNode[data-selected="true"] > text,
+.atomNode[data-correct="true"] > text {
+  fill: var(--color-text-on-dark);
+}
+
+.sequenceBadge circle,
+.placementBadge circle {
+  fill: var(--color-parliament-blue);
+  stroke: var(--surface-paper);
+}
+
+.challenge {
+  border-color: var(--border-color-on-ivory);
+}
+
+.challenge h4 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subtitle);
+}
+
+.optionGrid button,
+.structureChoices > button,
+.textAnswer input,
+.numericStepper,
+.bondOrderEditor,
+.priorityRanking,
+.structureBuilder,
+.stereoWidget {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+  color: var(--color-text-on-ivory);
+  font-size: var(--font-size-secondary);
+}
+
+.optionGrid button:hover,
+.structureChoices > button:hover {
+  border-color: var(--border-color-blue);
+  background: color-mix(in srgb, var(--color-knowledge-cobalt) 5%, var(--surface-paper));
+}
+
+.optionGrid button[data-selected="true"],
+.structureChoices > button[data-selected="true"] {
+  border-color: var(--border-color-orange);
+  background: var(--academy-orange-soft);
+  color: var(--color-deep-copper);
+  box-shadow: inset 3px 0 var(--color-metallic-orange);
+}
+
+.optionGrid button > span {
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+}
+
+.structureChoices > button[data-correct="true"] {
+  border-color: var(--academy-green);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--academy-green) 24%, transparent);
+}
+
+.hintButton,
+.checkButton,
+.feedback footer button {
+  min-height: 44px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-button);
+}
+
+.checkButton,
+.feedback footer button {
+  border-color: var(--color-parliament-blue);
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+}
+
+.feedback {
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-body);
+}
+
+.feedback[data-state="correct"] {
+  border-color: var(--academy-green);
+  box-shadow: inset 4px 0 var(--academy-green);
+}
+
+.feedback[data-state="incorrect"] {
+  border-color: var(--border-color-orange);
+  box-shadow: inset 4px 0 var(--color-metallic-orange);
+}
+
+.feedbackBody p,
+.feedbackBody li,
+.feedbackBody small {
+  font-size: var(--font-size-secondary);
+}
+
+.sources {
+  border-color: var(--border-color-on-ivory);
+}
+
+.sources summary {
+  color: var(--color-parliament-blue);
+  font-size: var(--font-size-secondary);
+}
+
+.sources a {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.sources a:hover {
+  border-color: var(--border-color-blue);
+  background: var(--surface-paper);
+}
+
+.sectionRail button:focus-visible,
+.optionGrid button:focus-visible,
+.structureChoices > button:focus-visible,
+.textAnswer input:focus-visible,
+.exercisePicker select:focus-visible,
+.hintButton:focus-visible,
+.checkButton:focus-visible,
+.feedback footer button:focus-visible,
+.sources summary:focus-visible,
+.bondTarget:focus-visible,
+.atomNode:focus-visible {
+  outline-color: var(--focus-ring-color);
+}
+
+@media (max-width: 920px) {
+  .sectionRail nav {
+    border-color: var(--border-color-on-ivory);
+  }
+
+  .sectionRail nav button {
+    border-color: var(--border-color-on-ivory);
+  }
+}
+
+@media (max-width: 640px) {
+  .academy {
+    margin-top: var(--space-2);
+    border-radius: var(--radius-xl);
+  }
+
+  .hero {
+    padding: var(--space-8) var(--space-5);
+  }
+
+  .sectionRail nav button {
+    min-width: 158px;
+  }
+
+  .exerciseTopline {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .lesson {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .graphFigure,
+  .smilesStructure {
+    min-height: 250px;
+  }
+
+  .graphFigure svg,
+  .smilesStructure svg {
+    height: 240px;
+  }
+}

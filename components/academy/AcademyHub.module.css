@@ -730,3 +730,411 @@
 @media (prefers-reduced-motion: reduce) {
   .recommended { backdrop-filter: none; }
 }
+
+/* MOLEVREN Phase A — Academy is a guided learning environment, not a status
+   dashboard. Dark spatial framing carries elevated ivory reading surfaces. */
+.hub,
+.lessonRoute {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-2xl);
+  background: var(--gradient-midnight-stage);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-floating), var(--shadow-inset-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-body);
+}
+
+.hub::before,
+.lessonRoute::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 84% 7%, color-mix(in srgb, var(--color-knowledge-cobalt) 18%, transparent), transparent 32rem),
+    radial-gradient(circle at 8% 92%, color-mix(in srgb, var(--color-metallic-orange) 7%, transparent), transparent 26rem);
+  content: "";
+  pointer-events: none;
+}
+
+.hero {
+  border-color: var(--border-color-on-dark);
+  background: var(--gradient-glass-dark);
+}
+
+.hero > div > span,
+.routeHeader > div > span,
+.lessonHeader > div > span,
+.synthesisPortal > span,
+.reviewProject > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-secondary);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.hero h1,
+.routeHeader h1,
+.lessonHeader h2,
+.synthesisPortal h2 {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.hero > div > p,
+.routeHeader p,
+.synthesisPortal > p {
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.recommended {
+  padding: var(--space-5);
+  border: var(--border-subtle-dark);
+  border-top: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  border-radius: var(--radius-lg);
+  background: var(--surface-glass-dark-strong);
+  box-shadow: var(--shadow-panel), var(--shadow-inset-highlight);
+  backdrop-filter: blur(var(--blur-lg));
+}
+
+.recommended > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.recommended strong {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subtitle);
+}
+
+.recommended small {
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+}
+
+.recommended button,
+.moduleCard footer > button,
+.synthesisPortal button,
+.lessonFooter > button {
+  min-height: 44px;
+  border-color: var(--color-parliament-blue);
+  border-radius: var(--radius-md);
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+  font-size: var(--font-size-button);
+  transition:
+    border-color var(--motion-duration-ui) var(--motion-ease-standard),
+    background var(--motion-duration-ui) var(--motion-ease-standard),
+    transform var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.recommended button:hover,
+.moduleCard footer > button:hover,
+.synthesisPortal button:hover,
+.lessonFooter > button:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-metallic-orange);
+  background: var(--color-parliament-blue);
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.path {
+  max-width: 1340px;
+  gap: var(--space-4);
+}
+
+.path::before {
+  width: 2px;
+  background: linear-gradient(
+    var(--color-metallic-orange),
+    var(--color-parliament-blue) 45%,
+    var(--border-color-on-dark) 88%,
+    transparent
+  );
+}
+
+.node {
+  border-color: var(--border-color-on-dark-strong);
+  background: var(--surface-elevated);
+  color: var(--color-orange-highlight);
+  box-shadow: var(--shadow-panel), var(--shadow-inset-highlight);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-secondary);
+}
+
+.module[data-recommended="true"] .node {
+  border-color: var(--border-color-orange);
+  background: var(--gradient-metallic-orange);
+  color: var(--color-deep-navy);
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.module[data-status="planned"] .node {
+  color: var(--color-text-muted-on-dark);
+}
+
+.module[data-status="coverage-dependent"] .node {
+  border-color: var(--border-color-blue);
+  color: var(--color-orange-highlight);
+}
+
+.moduleCard {
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-xl);
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-elevated);
+}
+
+.module[data-recommended="true"] .moduleCard {
+  border-color: var(--border-color-orange);
+  box-shadow: var(--shadow-elevated), inset 0 3px var(--color-metallic-orange);
+}
+
+.module[data-status="planned"] .moduleCard {
+  border-color: var(--border-color-on-ivory-strong);
+  background: var(--surface-ivory);
+}
+
+.moduleCard > header span,
+.lessonRecommendation > span,
+.moduleCard footer > div > span,
+.moduleMeta dt,
+.conceptCard > span,
+.guidedCard > span,
+.applicationCard > header > span,
+.lessonFooter > div > span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.moduleCard h2 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+}
+
+.moduleCard > header > small,
+.routeHeader > small,
+.lessonHeader > small {
+  border-color: var(--border-color-blue);
+  color: var(--color-parliament-blue);
+  font-size: var(--font-size-secondary);
+}
+
+.moduleCard > header > small[data-status="coverage-dependent"],
+.routeHeader > small[data-status="coverage-dependent"],
+.lessonHeader > small[data-status="context-only"] {
+  border-color: var(--border-color-orange);
+  background: color-mix(in srgb, var(--color-metallic-orange) 7%, transparent);
+  color: var(--color-deep-copper);
+}
+
+.moduleCard > header > small[data-status="planned"],
+.routeHeader > small[data-status="planned"],
+.lessonHeader > small[data-status="unavailable"] {
+  border-color: var(--border-color-on-ivory-strong);
+  background: var(--surface-ivory);
+  color: var(--color-text-muted-on-ivory);
+}
+
+.purpose,
+.coverageNote,
+.moduleCard footer li,
+.moduleMeta dd,
+.lessonRecommendation strong {
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
+}
+
+.purpose,
+.coverageNote {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.coverageNote {
+  border-color: var(--color-metallic-orange);
+}
+
+.moduleMeta {
+  border-color: var(--border-color-on-ivory);
+}
+
+.progressTrack {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-parliament-blue) 10%, var(--surface-ivory));
+}
+
+.progressTrack i {
+  background: linear-gradient(90deg, var(--color-parliament-blue), var(--color-knowledge-cobalt));
+}
+
+.moduleCard footer li {
+  border-color: var(--border-color-on-ivory);
+  color: var(--color-text-muted-on-ivory);
+}
+
+.moduleCard footer li button:hover {
+  color: var(--color-parliament-blue);
+}
+
+.routeHeader {
+  border-color: var(--border-color-on-dark);
+  background: var(--surface-glass-dark);
+}
+
+.routeHeader > button {
+  color: var(--color-orange-highlight);
+  font-size: var(--font-size-secondary);
+}
+
+.routeHeader > small {
+  border-color: var(--border-color-on-dark-strong);
+  color: var(--color-orange-highlight);
+}
+
+.scienceLesson {
+  overflow: hidden;
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-xl);
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-elevated);
+}
+
+.scienceLesson .lessonHeader h2 {
+  color: var(--color-text-on-ivory);
+}
+
+.scienceLesson .lessonHeader,
+.scienceLesson .conceptCard,
+.scienceLesson .applicationCard,
+.scienceLesson .lessonSources,
+.scienceLesson .lessonFooter,
+.scienceLesson .clinicalBoundary {
+  border-color: var(--border-color-on-ivory);
+}
+
+.scienceLesson p,
+.scienceLesson li,
+.scienceLesson small,
+.scienceLesson dt,
+.scienceLesson dd,
+.lessonSources summary,
+.lessonSources a strong {
+  font-size: var(--font-size-secondary);
+}
+
+.scienceLesson .lessonHeader p,
+.evidenceList dd,
+.lessonSources summary {
+  color: var(--color-parliament-blue);
+}
+
+.conceptCard p,
+.guidedCard p,
+.applicationCard > header p,
+.explicitGap,
+.evidenceList small,
+.contexts li span,
+.contexts li small,
+.contexts li p,
+.lessonSources li p,
+.lessonFooter ul,
+.clinicalBoundary {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.contexts li,
+.explicitGap {
+  border-color: var(--border-color-orange);
+  background: var(--surface-ivory);
+}
+
+.lessonSources li {
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-md);
+}
+
+.synthesisPortal {
+  border: var(--border-subtle-dark);
+  border-top: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  border-radius: var(--radius-xl);
+  background: var(--gradient-parliament-depth);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-elevated), var(--shadow-inset-highlight);
+}
+
+.synthesisPortal aside,
+.integrationGap {
+  border-color: var(--color-metallic-orange);
+  background: var(--surface-glass-dark);
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+}
+
+@media (max-width: 760px) {
+  .hub,
+  .lessonRoute {
+    border: var(--border-subtle-dark);
+    border-radius: var(--radius-xl);
+  }
+
+  .hero {
+    padding: var(--space-10) var(--space-5);
+  }
+
+  .path {
+    padding: var(--space-6) var(--space-3) var(--space-10);
+  }
+
+  .path::before {
+    left: 31px;
+  }
+
+  .module {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .node {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-ui-label);
+  }
+
+  .moduleCard {
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  .moduleCard > header > small,
+  .routeHeader > small,
+  .lessonHeader > small {
+    font-size: var(--font-size-ui-label);
+  }
+
+  .scienceLesson,
+  .synthesisPortal,
+  .reviewProject {
+    width: calc(100% - 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recommended button,
+  .moduleCard footer > button,
+  .synthesisPortal button,
+  .lessonFooter > button {
+    transition: none;
+  }
+}

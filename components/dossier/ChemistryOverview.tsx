@@ -1,3 +1,7 @@
+import {
+  SmilesNotationPanel,
+  type SmilesNotationMode,
+} from "@/components/chemistry/SmilesNotationPanel";
 import { MoleculeViewer } from "@/components/molecule-viewer";
 import type { DrugDossierRecord } from "@/lib/domain/dossier";
 
@@ -7,9 +11,15 @@ export interface ChemistryOverviewProps {
   readonly dossier: DrugDossierRecord;
   readonly locale: "tr" | "en";
   readonly compact?: boolean;
+  readonly smilesMode?: SmilesNotationMode;
 }
 
-export function ChemistryOverview({ dossier, locale, compact = false }: ChemistryOverviewProps) {
+export function ChemistryOverview({
+  dossier,
+  locale,
+  compact = false,
+  smilesMode = compact ? "story" : "student",
+}: ChemistryOverviewProps) {
   const labels = locale === "tr"
     ? {
         eyebrow: "KİMYA",
@@ -97,6 +107,12 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
             <div><dt>{labels.weight}</dt><dd>{dossier.chemistry.molecularWeight.value} {dossier.chemistry.molecularWeight.unit}</dd></div>
             <div><dt>{labels.stereo}</dt><dd>{dossier.chemistry.stereochemistry?.value ?? labels.unavailable}</dd></div>
           </dl>
+          <SmilesNotationPanel
+            canonicalSmiles={dossier.chemistry.canonicalSmiles.value}
+            isomericSmiles={dossier.chemistry.isomericSmiles?.value ?? null}
+            locale={locale}
+            mode={smilesMode}
+          />
           <div className={styles.forms}>
             <span>{labels.forms}</span>
             {dossier.chemistry.chemicalForms.length > 0 ? (
