@@ -168,7 +168,7 @@ test("new shell preserves legibility, reduced motion, and keyboard navigation at
   await page.locator("body").press("Home");
   await page.keyboard.press("Tab");
   await expect(
-    page.getByRole("button", { name: /Dev Molecules ana görünümünü aç/i }),
+    page.getByRole("button", { name: /Molevren ana görünümünü aç/i }),
   ).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(
@@ -233,6 +233,7 @@ test("Atlas exposes the 1,552-record Browse boundary, bounded Spatial view, and 
   await page.goto("/#family/beta-adrenergic-blockers", {
     waitUntil: "domcontentloaded",
   });
+  await switchToEnglish(page);
   const family = page.locator(
     '[data-family-page="beta-adrenergic-blockers"]',
   );
@@ -263,17 +264,17 @@ test("Atlas exposes the 1,552-record Browse boundary, bounded Spatial view, and 
   expectCleanRuntime(telemetry);
 });
 
-test("seed dossier separates Story and Reference modes and states pharmacology and ADME gaps", async ({
+test("non-flagship seed dossier separates Story and Reference modes and states pharmacology and ADME gaps", async ({
   page,
 }) => {
   const telemetry = watchRuntime(page);
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/#drug/propranolol", { waitUntil: "domcontentloaded" });
+  await page.goto("/#drug/metoprolol", { waitUntil: "domcontentloaded" });
 
-  const dossier = page.locator('[data-molecule-id="molecule:propranolol"]');
+  const dossier = page.locator('[data-molecule-id="molecule:metoprolol"]');
   await expect(dossier).toHaveAttribute("data-dossier-mode", "story");
   await expect(
-    dossier.getByRole("heading", { name: "Propranolol", exact: true }),
+    dossier.getByRole("heading", { name: "Metoprolol", exact: true }),
   ).toBeVisible();
   await expect(
     dossier.locator('[data-pharmacology-coverage="unavailable"]'),
@@ -292,9 +293,9 @@ test("seed dossier separates Story and Reference modes and states pharmacology a
     .getByRole("button", { name: "Referans Modu", exact: true })
     .click();
   await expect(dossier).toHaveAttribute("data-dossier-mode", "reference");
-  await dossier.getByRole("button", { name: "Farmakoloji", exact: true }).click();
+  await dossier.getByRole("tab", { name: "Farmakoloji", exact: true }).click();
   await expect(dossier.locator('[data-reference-tab="pharmacology"]')).toBeVisible();
-  await dossier.getByRole("button", { name: "ADME", exact: true }).click();
+  await dossier.getByRole("tab", { name: "ADME", exact: true }).click();
   await expect(dossier.locator('[data-reference-tab="adme"]')).toBeVisible();
 
   await page.getByRole("button", { name: "Ayarlar", exact: true }).click();
@@ -303,7 +304,7 @@ test("seed dossier separates Story and Reference modes and states pharmacology a
     .click();
   await expect(appRoot(page)).toHaveAttribute("data-experience-mode", "expert");
   await expect(dossier).toHaveAttribute("data-dossier-mode", "reference");
-  await expectNoHorizontalOverflow(page, "Propranolol Reference dossier");
+  await expectNoHorizontalOverflow(page, "Metoprolol Reference dossier");
   expectCleanRuntime(telemetry);
 });
 
@@ -509,6 +510,7 @@ test("Instructor composes one real task of each kind locally while Reviewer rema
   expect(JSON.stringify(lessonPackage)).not.toMatch(/learnerName|studentEmail/i);
 
   await page.goto("/#reviewer", { waitUntil: "domcontentloaded" });
+  await switchToEnglish(page);
   const reviewer = page.locator(
     '[data-reviewer-boundary="fail-closed"]',
   );
@@ -579,13 +581,13 @@ test("capture the documented Dev Molecules 2.0 review surfaces", async ({
   await expect(dossier).toHaveAttribute("data-dossier-mode", "story");
   await captureDocsScreenshot(page, "dossier-overview.png");
   await dossier.getByRole("button", { name: "Reference Mode" }).click();
-  await dossier.getByRole("button", { name: "Pharmacology" }).click();
+  await dossier.getByRole("tab", { name: "Pharmacology" }).click();
   await positionForScreenshot(
     dossier.locator('section[data-pharmacology-coverage="unavailable"]'),
     128,
   );
   await captureDocsScreenshot(page, "dossier-pharmacology.png");
-  await dossier.getByRole("button", { name: "ADME", exact: true }).click();
+  await dossier.getByRole("tab", { name: "ADME", exact: true }).click();
   await positionForScreenshot(
     dossier
       .locator("#dossier-adme-heading")
@@ -593,7 +595,7 @@ test("capture the documented Dev Molecules 2.0 review surfaces", async ({
     128,
   );
   await captureDocsScreenshot(page, "dossier-adme.png");
-  await dossier.getByRole("button", { name: "Synthesis", exact: true }).click();
+  await dossier.getByRole("tab", { name: "Synthesis", exact: true }).click();
   await positionForScreenshot(
     dossier.locator('[data-reference-tab="synthesis"]'),
     128,

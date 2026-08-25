@@ -573,6 +573,26 @@
   }
 }
 
+/* Premium spacing is declared after the original short-viewport rules. Keep
+   the scope boundary visible, but compact that repeated chrome at desktop
+   zoom equivalents so the real fitted canvas remains in the first viewport. */
+@media (max-height: 720px) and (min-width: 721px) {
+  .atlas[data-atlas-view="spatial"] .spatial {
+    margin-block: 0.5rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .spatialBoundary {
+    margin-bottom: 0.4rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .spatialBoundaryLead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.65rem;
+  }
+}
+
 /* Public Atlas typography contract: prose is 16px on desktop and 15px on
    mobile; secondary and interactive copy never drops below 14px. Renderer
    glyphs inside the structure thumbnails remain owned by their canvas. */
@@ -641,6 +661,15 @@
 
   .atlas[data-atlas-view="spatial"] .spatialBoundary {
     margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-height: 640px) and (min-width: 721px) {
+  /* The index hint is repeated by the immediately adjacent browse control.
+     Removing only that duplicate sentence lets the scientific scope boundary
+     and fitted scene coexist at the 150% desktop zoom equivalent. */
+  .atlas[data-atlas-view="spatial"] .spatialBoundary > span:last-child {
+    display: none;
   }
 }
 

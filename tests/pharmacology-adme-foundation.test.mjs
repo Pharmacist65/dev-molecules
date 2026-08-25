@@ -3,6 +3,10 @@ import test from "node:test";
 
 import { tsImport } from "tsx/esm/api";
 
+const { createAcademyScienceLesson } = await tsImport(
+  "../lib/application/academy-science-lessons.ts",
+  import.meta.url,
+);
 const { createDrugDossierByIdOrSlug } = await tsImport(
   "../lib/application/dossier/index.ts",
   import.meta.url,
@@ -21,10 +25,6 @@ const {
 );
 const { canPresentMetaboliteEdge } = await tsImport(
   "../lib/application/metabolites/index.ts",
-  import.meta.url,
-);
-const { createAcademyScienceLesson } = await tsImport(
-  "../lib/application/academy-science-lessons.ts",
   import.meta.url,
 );
 
@@ -52,7 +52,7 @@ const field = (value, sourceId, overrides = {}) => ({
 });
 
 test("route/form context is isolated and never populated as inferred ADME", () => {
-  const oral = createDrugDossierByIdOrSlug("propranolol", "en");
+  const oral = createDrugDossierByIdOrSlug("metoprolol", "en");
   const intravenous = createDrugDossierByIdOrSlug("labetalol", "en");
   const ophthalmic = createDrugDossierByIdOrSlug("timolol", "en");
   assert.ok(oral && intravenous && ophthalmic);
@@ -78,6 +78,13 @@ test("route and dosage-form context is localized only at the presentation bounda
   assert.equal(presentAdministrationRoute("TOPICAL", "tr"), "Topikal");
   assert.equal(presentAdministrationRoute("INTRAVENOUS", "en"), "Intravenous");
   assert.equal(presentDosageForm("CAPSULE, EXTENDED RELEASE", "tr"), "Uzatılmış salımlı kapsül");
+  assert.equal(presentDosageForm("IMMEDIATE-RELEASE TABLET", "tr"), "Hemen salımlı tablet");
+  assert.equal(presentDosageForm("IMMEDIATE-RELEASE TABLET", "en"), "Immediate-release tablet");
+  assert.equal(presentDosageForm("DELAYED-RELEASE CAPSULE", "tr"), "Gecikmeli salımlı kapsül");
+  assert.equal(presentDosageForm("DELAYED-RELEASE CAPSULE", "en"), "Delayed-release capsule");
+  assert.equal(presentDosageForm("BUFFERED ORAL SOLUTION", "tr"), "Tamponlanmış oral çözelti");
+  assert.equal(presentDosageForm("FORMULATION NOT STATED IN SOURCE", "tr"), "Form kaynakta belirtilmemiş");
+  assert.equal(presentDosageForm("FORMULATION NOT STATED IN SOURCE", "en"), "Form not stated in source");
   assert.equal(presentDosageForm("SOLUTION/DROPS", "tr"), "Damla çözelti");
   assert.equal(presentDosageForm("SUSPENSION", "tr"), "Süspansiyon");
   assert.equal(presentDosageForm("CAPSULE", "en"), "Capsule");

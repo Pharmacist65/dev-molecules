@@ -1422,6 +1422,27 @@
   min-height: 0;
 }
 
+/* Focus keeps an actual camera-input surface in the first desktop viewport.
+   Mobile retains its deliberately taller, scrollable learning stage. */
+@media (min-width: 721px) {
+  .exploreStage[data-level="focus"] {
+    height: var(--explore-stage-viewport-height, clamp(560px, calc(100svh - 285px), 760px));
+    min-height: var(--explore-stage-viewport-height, clamp(560px, calc(100svh - 285px), 760px));
+  }
+
+  .exploreStage[data-level="focus"] .sceneTelemetry {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .exploreStage[data-level="focus"] .sharedScene,
+  .exploreStage[data-level="focus"] .sceneHidden {
+    --molecular-scene-height: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+}
+
 .sceneTelemetry {
   position: relative;
   min-height: inherit;
@@ -3055,5 +3076,27 @@
   .universe[data-presentation-mode="student"] .similarMolecules > p,
   .universe[data-presentation-mode="student"] .passportGrid dd {
     font-size: 0.9375rem;
+  }
+}
+
+/* These overrides intentionally follow the readability contract: short
+   desktop/zoom-equivalent viewports keep 14px type while reclaiming vertical
+   space from control chrome for the fitted molecular canvas. */
+@media (max-height: 720px) and (min-width: 721px) {
+  .header {
+    min-height: 64px;
+    padding-block: 0.35rem;
+  }
+
+  .searchControl input {
+    min-height: 36px;
+  }
+
+  .lensDisclosureButton {
+    min-height: 40px;
+  }
+
+  .breadcrumb {
+    min-height: 32px;
   }
 }

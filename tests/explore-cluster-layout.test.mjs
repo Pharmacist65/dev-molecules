@@ -91,6 +91,35 @@ test("narrow cluster label layout reserves the enlarged control footprint", () =
   assert.ok(placed.every(({ x, y }) => x >= 19 && x <= 81 && y >= 10 && y <= 90));
 });
 
+test("mobile cluster layout reserves the rendered 132px region control", () => {
+  const viewportWidth = 330;
+  const viewportHeight = 150;
+  const options = {
+    minimumLabelWidthPercent: 132 / viewportWidth * 100,
+    minimumLabelHeightPercent: 32 / viewportHeight * 100,
+  };
+  const anchors = [{ id: "candidate-records", x: 50, y: 50 }];
+  const sdfBounds = [
+    { id: "molecule:bisoprolol", x: 47.5, y: 22.3, radiusX: 5.7, radiusY: 7.8 },
+  ];
+  const placed = resolveExploreClusterLabelLayout(
+    anchors,
+    viewportWidth / viewportHeight,
+    sdfBounds,
+    options,
+  );
+
+  assert.equal(
+    countExploreClusterLabelCollisions(
+      placed,
+      viewportWidth / viewportHeight,
+      sdfBounds,
+      options,
+    ),
+    0,
+  );
+});
+
 test("cluster label layout rejects invalid coordinate contracts", () => {
   assert.throws(
     () => resolveExploreClusterLabelLayout([{ id: "x", x: Number.NaN, y: 1 }]),
@@ -107,5 +136,14 @@ test("cluster label layout rejects invalid coordinate contracts", () => {
       [{ id: "molecule:x", x: 20, y: 20, radiusX: -1 }],
     ),
     /avoidance zones require unique IDs, finite coordinates and non-negative radii/,
+  );
+  assert.throws(
+    () => resolveExploreClusterLabelLayout(
+      [{ id: "x", x: 1, y: 1 }],
+      1,
+      [],
+      { minimumLabelWidthPercent: Number.NaN },
+    ),
+    /footprint percentages must be finite and non-negative/,
   );
 });

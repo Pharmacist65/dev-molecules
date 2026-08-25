@@ -17,6 +17,11 @@ export interface ExploreClusterLabelAvoidanceZone extends ExploreClusterAnchor {
   readonly radiusY?: number;
 }
 
+export interface ExploreClusterLabelLayoutOptions {
+  readonly minimumLabelWidthPercent?: number;
+  readonly minimumLabelHeightPercent?: number;
+}
+
 const clamp = (value: number, minimum: number, maximum: number) =>
   Math.min(maximum, Math.max(minimum, value));
 
@@ -42,6 +47,31 @@ const intersectsAvoidanceZone = (
     && Math.abs(label.y - zone.y) < labelHalfHeight + zoneRadiusY + breathingRoom;
 };
 
+const getLabelSeparations = (
+  viewportAspect: number,
+  options: ExploreClusterLabelLayoutOptions,
+) => {
+  const minimumLabelWidthPercent = options.minimumLabelWidthPercent ?? 0;
+  const minimumLabelHeightPercent = options.minimumLabelHeightPercent ?? 0;
+  if (
+    !Number.isFinite(minimumLabelWidthPercent)
+    || minimumLabelWidthPercent < 0
+    || !Number.isFinite(minimumLabelHeightPercent)
+    || minimumLabelHeightPercent < 0
+  ) {
+    throw new Error(
+      "Explore cluster label footprint percentages must be finite and non-negative.",
+    );
+  }
+  return {
+    horizontal: Math.max(
+      clamp(34 * ((16 / 9) / viewportAspect), 20, 38),
+      minimumLabelWidthPercent,
+    ),
+    vertical: Math.max(20, minimumLabelHeightPercent),
+  };
+};
+
 /**
  * Separates only the HTML cluster labels. Molecular projection coordinates are
  * retained independently, so this accessibility layout never changes the
@@ -51,6 +81,7 @@ export function resolveExploreClusterLabelLayout(
   anchors: readonly ExploreClusterAnchor[],
   viewportAspect = 16 / 9,
   avoidanceZones: readonly ExploreClusterLabelAvoidanceZone[] = anchors,
+  options: ExploreClusterLabelLayoutOptions = {},
 ): readonly ExploreClusterLabelPosition[] {
   if (!Number.isFinite(viewportAspect) || viewportAspect <= 0) {
     throw new Error("Explore cluster label layout requires a positive viewport aspect.");
@@ -85,12 +116,10 @@ export function resolveExploreClusterLabelLayout(
     avoidanceIds.add(zone.id);
   }
 
-  const minimumHorizontalSeparation = clamp(
-    34 * ((16 / 9) / viewportAspect),
-    20,
-    38,
-  );
-  const minimumVerticalSeparation = 20;
+  const {
+    horizontal: minimumHorizontalSeparation,
+    vertical: minimumVerticalSeparation,
+  } = getLabelSeparations(viewportAspect, options);
   const labelHalfWidth = minimumHorizontalSeparation / 2;
   const labelHalfHeight = minimumVerticalSeparation / 2;
   const maximumRadius = Math.max(4, Math.ceil(Math.sqrt(anchors.length)) + 2);
@@ -158,16 +187,15 @@ export function countExploreClusterLabelCollisions(
   labels: readonly ExploreClusterLabelPosition[],
   viewportAspect = 16 / 9,
   avoidanceZones: readonly ExploreClusterLabelAvoidanceZone[] = [],
+  options: ExploreClusterLabelLayoutOptions = {},
 ): number {
   if (!Number.isFinite(viewportAspect) || viewportAspect <= 0) {
     throw new Error("Explore cluster label collision count requires a positive viewport aspect.");
   }
-  const minimumHorizontalSeparation = clamp(
-    34 * ((16 / 9) / viewportAspect),
-    20,
-    38,
-  );
-  const minimumVerticalSeparation = 20;
+  const {
+    horizontal: minimumHorizontalSeparation,
+    vertical: minimumVerticalSeparation,
+  } = getLabelSeparations(viewportAspect, options);
   const labelHalfWidth = minimumHorizontalSeparation / 2;
   const labelHalfHeight = minimumVerticalSeparation / 2;
   let collisions = 0;

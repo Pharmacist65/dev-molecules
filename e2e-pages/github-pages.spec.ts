@@ -61,7 +61,7 @@ test("project-base deployment loads structures and the source-gated Academy rout
   });
   await page.goto("./#molecule/propranolol");
 
-  await expect(page).toHaveTitle(/Dev Molecules/);
+  await expect(page).toHaveTitle(/Molevren/);
   const typography = await page.evaluate(() => {
     const styles = getComputedStyle(document.documentElement);
     const firstMode = document.querySelector<HTMLElement>("nav button");

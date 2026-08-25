@@ -68,9 +68,10 @@ test("Dossier exposes coverage first and renders each empty science section once
   assert.match(chemistry, /originLabel=\{threeD\.origin\}/u);
   assert.match(chemistry, /twoDOriginLabel=\{twoD\?\.origin\}/u);
   assert.doesNotMatch(chemistry, /originLabel=\{labels\./u);
-  assert.match(sources, /presentSourceScope\(source\.id, locale\)/u);
-  assert.doesNotMatch(sources, /\{source\.scope\}/u);
-  assert.match(sources, /\? "Kaynak kapsamı"[\s\S]+: "Source scope"/u);
+  assert.match(sources, /\{source\.scope\}/u);
+  assert.doesNotMatch(sources, /presentSourceScope\(source\.id, locale\)/u);
+  assert.match(sources, /scope: "Desteklediği kapsam"/u);
+  assert.match(sources, /scope: "Supported scope"/u);
   assert.match(dossier, /hasJourneyEvidence \? <DrugJourney/u);
   assert.match(dossier, /dossier\.metabolites\.edges\.length > 0 \? <MetaboliteGraph/u);
   assert.doesNotMatch(dossier, /function LearningLinks/u);

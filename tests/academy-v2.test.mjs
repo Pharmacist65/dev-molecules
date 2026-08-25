@@ -116,11 +116,11 @@ test("Academy progress reuses real exercises and leaves untracked modules as nul
 test("pharmacology lessons fail closed when reviewed target evidence is absent", () => {
   const lesson = createAcademyScienceLesson(
     "pharmacology",
-    "propranolol",
+    "metoprolol",
     "en",
   );
 
-  assert.equal(lesson.moleculeId, "molecule:propranolol");
+  assert.equal(lesson.moleculeId, "molecule:metoprolol");
   assert.equal(lesson.status, "unavailable");
   assert.deepEqual(lesson.evidenceItems, []);
   assert.deepEqual(lesson.sources, []);
@@ -129,10 +129,10 @@ test("pharmacology lessons fail closed when reviewed target evidence is absent",
 });
 
 test("ADME lessons distinguish sourced administration context from ADME evidence", () => {
-  const oral = createAcademyScienceLesson("adme", "propranolol", "en");
+  const oral = createAcademyScienceLesson("adme", "metoprolol", "en");
   const intravenous = createAcademyScienceLesson("adme", "labetalol", "en");
   const ophthalmic = createAcademyScienceLesson("adme", "timolol", "en");
-  const oralTr = createAcademyScienceLesson("adme", "propranolol", "tr");
+  const oralTr = createAcademyScienceLesson("adme", "metoprolol", "tr");
   const intravenousTr = createAcademyScienceLesson("adme", "labetalol", "tr");
   const ophthalmicTr = createAcademyScienceLesson("adme", "timolol", "tr");
 

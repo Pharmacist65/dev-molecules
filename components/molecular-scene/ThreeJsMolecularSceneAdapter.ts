@@ -703,13 +703,16 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
 
   resize(width: number, height: number, pixelRatio = 1) {
     this.assertActive();
-    const safeWidth = Math.max(1, Math.floor(width));
-    const safeHeight = Math.max(1, Math.floor(height));
+    // Keep the logical CSS dimensions (including sub-pixels) for projection.
+    // Three.js floors only the physical drawing buffer; the camera must continue
+    // to match the real CSS box or short/zoomed canvases visibly drift.
+    const safeWidth = Math.max(1, width);
+    const safeHeight = Math.max(1, height);
     const meaningfulCssResize =
       this.viewportWidth === 0 ||
       this.viewportHeight === 0 ||
-      Math.abs(safeWidth - this.viewportWidth) >= 4 ||
-      Math.abs(safeHeight - this.viewportHeight) >= 4;
+      Math.abs(safeWidth - this.viewportWidth) >= 0.5 ||
+      Math.abs(safeHeight - this.viewportHeight) >= 0.5;
     const nextDevicePixelRatio = Math.max(0.1, pixelRatio);
     const pixelRatioChanged =
       Math.abs(nextDevicePixelRatio - this.reportedDevicePixelRatio) >= 0.001;

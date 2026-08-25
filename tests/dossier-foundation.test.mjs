@@ -12,7 +12,7 @@ const {
 
 test("reviewed identity and structure do not elevate missing scientific layers", () => {
   const dossier = createDrugDossierByIdOrSlug(
-    "propranolol",
+    "metoprolol",
     "en",
     "/dev-molecules/",
   );
@@ -23,7 +23,7 @@ test("reviewed identity and structure do not elevate missing scientific layers",
 
   assert.equal(coverage.get("identity"), "reviewed");
   assert.equal(coverage.get("structure"), "reviewed");
-  assert.equal(coverage.get("classification"), "pending-review");
+  assert.equal(coverage.get("classification"), "unavailable");
   assert.equal(coverage.get("pharmacology"), "unavailable");
   assert.equal(coverage.get("adme"), "unavailable");
   assert.equal(coverage.get("nomenclature"), "unavailable");
@@ -38,17 +38,23 @@ test("reviewed identity and structure do not elevate missing scientific layers",
 });
 
 test("drug-specific lesson links fail closed against dossier coverage", () => {
+  const metoprolol = createDrugDossierByIdOrSlug("metoprolol", "en");
   const propranolol = createDrugDossierByIdOrSlug("propranolol", "en");
   const celecoxib = createDrugDossierByIdOrSlug("celecoxib", "en");
-  assert.ok(propranolol);
-  assert.ok(celecoxib);
+  assert.ok(metoprolol && propranolol && celecoxib);
 
-  assert.equal(getDossierLearningAvailability(propranolol).nomenclature, false);
-  assert.equal(getDossierLearningAvailability(celecoxib).nomenclature, false);
-  assert.equal(
-    getDossierLearningAvailability(celecoxib).synthesis,
-    celecoxib.coverage.find((item) => item.dimension === "synthesis")?.status === "source-supported",
-  );
+  assert.deepEqual(getDossierLearningAvailability(metoprolol), {
+    synthesis: false,
+    nomenclature: false,
+  });
+  assert.deepEqual(getDossierLearningAvailability(propranolol), {
+    synthesis: true,
+    nomenclature: true,
+  });
+  assert.deepEqual(getDossierLearningAvailability(celecoxib), {
+    synthesis: true,
+    nomenclature: true,
+  });
 });
 
 test("canonical IDs, slugs, and malformed links resolve or fail closed", () => {

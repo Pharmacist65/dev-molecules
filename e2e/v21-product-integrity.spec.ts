@@ -143,7 +143,7 @@ test("a curated dossier renders one compact Pharmacology, ADME, and Synthesis ga
   await expect(dossier).toHaveAttribute("data-dossier-mode", "reference");
 
   for (const tabName of ["Pharmacology", "ADME", "Synthesis"] as const) {
-    const tab = dossier.getByRole("button", { name: tabName, exact: true });
+    const tab = dossier.getByRole("tab", { name: tabName, exact: true });
     await expect(tab).toHaveAttribute("data-tab-availability", "unavailable");
     const visualWeight = await tab.evaluate((element) => ({
       opacity: Number.parseFloat(getComputedStyle(element).opacity),
@@ -152,14 +152,14 @@ test("a curated dossier renders one compact Pharmacology, ADME, and Synthesis ga
     expect(visualWeight.opacity).toBeLessThan(1);
   }
 
-  await dossier.getByRole("button", { name: "ADME", exact: true }).click();
+  await dossier.getByRole("tab", { name: "ADME", exact: true }).click();
   const referenceAdme = dossier.locator(
     '[data-reference-tab="adme"] [data-empty-coverage="adme"]',
   );
   await expect(referenceAdme).toHaveCount(1);
   await expect(referenceAdme.locator("[data-phase]")).toHaveCount(0);
 
-  await dossier.getByRole("button", { name: "Synthesis", exact: true }).click();
+  await dossier.getByRole("tab", { name: "Synthesis", exact: true }).click();
   const referenceSynthesis = dossier.locator(
     '[data-reference-tab="synthesis"] [data-empty-coverage="synthesis"]',
   );

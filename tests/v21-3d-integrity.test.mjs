@@ -60,8 +60,11 @@ test("adapter publishes real camera, projection, canvas and DPR telemetry", () =
 test("focus fit is lifecycle-bound and resize callbacks are coalesced", () => {
   assert.match(shared, /new ResizeObserver/);
   assert.match(shared, /resizeFrame = window\.requestAnimationFrame/);
-  assert.match(shared, /Math\.abs\(next\.width - lastResize\.width\) >= 4/);
+  assert.match(shared, /Math\.abs\(next\.width - lastResize\.width\) >= 0\.5/);
   assert.match(shared, /activeAdapter\.resize\(next\.width, next\.height, pixelRatio\);[\s\S]*viewportCallbackRef\.current/);
+  assert.match(adapter, /const safeWidth = Math\.max\(1, width\)/);
+  assert.match(adapter, /this\.camera\.aspect = safeWidth \/ safeHeight/);
+  assert.doesNotMatch(adapter, /Math\.floor\(width\)/);
   assert.match(adapter, /if \(this\.focusedMoleculeId && this\.focusAutoFit\)/);
   assert.match(universe, /port\.relayoutVisibleMolecules\(\);[\s\S]*port\.fitVisibleMolecules\(\)/);
 

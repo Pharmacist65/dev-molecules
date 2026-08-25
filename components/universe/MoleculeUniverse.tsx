@@ -726,6 +726,16 @@ export function MoleculeUniverse({
   const [sceneCamera, setSceneCamera] = useState<MolecularSceneCamera | undefined>(
     STUDENT_UNIVERSE_CAMERA,
   );
+  const nearClusterLabelLayoutOptions = useMemo(() => {
+    const sceneViewportHeight = sceneViewportWidth / sceneViewportAspect;
+    return {
+      minimumLabelWidthPercent:
+        Math.min(sceneViewportWidth <= 720 ? 132 : 180, sceneViewportWidth)
+        / sceneViewportWidth * 100,
+      minimumLabelHeightPercent:
+        Math.min(32, sceneViewportHeight) / sceneViewportHeight * 100,
+    } as const;
+  }, [sceneViewportAspect, sceneViewportWidth]);
   const [viewportSelectionCamera, setViewportSelectionCamera] =
     useState<MolecularSceneCamera>(STUDENT_UNIVERSE_CAMERA);
   const [searchFitPendingId, setSearchFitPendingId] = useState<string | null>(null);
@@ -796,17 +806,17 @@ export function MoleculeUniverse({
   );
 
   useEffect(() => {
-    if (level !== "universe") return undefined;
+    if (level !== "universe" && level !== "focus") return undefined;
     const stage = exploreStageRef.current;
     if (!stage) return undefined;
     const updateFirstViewportHeight = () => {
-      if (stage.dataset.level !== "universe") return;
+      if (stage.dataset.level !== "universe" && stage.dataset.level !== "focus") return;
       const top = Math.max(0, stage.getBoundingClientRect().top);
       const available = Math.max(128, Math.floor(window.innerHeight - top - 1));
       setSceneFirstViewportHeight((current) => current === available ? current : available);
     };
     const observer = new ResizeObserver(([entry]) => {
-      if (stage.dataset.level !== "universe") return;
+      if (stage.dataset.level !== "universe" && stage.dataset.level !== "focus") return;
       if (!entry?.contentRect) return;
       updateFirstViewportHeight();
     });
@@ -978,13 +988,14 @@ export function MoleculeUniverse({
       })),
       sceneViewportAspect,
       [],
+      nearClusterLabelLayoutOptions,
     );
     const positionByKey = new Map(labelPositions.map((item) => [item.id, item]));
     return rawClusters.map((cluster) => ({
       ...cluster,
       position: positionByKey.get(cluster.key) ?? cluster.anchorPosition,
     }));
-  }, [activeLensId, locale, mapMolecules, sceneViewportAspect, unclassifiedLabel]);
+  }, [activeLensId, locale, mapMolecules, nearClusterLabelLayoutOptions, sceneViewportAspect, unclassifiedLabel]);
   const unprojectedMoleculeCount = mapMolecules.filter(
     (molecule) => !molecule.coordinates?.[activeLensId],
   ).length;
@@ -1346,17 +1357,34 @@ export function MoleculeUniverse({
     const zones = activeLabelAvoidanceZones.length > 0
       ? activeLabelAvoidanceZones
       : anchors;
-    const positions = resolveExploreClusterLabelLayout(
-      anchors,
-      sceneViewportAspect,
-      zones,
-    );
+    let positions: ReturnType<typeof resolveExploreClusterLabelLayout>;
+    try {
+      positions = resolveExploreClusterLabelLayout(
+        anchors,
+        sceneViewportAspect,
+        zones,
+        nearClusterLabelLayoutOptions,
+      );
+    } catch (error) {
+      /* A live desktop-to-mobile resize can briefly combine the new label
+         footprint with the previous frame's eight projected molecule bounds.
+         Retain the last valid cluster positions for that transient frame so
+         React stays mounted; the next committed canvas/bounds update reruns
+         the solver. Invalid coordinate contracts still fail closed. */
+      if (
+        error instanceof Error
+        && error.message.startsWith("Unable to place Explore cluster label ")
+      ) {
+        return clusters;
+      }
+      throw error;
+    }
     const positionByKey = new Map(positions.map((position) => [position.id, position]));
     return clusters.map((cluster) => ({
       ...cluster,
       position: positionByKey.get(cluster.key) ?? cluster.position,
     }));
-  }, [activeLabelAvoidanceZones, clusters, level, sceneViewportAspect]);
+  }, [activeLabelAvoidanceZones, clusters, level, nearClusterLabelLayoutOptions, sceneViewportAspect]);
   const labelCollisionCount = useMemo(
     () => countExploreClusterLabelCollisions(
       displayedClusters.map((cluster) => ({
@@ -1366,8 +1394,9 @@ export function MoleculeUniverse({
       })),
       sceneViewportAspect,
       activeLabelAvoidanceZones,
+      nearClusterLabelLayoutOptions,
     ),
-    [activeLabelAvoidanceZones, displayedClusters, sceneViewportAspect],
+    [activeLabelAvoidanceZones, displayedClusters, nearClusterLabelLayoutOptions, sceneViewportAspect],
   );
   const selectedStructureMissing =
     level === "focus" &&
@@ -2341,7 +2370,7 @@ export function MoleculeUniverse({
         data-level={level}
         data-flight={flightActive ? "active" : "idle"}
         style={
-          level === "universe" && sceneFirstViewportHeight !== null
+          (level === "universe" || level === "focus") && sceneFirstViewportHeight !== null
             ? {
                 "--explore-stage-viewport-height": `${sceneFirstViewportHeight}px`,
               } as ExploreStageStyle

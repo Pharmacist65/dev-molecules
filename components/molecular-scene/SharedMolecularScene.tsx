@@ -366,9 +366,12 @@ export function SharedMolecularScene({
         const activeAdapter = adapterRef.current;
         if (!next || !activeAdapter) return;
         const pixelRatio = window.devicePixelRatio || 1;
+        // Responsive/zoom layouts can settle by only one or two CSS pixels after
+        // the first ResizeObserver delivery. Those pixels materially change the
+        // camera aspect on a short canvas, so they must not be discarded as noise.
         const meaningfulCssResize =
-          Math.abs(next.width - lastResize.width) >= 4 ||
-          Math.abs(next.height - lastResize.height) >= 4;
+          Math.abs(next.width - lastResize.width) >= 0.5 ||
+          Math.abs(next.height - lastResize.height) >= 0.5;
         const pixelRatioChanged = Math.abs(pixelRatio - lastResize.pixelRatio) >= 0.001;
         if (!meaningfulCssResize && !pixelRatioChanged) return;
         activeAdapter.resize(next.width, next.height, pixelRatio);

@@ -17,7 +17,7 @@ const context = {
   passThroughOnException() {},
 };
 
-test("server-renders the Molevren working-brand metadata around the technical product shell", async () => {
+test("server-renders Molevren as the default public brand with technical platform attribution", async () => {
   const worker = await getWorker();
   const response = await worker.fetch(
     new Request("https://molecules.example/", {
@@ -36,8 +36,14 @@ test("server-renders the Molevren working-brand metadata around the technical pr
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  const publicShell = html.split("<!--$-->")[0];
   assert.match(html, /<title>Molevren — Pharmaceutical Molecular Atlas &amp; Academy<\/title>/i);
-  assert.match(html, /DEV MOLECULES/);
+  assert.match(publicShell, /data-working-brand="molevren"/);
+  assert.match(publicShell, /molevren-lockup-horizontal-dark\.svg/);
+  assert.match(publicShell, /<strong>MOLEVREN<\/strong>/);
+  assert.match(publicShell, /Molevren, Dev Molecules platformu üzerinde geliştirilmiştir\./);
+  assert.doesNotMatch(publicShell, />DEV MOLECULES</);
+  assert.equal((publicShell.match(/Dev Molecules/g) ?? []).length, 1);
   assert.match(html, /Yaşayan Moleküler Atlas/);
   assert.match(html, /İlaçları yapısından etkisine kadar keşfet/);
   assert.match(html, />Ana Sayfa<\/button>/);
@@ -45,7 +51,7 @@ test("server-renders the Molevren working-brand metadata around the technical pr
   assert.match(html, />Akademi<\/button>/);
   assert.match(html, />Laboratuvar<\/button>/);
   assert.doesNotMatch(html, />Oluştur<\/button>|>Eğit<\/button>|>Araştır<\/button>/);
-  assert.match(html, /Öğrenme, karşılaştırma ve araştırma için etkileşimli farmasötik atlas ve akademi/);
+  assert.match(publicShell, /Eğitim ve araştırma amaçlıdır; kişisel klinik öneri değildir\./);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/i);
   assert.match(html, /property="og:image" content="https:\/\/molecules\.example\/brand\/molevren-og-1200x630\.png"/i);
 });
