@@ -64,11 +64,20 @@ export default function HomeLanding({
   return (
     <div className={styles.page} data-home="true">
       <section className={styles.hero} aria-labelledby="home-heading">
+        <div className={styles.heroAtmosphere} aria-hidden="true" />
         <div className={styles.introduction}>
+          <p className={styles.brandDescriptor}>
+            <strong>{t("brand.publicName")}</strong>
+            <span aria-hidden="true">/</span>
+            <span>{t("brand.descriptor")}</span>
+          </p>
           <p className={styles.kicker}>{t("home.kicker")}</p>
           <h1 id="home-heading">{t("home.title")}</h1>
           <p className={styles.lede}>{t("home.description")}</p>
-          <CatalogSearch search={searchCatalog} onSelect={onOpenDrug} />
+
+          <div className={styles.searchPanel}>
+            <CatalogSearch search={searchCatalog} onSelect={onOpenDrug} />
+          </div>
 
           <div className={styles.startPaths} aria-label={t("home.startPathsLabel")}>
             <button type="button" onClick={onOpenAtlas}>
@@ -92,14 +101,20 @@ export default function HomeLanding({
           </div>
         </div>
 
-        <div ref={stageHost} className={styles.stageHost} aria-label={t("home.featuredStageLabel")}>
-          {stageReady ? (
-            <Suspense fallback={<StagePlaceholder label={t("home.preparingMolecule")} />}>
-              <HomeMoleculeStage molecule={featuredMolecule} />
-            </Suspense>
-          ) : (
-            <StagePlaceholder label={t("home.preparingMolecule")} />
-          )}
+        <div className={styles.stageColumn}>
+          <div className={styles.stageHeading} aria-hidden="true">
+            <span>{t("home.featuredStageLabel")}</span>
+            <strong>{featuredMolecule.name}</strong>
+          </div>
+          <div ref={stageHost} className={styles.stageHost} aria-label={t("home.featuredStageLabel")}>
+            {stageReady ? (
+              <Suspense fallback={<StagePlaceholder label={t("home.preparingMolecule")} />}>
+                <HomeMoleculeStage molecule={featuredMolecule} />
+              </Suspense>
+            ) : (
+              <StagePlaceholder label={t("home.preparingMolecule")} />
+            )}
+          </div>
         </div>
       </section>
 

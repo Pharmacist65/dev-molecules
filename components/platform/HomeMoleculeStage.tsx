@@ -76,6 +76,7 @@ export default function HomeMoleculeStage({ molecule }: HomeMoleculeStageProps) 
             }}
           />
         )}
+        <div className={styles.halo} aria-hidden="true" />
         <div className={styles.orbit} aria-hidden="true" />
       </div>
       <div className={styles.identity} data-home-featured-identity="true" aria-hidden="true">
