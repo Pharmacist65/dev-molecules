@@ -13,7 +13,7 @@ import {
 } from "@/lib/application/basic-molecular-record";
 import { getDrugHash } from "@/lib/application/platform-route";
 import type { CatalogNormalizedEntity } from "@/lib/catalog";
-import { moleculeCatalog } from "@/lib/data/catalog";
+import { curatedDossierMolecules } from "@/lib/data/curated-dossier-catalog";
 import type { MoleculeRecord } from "@/lib/domain/molecule";
 import type { Locale } from "@/lib/i18n";
 
@@ -72,7 +72,7 @@ export function MolecularRecordRoute({
   useEffect(() => {
     let cancelled = false;
     void resolveMolecularRecordRoute(stableSlug, navigator, {
-      curatedRecords: moleculeCatalog,
+      curatedRecords: curatedDossierMolecules,
       assetBasePath,
       residentEntities,
     })

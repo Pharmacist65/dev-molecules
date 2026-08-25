@@ -63,7 +63,7 @@
 }
 
 .orientation small {
-  color: var(--color-text-faint-on-ivory);
+  color: var(--color-text-muted-on-ivory);
 }
 
 .panel .marker {
@@ -110,6 +110,10 @@
 
 .rawDetails .fields {
   padding: var(--space-4);
+}
+
+.rawDetails .copyStatus {
+  padding: 0 var(--space-4) var(--space-4);
 }
 
 .field,
@@ -160,7 +164,8 @@
 }
 
 .fieldHeader button:focus-visible,
-.rawDetails summary:focus-visible {
+.rawDetails summary:focus-visible,
+.panel .rawCode:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
 }
@@ -197,7 +202,7 @@
 
 .copyStatus {
   min-height: 1.35rem;
-  color: var(--color-text-faint-on-ivory);
+  color: var(--color-text-muted-on-ivory);
 }
 
 .copyStatus[data-copy-state="copied"] {

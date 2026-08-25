@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { AdmePanel, DrugJourney, MetaboliteGraph } from "@/components/adme";
 import { PharmacologyPanel } from "@/components/pharmacology";
@@ -16,6 +16,19 @@ import type {
 } from "@/lib/domain/dossier";
 
 import { ChemistryOverview } from "./ChemistryOverview";
+import {
+  FlagshipAdmeReference,
+  FlagshipChemistryDetails,
+  FlagshipComparisons,
+  FlagshipExplicitMissing,
+  FlagshipJourney,
+  FlagshipNomenclature,
+  FlagshipPharmacology,
+  FlagshipProductAnchor,
+  FlagshipSynthesis,
+} from "./FlagshipDossierSections";
+import { FlagshipLearningTasks } from "./FlagshipLearningTasks";
+import { ReferenceDossierExport } from "./ReferenceDossierExport";
 import { SourcesDrawer } from "./SourcesDrawer";
 import styles from "./DrugDossier.module.css";
 
@@ -38,6 +51,7 @@ type ReferenceTab =
   | "synthesis"
   | "nomenclature"
   | "comparisons"
+  | "learning"
   | "sources";
 
 const copy = {
@@ -74,6 +88,7 @@ const copy = {
       synthesis: "Sentez",
       nomenclature: "Nomenklatür",
       comparisons: "SAR ve Karşılaştırma",
+      learning: "Öğrenme görevleri",
       sources: "Kaynaklar",
     },
   },
@@ -110,6 +125,7 @@ const copy = {
       synthesis: "Synthesis",
       nomenclature: "Nomenclature",
       comparisons: "SAR & Comparisons",
+      learning: "Learning tasks",
       sources: "Sources",
     },
   },
@@ -142,6 +158,7 @@ const referenceTabs: readonly ReferenceTab[] = [
   "synthesis",
   "nomenclature",
   "comparisons",
+  "learning",
   "sources",
 ];
 
@@ -165,6 +182,7 @@ function CoverageGrid({ dossier, locale }: { readonly dossier: DrugDossierRecord
             <div>
               <strong>{dimensionLabels[item.dimension][locale]}</strong>
               <small>{coverageStatusLabels[item.status][locale]}</small>
+              <small className={styles.coverageReason}>{item.reason}</small>
             </div>
           </li>
         ))}
@@ -234,6 +252,7 @@ export function DrugDossier({
 }: DrugDossierProps) {
   const [mode, setMode] = useState<DossierMode>(initialMode);
   const [activeTab, setActiveTab] = useState<ReferenceTab>("overview");
+  const tabRefs = useRef(new Map<ReferenceTab, HTMLButtonElement>());
   const dossier = useMemo(
     () => createDrugDossierByIdOrSlug(moleculeIdOrSlug, locale, assetBasePath),
     [assetBasePath, locale, moleculeIdOrSlug],
@@ -278,12 +297,37 @@ export function DrugDossier({
     ? { label: labels.nomenclature, onClick: () => onOpenNomenclature(dossier.moleculeId) }
     : undefined;
   const tabAvailability = (tab: ReferenceTab): string => {
+    if (dossier.flagship) {
+      if (tab === "chemistry") return dossier.flagship.chemistryAnnotations.status;
+      if (tab === "synthesis") return dossier.flagship.synthesis.status;
+      if (tab === "nomenclature") return dossier.flagship.nomenclature.status;
+      if (tab === "comparisons") return dossier.flagship.comparisons.status;
+      if (tab === "learning") return dossier.flagship.learning.status;
+      if (tab === "sources") return dossier.sources.length > 0 ? "available" : "unavailable";
+    }
     if (tab === "pharmacology") return coverageByDimension.get("pharmacology")?.status ?? "unavailable";
     if (tab === "adme") return coverageByDimension.get("adme")?.status ?? "unavailable";
     if (tab === "synthesis") return synthesisCoverage?.status ?? "unavailable";
     if (tab === "nomenclature") return nomenclatureCoverage?.status ?? "unavailable";
     if (tab === "comparisons") return "unavailable";
+    if (tab === "learning") return coverageByDimension.get("learning")?.status ?? "unavailable";
     return "available";
+  };
+  const moveReferenceTab = (
+    currentTab: ReferenceTab,
+    direction: "previous" | "next" | "first" | "last",
+  ) => {
+    const currentIndex = referenceTabs.indexOf(currentTab);
+    const nextIndex = direction === "first"
+      ? 0
+      : direction === "last"
+        ? referenceTabs.length - 1
+        : direction === "previous"
+          ? (currentIndex - 1 + referenceTabs.length) % referenceTabs.length
+          : (currentIndex + 1) % referenceTabs.length;
+    const nextTab = referenceTabs[nextIndex];
+    setActiveTab(nextTab);
+    tabRefs.current.get(nextTab)?.focus();
   };
 
   return (
@@ -321,51 +365,151 @@ export function DrugDossier({
           <ol className={styles.storyRail} aria-label={labels.story}>
             {labels.storySteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}
           </ol>
+          {dossier.flagship ? (
+            <FlagshipProductAnchor
+              flagship={dossier.flagship}
+              sources={dossier.sources}
+              locale={locale}
+              presentation="story"
+            />
+          ) : null}
           <ChemistryOverview dossier={dossier} locale={locale} smilesMode="student" />
+          {dossier.flagship ? (
+            <FlagshipChemistryDetails
+              flagship={dossier.flagship}
+              sources={dossier.sources}
+              locale={locale}
+              presentation="story"
+              parentSmiles={dossier.chemistry.canonicalSmiles.value}
+            />
+          ) : null}
           <ClassificationSummary dossier={dossier} locale={locale} />
-          <PharmacologyPanel profile={dossier.pharmacology} locale={locale} />
-          {hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}
+          {dossier.flagship ? (
+            <FlagshipPharmacology dossier={dossier} sources={dossier.sources} locale={locale} presentation="story" />
+          ) : <PharmacologyPanel profile={dossier.pharmacology} locale={locale} />}
+          {dossier.flagship ? (
+            <FlagshipJourney flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
+          ) : hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}
           <AdmePanel profiles={dossier.admeProfiles} locale={locale} />
           {dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}
-          <SectionCoverageMessage
-            section="synthesis"
-            eyebrow={labels.tabs.synthesis}
-            title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable}
-            message={synthesisCoverage?.reason ?? labels.unavailableSection}
-            available={learningAvailability.synthesis}
-            action={synthesisAction}
-          />
+          {dossier.flagship ? (
+            <>
+              <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
+              <FlagshipNomenclature flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" parentSmiles={dossier.chemistry.canonicalSmiles.value} />
+              <FlagshipComparisons flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
+              <FlagshipLearningTasks flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
+            </>
+          ) : (
+            <SectionCoverageMessage
+              section="synthesis"
+              eyebrow={labels.tabs.synthesis}
+              title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable}
+              message={synthesisCoverage?.reason ?? labels.unavailableSection}
+              available={learningAvailability.synthesis}
+              action={synthesisAction}
+            />
+          )}
         </div>
       ) : (
         <div className={styles.referenceMode}>
-          <nav className={styles.referenceTabs} aria-label={labels.reference}>
+          {dossier.flagship ? (
+            <ReferenceDossierExport
+              className={styles.referenceExport}
+              dossier={dossier}
+              locale={locale}
+            />
+          ) : null}
+          <div className={styles.referenceTabs} aria-label={labels.reference} role="tablist">
             {referenceTabs.map((tab) => (
               <button
                 key={tab}
+                ref={(element) => {
+                  if (element) tabRefs.current.set(tab, element);
+                  else tabRefs.current.delete(tab);
+                }}
                 type="button"
+                id={`dossier-reference-tab-${tab}`}
+                role="tab"
+                aria-controls="dossier-reference-panel"
+                aria-selected={activeTab === tab}
                 data-tab-availability={tabAvailability(tab)}
-                aria-pressed={activeTab === tab}
+                tabIndex={activeTab === tab ? 0 : -1}
                 onClick={() => setActiveTab(tab)}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowLeft") moveReferenceTab(tab, "previous");
+                  else if (event.key === "ArrowRight") moveReferenceTab(tab, "next");
+                  else if (event.key === "Home") moveReferenceTab(tab, "first");
+                  else if (event.key === "End") moveReferenceTab(tab, "last");
+                  else return;
+                  event.preventDefault();
+                }}
               >
                 {labels.tabs[tab]}
               </button>
             ))}
-          </nav>
-          <div className={styles.referencePanel} data-reference-tab={activeTab}>
-            {activeTab === "overview" ? <><ChemistryOverview dossier={dossier} locale={locale} compact smilesMode="story" /><ClassificationSummary dossier={dossier} locale={locale} /></> : null}
-            {activeTab === "chemistry" ? <ChemistryOverview dossier={dossier} locale={locale} smilesMode="reference" /> : null}
-            {activeTab === "pharmacology" ? <PharmacologyPanel profile={dossier.pharmacology} locale={locale} /> : null}
-            {activeTab === "adme" ? <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert />{hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}{dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}</> : null}
-            {activeTab === "synthesis" ? <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={synthesisAction} /> : null}
-            {activeTab === "nomenclature" ? <SectionCoverageMessage section="nomenclature" eyebrow={labels.tabs.nomenclature} title={learningAvailability.nomenclature ? labels.nomenclatureAvailable : labels.nomenclatureUnavailable} message={nomenclatureCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.nomenclature} action={nomenclatureAction} /> : null}
-            {activeTab === "comparisons" ? <SectionCoverageMessage section="comparisons" eyebrow={labels.tabs.comparisons} title={labels.comparisonsUnavailable} message={labels.unavailableSection} available={false} /> : null}
-            {activeTab === "sources" ? <section className={styles.sourcesTab}><p>{labels.sourcesHint}</p><SourcesDrawer sources={dossier.sources} locale={locale} /></section> : null}
+          </div>
+          <div
+            className={styles.referencePanel}
+            data-reference-tab={activeTab}
+            id="dossier-reference-panel"
+            role="tabpanel"
+            aria-labelledby={`dossier-reference-tab-${activeTab}`}
+            tabIndex={0}
+          >
+            {activeTab === "overview" ? (
+              <>
+                {dossier.flagship ? <FlagshipProductAnchor flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" /> : null}
+                <ChemistryOverview dossier={dossier} locale={locale} compact smilesMode="story" />
+                {dossier.flagship ? <FlagshipChemistryDetails flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" parentSmiles={dossier.chemistry.canonicalSmiles.value} /> : null}
+                <ClassificationSummary dossier={dossier} locale={locale} />
+                {dossier.flagship ? <FlagshipExplicitMissing flagship={dossier.flagship} locale={locale} /> : null}
+              </>
+            ) : null}
+            {activeTab === "chemistry" ? (
+              <>
+                <ChemistryOverview dossier={dossier} locale={locale} smilesMode="reference" />
+                {dossier.flagship ? <FlagshipChemistryDetails flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" parentSmiles={dossier.chemistry.canonicalSmiles.value} /> : null}
+              </>
+            ) : null}
+            {activeTab === "pharmacology" ? (
+              dossier.flagship
+                ? <FlagshipPharmacology dossier={dossier} sources={dossier.sources} locale={locale} presentation="reference" />
+                : <PharmacologyPanel profile={dossier.pharmacology} locale={locale} />
+            ) : null}
+            {activeTab === "adme" ? (
+              dossier.flagship ? (
+                <>
+                  <FlagshipJourney flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
+                  <FlagshipAdmeReference dossier={dossier} sources={dossier.sources} locale={locale} />
+                  {dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}
+                </>
+              ) : <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert />{hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}{dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}</>
+            ) : null}
+            {activeTab === "synthesis" ? (
+              dossier.flagship
+                ? <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
+                : <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={synthesisAction} />
+            ) : null}
+            {activeTab === "nomenclature" ? (
+              dossier.flagship
+                ? <FlagshipNomenclature flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" parentSmiles={dossier.chemistry.canonicalSmiles.value} />
+                : <SectionCoverageMessage section="nomenclature" eyebrow={labels.tabs.nomenclature} title={learningAvailability.nomenclature ? labels.nomenclatureAvailable : labels.nomenclatureUnavailable} message={nomenclatureCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.nomenclature} action={nomenclatureAction} />
+            ) : null}
+            {activeTab === "comparisons" ? (
+              dossier.flagship
+                ? <FlagshipComparisons flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
+                : <SectionCoverageMessage section="comparisons" eyebrow={labels.tabs.comparisons} title={labels.comparisonsUnavailable} message={labels.unavailableSection} available={false} />
+            ) : null}
+            {activeTab === "learning" && dossier.flagship ? <FlagshipLearningTasks flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" /> : null}
+            {activeTab === "sources" ? <section className={styles.sourcesTab}><p>{labels.sourcesHint}</p><SourcesDrawer sources={dossier.sources} locale={locale} technical /></section> : null}
           </div>
         </div>
       )}
 
       <footer className={styles.dossierFooter}>
-        <SourcesDrawer sources={dossier.sources} locale={locale} />
+        {mode === "reference" && activeTab === "sources"
+          ? null
+          : <SourcesDrawer sources={dossier.sources} locale={locale} technical={mode === "reference"} />}
         <ul>{dossier.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul>
       </footer>
     </article>

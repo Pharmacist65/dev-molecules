@@ -255,7 +255,7 @@
 
 .graphCanvas li {
   display: grid;
-  grid-template-columns: 2.8rem 1fr;
+  grid-template-columns: 2.8rem minmax(0, 1fr);
   align-items: center;
 }
 
@@ -264,12 +264,126 @@
   background: #8fa99d;
 }
 
-.graphCanvas li div {
+.metaboliteNodeCard {
   display: grid;
-  gap: 0.18rem;
-  padding: 0.75rem;
+  grid-template-columns: minmax(11rem, 0.72fr) minmax(14rem, 1fr);
+  gap: 1rem;
+  min-width: 0;
+  padding: 0.85rem;
   border: 1px solid #d5dfda;
   border-radius: 0.75rem;
+  background: #fff;
+}
+
+.metaboliteStructure {
+  display: grid;
+  align-content: center;
+  gap: 0.35rem;
+  min-height: 10rem;
+  margin: 0;
+  padding: 0.55rem;
+  border: 1px solid #e0e7e3;
+  border-radius: 0.65rem;
+  background: #fafcfb;
+}
+
+.metaboliteStructure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 9rem;
+}
+
+.metaboliteStructure figcaption {
+  color: #53675e;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.metaboliteStructure code {
+  overflow-wrap: anywhere;
+  color: #4f5f57;
+  font-size: 0.72rem;
+}
+
+.metaboliteStructureHeld {
+  display: grid;
+  place-items: center;
+  min-height: 10rem;
+  margin: 0;
+  padding: 1rem;
+  color: #5b6b63;
+  border: 1px dashed #aebdb5;
+  border-radius: 0.65rem;
+  background: #f7f9f8;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.metaboliteNodeCopy {
+  display: grid;
+  align-content: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.metaboliteNodeCopy > span {
+  color: #4f6d5f;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.metaboliteNodeCopy > strong {
+  font-size: 1.05rem;
+}
+
+.metaboliteNodeCopy > small,
+.metaboliteActivityNote,
+.metaboliteSourceUnavailable {
+  color: #56665e;
+  line-height: 1.45;
+}
+
+.metaboliteActivity {
+  width: fit-content;
+  margin: 0.25rem 0 0;
+  padding: 0.35rem 0.55rem;
+  color: #254e3c;
+  border: 1px solid #b9cec3;
+  border-radius: 999px;
+  background: #edf6f1;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.metaboliteActivity[data-metabolite-activity="unknown"],
+.metaboliteActivity[data-metabolite-activity="very-little-or-no-antisecretory"] {
+  color: #695632;
+  border-color: #dccca9;
+  background: #fff8e9;
+}
+
+.metaboliteSourceLink {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+  color: #205642;
+  font-size: 0.82rem;
+  font-weight: 750;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-underline-offset: 0.18em;
+}
+
+.metaboliteSourceLink:focus-visible {
+  outline: 3px solid #bf6b32;
+  outline-offset: 3px;
 }
 
 .routeContext small,
@@ -292,6 +406,10 @@
   .phaseGrid,
   .graphCanvas {
     grid-template-columns: 1fr;
+  }
+
+  .metaboliteNodeCard {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .admePanel[data-empty-coverage="adme"] .contextCard {

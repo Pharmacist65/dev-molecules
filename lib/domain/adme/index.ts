@@ -36,11 +36,11 @@ export interface AdmeProfile {
   readonly distribution: readonly AdmeEvidenceField[];
   readonly metabolism: readonly AdmeEvidenceField[];
   readonly excretion: readonly AdmeEvidenceField[];
-  readonly halfLife?: AdmeEvidenceField<number>;
-  readonly bioavailability?: AdmeEvidenceField<number>;
-  readonly proteinBinding?: AdmeEvidenceField<number>;
-  readonly volumeOfDistribution?: AdmeEvidenceField<number>;
-  readonly clearance?: AdmeEvidenceField<number>;
+  readonly halfLife?: AdmeEvidenceField<number | string> | null;
+  readonly bioavailability?: AdmeEvidenceField<number | string> | null;
+  readonly proteinBinding?: AdmeEvidenceField<number | string> | null;
+  readonly volumeOfDistribution?: AdmeEvidenceField<number | string> | null;
+  readonly clearance?: AdmeEvidenceField<number | string> | null;
   readonly metabolites: readonly MetaboliteEdge[];
   readonly sourceIds: readonly SourceId[];
   readonly reviewStatus: VerificationStatus;

@@ -13,6 +13,7 @@ export const pubChemSystematicNameByCid: Readonly<Record<number, string>> = {
   3672: "2-[4-(2-methylpropyl)phenyl]propanoic acid",
   3869: "2-hydroxy-5-[1-hydroxy-2-(4-phenylbutan-2-ylamino)ethyl]benzamide",
   4171: "1-[4-(2-methoxyethyl)phenoxy]-3-(propan-2-ylamino)propan-2-ol",
+  4594: "6-methoxy-2-[(4-methoxy-3,5-dimethylpyridin-2-yl)methylsulfinyl]-1H-benzimidazole",
   4946: "1-naphthalen-1-yloxy-3-(propan-2-ylamino)propan-2-ol",
   33624: "(2S)-1-(tert-butylamino)-3-[(4-morpholin-4-yl-1,2,5-thiadiazol-3-yl)oxy]propan-2-ol",
   39147: "(2R,3S)-5-[3-(tert-butylamino)-2-hydroxypropoxy]-1,2,3,4-tetrahydronaphthalene-2,3-diol",

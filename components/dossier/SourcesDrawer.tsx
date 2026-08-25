@@ -5,10 +5,11 @@ import styles from "./DrugDossier.module.css";
 export interface SourcesDrawerProps {
   readonly sources: readonly ResolvedDossierSource[];
   readonly locale: "tr" | "en";
+  readonly technical?: boolean;
 }
 
 const statusLabel = {
-  verified: { tr: "Doğrulandı", en: "Verified" },
+  verified: { tr: "Bağlantı / kimlik doğrulandı", en: "Link / identity verified" },
   "expert-reviewed": { tr: "Uzman incelemeli", en: "Expert reviewed" },
   "source-supported": { tr: "Kaynak destekli", en: "Source supported" },
   "pending-review": { tr: "İnceleme bekliyor", en: "Pending review" },
@@ -17,61 +18,41 @@ const statusLabel = {
   unknown: { tr: "Belirtilmedi", en: "Unspecified" },
 } as const;
 
-type SourceScopeToken = "pubchem" | "dailymed" | "drugsfda" | "patent";
+const reuseLabel = {
+  permitted: { tr: "Yeniden kullanıma açık", en: "Reuse permitted" },
+  "attribution-required": { tr: "Atıf gerekli", en: "Attribution required" },
+  restricted: { tr: "Kısıtlı", en: "Restricted" },
+  unknown: { tr: "Yeniden kullanım koşulu belirsiz", en: "Reuse terms unknown" },
+} as const;
 
-const sourceScopeLabel: Readonly<
-  Record<SourceScopeToken, Readonly<Record<"tr" | "en", string>>>
-> = {
-  pubchem: {
-    tr: "Normalize edilmiş bileşik kimliği ve PubChem tarafından hesaplanan yapı tanımlayıcıları; hesaplanmış konformer deneysel bağlı poz değildir.",
-    en: "Normalized compound identity and PubChem-computed structure descriptors; a computed conformer is not an experimental bound pose.",
-  },
-  dailymed: {
-    tr: "ABD ürün etiketleri ve farmasötik form incelemesi için keşif bağlantısı; henüz belirli bir etiket seti kimliğine sabitlenmemiştir.",
-    en: "Discovery link for US product labels and pharmaceutical-form review; it is not yet pinned to an exact label set ID.",
-  },
-  drugsfda: {
-    tr: "Bağlantılı Drugs@FDA uygulama ve ürün kaydı; ürün onayı normalize edilmiş PubChem ana molekülüne doğrudan aktarılmaz.",
-    en: "Linked Drugs@FDA application and product record; product approval is not assigned directly to the normalized PubChem parent.",
-  },
-  patent: {
-    tr: "Birincil patent belgesindeki raporlanmış bağlantı örneği; laboratuvar koşulları burada yayımlanmaz.",
-    en: "Reported connectivity example in the primary patent document; laboratory conditions are not reproduced here.",
-  },
+const formatRetrievedAt = (value: string, locale: "tr" | "en") => {
+  const date = new Date(value);
+  return Number.isFinite(date.getTime())
+    ? new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", {
+        dateStyle: "medium",
+        timeZone: "UTC",
+      }).format(date)
+    : value;
 };
 
-function sourceScopeToken(sourceId: string): SourceScopeToken | null {
-  if (sourceId.startsWith("source:pubchem-")) return "pubchem";
-  if (sourceId.startsWith("source:dailymed-")) return "dailymed";
-  if (sourceId.startsWith("source:drugsfda-")) return "drugsfda";
-  if (sourceId.startsWith("source:patent-")) return "patent";
-  return null;
-}
-
-function presentSourceScope(
-  sourceId: string,
-  locale: "tr" | "en",
-): string {
-  const token = sourceScopeToken(sourceId);
-  return token
-    ? sourceScopeLabel[token][locale]
-    : locale === "tr"
-      ? "Kaynak kapsamı"
-      : "Source scope";
-}
-
-export function SourcesDrawer({ sources, locale }: SourcesDrawerProps) {
+export function SourcesDrawer({ sources, locale, technical = false }: SourcesDrawerProps) {
   const labels = locale === "tr"
     ? {
         summary: "Kaynaklar ve teknik ayrıntılar",
         description: "Bu panel varsayılan olarak kapalıdır. Kimlik, kapsam ve doğrudan bağlantılar burada izlenebilir.",
         scope: "Desteklediği kapsam",
+        externalId: "Harici kayıt kimliği",
+        retrievedAt: "Erişim tarihi",
+        license: "Lisans / yeniden kullanım",
         unavailable: "Bu görünüm için çözümlenebilir kaynak yok.",
       }
     : {
         summary: "Sources and technical details",
         description: "This panel is closed by default. Identity, scope, and direct links can be traced here.",
         scope: "Supported scope",
+        externalId: "External record ID",
+        retrievedAt: "Retrieved",
+        license: "License / reuse",
         unavailable: "No resolvable source is available for this view.",
       };
 
@@ -91,8 +72,23 @@ export function SourcesDrawer({ sources, locale }: SourcesDrawerProps) {
                 <div>
                   <strong>{source.provider}</strong>
                   <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
-                  <small>{statusLabel[source.reviewStatus][locale]}</small>
-                  <p><b>{labels.scope}:</b> {presentSourceScope(source.id, locale)}</p>
+                  {technical ? <small>{statusLabel[source.reviewStatus][locale]}</small> : null}
+                  <p><b>{labels.scope}:</b> {source.scope}</p>
+                  {technical ? (
+                    <dl className={styles.sourceMetadata}>
+                      <div><dt>{labels.externalId}</dt><dd>{source.externalId}</dd></div>
+                      <div><dt>{labels.retrievedAt}</dt><dd>{formatRetrievedAt(source.retrievedAt, locale)}</dd></div>
+                      <div>
+                        <dt>{labels.license}</dt>
+                        <dd>
+                          {source.license.url ? (
+                            <a href={source.license.url} target="_blank" rel="noreferrer">{source.license.label} ↗</a>
+                          ) : source.license.label}
+                          {" · "}{reuseLabel[source.license.reuseStatus][locale]}
+                        </dd>
+                      </div>
+                    </dl>
+                  ) : null}
                 </div>
               </li>
             ))}

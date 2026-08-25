@@ -11,6 +11,17 @@ export type TargetActionType =
   | "binder"
   | "other";
 
+/** A sourced target/action claim does not require an assay number. */
+export interface PharmacologyTargetClaim {
+  readonly id: string;
+  readonly targetName: EvidenceField<string>;
+  readonly targetFamily: EvidenceField<string> | null;
+  readonly action: EvidenceField<TargetActionType>;
+  readonly mechanism: EvidenceField<string> | null;
+  readonly sourceIds: readonly SourceId[];
+  readonly reviewStatus: VerificationStatus;
+}
+
 export interface TargetInteraction {
   readonly id: string;
   readonly targetName: EvidenceField<string>;
@@ -32,6 +43,7 @@ export interface PathwayEffect {
 export interface PharmacologyProfile {
   readonly moleculeId: MoleculeId;
   readonly classifications: readonly ClassificationRef[];
+  readonly primaryTargets: readonly PharmacologyTargetClaim[];
   readonly targets: readonly TargetInteraction[];
   readonly actionTypes: readonly TargetActionType[];
   readonly mechanismClaims: readonly EvidenceClaim[];

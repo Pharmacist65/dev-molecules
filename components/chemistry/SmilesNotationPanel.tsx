@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- Unwrapped source notation must receive focus for keyboard-only horizontal scrolling. */
+
 import { useEffect, useId, useRef, useState } from "react";
 
 import styles from "./SmilesNotationPanel.module.css";
@@ -78,6 +80,8 @@ export function SmilesNotationPanel({
 }: SmilesNotationPanelProps) {
   const labels = copyByLocale[locale];
   const statusId = useId();
+  const canonicalLabelId = useId();
+  const isomericLabelId = useId();
   const clearStatusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [copyState, setCopyState] = useState<CopyState>({ kind: "idle" });
   const hasIsomericSmiles = isomericSmiles !== null && isomericSmiles.length > 0;
@@ -110,27 +114,47 @@ export function SmilesNotationPanel({
         ? labels.copiedCanonical
         : labels.copiedIsomeric;
 
-  const renderField = (field: SmilesField, value: string, label: string) => (
-    <div className={styles.field} data-smiles-field={field} key={field}>
-      <div className={styles.fieldHeader}>
-        <span>{label}</span>
-        <button
-          type="button"
-          aria-describedby={statusId}
-          aria-label={field === "canonical" ? labels.copyCanonical : labels.copyIsomeric}
-          onClick={() => void copyExactValue(field, value)}
-        >
-          {labels.copy}
-        </button>
+  const renderField = (field: SmilesField, value: string, label: string) => {
+    const labelId = field === "canonical" ? canonicalLabelId : isomericLabelId;
+
+    return (
+      <div className={styles.field} data-smiles-field={field} key={field}>
+        <div className={styles.fieldHeader}>
+          <span id={labelId}>{label}</span>
+          <button
+            type="button"
+            aria-describedby={statusId}
+            aria-label={field === "canonical" ? labels.copyCanonical : labels.copyIsomeric}
+            onClick={() => void copyExactValue(field, value)}
+          >
+            {labels.copy}
+          </button>
+        </div>
+        <code
+          className={styles.rawCode}
+          role="region"
+          dir="ltr"
+          translate="no"
+          spellCheck={false}
+          tabIndex={0}
+          aria-labelledby={labelId}
+          data-raw-smiles={field}
+        >{value}</code>
       </div>
-      <code
-        className={styles.rawCode}
-        dir="ltr"
-        translate="no"
-        spellCheck={false}
-        data-raw-smiles={field}
-      >{value}</code>
-    </div>
+    );
+  };
+
+  const copyStatus = (
+    <p
+      className={styles.copyStatus}
+      id={statusId}
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-copy-state={copyState.kind}
+    >
+      {statusMessage}
+    </p>
   );
 
   const rawFields = (
@@ -171,20 +195,13 @@ export function SmilesNotationPanel({
         <details className={styles.rawDetails}>
           <summary>{labels.openRaw}</summary>
           {rawFields}
+          {copyStatus}
         </details>
-      ) : mode === "reference" ? rawFields : null}
-
-      {mode !== "story" ? (
-        <p
-          className={styles.copyStatus}
-          id={statusId}
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-          data-copy-state={copyState.kind}
-        >
-          {statusMessage}
-        </p>
+      ) : mode === "reference" ? (
+        <>
+          {rawFields}
+          {copyStatus}
+        </>
       ) : null}
     </div>
   );

@@ -2,7 +2,18 @@ import { createRouteScopedAdmeProfiles } from "@/lib/application/adme";
 import { createClassificationProfile } from "@/lib/application/classifications";
 import { createMetaboliteGraph } from "@/lib/application/metabolites";
 import { createPharmacologyProfile } from "@/lib/application/pharmacology";
-import { moleculeCatalog } from "@/lib/data/catalog";
+import {
+  collectFlagshipSourceIds,
+  filterFlagshipAdmeProfiles,
+  validateFlagshipDossierSeed,
+} from "./flagship";
+export {
+  presentEvidenceCoefficientOfVariation,
+  presentEvidenceConditionValue,
+  presentEvidenceValue,
+} from "./evidence-presentation";
+import { curatedDossierMolecules } from "@/lib/data/curated-dossier-catalog";
+import { createFlagshipDossierSeed } from "@/lib/data/flagship-dossiers";
 import { pubChemSystematicNameByCid } from "@/lib/data/pubchem-systematic-names";
 import { sourceById } from "@/lib/data/sources";
 import { synthesisStories } from "@/lib/data/synthesis-stories";
@@ -101,7 +112,7 @@ export function resolveDossierMolecule(
   const candidateSlug = normalized.startsWith("molecule:")
     ? normalized.slice("molecule:".length)
     : normalized;
-  return moleculeCatalog.find((record) =>
+  return curatedDossierMolecules.find((record) =>
     record.id.toLowerCase() === normalized ||
     record.id.slice("molecule:".length).toLowerCase() === candidateSlug ||
     slugify(record.identity.preferredName) === candidateSlug,
@@ -131,6 +142,26 @@ const coverage = (
   totalFields,
 });
 
+function coverageIndicatorsForReviewCount(values: {
+  readonly reviewedIdentity: boolean;
+  readonly classificationFieldCount: number;
+  readonly pharmacologyFieldCount: number;
+  readonly admeFieldCount: number;
+  readonly synthesisAvailable: boolean;
+  readonly nomenclatureFieldCount: number;
+  readonly learningFieldCount: number;
+}): number {
+  return [
+    values.reviewedIdentity,
+    values.classificationFieldCount > 0,
+    values.pharmacologyFieldCount > 0,
+    values.admeFieldCount > 0,
+    values.synthesisAvailable,
+    values.nomenclatureFieldCount > 0,
+    values.learningFieldCount > 0,
+  ].filter(Boolean).length;
+}
+
 function resolveDossierSources(sourceIds: readonly SourceId[]): readonly ResolvedDossierSource[] {
   return [...new Set(sourceIds)]
     .map((sourceId) => sourceById.get(sourceId))
@@ -142,10 +173,13 @@ function resolveDossierSources(sourceIds: readonly SourceId[]): readonly Resolve
       id: source.id,
       provider: source.provider,
       title: source.title,
+      externalId: source.externalId,
       url: source.url as string,
+      retrievedAt: source.retrievedAt,
       evidenceType: scientificTypeForSource(source.kind),
       reviewStatus: source.verification.status,
       scope: source.scope,
+      license: source.license,
     }));
 }
 
@@ -154,6 +188,11 @@ export function createDrugDossier(
   locale: DossierLocale,
   basePath = "/",
 ): DrugDossierRecord {
+  const candidateFlagshipSeed = createFlagshipDossierSeed(record.id, locale);
+  const flagshipSeed = candidateFlagshipSeed &&
+    validateFlagshipDossierSeed(candidateFlagshipSeed, resolveSource).length === 0
+      ? candidateFlagshipSeed
+      : null;
   const identitySourceId = record.identity.sourceIds[0];
   const identityNote = localized(
     locale,
@@ -164,14 +203,20 @@ export function createDrugDossier(
   const reviewedForms = record.forms.filter((form) =>
     form.sourceIds.some((sourceId) => Boolean(resolveSource(sourceId)?.url)) &&
     isPresentableStatus(form.verification.status));
-  const classifications = createClassificationProfile(record, resolveSource, locale);
+  const classifications = flagshipSeed?.classifications ??
+    createClassificationProfile(record, resolveSource, locale);
   const pharmacology = createPharmacologyProfile(
     record,
     classifications,
     resolveSource,
     locale,
+    flagshipSeed?.interactions ?? [],
+    flagshipSeed?.primaryTargets ?? [],
+    flagshipSeed?.mechanismClaims ?? [],
   );
-  const admeProfiles = createRouteScopedAdmeProfiles(record, resolveSource, locale);
+  const admeProfiles = flagshipSeed
+    ? filterFlagshipAdmeProfiles(flagshipSeed.admeProfiles, resolveSource)
+    : createRouteScopedAdmeProfiles(record, resolveSource, locale);
   const parentLabel = identityField(
     record.identity.preferredName,
     record,
@@ -181,14 +226,17 @@ export function createDrugDossier(
   const metabolites = createMetaboliteGraph(
     record.id,
     parentLabel,
-    [],
-    [],
+    flagshipSeed?.metaboliteNodes ?? [],
+    flagshipSeed?.metaboliteEdges ?? [],
     resolveSource,
     locale,
   );
   const synthesisStory = synthesisStories.find((story) =>
     story.moleculeId === record.id && canPresentAsSourceReported(story));
-  const synthesisStatus = synthesisStory ? "source-supported" : "unavailable";
+  const flagshipSynthesis = flagshipSeed?.content.synthesis.content ?? null;
+  const synthesisStatus = flagshipSynthesis || synthesisStory
+    ? "source-supported"
+    : "unavailable";
   const dossierSourceIds = [
     ...record.identity.sourceIds,
     record.structures.twoDimensional.sourceId,
@@ -196,6 +244,7 @@ export function createDrugDossier(
     ...reviewedForms.flatMap((form) => form.sourceIds),
     ...admeProfiles.flatMap((profile) => profile.sourceIds),
     ...(synthesisStory?.sourceIds ?? []),
+    ...(flagshipSeed ? collectFlagshipSourceIds(flagshipSeed) : []),
   ];
 
   const chemistry = {
@@ -246,8 +295,7 @@ export function createDrugDossier(
     ],
     unavailableDescriptorKeys: [
       "formal-charge",
-      "pka",
-      "logp-logd",
+      ...(record.id === "molecule:celecoxib" && flagshipSeed ? [] : ["pka", "logp-logd"]),
       "tpsa",
       "h-bond-donors",
       "h-bond-acceptors",
@@ -257,6 +305,30 @@ export function createDrugDossier(
   };
 
   const reviewedIdentity = isReviewedStatus(record.identity.verification.status);
+  const admeFieldCount = admeProfiles.reduce(
+    (total, profile) => total +
+      profile.absorption.length +
+      profile.distribution.length +
+      profile.metabolism.length +
+      profile.excretion.length,
+    0,
+  );
+  const admeCoverageStatus = admeFieldCount === 0
+    ? "unavailable"
+    : admeProfiles.every((profile) => isReviewedStatus(profile.reviewStatus))
+      ? "reviewed"
+      : "source-supported";
+  const pharmacologyFieldCount =
+    pharmacology.primaryTargets.length +
+    pharmacology.targets.length +
+    pharmacology.mechanismClaims.length;
+  const classificationFieldCount =
+    classifications.therapeutic.length +
+    classifications.pharmacological.length +
+    classifications.chemical.length;
+  const nomenclatureFieldCount =
+    flagshipSeed?.content.nomenclature.content?.segments.length ?? 0;
+  const learningFieldCount = flagshipSeed?.content.learning.content.length ?? 0;
   const coverageIndicators: readonly DossierCoverageIndicator[] = [
     coverage("identity", reviewedIdentity ? "reviewed" : "pending-review", localized(
       locale,
@@ -268,37 +340,69 @@ export function createDrugDossier(
       "Yerel 2B kayıt ve hesaplanmış 3B konformer kimlik/bütünlük kontrolünden geçti.",
       "The local 2D record and computed 3D conformer passed identity/integrity checks.",
     ), 2, 2),
-    coverage("classification", classifications.availability === "reviewed" ? "reviewed" : "pending-review", classifications.unavailableReason ?? localized(locale, "İncelenmiş sınıflandırma mevcut.", "Reviewed classification available."), classifications.therapeutic.length + classifications.pharmacological.length + classifications.chemical.length, null),
-    coverage("pharmacology", pharmacology.availability === "reviewed" ? "reviewed" : "unavailable", pharmacology.unavailableReason ?? localized(locale, "İncelenmiş farmakoloji mevcut.", "Reviewed pharmacology available."), pharmacology.targets.length, null),
-    coverage("adme", "unavailable", localized(
+    coverage(
+      "classification",
+      classifications.availability === "reviewed"
+        ? "reviewed"
+        : classifications.availability === "source-supported"
+          ? "source-supported"
+          : "unavailable",
+      classifications.unavailableReason ?? localized(locale, "Kaynak destekli sınıflandırma mevcut.", "Source-supported classification is available."),
+      classificationFieldCount,
+      null,
+    ),
+    coverage(
+      "pharmacology",
+      pharmacology.availability === "reviewed"
+        ? "reviewed"
+        : pharmacology.availability === "source-supported"
+          ? "source-supported"
+          : "unavailable",
+      pharmacology.unavailableReason ?? localized(locale, "Kaynak destekli hedef ve mekanizma kaydı mevcut.", "Source-supported target and mechanism records are available."),
+      pharmacologyFieldCount,
+      null,
+    ),
+    coverage("adme", admeCoverageStatus, localized(
       locale,
-      admeProfiles.length > 0
-        ? "Ürün/form uygulama yolu doğrulandı; ADME ölçümleri henüz kaynaklandırılmadı."
-        : "Kaynaklandırılmış ADME profili henüz yok.",
-      admeProfiles.length > 0
-        ? "The product/form administration route is verified; ADME measurements are not sourced yet."
-        : "No sourced ADME profile is available yet.",
-    ), 0, null),
+      admeFieldCount > 0
+        ? "Uygulama yolu ve forma bağlı ADME alanları kaynak ve koşullarıyla tutulur."
+        : admeProfiles.length > 0
+          ? "Ürün/form uygulama yolu doğrulandı; ADME ölçümleri henüz kaynaklandırılmadı."
+          : "Kaynaklandırılmış ADME profili henüz yok.",
+      admeFieldCount > 0
+        ? "Route- and form-specific ADME fields retain their sources and conditions."
+        : admeProfiles.length > 0
+          ? "The product/form administration route is verified; ADME measurements are not sourced yet."
+          : "No sourced ADME profile is available yet.",
+    ), admeFieldCount, null),
     coverage("synthesis", synthesisStatus, localized(
       locale,
-      synthesisStory ? "Kaynak denetimli eğitim rotası mevcut; uzman inceleme durumu ayrıca korunur." : "Bu ilaç için kürate edilmiş rota henüz yok.",
-      synthesisStory ? "A source-audited educational route is available; its expert-review boundary remains visible." : "No curated route is available for this drug yet.",
-    ), synthesisStory ? 1 : 0, null),
-    coverage("nomenclature", "unavailable", localized(
+      flagshipSynthesis || synthesisStory ? "Kaynak denetimli eğitim rotası mevcut; uzman inceleme durumu ayrıca korunur." : "Bu ilaç için kürate edilmiş rota henüz yok.",
+      flagshipSynthesis || synthesisStory ? "A source-audited educational route is available; its expert-review boundary remains visible." : "No curated route is available for this drug yet.",
+    ), flagshipSynthesis || synthesisStory ? 1 : 0, null),
+    coverage("nomenclature", nomenclatureFieldCount > 0 ? "source-supported" : "unavailable", localized(
       locale,
-      systematicName ? "Kaynaklı sistematik ad kimya özetinde gösterilir; ilaç-özel etkileşimli nomenklatür dersi henüz yok." : "İlaç-özel nomenklatür çözümlemesi henüz yok.",
-      systematicName ? "The sourced systematic name appears in the chemistry summary; no drug-specific interactive nomenclature lesson is available yet." : "No drug-specific nomenclature decomposition is available yet.",
-    ), 0, null),
-    coverage("learning", synthesisStory ? "source-supported" : "pending-review", localized(
+      nomenclatureFieldCount > 0 ? "Kaynak-spesifik ilaç nomenklatür çözümlemesi mevcuttur; uzman inceleme sınırı korunur." : systematicName ? "Kaynaklı sistematik ad kimya özetinde gösterilir; ilaç-özel etkileşimli nomenklatür dersi henüz yok." : "İlaç-özel nomenklatür çözümlemesi henüz yok.",
+      nomenclatureFieldCount > 0 ? "A source-specific drug nomenclature decomposition is available; its expert-review boundary remains visible." : systematicName ? "The sourced systematic name appears in the chemistry summary; no drug-specific interactive nomenclature lesson is available yet." : "No drug-specific nomenclature decomposition is available yet.",
+    ), nomenclatureFieldCount, null),
+    coverage("learning", learningFieldCount > 0 || synthesisStory ? "source-supported" : "pending-review", localized(
       locale,
       "Derin öğrenme içeriği katalog genişliğinden ayrı kürate edilir.",
       "Deep-learning content is curated separately from catalog breadth.",
-    ), synthesisStory ? 1 : 0, null),
+    ), learningFieldCount || (synthesisStory ? 1 : 0), null),
     coverage("review", "source-supported", localized(
       locale,
       "Kimlik ve yapı incelendi; diğer bilimsel katmanlar kendi kaynak ve inceleme kapılarında kalır.",
       "Identity and structure are reviewed; other scientific layers remain behind their own source and review gates.",
-    ), 2, 9),
+    ), coverageIndicatorsForReviewCount({
+      reviewedIdentity,
+      classificationFieldCount,
+      pharmacologyFieldCount,
+      admeFieldCount,
+      synthesisAvailable: Boolean(flagshipSynthesis || synthesisStory),
+      nomenclatureFieldCount,
+      learningFieldCount,
+    }), 9),
   ];
 
   return {
@@ -326,6 +430,7 @@ export function createDrugDossier(
         "Parent-molecule identity remains separate from product, dose, route, and pharmaceutical form.",
       ],
     ),
+    flagship: flagshipSeed?.content ?? null,
     notForClinicalUse: true,
     sourceRecord: record,
   };

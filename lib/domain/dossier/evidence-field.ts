@@ -1,5 +1,6 @@
 import type {
   EvidenceLevel,
+  ReuseStatus,
   VerificationStatus,
 } from "../evidence";
 import type { SourceId } from "../ids";
@@ -15,15 +16,28 @@ export interface EvidenceConditions {
   readonly formulation?: string;
   readonly species?: string;
   readonly population?: string;
+  readonly dose?: string;
+  readonly fedState?: string;
+  readonly studyDesign?: string;
+  readonly cohortSize?: number;
+  readonly coefficientOfVariationPercent?: number;
   readonly assay?: string;
   readonly matrix?: string;
   readonly temperature?: string;
   readonly pH?: string;
 }
 
+export type EvidenceValueQualifier =
+  | "approximately"
+  | "range"
+  | "less-than";
+
 export interface EvidenceField<T> {
   readonly value: T;
   readonly unit: string | null;
+  /** True only for intrinsically unitless numeric fields such as pKa/logP. */
+  readonly dimensionless?: boolean;
+  readonly valueQualifier?: EvidenceValueQualifier;
   readonly conditions: EvidenceConditions;
   readonly sourceId: SourceId;
   readonly evidenceType: EvidenceLevel;
@@ -59,10 +73,17 @@ export interface ResolvedDossierSource {
   readonly id: SourceId;
   readonly provider: string;
   readonly title: string;
+  readonly externalId: string;
   readonly url: string;
+  readonly retrievedAt: string;
   readonly evidenceType: EvidenceLevel;
   readonly reviewStatus: VerificationStatus;
   readonly scope: string;
+  readonly license: {
+    readonly label: string;
+    readonly url: string | null;
+    readonly reuseStatus: ReuseStatus;
+  };
 }
 
 export const isReviewedStatus = (status: VerificationStatus): boolean =>
@@ -75,7 +96,9 @@ export const hasCompleteEvidenceField = <T>(
     return false;
   }
   if (typeof field.value === "number") {
-    return Number.isFinite(field.value) && Boolean(field.unit?.trim());
+    return Number.isFinite(field.value) && (
+      field.dimensionless === true || Boolean(field.unit?.trim())
+    );
   }
   return typeof field.value !== "string" || field.value.trim().length > 0;
 };

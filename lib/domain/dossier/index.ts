@@ -4,6 +4,7 @@ import type { AdmeProfile } from "../adme";
 import type { ClassificationProfile } from "../classifications";
 import type { MetaboliteGraph } from "../metabolites";
 import type { PharmacologyProfile } from "../pharmacology";
+import type { FlagshipDossierContent } from "./flagship";
 import type {
   DossierCoverageIndicator,
   EvidenceField,
@@ -11,6 +12,7 @@ import type {
 } from "./evidence-field";
 
 export * from "./evidence-field";
+export * from "./flagship";
 
 export type DossierMode = "story" | "reference";
 
@@ -49,6 +51,8 @@ export interface DrugDossierRecord {
   readonly coverage: readonly DossierCoverageIndicator[];
   readonly sources: readonly ResolvedDossierSource[];
   readonly limitations: readonly string[];
+  /** Null for breadth-only records; populated only by the audited flagship registry. */
+  readonly flagship: FlagshipDossierContent | null;
   readonly notForClinicalUse: true;
   /** Kept for integration with existing structure and learning components. */
   readonly sourceRecord: MoleculeRecord;

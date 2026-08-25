@@ -747,6 +747,45 @@
   }
 }
 
+.sourceMetadata {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-ivory) 76%, transparent);
+}
+
+.sourceMetadata > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.sourceMetadata dt {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-ui-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.sourceMetadata dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-chemical);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .sourceMetadata > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+}
+
 /* Learner-facing typography contract: body 16px desktop / 15px mobile,
    secondary copy and every interactive label remain at least 14px. */
 .dossier {
@@ -1063,6 +1102,13 @@
   line-height: var(--line-height-ui);
 }
 
+.coverage .coverageReason {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-caption);
+}
+
 .storyMode,
 .referencePanel {
   gap: clamp(var(--space-8), 5vw, var(--space-16));
@@ -1254,10 +1300,43 @@
   font-size: var(--font-size-body);
 }
 
+.referenceExport {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-4) var(--space-page-inline);
+  color: var(--color-text-muted-on-dark);
+  border-bottom: var(--border-subtle-dark);
+  background: var(--gradient-midnight-stage);
+}
+
+.referenceExport button {
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-5);
+  color: var(--color-text-on-dark);
+  border: var(--border-width-hairline) solid var(--border-color-orange);
+  border-radius: var(--radius-pill);
+  background: var(--gradient-parliament-depth);
+  cursor: pointer;
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+}
+
+.referenceExport small {
+  max-width: 44rem;
+  color: var(--color-text-muted-on-dark);
+  line-height: var(--line-height-ui);
+}
+
+.referenceExport button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
 .referenceTabs {
-  position: sticky;
-  z-index: var(--z-sticky);
-  top: 0;
+  position: relative;
+  z-index: 1;
   gap: var(--space-1);
   padding: var(--space-3) var(--space-page-inline);
   border-color: var(--border-color-on-dark);
@@ -1278,7 +1357,7 @@
 }
 
 .referenceTabs button:hover,
-.referenceTabs button[aria-pressed="true"] {
+.referenceTabs button[aria-selected="true"] {
   color: var(--color-text-on-dark);
   border-bottom-color: var(--color-metallic-orange);
   background: color-mix(in srgb, var(--color-parliament-blue) 22%, transparent);
@@ -1288,7 +1367,7 @@
   color: var(--color-text-faint-on-dark);
 }
 
-.referenceTabs button[data-tab-availability="unavailable"][aria-pressed="true"] {
+.referenceTabs button[data-tab-availability="unavailable"][aria-selected="true"] {
   color: var(--color-text-muted-on-dark);
 }
 
@@ -1576,6 +1655,16 @@
     width: 100%;
   }
 
+  .referenceExport {
+    display: grid;
+    justify-items: stretch;
+    padding-inline: var(--space-4);
+  }
+
+  .referenceExport button {
+    width: 100%;
+  }
+
   .headerActions div button {
     min-width: 0;
     padding-inline: var(--space-2);
@@ -1587,8 +1676,10 @@
 
   .identityHero h1 {
     max-width: 100%;
-    font-size: clamp(3.1rem, 18vw, 5.6rem);
-    line-height: 0.88;
+    font-size: clamp(2.8rem, 13.5vw, 5.2rem);
+    line-height: 0.92;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   .identityHero dl {

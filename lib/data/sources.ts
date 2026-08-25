@@ -4,6 +4,7 @@ import {
   regulatorySourceId,
 } from "./regulatory-approvals";
 import { synthesisSourceRegistry } from "./synthesis-sources";
+import { flagshipSourceRegistry } from "./flagship-sources";
 
 const RETRIEVED_AT = "2026-08-21";
 
@@ -107,6 +108,9 @@ export const sourceRegistry: readonly SourceReference[] = [
   ]),
   ...regulatoryProductSeeds.map(drugsFdaProductSource),
   ...synthesisSourceRegistry,
+  ...flagshipSourceRegistry.filter(
+    (source) => !catalogCompounds.some(([, , cid]) => source.id === `source:pubchem-${cid}`),
+  ),
   {
     id: "source:dev-molecules-educational-draft-001",
     provider: "Dev Molecules editorial queue",

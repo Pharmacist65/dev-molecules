@@ -28,6 +28,22 @@ const dosageFormLabels: Readonly<
     tr: "Uzatılmış salımlı kapsül",
     en: "Extended-release capsule",
   },
+  "DELAYED-RELEASE CAPSULE": {
+    tr: "Gecikmeli salımlı kapsül",
+    en: "Delayed-release capsule",
+  },
+  "IMMEDIATE-RELEASE TABLET": {
+    tr: "Hemen salımlı tablet",
+    en: "Immediate-release tablet",
+  },
+  "BUFFERED ORAL SOLUTION": {
+    tr: "Tamponlanmış oral çözelti",
+    en: "Buffered oral solution",
+  },
+  "FORMULATION NOT STATED IN SOURCE": {
+    tr: "Form kaynakta belirtilmemiş",
+    en: "Form not stated in source",
+  },
   CAPSULE: { tr: "Kapsül", en: "Capsule" },
   TABLET: { tr: "Tablet", en: "Tablet" },
   SOLUTION: { tr: "Çözelti", en: "Solution" },
@@ -53,6 +69,10 @@ export function presentDosageForm(
 
 const admeEvidenceScope = /adme|pharmacokinetic|absorption|distribution|metaboli|excretion|clearance|half[- ]?life|bioavailability/i;
 
+const isSourcePresentableStatus = (
+  status: EvidenceField<unknown>["reviewStatus"],
+): boolean => isReviewedStatus(status) || status === "source-supported";
+
 const contextField = (
   value: string,
   product: RegulatoryProductReference,
@@ -77,10 +97,10 @@ export function canPresentAdmeField(
   const source = resolveSource(field.sourceId);
   return (
     hasCompleteEvidenceField(field) &&
-    isReviewedStatus(field.reviewStatus) &&
+    isSourcePresentableStatus(field.reviewStatus) &&
     Boolean(
       source?.url &&
-      isReviewedStatus(source.verification.status) &&
+      isSourcePresentableStatus(source.verification.status) &&
       admeEvidenceScope.test(source.scope),
     )
   );

@@ -21,7 +21,7 @@ This document is a source-and-scope decision, not scientific certification, medi
 
 | Candidate and product anchor | Identity → chemistry | Family → target → mechanism | Route/form-specific journey and ADME | Metabolites and enzymes | Synthesis → nomenclature → comparison → learning | Phase A decision |
 |---|---|---|---|---|---|---|
-| **Propranolol** — racemic propranolol parent presented with oral immediate-release propranolol hydrochloride tablet evidence | Adequate | Adequate; assay values optional/Reference-only | Adequate for the anchored oral IR form; oral clearance remains missing | Adequate with conjugate/stereo holds | Adequate with expert review | **GO** |
+| **Propranolol** — racemic propranolol parent presented with oral propranolol hydrochloride tablet evidence | Adequate | Adequate; assay values optional/Reference-only | Adequate for the anchored oral tablet form; release type is not inferred and oral clearance remains missing | Adequate with conjugate/stereo holds | Adequate with expert review | **GO** |
 | **Celecoxib** — celecoxib parent in oral CELEBREX capsule evidence | Adequate | Adequate; must not say “COX-2 only” | Adequate for a single 200 mg fasted capsule study; absolute bioavailability is missing | Adequate; glucuronide identity hold | Adequate with historical-comparator context | **GO** |
 | **Omeprazole** — racemic free parent in delayed-release oral capsules (10/20/40 mg) | Adequate with stereochemical caveat | Adequate; acid activation is essential context | Adequate for delayed-release oral capsules; volume of distribution is missing | Adequate; activation-product structures hold | Adequate with nomenclature conflict exposed | **GO** |
 
@@ -31,7 +31,7 @@ The chain required by the Phase A brief is available for all three candidates. A
 
 ### Product and identity anchor
 
-The dosage-form anchor is the current oral immediate-release **propranolol hydrochloride tablet** label, DailyMed set `554c7446-8407-460e-b157-f860c5afbf12`, updated 2026-07-14. The molecular dossier must distinguish racemic free parent propranolol (PubChem CID 4946; ChEBI 8499; molecular weight 259.34) from propranolol hydrochloride (PubChem CID 62882; ChEBI 8500; molecular weight 295.80). Label-derived pharmacokinetics apply to the anchored oral hydrochloride tablet context, not to every propranolol form or route.
+The dosage-form anchor is the current oral **propranolol hydrochloride tablet** label, DailyMed set `554c7446-8407-460e-b157-f860c5afbf12`, updated 2026-07-14. The label does not establish a release qualifier, so the record uses `TABLET` and does not infer immediate release. The molecular dossier distinguishes racemic free parent propranolol (PubChem CID 4946; ChEBI 8499; molecular weight 259.34) from propranolol hydrochloride (PubChem CID 62882; ChEBI 8500; molecular weight 295.80). Label-derived pharmacokinetics apply to the anchored oral hydrochloride tablet context, not to every propranolol form or route.
 
 Primary routes: [DailyMed set](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=554c7446-8407-460e-b157-f860c5afbf12), [PubChem parent](https://pubchem.ncbi.nlm.nih.gov/compound/4946), [PubChem hydrochloride](https://pubchem.ncbi.nlm.nih.gov/compound/62882), [ChEBI parent](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:8499), [ChEBI hydrochloride](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:8500).
 
@@ -39,7 +39,7 @@ Primary routes: [DailyMed set](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cf
 
 | Field | Evidence and bounded content | Status | Required review / hold |
 |---|---|---|---|
-| Identity; parent/salt/form | Parent and hydrochloride have separately resolvable records; oral IR HCl is the label anchor | Direct | Pharmaceutical-form reviewer confirms no parent/salt value mixing |
+| Identity; parent/salt/form | Parent and hydrochloride have separately resolvable records; the oral HCl tablet is the label anchor and no release type is inferred | Direct | Pharmaceutical-form reviewer confirms no parent/salt value mixing |
 | 2D / 3D | Standardised 2D record and PubChem-computed 3D conformer | Direct with computed qualifier | 3D cannot be labelled experimental or racemate-complete |
 | Functional groups / scaffold | Naphthalene, aryl ether, secondary alcohol and secondary amine; aryloxypropanolamine scaffold | Structure-derived | Medicinal-chemistry reviewer |
 | Stereochemistry | One stereogenic centre; marketed evidence anchor is an R/S racemate | Direct + derived | Configuration wording and structure mapping require review |
@@ -47,11 +47,11 @@ Primary routes: [DailyMed set](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cf
 | Primary targets / action | ADRB1 (UniProt P08588, ChEMBL 213) and ADRB2 (P07550, ChEMBL 210); competitive antagonist | Direct | Target curator; do not imply these are the only molecular interactions |
 | Mechanism | Competes at beta-adrenergic receptor sites; the label says the mechanism of the antihypertensive effect is not established | Direct | Preserve the label's uncertainty; no invented downstream certainty |
 | Drug journey | Oral dose → absorption → first-pass metabolism → systemic circulation → beta-receptor engagement → hepatic metabolism → renal/fecal elimination narrative | Direct + educational synthesis | Clinical-pharmacology review; not treatment guidance |
-| Route-specific ADME | Nearly complete absorption; first pass leaves about 25% systemic; `Tmax` 1–4 h; about 90% protein bound; apparent distribution about 4 L/kg; plasma half-life 3–6 h; protein-rich food raises bioavailability by about 50% | Direct, oral IR context | Conditions shown beside every value; healthy-adult oral clearance remains `null` |
+| Route-specific ADME | Nearly complete absorption; first pass leaves about 25% systemic; `Tmax` 1–4 h; about 90% protein bound; apparent distribution about 4 L/kg; plasma half-life 3–6 h; protein-rich food raises bioavailability by about 50% | Direct, oral HCl-tablet context; release type unassigned | Conditions shown beside every value; healthy-adult oral clearance remains `null` |
 | Metabolism / enzymes | Aromatic hydroxylation, N-dealkylation/side-chain oxidation and direct glucuronidation; CYP2D6, CYP1A2 and CYP2C19/P-gp contexts retained exactly as source-qualified | Direct | Enzyme/pathway reviewer; avoid turning minor or interaction context into a universal rank |
-| Metabolites | 4-hydroxypropranolol (CID 91565), naphthoxylactic acid (CID 115274), propranolol glucuronide (CID 119515) | Direct identity + label pathway | Conjugate position and stereochemical identity remain on hold unless directly resolved |
+| Metabolites | 4-hydroxypropranolol (CID 91565), naphthoxylactic acid (CID 115274), propranolol glucuronide (CID 119515); PMID 4400184 directly supports preclinical beta-adrenoceptor-blocking activity for 4-hydroxypropranolol | Direct identity + label pathway + preclinical animal pharmacology | Naphthoxylactic-acid and glucuronide activity remain explicit unknowns; conjugate position and stereochemical identity remain on hold unless directly resolved |
 | Synthesis | GB2238786A-reported sequence: 1-naphthol + epichlorohydrin → glycidyl ether/epoxide → isopropylamine ring opening → free base → HCl salt; EP0249610B1 may support a separately labelled chiral route | Patent-reported | Original redrawing and chemistry review; no quantities, operational protocol or manufacturing claim |
-| Nomenclature | `propan-2-ol` parent; `1-(propan-2-ylamino)` and `3-(naphthalen-1-yloxy)` substituent logic; alcohol suffix | Source-backed interpretation | IUPAC-capable reviewer validates locants, ordering and stereo treatment |
+| Nomenclature | `propan-2-ol` parent; `3-(propan-2-ylamino)` and `1-(naphthalen-1-yloxy)` substituent logic; alcohol suffix | Source-backed interpretation | IUPAC-capable reviewer validates locants, ordering and stereo treatment |
 | SAR / comparison | Metoprolol (CID 4171) and atenolol (CID 2249) can support scaffold/action comparison | Source-backed comparison | No unsupported “better”, efficacy or safety rank; route/form contexts remain visible |
 | Learning | Identify groups/scaffold; distinguish parent/HCl; map antagonism; order epoxide-opening steps; build the systematic name | Derived from reviewed claims | Learning copy cannot become additional scientific claims |
 | TR / EN | English source-backed draft feasible; Turkish guided and Reference copy feasible | Review required | EN scientific review, then TR scientific-language review; untranslated enum/source locators stay Reviewer-only |
@@ -87,12 +87,12 @@ Primary routes: [FDA label](https://www.accessdata.fda.gov/drugsatfda_docs/label
 | Primary target / action | PTGS2/COX-2 (UniProt P35354; ChEMBL 230), inhibitor | Direct | Must not say “COX-2 only”; interaction breadth and in-vivo selectivity need context |
 | Mechanism | Primarily inhibits COX-2 and thereby prostaglandin synthesis in the supported label context | Direct | Avoid universal or clinical-superiority conclusions |
 | Drug journey | Oral capsule → dissolution/absorption → systemic distribution → COX-2 engagement → oxidative metabolism → urinary/fecal excretion | Direct + educational synthesis | Clinical-pharmacology review |
-| Route-specific ADME | Single 200 mg fasted oral capsule, healthy adults (`n=36`, age 19–52): Cmax 705 ng/mL, Tmax 2.8 h, effective half-life 11.2 h, Vss/F 429 L and CL/F 27.7 L, each with its source %CV; about 97% protein bound; high-fat meal delays Tmax 1–2 h and increases AUC 10–20% | Direct, condition-bound | Show dose, fed state, cohort and %CV; absolute bioavailability was not studied and stays `null` |
+| Route-specific ADME | Single 200 mg fasted oral capsule, healthy adults (`n=36`, age 19–52): Cmax 705 ng/mL, Tmax 2.8 h, effective half-life 11.2 h, Vss/F 429 L and CL/F 27.7 L/h, each with its source %CV; about 97% protein bound; high-fat meal delays Tmax 1–2 h and increases AUC 10–20% | Direct, condition-bound | Show dose, fed state, cohort and %CV; absolute bioavailability was not studied and stays `null` |
 | Metabolism / enzymes | Primarily CYP2C9; alcohol → carboxylic acid → glucuronide pathway | Direct | Interaction/genotype language is not generalized beyond source context |
 | Metabolites | Hydroxycelecoxib/alcohol (CID 9908776), carboxycelecoxib (CID 10047220); label says the three circulating primary metabolites are inactive as COX-1/COX-2 inhibitors | Direct identity + label | Glucuronide CID 10415951 versus 169502284 remains hold; CID 131770042 is excluded as a wrong mapping |
 | Synthesis | US5466823A example: p-methylacetophenone + ethyl trifluoroacetate/NaOMe → trifluorinated 1,3-diketone; condensation with 4-sulfamoylphenylhydrazine HCl → pyrazole | Patent-reported | Independently redraw; chemistry review; no laboratory protocol or practical-yield claim |
 | Nomenclature | Pyrazole parent numbering, N-aryl attachment, para-sulfonamide, 4-methylphenyl and CF3 locants | Source-backed interpretation | IUPAC-capable reviewer validates locants and linked highlighting |
-| SAR / comparison | Valdecoxib (CID 119607; NDA 21-341) and rofecoxib (CID 5090; NDA 21-042) provide historical structural/action context | Direct identity + regulatory context | Withdrawal/history must remain visible; no “better” ranking |
+| SAR / comparison | Valdecoxib (CID 119607; NDA 21-341) and rofecoxib (CID 5090; NDA 21-042) provide historical structural/action context | Direct PubChem identity + archived FDA mechanism labels + formal Federal Register withdrawal notices (FR Doc. 2013-18657 and 2022-19740) | Both labels support the same COX-2 action class; formal withdrawal/history remains visible and no distinct action difference or “better” ranking is inferred |
 | Learning | Mark diarylpyrazole/sulfonamide/CF3; distinguish NSAID, inhibitor family and scaffold; bind assay context; order diketone-to-pyrazole steps; nomenclature locants | Derived from reviewed claims | Learning answer keys require review |
 | TR / EN | English source-backed draft feasible; Turkish copy feasible | Review required | EN scientific review then TR terminology review; stale-label status visible in both locales |
 
@@ -103,7 +103,7 @@ The optional Reference activity is [ChEMBL activity 1192793](https://www.ebi.ac.
 - Absolute oral bioavailability: **not studied in the anchor label — leave `null`**.
 - Celecoxib glucuronide structure: **hold** until one CID is directly resolved by a chemical reviewer; exclude CID 131770042.
 - DailyMed/openFDA 2021 record: **stale secondary evidence**, never silently substituted for the 2024 FDA label.
-- Valdecoxib/rofecoxib comparison: **historical context only**, with regulatory status; no class ranking.
+- Valdecoxib/rofecoxib comparison: archived FDA labels support the same COX-2 target/action class; this is **historical context only**, with withdrawal status visible and no class ranking.
 
 ## Omeprazole
 
@@ -133,7 +133,7 @@ Primary routes: [DailyMed set](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?
 | Activation products | Sulfenic acid/sulfenamide identities support mechanism context | Partial | Candidate structures CID 5311467 and CID 130512 require expert identity review; no public structure animation before approval |
 | Synthesis | Reported sequence: substituted 2-mercaptobenzimidazole + chloromethylpyridine → sulfide → controlled oxidation to sulfoxide, supported by EP0005129A1 and omeprazole-specific US5386032A | Patent-reported | Original redrawing; chemistry review; no operating parameters or manufacturing claim |
 | Nomenclature | Source forms differ: label `5-methoxy`, PubChem computed `6-methoxy`, ChEBI racemic `rac-5` context | Direct conflict, exposed | Store each exact source/status; do not silently select a winner; nomenclature reviewer required |
-| SAR / comparison | Esomeprazole (CID 9568614), lansoprazole (CID 3883) and pantoprazole (CID 4679) support bounded structure/family comparison | Direct identity + source-backed comparison | No unsupported efficacy, safety or “better” ranking |
+| SAR / comparison | Esomeprazole (CID 9568614), lansoprazole (CID 3883) and pantoprazole (CID 4679) support bounded structure/family comparison | Direct PubChem identity + direct DailyMed mechanism labels | Same gastric H+/K+-ATPase target/action class is shown; no distinct action difference, efficacy, safety or “better” ranking is inferred |
 | Learning | Mark stereogenic sulfur; trace enteric journey/acid activation; distinguish sulfide and sulfoxide; order synthesis stages; investigate the source-dependent methoxy locant | Derived from reviewed claims | Answer keys disclose the nomenclature conflict and computed-3D limitation |
 | TR / EN | English source-backed draft feasible; Turkish Student and Reference copy feasible | Review required | EN scientific/mechanism review, then TR domain-language review |
 

@@ -17,6 +17,45 @@ export type MetaboliteSourceResolver = (
 
 const metaboliteEvidenceScope = /metabolite|metaboli|biotransformation|enzyme/i;
 
+const isSourcePresentableStatus = (
+  status: EvidenceField<unknown>["reviewStatus"],
+): boolean => isReviewedStatus(status) || status === "source-supported";
+
+const resolvedNodeProvenance = (
+  sourceId: SourceId,
+  resolveSource: MetaboliteSourceResolver,
+): MetaboliteNode["provenance"] => {
+  const source = resolveSource(sourceId);
+  if (!source?.url || !isSourcePresentableStatus(source.verification.status)) {
+    return null;
+  }
+  return {
+    sourceId,
+    provider: source.provider,
+    title: source.title,
+    externalId: source.externalId,
+    url: source.url,
+  };
+};
+
+const presentableStructure = (
+  node: MetaboliteNode,
+  resolveSource: MetaboliteSourceResolver,
+): MetaboliteNode["structure2dSmiles"] => {
+  const structure = node.structure2dSmiles;
+  if (
+    !structure ||
+    !hasCompleteEvidenceField(structure) ||
+    !isSourcePresentableStatus(structure.reviewStatus)
+  ) {
+    return null;
+  }
+  const source = resolveSource(structure.sourceId);
+  return source?.url && isSourcePresentableStatus(source.verification.status)
+    ? structure
+    : null;
+};
+
 export function canPresentMetaboliteEdge(
   edge: MetaboliteEdge,
   resolveSource: MetaboliteSourceResolver,
@@ -26,8 +65,8 @@ export function canPresentMetaboliteEdge(
     edge.activity,
     ...(edge.enzyme ? [edge.enzyme] : []),
   ];
-  if (!isReviewedStatus(edge.reviewStatus)) return false;
-  if (!fields.every((field) => hasCompleteEvidenceField(field) && isReviewedStatus(field.reviewStatus))) {
+  if (!isSourcePresentableStatus(edge.reviewStatus)) return false;
+  if (!fields.every((field) => hasCompleteEvidenceField(field) && isSourcePresentableStatus(field.reviewStatus))) {
     return false;
   }
   if (
@@ -49,7 +88,7 @@ export function canPresentMetaboliteEdge(
     const source = resolveSource(sourceId);
     return Boolean(
       source?.url &&
-      isReviewedStatus(source.verification.status) &&
+      isSourcePresentableStatus(source.verification.status) &&
       metaboliteEvidenceScope.test(source.scope),
     );
   });
@@ -68,25 +107,51 @@ export function createMetaboliteGraph(
     moleculeId,
     label: parentLabel,
     role: "parent",
+    structure2dSmiles: null,
+    provenance: resolvedNodeProvenance(parentLabel.sourceId, resolveSource),
     structure2dPath: null,
     structure3dPath: null,
   };
   const acceptedEdges = edges.filter((edge) => canPresentMetaboliteEdge(edge, resolveSource));
   const acceptedNodeIds = new Set(acceptedEdges.map((edge) => edge.metaboliteNodeId));
-  const acceptedNodes = nodes.filter((node) =>
-    acceptedNodeIds.has(node.id) &&
-    hasCompleteEvidenceField(node.label) &&
-    isReviewedStatus(node.label.reviewStatus) &&
-    Boolean(resolveSource(node.label.sourceId)?.url));
+  const acceptedNodes = nodes
+    .filter((node) =>
+      acceptedNodeIds.has(node.id) &&
+      hasCompleteEvidenceField(node.label) &&
+      isSourcePresentableStatus(node.label.reviewStatus) &&
+      Boolean(resolveSource(node.label.sourceId)?.url))
+    .map((node) => {
+      const structure2dSmiles = presentableStructure(node, resolveSource);
+      return {
+        ...node,
+        structure2dSmiles,
+        provenance: resolvedNodeProvenance(
+          structure2dSmiles?.sourceId ?? node.label.sourceId,
+          resolveSource,
+        ),
+      };
+    });
 
   const acceptedEdgesWithNodes = acceptedEdges.filter((edge) =>
     acceptedNodes.some((node) => node.id === edge.metaboliteNodeId));
+  const allAcceptedEvidenceReviewed =
+    acceptedEdgesWithNodes.length > 0 &&
+    acceptedEdgesWithNodes.every((edge) =>
+      isReviewedStatus(edge.reviewStatus) &&
+      isReviewedStatus(edge.transformationClass.reviewStatus) &&
+      isReviewedStatus(edge.activity.reviewStatus) &&
+      (!edge.enzyme || isReviewedStatus(edge.enzyme.reviewStatus))) &&
+    acceptedNodes.every((node) => isReviewedStatus(node.label.reviewStatus));
 
   return {
     moleculeId,
     nodes: [parentNode, ...acceptedNodes],
     edges: acceptedEdgesWithNodes,
-    availability: acceptedEdgesWithNodes.length > 0 ? "reviewed" : "unavailable",
+    availability: acceptedEdgesWithNodes.length > 0
+      ? allAcceptedEvidenceReviewed
+        ? "reviewed"
+        : "source-supported"
+      : "unavailable",
     unavailableReason: acceptedEdgesWithNodes.length > 0
       ? null
       : locale === "tr"

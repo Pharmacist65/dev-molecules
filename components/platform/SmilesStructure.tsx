@@ -8,12 +8,15 @@ export interface SmilesAtomAnchor {
 }
 
 const EMPTY_ATOM_ANCHORS: readonly SmilesAtomAnchor[] = [];
+const EMPTY_ATOM_INDEXES: readonly number[] = [];
 
 interface SmilesStructureProps {
   readonly smiles: string;
   readonly label: string;
   readonly className?: string;
   readonly atomAnchors?: readonly SmilesAtomAnchor[];
+  /** Zero-based SMILES traversal atoms to mark in the rendered 2D structure. */
+  readonly highlightedAtomIndexes?: readonly number[];
   readonly onDrawReady?: () => void;
 }
 
@@ -22,16 +25,22 @@ export function SmilesStructure({
   label,
   className,
   atomAnchors = EMPTY_ATOM_ANCHORS,
+  highlightedAtomIndexes = EMPTY_ATOM_INDEXES,
   onDrawReady,
 }: SmilesStructureProps) {
   const reactId = useId();
   const svgRef = useRef<SVGSVGElement>(null);
   const onDrawReadyRef = useRef(onDrawReady);
   const atomAnchorsRef = useRef(atomAnchors);
+  const highlightedAtomIndexesRef = useRef(highlightedAtomIndexes);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const anchorSignature = useMemo(
     () => atomAnchors.map((anchor) => `${anchor.id}:${anchor.atomIndex}`).join("|"),
     [atomAnchors],
+  );
+  const highlightSignature = useMemo(
+    () => [...new Set(highlightedAtomIndexes)].sort((left, right) => left - right).join("|"),
+    [highlightedAtomIndexes],
   );
 
   useEffect(() => {
@@ -41,6 +50,10 @@ export function SmilesStructure({
   useEffect(() => {
     atomAnchorsRef.current = atomAnchors;
   }, [atomAnchors]);
+
+  useEffect(() => {
+    highlightedAtomIndexesRef.current = highlightedAtomIndexes;
+  }, [highlightedAtomIndexes]);
 
   useEffect(() => {
     let cancelled = false;
@@ -81,6 +94,41 @@ export function SmilesStructure({
                 };
               }
             ).preprocessor?.graph;
+            const highlightLayer = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "g",
+            );
+            highlightLayer.setAttribute("aria-hidden", "true");
+            highlightLayer.setAttribute("data-smiles-highlight-layer", "true");
+            for (const atomIndex of [...new Set(highlightedAtomIndexesRef.current)]) {
+              const position = graph?.vertices?.[atomIndex]?.position;
+              if (!Number.isFinite(position?.x) || !Number.isFinite(position?.y)) {
+                continue;
+              }
+              const marker = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle",
+              );
+              marker.setAttribute("cx", String(position?.x));
+              marker.setAttribute("cy", String(position?.y));
+              marker.setAttribute("r", "10");
+              marker.setAttribute("pointer-events", "none");
+              marker.setAttribute("data-smiles-atom-highlight", String(atomIndex));
+              highlightLayer.appendChild(marker);
+
+              const atomLabel = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text",
+              );
+              atomLabel.setAttribute("x", String((position?.x ?? 0) + 8));
+              atomLabel.setAttribute("y", String((position?.y ?? 0) - 8));
+              atomLabel.setAttribute("pointer-events", "none");
+              atomLabel.setAttribute("data-smiles-atom-highlight-label", String(atomIndex));
+              atomLabel.textContent = `A${atomIndex + 1}`;
+              highlightLayer.appendChild(atomLabel);
+            }
+            svgRef.current.appendChild(highlightLayer);
+
             const anchorLayer = document.createElementNS(
               "http://www.w3.org/2000/svg",
               "g",
@@ -121,7 +169,7 @@ export function SmilesStructure({
       cancelled = true;
       svg.replaceChildren();
     };
-  }, [anchorSignature, smiles]);
+  }, [anchorSignature, highlightSignature, smiles]);
 
   return (
     <figure

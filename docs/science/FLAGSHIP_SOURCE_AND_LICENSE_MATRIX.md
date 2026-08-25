@@ -40,11 +40,11 @@ ChEMBL's live interface reported release 37, updated 2026-05-01, at assessment t
 
 ## Propranolol claim routes
 
-**Anchored form/route:** racemic propranolol parent for molecular identity; oral immediate-release propranolol hydrochloride tablet for label-derived journey/ADME.
+**Anchored form/route:** racemic propranolol parent for molecular identity; oral propranolol hydrochloride tablet for label-derived journey/ADME. The exact label does not establish a release qualifier, so none is inferred.
 
 | Claim group | Direct source route and record | Reuse | Public-data decision |
 |---|---|---|---|
-| Current oral IR HCl label, mechanism, PK, metabolism | [DailyMed set 554c7446-8407-460e-b157-f860c5afbf12](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=554c7446-8407-460e-b157-f860c5afbf12); [openFDA exact-set JSON](https://api.fda.gov/drug/label.json?search=openfda.spl_set_id:%22554c7446-8407-460e-b157-f860c5afbf12%22&limit=1), label effective/update 2026-07-14 | openFDA green; DailyMed amber | Normalised, paraphrased form/route-specific fields; retain set/effective date. No brand/package assets. |
+| Current oral HCl tablet label, mechanism, PK, metabolism | [DailyMed set 554c7446-8407-460e-b157-f860c5afbf12](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=554c7446-8407-460e-b157-f860c5afbf12); [openFDA exact-set JSON](https://api.fda.gov/drug/label.json?search=openfda.spl_set_id:%22554c7446-8407-460e-b157-f860c5afbf12%22&limit=1), label effective/update 2026-07-14 | openFDA green; DailyMed amber | Normalised, paraphrased form/route-specific fields; retain set/effective date. No brand/package assets. No release qualifier is inferred. |
 | Parent identity/connectivity | [PubChem CID 4946](https://pubchem.ncbi.nlm.nih.gov/compound/4946); [ChEBI 8499](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:8499) | PubChem amber; ChEBI green | Store separately attributed identity fields. |
 | Hydrochloride identity/form relation | [PubChem CID 62882](https://pubchem.ncbi.nlm.nih.gov/compound/62882); [ChEBI 8500](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:8500) | PubChem amber; ChEBI green | Separate entity; never overwrite parent formula/MW or attach parent 3D as the salt. |
 | 2D / computed 3D | [PubChem CID 4946 PUG record](https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4946/record/JSON) | Amber | Cache provenance-qualified 2D/3D records; label 3D `computed`; validate CID/InChIKey. |
@@ -54,6 +54,7 @@ ChEMBL's live interface reported release 37, updated 2026-05-01, at assessment t
 | ADRB2 condition-bound assay | [activity 18377937](https://www.ebi.ac.uk/chembl/api/data/activity/18377937.json); [assay CHEMBL4145115](https://www.ebi.ac.uk/chembl/api/data/assay/CHEMBL4145115.json) | Amber/share-alike | Optional Reference view only: Kᵢ 1.738 nM, pKᵢ 8.76 with full assay context; no universal selectivity claim. |
 | DrugCentral cross-reference | [DrugCentral card 2303](https://drugcentral.org/drugcard/2303) | Amber/share-alike | Cross-check only; keep snapshot distinction and exclude WOMBAT-PK potency. |
 | 4-hydroxypropranolol identity | [PubChem CID 91565](https://pubchem.ncbi.nlm.nih.gov/compound/91565) | Amber | Structure may be used after identity reviewer confirms mapping to the label claim. |
+| 4-hydroxypropranolol activity | [Fitzgerald & O'Donnell 1971, PMID 4400184 / PMCID PMC1665931](https://pubmed.ncbi.nlm.nih.gov/4400184/) | Bibliographic facts green; article rights unknown | Present beta-adrenoceptor-blocking activity only as direct preclinical animal evidence; do not turn it into a human clinical-effect claim. |
 | Naphthoxylactic-acid identity | [PubChem CID 115274](https://pubchem.ncbi.nlm.nih.gov/compound/115274) | Amber | Same; source-linked node only. |
 | Propranolol-glucuronide identity | [PubChem CID 119515](https://pubchem.ncbi.nlm.nih.gov/compound/119515) | Amber | **Hold structure-level specificity** for conjugation-position/stereo review; text label may remain bounded. |
 | Reported racemic synthesis | [GB2238786A](https://patents.google.com/patent/GB2238786A/en) | Amber | Paraphrased route and independent reaction redraw only; not a protocol. |
@@ -83,8 +84,8 @@ ChEMBL's live interface reported release 37, updated 2026-05-01, at assessment t
 | Carboxycelecoxib identity | [PubChem CID 10047220](https://pubchem.ncbi.nlm.nih.gov/compound/10047220) | Amber | Reviewer-confirmed metabolite node. |
 | Glucuronide identity candidates | [PubChem CID 10415951](https://pubchem.ncbi.nlm.nih.gov/compound/10415951); [CID 169502284](https://pubchem.ncbi.nlm.nih.gov/compound/169502284) | Amber | **Hold both** until a reviewer resolves the conjugate identity. Exclude CID 131770042 as an incorrect mapping. |
 | Reported synthesis | [US5466823A](https://patents.google.com/patent/US5466823A/en) | Amber | Paraphrased example and independently redrawn intermediates/bond changes; no protocol. |
-| Valdecoxib comparator | [PubChem CID 119607](https://pubchem.ncbi.nlm.nih.gov/compound/119607); [Drugs@FDA NDA 021341](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021341) | PubChem amber; FDA facts green | Historical/withdrawn regulatory context remains visible; no class rank. |
-| Rofecoxib comparator | [PubChem CID 5090](https://pubchem.ncbi.nlm.nih.gov/compound/5090); [Drugs@FDA NDA 021042](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021042) | PubChem amber; FDA facts green | Same boundary. |
+| Valdecoxib comparator | [PubChem CID 119607](https://pubchem.ncbi.nlm.nih.gov/compound/119607); [Drugs@FDA NDA 021341](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021341); [Federal Register withdrawal notice, FR Doc. 2013-18657](https://www.govinfo.gov/content/pkg/FR-2013-08-02/pdf/2013-18657.pdf) | PubChem amber; FDA/GovInfo facts green | Drugs@FDA supplies the application/discontinued-status context; the Federal Register notice directly supports formal approval withdrawal. No class rank. |
+| Rofecoxib comparator | [PubChem CID 5090](https://pubchem.ncbi.nlm.nih.gov/compound/5090); [Drugs@FDA NDA 021042](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021042); [Federal Register withdrawal notice, FR Doc. 2022-19740](https://www.govinfo.gov/content/pkg/FR-2022-09-13/pdf/2022-19740.pdf) | PubChem amber; FDA/GovInfo facts green | Same boundary: formal approval withdrawal resolves only through the direct Federal Register notice. |
 
 **Celecoxib holds:** absolute oral bioavailability stays `null`; glucuronide CID stays unresolved; stale DailyMed/openFDA claims cannot outrank the 2024 FDA label; assay values do not become clinical selectivity; withdrawn comparators cannot support superiority claims.
 
@@ -131,7 +132,7 @@ Every import record must retain at least `source_id`, `direct_url`, `record_or_r
 
 ## Final implementation decision
 
-- **Propranolol: GO**, with oral IR hydrochloride context, clearance and conjugate/stereo holds.
+- **Propranolol: GO**, with oral hydrochloride tablet context, clearance and conjugate/stereo holds; release type remains unassigned.
 - **Celecoxib: GO**, with the 2024 FDA label as authority, absolute-bioavailability and glucuronide holds, and stale DailyMed evidence visibly secondary.
 - **Omeprazole: GO**, with delayed-release capsule context, activation/nomenclature review gates and no volume-of-distribution estimate.
 - **Fallback: not activated.** None of the three candidates fails the required chain. Declared gaps remain gaps instead of being filled from a weaker, restricted or differently scoped source.
