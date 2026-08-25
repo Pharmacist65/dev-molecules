@@ -6,6 +6,11 @@ import {
   watchRuntime,
 } from "./explore-helpers";
 
+const longAcceptanceTimeout =
+  process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer"
+    ? 180_000
+    : 60_000;
+
 async function openAcademy(page: Page) {
   await page.addInitScript(() => {
     window.localStorage.setItem("dev-molecules:locale", "tr");
@@ -37,6 +42,7 @@ async function expectCorrect(page: Page) {
 }
 
 test("Academy widgets manipulate real structures and curated scoring paths", async ({ page }) => {
+  test.setTimeout(longAcceptanceTimeout);
   await page.setViewportSize({ width: 1440, height: 900 });
   const telemetry = watchRuntime(page);
   await openAcademy(page);

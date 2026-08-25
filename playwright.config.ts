@@ -11,6 +11,7 @@ const usesSharedSoftwareRenderer =
   process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer";
 const testTimeout = usesSharedSoftwareRenderer ? 120_000 : 60_000;
 const assertionTimeout = usesSharedSoftwareRenderer ? 30_000 : 12_000;
+const actionTimeout = usesSharedSoftwareRenderer ? 45_000 : 0;
 const chromiumLaunchArgs = usesSharedSoftwareRenderer
   ? [
       "--enable-webgl",
@@ -44,6 +45,7 @@ export default defineConfig({
     contextOptions: {
       reducedMotion: "reduce",
     },
+    actionTimeout,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
     video: "off",

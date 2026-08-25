@@ -809,23 +809,55 @@ export function MoleculeUniverse({
     if (level !== "universe" && level !== "focus") return undefined;
     const stage = exploreStageRef.current;
     if (!stage) return undefined;
+    let disposed = false;
+    let firstFrame = 0;
+    let secondFrame = 0;
     const updateFirstViewportHeight = () => {
       if (stage.dataset.level !== "universe" && stage.dataset.level !== "focus") return;
       const top = Math.max(0, stage.getBoundingClientRect().top);
-      const available = Math.max(128, Math.floor(window.innerHeight - top - 1));
+      // Never make the stage taller than the physical space that remains. The
+      // former 128px floor overflowed by a few pixels on Linux at the supported
+      // 1440x900 / 150% zoom equivalent, where font metrics move the stage top.
+      const available = Math.max(1, Math.floor(window.innerHeight - top - 1));
       setSceneFirstViewportHeight((current) => current === available ? current : available);
+    };
+    const scheduleFirstViewportHeightUpdate = () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+      firstFrame = window.requestAnimationFrame(() => {
+        if (disposed) return;
+        updateFirstViewportHeight();
+        secondFrame = window.requestAnimationFrame(() => {
+          if (!disposed) updateFirstViewportHeight();
+        });
+      });
     };
     const observer = new ResizeObserver(([entry]) => {
       if (stage.dataset.level !== "universe" && stage.dataset.level !== "focus") return;
       if (!entry?.contentRect) return;
-      updateFirstViewportHeight();
+      scheduleFirstViewportHeightUpdate();
     });
     observer.observe(stage);
     updateFirstViewportHeight();
-    window.addEventListener("resize", updateFirstViewportHeight);
+    scheduleFirstViewportHeightUpdate();
+    window.addEventListener("resize", scheduleFirstViewportHeightUpdate);
+    window.visualViewport?.addEventListener(
+      "resize",
+      scheduleFirstViewportHeightUpdate,
+    );
+    void document.fonts.ready.then(() => {
+      if (!disposed) scheduleFirstViewportHeightUpdate();
+    });
     return () => {
+      disposed = true;
       observer.disconnect();
-      window.removeEventListener("resize", updateFirstViewportHeight);
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+      window.removeEventListener("resize", scheduleFirstViewportHeightUpdate);
+      window.visualViewport?.removeEventListener(
+        "resize",
+        scheduleFirstViewportHeightUpdate,
+      );
     };
   }, [level]);
 

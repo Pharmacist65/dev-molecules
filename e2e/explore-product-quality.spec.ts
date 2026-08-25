@@ -646,6 +646,27 @@ test.describe("Explore product-quality acceptance", () => {
           .toBeGreaterThan(fitCountBeforeResize);
       }
       await expect(scene).toHaveAttribute("data-scene-status", /^(?:ready|partial)$/);
+      await expect
+        .poll(
+          async () => {
+            const box = await exploreCanvas(page).boundingBox();
+            const viewportHeight = await page.evaluate(() => window.innerHeight);
+            return {
+              hasCanvas: box !== null,
+              startsInViewport: box !== null && box.y >= 0 && box.y < viewportHeight,
+              endsInViewport:
+                box !== null && box.y + box.height <= viewportHeight + 1,
+            };
+          },
+          {
+            message: `${qualityCase.name} must settle the complete fitted 3D canvas inside the first viewport`,
+          },
+        )
+        .toEqual({
+          hasCanvas: true,
+          startsInViewport: true,
+          endsInViewport: true,
+        });
       const overflow = await measureHorizontalOverflow(page);
       const spatialQuality = await measureClusterSpatialQuality(page);
       const canvasBox = await exploreCanvas(page).boundingBox();

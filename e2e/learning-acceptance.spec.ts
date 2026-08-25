@@ -9,6 +9,10 @@ import {
 const localeRoot = (page: Page) => page.locator("[data-locale]").first();
 const synthesisRoot = (page: Page) => page.locator("[data-synthesis-atlas]").first();
 const academyRoot = (page: Page) => page.getByTestId("nomenclature-academy");
+const longAcceptanceTimeout =
+  process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer"
+    ? 180_000
+    : 60_000;
 
 test.use({ locale: "tr-TR" });
 
@@ -29,7 +33,9 @@ async function openLearn(page: Page) {
 }
 
 async function switchToEnglish(page: Page) {
-  await page.getByRole("button", { name: "Dili İngilizce yap", exact: true }).click();
+  if (await localeRoot(page).getAttribute("data-locale") !== "en") {
+    await page.getByRole("button", { name: "Dili İngilizce yap", exact: true }).click();
+  }
   await expect(localeRoot(page)).toHaveAttribute("data-locale", "en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
 }
@@ -117,6 +123,7 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
 test("Synthesis Atlas exposes three molecules and the six-step reported Carvedilol route", async ({
   page,
 }) => {
+  test.setTimeout(longAcceptanceTimeout);
   await page.setViewportSize({ width: 1920, height: 1080 });
   const telemetry = watchRuntime(page);
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
