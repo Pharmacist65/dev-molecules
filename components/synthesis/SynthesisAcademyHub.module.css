@@ -766,3 +766,304 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* MOLEVREN Phase A — the curriculum keeps its evidence boundaries while the
+   public surface reads as a premium learning environment. */
+.hub {
+  --synthesis-ink: var(--color-text-on-ivory);
+  --synthesis-muted: var(--color-text-muted-on-ivory);
+  --synthesis-paper: var(--surface-ivory);
+  --synthesis-surface: var(--surface-paper);
+  --synthesis-line: var(--border-color-on-ivory);
+  --synthesis-accent: var(--color-metallic-orange);
+  width: min(100%, 1560px);
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-2xl);
+  background: var(--gradient-midnight-stage);
+  box-shadow: var(--shadow-floating), var(--shadow-inset-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-body);
+}
+
+.hero {
+  min-height: min(650px, 72vh);
+  background:
+    radial-gradient(circle at 78% 28%, color-mix(in srgb, var(--color-metallic-orange) 18%, transparent), transparent 22rem),
+    radial-gradient(circle at 74% 50%, color-mix(in srgb, var(--color-knowledge-cobalt) 20%, transparent), transparent 34rem),
+    var(--gradient-parliament-depth);
+  color: var(--color-text-on-dark);
+}
+
+.hero::before,
+.hero::after {
+  border-color: var(--border-color-on-dark);
+}
+
+.backButton,
+.hero p {
+  color: var(--color-text-muted-on-dark);
+}
+
+.boundary {
+  color: var(--color-text-faint-on-dark);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-ui-label);
+}
+
+.eyebrow,
+.sectionLabel,
+.hero .eyebrow {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-ui-label);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.hero h1,
+.coverageIntro h2,
+.sectionHeader h2,
+.readinessRail h2,
+.labHeader h2,
+.flagshipIdentity strong,
+.targetDial strong,
+.viewTabs strong {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6.8vw, 7rem);
+  line-height: 0.94;
+}
+
+.targetDial {
+  border-color: var(--border-color-on-dark-strong);
+  background: var(--surface-glass-dark);
+  box-shadow: var(--shadow-panel), var(--shadow-inset-highlight);
+}
+
+.targetDial strong {
+  color: var(--color-orange-highlight);
+}
+
+.targetDial > span,
+.targetDial small {
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-ui-label);
+}
+
+.viewTabs {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-reading);
+}
+
+.viewTabs button {
+  min-height: 98px;
+  border-color: var(--border-color-on-ivory);
+  color: var(--color-text-muted-on-ivory);
+  transition:
+    background var(--motion-duration-ui) var(--motion-ease-standard),
+    color var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.viewTabs button[aria-selected="true"] {
+  background: color-mix(in srgb, var(--color-metallic-orange) 6%, var(--surface-paper));
+  color: var(--color-deep-navy);
+  box-shadow: inset 0 -3px var(--color-metallic-orange);
+}
+
+.viewTabs span,
+.coverageIntro p,
+.sectionHeader p,
+.labHeader p {
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
+}
+
+.curriculumPanel {
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+}
+
+.coverageIntro,
+.flagshipSection,
+.readinessRail > section {
+  border-color: var(--border-color-on-ivory);
+}
+
+.coverageIntro h2,
+.sectionHeader h2,
+.readinessRail h2 {
+  color: var(--color-text-on-ivory);
+}
+
+.coverageIntro p,
+.sectionHeader p,
+.criteriaList p,
+.sourcePolicy dd {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.metrics {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-subtle);
+}
+
+.metrics div,
+.flagshipList,
+.flagshipList > li,
+.entryMetrics div,
+.criteriaList,
+.criteriaList li {
+  border-color: var(--border-color-on-ivory);
+}
+
+.metrics dt,
+.entryMetrics dt,
+.criteriaList li > div span,
+.criteriaList output small,
+.slot,
+.pendingStatus {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-ui-label);
+}
+
+.metrics dd,
+.criteriaList li[data-state="in-progress"] output {
+  color: var(--color-deep-copper);
+}
+
+.flagshipList > li {
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-md);
+  transition:
+    background var(--motion-duration-ui) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-ui) var(--motion-ease-standard),
+    transform var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.flagshipList > li[data-status="curated-route-available"] {
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-subtle);
+}
+
+.flagshipList > li[data-status="curated-route-available"]:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-panel), inset 3px 0 var(--color-metallic-orange);
+}
+
+.flagshipIdentity span,
+.pendingStatus,
+.entryActions button,
+.criteriaList strong,
+.criteriaList p,
+.sourcePolicy dt,
+.sourcePolicy dd {
+  font-size: var(--font-size-ui-label);
+}
+
+.entryActions button,
+.labHeader button {
+  min-height: 44px;
+  border-color: var(--border-color-on-ivory-strong);
+  color: var(--color-parliament-blue);
+  font-size: var(--font-size-button);
+}
+
+.entryActions button:hover,
+.labHeader button:hover {
+  border-color: var(--color-metallic-orange);
+  color: var(--color-deep-copper);
+}
+
+.entryActions .primaryAction {
+  border-color: var(--color-parliament-blue);
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+}
+
+.sourcePolicy {
+  background: var(--surface-paper);
+}
+
+.sourcePolicy dl div {
+  border-color: var(--color-metallic-orange);
+}
+
+.reviewerLedger {
+  background: var(--surface-elevated);
+  color: var(--color-text-on-dark);
+}
+
+.reviewerLedger .sectionLabel,
+.reviewerLedger dd {
+  color: var(--color-orange-highlight);
+}
+
+.atlasPanel {
+  border-top: var(--border-subtle-dark);
+  background:
+    linear-gradient(var(--border-color-on-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color-on-dark) 1px, transparent 1px),
+    var(--gradient-midnight-stage);
+  background-size: 34px 34px, 34px 34px, auto;
+  color: var(--color-text-on-dark);
+}
+
+.atlasPanel .sectionLabel {
+  color: var(--color-orange-highlight);
+}
+
+.atlasPanel .labHeader h2 {
+  color: var(--color-text-on-dark);
+}
+
+.atlasPanel .labHeader p {
+  color: var(--color-text-muted-on-dark);
+}
+
+.atlasPanel .labHeader button {
+  border-color: var(--border-color-on-dark-strong);
+  color: var(--color-text-on-dark);
+}
+
+.loading {
+  border-color: var(--border-color-on-dark);
+  background: var(--surface-glass-dark-strong);
+  color: var(--color-text-muted-on-dark);
+}
+
+.hub button:focus-visible,
+.hub a:focus-visible,
+.hub summary:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (max-width: 760px) {
+  .hub {
+    border-radius: var(--radius-xl);
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroBody {
+    min-height: 540px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 13vw, 4.5rem);
+  }
+
+  .flagshipList > li {
+    padding-inline: var(--space-2);
+  }
+
+  .atlasPanel {
+    padding: var(--space-3);
+  }
+}

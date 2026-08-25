@@ -28,6 +28,8 @@ const copy = {
     eyebrow: "Molekül Oluşturucu · cihazda çalışır",
     title: "Gerçek 2B yapı çalışma alanı",
     body: "Bağımsız Ketcher, yapıyı bu tarayıcıda işler. Yalnız siz dışa aktarırsanız bir dosya oluşur; herkese açık sürüm özel bulut depolaması sunmaz.",
+    privacyLabel: "Cihazda kalır",
+    privacyBody: "Çizdiğiniz yapı bu cihazda işlenir; siz dışa aktarmadıkça uygulama dışına aktarılmaz.",
     loading: "Ketcher ve yerel kimya motoru yükleniyor…",
     inspect: "Yapıyı doğrula ve eşleştir",
     export: "Yerel proje dışa aktar",
@@ -46,6 +48,8 @@ const copy = {
     eyebrow: "Molecule Builder · runs on this device",
     title: "A real 2D structure workspace",
     body: "Ketcher standalone processes the structure in this browser. A file exists only when you export it; the public build provides no private cloud storage.",
+    privacyLabel: "Stays on this device",
+    privacyBody: "Your drawn structure is processed on this device and is not transferred out of the application unless you export it.",
     loading: "Loading Ketcher and the local chemistry engine…",
     inspect: "Validate and match structure",
     export: "Export local project",
@@ -145,6 +149,14 @@ export function KetcherWorkspace({ locale }: { readonly locale: "tr" | "en" }) {
         </span>
       </header>
 
+      <aside className={styles.privacyBoundary} aria-label={t.privacyLabel}>
+        <span aria-hidden="true">⌁</span>
+        <div>
+          <strong>{t.privacyLabel}</strong>
+          <p>{t.privacyBody}</p>
+        </div>
+      </aside>
+
       <Suspense fallback={<div className={styles.editorLoading}>{t.loading}</div>}>
         <KetcherEditorSurface
           ref={editorRef}
@@ -156,13 +168,14 @@ export function KetcherWorkspace({ locale }: { readonly locale: "tr" | "en" }) {
       </Suspense>
 
       <div className={styles.builderActions}>
-        <button type="button" disabled={!ready || working} onClick={() => void inspect()}>
+        <button className={styles.primaryAction} type="button" disabled={!ready || working} onClick={() => void inspect()}>
           {working ? "···" : "⌁"} {t.inspect}
         </button>
-        <button type="button" disabled={!snapshot || !identityMatch} onClick={exportProject}>
+        <button className={styles.secondaryAction} type="button" disabled={!snapshot || !identityMatch} onClick={exportProject}>
           ↓ {t.export}
         </button>
         <button
+          className={styles.quietAction}
           type="button"
           disabled={!ready}
           onClick={() => {

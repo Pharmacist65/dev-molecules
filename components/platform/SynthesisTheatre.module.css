@@ -237,3 +237,210 @@
   .reactionArrow { min-height: 48px; transform: rotate(90deg); }
   .productStrip { align-items: flex-start; flex-direction: column; }
 }
+
+/* MOLEVREN Phase A — editorial route narrative around a deep parliament
+   reaction stage. Sources remain in the existing closed disclosure. */
+.theatre {
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-ui);
+}
+
+.storyIntro {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-reading);
+}
+
+.storyIntro > div > span,
+.reactionCanvas section > span,
+.productStrip span,
+.bondChanges span {
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-ui-label);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.storyIntro h2,
+.learningPanel h3 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.storyIntro p,
+.learningPanel > p,
+.bondChanges p,
+.detailsGrid p,
+.detailsGrid li {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
+}
+
+.storyIntro dl,
+.learningPanel dl {
+  border-color: var(--color-metallic-orange);
+}
+
+.storyIntro dl div,
+.learningPanel dl div,
+.stepRail,
+.learningPanel,
+.routeDetails,
+.productStrip {
+  border-color: var(--border-color-on-ivory);
+}
+
+.storyIntro dt,
+.storyIntro dd,
+.learningPanel dt,
+.learningPanel dd,
+.stepRail button strong,
+.stepRail button small,
+.safetyNote p,
+.reactionTopline,
+.structureCard figcaption,
+.structureCard code,
+.transformationCaption > span,
+.transformationCaption > p,
+.stepNavigation button,
+.productStrip button,
+.misconceptionBox span,
+.misconceptionBox p,
+.bondChanges p,
+.detailsGrid h3,
+.detailsGrid a,
+.detailsGrid strong,
+.detailsGrid p,
+.detailsGrid li,
+.routeDetails summary {
+  font-size: var(--font-size-ui-label);
+}
+
+.stepRail,
+.learningPanel {
+  background: var(--surface-ivory);
+}
+
+.stepRail > button {
+  min-height: 58px;
+  border-color: var(--border-color-on-ivory);
+  color: var(--color-text-muted-on-ivory);
+}
+
+.stepRail button[data-active="true"] {
+  background: color-mix(in srgb, var(--color-parliament-blue) 8%, var(--surface-paper));
+  box-shadow: inset 3px 0 var(--color-metallic-orange);
+}
+
+.stepRail button[data-active="true"] strong,
+.stepRail button[data-active="true"] > span:first-child {
+  color: var(--color-parliament-blue);
+}
+
+.reactionStage,
+.reactionCanvas {
+  background-color: var(--color-deep-navy);
+  color: var(--color-text-on-dark);
+}
+
+.reactionCanvas {
+  background:
+    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--color-knowledge-cobalt) 26%, transparent), transparent 40%),
+    radial-gradient(circle, rgb(255 253 247 / 14%) 0 0.55px, transparent 0.8px) 0 0 / 27px 27px,
+    var(--gradient-parliament-depth);
+}
+
+.reactionTopline,
+.transformationCaption {
+  border-color: var(--border-color-on-dark);
+  color: var(--color-text-muted-on-dark);
+}
+
+.structureCard {
+  border-color: var(--border-color-on-dark-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-paper);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-panel);
+}
+
+.structureCard figcaption {
+  color: var(--color-text-on-ivory);
+}
+
+.structureCard code {
+  color: var(--color-deep-copper);
+}
+
+.reactionArrow {
+  color: var(--color-orange-highlight);
+}
+
+.reactionArrow i {
+  background: var(--color-metallic-orange);
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.reactionArrow i::after {
+  border-color: var(--color-metallic-orange);
+}
+
+.transformationCaption > span {
+  color: var(--color-orange-highlight);
+}
+
+.transformationCaption > p {
+  color: var(--color-text-muted-on-dark);
+}
+
+.stepNavigation button,
+.productStrip button {
+  min-height: 44px;
+  border-color: var(--color-metallic-orange);
+  background: var(--color-metallic-orange);
+  color: var(--color-deep-navy);
+}
+
+.stepNavigation button:first-child {
+  border-color: var(--border-color-on-dark-strong);
+  background: transparent;
+  color: var(--color-text-on-dark);
+}
+
+.misconceptionBox {
+  border-color: var(--color-metallic-orange);
+  background: color-mix(in srgb, var(--color-metallic-orange) 7%, var(--surface-paper));
+}
+
+.misconceptionBox span,
+.bondChanges span {
+  color: var(--color-deep-copper);
+}
+
+.productStrip {
+  background: color-mix(in srgb, var(--color-parliament-blue) 7%, var(--surface-ivory));
+}
+
+.routeDetails {
+  background: var(--surface-paper);
+}
+
+.routeDetails summary {
+  min-height: 52px;
+  color: var(--color-parliament-blue);
+}
+
+.detailsGrid article {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.theatre button:focus-visible,
+.theatre summary:focus-visible,
+.theatre a:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}

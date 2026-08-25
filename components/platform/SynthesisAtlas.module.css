@@ -727,3 +727,290 @@
   .materialNode { transition: none; }
   .graphSurface { will-change: auto; }
 }
+
+/* MOLEVREN Phase A — route, step and mechanism remain distinct while sharing
+   one parliament stage and warm paper structure cards. */
+.atlas {
+  --atlas-navy: var(--color-deep-navy);
+  --atlas-blue: var(--color-parliament-blue);
+  --atlas-orange: var(--color-metallic-orange);
+  --atlas-ink: var(--color-text-on-ivory);
+  --atlas-muted: var(--color-text-muted-on-ivory);
+  --atlas-line: var(--border-color-on-ivory);
+  --atlas-surface: var(--surface-paper);
+  --atlas-soft: var(--surface-ivory);
+  overflow: hidden;
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-reading);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-floating), var(--shadow-inset-highlight);
+  font-family: var(--font-family-ui);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 82% 16%, color-mix(in srgb, var(--color-knowledge-cobalt) 24%, transparent), transparent 26rem),
+    var(--gradient-parliament-depth);
+  color: var(--color-text-on-dark);
+}
+
+.hero > div > span,
+.routeIntro > div:last-child > span,
+.stepDetailHeader > div > span,
+.challengeHeader > div > span,
+.mechanismHeader > div > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.hero h1,
+.routeIntro h2,
+.stepDetailHeader h2,
+.mechanismHeader h3,
+.challengeHeader h2 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.hero p,
+.hero > strong {
+  color: var(--color-text-muted-on-dark);
+}
+
+.hero > strong {
+  border-color: var(--border-color-on-dark-strong);
+  background: var(--surface-glass-dark);
+}
+
+.moleculeTabs,
+.routeIntro {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+}
+
+.moleculeTabs button {
+  min-height: 76px;
+  border-color: var(--border-color-on-ivory);
+  color: var(--color-text-muted-on-ivory);
+  transition:
+    background var(--motion-duration-ui) var(--motion-ease-standard),
+    color var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.moleculeTabs button:hover {
+  background: color-mix(in srgb, var(--color-metallic-orange) 5%, var(--surface-paper));
+  color: var(--color-deep-navy);
+}
+
+.moleculeTabs button[data-active="true"] {
+  box-shadow: inset 0 -3px var(--color-metallic-orange);
+  color: var(--color-deep-navy);
+}
+
+.routeKindSwitch {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-ivory);
+}
+
+.routeKindSwitch button {
+  color: var(--color-text-muted-on-ivory);
+}
+
+.routeKindSwitch button[data-active="true"] {
+  background: var(--surface-paper);
+  color: var(--color-parliament-blue);
+  box-shadow: var(--shadow-subtle), inset 3px 0 var(--color-metallic-orange);
+}
+
+.atlasToolbar {
+  border-color: var(--border-color-on-dark);
+  background: var(--surface-elevated);
+}
+
+.levelSwitch button,
+.directionSwitch button,
+.zoomControls button {
+  min-height: 40px;
+  border-color: var(--border-color-on-dark);
+  background: var(--surface-glass-dark);
+  color: var(--color-text-muted-on-dark);
+}
+
+.levelSwitch button[aria-selected="true"],
+.directionSwitch button[data-active="true"] {
+  border-color: var(--color-metallic-orange);
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+  box-shadow: inset 0 -2px var(--color-metallic-orange);
+}
+
+.graphViewport {
+  border-color: var(--border-color-on-dark);
+  background-color: var(--color-midnight-stage);
+  background-image:
+    linear-gradient(var(--border-color-on-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color-on-dark) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-knowledge-cobalt) 22%, transparent), transparent 56%);
+}
+
+.graphEdges path {
+  stroke: var(--color-cool-gray);
+  stroke-opacity: 0.52;
+}
+
+.graphEdges path[data-active="true"] {
+  stroke: var(--color-metallic-orange);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-metallic-orange) 45%, transparent));
+}
+
+.graphEdges marker path {
+  fill: var(--color-metallic-orange);
+}
+
+.materialNode {
+  border-color: var(--border-color-on-ivory);
+  border-radius: var(--radius-lg);
+  background: var(--surface-paper);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-elevated);
+  transition:
+    border-color var(--motion-duration-ui) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-ui) var(--motion-ease-standard),
+    transform var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.materialNode:hover {
+  border-color: var(--color-knowledge-cobalt);
+}
+
+.materialNode[data-active="true"] {
+  border-color: var(--color-metallic-orange);
+  box-shadow: var(--shadow-elevated), var(--shadow-glow-orange);
+}
+
+.materialNode > span {
+  background: color-mix(in srgb, var(--color-parliament-blue) 8%, var(--surface-paper));
+  color: var(--color-parliament-blue);
+}
+
+.materialNode[data-material-role="active-parent"] > span {
+  background: color-mix(in srgb, var(--color-metallic-orange) 10%, var(--surface-paper));
+  color: var(--color-deep-copper);
+}
+
+.stepNode {
+  border-color: var(--border-color-on-dark-strong);
+  background: var(--surface-elevated);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-panel), var(--shadow-inset-highlight);
+}
+
+.stepNode:hover,
+.stepNode[data-active="true"] {
+  border-color: var(--color-metallic-orange);
+  box-shadow: var(--shadow-panel), var(--shadow-glow-orange);
+}
+
+.stepNode b {
+  color: var(--color-orange-highlight);
+}
+
+.stepNode small,
+.stepNode em,
+.routeHint {
+  color: var(--color-text-muted-on-dark);
+}
+
+.routeHint {
+  border-color: var(--border-color-on-dark);
+  background: var(--surface-glass-dark-strong);
+}
+
+.stepDetail,
+.mechanismLayer,
+.challengeLab,
+.sourceDrawer {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-panel);
+}
+
+.stepDetailHeader,
+.mechanismHeader,
+.challengeHeader,
+.stepFacts,
+.mechanismRoles,
+.sourceDrawerBody,
+.stepActions {
+  border-color: var(--border-color-on-ivory);
+}
+
+.stepStructures,
+.mechanismStructures,
+.electronFlow li,
+.changeLedger article {
+  background: var(--surface-ivory);
+}
+
+.detailStructure,
+.mechanismStructure,
+.choiceOptions button,
+.challengeTabs button,
+.stepActions button,
+.challengeActions button,
+.focusAction button {
+  border-color: var(--border-color-on-ivory);
+  background: var(--surface-paper);
+}
+
+.stepActions button:nth-child(2),
+.challengeActions button:first-child,
+.focusAction button {
+  border-color: var(--color-parliament-blue);
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+}
+
+.mechanismArrowOverlay > path {
+  stroke: var(--color-metallic-orange);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-metallic-orange) 45%, transparent));
+}
+
+.mechanismArrowOverlay marker path {
+  fill: var(--color-metallic-orange);
+}
+
+.sourceDrawer summary {
+  min-height: 52px;
+  color: var(--color-text-on-ivory);
+}
+
+.sourceDrawer summary small {
+  background: color-mix(in srgb, var(--color-parliament-blue) 9%, var(--surface-paper));
+  color: var(--color-parliament-blue);
+}
+
+.atlas button:focus-visible,
+.atlas summary:focus-visible,
+.atlas a:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (max-width: 620px) {
+  .atlas {
+    border-radius: var(--radius-xl);
+  }
+
+  .stepDetail,
+  .mechanismLayer,
+  .mechanismUnavailable,
+  .challengeLab,
+  .sourceDrawer,
+  .focusAction {
+    margin-inline: var(--space-2);
+  }
+}
