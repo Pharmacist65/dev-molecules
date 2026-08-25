@@ -51,6 +51,15 @@ function parseComputedColor(value: string): Rgba {
     throw new Error(`Unsupported computed color: ${value}`);
   }
 
+  if (value.trimStart().startsWith("color(srgb ")) {
+    return {
+      red: channels[0] * 255,
+      green: channels[1] * 255,
+      blue: channels[2] * 255,
+      alpha: channels[3] ?? 1,
+    };
+  }
+
   return {
     red: channels[0],
     green: channels[1],
@@ -132,6 +141,33 @@ async function expectComputedContrast(
   expect(
     ratio,
     `${context}: computed text-to-surface contrast was ${ratio.toFixed(2)}:1`,
+  ).toBeGreaterThanOrEqual(4.5);
+}
+
+async function expectSurfaceContrast(
+  text: Locator,
+  surface: Locator,
+  context: string,
+) {
+  await expect(text, `${context}: text must be visible`).toBeVisible();
+  const color = await text.evaluate((element) => getComputedStyle(element).color);
+  const backgroundColor = await surface.evaluate(
+    (element) => getComputedStyle(element).backgroundColor,
+  );
+  const background = parseComputedColor(backgroundColor);
+  const ratio = contrastRatio(parseComputedColor(color), background);
+
+  expect(
+    background.alpha,
+    `${context}: the summary chip must own an opaque surface`,
+  ).toBeGreaterThanOrEqual(0.99);
+  expect(
+    relativeLuminance(background),
+    `${context}: the summary chip must remain on the dark Atlas surface`,
+  ).toBeLessThanOrEqual(0.15);
+  expect(
+    ratio,
+    `${context}: computed text-to-chip contrast was ${ratio.toFixed(2)}:1`,
   ).toBeGreaterThanOrEqual(4.5);
 }
 
@@ -283,6 +319,44 @@ test("Molevren header signature is legible and collision-free on desktop and bec
   expect(mobileSymbolBox?.height ?? 0).toBeGreaterThanOrEqual(39.5);
   expect(mobileSymbolBox?.height ?? 0).toBeLessThanOrEqual(40.5);
   await expectNoHorizontalOverflow(page, "mobile Molevren header");
+});
+
+test("Spatial Atlas summary chips expose their content on the midnight surface", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("./#atlas/spatial", { waitUntil: "domcontentloaded" });
+  await expectCatalogReady(page);
+
+  const atlas = page.locator(
+    '[data-drug-atlas="true"][data-atlas-view="spatial"]',
+  );
+  const spatial = atlas.locator('[data-atlas-spatial="true"]');
+  const summary = spatial.locator('[data-universe-summary="true"]');
+  const chips = summary.locator(":scope > span");
+
+  await expect(spatial).toBeVisible();
+  await expect(summary).toBeVisible();
+  await expect(chips).toHaveCount(3);
+  await expect(chips.nth(0)).toContainText("Temsilî yapılar");
+  await expect(chips.nth(1)).toContainText("küme");
+  await expect(chips.nth(2)).toContainText("Evren");
+
+  await expectSurfaceContrast(
+    chips.nth(0),
+    chips.nth(0),
+    "representative-structure chip",
+  );
+  await expectSurfaceContrast(
+    chips.nth(1),
+    chips.nth(1),
+    "cluster-count chip",
+  );
+  await expectSurfaceContrast(
+    chips.nth(2).locator("strong"),
+    chips.nth(2),
+    "universe-level chip",
+  );
 });
 
 test("Beta-sitosterol direct route explains SMILES and @/@@ before exposing source notation", async ({

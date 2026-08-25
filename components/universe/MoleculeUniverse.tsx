@@ -2204,7 +2204,11 @@ export function MoleculeUniverse({
           <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1}>{resolvedTitle}</h2>
           <p className={styles.description}>{resolvedDescription}</p>
         </div>
-        <div className={styles.headerSummary} aria-label={t("explore.atlasSummary")}>
+        <div
+          className={styles.headerSummary}
+          aria-label={t("explore.atlasSummary")}
+          data-universe-summary="true"
+        >
           <span>
             {interpolateIndexedCopy(catalogCopy.sceneSample, {
               count: sceneVisibleIds.length,

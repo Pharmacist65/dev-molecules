@@ -1197,6 +1197,24 @@
   color: var(--color-text-on-dark);
 }
 
+/* MoleculeUniverse normally uses light editorial summary chips. Inside the
+   midnight Atlas shell those chips need an explicit dark surface as well as
+   dark-surface text; changing only the inherited text color creates an
+   unreadable ivory-on-ivory result. */
+.spatial > [data-explore-level] [data-universe-summary="true"] > span {
+  border-color: var(--border-color-on-dark);
+  background: color-mix(
+    in srgb,
+    var(--color-deep-navy) 88%,
+    var(--surface-midnight)
+  );
+  color: var(--color-text-muted-on-dark);
+}
+
+.spatial > [data-explore-level] [data-universe-summary="true"] strong {
+  color: var(--color-text-on-dark);
+}
+
 .spatial > [data-explore-level] [data-selected="true"] {
   border-color: var(--border-color-orange);
   box-shadow: var(--shadow-glow-orange), inset 0 0 0 var(--border-width-hairline) color-mix(in srgb, var(--color-orange-highlight) 24%, transparent);
