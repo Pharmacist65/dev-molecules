@@ -9,6 +9,8 @@ const managesWebServer = !process.env.PLAYWRIGHT_BASE_URL;
 const requestedBrowser = process.env.PLAYWRIGHT_BROWSER;
 const usesSharedSoftwareRenderer =
   process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer";
+const testTimeout = usesSharedSoftwareRenderer ? 120_000 : 60_000;
+const assertionTimeout = usesSharedSoftwareRenderer ? 30_000 : 12_000;
 const chromiumLaunchArgs = usesSharedSoftwareRenderer
   ? [
       "--enable-webgl",
@@ -23,9 +25,9 @@ export default defineConfig({
   outputDir: "work/playwright/results",
   fullyParallel: false,
   workers: 1,
-  timeout: 60_000,
+  timeout: testTimeout,
   expect: {
-    timeout: 12_000,
+    timeout: assertionTimeout,
   },
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,

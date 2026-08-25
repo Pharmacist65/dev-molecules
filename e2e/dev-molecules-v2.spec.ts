@@ -44,9 +44,11 @@ async function expectNoHorizontalOverflow(page: Page, context: string) {
 }
 
 async function switchToEnglish(page: Page) {
-  await page
-    .getByRole("button", { name: "Dili İngilizce yap", exact: true })
-    .click();
+  if ((await appRoot(page).getAttribute("data-locale")) !== "en") {
+    await page
+      .getByRole("button", { name: "Dili İngilizce yap", exact: true })
+      .click();
+  }
   await expect(appRoot(page)).toHaveAttribute("data-locale", "en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
 }
