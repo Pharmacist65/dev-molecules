@@ -28,6 +28,9 @@ export default defineConfig(({ command }) => ({
       command === "serve" ? "development" : "production",
     ),
     "import.meta.env.VITE_STATIC_EVIDENCE": JSON.stringify("true"),
+    "import.meta.env.VITE_MOLEVREN_WORKING_BRAND": JSON.stringify(
+      process.env.MOLEVREN_WORKING_BRAND ?? "on",
+    ),
   },
   build: {
     outDir: fileURLToPath(new URL("./dist-pages", import.meta.url)),

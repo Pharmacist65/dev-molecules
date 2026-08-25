@@ -68,6 +68,9 @@ export default defineConfig(async ({ command }) => {
       "process.env.NODE_ENV": JSON.stringify(
         command === "serve" ? "development" : "production",
       ),
+      "import.meta.env.VITE_MOLEVREN_WORKING_BRAND": JSON.stringify(
+        process.env.MOLEVREN_WORKING_BRAND ?? "on",
+      ),
     },
     server: usePolling
       ? { watch: { useFsEvents: false, usePolling: true } }

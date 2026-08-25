@@ -17,8 +17,8 @@ async function brandFontCss() {
     readFile(join(root, "node_modules", "@fontsource-variable", "manrope", "files", "manrope-latin-wght-normal.woff2")),
   ]);
   return `
-    @font-face{font-family:FrauncesBrand;font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,${fraunces.toString("base64")}) format("woff2-variations")}
-    @font-face{font-family:ManropeBrand;font-style:normal;font-weight:200 800;src:url(data:font/woff2;base64,${manrope.toString("base64")}) format("woff2-variations")}
+    @font-face{font-family:FrauncesBrand;font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,${Buffer.from(fraunces).toString("base64")}) format("woff2-variations")}
+    @font-face{font-family:ManropeBrand;font-style:normal;font-weight:200 800;src:url(data:font/woff2;base64,${Buffer.from(manrope).toString("base64")}) format("woff2-variations")}
   `;
 }
 

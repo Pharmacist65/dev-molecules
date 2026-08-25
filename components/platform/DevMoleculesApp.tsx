@@ -14,6 +14,7 @@ import type {
   UniverseIndexedCatalog,
   UniverseLearningActions,
 } from "@/components/universe";
+import { MolecularAtmosphere } from "@/components/brand";
 import {
   canonicalizeIndexedCatalogBrowsePage,
   canonicalizeIndexedCatalogHit,
@@ -55,6 +56,14 @@ import type {
   LearnerPresentationMode,
   NomenclatureInstructorTaskId,
 } from "@/lib/domain/role-experience";
+import { getMolevrenAssetUrl, MOLEVREN_BRAND } from "@/lib/brand/molevren-brand";
+import {
+  DEFAULT_WORKING_BRAND_MODE,
+  MOLEVREN_WORKING_BRAND_STORAGE_KEY,
+  resolveWorkingBrandMode,
+  type WorkingBrandMode,
+} from "@/lib/brand/working-brand";
+import { useMolevrenMotionPreference } from "@/lib/brand/motion-preference";
 import { I18nProvider, useI18n, type TranslationKey } from "@/lib/i18n";
 
 import { CatalogSearch } from "./CatalogSearch";
@@ -192,7 +201,10 @@ function CuratedWorkflowUnavailable({
 
 function DevMoleculesWorkspace() {
   const { locale, setLocale, t } = useI18n();
+  const { motionMode, setMotionMode } = useMolevrenMotionPreference();
   const [route, setRoute] = useState<PlatformRoute>(DEFAULT_PLATFORM_ROUTE);
+  const [workingBrandMode, setWorkingBrandMode] =
+    useState<WorkingBrandMode>(DEFAULT_WORKING_BRAND_MODE);
   const [experienceMode, setExperienceMode] = useState<LearnerPresentationMode>("student");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -227,6 +239,7 @@ function DevMoleculesWorkspace() {
   );
 
   const assetBasePath = import.meta.env.BASE_URL;
+  const molevrenWorkingBrandEnabled = workingBrandMode === "molevren";
   const activeFamilyPage = useMemo(
     () => route.section === "family" && route.familyId
       ? createDrugFamilyPage(route.familyId, assetBasePath)
@@ -370,6 +383,10 @@ function DevMoleculesWorkspace() {
       (molecule) => molecule.name.toLocaleLowerCase("en").includes("celecoxib"),
     ) ?? seedExploreCatalogView.molecules.find((molecule) => molecule.structure.threeDUrl);
   const primarySection = getPrimaryNavigationSection(route);
+  const atmosphereRoute =
+    route.section === "academy" && route.academyArea === "synthesis"
+      ? "synthesis"
+      : route.section;
 
   useEffect(() => {
     const synchronizeRoute = () => {
@@ -389,6 +406,41 @@ function DevMoleculesWorkspace() {
       window.removeEventListener("popstate", synchronizeRoute);
     };
   }, []);
+
+  useEffect(() => {
+    const synchronizeWorkingBrand = () => {
+      let storedPreference: string | null = null;
+      try {
+        storedPreference = window.localStorage.getItem(
+          MOLEVREN_WORKING_BRAND_STORAGE_KEY,
+        );
+      } catch {
+        // The compile-time flag and query override remain available.
+      }
+      setWorkingBrandMode(resolveWorkingBrandMode({
+        search: window.location.search,
+        storedPreference,
+      }));
+    };
+    synchronizeWorkingBrand();
+    window.addEventListener("popstate", synchronizeWorkingBrand);
+    window.addEventListener("storage", synchronizeWorkingBrand);
+    return () => {
+      window.removeEventListener("popstate", synchronizeWorkingBrand);
+      window.removeEventListener("storage", synchronizeWorkingBrand);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dataset.motion = motionMode;
+    document.documentElement.dataset.workingBrand = workingBrandMode;
+    document.title = molevrenWorkingBrandEnabled
+      ? `${MOLEVREN_BRAND.publicName} — ${t("brand.descriptor")}`
+      : locale === "tr"
+        ? "Dev Molecules — Farmasötik moleküler öğrenme"
+        : "Dev Molecules — Pharmaceutical molecular learning";
+  }, [locale, molevrenWorkingBrandEnabled, motionMode, t, workingBrandMode]);
 
   useEffect(() => {
     if (route.section !== "academy") return;
@@ -570,7 +622,12 @@ function DevMoleculesWorkspace() {
       data-catalog-status={catalogLoadStatus}
       data-catalog-records={catalogExpansion?.manifest.recordCount ?? exploreCatalogView.molecules.length}
       data-catalog-resident-records={exploreCatalogView.molecules.length}
+      data-working-brand={workingBrandMode}
+      data-motion={motionMode}
     >
+      {molevrenWorkingBrandEnabled ? (
+        <MolecularAtmosphere route={atmosphereRoute} motionMode={motionMode} />
+      ) : null}
       <header className={styles.topbar}>
         <button
           className={styles.brand}
@@ -578,8 +635,29 @@ function DevMoleculesWorkspace() {
           aria-label={t("shell.brandHomeLabel")}
           onClick={() => navigate("#home")}
         >
-          <BrandMark />
-          <span><strong>DEV MOLECULES</strong><small>{t("shell.livingAtlas")}</small></span>
+          {molevrenWorkingBrandEnabled ? (
+            <>
+              {/* GitHub Pages serves the production SVG directly; next/image
+                  would make this reversible shell depend on a Next loader. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.brandLockup}
+                src={getMolevrenAssetUrl(assetBasePath, "horizontalDark")}
+                alt=""
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.brandSymbol}
+                src={getMolevrenAssetUrl(assetBasePath, "symbolFlat")}
+                alt=""
+              />
+            </>
+          ) : (
+            <>
+              <BrandMark />
+              <span><strong>DEV MOLECULES</strong><small>{t("shell.livingAtlas")}</small></span>
+            </>
+          )}
         </button>
 
         <nav className={styles.primaryNav} aria-label={t("nav.primary")}>
@@ -646,6 +724,35 @@ function DevMoleculesWorkspace() {
                   <span>{t("shell.expertView")}</span>
                   <small>{t("shell.expertViewDescription")}</small>
                 </button>
+                <hr />
+                <strong>{t("shell.motion")}</strong>
+                <p className={styles.settingsHint}>{t("shell.motionDescription")}</p>
+                <div className={styles.motionChoices} role="group" aria-label={t("shell.motion")}>
+                  <button
+                    type="button"
+                    aria-pressed={motionMode === "full"}
+                    onClick={() => setMotionMode("full")}
+                  >
+                    <span>{t("shell.motionFull")}</span>
+                    <small>{t("shell.motionFullDescription")}</small>
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={motionMode === "reduced"}
+                    onClick={() => setMotionMode("reduced")}
+                  >
+                    <span>{t("shell.motionReduced")}</span>
+                    <small>{t("shell.motionReducedDescription")}</small>
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={motionMode === "off"}
+                    onClick={() => setMotionMode("off")}
+                  >
+                    <span>{t("shell.motionOff")}</span>
+                    <small>{t("shell.motionOffDescription")}</small>
+                  </button>
+                </div>
                 <hr />
                 <button type="button" onClick={() => navigate("#instructor")}>
                   <span>{t("shell.openInstructor")}</span>
@@ -883,8 +990,11 @@ function DevMoleculesWorkspace() {
       </main>
 
       <footer className={styles.globalFooter}>
-        <strong>DEV MOLECULES</strong>
-        <span>{t("shell.footerAtlas")}</span>
+        <div>
+          <strong>{molevrenWorkingBrandEnabled ? "MOLEVREN" : "DEV MOLECULES"}</strong>
+          {molevrenWorkingBrandEnabled ? <small>{t("brand.platformAttribution")}</small> : null}
+        </div>
+        <span>{t("shell.footerSentence")}</span>
       </footer>
     </div>
   );

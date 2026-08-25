@@ -1,0 +1,311 @@
+/*
+ * MOLEVREN design tokens
+ *
+ * These primitives are the only supported source for brand color, depth,
+ * typography and motion values. Component-level tokens should reference this
+ * layer instead of repeating literal values.
+ */
+
+:root {
+  /* color */
+  --color-metallic-orange: #ff8a00;
+  --color-deep-copper: #c85200;
+  --color-orange-highlight: #ffd0a4;
+  --color-parliament-blue: #0a3d91;
+  --color-knowledge-cobalt: #2d5be3;
+  --color-deep-navy: #0b1324;
+  --color-midnight-stage: #050a16;
+  --color-soft-lake-ivory: #f6f1e8;
+  --color-paper-ivory: #fffdf7;
+  --color-cool-gray: #a5adb8;
+  --color-mole-teal: #00b3c6;
+
+  --color-text-on-dark: var(--color-paper-ivory);
+  --color-text-muted-on-dark: rgb(246 241 232 / 72%);
+  --color-text-faint-on-dark: rgb(246 241 232 / 52%);
+  --color-text-on-ivory: var(--color-deep-navy);
+  --color-text-muted-on-ivory: rgb(11 19 36 / 68%);
+  --color-text-faint-on-ivory: rgb(11 19 36 / 50%);
+  --color-link: var(--color-knowledge-cobalt);
+  --color-link-on-dark: var(--color-orange-highlight);
+  --color-action: var(--color-metallic-orange);
+  --color-selection-background: rgb(255 138 0 / 24%);
+  --color-selection-text: var(--color-deep-navy);
+
+  /* gradient */
+  --gradient-metallic-orange: linear-gradient(
+    135deg,
+    #ffd0a4 0%,
+    #ff9a2e 18%,
+    #ff8a00 36%,
+    #d95b00 58%,
+    #ffb566 78%,
+    #b94000 100%
+  );
+  --gradient-midnight-stage: radial-gradient(
+      circle at 76% 12%,
+      rgb(45 91 227 / 24%),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 18% 82%,
+      rgb(10 61 145 / 30%),
+      transparent 42%
+    ),
+    linear-gradient(145deg, var(--color-deep-navy), var(--color-midnight-stage));
+  --gradient-parliament-depth: linear-gradient(
+    145deg,
+    var(--color-parliament-blue),
+    var(--color-deep-navy) 72%
+  );
+  --gradient-glass-dark: linear-gradient(
+    145deg,
+    rgb(45 91 227 / 14%),
+    rgb(5 10 22 / 78%) 48%,
+    rgb(11 19 36 / 92%)
+  );
+  --gradient-ivory-reading: linear-gradient(
+    180deg,
+    var(--color-paper-ivory),
+    var(--color-soft-lake-ivory)
+  );
+  --gradient-metallic-sweep: linear-gradient(
+    100deg,
+    transparent 22%,
+    rgb(255 208 164 / 68%) 48%,
+    transparent 74%
+  );
+
+  /* typography */
+  --font-family-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-family-ui: "Manrope Variable", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --font-size-hero: clamp(3rem, 6vw, 4.5rem);
+  --font-size-display: clamp(2.5rem, 4.6vw, 3.75rem);
+  --font-size-section: clamp(1.875rem, 3.4vw, 3rem);
+  --font-size-title: clamp(1.5rem, 2.4vw, 2rem);
+  --font-size-subtitle: 1.25rem;
+  --font-size-body: 1rem;
+  --font-size-body-mobile: 0.9375rem;
+  --font-size-button: 0.9375rem;
+  --font-size-secondary: 0.875rem;
+  --font-size-chemical: 0.875rem;
+  --font-size-ui-label: 0.8125rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-display: 650;
+
+  --line-height-display: 1.04;
+  --line-height-heading: 1.16;
+  --line-height-body: 1.65;
+  --line-height-ui: 1.4;
+  --line-height-compact: 1.25;
+
+  --letter-spacing-display: -0.025em;
+  --letter-spacing-heading: -0.012em;
+  --letter-spacing-body: 0;
+  --letter-spacing-ui: 0.01em;
+  --letter-spacing-label: 0.045em;
+  --letter-spacing-brand-line: 0.22em;
+
+  /* spacing: four-pixel base */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-page-inline: clamp(1rem, 3.4vw, 3.5rem);
+  --space-section-block: clamp(3rem, 7vw, 6.5rem);
+  --space-content-gap: clamp(1.25rem, 2.4vw, 2.5rem);
+
+  /* radius */
+  --radius-none: 0;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-pill: 999px;
+  --radius-round: 50%;
+
+  /* border */
+  --border-width-hairline: 1px;
+  --border-width-emphasis: 2px;
+  --border-color-on-dark: rgb(246 241 232 / 14%);
+  --border-color-on-dark-strong: rgb(246 241 232 / 26%);
+  --border-color-on-ivory: rgb(11 19 36 / 14%);
+  --border-color-on-ivory-strong: rgb(11 19 36 / 24%);
+  --border-color-orange: rgb(255 138 0 / 72%);
+  --border-color-blue: rgb(45 91 227 / 62%);
+  --border-subtle-dark: var(--border-width-hairline) solid var(--border-color-on-dark);
+  --border-subtle-ivory: var(--border-width-hairline) solid var(--border-color-on-ivory);
+  --border-active: var(--border-width-emphasis) solid var(--color-metallic-orange);
+
+  /* shadow */
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 2px rgb(5 10 22 / 18%);
+  --shadow-panel: 0 12px 32px rgb(5 10 22 / 24%);
+  --shadow-elevated: 0 20px 52px rgb(5 10 22 / 34%);
+  --shadow-floating: 0 28px 80px rgb(5 10 22 / 46%);
+  --shadow-inset-highlight: inset 0 1px 0 rgb(255 253 247 / 12%);
+  --shadow-glow-orange: 0 0 28px rgb(255 138 0 / 24%);
+  --shadow-glow-blue: 0 0 34px rgb(45 91 227 / 24%);
+
+  /* blur */
+  --blur-none: 0;
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 16px;
+  --blur-xl: 28px;
+  --blur-atmosphere: 48px;
+
+  /* motion */
+  --motion-duration-instant: 0ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-ui: 200ms;
+  --motion-duration-slow: 250ms;
+  --motion-duration-scene: 450ms;
+  --motion-duration-brand: 600ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-linear: linear;
+  --motion-distance-scale: 1;
+  --motion-atmosphere-play-state: running;
+
+  /* z-index */
+  --z-atmosphere: 0;
+  --z-content: 1;
+  --z-elevated: 10;
+  --z-sticky: 100;
+  --z-navigation: 200;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+  --z-tooltip: 700;
+
+  /* surface */
+  --surface-midnight: var(--color-midnight-stage);
+  --surface-parliament: var(--color-parliament-blue);
+  --surface-glass-dark: rgb(11 19 36 / 78%);
+  --surface-glass-dark-strong: rgb(5 10 22 / 90%);
+  --surface-ivory: var(--color-soft-lake-ivory);
+  --surface-paper: var(--color-paper-ivory);
+  --surface-editor: var(--color-paper-ivory);
+  --surface-elevated: rgb(11 19 36 / 92%);
+  --surface-reading: var(--gradient-ivory-reading);
+  --surface-stage: var(--gradient-midnight-stage);
+
+  /* molecular-stage */
+  --molecular-stage-background: var(--surface-midnight);
+  --molecular-stage-background-depth: var(--gradient-midnight-stage);
+  --molecular-stage-node-orange: var(--color-metallic-orange);
+  --molecular-stage-node-blue: var(--color-knowledge-cobalt);
+  --molecular-stage-node-teal: var(--color-mole-teal);
+  --molecular-stage-link: rgb(165 173 184 / 18%);
+  --molecular-stage-node-opacity: 0.07;
+  --molecular-stage-node-opacity-hero: 0.12;
+  --molecular-stage-link-opacity: 0.055;
+  --molecular-stage-noise-opacity: 0.035;
+  --molecular-stage-halo-opacity: 0.18;
+  --molecular-stage-parallax: 0.018;
+
+  /* focus-ring */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 3px;
+  --focus-ring-color: var(--color-knowledge-cobalt);
+  --focus-ring-color-on-dark: var(--color-orange-highlight);
+  --focus-ring-shadow: 0 0 0 1px var(--color-paper-ivory), 0 0 0 4px rgb(45 91 227 / 72%);
+  --focus-ring-shadow-on-dark: 0 0 0 1px var(--color-midnight-stage), 0 0 0 4px rgb(255 208 164 / 88%);
+
+  /* Compatibility aliases for current product CSS during phased migration. */
+  --font-molevren-display: var(--font-family-display);
+  --font-molevren-ui: var(--font-family-ui);
+  --font-molevren-mono: var(--font-family-mono);
+  --font-geist-sans: var(--font-family-ui);
+  --font-geist-mono: var(--font-family-mono);
+  --font-display: var(--font-family-display);
+  --font-body: var(--font-family-ui);
+  --font-mono: var(--font-family-mono);
+
+  --background: var(--surface-midnight);
+  --foreground: var(--color-text-on-dark);
+  --surface: var(--surface-paper);
+  --surface-muted: var(--surface-ivory);
+  --border: var(--border-color-on-ivory);
+  --navy: var(--color-deep-navy);
+  --blue: var(--color-knowledge-cobalt);
+  --orange: var(--color-metallic-orange);
+  --ink: var(--color-text-on-ivory);
+  --muted: var(--color-text-muted-on-ivory);
+  --faint: var(--color-text-faint-on-ivory);
+  --line: var(--border-color-on-ivory);
+  --panel: var(--surface-elevated);
+  --paper: var(--surface-ivory);
+  --accent: var(--color-metallic-orange);
+
+  --lake-white: var(--color-soft-lake-ivory);
+  --paper-white: var(--color-paper-ivory);
+  --ink-navy: var(--color-deep-navy);
+  --deep-stage: var(--color-midnight-stage);
+  --signal-orange: var(--color-metallic-orange);
+  --knowledge-blue: var(--color-knowledge-cobalt);
+  --soft-blue: rgb(45 91 227 / 10%);
+  --warm-line: var(--border-color-on-ivory);
+  --muted-text: var(--color-text-muted-on-ivory);
+}
+
+:root[data-motion="reduced"],
+[data-motion="reduced"] {
+  --motion-duration-scene: 200ms;
+  --motion-duration-brand: 250ms;
+  --motion-distance-scale: 0.15;
+  --motion-atmosphere-play-state: paused;
+  --molecular-stage-parallax: 0;
+}
+
+:root[data-motion="off"],
+[data-motion="off"] {
+  --motion-duration-fast: 0ms;
+  --motion-duration-ui: 0ms;
+  --motion-duration-slow: 0ms;
+  --motion-duration-scene: 0ms;
+  --motion-duration-brand: 0ms;
+  --motion-distance-scale: 0;
+  --motion-atmosphere-play-state: paused;
+  --molecular-stage-parallax: 0;
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --font-size-body: var(--font-size-body-mobile);
+    --space-section-block: clamp(2.5rem, 10vw, 4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration-ui: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+    --motion-duration-scene: 0.01ms;
+    --motion-duration-brand: 0.01ms;
+    --motion-distance-scale: 0;
+    --motion-atmosphere-play-state: paused;
+    --molecular-stage-parallax: 0;
+  }
+}

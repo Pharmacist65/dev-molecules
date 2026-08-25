@@ -1269,3 +1269,286 @@
 @media (prefers-reduced-motion: reduce) {
   .routeLoading i { animation: none; }
 }
+
+/* Molevren working-brand shell. The selector preserves the reversible
+   Dev Molecules technical shell while the preliminary name review is open. */
+.app[data-working-brand="molevren"] {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: clip;
+  background: var(--gradient-midnight-stage);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-body);
+  --molevren-atmosphere-opacity: 0.56;
+  --molevren-atmosphere-mobile-opacity: 0.42;
+  --molevren-atmosphere-reduced-opacity: 0.34;
+}
+
+.app[data-working-brand="molevren"][data-route="atlas"] {
+  --molevren-atmosphere-opacity: 0.38;
+  --molevren-atmosphere-mobile-opacity: 0.3;
+}
+
+.app[data-working-brand="molevren"][data-route="lab"],
+.app[data-working-brand="molevren"][data-route="drug"] {
+  --molevren-atmosphere-opacity: 0.28;
+  --molevren-atmosphere-mobile-opacity: 0.22;
+}
+
+.app[data-working-brand="molevren"] > .topbar,
+.app[data-working-brand="molevren"] > .mainContent,
+.app[data-working-brand="molevren"] > .globalFooter {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.app[data-working-brand="molevren"] > .topbar {
+  position: sticky;
+  z-index: var(--z-navigation);
+  min-height: 78px;
+  padding-inline: var(--space-page-inline);
+  border-bottom: var(--border-subtle-dark);
+  background: rgb(5 10 22 / 84%);
+  box-shadow: var(--shadow-inset-highlight), var(--shadow-subtle);
+  backdrop-filter: blur(var(--blur-lg)) saturate(130%);
+}
+
+.app[data-working-brand="molevren"] .brand {
+  min-width: 0;
+  color: var(--color-text-on-dark);
+}
+
+.brandLockup {
+  display: block;
+  width: clamp(158px, 13vw, 204px);
+  height: auto;
+}
+
+.brandSymbol {
+  display: none;
+  width: 36px;
+  height: 36px;
+}
+
+.app[data-working-brand="molevren"] .primaryNav {
+  min-height: 78px;
+}
+
+.app[data-working-brand="molevren"] .primaryNav button {
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-semibold);
+  transition:
+    color var(--motion-duration-ui) var(--motion-ease-standard),
+    background var(--motion-duration-ui) var(--motion-ease-standard);
+}
+
+.app[data-working-brand="molevren"] .primaryNav button:hover,
+.app[data-working-brand="molevren"] .primaryNav button[data-active="true"] {
+  color: var(--color-text-on-dark);
+}
+
+.app[data-working-brand="molevren"] .primaryNav button[data-active="true"]::after {
+  height: 2px;
+  background: var(--gradient-metallic-orange);
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.app[data-working-brand="molevren"] .searchButton,
+.app[data-working-brand="molevren"] .topActions .settingsButton,
+.app[data-working-brand="molevren"] .languageSwitcher {
+  border-color: var(--border-color-on-dark);
+  background: rgb(255 253 247 / 4%);
+  color: var(--color-text-muted-on-dark);
+}
+
+.app[data-working-brand="molevren"] .searchButton:hover,
+.app[data-working-brand="molevren"] .topActions .settingsButton:hover {
+  border-color: var(--border-color-orange);
+  color: var(--color-orange-highlight);
+}
+
+.app[data-working-brand="molevren"] .languageSwitcher button {
+  color: var(--color-text-muted-on-dark);
+}
+
+.app[data-working-brand="molevren"] .languageSwitcher button[aria-pressed="true"] {
+  background: var(--color-parliament-blue);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-inset-highlight);
+}
+
+.app[data-working-brand="molevren"] .settingsMenu {
+  z-index: var(--z-overlay);
+  padding: var(--space-3);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-lg);
+  background: var(--surface-paper);
+  color: var(--color-text-on-ivory);
+  box-shadow: var(--shadow-floating);
+}
+
+.app[data-working-brand="molevren"] .settingsMenu > strong {
+  color: var(--color-text-on-ivory);
+  font-size: var(--font-size-secondary);
+}
+
+.app[data-working-brand="molevren"] .settingsMenu > hr {
+  border-color: var(--border-color-on-ivory);
+}
+
+.settingsHint {
+  margin: calc(var(--space-1) * -1) var(--space-2) var(--space-1);
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-ui-label);
+  line-height: var(--line-height-ui);
+}
+
+.motionChoices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.motionChoices button {
+  display: grid;
+  min-width: 0;
+  min-height: 72px;
+  align-content: start;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-md);
+  background: var(--surface-ivory);
+  color: var(--color-text-on-ivory);
+  cursor: pointer;
+  text-align: left;
+}
+
+.motionChoices button:hover {
+  border-color: var(--border-color-blue);
+}
+
+.motionChoices button[aria-pressed="true"] {
+  border-color: var(--border-color-orange);
+  box-shadow: inset 0 -2px var(--color-metallic-orange);
+}
+
+.motionChoices button span {
+  font-size: var(--font-size-ui-label);
+  font-weight: var(--font-weight-bold);
+}
+
+.motionChoices button small {
+  color: var(--color-text-muted-on-ivory);
+  font-size: 0.75rem;
+  line-height: var(--line-height-ui);
+}
+
+.app[data-working-brand="molevren"] .mainContent {
+  min-height: calc(100vh - 78px);
+}
+
+.app[data-working-brand="molevren"] .workspacePage {
+  width: min(1500px, calc(100% - 2 * var(--space-page-inline)));
+}
+
+.app[data-working-brand="molevren"] .routeLoading {
+  color: var(--color-text-muted-on-dark);
+}
+
+.app[data-working-brand="molevren"] .routeLoading i {
+  border-color: var(--border-color-on-dark-strong);
+  border-top-color: var(--color-metallic-orange);
+}
+
+.app[data-working-brand="molevren"] .searchOverlay {
+  z-index: var(--z-modal);
+  background: rgb(5 10 22 / 82%);
+  backdrop-filter: blur(var(--blur-md));
+}
+
+.app[data-working-brand="molevren"] .searchDialog {
+  border: var(--border-subtle-ivory);
+  border-top: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  border-radius: var(--radius-xl);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-floating);
+}
+
+.app[data-working-brand="molevren"] .searchDialog h2 {
+  color: var(--color-text-on-ivory);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.app[data-working-brand="molevren"] .searchDialog > p {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-body);
+}
+
+.app[data-working-brand="molevren"] > .globalFooter {
+  min-height: 96px;
+  border-top: var(--border-subtle-dark);
+  background: rgb(5 10 22 / 72%);
+  color: var(--color-text-muted-on-dark);
+  backdrop-filter: blur(var(--blur-md));
+}
+
+.app[data-working-brand="molevren"] .globalFooter > div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.app[data-working-brand="molevren"] .globalFooter strong {
+  color: var(--color-text-on-dark);
+  font-size: var(--font-size-secondary);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.app[data-working-brand="molevren"] .globalFooter small {
+  color: var(--color-text-faint-on-dark);
+  font-size: var(--font-size-ui-label);
+}
+
+.app[data-working-brand="molevren"] .globalFooter > span {
+  font-size: var(--font-size-secondary);
+}
+
+@media (max-width: 1120px) {
+  .app[data-working-brand="molevren"] > .topbar {
+    padding-top: var(--space-2);
+  }
+
+  .app[data-working-brand="molevren"] .primaryNav {
+    border-top-color: var(--border-color-on-dark);
+  }
+}
+
+@media (max-width: 700px) {
+  .app[data-working-brand="molevren"] > .topbar {
+    padding-inline: var(--space-3);
+  }
+
+  .brandLockup { display: none; }
+  .brandSymbol { display: block; }
+
+  .app[data-working-brand="molevren"] .workspacePage {
+    width: calc(100% - 1rem);
+  }
+
+  .motionChoices { grid-template-columns: 1fr; }
+  .motionChoices button { min-height: 58px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app[data-working-brand="molevren"] *,
+  .app[data-working-brand="molevren"] *::before,
+  .app[data-working-brand="molevren"] *::after {
+    scroll-behavior: auto;
+  }
+}
