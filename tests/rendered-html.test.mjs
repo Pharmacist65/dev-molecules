@@ -17,7 +17,7 @@ const context = {
   passThroughOnException() {},
 };
 
-test("server-renders the Dev Molecules product shell", async () => {
+test("server-renders the Molevren working-brand metadata around the technical product shell", async () => {
   const worker = await getWorker();
   const response = await worker.fetch(
     new Request("https://molecules.example/", {
@@ -36,7 +36,7 @@ test("server-renders the Dev Molecules product shell", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Dev Molecules — Evidence-aware molecular learning<\/title>/i);
+  assert.match(html, /<title>Molevren — Pharmaceutical Molecular Atlas &amp; Academy<\/title>/i);
   assert.match(html, /DEV MOLECULES/);
   assert.match(html, /Yaşayan Moleküler Atlas/);
   assert.match(html, /İlaçları yapısından etkisine kadar keşfet/);
@@ -47,12 +47,13 @@ test("server-renders the Dev Molecules product shell", async () => {
   assert.doesNotMatch(html, />Oluştur<\/button>|>Eğit<\/button>|>Araştır<\/button>/);
   assert.match(html, /Öğrenme, karşılaştırma ve araştırma için etkileşimli farmasötik atlas ve akademi/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/i);
-  assert.match(html, /property="og:image" content="https:\/\/molecules\.example\/og-v2\.png"/i);
+  assert.match(html, /property="og:image" content="https:\/\/molecules\.example\/brand\/molevren-og-1200x630\.png"/i);
 });
 
-test("ships a bespoke social card", async () => {
-  await access(new URL("../public/og-v2.png", import.meta.url));
-  const image = await readFile(new URL("../public/og-v2.png", import.meta.url));
+test("ships the production-derived Molevren social card", async () => {
+  const socialCard = new URL("../public/brand/molevren-og-1200x630.png", import.meta.url);
+  await access(socialCard);
+  const image = await readFile(socialCard);
   assert.ok(image.byteLength > 100_000);
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
 });

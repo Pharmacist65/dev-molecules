@@ -2,6 +2,13 @@
 
 :root {
   color-scheme: light;
+  --font-molevren-display: "Fraunces Variable", Georgia, serif;
+  --font-molevren-ui: "Manrope Variable", Arial, sans-serif;
+  --font-molevren-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Compatibility aliases keep existing product surfaces stable until the
+     design-token phase migrates each surface explicitly. */
+  --font-geist-sans: var(--font-molevren-ui);
+  --font-geist-mono: var(--font-molevren-mono);
   --background: #f6f7fb;
   --foreground: #13213c;
   --surface: #ffffff;
@@ -14,7 +21,7 @@
 
 * { box-sizing: border-box; }
 html { min-width: 320px; background: var(--background); scroll-behavior: smooth; }
-body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans), Arial, sans-serif; }
+body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-molevren-ui); }
 button,
 input,
 select,

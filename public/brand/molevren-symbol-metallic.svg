@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
+  <title id="title">Molevren metallic symbol</title>
+  <desc id="description">Large-format metallic interpretation of the abstract Molevren connection symbol.</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD0A4"/><stop offset=".18" stop-color="#FF9A2E"/>
+      <stop offset=".36" stop-color="#FF8A00"/><stop offset=".58" stop-color="#D95B00"/>
+      <stop offset=".78" stop-color="#FFB566"/><stop offset="1" stop-color="#B94000"/>
+    </linearGradient>
+    <radialGradient id="node" cx="32%" cy="24%" r="72%">
+      <stop offset="0" stop-color="#FFF2DF"/><stop offset=".22" stop-color="#FFB566"/>
+      <stop offset=".62" stop-color="#FF7900"/><stop offset="1" stop-color="#A82F00"/>
+    </radialGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D5BE3"/><stop offset=".45" stop-color="#0A3D91"/><stop offset="1" stop-color="#0B1324"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0B1324" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <g fill="none" stroke="url(#metal)" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M64 21 102 43v42l-38 22-38-22V43Z" stroke-width="5"/>
+      <path d="m64 35 18 11-18 11-18-11Z" stroke-width="4"/>
+      <path d="m70 20 10-9" stroke-width="3.5"/>
+    </g>
+    <path d="m38 52 26 14 26-14v35L64 102 38 87Z" fill="url(#core)"/>
+    <path d="M47 87V65l17 12 17-12v22h-9V80l-8 6-8-6v7Z" fill="#FFFDF7"/>
+    <g fill="url(#node)" stroke="#C85200" stroke-width="1.7">
+      <circle cx="64" cy="21" r="6"/><circle cx="102" cy="43" r="6"/>
+      <circle cx="102" cy="85" r="6"/><circle cx="64" cy="107" r="6"/>
+      <circle cx="26" cy="85" r="6"/><circle cx="26" cy="43" r="6"/>
+      <circle cx="82" cy="9" r="4.5"/>
+    </g>
+  </g>
+</svg>

@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import "@/styles/molevren-fonts.css";
 import "@/app/globals.css";
 import { DevMoleculesApp } from "@/components/platform/DevMoleculesApp";
 

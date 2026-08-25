@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { Geist, Geist_Mono } from "next/font/google";
 
+import "@/styles/molevren-fonts.css";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-
-const title = "Dev Molecules — Evidence-aware molecular learning";
+const title = "Molevren — Pharmaceutical Molecular Atlas & Academy";
 const description =
-  "Explore sourced molecular structures, non-operational synthesis stories, nomenclature and scientific evidence in Turkish or English.";
+  "Explore medicines from structure to effect in a bilingual pharmaceutical molecular atlas and academy.";
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#0B1324",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -20,20 +22,36 @@ export async function generateMetadata(): Promise<Metadata> {
   const forwardedProto = requestHeaders.get("x-forwarded-proto")?.split(",")[0]?.trim();
   const protocol = forwardedProto || (host.startsWith("localhost") ? "http" : "https");
   const metadataBase = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og-v2.png", metadataBase).toString();
+  const socialImage = new URL("/brand/molevren-og-1200x630.png", metadataBase).toString();
 
   return {
     metadataBase,
     title,
     description,
+    applicationName: "Molevren",
+    manifest: "/manifest.webmanifest",
     icons: {
-      icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+      icon: [
+        { url: "/brand/molevren-favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "any" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      other: [
+        {
+          rel: "mask-icon",
+          url: "/brand/molevren-mask-icon.svg",
+          color: "#FF8A00",
+        },
+      ],
     },
     openGraph: {
       title,
       description,
       type: "website",
-      images: [{ url: socialImage, width: 1200, height: 630, alt: "Dev Molecules evidence-aware learning environment" }],
+      siteName: "Molevren",
+      locale: "tr_TR",
+      alternateLocale: ["en_US"],
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Molevren Pharmaceutical Molecular Atlas & Academy" }],
     },
     twitter: {
       card: "summary_large_image",
@@ -47,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
