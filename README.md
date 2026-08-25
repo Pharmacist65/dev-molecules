@@ -1,10 +1,10 @@
-# Dev Molecules V2.1 — Public Alpha
+# Molevren — Public Alpha
 
-Dev Molecules is a bilingual, student-first pharmaceutical atlas and academy. It connects source-resolved molecular identity and structure to learning journeys without presenting missing, predicted, or educational content as verified science.
+Molevren is a bilingual, student-first pharmaceutical molecular atlas and academy. It connects source-resolved identity and structure to learning journeys without presenting missing, predicted, or educational content as verified science. **Dev Molecules remains the technical platform and repository name; Molevren is the reversible public working brand pending professional trademark clearance.**
 
 [Live application](https://pharmacist65.github.io/dev-molecules/) · [Public repository](https://github.com/Pharmacist65/dev-molecules)
 
-**Release boundary:** this repository is a public engineering and curriculum alpha. It is not a complete approved-drug database, peer-reviewed scientific publication, clinical decision tool, laboratory protocol, patent assessment, or autonomous discovery system. The active product-integrity gate is documented in [Dev Molecules V2.1](docs/V2_1_RELEASE_BLOCKER_SPRINT.md).
+**Release boundary:** this repository is a public engineering, brand, and curriculum alpha. It is not a complete approved-drug database, peer-reviewed scientific publication, clinical decision tool, laboratory protocol, patent assessment, trademark clearance, or autonomous discovery system. V2.1 remains the frozen integrity baseline documented in [Dev Molecules V2.1](docs/V2_1_RELEASE_BLOCKER_SPRINT.md); the public-brand and flagship Phase A layer is documented below.
 
 ## Product architecture
 
@@ -43,10 +43,11 @@ Catalog breadth and scientific depth are separate:
 
 - Atlas Browse searches and pages through all 1,552 imported records, then loads one shard/entity and requested structure through bounded caches.
 - Every one of the 1,552 resolved identities has a stable record route and a Basic Molecular Record boundary: source-matched identity, real 2D and computed 3D structures, provenance, conservative properties when present, and explicit nine-dimension coverage.
-- The 15 original curated molecules remain regression fixtures, teaching anchors, and the current Curated Dossier seed. Their routes retain Story/Reference depth; non-seed records open the Basic Molecular Record instead of an unavailable Dossier.
-- The current enrichment readiness report has two active source adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles.
+- The fixed Atlas seed remains 15 records. A separately reviewed Omeprazole identity brings the Curated Dossier registry to 16 without widening the seed Atlas.
+- Exactly three dossiers—Propranolol, Celecoxib, and Omeprazole—implement the Phase A flagship chain across source-scoped pharmacology, route/form-specific ADME, metabolite boundaries, synthesis, nomenclature, comparisons, and learning. The other 13 curated records retain their explicit V2.1 gaps.
+- The scalable enrichment readiness report still has two active source adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles. The three hand-curated flagship records do not masquerade as catalog-wide enrichment coverage.
 - Basic Record and Curated Dossier identity/structure fields are source-linked. Classification, target, ADME, metabolite, synthesis, nomenclature, and learning coverage are independently gated.
-- Pharmacology currently has no reviewed target-interaction dataset. ADME may show an exact curated product/form administration context, but it has no sourced quantitative phase measurements. Metabolite graphs have no reviewed edges.
+- The generated catalog has no reviewed target-interaction or ADME snapshot. Only the three named flagship dossiers carry audited, source-resolved target/action and route/form-specific ADME records; their metabolite edges preserve activity holds and never generalize beyond the cited context.
 
 See [Catalog pipeline](docs/CATALOG_PIPELINE.md), [enrichment readiness](public/catalog/reports/enrichment-readiness.json), [coverage](public/catalog/reports/coverage.json), and [unresolved rows](public/catalog/reports/unresolved.json).
 
@@ -117,6 +118,12 @@ git diff --check
 
 ## Visual review evidence
 
+[Watch the 75-second silent Molevren Phase A walkthrough](docs/assets/molevren/molevren-phase-a-walkthrough.mp4). It covers Home, Atlas Browse and Spatial, Basic Record, flagship Story/Reference, Academy, Synthesis, Nomenclature, and Lab against the same production-derived brand system.
+
+[![Molevren Phase A brand board](docs/assets/molevren/brand-board.png)](docs/assets/molevren/molevren-phase-a-walkthrough.mp4)
+
+The exact 18-image acceptance set and checksums are recorded in the [capture manifest](docs/assets/molevren/capture-manifest.json). Screenshots are product evidence, not scientific or trademark clearance.
+
 [Watch the V2.1 ten-second Home stability recording](docs/assets/v21/home-featured-10s.mp4). It contains exactly 300 frames at 30 FPS and accompanies the fixed-size idle captures.
 
 [![Dev Molecules V2.1 stable Home](docs/assets/v21/home-featured-idle-start.png)](docs/assets/v21/home-featured-10s.mp4)
@@ -147,6 +154,10 @@ tests/, e2e/, e2e-pages/          domain, integration, and browser acceptance ev
 
 Further documentation:
 
+- [Molevren name and domain research](docs/brand/MOLEVREN_NAME_AND_DOMAIN_RESEARCH.md)
+- [Molevren brand guide](docs/brand/MOLEVREN_BRAND_GUIDE.md)
+- [Flagship Phase A feasibility](docs/science/FLAGSHIP_DOSSIER_PHASE_A_FEASIBILITY.md)
+- [Flagship source and license matrix](docs/science/FLAGSHIP_SOURCE_AND_LICENSE_MATRIX.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Deployment](docs/DEPLOYMENT.md)
 - [Scientific governance](docs/SCIENTIFIC_GOVERNANCE.md)
@@ -170,4 +181,4 @@ Further documentation:
 
 ## Türkçe kısa özet
 
-Dev Molecules V2.1 Public Alpha; Home, İlaç Atlası, Academy ve Lab ana mimarisine sahip iki dilli bir farmasötik öğrenme prototipidir. Atlas Browse 1.552 çözümlenmiş kaydın tamamını indeksler ve her kimlik için kararlı bir kayıt yolu sunar. Seed dışındaki kayıtlar gerçek kimlik, 2B/3B yapı, köken ve açık kapsam durumları taşıyan Temel Moleküler Kayıt açar; 15 kürate seed kayıt ise Story/Reference derinliğindeki Kürate İlaç Dosyası'na ilerler. Spatial görünüm yalnız temsili ve sınırlandırılmış bir örneklem gösterir. Güncel enrichment raporunda sınıflandırma, farmakoloji ve ADME için eklenmiş kayıt sayısı sıfırdır; eksikler yapay içerikle doldurulmaz. Academy sekiz modülden oluşur. Sentez kapsamı üç ilaç, altı rota, 20 dönüşüm ve 12 mekanizma kaydıdır; yalnız iki reported rota doğrudan kaynakta bildirilmiş olarak sunulur. Ketcher Lab cihazda çalışır ve kullanıcı açıkça dışa aktarmadıkça yapı için dosya veya sunucu kaydı oluşturmaz. V2.1 yerel kabul kapıları ve kanıt seti tamamlanmıştır; yayımlanan her commit yine CI, dağıtım ve anonim canlı kontrollerinden geçmelidir.
+Molevren Public Alpha, Dev Molecules teknik platformu üzerinde çalışan iki dilli bir farmasötik moleküler atlas ve akademidir. Atlas Browse 1.552 çözümlenmiş kaydın tamamını indeksler ve her kimlik için kararlı bir kayıt yolu sunar; Spatial yalnız temsili ve sınırlandırılmış bir örneklem gösterir. Sabit Atlas seed’i 15 kayıttır; ayrı Omeprazole kimliğiyle Kürate Dossier registry’si 16 kayda çıkar. Yalnız Propranolol, Celecoxib ve Omeprazole tam Phase A flagship zincirine sahiptir; diğer 13 kürate kayıt ve geniş katalogdaki bilimsel boşluklar yapay içerikle doldurulmaz. `@/@@` içeren isomerik SMILES ham veri olarak aynen korunur, Student görünümünde ise yerel stereo yön işaretleri olarak açıklanıp açılır ayrıntıya alınır. Ketcher Lab cihazda çalışır ve kullanıcı açıkça dışa aktarmadıkça yapı için dosya veya sunucu kaydı oluşturmaz. Molevren orta-yüksek ön marka riskine sahip geri alınabilir bir çalışma markasıdır; hukuki tescil araştırması ve domain satın alımı yapılmamıştır.

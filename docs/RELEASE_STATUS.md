@@ -1,10 +1,17 @@
-# Dev Molecules V2.1 Public Alpha — Release Status
+# Molevren Public Alpha — Release Status
 
 Status date: 2026-08-25
 
 This document distinguishes implemented product flow, checked scientific coverage, and architecture-only capability. Counts are release evidence for this snapshot, never schema or product ceilings.
 
-V2.1 implementation, local acceptance gates, and the required visual evidence are present in the release candidate. Release status is still per-commit: the [V2.1 product-integrity gates](V2_1_RELEASE_BLOCKER_SPRINT.md), CI deployment, and anonymous-live checks must all resolve against the same published commit.
+Dev Molecules V2.1 is the frozen integrity baseline. Molevren is the reversible public working brand layered on that technical platform, together with three audited flagship Dossier chains. Local acceptance and visual evidence are present in the release candidate. Release status remains per-commit: the [V2.1 product-integrity gates](V2_1_RELEASE_BLOCKER_SPRINT.md), CI deployment, and anonymous-live checks must all resolve against the same published commit.
+
+## Working brand and evidence
+
+- **Public name:** Molevren — Pharmaceutical Molecular Atlas & Academy.
+- **Technical identity:** repository and platform remain `dev-molecules`; no destructive rename was performed.
+- **Legal boundary:** the preliminary name review is **medium-high risk**, not trademark clearance. No domain or social handle was purchased or reserved. See [name and domain research](brand/MOLEVREN_NAME_AND_DOMAIN_RESEARCH.md).
+- **Product evidence:** 18 exact PNGs, a checksum manifest, and one 75-second silent H.264 walkthrough are committed under [`docs/assets/molevren/`](assets/molevren/).
 
 ## Routed product surfaces
 
@@ -14,7 +21,7 @@ V2.1 implementation, local acceptance gates, and the required visual evidence ar
 | Drug Atlas · Browse | Default Atlas view; indexed search and paging over all 1,552 imported records; lazy entity and requested 2D/3D hydration | Catalog membership does not imply Curated Dossier depth or reviewed pharmacology. |
 | Drug Atlas · Spatial | Lazy, one-WebGL representative Universe/cluster/focus/compare experience | The bounded scene represents only a sample of the checked structure index; unclassified generated records do not become invented clusters. |
 | Basic Molecular Record | Stable record route for every one of the 1,552 resolved identities; source-matched names and identifiers, real 2D structure, computed 3D conformer, provenance, molecular weight when present, and explicit nine-dimension coverage | This is an identity/structure baseline. Unavailable classification, pharmacology, ADME, metabolite, synthesis, nomenclature, and learning fields remain unavailable; bounded structure-neighbor hints are computed and unreviewed. |
-| Curated Drug Dossier | Story and Reference modes for the 15 curated seed records; independent identity, structure, classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review indicators | Curated depth is not inferred for non-seed records. Pharmacology and quantitative ADME are not populated. |
+| Curated Drug Dossier | Story and Reference modes for 16 curated records: the fixed 15-record Atlas seed plus a separately reviewed Omeprazole identity. Propranolol, Celecoxib, and Omeprazole implement the complete Phase A flagship chain. | The other 13 curated records retain explicit scientific gaps. Flagship depth is not inferred for non-flagship or non-curated records. |
 | Family | Two bounded review workspaces with four exact PubChem identity/2D representatives each, computed-unreviewed structural fingerprint comparison, explicit coverage gaps, and unknown-ID fail-closed routing | No sourced production classification, shared mechanism, targets, ADME, or family comparison observations are configured. The representative set is not family coverage. |
 | Academy | Eight-module map with real progress where activities exist | Five modules are available, Pharmacology and ADME are coverage-dependent, and standalone Reaction Mechanisms is planned. |
 | Nomenclature Academy | Eight sections, 22 exercises, 20 parseable 2D structures, 16 response/widget contracts | Curated deterministic exercises; not a general IUPAC parser or arbitrary structure validator. |
@@ -33,7 +40,9 @@ V2.1 implementation, local acceptance gates, and the required visual evidence ar
 | Exact unique PubChem identity resolutions | 1,747 |
 | Imported complete 2D/3D records | 1,552 |
 | Stable molecular-record routes | 1,552 |
-| Curated Dossier records | 15 |
+| Fixed Atlas seed records | 15 |
+| Curated Dossier records | 16 |
+| Phase A flagship Dossiers | 3 |
 | Fail-closed unresolved rows | 779 |
 | Published SDF assets | 3,104 |
 | Active public-build source adapters | 2 |
@@ -48,10 +57,10 @@ DrugCentral and PubChem are the only enabled public-build source policies. Targe
 
 ## Scientific coverage boundary
 
-- Basic Molecular Record identity/structure coverage reaches all 1,552 resolved records. Deep Curated Dossier coverage remains seed-only, and no non-seed record is completed with generated prose.
-- The checked catalog has no reviewed target-interaction snapshot. Pharmacology panels therefore expose an explicit unavailable state.
-- Curated product/form route context can be present in ADME, but absorption, distribution, metabolism, and excretion measurements remain empty without direct evidence and conditions.
-- No reviewed metabolite edges are configured. An empty graph does not mean that no metabolites exist.
+- Basic Molecular Record identity/structure coverage reaches all 1,552 resolved records. Deep flagship coverage is limited to the three named dossiers, and no other record is completed with generated prose.
+- The checked catalog still has no scalable reviewed target-interaction or ADME enrichment snapshot. The three flagship dossiers use a separate, hand-curated source registry with explicit review and provenance.
+- Propranolol, Celecoxib, and Omeprazole carry route/form-specific ADME measurements only when dose, formulation, population, conditions, units, and source are resolvable. Their known missing properties remain `null`.
+- Reviewed metabolite edges exist only for the three flagship records. Activity boundaries remain exact: two Propranolol metabolites are `unknown`, Celecoxib statements are limited to COX-1/COX-2 inhibition, and Omeprazole statements are limited to antisecretory context.
 - Synthesis route kind, source gate, and presentation are separate. The current six-route split is three `source-supported` and three `context-supported`; strict reported presentation counts only Atenolol and Carvedilol.
 - Synthesis and nomenclature are educational content with their own review boundaries. Passing deterministic tests does not make them peer-reviewed science.
 - PubChem 3D assets are computed conformers, not experimental structures, target-bound poses, or clinical evidence.
@@ -76,6 +85,20 @@ Universal lookup, unified cross-representation Lens, Property Atlas distribution
 - The public reviewer route is locked and the research sandbox is unavailable; static hosting does not simulate those server-backed capabilities.
 
 Performance claims remain bounded to architecture and tests: route-level lazy loading, a single WebGL context for Spatial Atlas, bounded metadata/structure caches, and demand-driven asset loading are implemented. This release does not publish a universal device FPS, Lighthouse score, or network-latency guarantee.
+
+## Candidate verification snapshot
+
+The frozen local candidate passed on 2026-08-25:
+
+- TypeScript, ESLint, Vinext production build, and GitHub Pages build;
+- 346/346 Node unit and integration tests;
+- 45/45 executed primary Chromium E2E scenarios, with one documentation-only capture test intentionally skipped;
+- 5/5 GitHub Pages E2E scenarios;
+- exact validation of 1,552 catalog records and 3,104 SDF assets;
+- third-party notice consistency and `npm audit --omit=dev --audit-level=high` with zero reported vulnerabilities;
+- the final 18-image / 75-second evidence manifest with no runtime or horizontal-overflow errors.
+
+These are engineering acceptance results for the candidate commit, not scientific peer review, external accessibility certification, legal clearance, or a guarantee about future source availability.
 
 ## Release gate
 
