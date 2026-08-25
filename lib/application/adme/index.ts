@@ -12,6 +12,45 @@ export type AdmeSourceResolver = (
   sourceId: SourceId,
 ) => SourceReference | undefined;
 
+const administrationRouteLabels: Readonly<
+  Record<string, Readonly<Record<"tr" | "en", string>>>
+> = {
+  ORAL: { tr: "Oral", en: "Oral" },
+  INTRAVENOUS: { tr: "İntravenöz", en: "Intravenous" },
+  OPHTHALMIC: { tr: "Oftalmik", en: "Ophthalmic" },
+  TOPICAL: { tr: "Topikal", en: "Topical" },
+};
+
+const dosageFormLabels: Readonly<
+  Record<string, Readonly<Record<"tr" | "en", string>>>
+> = {
+  "CAPSULE, EXTENDED RELEASE": {
+    tr: "Uzatılmış salımlı kapsül",
+    en: "Extended-release capsule",
+  },
+  CAPSULE: { tr: "Kapsül", en: "Capsule" },
+  TABLET: { tr: "Tablet", en: "Tablet" },
+  SOLUTION: { tr: "Çözelti", en: "Solution" },
+  "SOLUTION/DROPS": { tr: "Damla çözelti", en: "Solution/drops" },
+  SUSPENSION: { tr: "Süspansiyon", en: "Suspension" },
+  GEL: { tr: "Jel", en: "Gel" },
+};
+
+export function presentAdministrationRoute(
+  value: string,
+  locale: "tr" | "en",
+): string {
+  return administrationRouteLabels[value.trim().toUpperCase()]?.[locale] ?? value;
+}
+
+export function presentDosageForm(
+  value: string | null | undefined,
+  locale: "tr" | "en",
+): string {
+  if (!value) return "";
+  return dosageFormLabels[value.trim().toUpperCase()]?.[locale] ?? value;
+}
+
 const admeEvidenceScope = /adme|pharmacokinetic|absorption|distribution|metaboli|excretion|clearance|half[- ]?life|bioavailability/i;
 
 const contextField = (

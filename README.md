@@ -1,16 +1,16 @@
-# Dev Molecules 2.0
+# Dev Molecules V2.1 — Public Alpha
 
 Dev Molecules is a bilingual, student-first pharmaceutical atlas and academy. It connects source-resolved molecular identity and structure to learning journeys without presenting missing, predicted, or educational content as verified science.
 
 [Live application](https://pharmacist65.github.io/dev-molecules/) · [Public repository](https://github.com/Pharmacist65/dev-molecules)
 
-**Release boundary:** this repository is a public engineering and curriculum prototype. It is not a complete approved-drug database, peer-reviewed scientific publication, clinical decision tool, laboratory protocol, patent assessment, or autonomous discovery system.
+**Release boundary:** this repository is a public engineering and curriculum alpha. It is not a complete approved-drug database, peer-reviewed scientific publication, clinical decision tool, laboratory protocol, patent assessment, or autonomous discovery system. The active product-integrity gate is documented in [Dev Molecules V2.1](docs/V2_1_RELEASE_BLOCKER_SPRINT.md).
 
 ## Product architecture
 
 The primary navigation is deliberately small:
 
-- **Home** — search over the 1,552-record structure index, one lazily loaded molecular object, and clear paths into Atlas, Academy, and a curated dossier.
+- **Home** — search over the 1,552-record structure index, one lazily loaded molecular object, and clear paths into Atlas, Academy, and the molecular-record flow.
 - **Drug Atlas** — **Browse** pages through the 1,552 imported structure records in the checked snapshot; **Spatial** is an optional, lazily loaded representative Three.js view. Two bounded Family review workspaces compare four exact identity/2D records each while keeping unsourced family science empty. The spatial sample and Family representatives are never presented as catalog coverage.
 - **Academy** — an eight-module map that distinguishes working lessons, coverage-dependent lessons, and planned curriculum.
 - **Lab** — an on-device Ketcher structure editor, curated comparison, local evidence cards, and an explicitly unavailable private-research beta.
@@ -42,9 +42,10 @@ The 779 unresolved rows are accounted for without name-based identity guessing: 
 Catalog breadth and scientific depth are separate:
 
 - Atlas Browse searches and pages through all 1,552 imported records, then loads one shard/entity and requested structure through bounded caches.
-- The 15 original curated molecules remain regression fixtures, teaching anchors, and the current deep-Dossier seed. An imported catalog hit outside that seed receives an explicit unavailable state rather than an invented dossier.
+- Every one of the 1,552 resolved identities has a stable record route and a Basic Molecular Record boundary: source-matched identity, real 2D and computed 3D structures, provenance, conservative properties when present, and explicit nine-dimension coverage.
+- The 15 original curated molecules remain regression fixtures, teaching anchors, and the current Curated Dossier seed. Their routes retain Story/Reference depth; non-seed records open the Basic Molecular Record instead of an unavailable Dossier.
 - The current enrichment readiness report has two active source adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles.
-- Dossier identity and structure fields are source-linked. Classification, target, ADME, metabolite, synthesis, nomenclature, and learning coverage are independently gated.
+- Basic Record and Curated Dossier identity/structure fields are source-linked. Classification, target, ADME, metabolite, synthesis, nomenclature, and learning coverage are independently gated.
 - Pharmacology currently has no reviewed target-interaction dataset. ADME may show an exact curated product/form administration context, but it has no sourced quantitative phase measurements. Metabolite graphs have no reviewed edges.
 
 See [Catalog pipeline](docs/CATALOG_PIPELINE.md), [enrichment readiness](public/catalog/reports/enrichment-readiness.json), [coverage](public/catalog/reports/coverage.json), and [unresolved rows](public/catalog/reports/unresolved.json).
@@ -102,6 +103,7 @@ npm run typecheck
 npm run lint
 npm run catalog:validate
 npm run catalog:report
+npm run licenses:check
 npm run build
 npm run build:pages
 node --test tests/*.test.mjs
@@ -115,11 +117,17 @@ git diff --check
 
 ## Visual review evidence
 
-[Watch the 86-second silent Dev Molecules 2.0 walkthrough](docs/assets/demo/dev-molecules-v2-walkthrough.mp4).
+[Watch the V2.1 ten-second Home stability recording](docs/assets/v21/home-featured-10s.mp4). It contains exactly 300 frames at 30 FPS and accompanies the fixed-size idle captures.
 
-[![Dev Molecules 2.0 Home](docs/assets/screenshots/home-en.png)](docs/assets/demo/dev-molecules-v2-walkthrough.mp4)
+[![Dev Molecules V2.1 stable Home](docs/assets/v21/home-featured-idle-start.png)](docs/assets/v21/home-featured-10s.mp4)
 
-The committed acceptance set covers [Home in Turkish](docs/assets/screenshots/home-tr.png), [Atlas Browse](docs/assets/screenshots/atlas-browse.png), [Atlas Spatial](docs/assets/screenshots/atlas-spatial.png), [Dossier overview](docs/assets/screenshots/dossier-overview.png), [Pharmacology](docs/assets/screenshots/dossier-pharmacology.png), [ADME](docs/assets/screenshots/dossier-adme.png), [Synthesis](docs/assets/screenshots/dossier-synthesis.png), [Nomenclature](docs/assets/screenshots/nomenclature-lesson.png), [Synthesis route learning](docs/assets/screenshots/synthesis-route.png), [Lab](docs/assets/screenshots/lab.png), [the fail-closed Family review workspace](docs/assets/screenshots/family-page.png), and [mobile Home](docs/assets/screenshots/mobile-home.png). Screenshots demonstrate the routed product and its explicit gaps; they are not evidence of scientific review.
+The committed V2.1 acceptance set covers the [pre-fix clipped Home](docs/assets/v21/home-featured-before-tr-start.png), [stable Home at start](docs/assets/v21/home-featured-idle-start.png), [the same Home after three idle seconds](docs/assets/v21/home-featured-idle-after-3s.png), [the non-selectable Home molecule](docs/assets/v21/home-featured-selected-state.png), [Beta-sitosterol Basic Molecular Record](docs/assets/v21/beta-sitosterol-basic-record.png), [Propranolol Curated Dossier](docs/assets/v21/propranolol-curated-dossier.png), [compact empty ADME state](docs/assets/v21/empty-adme-compact.png), [Student Spatial Atlas](docs/assets/v21/atlas-spatial-student.png), and [the real Ketcher Lab editor](docs/assets/v21/lab-ketcher.png). Screenshots demonstrate routed behavior and explicit gaps; they are not evidence of scientific review.
+
+[Watch the 86-second silent V2.0 baseline walkthrough](docs/assets/demo/dev-molecules-v2-walkthrough.mp4). It predates the V2.1 Basic Molecular Record and product-integrity changes.
+
+[![Dev Molecules V2.0 baseline Home](docs/assets/screenshots/home-en.png)](docs/assets/demo/dev-molecules-v2-walkthrough.mp4)
+
+The older V2.0 baseline capture set remains available for regression comparison: [Home in Turkish](docs/assets/screenshots/home-tr.png), [Atlas Browse](docs/assets/screenshots/atlas-browse.png), [Atlas Spatial](docs/assets/screenshots/atlas-spatial.png), [Dossier overview](docs/assets/screenshots/dossier-overview.png), [Pharmacology](docs/assets/screenshots/dossier-pharmacology.png), [ADME](docs/assets/screenshots/dossier-adme.png), [Synthesis](docs/assets/screenshots/dossier-synthesis.png), [Nomenclature lesson](docs/assets/screenshots/nomenclature-lesson.png), [Synthesis route learning](docs/assets/screenshots/synthesis-route.png), [Lab](docs/assets/screenshots/lab.png), [the fail-closed Family review workspace](docs/assets/screenshots/family-page.png), and [mobile Home](docs/assets/screenshots/mobile-home.png).
 
 ## Delivery architecture
 
@@ -162,4 +170,4 @@ Further documentation:
 
 ## Türkçe kısa özet
 
-Dev Molecules 2.0; Home, İlaç Atlası, Academy ve Lab ana mimarisine sahip iki dilli bir farmasötik öğrenme prototipidir. Atlas Browse 1.552 içe aktarılmış kaydın tamamını indeksler; Spatial görünüm yalnız temsili ve sınırlandırılmış bir örneklem gösterir. Derin İlaç Dosyası kapsamı şimdilik 15 kürate seed kayıtla sınırlıdır. Güncel enrichment raporunda sınıflandırma, farmakoloji ve ADME için eklenmiş kayıt sayısı sıfırdır; eksikler yapay içerikle doldurulmaz. Academy sekiz modülden oluşur. Sentez kapsamı üç ilaç, altı rota, 20 dönüşüm ve 12 mekanizma kaydıdır; yalnız iki reported rota doğrudan kaynakta bildirilmiş olarak sunulur. Ketcher Lab cihazda çalışır ve kullanıcı açıkça dışa aktarmadıkça yapı için dosya veya sunucu kaydı oluşturmaz.
+Dev Molecules V2.1 Public Alpha; Home, İlaç Atlası, Academy ve Lab ana mimarisine sahip iki dilli bir farmasötik öğrenme prototipidir. Atlas Browse 1.552 çözümlenmiş kaydın tamamını indeksler ve her kimlik için kararlı bir kayıt yolu sunar. Seed dışındaki kayıtlar gerçek kimlik, 2B/3B yapı, köken ve açık kapsam durumları taşıyan Temel Moleküler Kayıt açar; 15 kürate seed kayıt ise Story/Reference derinliğindeki Kürate İlaç Dosyası'na ilerler. Spatial görünüm yalnız temsili ve sınırlandırılmış bir örneklem gösterir. Güncel enrichment raporunda sınıflandırma, farmakoloji ve ADME için eklenmiş kayıt sayısı sıfırdır; eksikler yapay içerikle doldurulmaz. Academy sekiz modülden oluşur. Sentez kapsamı üç ilaç, altı rota, 20 dönüşüm ve 12 mekanizma kaydıdır; yalnız iki reported rota doğrudan kaynakta bildirilmiş olarak sunulur. Ketcher Lab cihazda çalışır ve kullanıcı açıkça dışa aktarmadıkça yapı için dosya veya sunucu kaydı oluşturmaz. V2.1 yerel kabul kapıları ve kanıt seti tamamlanmıştır; yayımlanan her commit yine CI, dağıtım ve anonim canlı kontrollerinden geçmelidir.

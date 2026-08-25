@@ -10,7 +10,7 @@ The initial small data slice is an implementation and validation seed only. It i
 
 Explore, Learn, Build, Teach, and Discover remain five product jobs, but they are no longer five equal primary tabs. The current information architecture is Home / Drug Atlas / Academy / Lab, with Instructor and Reviewer as secondary workspaces:
 
-1. **Explore — Home and Drug Atlas:** find any indexed record in Browse, then optionally move into the bounded Spatial Atlas, a curated dossier, or a learning route.
+1. **Explore — Home and Drug Atlas:** find any indexed record in Browse, open its source-grounded molecular record, then optionally move into the bounded Spatial Atlas, Curated Dossier depth where available, or a learning route.
 2. **Learn — Academy:** move through an eight-module learning map, the interactive Nomenclature Academy, and a source-gated Synthesis Atlas.
 3. **Build — Lab:** use the route-lazy Ketcher 2D editor, inspect exact static-catalog identity, and export a device-local project deliberately.
 4. **Teach — Instructor Studio:** compose local lesson packages from real nomenclature and synthesis task IDs and, when a local progress snapshot exists, export a local summary.
@@ -49,8 +49,9 @@ The current slice proves the product loop with a source-versioned approved-list 
 - 15 curated regression fixtures plus an all-row evaluation of the selected 2,331-row DrugCentral FDA list: 1,858 complete same-ID source structures, 1,747 exact PubChem resolutions, 1,552 imported 2D/3D pairs, and 779 explicit unresolved rows;
 - categorical therapeutic, target, and scaffold lenses plus a scoped structural-similarity lens, a bounded resident Explore window, and lazy structure-index search across all 1,552 imported records;
 - a Home / Drug Atlas / Academy / Lab shell with Student presentation and a Dossier-only Expert default preference;
-- Browse over the 1,552 imported structure records in the checked snapshot, an optional representative Spatial Atlas, and a deep-Dossier seed limited to the 15 curated records;
-- Story and Reference dossier modes with independent coverage indicators; reviewed target interactions, quantitative ADME fields, and reviewed metabolite edges are currently unavailable;
+- Browse over the 1,552 imported structure records in the checked snapshot, a stable Basic Molecular Record boundary for every resolved identity, an optional representative Spatial Atlas, and Curated Dossier depth limited to the 15 seed records;
+- Basic Molecular Records with source-matched identity, real 2D structure, separately labelled computed 3D conformer, provenance, conservative properties when present, and explicit nine-dimension coverage; non-seed records no longer end at an unavailable Dossier;
+- Story and Reference Curated Dossier modes with independent coverage indicators; reviewed target interactions, quantitative ADME fields, and reviewed metabolite edges are currently unavailable;
 - six source-gated Synthesis Atlas routes over three molecules, with 20 transformations and 12 mechanism records; only two reported routes meet the strict direct-source-reported presentation gate;
 - an eight-module Academy map plus an eight-section, 22-exercise Nomenclature Academy over 20 parseable structures and 16 concrete response/widget types;
 - five guided missions covering recognition, scaffold building, repair, synthesis ordering and evidence reading;

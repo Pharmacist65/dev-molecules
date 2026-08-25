@@ -175,8 +175,6 @@ export function SynthesisTheatre({
         </div>
         <dl>
           <div><dt>{t("synthesis.routeType")}</dt><dd>{routeLabelKey ? t(routeLabelKey) : t("common.notSpecified")}</dd></div>
-          <div><dt>{t("synthesis.routeId")}</dt><dd>{story.id}</dd></div>
-          <div><dt>{t("synthesis.routeVersion")}</dt><dd>{story.version}</dd></div>
           <div><dt>{t("synthesis.reviewStatus")}</dt><dd>{t("synthesis.expertReviewPending")}</dd></div>
         </dl>
       </div>

@@ -1,5 +1,9 @@
 import type { AdmeProfile } from "@/lib/domain/adme";
 import type { PharmacologyProfile } from "@/lib/domain/pharmacology";
+import {
+  presentAdministrationRoute,
+  presentDosageForm,
+} from "@/lib/application/adme";
 
 import styles from "./Adme.module.css";
 
@@ -50,7 +54,9 @@ export function DrugJourney({ profile, pharmacology, locale }: DrugJourneyProps)
     {
       id: "route",
       label: labels.route,
-      value: profile?.administration.route.value ?? labels.unavailable,
+      value: profile
+        ? presentAdministrationRoute(profile.administration.route.value, locale)
+        : labels.unavailable,
       available: Boolean(profile),
     },
     {
@@ -103,8 +109,8 @@ export function DrugJourney({ profile, pharmacology, locale }: DrugJourneyProps)
       {profile ? (
         <div className={styles.routeContext}>
           <span>{labels.contextOnly}</span>
-          <strong>{profile.administration.route.value}</strong>
-          <small>{profile.administration.formulation?.value}</small>
+          <strong>{presentAdministrationRoute(profile.administration.route.value, locale)}</strong>
+          <small>{presentDosageForm(profile.administration.formulation?.value, locale)}</small>
         </div>
       ) : null}
       <ol className={styles.journeyPath}>

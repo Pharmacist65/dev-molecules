@@ -211,7 +211,7 @@ test("Atlas exposes the 1,552-record Browse boundary, bounded Spatial view, and 
   await expect(atlas.locator('[data-atlas-spatial="true"]')).toBeVisible();
   await expect(
     atlas.getByText(
-      "This is not an FDA product or application universe; the scene loads only representative structures from the 1,552-record structure-complete index.",
+      "Use Browse to find a specific record in the structure index.",
       { exact: true },
     ),
   ).toBeVisible();
@@ -278,12 +278,12 @@ test("seed dossier separates Story and Reference modes and states pharmacology a
   await expect(
     dossier.locator('[data-pharmacology-coverage="unavailable"]'),
   ).toContainText("Farmakoloji kapsamı henüz açık değil");
+  const compactAdmeGap = dossier.locator('[data-empty-coverage="adme"]');
+  await expect(compactAdmeGap).toHaveCount(1);
+  await expect(compactAdmeGap.locator("[data-phase]")).toHaveCount(0);
   await expect(
-    dossier.getByText(
-      "Bu bağlam için kaynaklandırılmış ADME ölçümü henüz yok.",
-      { exact: true },
-    ),
-  ).toHaveCount(4);
+    compactAdmeGap.locator('[data-adme-context-only="true"]'),
+  ).toHaveCount(1);
   await expect(
     dossier.locator('details[data-source-drawer="closed-by-default"]').first(),
   ).not.toHaveAttribute("open", "");

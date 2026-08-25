@@ -16,6 +16,13 @@ export interface MolecularSceneCamera {
   readonly far?: number;
 }
 
+export interface MolecularSceneFocusOptions {
+  /** Whether focus may fit on first load, route focus changes and meaningful resizes. */
+  readonly autoFit?: boolean;
+  /** Fraction of each viewport edge kept clear around the focused molecule. */
+  readonly paddingFraction?: number;
+}
+
 export interface MolecularSceneMolecule {
   readonly id: string;
   readonly name: string;
@@ -95,9 +102,14 @@ export interface MolecularScenePort {
   getLayoutMetrics(): MolecularSceneLayoutMetrics;
   /** Fits the camera to the last collision-aware layout, if one is active. */
   fitVisibleMolecules(): MolecularSceneCamera | null;
+  /** Fits the current focused structure without changing its auto-fit policy. */
+  fitFocusedMolecule(): MolecularSceneCamera | null;
   /** Recomputes real-SDF placement for the current viewport without reloading data. */
   relayoutVisibleMolecules(): void;
-  focusMolecule(moleculeId: string | null): void;
+  focusMolecule(
+    moleculeId: string | null,
+    options?: MolecularSceneFocusOptions,
+  ): void;
   setEmphasizedMolecule(moleculeId: string | null): void;
   setRepresentation(representation: MolecularSceneRepresentation): void;
   setHydrogenVisibility(visible: boolean): void;
@@ -133,6 +145,13 @@ export interface MolecularSceneStatusDetail {
   readonly error: string | null;
 }
 
+/** Real CSS viewport committed after the canvas adapter has resized. */
+export interface MolecularSceneViewportCommit {
+  readonly width: number;
+  readonly height: number;
+  readonly aspect: number;
+}
+
 export interface SharedMolecularSceneProps {
   readonly molecules: readonly MolecularSceneMolecule[];
   readonly visibleMoleculeIds: readonly string[];
@@ -144,6 +163,14 @@ export interface SharedMolecularSceneProps {
   readonly showHydrogens?: boolean;
   readonly camera?: MolecularSceneCamera;
   readonly interactionMode?: MolecularSceneInteractionMode;
+  /** Focus-only atom picking/readout. Disable for decorative product stages. */
+  readonly atomSelectionEnabled?: boolean;
+  /** Replaces renderer terminology with learner-facing loading and fallback copy. */
+  readonly copyMode?: "default" | "student";
+  /** Keeps a deterministic empty envelope around a focused molecule. */
+  readonly focusFitPadding?: number;
+  /** Allows the focused molecule to fit only at explicit lifecycle boundaries. */
+  readonly focusAutoFit?: boolean;
   readonly className?: string;
   readonly ariaLabel?: string;
   readonly onAtomSelect?: (atom: MolecularSceneAtom | null) => void;
@@ -152,7 +179,11 @@ export interface SharedMolecularSceneProps {
   readonly onMoleculeBoundsChange?: (
     bounds: readonly MolecularSceneScreenBounds[],
   ) => void;
-  readonly onCameraChange?: (camera: MolecularSceneCamera) => void;
+  readonly onViewportCommit?: (viewport: MolecularSceneViewportCommit) => void;
+  readonly onCameraChange?: (
+    camera: MolecularSceneCamera,
+    cameraRevision: number,
+  ) => void;
   readonly onSceneReady?: (port: MolecularScenePort) => void;
   readonly onStatusChange?: (detail: MolecularSceneStatusDetail) => void;
   readonly onComparisonAnalysis?: (

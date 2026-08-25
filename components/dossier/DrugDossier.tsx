@@ -26,6 +26,7 @@ export interface DrugDossierProps {
   readonly initialMode?: DossierMode;
   readonly onBackToAtlas?: () => void;
   readonly onOpenSynthesis?: (moleculeId: string) => void;
+  readonly onOpenSynthesisAcademy?: () => void;
   readonly onOpenNomenclature?: (moleculeId: string) => void;
 }
 
@@ -52,11 +53,14 @@ const copy = {
     clinicalBoundary: "Eğitim ve referans içeriği · klinik karar desteği değildir",
     unavailableTitle: "Bu bağlantı için kürate edilmiş dossier kaydı bulunamadı",
     unavailableBody: "Katalog kaydının bulunamaması molekülün yokluğu, yeniliği veya sentezlenebilirliği hakkında hüküm üretmez.",
-    learningTitle: "Molekülden derse geç",
-    learningBody: "Yalnız çalışan ve kaynak sınırı tanımlı öğrenme alanları açılır.",
     synthesis: "Sentez dersine git",
+    generalSynthesis: "Genel Sentez Akademisi'ne git",
     nomenclature: "Nomenklatür dersine git",
-    noRelatedLessons: "Bu molekül için ilaç-özel ders bağlantısı henüz kaynak sınırını geçmedi.",
+    synthesisAvailable: "Kürate edilmiş sentez dersi mevcut",
+    synthesisUnavailable: "İlaç-özel sentez dersi henüz yok",
+    nomenclatureAvailable: "İlaç-özel nomenklatür dersi mevcut",
+    nomenclatureUnavailable: "İlaç-özel nomenklatür dersi henüz yok",
+    comparisonsUnavailable: "Kaynaklandırılmış SAR karşılaştırması henüz yok",
     formula: "FORMÜL",
     molarMass: "MOLAR KÜTLE",
     unavailableSection: "Bu bölümün ilaç-özel içeriği henüz kaynaklandırılmadı.",
@@ -85,11 +89,14 @@ const copy = {
     clinicalBoundary: "Education and reference · not clinical decision support",
     unavailableTitle: "No curated dossier record was found for this link",
     unavailableBody: "Absence from the catalog does not establish molecular absence, novelty, or synthesizability.",
-    learningTitle: "Move from molecule to lesson",
-    learningBody: "Only working learning areas with explicit source boundaries are opened.",
     synthesis: "Open synthesis lesson",
+    generalSynthesis: "Open general Synthesis Academy",
     nomenclature: "Open nomenclature lesson",
-    noRelatedLessons: "No drug-specific lesson link has passed its source boundary for this molecule yet.",
+    synthesisAvailable: "A curated synthesis lesson is available",
+    synthesisUnavailable: "No drug-specific synthesis lesson is available yet",
+    nomenclatureAvailable: "A drug-specific nomenclature lesson is available",
+    nomenclatureUnavailable: "No drug-specific nomenclature lesson is available yet",
+    comparisonsUnavailable: "No sourced SAR comparison is available yet",
     formula: "FORMULA",
     molarMass: "MOLAR MASS",
     unavailableSection: "Drug-specific content for this section is not sourced yet.",
@@ -148,7 +155,12 @@ function CoverageGrid({ dossier, locale }: { readonly dossier: DrugDossierRecord
       </header>
       <ul>
         {dossier.coverage.map((item) => (
-          <li key={item.dimension} data-status={item.status} title={item.reason}>
+          <li
+            key={item.dimension}
+            data-coverage-dimension={item.dimension}
+            data-status={item.status}
+            title={item.reason}
+          >
             <i aria-hidden="true" />
             <div>
               <strong>{dimensionLabels[item.dimension][locale]}</strong>
@@ -179,33 +191,33 @@ function ClassificationSummary({ dossier, locale }: { readonly dossier: DrugDoss
   );
 }
 
-function LearningLinks({
-  dossier,
-  locale,
-  onOpenSynthesis,
-  onOpenNomenclature,
+function SectionCoverageMessage({
+  section,
+  eyebrow,
+  title,
+  message,
+  available,
+  action,
 }: {
-  readonly dossier: DrugDossierRecord;
-  readonly locale: "tr" | "en";
-  readonly onOpenSynthesis?: (moleculeId: string) => void;
-  readonly onOpenNomenclature?: (moleculeId: string) => void;
+  readonly section: "synthesis" | "nomenclature" | "comparisons";
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly message: string;
+  readonly available: boolean;
+  readonly action?: Readonly<{ label: string; onClick: () => void }>;
 }) {
-  const labels = copy[locale];
-  const availability = getDossierLearningAvailability(dossier);
-  const canOpenSynthesis = availability.synthesis && Boolean(onOpenSynthesis);
-  const canOpenNomenclature = availability.nomenclature && Boolean(onOpenNomenclature);
   return (
-    <section className={styles.learningLinks}>
+    <section
+      className={styles.sectionCoverageMessage}
+      data-coverage-state={available ? "available" : "unavailable"}
+      data-empty-coverage={available ? undefined : section}
+    >
       <div>
-        <span>{locale === "tr" ? "İLGİLİ DERSLER" : "RELATED LESSONS"}</span>
-        <h2>{labels.learningTitle}</h2>
-        <p>{labels.learningBody}</p>
+        <span>{eyebrow}</span>
+        <h2>{title}</h2>
+        <p>{message}</p>
       </div>
-      <div>
-        {canOpenSynthesis ? <button type="button" onClick={() => onOpenSynthesis?.(dossier.moleculeId)}>{labels.synthesis} <i>↗</i></button> : null}
-        {canOpenNomenclature ? <button type="button" onClick={() => onOpenNomenclature?.(dossier.moleculeId)}>{labels.nomenclature} <i>↗</i></button> : null}
-        {!canOpenSynthesis && !canOpenNomenclature ? <p>{labels.noRelatedLessons}</p> : null}
-      </div>
+      {action ? <button type="button" onClick={action.onClick}>{action.label} <i aria-hidden="true">↗</i></button> : null}
     </section>
   );
 }
@@ -217,6 +229,7 @@ export function DrugDossier({
   initialMode = "story",
   onBackToAtlas,
   onOpenSynthesis,
+  onOpenSynthesisAcademy,
   onOpenNomenclature,
 }: DrugDossierProps) {
   const [mode, setMode] = useState<DossierMode>(initialMode);
@@ -239,6 +252,39 @@ export function DrugDossier({
   }
 
   const activeProfile = dossier.admeProfiles[0] ?? null;
+  const learningAvailability = getDossierLearningAvailability(dossier);
+  const coverageByDimension = new Map(
+    dossier.coverage.map((item) => [item.dimension, item]),
+  );
+  const hasAdmeMeasurements = dossier.admeProfiles.some((profile) =>
+    profile.absorption.length > 0 ||
+    profile.distribution.length > 0 ||
+    profile.metabolism.length > 0 ||
+    profile.excretion.length > 0,
+  );
+  const hasJourneyEvidence = hasAdmeMeasurements ||
+    dossier.pharmacology.targets.length > 0 ||
+    dossier.pharmacology.pathwayEffects.length > 0;
+  const synthesisCoverage = coverageByDimension.get("synthesis");
+  const nomenclatureCoverage = coverageByDimension.get("nomenclature");
+  const synthesisAction = learningAvailability.synthesis
+    ? onOpenSynthesis
+      ? { label: labels.synthesis, onClick: () => onOpenSynthesis(dossier.moleculeId) }
+      : undefined
+    : onOpenSynthesisAcademy
+      ? { label: labels.generalSynthesis, onClick: onOpenSynthesisAcademy }
+      : undefined;
+  const nomenclatureAction = learningAvailability.nomenclature && onOpenNomenclature
+    ? { label: labels.nomenclature, onClick: () => onOpenNomenclature(dossier.moleculeId) }
+    : undefined;
+  const tabAvailability = (tab: ReferenceTab): string => {
+    if (tab === "pharmacology") return coverageByDimension.get("pharmacology")?.status ?? "unavailable";
+    if (tab === "adme") return coverageByDimension.get("adme")?.status ?? "unavailable";
+    if (tab === "synthesis") return synthesisCoverage?.status ?? "unavailable";
+    if (tab === "nomenclature") return nomenclatureCoverage?.status ?? "unavailable";
+    if (tab === "comparisons") return "unavailable";
+    return "available";
+  };
 
   return (
     <article className={styles.dossier} data-dossier-mode={mode} data-molecule-id={dossier.moleculeId}>
@@ -266,6 +312,10 @@ export function DrugDossier({
         <p className={styles.clinicalBoundary}>{labels.clinicalBoundary}</p>
       </header>
 
+      <div className={styles.availabilityOverview} data-dossier-availability="upfront">
+        <CoverageGrid dossier={dossier} locale={locale} />
+      </div>
+
       {mode === "story" ? (
         <div className={styles.storyMode}>
           <ol className={styles.storyRail} aria-label={labels.story}>
@@ -274,27 +324,41 @@ export function DrugDossier({
           <ChemistryOverview dossier={dossier} locale={locale} />
           <ClassificationSummary dossier={dossier} locale={locale} />
           <PharmacologyPanel profile={dossier.pharmacology} locale={locale} />
-          <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} />
+          {hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}
           <AdmePanel profiles={dossier.admeProfiles} locale={locale} />
-          <MetaboliteGraph graph={dossier.metabolites} locale={locale} />
-          <LearningLinks dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} onOpenNomenclature={onOpenNomenclature} />
-          <CoverageGrid dossier={dossier} locale={locale} />
+          {dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}
+          <SectionCoverageMessage
+            section="synthesis"
+            eyebrow={labels.tabs.synthesis}
+            title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable}
+            message={synthesisCoverage?.reason ?? labels.unavailableSection}
+            available={learningAvailability.synthesis}
+            action={synthesisAction}
+          />
         </div>
       ) : (
         <div className={styles.referenceMode}>
           <nav className={styles.referenceTabs} aria-label={labels.reference}>
             {referenceTabs.map((tab) => (
-              <button key={tab} type="button" aria-pressed={activeTab === tab} onClick={() => setActiveTab(tab)}>{labels.tabs[tab]}</button>
+              <button
+                key={tab}
+                type="button"
+                data-tab-availability={tabAvailability(tab)}
+                aria-pressed={activeTab === tab}
+                onClick={() => setActiveTab(tab)}
+              >
+                {labels.tabs[tab]}
+              </button>
             ))}
           </nav>
           <div className={styles.referencePanel} data-reference-tab={activeTab}>
-            {activeTab === "overview" ? <><ChemistryOverview dossier={dossier} locale={locale} compact /><ClassificationSummary dossier={dossier} locale={locale} /><CoverageGrid dossier={dossier} locale={locale} /></> : null}
+            {activeTab === "overview" ? <><ChemistryOverview dossier={dossier} locale={locale} compact /><ClassificationSummary dossier={dossier} locale={locale} /></> : null}
             {activeTab === "chemistry" ? <ChemistryOverview dossier={dossier} locale={locale} /> : null}
             {activeTab === "pharmacology" ? <PharmacologyPanel profile={dossier.pharmacology} locale={locale} /> : null}
-            {activeTab === "adme" ? <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert /><DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /><MetaboliteGraph graph={dossier.metabolites} locale={locale} /></> : null}
-            {activeTab === "synthesis" || activeTab === "nomenclature" || activeTab === "comparisons" ? (
-              <section className={styles.referenceUnavailable}><span>{labels.tabs[activeTab]}</span><p>{labels.unavailableSection}</p><LearningLinks dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} onOpenNomenclature={onOpenNomenclature} /></section>
-            ) : null}
+            {activeTab === "adme" ? <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert />{hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}{dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}</> : null}
+            {activeTab === "synthesis" ? <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={synthesisAction} /> : null}
+            {activeTab === "nomenclature" ? <SectionCoverageMessage section="nomenclature" eyebrow={labels.tabs.nomenclature} title={learningAvailability.nomenclature ? labels.nomenclatureAvailable : labels.nomenclatureUnavailable} message={nomenclatureCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.nomenclature} action={nomenclatureAction} /> : null}
+            {activeTab === "comparisons" ? <SectionCoverageMessage section="comparisons" eyebrow={labels.tabs.comparisons} title={labels.comparisonsUnavailable} message={labels.unavailableSection} available={false} /> : null}
             {activeTab === "sources" ? <section className={styles.sourcesTab}><p>{labels.sourcesHint}</p><SourcesDrawer sources={dossier.sources} locale={locale} /></section> : null}
           </div>
         </div>

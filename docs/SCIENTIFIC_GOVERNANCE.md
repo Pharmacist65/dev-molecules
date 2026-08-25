@@ -83,7 +83,9 @@ The checked `drugcentral-fda-pubchem-eligible-v1` snapshot evaluates all 2,331 r
 - The enrichment-readiness artifact has two active identity/structure adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles.
 - openFDA enrichment is not configured; EMA and PMDA are not configured.
 
-The deep Dossier is currently limited to the 15 curated seed records. A generated catalog identity outside that seed cannot inherit curated fixture claims. It receives an unavailable Dossier state until independently source-resolved content exists. Within the seed, there is no presentable target-interaction dataset, no quantitative ADME field, and no reviewed metabolite edge. Exact product/form route context may be displayed only as context; it is not absorption, exposure, metabolism, or excretion evidence.
+Every one of the 1,552 resolved index identities has a Basic Molecular Record boundary containing only its source-matched identity, checked 2D SDF, separately labelled computed 3D conformer, conservative property values when present, resolvable source/snapshot provenance, and explicit coverage states. This availability does not make the identity a reviewed pharmaceutical dossier. A generated catalog identity outside the 15-record seed cannot inherit curated fixture claims, classifications, targets, ADME, metabolites, synthesis, nomenclature, or learning content. Missing dimensions stay unavailable.
+
+The deep Curated Dossier remains limited to the 15 curated seed records. Within that seed, there is no presentable target-interaction dataset, no quantitative ADME field, and no reviewed metabolite edge. Exact product/form route context may be displayed only as context; it is not absorption, exposure, metabolism, or excretion evidence. Any Basic Record structure-neighbor hint is bounded, computed, and unreviewed; it cannot be presented as pharmacological, biological, clinical, route, or patent similarity.
 
 See [Catalog pipeline](CATALOG_PIPELINE.md).
 

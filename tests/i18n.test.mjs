@@ -154,23 +154,38 @@ test("required Turkish product terminology is explicit and consistent", () => {
   assert.equal(messages.tr["explore.level.focus"], "Odak");
 });
 
-test("Home and Atlas copy state the exact source-slice boundary without approval-universe claims", () => {
-  const english = [
+test("Home leads with human copy and keeps source-slice detail in its disclosure", () => {
+  assert.equal(
     messages.en["home.description"],
+    "Search 1,552 resolved molecular structures, inspect them in 2D and 3D, and continue into chemistry and learning content where curated coverage exists.",
+  );
+  assert.equal(
+    messages.tr["home.description"],
+    "1.552 çözümlenmiş moleküler yapıyı ara, 2B ve 3B incele; derinleştirilmiş ilaç kayıtlarında kimya ve öğrenme içeriklerine ilerle.",
+  );
+  assert.doesNotMatch(messages.en["home.description"], /2,331|DrugCentral|FDA/i);
+  assert.doesNotMatch(messages.tr["home.description"], /2\.331|DrugCentral|FDA/i);
+
+  const english = [
+    messages.en["home.catalogScopeSummary"],
+    messages.en["home.catalogScopeBoundary"],
+    messages.en["home.catalogScopeRights"],
     messages.en["shell.searchDialogDescription"],
     messages.en["explore.catalogFallbackBody"],
   ].join(" ");
   const turkish = [
-    messages.tr["home.description"],
+    messages.tr["home.catalogScopeSummary"],
+    messages.tr["home.catalogScopeBoundary"],
+    messages.tr["home.catalogScopeRights"],
     messages.tr["shell.searchDialogDescription"],
     messages.tr["explore.catalogFallbackBody"],
   ].join(" ");
 
   assert.match(english, /2,331 rows/);
-  assert.match(english, /1,552-record structure-complete molecular index/);
+  assert.match(english, /1,552 records/);
   assert.match(english, /not an FDA product or application universe/i);
   assert.match(turkish, /2\.331 satır/);
-  assert.match(turkish, /1\.552 kayıtlık yapı-bütün moleküler indeks/);
+  assert.match(turkish, /1\.552 kayıt/);
   assert.match(turkish, /FDA ürün veya başvuru evreni değildir/i);
   assert.doesNotMatch(
     `${english} ${turkish}`,

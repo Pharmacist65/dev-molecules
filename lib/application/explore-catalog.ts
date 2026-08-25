@@ -13,6 +13,8 @@ import {
 } from "@/lib/explore";
 import type { Locale } from "@/lib/i18n";
 
+import type { ExploreRepresentativeMapStatus } from "./explore-scene-sample";
+
 import {
   localizeExploreClassification,
   localizeExploreSummary,
@@ -51,6 +53,7 @@ export interface ExploreMoleculeStructureView {
 export interface ExploreMoleculeView {
   readonly id: string;
   readonly name: string;
+  readonly representativeMapStatus: ExploreRepresentativeMapStatus;
   readonly canonicalSmiles: string;
   readonly formula?: string;
   readonly category?: string;
@@ -141,6 +144,14 @@ interface LensDefinition {
 const GENERATED_AT = "2026-08-21T00:00:00.000Z";
 const ALGORITHM_VERSION = "categorical-layout@1.0.0";
 const STRUCTURAL_LENS_ID = "structural-similarity";
+const CANDIDATE_RECORDS_KEY = "candidate-records";
+const REPRESENTATIVE_STRUCTURES_KEY = "representative-structures";
+
+const candidateRecordsLabel = (locale: Locale) =>
+  locale === "tr" ? "Aday kayıtlar" : "Candidate records";
+
+const representativeStructuresLabel = (locale: Locale) =>
+  locale === "tr" ? "Temsilî yapılar" : "Representative structures";
 
 const LENS_DEFINITIONS: readonly LensDefinition[] = [
   {
@@ -209,7 +220,7 @@ function learningClassificationKey(
     classification.verification.status === "expert-reviewed"
   )
     ? classification.value
-    : "classification-review-in-progress";
+    : CANDIDATE_RECORDS_KEY;
 }
 
 function classificationStatus(record: MoleculeRecord, axis: MoleculeClassificationAxis) {
@@ -257,8 +268,8 @@ function learningSummary(record: MoleculeRecord, locale: Locale) {
     );
   }
   return locale === "tr"
-    ? "Eğitim özeti incelemesi sürüyor; öğrenci görünümünde iç taslak bilimsel anlatı gösterilmez."
-    : "Educational summary review is in progress; no internal-draft scientific narrative is shown in Student view.";
+    ? "Bu kayıt için incelenmiş öğrenme özeti henüz yok."
+    : "No reviewed learning summary is available for this record yet.";
 }
 
 export function createExploreCatalogView(
@@ -406,9 +417,7 @@ export function createExploreCatalogView(
       ] as const),
       [
         STRUCTURAL_LENS_ID,
-        locale === "tr"
-          ? "Hesaplanmış yapısal görünüm · incelenmemiş"
-          : "Computed structural view · unreviewed",
+        representativeStructuresLabel(locale),
       ] as const,
     ]);
     const lensKeys = Object.fromEntries([
@@ -416,7 +425,7 @@ export function createExploreCatalogView(
         definition.id,
         learningClassificationKey(record, definition.axis),
       ] as const),
-      [STRUCTURAL_LENS_ID, "computed-structural-view-unreviewed"] as const,
+      [STRUCTURAL_LENS_ID, REPRESENTATIVE_STRUCTURES_KEY] as const,
     ]);
     const reviewerLensValues = Object.fromEntries([
       ...LENS_DEFINITIONS.map((definition) => [
@@ -445,6 +454,8 @@ export function createExploreCatalogView(
       ...LENS_DEFINITIONS.map((definition) => {
         const status = classificationStatus(record, definition.axis);
         const sourceLabel = classificationLabel(record, definition.axis);
+        const classificationReviewed =
+          status === "verified" || status === "expert-reviewed";
         return [
           definition.id,
           [...new Set([
@@ -458,12 +469,22 @@ export function createExploreCatalogView(
               status,
               "en",
             ),
+            ...(!classificationReviewed ? [
+              candidateRecordsLabel(locale),
+              CANDIDATE_RECORDS_KEY,
+              "classification-review-in-progress",
+              "Sınıflandırma incelemesi sürüyor",
+              "Classification review in progress",
+            ] : []),
           ])],
         ] as const;
       }),
       [
         STRUCTURAL_LENS_ID,
         [
+          representativeStructuresLabel(locale),
+          REPRESENTATIVE_STRUCTURES_KEY,
+          "computed-structural-view-unreviewed",
           "Hesaplanmış yapısal görünüm · incelenmemiş",
           "Computed structural view · unreviewed",
         ],
@@ -520,6 +541,7 @@ export function createExploreCatalogView(
     return {
       id: record.id,
       name: record.identity.preferredName,
+      representativeMapStatus: "curated-seed",
       canonicalSmiles: record.identity.canonicalSmiles,
       formula: record.identity.molecularFormula,
       category: lensValues.target,

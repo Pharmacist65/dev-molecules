@@ -19,7 +19,7 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
         systematic: "Sistematik ad",
         stereo: "Stereokimya",
         forms: "Kimyasal formlar",
-        descriptors: "Kaynak bekleyen tanımlayıcılar",
+        descriptors: "Bu Dossier'a henüz aktarılmayan tanımlayıcılar",
         unavailable: "Kaynaklı alan henüz yok",
         activeMoiety: "Ana molekül",
         pharmaceuticalForm: "Farmasötik form",
@@ -35,7 +35,7 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
         systematic: "Systematic name",
         stereo: "Stereochemistry",
         forms: "Chemical forms",
-        descriptors: "Descriptors awaiting a source",
+        descriptors: "Descriptors not yet normalized into this Dossier",
         unavailable: "No sourced field yet",
         activeMoiety: "Parent molecule",
         pharmaceuticalForm: "Pharmaceutical form",
@@ -50,9 +50,24 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
     "pharmaceutical-form": labels.pharmaceuticalForm,
     "related-form": labels.relatedForm,
   } as const;
+  const descriptorLabels: Readonly<Record<string, Readonly<Record<"tr" | "en", string>>>> = {
+    "formal-charge": { tr: "Biçimsel yük", en: "Formal charge" },
+    pka: { tr: "pKa", en: "pKa" },
+    "logp-logd": { tr: "LogP / LogD", en: "LogP / LogD" },
+    tpsa: { tr: "Topolojik polar yüzey alanı", en: "Topological polar surface area" },
+    "h-bond-donors": { tr: "Hidrojen bağı vericileri", en: "Hydrogen-bond donors" },
+    "h-bond-acceptors": { tr: "Hidrojen bağı alıcıları", en: "Hydrogen-bond acceptors" },
+    "rotatable-bonds": { tr: "Dönebilir bağlar", en: "Rotatable bonds" },
+    "ring-systems": { tr: "Halka sistemleri", en: "Ring systems" },
+  };
 
   return (
-    <section className={styles.chemistry} data-compact={compact} aria-labelledby="dossier-chemistry-heading">
+    <section
+      className={styles.chemistry}
+      data-compact={compact}
+      data-dossier-chemistry="true"
+      aria-labelledby="dossier-chemistry-heading"
+    >
       <header>
         <span>{labels.eyebrow}</span>
         <h2 id="dossier-chemistry-heading">{labels.title}</h2>
@@ -66,10 +81,10 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
               moleculeName={dossier.preferredName}
               expectedPubChemCid={dossier.sourceRecord.identity.pubChemCid}
               sourceLabel={labels.source}
-              originLabel={labels.computed3d}
+              originLabel={threeD.origin}
               sourceHref={threeD.sourceUrl}
               twoDSourceLabel={labels.source}
-              twoDOriginLabel={labels.source}
+              twoDOriginLabel={twoD?.origin}
               twoDSourceHref={twoD?.sourceUrl}
               initialDimension="3d"
             />
@@ -98,7 +113,11 @@ export function ChemistryOverview({ dossier, locale, compact = false }: Chemistr
           {!compact ? (
             <div className={styles.descriptorBoundary}>
               <span>{labels.descriptors}</span>
-              <p>{dossier.chemistry.unavailableDescriptorKeys.join(" · ")}</p>
+              <p>
+                {dossier.chemistry.unavailableDescriptorKeys
+                  .map((key) => descriptorLabels[key]?.[locale] ?? key)
+                  .join(" · ")}
+              </p>
             </div>
           ) : null}
         </div>

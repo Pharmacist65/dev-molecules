@@ -25,11 +25,14 @@ test("every checked-in regression molecule has a source-derived systematic name 
     assert.ok(profile.systematicName, `${molecule.id} systematic name`);
     assert.ok(profile.functionalGroups.length > 0, `${molecule.id} functional groups`);
     assert.equal(profile.functionalGroupsStatus, "computed-unreviewed");
-    assert.equal(profile.scaffoldFamily, "Classification review in progress");
-    assert.equal(profile.scaffoldDetail, "Classification review in progress");
-    assert.equal(profile.drugClass, "Classification review in progress");
-    assert.match(profile.mechanismSummary, /review is in progress/i);
-    assert.match(profile.nomenclatureLesson, /computed, unreviewed/i);
+    assert.equal(profile.scaffoldFamily, "Candidate records");
+    assert.equal(profile.scaffoldDetail, "Candidate records");
+    assert.equal(profile.drugClass, "Candidate records");
+    assert.match(profile.mechanismSummary, /no sourced mechanism lesson/i);
+    assert.equal(
+      profile.nomenclatureLesson,
+      "No reviewed molecule-specific nomenclature lesson is available yet.",
+    );
   }
 });
 
@@ -40,16 +43,27 @@ test("Student presentation withholds every pending internal classification while
   for (const [index, molecule] of english.molecules.entries()) {
     assert.deepEqual(
       ["therapeutic", "target", "scaffold"].map((lensId) => molecule.lensValues[lensId]),
-      Array(3).fill("Classification review in progress"),
+      Array(3).fill("Candidate records"),
       molecule.id,
     );
     assert.deepEqual(
       ["therapeutic", "target", "scaffold"].map((lensId) => molecule.lensKeys[lensId]),
-      Array(3).fill("classification-review-in-progress"),
+      Array(3).fill("candidate-records"),
       molecule.id,
     );
-    assert.match(molecule.lensValues["structural-similarity"], /computed.*unreviewed/i);
-    assert.match(molecule.summary, /review is in progress/i);
+    assert.equal(molecule.lensValues["structural-similarity"], "Representative structures");
+    assert.equal(molecule.lensKeys["structural-similarity"], "representative-structures");
+    assert.equal(
+      molecule.summary,
+      "No reviewed learning summary is available for this record yet.",
+    );
+    assert.ok(molecule.lensAliases.target.includes("classification-review-in-progress"));
+    assert.ok(molecule.lensAliases.target.includes("Classification review in progress"));
+    assert.ok(
+      molecule.lensAliases["structural-similarity"].includes(
+        "computed-structural-view-unreviewed",
+      ),
+    );
 
     for (const classification of moleculeCatalog[index].classifications) {
       const studentSurface = JSON.stringify({
@@ -80,7 +94,16 @@ test("Student presentation withholds every pending internal classification while
     const turkishMolecule = turkish.molecules[index];
     assert.equal(
       turkishMolecule.lensValues.target,
-      "Sınıflandırma incelemesi sürüyor",
+      "Aday kayıtlar",
+    );
+    assert.equal(turkishMolecule.lensKeys.target, "candidate-records");
+    assert.equal(
+      turkishMolecule.lensValues["structural-similarity"],
+      "Temsilî yapılar",
+    );
+    assert.equal(
+      turkishMolecule.lensKeys["structural-similarity"],
+      "representative-structures",
     );
     assert.doesNotMatch(
       JSON.stringify({
@@ -169,7 +192,7 @@ test("functional-group labels are localized without changing the detected set", 
   assert.ok(turkish.includes("Ester"));
 });
 
-test("Student structural lens exposes only a locale-stable computed-unreviewed region", () => {
+test("Student structural lens exposes only a locale-stable representative region", () => {
   const turkish = createExploreCatalogView(moleculeCatalog, "tr");
   const english = createExploreCatalogView(moleculeCatalog, "en");
   const englishById = new Map(english.molecules.map((molecule) => [molecule.id, molecule]));
@@ -193,7 +216,7 @@ test("Student structural lens exposes only a locale-stable computed-unreviewed r
   for (const [label, keys] of keysByDisplayedFamily) {
     assert.equal(keys.size, 1, `${label} must render as one structural cluster`);
   }
-  assert.deepEqual([...keysByDisplayedFamily.keys()], ["Hesaplanmış yapısal görünüm · incelenmemiş"]);
+  assert.deepEqual([...keysByDisplayedFamily.keys()], ["Temsilî yapılar"]);
 });
 
 test("route availability is stated narrowly and does not imply missing synthesis knowledge", () => {

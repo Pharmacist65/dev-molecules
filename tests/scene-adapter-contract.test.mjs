@@ -65,6 +65,9 @@ test("Universe geometry LOD stays bounded below Cluster and Focus without changi
   assert.doesNotMatch(moleculePickerSource, /intersectObjects|atomBatches/);
   assert.match(adapterSource, /getVisibleMoleculeScreenBounds\(\)/);
   assert.match(adapterSource, /relayoutVisibleMolecules\(\)/);
+  assert.match(adapterSource, /fitFocusedMolecule\(\)/);
+  assert.match(adapterSource, /getStructureFitEnvelopeCacheKey/);
+  assert.match(adapterSource, /onCameraChange\?\.\(this\.getCameraState\(\), this\.cameraRevision\)/);
   assert.match(adapterSource, /dataset\.visibleMoleculeBounds\s*=/);
   assert.match(componentSource, /levelOfDetail\s*===\s*"universe"/);
   assert.match(componentSource, /publishAtomHover\(null\)/);
@@ -97,6 +100,7 @@ test("shared scene exposes stable acceptance hooks and atom events", () => {
   assert.match(componentSource, /atom-select/);
   assert.match(componentSource, /atom-hover/);
   assert.match(componentSource, /onCameraChange/);
+  assert.match(componentSource, /setCameraRevision\(nextCameraRevision\)/);
   assert.match(adapterSource, /getVisibleAtoms\(\)/);
   assert.match(componentSource, /data-keyboard-atom/);
   assert.match(componentSource, /BracketLeft/);

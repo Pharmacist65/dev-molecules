@@ -42,6 +42,7 @@ const OUTSIDE_INITIAL_CATALOG_RECORDS = [
 
 const CATALOG_TOTAL = 1_552;
 const DESKTOP_SCENE_SAMPLE_SIZE = 8;
+const STUDENT_FORBIDDEN_COPY = /Sınıflandırma incelemesi sürüyor|Classification review in progress|Sınıflandırılmamış · kürasyon bekliyor|Unclassified · curation pending|Hesaplanmış yapısal görünüm|Computed structural view|has not been reviewed|\b(?:projection|algorithm|fingerprint|Tanimoto|SDF|WebGL|unreviewed|pending-review|source-supported|computed-unreviewed)\b|incelenmemiş|projeksiyon|algoritma/iu;
 
 function catalogApp(page: Page) {
   return page.locator("[data-catalog-status][data-catalog-records]").first();
@@ -277,15 +278,16 @@ test.describe("Explore product-quality acceptance", () => {
     ).toBeGreaterThanOrEqual(26);
     expect.soft(
       spatialQuality.minimumStrongFontSize ?? 0,
-      "each region name must render at no less than 8px",
-    ).toBeGreaterThanOrEqual(8);
+      "each Student region name must render at no less than 14px",
+    ).toBeGreaterThanOrEqual(14);
     expect.soft(
       publicClusterLabels,
       "pending draft classifications must collapse into one neutral public region",
     ).toHaveLength(1);
     expect.soft(publicClusterLabels[0]).toMatch(
-      /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
+      /^(?:Aday kayıtlar|Candidate records)$/i,
     );
+    await expect.soft(exploreRoot(page)).not.toContainText(STUDENT_FORBIDDEN_COPY);
     expect.soft(
       importedIdsInMainMap,
       "source-matched but unclassified imports must not receive invented map positions",
@@ -489,7 +491,7 @@ test.describe("Explore product-quality acceptance", () => {
       .first();
     await expect(neutralClassification).toBeVisible();
     await expect(neutralClassification).toContainText(
-      /Sınıflandırılmamış|Unclassified/i,
+      /Aday kayıtlar|Candidate records/i,
     );
     await expect(drawer.locator('[data-classification-status="known"]')).toHaveCount(0);
     await catalogSearch.fill("");
@@ -607,8 +609,11 @@ test.describe("Explore product-quality acceptance", () => {
           qualityCase.physicalViewport.height * 100 / qualityCase.browserZoomPercent,
         ),
       };
-      const revisionBeforeResize = initialized
-        ? await readNumericAttribute(exploreScene(page), "data-camera-revision")
+      const fitCountBeforeResize = initialized
+        ? await readNumericAttribute(
+            exploreCanvas(page),
+            "data-fit-visible-molecules-count",
+          )
         : null;
       await page.setViewportSize(effectiveViewport);
       if (!initialized) {
@@ -627,12 +632,18 @@ test.describe("Explore product-quality acceptance", () => {
           message: `${qualityCase.name} must settle to its viewport-specific sample`,
         })
         .toBe(expectedVisibleCount);
-      if (revisionBeforeResize !== null) {
+      if (fitCountBeforeResize !== null) {
         await expect
-          .poll(() => readNumericAttribute(scene, "data-camera-revision"), {
-            message: `${qualityCase.name} must refit the existing scene after live resize`,
-          })
-          .toBeGreaterThan(revisionBeforeResize);
+          .poll(
+            () => readNumericAttribute(
+              exploreCanvas(page),
+              "data-fit-visible-molecules-count",
+            ),
+            {
+              message: `${qualityCase.name} must refit the existing scene after live resize`,
+            },
+          )
+          .toBeGreaterThan(fitCountBeforeResize);
       }
       await expect(scene).toHaveAttribute("data-scene-status", /^(?:ready|partial)$/);
       const overflow = await measureHorizontalOverflow(page);
@@ -649,6 +660,10 @@ test.describe("Explore product-quality acceptance", () => {
         clippedMoleculeCount: await readNumericAttribute(
           scene,
           "data-clipped-molecule-count",
+        ),
+        layoutViewportAspect: await readNumericAttribute(
+          exploreCanvas(page),
+          "data-layout-viewport-aspect",
         ),
         visibleLabelCount: await readNumericAttribute(scene, "data-visible-label-count"),
         labelCollisionCount: await readNumericAttribute(
@@ -701,11 +716,18 @@ test.describe("Explore product-quality acceptance", () => {
       }).toEqual({ overlap: 0, clipped: 0, labelCollision: 0 });
       expect.soft(measurement.renderer.visibleLabelCount).toBeGreaterThan(0);
       expect.soft(
+        Math.abs(
+          measurement.renderer.layoutViewportAspect
+          - (measurement.canvasBox!.width / measurement.canvasBox!.height),
+        ),
+        `${measurement.name} must fit against the committed real canvas aspect`,
+      ).toBeLessThan(0.01);
+      expect.soft(
         measurement.publicClusterLabels,
         `${measurement.name} must retain one neutral public review region`,
       ).toHaveLength(1);
       expect.soft(measurement.publicClusterLabels[0]).toMatch(
-        /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
+        /^(?:Aday kayıtlar|Candidate records)$/i,
       );
       expect.soft({
         overlap: measurement.spatialQuality.overlap,
@@ -731,8 +753,8 @@ test.describe("Explore product-quality acceptance", () => {
       ).toBeGreaterThanOrEqual(26);
       expect.soft(
         measurement.spatialQuality.minimumStrongFontSize ?? 0,
-        `${measurement.name} region names must remain at least 8px`,
-      ).toBeGreaterThanOrEqual(8);
+        `${measurement.name} Student region names must remain at least 14px`,
+      ).toBeGreaterThanOrEqual(14);
       expect.soft(
         measurement.canvasBox !== null &&
           measurement.canvasBox.y >= 0 &&

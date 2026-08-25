@@ -16,8 +16,9 @@ The current vertical slice implements:
 - a single shared Three.js scene with bounded progressive level of detail and 2–4 molecule comparison;
 - four versioned Spatial lenses, including a scoped canonical-SMILES path fingerprint/Tanimoto lens that is explicitly not ECFP or clinical similarity;
 - an all-row static pipeline over the selected 2,331-row DrugCentral FDA list: 1,858 complete same-ID structures, 1,747 exact PubChem resolutions, 1,552 imported 2D/3D pairs, 779 explicit unresolved rows, 25 alphabetic shards, one `unclassified` therapeutic shard, and 3,104 PubChem SDF assets;
-- 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors and the current deep-Dossier seed;
-- Story/Reference Dossier surfaces whose classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review coverage fail independently;
+- stable molecular-record routes across all 1,552 resolved identities, with a Basic Molecular Record boundary for source-matched identity, 2D/3D structure, provenance, conservative properties, and explicit coverage;
+- 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors and the current Curated Dossier seed;
+- Story/Reference Curated Dossier surfaces whose classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review coverage fail independently;
 - an eight-module Academy map: five available modules, two coverage-dependent modules, and one planned standalone module;
 - six non-operational Synthesis Atlas routes over three molecules, 20 transformations, 12 mechanism records, two strictly source-reported route presentations, and fail-closed/no-decorative-arrow behavior for incompatible or unmapped steps;
 - eight Nomenclature Academy sections with 22 exercises over 20 parseable structures and 16 concrete response/widget types;
@@ -28,6 +29,8 @@ The current vertical slice implements:
 - typecheck, lint, server/static production builds, Node tests, and Playwright gates in CI.
 
 This baseline is not a production scientific publication or the exact FDA application/product universe. All 1,552 generated therapeutic classifications remain unresolved; all 2,331 product/application links remain unresolved; one display-name form/stereo conflict stays separate; and two multicomponent parent relations remain unresolved. The enrichment report has zero configured snapshots and zero classification, pharmacology, or ADME enrichment. The 15-record Dossier seed has no reviewed target interactions, no quantitative ADME fields, and no reviewed metabolite edges. openFDA enrichment is not configured; EMA and PMDA remain future sources. Synthesis mechanisms, educational classification wording, and the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or research project store.
+
+The implemented V2.1 release candidate remains behind the [V2.1 Release Blocker and Product Integrity Sprint](V2_1_RELEASE_BLOCKER_SPRINT.md): stable Basic Molecular Records for all resolved identities, non-repetitive Dossier gaps, and a telemetry-proven stable Home molecule must pass the full local, CI, deployment, and anonymous-live gates. Scientific enrichment is intentionally deferred until that gate passes.
 
 ## R1 — Public engineering release
 

@@ -472,6 +472,15 @@
   text-transform: uppercase;
 }
 
+.spatialBoundaryLead {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.spatialBoundaryLead > span {
+  color: var(--atlas-ink);
+}
+
 @media (max-width: 900px) {
   .recordList a {
     grid-template-columns: 88px minmax(0, 1fr) auto;
@@ -561,6 +570,49 @@
 
   .spatialBoundary {
     display: grid;
+  }
+}
+
+/* Public Atlas typography contract: prose is 16px on desktop and 15px on
+   mobile; secondary and interactive copy never drops below 14px. Renderer
+   glyphs inside the structure thumbnails remain owned by their canvas. */
+.atlas {
+  font-size: 1rem;
+}
+
+.eyebrow,
+.catalogTotal span,
+.viewTabs span,
+.searchArea > label,
+.filters legend,
+.filters label,
+.searchControl button,
+.message button,
+.resultsHeader h2,
+.resultsHeader span,
+.thumbnailState small,
+.recordIdentity span,
+.recordClassification span,
+.recordClassification small,
+.coverage::before,
+.coverage small,
+.openAction,
+.pagination > span,
+.pagination button,
+.spatialBoundary {
+  font-size: 0.875rem;
+}
+
+.message,
+.routeState {
+  font-size: 1rem;
+}
+
+@media (max-width: 620px) {
+  .atlas,
+  .message,
+  .routeState {
+    font-size: 0.9375rem;
   }
 }
 

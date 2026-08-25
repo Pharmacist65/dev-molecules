@@ -17,7 +17,7 @@ The repository has two production adapters around one product implementation:
 
 The Pages entry imports `DevMoleculesApp` directly. It does not copy the product shell, scientific records, scoring rules, or rendering implementation. The static build prefixes checked-in structure-asset and catalog requests with the project base path while leaving canonical domain asset records unchanged. It also emits the route-lazy Ketcher browser chunk, worker, and WASM used by the on-device Lab.
 
-`public/catalog/` is copied into the Pages artifact. The browser loads a compact manifest/search index, then bounded metadata shards and individual SDF assets on demand. The checked `drugcentral-fda-pubchem-eligible-v1` source evaluates 2,331 rows and publishes 1,552 records with 3,104 PubChem SDF assets. Its 25 alphabetic shards, one `unclassified` therapeutic shard, coverage/unresolved reports, and enrichment-readiness report remain directly inspectable; no catalog API, database, or secret is required. Atlas Browse searches the complete static index while the optional Spatial Atlas keeps only a bounded resident metadata/structure window.
+`public/catalog/` is copied into the Pages artifact. The browser loads a compact manifest/search index, then bounded metadata shards and individual SDF assets on demand. The checked `drugcentral-fda-pubchem-eligible-v1` source evaluates 2,331 rows and publishes 1,552 records with 3,104 PubChem SDF assets. Its 25 alphabetic shards, one `unclassified` therapeutic shard, coverage/unresolved reports, and enrichment-readiness report remain directly inspectable; no catalog API, database, or secret is required. Atlas Browse searches the complete static index, every resolved identity has a stable static Basic Molecular Record route, the 15 exact curated identities retain Curated Dossier depth, and the optional Spatial Atlas keeps only a bounded resident metadata/structure window.
 
 The Pages root also publishes `THIRD_PARTY_NOTICES.txt`, generated from the
 complete non-development npm dependency closure plus the DrugCentral and
@@ -31,7 +31,7 @@ Ketcher standalone processes structures in the browser. The public host does not
 
 ## CI and least privilege
 
-`.github/workflows/quality.yml` runs on every push and pull request. It validates type safety, lint, dependency audit, the server-capable build, the static build, Node tests, the main browser suite, and the Pages-specific browser suite.
+`.github/workflows/quality.yml` runs on pushes to `main` and on pull requests. It validates type safety, lint, dependency audit, the server-capable build, the static build, Node tests, the main browser suite, and the Pages-specific browser suite.
 
 On a push to `main`, the tested `dist-pages/` directory is uploaded as the Pages artifact. Deployment is a separate job that:
 
@@ -50,6 +50,7 @@ npm run typecheck
 npm run lint
 npm run catalog:validate
 npm run catalog:report
+npm run licenses:check
 npm run build
 npm run build:pages
 node --test tests/*.test.mjs
@@ -59,10 +60,10 @@ npm audit --omit=dev --audit-level=high
 git diff --check
 ```
 
-The browser gates open production artifacts at `/dev-molecules/`, exercise base-path hashes, load real PubChem 3D and 2D SDF records, require the bounded Spatial renderer to retain one WebGL context, and verify the serverless curated-evidence boundary without an API request. The Dev Molecules 2.0 suite also covers the four-section shell, 1,552-record Browse boundary, Dossier gaps, eight-module Academy, synthesis counts, the real Ketcher runtime, device-local Instructor composition, locked Reviewer behavior, and mobile overflow. `catalog:validate` separately verifies every generated shard and exactly 3,104 referenced catalog structure assets before release; orphan or partial SDF files fail validation.
+The browser gates open production artifacts at `/dev-molecules/`, exercise base-path hashes and stable record hashes, load real PubChem 3D and 2D SDF records, require the bounded Spatial renderer to retain one WebGL context, and verify the serverless curated-evidence boundary without an API request. The V2.1 release-candidate suite covers the four-section shell, the 1,552-record Browse and Basic Molecular Record boundary, a non-seed record through refresh and Atlas-return state, the 15-record Curated Dossier split, compact coverage gaps, eight-module Academy, synthesis counts, the real Ketcher runtime, device-local Instructor composition, locked Reviewer behavior, Home motion integrity, and mobile overflow. `catalog:validate` separately verifies every generated shard and exactly 3,104 referenced catalog structure assets before release; orphan or partial SDF files fail validation. Implementation presence is not release acceptance: the complete [V2.1 gate](V2_1_RELEASE_BLOCKER_SPRINT.md) must pass against the deployed commit.
 
 ## Release and rollback
 
-The workflow environment records each Pages deployment against its source revision. A release is accepted only after the workflow is green and an unauthenticated browser receives the public URL, catalog manifest/shard assets, and a real SDF with HTTP 200 responses.
+The workflow environment records each Pages deployment against its source revision. A release is accepted only after the workflow is green and an unauthenticated browser receives the public URL, catalog manifest/shard assets, a non-seed Basic Molecular Record, a Curated Dossier, and a real SDF with HTTP 200 responses.
 
 If a release fails after deployment, restore a previously verified source tree on `main` and let the same gated workflow redeploy it. Do not upload a local directory manually, bypass the quality workflow, or place a token in a public client environment variable.

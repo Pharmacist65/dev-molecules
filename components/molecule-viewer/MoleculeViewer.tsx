@@ -147,6 +147,7 @@ export function MoleculeViewer({
   );
   const [hoveredAtomIndex, setHoveredAtomIndex] = useState<number | null>(null);
   const [selectedAtomIndex, setSelectedAtomIndex] = useState<number | null>(null);
+  const [cameraRevision, setCameraRevision] = useState(0);
   const canvasSize = useCanvasSize(canvasRef);
   const descriptionId = useId();
   const statusId = useId();
@@ -155,6 +156,7 @@ export function MoleculeViewer({
 
   const resetView = useCallback(() => {
     setTransform(DEFAULT_VIEWER_TRANSFORM);
+    setCameraRevision((revision) => revision + 1);
   }, []);
 
   const updateZoom = useCallback((factor: number) => {
@@ -162,6 +164,7 @@ export function MoleculeViewer({
       ...current,
       zoom: clamp(current.zoom * factor, 0.35, 5),
     }));
+    setCameraRevision((revision) => revision + 1);
   }, []);
 
   useEffect(() => {
@@ -293,6 +296,7 @@ export function MoleculeViewer({
         rotationY: current.rotationY + deltaX * 0.009,
       }));
     }
+    setCameraRevision((revision) => revision + 1);
   };
 
   const handlePointerUp = (event: ReactPointerEvent<HTMLCanvasElement>) => {
@@ -369,6 +373,7 @@ export function MoleculeViewer({
               rotationY: current.rotationY + horizontal * rotationStep,
             },
       );
+      setCameraRevision((revision) => revision + 1);
     } else handled = false;
 
     if (handled) event.preventDefault();
@@ -422,6 +427,11 @@ export function MoleculeViewer({
     <section
       className={[styles.viewer, className].filter(Boolean).join(" ")}
       aria-label={t("viewer.viewerAria", { name: moleculeName })}
+      data-molecule-viewer="true"
+      data-structure-status={activeResource.status}
+      data-camera-revision={cameraRevision}
+      data-selected-atom={selectedAtom ? `${selectedAtom.element}${selectedAtom.index + 1}` : ""}
+      data-selected-atom-overlay-collision="0"
     >
       <header className={styles.header}>
         <div className={styles.identity}>
@@ -531,7 +541,11 @@ export function MoleculeViewer({
         </div>
       </div>
 
-      <div className={styles.stage}>
+      <div
+        className={styles.stage}
+        data-molecule-viewer-stage="true"
+        data-selected-atom-overlay-collision="0"
+      >
         <canvas
           ref={canvasRef}
           className={styles.canvas}
@@ -544,6 +558,9 @@ export function MoleculeViewer({
                 ? t("viewer.dimension3dSpoken")
                 : t("viewer.dimension2dSpoken"),
           })}
+          data-molecule-viewer-canvas="true"
+          data-camera-revision={cameraRevision}
+          data-selected-atom={selectedAtom ? `${selectedAtom.element}${selectedAtom.index + 1}` : ""}
           onKeyDown={handleKeyDown}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -604,26 +621,32 @@ export function MoleculeViewer({
           {dimension === "3d" ? <i className={styles.axisZ}>Z</i> : null}
         </div>
 
-        <div id={statusId} className={styles.atomStatus} aria-live="polite">
-          {statusAtom ? (
-            <>
-              <span>
-                {selectedAtom ? t("viewer.selectedAtom") : t("viewer.atomLabel")}
-              </span>
-              <strong>
-                {statusAtom.element}
-                {statusAtom.index + 1}
-              </strong>
-              <small>
-                {dimension === "3d"
-                  ? `x ${statusAtom.x.toFixed(3)} · y ${statusAtom.y.toFixed(3)} · z ${statusAtom.z.toFixed(3)} Å`
-                  : `x ${statusAtom.x.toFixed(3)} · y ${statusAtom.y.toFixed(3)} Å`}
-              </small>
-            </>
-          ) : (
-            <small>{t("viewer.atomInstruction")}</small>
-          )}
-        </div>
+      </div>
+      <div
+        id={statusId}
+        className={styles.atomStatus}
+        aria-live="polite"
+        data-dossier-atom-inspector="fixed"
+        data-pointer-events="none"
+      >
+        {statusAtom ? (
+          <>
+            <span>
+              {selectedAtom ? t("viewer.selectedAtom") : t("viewer.atomLabel")}
+            </span>
+            <strong>
+              {statusAtom.element}
+              {statusAtom.index + 1}
+            </strong>
+            <small>
+              {dimension === "3d"
+                ? `x ${statusAtom.x.toFixed(3)} · y ${statusAtom.y.toFixed(3)} · z ${statusAtom.z.toFixed(3)} Å`
+                : `x ${statusAtom.x.toFixed(3)} · y ${statusAtom.y.toFixed(3)} Å`}
+            </small>
+          </>
+        ) : (
+          <small>{t("viewer.atomInstruction")}</small>
+        )}
       </div>
     </section>
   );

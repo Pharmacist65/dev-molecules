@@ -29,7 +29,7 @@ Versioned catalog source snapshot
 ```
 
 - `lib/domain/` owns identity, evidence, structure, synthesis, nomenclature, challenge, and learning contracts.
-- `lib/application/` turns domain/data records into deterministic UI-facing models; it does not promote review status.
+- `lib/application/` turns domain/data records into deterministic UI-facing models, including the Basic Molecular Record route resolver; it does not promote review status.
 - `lib/catalog/` owns source adapters, identity normalization, sharding, bounded caches, and the static client.
 - `lib/data/` composes curated regression fixtures, source registries, synthesis routes, challenges, and curricula.
 - `scripts/catalog/` owns the reproducible snapshot → normalize → build → validate → report lifecycle.
@@ -42,7 +42,7 @@ This direction is tested. Application consumers do not import a family-specific 
 
 ### Routing and presentation
 
-The primary route model is Home / Drug Atlas / Academy / Lab. Instructor and Reviewer are secondary workspaces rather than equal learner-navigation items. Retired Explore/Learn/Build/Teach/Discover top-level hashes resolve through compatibility mappings; molecule, cluster, and comparison hashes preserve the established Spatial Atlas state.
+The primary route model is Home / Drug Atlas / Academy / Lab. Instructor and Reviewer are secondary workspaces rather than equal learner-navigation items. Retired Explore/Learn/Build/Teach/Discover top-level hashes resolve through compatibility mappings; molecule, cluster, and comparison hashes preserve the established Spatial Atlas state. Each of the 1,552 resolved index identities also owns a stable `#drug/{slug}` route. Route resolution checks an exact curated identity first, then the compact index, and hydrates only the selected non-seed entity; refresh preserves the record route and Atlas return navigation retains its query/page state.
 
 Student and Expert are exhaustive learner preferences over the same scientific record. Student is the shared public science presentation. Expert currently changes only curated Drug Dossiers to open in Reference mode by default; Home, Atlas, Academy, Synthesis, and Lab keep the same learner-safe fields, source drawers, comparisons, and explicit local exports. Reviewer access is intentionally absent from that union. It requires a separate `ScientificReviewerAdapter` with authentication, authorization, record listing, audited writes, version/hash checks, and persistence. The public application injects no adapter and remains locked.
 
@@ -62,7 +62,9 @@ Drug Atlas Browse is the default structure-index surface. It searches and pages 
 
 Therapeutic-area, target-profile, and curated-scaffold lenses are deterministic categorical layouts. Their screen distance is explicitly **not** a fingerprint/Tanimoto score, binding measurement, clinical similarity, or efficacy claim. The separate structural lens hashes one-, two-, and three-token canonical-SMILES paths into 512 bits and calculates Tanimoto similarity. It is versioned as `canonical-smiles-path-fingerprint@1.0.0`; it is not ECFP, pharmacology, clinical equivalence, route similarity, or a patent relationship. Localized labels never change canonical inputs, scores, or coordinates.
 
-The current `DrugDossier` resolves only `moleculeCatalog`, the 15 curated seed records. Every dossier has Story and Reference presentations and independently calculated coverage indicators. Imported records outside that seed do not inherit fixture claims; they receive an unavailable dossier state. The checked repository has no presentable target interactions, no quantitative ADME fields, and no reviewed metabolite edges. Curated exact product/form administration contexts can be shown without being relabelled as ADME measurement evidence.
+The molecular-record flow deliberately separates universal identity/structure coverage from curated depth. Every one of the 1,552 resolved index identities has a Basic Molecular Record boundary backed by its hydrated catalog entity: source-matched identifiers and aliases, checked 2D SDF, separately labelled PubChem-computed 3D conformer, conservative molecular-weight property when present, source/snapshot provenance, and nine independent coverage dimensions. Optional structure-neighbor hints are calculated only over the bounded resident metadata window with the existing canonical-SMILES path fingerprint and remain `computed-unreviewed`; they are not pharmacology, bioactivity, or clinical similarity.
+
+The 15 identities that exactly map to `moleculeCatalog` resolve to the deeper Curated Drug Dossier. Every curated Dossier has Story and Reference presentations and independently calculated coverage indicators. Non-seed records do not inherit fixture claims and now open their Basic Molecular Record rather than an unavailable Dossier. The checked repository has no presentable target interactions, no quantitative ADME fields, and no reviewed metabolite edges. Curated exact product/form administration contexts can be shown without being relabelled as ADME measurement evidence.
 
 The family domain and component validate parallel classification paths, provenance, representatives, comparison rows, and coverage gaps without forcing exclusive membership. The public route now exposes two deliberately bounded review workspaces—beta-adrenergic blockers and NSAIDs—with four exact PubChem identity/2D representatives each. Their canonical-SMILES fingerprint matrix is computed and unreviewed; classifications, shared mechanism, target families, motifs, and sourced comparison rows remain explicit gaps. This is not a curated production family dataset.
 
@@ -190,6 +192,7 @@ npm run typecheck
 npm run lint
 npm run catalog:validate
 npm run catalog:report
+npm run licenses:check
 npm run build
 npm run build:pages
 node --test tests/*.test.mjs
@@ -199,4 +202,4 @@ npm audit --omit=dev --audit-level=high
 git diff --check
 ```
 
-Unit and fixture tests cover domain invariants, catalog adapters/normalization/shards/caches, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, structural similarity, renderer contracts, and bounded LOD behavior. Playwright exercises production bundles, routed product journeys, real scene interactions, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. Focused Node tests also cover Atlas/Dossier, the eight-module Academy, synthesis readiness, Ketcher runtime contracts, device-local Instructor behavior, and fail-closed Reviewer authorization. These checks are acceptance evidence, not scientific peer review, a catalog-exhaustiveness proof, or a universal GPU benchmark.
+Unit and fixture tests cover domain invariants, catalog adapters/normalization/shards/caches, full-index stable record routing, Basic Molecular Record composition, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, structural similarity, renderer contracts, and bounded LOD behavior. Playwright exercises production bundles, non-seed Basic Records, curated Dossiers, refresh/Atlas-return behavior, real scene interactions, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. Focused Node tests also cover Atlas/Dossier, the eight-module Academy, synthesis readiness, Ketcher runtime contracts, device-local Instructor behavior, and fail-closed Reviewer authorization. These checks are acceptance evidence, not scientific peer review, a catalog-exhaustiveness proof, or a universal GPU benchmark. The V2.1 implementation remains release-pending until the complete [product-integrity gate](V2_1_RELEASE_BLOCKER_SPRINT.md) passes against the deployed commit.

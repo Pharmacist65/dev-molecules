@@ -29,6 +29,11 @@ import {
 } from "@/lib/application/catalog-expansion";
 import { createExploreCatalogView } from "@/lib/application/explore-catalog";
 import {
+  DEFAULT_DRUG_ATLAS_BROWSE_STATE,
+  normalizeDrugAtlasBrowseState,
+  type DrugAtlasBrowseState,
+} from "@/lib/application/drug-atlas";
+import {
   DEFAULT_PLATFORM_ROUTE,
   getDrugHash,
   getPrimaryNavigationSection,
@@ -62,6 +67,11 @@ const DrugAtlas = lazy(() =>
 const DrugDossier = lazy(() =>
   import("@/components/dossier").then((module) => ({ default: module.DrugDossier })),
 );
+const MolecularRecordRoute = lazy(() =>
+  import("@/components/basic-record").then((module) => ({
+    default: module.MolecularRecordRoute,
+  })),
+);
 const FamilyPage = lazy(() =>
   import("@/components/atlas/FamilyPage").then((module) => ({ default: module.FamilyPage })),
 );
@@ -87,6 +97,7 @@ const MissionStudio = lazy(() =>
 );
 
 const PRESENTATION_MODE_STORAGE_KEY = "dev-molecules:presentation-mode";
+const ATLAS_BROWSE_STATE_STORAGE_KEY = "dev-molecules:atlas-browse-state:v1";
 const SYNTHESIS_MOLECULE_IDS = [...new Set(synthesisStories.map((story) => story.moleculeId))];
 const LEARNING_TASK_MOLECULE_IDS = [
   ...new Set(learningMissions.flatMap((mission) => mission.moleculeIds)),
@@ -114,6 +125,7 @@ function getMoleculeSlug(moleculeId: string) {
 
 function getAcademyModuleId(route: PlatformRoute): AcademyModuleId | null {
   if (route.section !== "academy") return null;
+  if (route.academyArea === "synthesis" && !route.slug) return "synthesis-atlas";
   if (route.academyArea === "pharmacology") return "pharmacology";
   if (route.academyArea === "nomenclature") {
     if (route.lessonId === "structure-language") return "structure-language";
@@ -189,6 +201,10 @@ function DevMoleculesWorkspace() {
     useState<readonly CatalogNormalizedEntity[]>([]);
   const [catalogLoadStatus, setCatalogLoadStatus] =
     useState<"loading" | "ready" | "fallback">("loading");
+  const [atlasBrowseState, setAtlasBrowseState] = useState<DrugAtlasBrowseState>(
+    DEFAULT_DRUG_ATLAS_BROWSE_STATE,
+  );
+  const [atlasBrowseStateRestored, setAtlasBrowseStateRestored] = useState(false);
   const [selectedId, setSelectedId] = useState<string>(moleculeCatalog[0]?.id ?? "");
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<string>>(new Set());
   const [nomenclatureProgress, setNomenclatureProgress] =
@@ -407,6 +423,40 @@ function DevMoleculesWorkspace() {
   }, []);
 
   useEffect(() => {
+    let restoreFrame: number | undefined;
+    try {
+      const saved = window.sessionStorage.getItem(ATLAS_BROWSE_STATE_STORAGE_KEY);
+      const restored = saved
+        ? normalizeDrugAtlasBrowseState(JSON.parse(saved) as unknown)
+        : DEFAULT_DRUG_ATLAS_BROWSE_STATE;
+      restoreFrame = window.requestAnimationFrame(() => {
+        setAtlasBrowseState(restored);
+        setAtlasBrowseStateRestored(true);
+      });
+    } catch {
+      restoreFrame = window.requestAnimationFrame(() => {
+        setAtlasBrowseState(DEFAULT_DRUG_ATLAS_BROWSE_STATE);
+        setAtlasBrowseStateRestored(true);
+      });
+    }
+    return () => {
+      if (restoreFrame !== undefined) window.cancelAnimationFrame(restoreFrame);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!atlasBrowseStateRestored) return;
+    try {
+      window.sessionStorage.setItem(
+        ATLAS_BROWSE_STATE_STORAGE_KEY,
+        JSON.stringify(atlasBrowseState),
+      );
+    } catch {
+      // Atlas navigation remains app-local when session storage is unavailable.
+    }
+  }, [atlasBrowseState, atlasBrowseStateRestored]);
+
+  useEffect(() => {
     let cancelled = false;
     void loadCatalogExpansion(assetBasePath)
       .then((expansion) => {
@@ -467,6 +517,21 @@ function DevMoleculesWorkspace() {
     setSelectedId(record.id);
     navigate(getDrugHash(record.stableSlug));
   }
+
+  const retainSelectedCatalogEntity = useCallback(
+    (entity: CatalogNormalizedEntity) => {
+      setHydratedCatalogEntities((current) =>
+        retainHydratedCatalogEntity(current, entity),
+      );
+    },
+    [],
+  );
+
+  const canonicalizeDrugRoute = useCallback((hash: string) => {
+    if (window.location.hash === hash) return;
+    window.history.replaceState(null, "", hash);
+    setRoute(parsePlatformHash(hash));
+  }, []);
 
   function openMoleculeFocus(moleculeId: string) {
     setSelectedId(moleculeId);
@@ -649,6 +714,8 @@ function DevMoleculesWorkspace() {
                 locale={locale}
                 view={route.atlasView ?? "browse"}
                 onViewChange={(view) => navigate(view === "spatial" ? "#atlas/spatial" : "#atlas")}
+                browseState={atlasBrowseState}
+                onBrowseStateChange={setAtlasBrowseState}
                 catalogRecordCount={catalogExpansion?.manifest.recordCount}
                 assetBasePath={assetBasePath}
                 getDrugHref={(record) => getDrugHash(record.stableSlug)}
@@ -678,7 +745,7 @@ function DevMoleculesWorkspace() {
         {route.section === "academy" ? (
           <div className={styles.workspacePage}>
             <Suspense fallback={loading}>
-              {route.academyArea === "synthesis" ? (
+              {route.academyArea === "synthesis" && route.slug ? (
                 synthesisRouteMolecule ? (
                   <>
                     <SynthesisAcademyHub
@@ -766,17 +833,31 @@ function DevMoleculesWorkspace() {
         {route.section === "drug" ? (
           <div className={styles.workspacePage}>
             <Suspense fallback={loading}>
-              <DrugDossier
-                key={`${route.slug}:${experienceMode}`}
-                moleculeIdOrSlug={route.slug ?? ""}
-                locale={locale}
+              <MolecularRecordRoute
+                key={route.slug}
+                stableSlug={route.slug ?? ""}
+                navigator={indexedCatalogNavigator}
+                residentEntities={residentCatalogExpansion?.entities ?? []}
                 assetBasePath={assetBasePath}
-                initialMode={experienceMode === "expert" ? "reference" : "story"}
+                locale={locale}
                 onBackToAtlas={() => navigate("#atlas")}
-                onOpenSynthesis={(moleculeId) => {
-                  setSelectedId(moleculeId);
-                  navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId)));
-                }}
+                onEntityHydrated={retainSelectedCatalogEntity}
+                onCanonicalHash={canonicalizeDrugRoute}
+                renderCuratedDossier={(molecule) => (
+                  <DrugDossier
+                    key={`${molecule.id}:${experienceMode}`}
+                    moleculeIdOrSlug={molecule.id}
+                    locale={locale}
+                    assetBasePath={assetBasePath}
+                    initialMode={experienceMode === "expert" ? "reference" : "story"}
+                    onBackToAtlas={() => navigate("#atlas")}
+                    onOpenSynthesis={(moleculeId) => {
+                      setSelectedId(moleculeId);
+                      navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId)));
+                    }}
+                    onOpenSynthesisAcademy={() => navigate("#academy/synthesis")}
+                  />
+                )}
               />
             </Suspense>
           </div>

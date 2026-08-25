@@ -9,12 +9,12 @@ const { selectExploreSceneSample } = await tsImport(
 );
 
 const candidates = [
-  { id: "pain:c", clusterKey: "pain", projectedPosition: { x: 12, y: 15 } },
-  { id: "heart:c", clusterKey: "heart", projectedPosition: { x: 74, y: 70 } },
-  { id: "pain:a", clusterKey: "pain", projectedPosition: { x: 18, y: 21 } },
-  { id: "heart:a", clusterKey: "heart", projectedPosition: { x: 67, y: 64 } },
-  { id: "pain:b", clusterKey: "pain", projectedPosition: { x: 22, y: 26 } },
-  { id: "heart:b", clusterKey: "heart", projectedPosition: { x: 78, y: 72 } },
+  { id: "pain:c", clusterKey: "pain", projectedPosition: { x: 12, y: 15 }, representativeMapStatus: "curated-seed" },
+  { id: "heart:c", clusterKey: "heart", projectedPosition: { x: 74, y: 70 }, representativeMapStatus: "curated-seed" },
+  { id: "pain:a", clusterKey: "pain", projectedPosition: { x: 18, y: 21 }, representativeMapStatus: "curated-seed" },
+  { id: "heart:a", clusterKey: "heart", projectedPosition: { x: 67, y: 64 }, representativeMapStatus: "curated-seed" },
+  { id: "pain:b", clusterKey: "pain", projectedPosition: { x: 22, y: 26 }, representativeMapStatus: "curated-seed" },
+  { id: "heart:b", clusterKey: "heart", projectedPosition: { x: 78, y: 72 }, representativeMapStatus: "curated-seed" },
 ];
 
 test("representative sample is deterministic, balanced and independent of source order", () => {
@@ -35,6 +35,24 @@ test("required cluster selection remains visible without exceeding the budget", 
   assert.ok(selected.includes("pain:c"));
 });
 
+test("source-matched unclassified imports never enter or displace the curated seed sample", () => {
+  const imported = {
+    id: "molecule:imported:abacavir",
+    clusterKey: "candidate-records",
+    projectedPosition: { x: 50, y: 50 },
+    representativeMapStatus: "source-matched-unclassified",
+  };
+  const selected = selectExploreSceneSample({
+    candidates: [imported, ...candidates],
+    limit: 4,
+    requiredId: imported.id,
+  });
+
+  assert.equal(selected.length, 4);
+  assert.ok(!selected.includes(imported.id));
+  assert.ok(selected.every((id) => !id.startsWith("molecule:imported:")));
+});
+
 test("sample policy rejects malformed contracts and does not invent records", () => {
   assert.deepEqual(selectExploreSceneSample({ candidates: [], limit: 8 }), []);
   assert.throws(
@@ -49,4 +67,3 @@ test("sample policy rejects malformed contracts and does not invent records", ()
     /unique IDs/,
   );
 });
-

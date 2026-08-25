@@ -264,36 +264,84 @@ export function createExpandedExploreMolecule(
   const pending = locale === "tr"
     ? "Sınıflandırılmamış · kürasyon bekliyor"
     : "Unclassified · curation pending";
+  const candidateRecords = locale === "tr" ? "Aday kayıtlar" : "Candidate records";
+  const representativeStructures = locale === "tr"
+    ? "Temsilî yapılar"
+    : "Representative structures";
+  const candidateAliases = [
+    candidateRecords,
+    "candidate-records",
+    "unclassified",
+    "classification-review-in-progress",
+    "Sınıflandırma incelemesi sürüyor",
+    "Classification review in progress",
+    "Sınıflandırılmamış · kürasyon bekliyor",
+    "Unclassified · curation pending",
+  ];
+  const representativeAliases = [
+    representativeStructures,
+    "representative-structures",
+    "computed-structural-view-unreviewed",
+    "Hesaplanmış yapısal görünüm · incelenmemiş",
+    "Computed structural view · unreviewed",
+    "unclassified",
+    "Sınıflandırılmamış · kürasyon bekliyor",
+    "Unclassified · curation pending",
+  ];
+  const reviewerAliases = [
+    "unclassified",
+    "Sınıflandırılmamış · kürasyon bekliyor",
+    "Unclassified · curation pending",
+  ];
   const functionalGroups = identifyFunctionalGroups(entity.identity.canonicalSmiles, locale);
   const sourceLabel = `PubChem PUG REST · CID ${entity.identity.pubChemCid}`;
   const sourceUrl = `https://pubchem.ncbi.nlm.nih.gov/compound/${entity.identity.pubChemCid}`;
   return {
     id: entity.id,
     name: entity.preferredName,
+    representativeMapStatus: "source-matched-unclassified",
     canonicalSmiles: entity.identity.canonicalSmiles,
     formula: entity.identity.molecularFormula,
-    category: pending,
+    category: candidateRecords,
     summary:
       locale === "tr"
-        ? "Kaynak eşleşmeli katalog kaydı; eğitim sınıflandırması henüz kürate edilmedi."
-        : "Source-matched catalog record; educational classification has not yet been curated.",
+        ? "Bu kayıt için incelenmiş öğrenme özeti henüz yok."
+        : "No reviewed learning summary is available for this record yet.",
     lensValues: {
+      therapeutic: candidateRecords,
+      target: candidateRecords,
+      scaffold: candidateRecords,
+      "structural-similarity": representativeStructures,
+    },
+    lensKeys: {
+      therapeutic: "candidate-records",
+      target: "candidate-records",
+      scaffold: "candidate-records",
+      "structural-similarity": "representative-structures",
+    },
+    lensAliases: {
+      therapeutic: candidateAliases,
+      target: candidateAliases,
+      scaffold: candidateAliases,
+      "structural-similarity": representativeAliases,
+    },
+    reviewerLensValues: {
       therapeutic: pending,
       target: pending,
       scaffold: pending,
       "structural-similarity": pending,
     },
-    lensKeys: {
+    reviewerLensKeys: {
       therapeutic: "unclassified",
       target: "unclassified",
       scaffold: "unclassified",
       "structural-similarity": "unclassified",
     },
-    lensAliases: {
-      therapeutic: ["unclassified", "Sınıflandırılmamış · kürasyon bekliyor", "Unclassified · curation pending"],
-      target: ["unclassified", "Sınıflandırılmamış · kürasyon bekliyor", "Unclassified · curation pending"],
-      scaffold: ["unclassified", "Sınıflandırılmamış · kürasyon bekliyor", "Unclassified · curation pending"],
-      "structural-similarity": ["unclassified", "Sınıflandırılmamış · kürasyon bekliyor", "Unclassified · curation pending"],
+    reviewerLensAliases: {
+      therapeutic: reviewerAliases,
+      target: reviewerAliases,
+      scaffold: reviewerAliases,
+      "structural-similarity": reviewerAliases,
     },
     coordinates: {},
     evidenceLabel:
@@ -305,21 +353,21 @@ export function createExpandedExploreMolecule(
     studentProfile: {
       functionalGroups,
       functionalGroupsStatus: "computed-unreviewed",
-      scaffoldFamily: pending,
-      scaffoldDetail: pending,
-      drugClass: pending,
+      scaffoldFamily: candidateRecords,
+      scaffoldDetail: candidateRecords,
+      drugClass: candidateRecords,
       mechanismSummary:
         locale === "tr"
-          ? "Bu kayıt için mekanizma anlatımı henüz kürate edilmedi."
-          : "A mechanism lesson has not yet been curated for this record.",
+          ? "Bu kayıt için incelenmiş mekanizma dersi henüz yok."
+          : "No reviewed mechanism lesson is available for this record yet.",
       synthesisScope:
         locale === "tr"
           ? "Bu kayıt için kaynak bağlantılı eğitim rotası henüz yok."
           : "No source-linked educational route is available for this record yet.",
       nomenclatureLesson:
-        functionalGroups.length > 0
-          ? functionalGroups.slice(0, 3).join(" · ")
-          : pending,
+        locale === "tr"
+          ? "Bu kayıt için incelenmiş molekül-özel nomenklatür dersi henüz yok."
+          : "No reviewed molecule-specific nomenclature lesson is available yet.",
     },
     structuralNeighbors: [],
     structure: {

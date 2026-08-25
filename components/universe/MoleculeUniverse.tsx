@@ -37,7 +37,10 @@ import {
   resolveExploreClusterLabelLayout,
   type ExploreClusterLabelAvoidanceZone,
 } from "@/lib/application/explore-cluster-layout";
-import { selectExploreSceneSample } from "@/lib/application/explore-scene-sample";
+import {
+  selectExploreSceneSample,
+  type ExploreRepresentativeMapStatus,
+} from "@/lib/application/explore-scene-sample";
 import { selectViewportSceneCandidateIds } from "@/lib/application/explore-viewport";
 import { STRUCTURE_GRAPH_COMPARISON_VERSION } from "@/lib/application/structure-comparison";
 import { getStructureProvenancePresentation } from "@/lib/application/structure-presentation";
@@ -110,6 +113,7 @@ export interface UniverseClassificationEvidence {
 export interface UniverseMolecule {
   id: string;
   name: string;
+  representativeMapStatus: ExploreRepresentativeMapStatus;
   canonicalSmiles?: string;
   formula?: string;
   category?: string;
@@ -297,26 +301,32 @@ const indexedCatalogCopy = {
     resultMeta: "CID {cid} · {formula}",
     aliasPrefix: "Diğer adlar",
     pageSummary: "{shown} / {total} kayıt",
-    sceneSample: "3B örneklem · {count} yapı",
-    sceneSampleMore: "{shown} temsilî yapı · +{remaining} yapı bölgelerde",
+    sceneSample: "Temsilî yapılar · {count}",
+    sceneSampleMore: "Temsilî yapılar · {shown} · bölgelerde +{remaining}",
     scaffoldDetail: "İskelet ayrıntısı",
     similarMolecules: "Yüklü penceredeki yapısal adaylar",
-    similarMoleculesBoundary: "Yalnız yüklü kayıtlar ve bu eğitim fingerprint'i karşılaştırılır; biyolojik veya klinik benzerlik değildir.",
+    similarMoleculesBoundary: "Bu yapısal öğrenme ipucu yalnız yüklü yapıları karşılaştırır; biyolojik veya klinik benzerlik değildir.",
+    similarMoleculesReviewerBoundary: "Yalnız yüklü kayıtlar ve bu eğitim fingerprint'i karşılaştırılır; biyolojik veya klinik benzerlik değildir.",
     noSimilarMolecules: "Bu yüklü pencerede %45 eşiğini geçen yapısal aday yok.",
-    functionalMotifHints: "Fonksiyonel grup ipuçları · hesaplanmış, incelenmemiş",
+    functionalMotifHints: "Yapı özellikleri",
+    functionalMotifReviewerHints: "Fonksiyonel grup ipuçları · hesaplanmış, incelenmemiş",
     learningActions: "Bu yapıyla öğren",
     synthesis: "Sentez Atlası’nı aç",
     nomenclature: "Nomenklatür Akademisi’ni aç",
     tasks: "İlgili öğrenme görevlerini aç",
     commonCore: "Ortak yapısal çekirdek",
     commonCoreSummary: "{atoms} ortak ağır atom çevresi · {bonds} çekirdek bağı",
-    commonCorePending: "Gerçek SDF grafikleri yüklenince ortak çekirdek işaretlenecek.",
+    studentCommonCoreSummary: "{atoms} ortak atom bölgesi · {bonds} ortak bağlantı",
+    commonCorePending: "Ortak yapı görünümü hazırlanıyor.",
+    commonCoreReviewerPending: "Gerçek SDF grafikleri yüklenince ortak çekirdek işaretlenecek.",
     fingerprintSummary: "Yapı fingerprint benzerliği: {score}%",
     changedGroups: "Değişen atom / grup bölgesi",
     changedNone: "Bu konservatif maskede ek değişen ağır atom yok.",
     commonMask: "Ortak çekirdek",
     changedMask: "Değişen bölge",
-    comparisonBoundary: "SDF yerel bağ çevresi maskesi; kesin maksimum ortak alt yapı veya etki benzerliği iddiası değildir.",
+    comparisonBoundary: "Bu görsel karşılaştırma ortak ve değişen bölgeleri vurgular; aynı kimya veya etki iddiası değildir.",
+    comparisonReviewerBoundary: "SDF yerel bağ çevresi maskesi; kesin maksimum ortak alt yapı veya etki benzerliği iddiası değildir.",
+    representativeStructure: "Temsilî yapı",
   },
   en: {
     browse: "Browse structure index",
@@ -331,28 +341,59 @@ const indexedCatalogCopy = {
     resultMeta: "CID {cid} · {formula}",
     aliasPrefix: "Also known as",
     pageSummary: "{shown} / {total} records",
-    sceneSample: "3D sample · {count} structures",
-    sceneSampleMore: "{shown} representative structures · +{remaining} in regions",
+    sceneSample: "Representative structures · {count}",
+    sceneSampleMore: "Representative structures · {shown} · +{remaining} in regions",
     scaffoldDetail: "Scaffold detail",
     similarMolecules: "Structural candidates in the loaded window",
-    similarMoleculesBoundary: "Only loaded records and this educational fingerprint are compared; this is not biological or clinical similarity.",
+    similarMoleculesBoundary: "This structural learning hint compares only loaded structures; it is not biological or clinical similarity.",
+    similarMoleculesReviewerBoundary: "Only loaded records and this educational fingerprint are compared; this is not biological or clinical similarity.",
     noSimilarMolecules: "No structural candidate in the loaded window passes the 45% threshold.",
-    functionalMotifHints: "Functional-group motif hints · computed, unreviewed",
+    functionalMotifHints: "Structure features",
+    functionalMotifReviewerHints: "Functional-group motif hints · computed, unreviewed",
     learningActions: "Learn with this structure",
     synthesis: "Open Synthesis Atlas",
     nomenclature: "Open Nomenclature Academy",
     tasks: "Open related learning tasks",
     commonCore: "Common structural core",
     commonCoreSummary: "{atoms} shared heavy-atom environments · {bonds} core bonds",
-    commonCorePending: "The common core will be marked after the real SDF graphs load.",
+    studentCommonCoreSummary: "{atoms} shared atom regions · {bonds} shared connections",
+    commonCorePending: "Preparing the shared structure view.",
+    commonCoreReviewerPending: "The common core will be marked after the real SDF graphs load.",
     fingerprintSummary: "Structure fingerprint similarity: {score}%",
     changedGroups: "Changed atom / group region",
     changedNone: "No additional changed heavy atoms in this conservative mask.",
     commonMask: "Common core",
     changedMask: "Changed region",
-    comparisonBoundary: "Local SDF bonding-environment mask; not an exact maximum common substructure or an activity-similarity claim.",
+    comparisonBoundary: "This visual comparison highlights shared and changing regions; it does not establish identical chemistry or effects.",
+    comparisonReviewerBoundary: "Local SDF bonding-environment mask; not an exact maximum common substructure or an activity-similarity claim.",
+    representativeStructure: "Representative structure",
   },
 } as const;
+
+const STUDENT_CANDIDATE_RECORDS_COPY = new Set([
+  "Aday kayıtlar",
+  "Candidate records",
+  "Sınıflandırma incelemesi sürüyor",
+  "Classification review in progress",
+  "Sınıflandırılmamış · kürasyon bekliyor",
+  "Unclassified · curation pending",
+]);
+
+const STUDENT_CANDIDATE_RECORDS_KEYS = new Set([
+  "candidate-records",
+  "classification-review-in-progress",
+  "unclassified",
+]);
+
+const STUDENT_STRUCTURAL_LENS_ID = "structural-similarity";
+const STUDENT_REPRESENTATIVE_STRUCTURES_KEY = "representative-structures";
+
+const STUDENT_LENS_SUMMARY_KEYS: Readonly<Record<string, TranslationKey>> = {
+  therapeutic: "explore.studentLens.therapeutic",
+  target: "explore.studentLens.target",
+  scaffold: "explore.studentLens.scaffold",
+  "structural-similarity": "explore.studentLens.structuralSimilarity",
+};
 
 const interpolateIndexedCopy = (
   template: string,
@@ -392,7 +433,7 @@ function normalizeSearchValue(value: string, locale: Locale) {
 }
 
 function getLensValue(
-  molecule: UniverseMolecule,
+  molecule: Pick<UniverseMolecule, "category" | "lensValues">,
   lensId: string,
   unclassifiedLabel: string,
 ) {
@@ -409,7 +450,7 @@ function normalizeClusterToken(value: string) {
 }
 
 function getLensKey(
-  molecule: UniverseMolecule,
+  molecule: Pick<UniverseMolecule, "category" | "lensKeys" | "lensValues">,
   lensId: string,
   unclassifiedLabel: string,
 ) {
@@ -538,6 +579,8 @@ export function MoleculeUniverse({
   onMoleculeSelect,
 }: MoleculeUniverseProps) {
   const { locale, t } = useI18n();
+  const candidateRecordsLabel = t("explore.candidateRecords");
+  const representativeStructuresLabel = t("explore.representativeStructures");
   const molecules = useMemo(
     () => presentationMode === "reviewer"
       ? providedMolecules.map((molecule) => ({
@@ -548,8 +591,51 @@ export function MoleculeUniverse({
           lensAliases: molecule.reviewerLensAliases ?? molecule.lensAliases,
           coordinates: molecule.reviewerCoordinates ?? molecule.coordinates,
         }))
-      : providedMolecules,
-    [presentationMode, providedMolecules],
+      : providedMolecules.map((molecule) => {
+          const studentCategoricalValue = (value: string | undefined) =>
+            value && STUDENT_CANDIDATE_RECORDS_COPY.has(value)
+              ? candidateRecordsLabel
+              : value;
+          const studentLensValue = (lensId: string, value: string) =>
+            lensId === STUDENT_STRUCTURAL_LENS_ID
+              ? representativeStructuresLabel
+              : studentCategoricalValue(value) ?? value;
+          const studentLensKey = (lensId: string, value: string) =>
+            lensId === STUDENT_STRUCTURAL_LENS_ID
+              ? STUDENT_REPRESENTATIVE_STRUCTURES_KEY
+              : STUDENT_CANDIDATE_RECORDS_KEYS.has(value)
+                ? "candidate-records"
+                : value;
+          return {
+            ...molecule,
+            category: studentCategoricalValue(molecule.category),
+            lensValues: molecule.lensValues
+              ? Object.fromEntries(
+                  Object.entries(molecule.lensValues).map(([key, value]) => [
+                    key,
+                    studentLensValue(key, value),
+                  ]),
+                )
+              : molecule.lensValues,
+            lensKeys: molecule.lensKeys
+              ? Object.fromEntries(
+                  Object.entries(molecule.lensKeys).map(([key, value]) => [
+                    key,
+                    studentLensKey(key, value),
+                  ]),
+                )
+              : molecule.lensKeys,
+            studentProfile: molecule.studentProfile
+              ? {
+                  ...molecule.studentProfile,
+                  scaffoldFamily: studentCategoricalValue(molecule.studentProfile.scaffoldFamily) ?? candidateRecordsLabel,
+                  scaffoldDetail: studentCategoricalValue(molecule.studentProfile.scaffoldDetail) ?? candidateRecordsLabel,
+                  drugClass: studentCategoricalValue(molecule.studentProfile.drugClass) ?? candidateRecordsLabel,
+                }
+              : molecule.studentProfile,
+          };
+        }),
+    [candidateRecordsLabel, presentationMode, providedMolecules, representativeStructuresLabel],
   );
   const catalogCopy = indexedCatalogCopy[locale];
   const localizedDefaultLenses = useMemo<readonly UniverseLens[]>(
@@ -632,7 +718,7 @@ export function MoleculeUniverse({
   const [sceneViewportAspect, setSceneViewportAspect] = useState(16 / 9);
   const [sceneViewportWidth, setSceneViewportWidth] = useState(1_440);
   const [sceneFirstViewportHeight, setSceneFirstViewportHeight] = useState<number | null>(null);
-  const [browserViewportKey, setBrowserViewportKey] = useState("initial");
+  const [sceneViewportKey, setSceneViewportKey] = useState("initial");
   const [flightActive, setFlightActive] = useState(false);
   const [universeZoom, setUniverseZoom] = useState(STUDENT_UNIVERSE_ZOOM);
   const [universeNearZoomThreshold, setUniverseNearZoomThreshold] = useState(1.08);
@@ -654,8 +740,6 @@ export function MoleculeUniverse({
     sceneViewportWidth <= 540
       ? NARROW_UNIVERSE_VISIBLE_SAMPLE_SIZE
       : UNIVERSE_VISIBLE_SAMPLE_SIZE;
-  const sceneViewportKey = browserViewportKey;
-
   const cancelViewportSelectionUpdate = useCallback(() => {
     if (viewportSelectionTimerRef.current === null) return;
     window.clearTimeout(viewportSelectionTimerRef.current);
@@ -693,7 +777,6 @@ export function MoleculeUniverse({
         .map((bounds) => ({ ...bounds, id: bounds.moleculeId }));
       setTelemetry((current) => ({
         ...current,
-        cameraRevision: current.cameraRevision + 1,
         labelAvoidanceZones: fittedScreenBounds,
       }));
       lastCameraRef.current = fittedCamera;
@@ -713,34 +796,18 @@ export function MoleculeUniverse({
   );
 
   useEffect(() => {
-    const updateBrowserViewportKey = () => {
-      setBrowserViewportKey(
-        `${window.innerWidth}:${window.innerHeight}:${window.devicePixelRatio || 1}`,
-      );
-    };
-    updateBrowserViewportKey();
-    window.addEventListener("resize", updateBrowserViewportKey);
-    return () => window.removeEventListener("resize", updateBrowserViewportKey);
-  }, []);
-
-  useEffect(() => {
     if (level !== "universe") return undefined;
     const stage = exploreStageRef.current;
     if (!stage) return undefined;
     const updateFirstViewportHeight = () => {
       if (stage.dataset.level !== "universe") return;
       const top = Math.max(0, stage.getBoundingClientRect().top);
-      const available = Math.max(160, Math.floor(window.innerHeight - top - 1));
+      const available = Math.max(128, Math.floor(window.innerHeight - top - 1));
       setSceneFirstViewportHeight((current) => current === available ? current : available);
     };
     const observer = new ResizeObserver(([entry]) => {
       if (stage.dataset.level !== "universe") return;
-      const width = entry?.contentRect.width ?? 0;
-      const height = entry?.contentRect.height ?? 0;
-      if (width > 0 && height > 0) {
-        setSceneViewportAspect(width / height);
-        setSceneViewportWidth(width);
-      }
+      if (!entry?.contentRect) return;
       updateFirstViewportHeight();
     });
     observer.observe(stage);
@@ -829,9 +896,14 @@ export function MoleculeUniverse({
       const label = knownCatalogClassificationByCid.get(hit.pubChemCid);
       return label
         ? { status: "known" as const, label }
-        : { status: "unclassified" as const, label: unclassifiedLabel };
+        : {
+            status: "unclassified" as const,
+            label: presentationMode === "student"
+              ? candidateRecordsLabel
+              : unclassifiedLabel,
+          };
     },
-    [knownCatalogClassificationByCid, unclassifiedLabel],
+    [candidateRecordsLabel, knownCatalogClassificationByCid, presentationMode, unclassifiedLabel],
   );
   const catalogBrowseNavigator = useMemo<UniverseIndexedCatalog | undefined>(() => {
     if (!indexedCatalog) return undefined;
@@ -992,13 +1064,18 @@ export function MoleculeUniverse({
   const activeComparisonAnalysis =
     comparisonAnalysis?.groupId === comparisonGroupId ? comparisonAnalysis : null;
   const commonComparisonScaffold = useMemo(() => {
-    const families = new Set(
-      comparisonMolecules
-        .map((molecule) => molecule.studentProfile?.scaffoldFamily)
-        .filter((value): value is string => Boolean(value)),
+    if (presentationMode !== "reviewer" || comparisonMolecules.length < 2) return null;
+    const evidence = comparisonMolecules.map(
+      (molecule) => molecule.classificationEvidence?.scaffold,
     );
-    return families.size === 1 ? [...families][0] : null;
-  }, [comparisonMolecules]);
+    if (!evidence.every((item) => item && (
+      item.verificationStatus === "verified" ||
+      item.verificationStatus === "expert-reviewed"
+    ) && item.sourceIds.length > 0)) return null;
+    const canonicalFamilies = new Set(evidence.map((item) => item?.value).filter(Boolean));
+    if (canonicalFamilies.size !== 1) return null;
+    return evidence[0]?.label ?? null;
+  }, [comparisonMolecules, presentationMode]);
   const normalizedUniverseLodZoom = searchFocusedId
     ? Math.max(universeZoom, universeNearZoomThreshold)
     : universeZoom;
@@ -1012,10 +1089,14 @@ export function MoleculeUniverse({
         : getExploreLodLevel(level, universeZoom);
   const sceneLevel =
     lodLevel === "focus" ? "focus" : lodLevel === "cluster" ? "cluster" : "universe";
+  const activeClusterAnchor = clusters.find(
+    (cluster) => cluster.name === effectiveClusterName,
+  )?.anchorPosition;
+  const activeClusterCenterX = activeClusterAnchor?.x ?? 50;
+  const activeClusterCenterY = activeClusterAnchor?.y ?? 50;
 
   const sceneMolecules = useMemo<readonly MolecularSceneMolecule[]>(() => {
-    const activeCluster = clusters.find((cluster) => cluster.name === effectiveClusterName);
-    const center = activeCluster?.anchorPosition ?? { x: 50, y: 50 };
+    const center = { x: activeClusterCenterX, y: activeClusterCenterY };
     return molecules.flatMap((molecule) => {
       const structure = molecule.structure;
       const structureUrl = structure?.threeDUrl;
@@ -1062,7 +1143,15 @@ export function MoleculeUniverse({
             : undefined,
       }];
     });
-  }, [activeLensId, clusters, compareIds, comparisonGroupId, effectiveClusterName, level, molecules]);
+  }, [
+    activeClusterCenterX,
+    activeClusterCenterY,
+    activeLensId,
+    compareIds,
+    comparisonGroupId,
+    level,
+    molecules,
+  ]);
   const eligibleIds = useMemo(
     () => new Set(sceneMolecules.map((molecule) => molecule.id)),
     [sceneMolecules],
@@ -1091,6 +1180,7 @@ export function MoleculeUniverse({
             id: molecule.id,
             clusterKey: getLensKey(molecule, activeLensId, unclassifiedLabel),
             projectedPosition: sceneMolecule.position,
+            representativeMapStatus: molecule.representativeMapStatus,
           }];
         }),
         limit: UNIVERSE_REPRESENTATIVE_POOL_SIZE,
@@ -1107,6 +1197,7 @@ export function MoleculeUniverse({
             id: molecule.id,
             clusterKey: getLensKey(molecule, activeLensId, unclassifiedLabel),
             projectedPosition: sceneMolecule.position,
+            representativeMapStatus: molecule.representativeMapStatus,
           }];
         }),
         limit: CLUSTER_VISIBLE_SAMPLE_SIZE,
@@ -1162,10 +1253,7 @@ export function MoleculeUniverse({
           ? [{
               id: molecule.id,
               groupKey: getLensKey(
-                molecules.find((candidate) => candidate.id === molecule.id) ?? {
-                  id: molecule.id,
-                  name: molecule.name,
-                },
+                molecules.find((candidate) => candidate.id === molecule.id) ?? {},
                 activeLensId,
                 unclassifiedLabel,
               ),
@@ -1299,7 +1387,8 @@ export function MoleculeUniverse({
         )
       : [];
   const activeSceneGapCount =
-    unavailableSceneMolecules.length + unprojectedSceneMolecules.length;
+    unavailableSceneMolecules.length +
+    (presentationMode === "reviewer" ? unprojectedSceneMolecules.length : 0);
   const effectiveSceneStatus: MolecularSceneStatus = selectedStructureMissing
     ? "error"
     : activeSceneGapCount > 0 && telemetry.status !== "loading"
@@ -1317,7 +1406,11 @@ export function MoleculeUniverse({
         ? "multiple-sourced-structures"
         : "not-loaded-at-far-lod";
   const rootClassName = className ? `${styles.universe} ${className}` : styles.universe;
-  const lensNarrativeIds = `${lensDescriptionId} ${lensMeaningId} ${lensCaveatId}`;
+  const studentLensSummaryKey = STUDENT_LENS_SUMMARY_KEYS[activeLensId]
+    ?? "explore.studentLens.generic";
+  const lensNarrativeIds = presentationMode === "student"
+    ? `${lensDescriptionId} ${lensCaveatId}`
+    : `${lensDescriptionId} ${lensMeaningId} ${lensCaveatId}`;
 
   function changeLens(nextLensId: string) {
     setLensId(nextLensId);
@@ -1431,17 +1524,16 @@ export function MoleculeUniverse({
     );
   }
 
-  function openMolecule(molecule: UniverseMolecule, animateFlight = false) {
+  function openMolecule(molecule: UniverseMolecule) {
     if (level === "universe") universeCameraRef.current = lastCameraRef.current;
     if (level === "cluster") clusterCameraRef.current = lastCameraRef.current;
     setSelectedId(molecule.id);
     setClusterName(getLensValue(molecule, activeLensId, unclassifiedLabel));
     setLevel("focus");
-    if (animateFlight) flyToCamera(DEFAULT_MOLECULAR_SCENE_CAMERA);
-    else {
-      cancelViewportSelectionUpdate();
-      setSceneCamera(undefined);
-    }
+    // A focused structure owns an explicit first-load fit lifecycle. Keeping a
+    // controlled overview camera here would race that fit and restore stale scale.
+    cancelViewportSelectionUpdate();
+    setSceneCamera(undefined);
     setDimension("3d");
     setInspectorOpen(true);
     setTelemetry((current) => ({ ...current, selectedAtom: null }));
@@ -1463,7 +1555,7 @@ export function MoleculeUniverse({
       setQuery("");
       setIndexedPanelOpen(false);
       setIndexedStatus("ready");
-      openMolecule(molecule, true);
+      openMolecule(molecule);
     } catch (error) {
       setIndexedErrorMessage(error instanceof Error ? error.message : "Catalog hydration failed.");
       setIndexedStatus("error");
@@ -1567,7 +1659,6 @@ export function MoleculeUniverse({
         y: nextCamera.target.y * 18,
       });
     }
-    setTelemetry((current) => ({ ...current, cameraRevision: current.cameraRevision + 1 }));
   }
 
   function resetCamera() {
@@ -1576,13 +1667,11 @@ export function MoleculeUniverse({
       selectedMolecule &&
       eligibleIds.has(selectedMolecule.id)
     ) {
-      scenePortRef.current?.focusMolecule(selectedMolecule.id);
-      const resetCameraState = scenePortRef.current?.getCameraState();
+      const resetCameraState = scenePortRef.current?.fitFocusedMolecule();
       if (resetCameraState) {
         lastCameraRef.current = resetCameraState;
         setSceneCamera(resetCameraState);
       }
-      setTelemetry((current) => ({ ...current, cameraRevision: current.cameraRevision + 1 }));
       return;
     }
     const fitted = scenePortRef.current?.fitVisibleMolecules();
@@ -1962,7 +2051,12 @@ export function MoleculeUniverse({
 
   const levelAnnouncement =
     level === "universe"
-      ? t("explore.universeAnnouncement", { count: clusters.length })
+      ? t(
+          clusters.length === 1
+            ? "explore.universeAnnouncement.one"
+            : "explore.universeAnnouncement.other",
+          { count: clusters.length },
+        )
       : level === "cluster"
         ? t("explore.clusterAnnouncement", {
             name: effectiveClusterName ?? t("explore.level.cluster"),
@@ -2013,6 +2107,28 @@ export function MoleculeUniverse({
     0,
     activeSceneScopeCount - sceneVisibleIds.length,
   );
+  const studentClassificationEntries = selectedMolecule?.studentProfile
+    ? [
+        {
+          id: "scaffold-family",
+          label: t("explore.scaffoldFamily"),
+          value: selectedMolecule.studentProfile.scaffoldFamily,
+        },
+        {
+          id: "scaffold-detail",
+          label: catalogCopy.scaffoldDetail,
+          value: selectedMolecule.studentProfile.scaffoldDetail,
+        },
+        {
+          id: "drug-class",
+          label: t("explore.drugClass"),
+          value: selectedMolecule.studentProfile.drugClass,
+        },
+      ].filter((entry, index, entries) =>
+        entry.value !== candidateRecordsLabel ||
+        entries.findIndex((candidate) => candidate.value === candidateRecordsLabel) === index,
+      )
+    : [];
 
   return (
     <section
@@ -2033,7 +2149,14 @@ export function MoleculeUniverse({
               count: sceneVisibleIds.length,
             })}
           </span>
-          <span>{t("explore.clusterCount", { count: clusters.length })}</span>
+          <span>
+            {t(
+              clusters.length === 1
+                ? "explore.clusterCount.one"
+                : "explore.clusterCount.other",
+              { count: clusters.length },
+            )}
+          </span>
           <span>
             <strong>
               {level === "universe"
@@ -2132,17 +2255,30 @@ export function MoleculeUniverse({
                 aria-atomic="true"
                 data-lens-announcement={activeLensId}
               >
-                <span id={lensDescriptionId} className={styles.lensDescription}>
-                  {activeLens?.description ?? t("explore.lens.categoricalPlacement")}
-                </span>
-                <span id={lensMeaningId} className={styles.lensMeaning}>
-                  <strong>{t("explore.lens.represents")}</strong>{" "}
-                  {activeLens?.meaning ?? t("explore.lens.categoricalPlacement")}
-                </span>
-                <span id={lensCaveatId} className={styles.lensCaveat}>
-                  <strong>{t("explore.lens.doesNotRepresent")}</strong>{" "}
-                  {activeLens?.doesNotMean ?? t("explore.lens.caveat")}
-                </span>
+                {presentationMode === "student" ? (
+                  <>
+                    <span id={lensDescriptionId} className={styles.lensDescription}>
+                      {t(studentLensSummaryKey)}
+                    </span>
+                    <span id={lensCaveatId} className={styles.lensCaveat}>
+                      {t("explore.studentLensCaveat")}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span id={lensDescriptionId} className={styles.lensDescription}>
+                      {activeLens?.description ?? t("explore.lens.categoricalPlacement")}
+                    </span>
+                    <span id={lensMeaningId} className={styles.lensMeaning}>
+                      <strong>{t("explore.lens.represents")}</strong>{" "}
+                      {activeLens?.meaning ?? t("explore.lens.categoricalPlacement")}
+                    </span>
+                    <span id={lensCaveatId} className={styles.lensCaveat}>
+                      <strong>{t("explore.lens.doesNotRepresent")}</strong>{" "}
+                      {activeLens?.doesNotMean ?? t("explore.lens.caveat")}
+                    </span>
+                  </>
+                )}
               </div>
               {presentationMode === "student" ? (
                 <span className={styles.studentHint}>{t("explore.studentHint")}</span>
@@ -2267,12 +2403,19 @@ export function MoleculeUniverse({
             }
             representation={representation}
             showHydrogens={showHydrogens}
+            focusAutoFit={
+              dimension === "3d" && (
+                level === "focus" ||
+                Boolean(searchFocusedId && searchFitPendingId === searchFocusedId)
+              )
+            }
             camera={
               searchFocusedId && searchFitPendingId === searchFocusedId
                 ? undefined
                 : sceneCamera
             }
             interactionMode={level === "universe" || level === "compare" ? "pan" : interactionMode}
+            copyMode={presentationMode === "student" ? "student" : "default"}
             ariaLabel={
               level === "focus"
                 ? t("explore.focusSceneAria", {
@@ -2297,6 +2440,13 @@ export function MoleculeUniverse({
                   id: bounds.moleculeId,
                 })),
               }));
+            }}
+            onViewportCommit={({ width, height, aspect }) => {
+              if (level !== "universe") return;
+              setSceneViewportWidth((current) => current === width ? current : width);
+              setSceneViewportAspect((current) => current === aspect ? current : aspect);
+              const key = `${Math.round(width)}:${Math.round(height)}`;
+              setSceneViewportKey((current) => current === key ? current : key);
             }}
             onStatusChange={(detail) => {
               const layout = scenePortRef.current?.getLayoutMetrics();
@@ -2330,25 +2480,37 @@ export function MoleculeUniverse({
               }
             }}
             onComparisonAnalysis={setComparisonAnalysis}
-            onCameraChange={(camera) => {
-              lastCameraRef.current = camera;
-              if (level === "universe" || level === "cluster") {
-                scheduleViewportSelectionCamera(camera);
+            onCameraChange={(camera, cameraRevision) => {
+              // The adapter's constructor publishes revision 1 before the port
+              // is ready. Mirror that revision, but do not let its default
+              // camera overwrite an explicit controlled route camera.
+              let activePortReady = false;
+              try {
+                activePortReady = Boolean(scenePortRef.current?.getCameraState());
+              } catch {
+                // React Strict Mode can leave the first probe port disposed
+                // until the replacement adapter reaches onSceneReady.
               }
-              if (level === "universe") universeCameraRef.current = camera;
-              if (level === "cluster") clusterCameraRef.current = camera;
-              if (searchFocusedId && searchFitPendingId === searchFocusedId) {
+              if (activePortReady) {
+                lastCameraRef.current = camera;
                 setSceneCamera(camera);
-                setSearchFitPendingId(null);
+                if (level === "universe" || level === "cluster") {
+                  scheduleViewportSelectionCamera(camera);
+                }
+                if (level === "universe") universeCameraRef.current = camera;
+                if (level === "cluster") clusterCameraRef.current = camera;
+                if (searchFocusedId && searchFitPendingId === searchFocusedId) {
+                  setSearchFitPendingId(null);
+                }
+                if (level === "universe") {
+                  setUniverseZoom(cameraZoom(camera));
+                  setUniversePan({
+                    x: -camera.target.x * 18,
+                    y: camera.target.y * 18,
+                  });
+                }
               }
-              if (level === "universe") {
-                setUniverseZoom(cameraZoom(camera));
-                setUniversePan({
-                  x: -camera.target.x * 18,
-                  y: camera.target.y * 18,
-                });
-              }
-              setTelemetry((current) => ({ ...current, cameraRevision: current.cameraRevision + 1 }));
+              setTelemetry((current) => ({ ...current, cameraRevision }));
             }}
             onAtomSelect={(atom) => {
               setTelemetry((current) => ({ ...current, selectedAtom: atom }));
@@ -2376,7 +2538,10 @@ export function MoleculeUniverse({
             </div>
           ) : null}
 
-          {level !== "focus" && activeSceneGapCount > 0 ? (
+          {level !== "focus" && (
+            unavailableSceneMolecules.length > 0 ||
+            (presentationMode === "reviewer" && unprojectedSceneMolecules.length > 0)
+          ) ? (
             <div
               className={styles.structureGapStatus}
               role={effectiveLoadedCount === 0 ? "alert" : "status"}
@@ -2397,7 +2562,7 @@ export function MoleculeUniverse({
                   </span>
                 </div>
               ) : null}
-              {unprojectedSceneMolecules.length > 0 ? (
+              {presentationMode === "reviewer" && unprojectedSceneMolecules.length > 0 ? (
                 <div>
                   <strong>
                     {t("explore.missingProjectionRecords", {
@@ -2504,13 +2669,18 @@ export function MoleculeUniverse({
               </div>
               <p className={styles.lodStatus}>
                 {lodLevel === "far"
-                  ? t("explore.lodFar")
+                  ? t(presentationMode === "student" ? "explore.studentLodFar" : "explore.lodFar")
                   : remainingSceneScopeCount > 0
                     ? interpolateIndexedCopy(catalogCopy.sceneSampleMore, {
                         shown: sceneVisibleIds.length,
                         remaining: remainingSceneScopeCount,
                       })
-                    : t("explore.lodNear", { count: sceneVisibleIds.length })}
+                    : t(
+                        presentationMode === "student"
+                          ? "explore.studentLodNear"
+                          : "explore.lodNear",
+                        { count: sceneVisibleIds.length },
+                      )}
               </p>
             </div>
           ) : null}
@@ -2623,13 +2793,20 @@ export function MoleculeUniverse({
                 <span>{catalogCopy.commonCore}</span>
                 <strong>
                   {activeComparisonAnalysis
-                    ? interpolateIndexedCopy(catalogCopy.commonCoreSummary, {
+                    ? interpolateIndexedCopy(
+                        presentationMode === "student"
+                          ? catalogCopy.studentCommonCoreSummary
+                          : catalogCopy.commonCoreSummary,
+                        {
                         atoms: activeComparisonAnalysis.commonCoreAtomCount,
                         bonds: activeComparisonAnalysis.commonCoreBondCount,
-                      })
-                    : catalogCopy.commonCorePending}
+                        },
+                      )
+                    : presentationMode === "student"
+                      ? catalogCopy.commonCorePending
+                      : catalogCopy.commonCoreReviewerPending}
                 </strong>
-                {comparisonFingerprintScore !== null ? (
+                {presentationMode === "reviewer" && comparisonFingerprintScore !== null ? (
                   <small>
                     {interpolateIndexedCopy(catalogCopy.fingerprintSummary, {
                       score: comparisonFingerprintScore,
@@ -2640,7 +2817,11 @@ export function MoleculeUniverse({
                   <span data-mask="common">{catalogCopy.commonMask}</span>
                   <span data-mask="changed">{catalogCopy.changedMask}</span>
                 </div>
-                <small>{catalogCopy.comparisonBoundary}</small>
+                <small>
+                  {presentationMode === "student"
+                    ? catalogCopy.comparisonBoundary
+                    : catalogCopy.comparisonReviewerBoundary}
+                </small>
                 {commonComparisonScaffold ? (
                   <small>{t("explore.compareCommonScaffold")}: {commonComparisonScaffold}</small>
                 ) : null}
@@ -2659,7 +2840,12 @@ export function MoleculeUniverse({
                   <li key={molecule.id} style={{ "--accent": molecule.accent ?? "#8be1c4" } as CSSProperties}>
                     <span>{molecule.formula ?? t("explore.formulaMissing")}</span>
                     <strong>{molecule.name}</strong>
-                    <small>{molecule.studentProfile?.scaffoldFamily ?? getLensValue(molecule, "scaffold", unclassifiedLabel)}</small>
+                    <small>
+                      {presentationMode === "student"
+                        ? catalogCopy.representativeStructure
+                        : molecule.classificationEvidence?.scaffold?.label
+                          ?? getLensValue(molecule, "scaffold", unclassifiedLabel)}
+                    </small>
                     {changedMask ? (
                       <p>
                         <span>{catalogCopy.changedGroups}</span>
@@ -2769,58 +2955,75 @@ export function MoleculeUniverse({
                       <dt>{t("explore.systematicName")}</dt>
                       <dd>{selectedMolecule.studentProfile?.systematicName ?? t("common.notSpecified")}</dd>
                     </div>
-                    <div>
-                      <dt>{catalogCopy.functionalMotifHints}</dt>
-                      <dd>{selectedMolecule.studentProfile?.functionalGroups.join(" · ") || t("common.notSpecified")}</dd>
-                    </div>
-                    <div>
-                      <dt>{t("explore.scaffoldFamily")}</dt>
-                      <dd>
-                        {presentationMode === "reviewer" ? (
+                    {presentationMode === "reviewer" ? (
+                      <div>
+                        <dt>{catalogCopy.functionalMotifReviewerHints}</dt>
+                        <dd>{selectedMolecule.studentProfile?.functionalGroups.join(" · ") || t("common.notSpecified")}</dd>
+                      </div>
+                    ) : null}
+                    {presentationMode === "reviewer" ? (
+                      <>
+                        <div>
+                          <dt>{t("explore.scaffoldFamily")}</dt>
+                          <dd>
                           <ReviewerClassificationEvidence
                             evidence={selectedMolecule.classificationEvidence?.scaffold}
                             fallback={selectedMolecule.studentProfile?.scaffoldFamily ?? t("common.notSpecified")}
                             fallbackStatus="pending-review"
                             t={t}
                           />
-                        ) : selectedMolecule.studentProfile?.scaffoldFamily ?? t("common.notSpecified")}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>{catalogCopy.scaffoldDetail}</dt>
-                      <dd>
-                        {presentationMode === "reviewer" ? (
+                          </dd>
+                        </div>
+                        <div>
+                          <dt>{catalogCopy.scaffoldDetail}</dt>
+                          <dd>
                           <ReviewerClassificationEvidence
                             evidence={selectedMolecule.classificationEvidence?.scaffold}
                             fallback={selectedMolecule.studentProfile?.scaffoldDetail ?? t("common.notSpecified")}
                             fallbackStatus="pending-review"
                             t={t}
                           />
-                        ) : selectedMolecule.studentProfile?.scaffoldDetail ?? t("common.notSpecified")}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>{t("explore.drugClass")}</dt>
-                      <dd>
-                        {presentationMode === "reviewer" ? (
+                          </dd>
+                        </div>
+                        <div>
+                          <dt>{t("explore.drugClass")}</dt>
+                          <dd>
                           <ReviewerClassificationEvidence
                             evidence={selectedMolecule.classificationEvidence?.["pharmacologic-class"]}
                             fallback={selectedMolecule.studentProfile?.drugClass ?? t("common.notSpecified")}
                             fallbackStatus="pending-review"
                             t={t}
                           />
-                        ) : selectedMolecule.studentProfile?.drugClass ?? t("common.notSpecified")}
-                      </dd>
-                    </div>
+                          </dd>
+                        </div>
+                      </>
+                    ) : studentClassificationEntries.map((entry) => (
+                      <div key={entry.id}>
+                        <dt>
+                          {entry.value === candidateRecordsLabel
+                            ? t("explore.candidateRecords")
+                            : entry.label}
+                        </dt>
+                        <dd>
+                          {entry.value === candidateRecordsLabel
+                            ? t("explore.candidateRecordsBoundary")
+                            : entry.value}
+                        </dd>
+                      </div>
+                    ))}
                   </dl>
                   <section className={styles.similarMolecules} data-neighbor-scope="resident-window">
                     <span>{catalogCopy.similarMolecules}</span>
-                    <p>{catalogCopy.similarMoleculesBoundary}</p>
+                    <p>
+                      {presentationMode === "student"
+                        ? catalogCopy.similarMoleculesBoundary
+                        : catalogCopy.similarMoleculesReviewerBoundary}
+                    </p>
                     {selectedSimilarMolecules.length > 0 ? (
                       <ul>
                         {selectedSimilarMolecules.map(({ molecule, score }) => (
                           <li key={molecule.id}>
-                            <button type="button" onClick={() => openMolecule(molecule, true)}>
+                            <button type="button" onClick={() => openMolecule(molecule)}>
                               <strong>{molecule.name}</strong>
                               <small>{molecule.formula ?? t("explore.formulaMissing")}</small>
                               {presentationMode === "reviewer" ? <em>{score.toFixed(3)}</em> : null}
@@ -2931,7 +3134,11 @@ export function MoleculeUniverse({
       <footer className={styles.footer}>
         <span><kbd>Esc</kbd> {t("explore.keyboardBack")}</span>
         <span><kbd>←</kbd><kbd>→</kbd> {t("explore.keyboardNavigate")}</span>
-        <span>{activeLens?.doesNotMean ?? t("explore.lens.caveat")}</span>
+        <span>
+          {presentationMode === "reviewer"
+            ? activeLens?.doesNotMean ?? t("explore.lens.caveat")
+            : t("explore.studentBoundary")}
+        </span>
       </footer>
     </section>
   );

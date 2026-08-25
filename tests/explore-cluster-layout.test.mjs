@@ -14,7 +14,7 @@ const collides = (left, right, horizontal = 20, vertical = 20) =>
 const coversAvoidanceZone = (
   label,
   zone,
-  labelHalfWidth = 12,
+  labelHalfWidth = 17,
   labelHalfHeight = 10,
 ) =>
   Math.abs(label.x - zone.x) < labelHalfWidth + (zone.radiusX ?? 6) + 1.5

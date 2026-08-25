@@ -6,6 +6,24 @@
   border: 1px solid color-mix(in srgb, #355f4e 18%, transparent);
   border-radius: 1.5rem;
   background: color-mix(in srgb, #f5f1e8 88%, white);
+  font-size: 1rem;
+}
+
+.panel[data-empty-coverage="pharmacology"] {
+  gap: 0;
+  padding: 1rem 1.15rem;
+  border-style: dashed;
+  border-radius: 1rem;
+  background: #fafafa;
+}
+
+.panel[data-empty-coverage="pharmacology"] h2 {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.panel[data-empty-coverage="pharmacology"] header p {
+  margin-top: 0.4rem;
 }
 
 .panel > header {
@@ -15,7 +33,7 @@
 .panel > header > span,
 .classifications > span {
   color: #557064;
-  font: 700 0.72rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 700 0.875rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: 0.13em;
 }
 
@@ -83,7 +101,7 @@
   padding: 0.75rem 1rem;
   color: #66776f;
   background: #eef2ef;
-  font-size: 0.76rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -102,6 +120,7 @@
 
 .targetRow small {
   color: #6b7872;
+  font-size: 0.875rem;
 }
 
 .reviewed {
@@ -109,7 +128,7 @@
   right: 0.7rem;
   bottom: 0.45rem;
   color: #39705a;
-  font-size: 0.68rem;
+  font-size: 0.875rem;
 }
 
 .classifications {
@@ -131,10 +150,14 @@
   border: 1px solid #ccd8d2;
   border-radius: 999px;
   background: white;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 760px) {
+  .panel {
+    font-size: 0.9375rem;
+  }
+
   .tableHeader {
     display: none;
   }

@@ -8,6 +8,8 @@ export const DEFAULT_MOLECULAR_SCENE_CAMERA: MolecularSceneCamera = {
   far: 2500,
 };
 
+export const DEFAULT_FOCUS_FIT_PADDING = 0.14;
+
 function add(left: SceneVector3, right: SceneVector3): SceneVector3 {
   return { x: left.x + right.x, y: left.y + right.y, z: left.z + right.z };
 }
@@ -38,6 +40,56 @@ function cross(left: SceneVector3, right: SceneVector3): SceneVector3 {
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value));
+}
+
+function canonicalCameraCoordinate(value: number) {
+  // Reset/fit is a product-state boundary. Quantizing well below rendering
+  // precision prevents one-ULP drift from making two identical fits serialize
+  // as different camera states after an intervening zoom.
+  return Math.round(value * 1e12) / 1e12;
+}
+
+/**
+ * Fits a rotation-invariant bounding sphere while preserving the incoming
+ * camera direction. Using a fixed local-space sphere prevents representation,
+ * hover and selection changes from becoming implicit camera operations.
+ */
+export function fitSceneCameraToBoundingSphere(
+  camera: MolecularSceneCamera,
+  center: SceneVector3,
+  radius: number,
+  aspect: number,
+  paddingFraction = DEFAULT_FOCUS_FIT_PADDING,
+): MolecularSceneCamera {
+  const safeRadius = Math.max(0.001, radius);
+  const safeAspect = Math.max(0.1, aspect);
+  const safePadding = clamp(paddingFraction, 0, 0.3);
+  const visibleFraction = Math.max(0.4, 1 - safePadding * 2);
+  const halfVerticalFov = (((camera.fov ?? 42) * Math.PI) / 180) / 2;
+  const limitingTangent = Math.tan(halfVerticalFov) * Math.min(1, safeAspect);
+  const distance = Math.max(
+    3.5,
+    safeRadius / Math.max(0.001, limitingTangent * visibleFraction),
+  );
+  const incomingDirection = subtract(camera.position, camera.target);
+  const direction = length(incomingDirection) < 0.0001
+    ? normalize({ x: 0, y: 0.16, z: 1 })
+    : normalize(incomingDirection);
+
+  const position = add(center, multiply(direction, distance));
+  return {
+    ...camera,
+    position: {
+      x: canonicalCameraCoordinate(position.x),
+      y: canonicalCameraCoordinate(position.y),
+      z: canonicalCameraCoordinate(position.z),
+    },
+    target: {
+      x: canonicalCameraCoordinate(center.x),
+      y: canonicalCameraCoordinate(center.y),
+      z: canonicalCameraCoordinate(center.z),
+    },
+  };
 }
 
 export function orbitSceneCamera(

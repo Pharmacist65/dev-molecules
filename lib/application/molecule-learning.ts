@@ -121,8 +121,8 @@ export function presentLearningClassification(
 ) {
   if (label && status && isReviewedVerification(status)) return label;
   return locale === "tr"
-    ? "Sınıflandırma incelemesi sürüyor"
-    : "Classification review in progress";
+    ? "Aday kayıtlar"
+    : "Candidate records";
 }
 
 export function createStudentMoleculeProfile(
@@ -165,8 +165,8 @@ export function createStudentMoleculeProfile(
         ? `${target.label} bağlamında gözden geçirilmiş öğrenme özeti.`
         : `Reviewed learning summary in the ${target.label} context.`
       : locale === "tr"
-        ? "Etki mekanizması incelemesi sürüyor; öğrenci görünümünde taslak hedef özeti gösterilmez."
-        : "Mechanism review is in progress; no draft target summary is shown in Student view.",
+        ? "Bu kayıt için kaynaklandırılmış etki mekanizması dersi henüz yok."
+        : "No sourced mechanism lesson is available for this record yet.",
     synthesisScope: routeAvailable
       ? locale === "tr"
         ? "Sentez Atlası'nda kaynak bağlantılı eğitim rotası var."
@@ -174,13 +174,8 @@ export function createStudentMoleculeProfile(
       : locale === "tr"
         ? "Bu molekül için kürate edilmiş rota henüz yok."
         : "No curated route is available for this molecule yet.",
-    nomenclatureLesson:
-      functionalGroups.length > 0
-        ? locale === "tr"
-          ? `Hesaplanmış, incelenmemiş motif ipucu: ${functionalGroups.slice(0, 3).join(", ")}.`
-          : `Computed, unreviewed motif hint: ${functionalGroups.slice(0, 3).join(", ")}.`
-        : locale === "tr"
-          ? "Yapı dili dersi hazırlanıyor."
-          : "The structure-language lesson is being prepared.",
+    nomenclatureLesson: locale === "tr"
+      ? "Bu kayıt için incelenmiş molekül-özel nomenklatür dersi henüz yok."
+      : "No reviewed molecule-specific nomenclature lesson is available yet.",
   };
 }

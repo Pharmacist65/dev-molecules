@@ -1,17 +1,20 @@
-# Dev Molecules 2.0 — Release Status
+# Dev Molecules V2.1 Public Alpha — Release Status
 
-Status date: 2026-08-23
+Status date: 2026-08-25
 
 This document distinguishes implemented product flow, checked scientific coverage, and architecture-only capability. Counts are release evidence for this snapshot, never schema or product ceilings.
+
+V2.1 implementation, local acceptance gates, and the required visual evidence are present in the release candidate. Release status is still per-commit: the [V2.1 product-integrity gates](V2_1_RELEASE_BLOCKER_SPRINT.md), CI deployment, and anonymous-live checks must all resolve against the same published commit.
 
 ## Routed product surfaces
 
 | Surface | Current implementation | Explicit boundary |
 | --- | --- | --- |
-| Home | Default route, search over the 1,552-record checked structure index, lazy featured molecule, Atlas/Academy/dossier entry paths | Featured content is not catalog coverage. |
-| Drug Atlas · Browse | Default Atlas view; indexed search and paging over all 1,552 imported records; lazy 2D/entity hydration | Catalog membership does not imply a deep dossier or reviewed pharmacology. |
+| Home | Default route, search over the 1,552-record checked structure index, lazy featured molecule, and Atlas/Academy/molecular-record entry paths | Featured content is not catalog coverage. |
+| Drug Atlas · Browse | Default Atlas view; indexed search and paging over all 1,552 imported records; lazy entity and requested 2D/3D hydration | Catalog membership does not imply Curated Dossier depth or reviewed pharmacology. |
 | Drug Atlas · Spatial | Lazy, one-WebGL representative Universe/cluster/focus/compare experience | The bounded scene represents only a sample of the checked structure index; unclassified generated records do not become invented clusters. |
-| Drug Dossier | Story and Reference modes for the 15 curated seed records; independent identity, structure, classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review indicators | Generated catalog records outside the seed fail to an explicit unavailable dossier. Pharmacology and quantitative ADME are not populated. |
+| Basic Molecular Record | Stable record route for every one of the 1,552 resolved identities; source-matched names and identifiers, real 2D structure, computed 3D conformer, provenance, molecular weight when present, and explicit nine-dimension coverage | This is an identity/structure baseline. Unavailable classification, pharmacology, ADME, metabolite, synthesis, nomenclature, and learning fields remain unavailable; bounded structure-neighbor hints are computed and unreviewed. |
+| Curated Drug Dossier | Story and Reference modes for the 15 curated seed records; independent identity, structure, classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review indicators | Curated depth is not inferred for non-seed records. Pharmacology and quantitative ADME are not populated. |
 | Family | Two bounded review workspaces with four exact PubChem identity/2D representatives each, computed-unreviewed structural fingerprint comparison, explicit coverage gaps, and unknown-ID fail-closed routing | No sourced production classification, shared mechanism, targets, ADME, or family comparison observations are configured. The representative set is not family coverage. |
 | Academy | Eight-module map with real progress where activities exist | Five modules are available, Pharmacology and ADME are coverage-dependent, and standalone Reaction Mechanisms is planned. |
 | Nomenclature Academy | Eight sections, 22 exercises, 20 parseable 2D structures, 16 response/widget contracts | Curated deterministic exercises; not a general IUPAC parser or arbitrary structure validator. |
@@ -29,6 +32,8 @@ This document distinguishes implemented product flow, checked scientific coverag
 | Complete same-ID DrugCentral structures | 1,858 |
 | Exact unique PubChem identity resolutions | 1,747 |
 | Imported complete 2D/3D records | 1,552 |
+| Stable molecular-record routes | 1,552 |
+| Curated Dossier records | 15 |
 | Fail-closed unresolved rows | 779 |
 | Published SDF assets | 3,104 |
 | Active public-build source adapters | 2 |
@@ -43,7 +48,7 @@ DrugCentral and PubChem are the only enabled public-build source policies. Targe
 
 ## Scientific coverage boundary
 
-- Deep Dossier coverage is seed-only. No source-ineligible imported record is completed with generated prose.
+- Basic Molecular Record identity/structure coverage reaches all 1,552 resolved records. Deep Curated Dossier coverage remains seed-only, and no non-seed record is completed with generated prose.
 - The checked catalog has no reviewed target-interaction snapshot. Pharmacology panels therefore expose an explicit unavailable state.
 - Curated product/form route context can be present in ADME, but absorption, distribution, metabolism, and excretion measurements remain empty without direct evidence and conditions.
 - No reviewed metabolite edges are configured. An empty graph does not mean that no metabolites exist.
@@ -74,4 +79,4 @@ Performance claims remain bounded to architecture and tests: route-level lazy lo
 
 ## Release gate
 
-Before handoff or deployment, run the commands in [README](../README.md#reproducible-gates), verify the [catalog reports](CATALOG_PIPELINE.md), inspect TR and EN at desktop and mobile sizes, and confirm that the anonymous public URL serves the root document, catalog manifest, and a real SDF. Passing the engineering gate does not replace qualified scientific, educational, privacy, accessibility, or licensing review.
+Before handoff or deployment, run the commands in [README](../README.md#reproducible-gates), complete the [V2.1 product-integrity gate](V2_1_RELEASE_BLOCKER_SPRINT.md), verify the [catalog reports](CATALOG_PIPELINE.md), inspect TR and EN at desktop and mobile sizes, and confirm that the anonymous public URL serves the root document, catalog manifest, a Basic Molecular Record, a Curated Dossier, and a real SDF. Passing the engineering gate does not replace qualified scientific, educational, privacy, accessibility, or licensing review.

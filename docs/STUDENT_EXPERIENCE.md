@@ -2,7 +2,7 @@
 
 ## Product decision
 
-Dev Molecules opens in Student presentation. Home answers where to begin; Drug Atlas defaults to the checked structure-index Browse surface; Academy exposes a visible learning map; and Lab labels local computation and privacy before the editor opens.
+Dev Molecules opens in Student presentation. Home answers where to begin; Drug Atlas defaults to the checked structure-index Browse surface and gives every resolved result a stable molecular-record route; Academy exposes a visible learning map; and Lab labels local computation and privacy before the editor opens.
 
 An Expert preference remains available under Settings, but its shipped effect is deliberately narrow: curated Drug Dossiers open in Reference mode by default. Home, Atlas, Academy, Synthesis, and Lab retain the same learner-safe scientific presentation. No additional Expert measurement, assay-context, comparison, or export workflow is shipped. Reviewer Console is a separate access domain and stays locked on the public host without an authenticated, audited adapter.
 
@@ -25,7 +25,7 @@ Neither learner presentation displays raw scientific enums as user-facing labels
 
 Drug Atlas has two complementary views:
 
-- **Browse** is the default. It searches and pages through all 1,552 imported records and hydrates only the selected shard, entity, and requested structure.
+- **Browse** is the default. It searches and pages through all 1,552 imported records, hydrates only the selected shard, entity, and requested structure, and opens either the universal Basic Molecular Record boundary or the matching Curated Dossier depth. Refresh preserves the stable record route; returning to Atlas restores the prior query and page state.
 - **Spatial** is optional and route-lazy. It uses one shared Three.js scene across four states:
 
 ```text
@@ -57,9 +57,17 @@ The initial generated-catalog metadata window is deterministic and bounded; it i
 
 The parser rejects a missing, malformed, 2D-only, or identity-mismatched 3D SDF. Partial failures keep valid structures visible and report the failed identities; total failure stays explicit. No fallback creates decorative atoms or random bonds.
 
-## Drug Dossier coverage
+## Basic Molecular Record and Curated Dossier coverage
 
-The routed Drug Dossier currently resolves only the 15 curated seed records. It offers Story and Reference presentations over the same typed record and composes:
+Every one of the 1,552 resolved index identities owns a stable route and a Basic Molecular Record boundary. For a non-seed record, that surface composes only checked catalog fields:
+
+- preferred name, aliases, molecular formula, PubChem CID, canonical/isomeric SMILES, InChIKey, and molecular weight when present;
+- the real source 2D SDF and the separately labelled PubChem-computed 3D conformer;
+- source links, snapshot provenance, and capture date;
+- independent coverage states for identity, structure, classification, pharmacology, ADME, metabolites, synthesis, nomenclature, and learning;
+- optional neighbors calculated only inside the bounded resident metadata window with the versioned canonical-SMILES path fingerprint, labelled computed and unreviewed.
+
+The 15 curated seed identities continue into a Curated Dossier rather than losing their deeper content. Story and Reference presentations use the same typed record and compose:
 
 - preferred and PubChem systematic name when present in the checked SDF;
 - molecular formula;
@@ -72,7 +80,7 @@ The routed Drug Dossier currently resolves only the 15 curated seed records. It 
 - a nomenclature learning cue;
 - collapsed structure and regulatory sources.
 
-Functional-group detection is a bounded educational classifier, not a general substructure-search engine. A missing systematic name, classification, target, ADME field, metabolite edge, or deep-Dossier record remains unavailable/pending; the Dossier does not ask an LLM to fill it. A generated Atlas record outside the 15-record seed opens an explicit unavailable state rather than an invented dossier.
+Functional-group detection is a bounded educational classifier, not a general substructure-search engine. A missing systematic name, classification, target, ADME field, metabolite edge, or Curated Dossier layer remains unavailable/pending; neither record surface asks an LLM to fill it. A generated Atlas record outside the 15-record seed opens its Basic Molecular Record instead of an unavailable or invented Dossier. The Basic Record does not convert source-list membership, missing enrichment, or a computed structure-neighbor score into reviewed therapeutic, pharmacological, biological, or clinical meaning.
 
 ## Spatial Atlas lenses
 

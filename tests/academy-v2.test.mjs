@@ -132,6 +132,9 @@ test("ADME lessons distinguish sourced administration context from ADME evidence
   const oral = createAcademyScienceLesson("adme", "propranolol", "en");
   const intravenous = createAcademyScienceLesson("adme", "labetalol", "en");
   const ophthalmic = createAcademyScienceLesson("adme", "timolol", "en");
+  const oralTr = createAcademyScienceLesson("adme", "propranolol", "tr");
+  const intravenousTr = createAcademyScienceLesson("adme", "labetalol", "tr");
+  const ophthalmicTr = createAcademyScienceLesson("adme", "timolol", "tr");
 
   for (const lesson of [oral, intravenous, ophthalmic]) {
     assert.equal(lesson.status, "context-only");
@@ -141,9 +144,12 @@ test("ADME lessons distinguish sourced administration context from ADME evidence
     assert.match(lesson.statusReason, /no absorption, distribution, metabolism, or excretion measurement/i);
   }
 
-  assert.equal(oral.administrationContexts[0]?.route, "ORAL");
-  assert.equal(intravenous.administrationContexts[0]?.route, "INTRAVENOUS");
-  assert.equal(ophthalmic.administrationContexts[0]?.route, "OPHTHALMIC");
+  assert.equal(oral.administrationContexts[0]?.route, "Oral");
+  assert.equal(intravenous.administrationContexts[0]?.route, "Intravenous");
+  assert.equal(ophthalmic.administrationContexts[0]?.route, "Ophthalmic");
+  assert.equal(oralTr.administrationContexts[0]?.route, "Oral");
+  assert.equal(intravenousTr.administrationContexts[0]?.route, "İntravenöz");
+  assert.equal(ophthalmicTr.administrationContexts[0]?.route, "Oftalmik");
 });
 
 test("unmatched science lessons produce no molecule claim or source", () => {

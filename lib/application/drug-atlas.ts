@@ -1,6 +1,7 @@
 import type { CatalogBrowseNavigator } from "./catalog-browse";
 import {
   loadCatalogBrowseWindow,
+  normalizeCatalogBrowseQuery,
   type CatalogBrowseRecord,
   type CatalogBrowseWindow,
   type LoadCatalogBrowseWindowOptions,
@@ -68,6 +69,49 @@ export interface AtlasFilterFacet {
 }
 
 export type AtlasFilterSelection = Readonly<Record<string, string>>;
+
+export interface DrugAtlasBrowseState {
+  readonly query: string;
+  readonly offset: number;
+  readonly filters: AtlasFilterSelection;
+}
+
+export const DEFAULT_DRUG_ATLAS_BROWSE_STATE: DrugAtlasBrowseState = {
+  query: "",
+  offset: 0,
+  filters: {},
+};
+
+/**
+ * Restores only presentation state. Unknown filters and malformed storage are
+ * harmless because scientific facet adapters still validate every selection.
+ */
+export function normalizeDrugAtlasBrowseState(
+  value: unknown,
+): DrugAtlasBrowseState {
+  if (!value || typeof value !== "object") return DEFAULT_DRUG_ATLAS_BROWSE_STATE;
+  const candidate = value as {
+    readonly query?: unknown;
+    readonly offset?: unknown;
+    readonly filters?: unknown;
+  };
+  const query = typeof candidate.query === "string" && candidate.query.length <= 512
+    ? normalizeCatalogBrowseQuery(candidate.query)
+    : "";
+  const offset = Number.isSafeInteger(candidate.offset) && Number(candidate.offset) >= 0
+    ? Number(candidate.offset)
+    : 0;
+  const filters: Record<string, string> = {};
+  if (candidate.filters && typeof candidate.filters === "object") {
+    for (const [rawKey, rawValue] of Object.entries(candidate.filters)) {
+      const key = rawKey.trim();
+      const filterValue = typeof rawValue === "string" ? rawValue.trim() : "";
+      if (!key || key.length > 80 || !filterValue || filterValue.length > 160) continue;
+      filters[key] = filterValue;
+    }
+  }
+  return { query, offset, filters };
+}
 
 export interface AtlasFilteredWindowRequest {
   readonly query: string;

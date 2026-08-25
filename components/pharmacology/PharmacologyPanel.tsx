@@ -54,6 +54,24 @@ export function PharmacologyPanel({
   const labels = copy[locale];
   const classifications = profile.classifications;
 
+  if (profile.targets.length === 0) {
+    return (
+      <section
+        className={styles.panel}
+        data-pharmacology-coverage={profile.availability}
+        data-empty-coverage="pharmacology"
+        data-compact={compact}
+        aria-labelledby="dossier-pharmacology-heading"
+      >
+        <header>
+          <span>{labels.eyebrow}</span>
+          <h2 id="dossier-pharmacology-heading">{labels.unavailable}</h2>
+          <p role="status">{profile.unavailableReason}</p>
+        </header>
+      </section>
+    );
+  }
+
   return (
     <section
       className={styles.panel}
@@ -67,44 +85,34 @@ export function PharmacologyPanel({
         <p>{labels.description}</p>
       </header>
 
-      {profile.targets.length === 0 ? (
-        <div className={styles.unavailable} role="status">
-          <span aria-hidden="true">○</span>
-          <div>
-            <strong>{labels.unavailable}</strong>
-            <p>{profile.unavailableReason}</p>
-          </div>
+      <div className={styles.targetTable} role="table" aria-label={labels.title}>
+        <div className={styles.tableHeader} role="row">
+          <span role="columnheader">{labels.target}</span>
+          <span role="columnheader">{labels.action}</span>
+          <span role="columnheader">{labels.measurement}</span>
+          <span role="columnheader">{labels.context}</span>
         </div>
-      ) : (
-        <div className={styles.targetTable} role="table" aria-label={labels.title}>
-          <div className={styles.tableHeader} role="row">
-            <span role="columnheader">{labels.target}</span>
-            <span role="columnheader">{labels.action}</span>
-            <span role="columnheader">{labels.measurement}</span>
-            <span role="columnheader">{labels.context}</span>
-          </div>
-          {profile.targets.map((target) => (
-            <div key={target.id} role="row" className={styles.targetRow}>
-              <div role="cell">
-                <strong>{target.targetName.value}</strong>
-                <small>{target.targetFamily?.value ?? labels.family}</small>
-              </div>
-              <div role="cell">
-                <span>{actionLabel[target.action.value][locale]}</span>
-              </div>
-              <div role="cell">
-                <strong>{target.measurementType.value}</strong>
-                <small>{target.measurement.value} {target.measurement.unit}</small>
-              </div>
-              <div role="cell">
-                <strong>{target.species.value}</strong>
-                <small>{target.assayContext.value}</small>
-              </div>
-              <span className={styles.reviewed}>{labels.reviewed}</span>
+        {profile.targets.map((target) => (
+          <div key={target.id} role="row" className={styles.targetRow}>
+            <div role="cell">
+              <strong>{target.targetName.value}</strong>
+              <small>{target.targetFamily?.value ?? labels.family}</small>
             </div>
-          ))}
-        </div>
-      )}
+            <div role="cell">
+              <span>{actionLabel[target.action.value][locale]}</span>
+            </div>
+            <div role="cell">
+              <strong>{target.measurementType.value}</strong>
+              <small>{target.measurement.value} {target.measurement.unit}</small>
+            </div>
+            <div role="cell">
+              <strong>{target.species.value}</strong>
+              <small>{target.assayContext.value}</small>
+            </div>
+            <span className={styles.reviewed}>{labels.reviewed}</span>
+          </div>
+        ))}
+      </div>
 
       {classifications.length > 0 ? (
         <aside className={styles.classifications}>

@@ -11,12 +11,20 @@ const { canPresentTargetInteraction } = await tsImport(
   "../lib/application/pharmacology/index.ts",
   import.meta.url,
 );
-const { canPresentAdmeField } = await tsImport(
+const {
+  canPresentAdmeField,
+  presentAdministrationRoute,
+  presentDosageForm,
+} = await tsImport(
   "../lib/application/adme/index.ts",
   import.meta.url,
 );
 const { canPresentMetaboliteEdge } = await tsImport(
   "../lib/application/metabolites/index.ts",
+  import.meta.url,
+);
+const { createAcademyScienceLesson } = await tsImport(
+  "../lib/application/academy-science-lessons.ts",
   import.meta.url,
 );
 
@@ -61,6 +69,28 @@ test("route/form context is isolated and never populated as inferred ADME", () =
     assert.deepEqual(profile.metabolism, []);
     assert.deepEqual(profile.excretion, []);
   }
+});
+
+test("route and dosage-form context is localized only at the presentation boundary", () => {
+  assert.equal(presentAdministrationRoute("ORAL", "tr"), "Oral");
+  assert.equal(presentAdministrationRoute("INTRAVENOUS", "tr"), "İntravenöz");
+  assert.equal(presentAdministrationRoute("OPHTHALMIC", "tr"), "Oftalmik");
+  assert.equal(presentAdministrationRoute("TOPICAL", "tr"), "Topikal");
+  assert.equal(presentAdministrationRoute("INTRAVENOUS", "en"), "Intravenous");
+  assert.equal(presentDosageForm("CAPSULE, EXTENDED RELEASE", "tr"), "Uzatılmış salımlı kapsül");
+  assert.equal(presentDosageForm("SOLUTION/DROPS", "tr"), "Damla çözelti");
+  assert.equal(presentDosageForm("SUSPENSION", "tr"), "Süspansiyon");
+  assert.equal(presentDosageForm("CAPSULE", "en"), "Capsule");
+
+  const turkishLesson = createAcademyScienceLesson("adme", "labetalol", "tr");
+  assert.ok(turkishLesson.administrationContexts.length > 0);
+  assert.equal(turkishLesson.administrationContexts[0]?.route, "İntravenöz");
+  assert.doesNotMatch(
+    turkishLesson.administrationContexts
+      .flatMap((context) => [context.route, context.formulation ?? ""])
+      .join(" "),
+    /\b(?:INTRAVENOUS|CAPSULE, EXTENDED RELEASE|SOLUTION\/DROPS|SUSPENSION)\b/u,
+  );
 });
 
 test("target interactions require reviewed fields, units, conditions, and a target-scoped source", () => {

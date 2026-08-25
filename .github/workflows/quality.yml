@@ -32,6 +32,21 @@ jobs:
       - run: npm run licenses:check
       - run: npm run build
       - run: node --test tests/*.test.mjs
+      - name: Validate V2.1 visual release evidence
+        run: |
+          for file in \
+            docs/assets/v21/home-featured-idle-start.png \
+            docs/assets/v21/home-featured-idle-after-3s.png \
+            docs/assets/v21/home-featured-selected-state.png \
+            docs/assets/v21/beta-sitosterol-basic-record.png \
+            docs/assets/v21/propranolol-curated-dossier.png \
+            docs/assets/v21/empty-adme-compact.png \
+            docs/assets/v21/atlas-spatial-student.png \
+            docs/assets/v21/lab-ketcher.png \
+            docs/assets/v21/home-featured-10s.mp4
+          do
+            test -s "$file"
+          done
 
   browser:
     runs-on: ubuntu-latest

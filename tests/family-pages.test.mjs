@@ -108,8 +108,8 @@ test("candidate review labels state the non-membership boundary in TR and EN", a
     assert.match(family.overview.reason.en, /query label does not establish membership/i);
   }
 
-  assert.equal(messages.en["home.familiesLabel"], "Candidate identity review sets");
-  assert.equal(messages.tr["home.familiesLabel"], "Aday kimlik inceleme setleri");
+  assert.equal(messages.en["home.familiesLabel"], "Candidate records");
+  assert.equal(messages.tr["home.familiesLabel"], "Aday kayıtlar");
   assert.match(messages.en["home.familyBetaBlockers"], /query · candidate records/);
   assert.match(messages.tr["home.familyBetaBlockers"], /sorgusu · aday kayıtlar/);
 

@@ -1,4 +1,8 @@
-import { canPresentAdmeField } from "@/lib/application/adme";
+import {
+  canPresentAdmeField,
+  presentAdministrationRoute,
+  presentDosageForm,
+} from "@/lib/application/adme";
 import { createDrugDossierByIdOrSlug } from "@/lib/application/dossier";
 import { sourceById } from "@/lib/data/sources";
 import type {
@@ -205,8 +209,10 @@ const admeLesson = (
     .filter((profile) => sourceLinksFor(dossier, profile.sourceIds).length > 0)
     .map((profile) => ({
       id: profile.id,
-      route: profile.administration.route.value,
-      formulation: profile.administration.formulation?.value ?? null,
+      route: presentAdministrationRoute(profile.administration.route.value, locale),
+      formulation: profile.administration.formulation
+        ? presentDosageForm(profile.administration.formulation.value, locale)
+        : null,
       sourceIds: profile.sourceIds,
       boundary: profile.administration.route.conditions.note,
     }));

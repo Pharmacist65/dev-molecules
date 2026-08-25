@@ -80,18 +80,24 @@ export function SharedMolecularScene({
   showHydrogens = false,
   camera,
   interactionMode = "rotate",
+  atomSelectionEnabled = true,
+  copyMode = "default",
+  focusFitPadding = 0.14,
+  focusAutoFit = false,
   className,
   ariaLabel,
   onAtomSelect,
   onAtomHover,
   onMoleculeHover,
   onMoleculeBoundsChange,
+  onViewportCommit,
   onCameraChange,
   onComparisonAnalysis,
   onSceneReady,
   onStatusChange,
 }: SharedMolecularSceneProps) {
   const { t } = useI18n();
+  const studentCopy = copyMode === "student";
   const resolvedAriaLabel = ariaLabel ?? t("viewer.sceneAria");
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -109,6 +115,7 @@ export function SharedMolecularScene({
   const hoverCallbackRef = useRef(onAtomHover);
   const moleculeHoverCallbackRef = useRef(onMoleculeHover);
   const moleculeBoundsCallbackRef = useRef(onMoleculeBoundsChange);
+  const viewportCallbackRef = useRef(onViewportCommit);
   const cameraCallbackRef = useRef(onCameraChange);
   const comparisonCallbackRef = useRef(onComparisonAnalysis);
   const readyCallbackRef = useRef(onSceneReady);
@@ -136,6 +143,9 @@ export function SharedMolecularScene({
   useEffect(() => {
     moleculeBoundsCallbackRef.current = onMoleculeBoundsChange;
   }, [onMoleculeBoundsChange]);
+  useEffect(() => {
+    viewportCallbackRef.current = onViewportCommit;
+  }, [onViewportCommit]);
   useEffect(() => {
     cameraCallbackRef.current = onCameraChange;
   }, [onCameraChange]);
@@ -214,7 +224,13 @@ export function SharedMolecularScene({
 
   const publishCameraState = useCallback((nextCamera: MolecularSceneCamera) => {
     const value = JSON.stringify(nextCamera);
+    const distance = Math.hypot(
+      nextCamera.position.x - nextCamera.target.x,
+      nextCamera.position.y - nextCamera.target.y,
+      nextCamera.position.z - nextCamera.target.z,
+    );
     rootRef.current?.setAttribute("data-camera-state", value);
+    rootRef.current?.setAttribute("data-camera-distance", distance.toFixed(6));
     canvasRef.current?.setAttribute("data-camera-state", value);
   }, []);
 
@@ -224,8 +240,6 @@ export function SharedMolecularScene({
     publishCameraState(nextCamera);
     adapterRef.current?.setCamera(nextCamera, true);
     publishMoleculeBounds();
-    cameraCallbackRef.current?.(nextCamera);
-    setCameraRevision((revision) => revision + 1);
   }, [publishCameraState, publishMoleculeBounds]);
 
   const stopInertia = useCallback(() => {
@@ -297,7 +311,15 @@ export function SharedMolecularScene({
     let alive = true;
 
     try {
-      adapter = new ThreeJsMolecularSceneAdapter(canvas);
+      adapter = new ThreeJsMolecularSceneAdapter(canvas, {
+        onCameraChange: (nextCamera, nextCameraRevision) => {
+          if (!alive) return;
+          cameraRef.current = nextCamera;
+          publishCameraState(nextCamera);
+          cameraCallbackRef.current?.(nextCamera, nextCameraRevision);
+          setCameraRevision(nextCameraRevision);
+        },
+      });
       adapterRef.current = adapter;
       publishCameraState(cameraRef.current);
       readyCallbackRef.current?.(adapter);
@@ -320,17 +342,53 @@ export function SharedMolecularScene({
       };
     }
 
+    let resizeFrame: number | null = null;
+    let pendingResize: { readonly width: number; readonly height: number } | null = null;
+    let lastResize = {
+      width: Math.max(1, canvas.getBoundingClientRect().width),
+      height: Math.max(1, canvas.getBoundingClientRect().height),
+      pixelRatio: window.devicePixelRatio || 1,
+    };
+    viewportCallbackRef.current?.({
+      width: lastResize.width,
+      height: lastResize.height,
+      aspect: lastResize.width / lastResize.height,
+    });
     const observer = new ResizeObserver((entries) => {
       const bounds = entries[0]?.contentRect;
-      if (!bounds || !adapterRef.current) return;
-      adapterRef.current.resize(bounds.width, bounds.height, window.devicePixelRatio || 1);
-      publishMoleculeBounds();
+      if (!bounds) return;
+      pendingResize = { width: bounds.width, height: bounds.height };
+      if (resizeFrame !== null) return;
+      resizeFrame = window.requestAnimationFrame(() => {
+        resizeFrame = null;
+        const next = pendingResize;
+        pendingResize = null;
+        const activeAdapter = adapterRef.current;
+        if (!next || !activeAdapter) return;
+        const pixelRatio = window.devicePixelRatio || 1;
+        const meaningfulCssResize =
+          Math.abs(next.width - lastResize.width) >= 4 ||
+          Math.abs(next.height - lastResize.height) >= 4;
+        const pixelRatioChanged = Math.abs(pixelRatio - lastResize.pixelRatio) >= 0.001;
+        if (!meaningfulCssResize && !pixelRatioChanged) return;
+        activeAdapter.resize(next.width, next.height, pixelRatio);
+        lastResize = { width: next.width, height: next.height, pixelRatio };
+        if (meaningfulCssResize) {
+          viewportCallbackRef.current?.({
+            width: next.width,
+            height: next.height,
+            aspect: next.width / next.height,
+          });
+        }
+        publishMoleculeBounds();
+      });
     });
     observer.observe(canvas);
 
     return () => {
       alive = false;
       observer.disconnect();
+      if (resizeFrame !== null) window.cancelAnimationFrame(resizeFrame);
       adapter.dispose();
       if (adapterRef.current === adapter) adapterRef.current = null;
     };
@@ -374,8 +432,6 @@ export function SharedMolecularScene({
         } else if (focusedMoleculeId) {
           cameraRef.current = adapter.getCameraState();
           publishCameraState(cameraRef.current);
-          cameraCallbackRef.current?.(cameraRef.current);
-          setCameraRevision((revision) => revision + 1);
         }
         publishStatus({
           status: "ready",
@@ -452,6 +508,17 @@ export function SharedMolecularScene({
   }, [focusedMoleculeId, levelOfDetail, publishAtomSelection, selectedAtom, visibleMoleculeIds]);
 
   useEffect(() => {
+    if (atomSelectionEnabled || (!selectedAtom && !keyboardAtom && !hoverRef.current)) return;
+    const frame = window.requestAnimationFrame(() => {
+      hoverRef.current = null;
+      setKeyboardAtom(null);
+      adapterRef.current?.highlightAtom(null);
+      publishAtomSelection(null);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [atomSelectionEnabled, keyboardAtom, publishAtomSelection, selectedAtom]);
+
+  useEffect(() => {
     const frame = window.requestAnimationFrame(() => setKeyboardAtom(null));
     return () => window.cancelAnimationFrame(frame);
   }, [focusedMoleculeId, levelOfDetail, showHydrogens, visibleMoleculeIds]);
@@ -459,9 +526,12 @@ export function SharedMolecularScene({
   useEffect(() => {
     const adapter = adapterRef.current;
     if (!adapter) return;
-    adapter.focusMolecule(focusedMoleculeId);
+    adapter.focusMolecule(focusedMoleculeId, {
+      autoFit: focusAutoFit,
+      paddingFraction: focusFitPadding,
+    });
     publishMoleculeBounds();
-  }, [focusedMoleculeId, publishMoleculeBounds]);
+  }, [focusAutoFit, focusFitPadding, focusedMoleculeId, publishMoleculeBounds]);
 
   useEffect(() => {
     adapterRef.current?.setEmphasizedMolecule(emphasizedMoleculeId);
@@ -491,6 +561,11 @@ export function SharedMolecularScene({
       publishMoleculeHover(
         adapter.pickMolecule(point.x, point.y, point.width, point.height),
       );
+      return null;
+    }
+    if (!atomSelectionEnabled) {
+      publishAtomHover(null);
+      adapter.highlightAtom(null);
       return null;
     }
     publishMoleculeHover(null);
@@ -586,7 +661,7 @@ export function SharedMolecularScene({
     const drag = dragRef.current;
     const wasSinglePointerClick =
       pointerPointsRef.current.size === 1 && drag?.pointerId === event.pointerId;
-    if (wasSinglePointerClick && drag && !drag.moved) {
+    if (atomSelectionEnabled && wasSinglePointerClick && drag && !drag.moved) {
       const atom = pickAtEvent(event);
       setKeyboardAtom(atom);
       publishAtomSelection(atom);
@@ -616,7 +691,7 @@ export function SharedMolecularScene({
     const adapter = adapterRef.current;
     const isPreviousAtomKey = event.key === "[" || event.code === "BracketLeft";
     const isNextAtomKey = event.key === "]" || event.code === "BracketRight";
-    if (isPreviousAtomKey || isNextAtomKey) {
+    if (atomSelectionEnabled && (isPreviousAtomKey || isNextAtomKey)) {
       const atom = getTraversedSceneAtom(
         adapter?.getVisibleAtoms() ?? [],
         keyboardAtom ?? selectedAtom,
@@ -630,7 +705,10 @@ export function SharedMolecularScene({
       return;
     }
 
-    if (event.key === "Enter" || event.key === " " || event.code === "Space") {
+    if (
+      atomSelectionEnabled &&
+      (event.key === "Enter" || event.key === " " || event.code === "Space")
+    ) {
       const atoms = adapter?.getVisibleAtoms() ?? [];
       const preferredAtom = keyboardAtom ?? selectedAtom;
       const atom = preferredAtom
@@ -693,7 +771,7 @@ export function SharedMolecularScene({
   const selectedAtomId = atomKey(selectedAtom);
   const keyboardAtomId = atomKey(keyboardAtom);
   const visibleMoleculeValue = visibleMoleculeIds.join(",");
-  const announcedAtom = keyboardAtom ?? selectedAtom;
+  const announcedAtom = atomSelectionEnabled ? keyboardAtom ?? selectedAtom : null;
   const announcedAtomIsCandidate =
     Boolean(keyboardAtom) && keyboardAtomId !== selectedAtomId;
 
@@ -715,9 +793,13 @@ export function SharedMolecularScene({
       data-visible-count={renderedMoleculeCount}
       data-requested-visible-count={visibleMoleculeIds.length}
       data-camera-revision={cameraRevision}
+      data-focus-auto-fit={focusAutoFit ? "true" : "false"}
       data-inertia-revision={inertiaRevision}
-      data-selected-atom={selectedAtomId}
-      data-keyboard-atom={keyboardAtomId}
+      data-atom-selection-enabled={atomSelectionEnabled ? "true" : "false"}
+      data-scene-copy-mode={copyMode}
+      data-selected-atom={atomSelectionEnabled ? selectedAtomId : ""}
+      data-keyboard-atom={atomSelectionEnabled ? keyboardAtomId : ""}
+      data-selected-atom-overlay-collision="0"
       data-hovered-molecule={hoveredMolecule?.moleculeId ?? ""}
     >
       <canvas
@@ -726,13 +808,14 @@ export function SharedMolecularScene({
         tabIndex={0}
         aria-label={resolvedAriaLabel}
         aria-describedby={instructionsId}
-        aria-keyshortcuts="[ ] Enter Space"
+        aria-keyshortcuts={atomSelectionEnabled ? "[ ] Enter Space" : undefined}
         data-molecular-scene-canvas="true"
         data-dimension="3d"
         data-lod-level={levelOfDetail}
         data-representation={representation}
-        data-camera-revision={cameraRevision}
         data-inertia-revision={inertiaRevision}
+        data-atom-selection-enabled={atomSelectionEnabled ? "true" : "false"}
+        data-selected-atom-overlay-collision="0"
         data-selected-molecule={focusedMoleculeId ?? ""}
         data-structure-origin={structureOrigin}
         data-keyboard-atom={keyboardAtomId}
@@ -749,37 +832,37 @@ export function SharedMolecularScene({
         }}
         onKeyDown={handleKeyDown}
       >
-        {t("viewer.canvasFallback")}
+        {t(studentCopy ? "viewer.studentCanvasFallback" : "viewer.canvasFallback")}
       </canvas>
 
       <p id={instructionsId} className={styles.srOnly}>
         {interactionMode === "pan"
           ? t("viewer.dragToPan")
           : t("viewer.dragToRotate")}
-        {" "}{t("viewer.keyboardInstructions")}
+        {atomSelectionEnabled ? <> {t("viewer.keyboardInstructions")}</> : null}
       </p>
 
       {sceneStatus === "loading" ? (
         <div className={styles.state} role="status">
           <span className={styles.loader} aria-hidden="true" />
-          <strong>{t("viewer.loadingTitle")}</strong>
-          <small>{t("viewer.loadingBody")}</small>
+          <strong>{t(studentCopy ? "viewer.studentLoadingTitle" : "viewer.loadingTitle")}</strong>
+          <small>{t(studentCopy ? "viewer.studentLoadingBody" : "viewer.loadingBody")}</small>
         </div>
       ) : null}
 
       {sceneStatus === "error" ? (
         <div className={`${styles.state} ${styles.error}`} role="alert">
-          <strong>{t("viewer.errorTitle")}</strong>
-          <small>{t("viewer.structuresLoadError")}</small>
-          <small>{t("viewer.errorNoFabrication")}</small>
+          <strong>{t(studentCopy ? "viewer.studentErrorTitle" : "viewer.errorTitle")}</strong>
+          <small>{t(studentCopy ? "viewer.studentStructuresLoadError" : "viewer.structuresLoadError")}</small>
+          <small>{t(studentCopy ? "viewer.studentErrorNoFabrication" : "viewer.errorNoFabrication")}</small>
         </div>
       ) : null}
 
       {sceneStatus === "partial" ? (
         <div className={styles.partialStatus} role="status" aria-live="polite">
-          <strong>{t("viewer.partialTitle")}</strong>
-          <small>{error ? t("viewer.structuresLoadError") : null}</small>
-          <small>{t("viewer.partialBody")}</small>
+          <strong>{t(studentCopy ? "viewer.studentPartialTitle" : "viewer.partialTitle")}</strong>
+          <small>{error ? t(studentCopy ? "viewer.studentStructuresLoadError" : "viewer.structuresLoadError") : null}</small>
+          <small>{t(studentCopy ? "viewer.studentPartialBody" : "viewer.partialBody")}</small>
         </div>
       ) : null}
 

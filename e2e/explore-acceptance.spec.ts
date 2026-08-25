@@ -22,6 +22,7 @@ import {
 const exploreRoot = (page: Page) => page.locator("[data-explore-level]").first();
 const sceneRoot = (page: Page) => page.locator("[data-active-webgl-contexts]").first();
 const sceneCanvas = (page: Page) => page.locator("canvas[data-molecular-scene-canvas]").first();
+const STUDENT_FORBIDDEN_COPY = /Sınıflandırma incelemesi sürüyor|Classification review in progress|Sınıflandırılmamış · kürasyon bekliyor|Unclassified · curation pending|Hesaplanmış yapısal görünüm|Computed structural view|has not been reviewed|\b(?:projection|algorithm|fingerprint|Tanimoto|SDF|WebGL|unreviewed|pending-review|source-supported|computed-unreviewed)\b|incelenmemiş|projeksiyon|algoritma/iu;
 const METFORMIN_ID = "molecule:imported:metformin-xzwyzxlipxdolr-uhfffaoysa-n";
 const METFORMIN_SLUG = "metformin-xzwyzxlipxdolr-uhfffaoysa-n";
 const REVIEWED_INDEX_ALIASES = [
@@ -236,14 +237,14 @@ test("cluster permalinks restore the public neutral cluster and reject raw draft
   const structuralClusterLabels = await clusterButtons.locator("strong").allTextContents();
   expect(structuralClusterLabels).toHaveLength(1);
   expect(structuralClusterLabels[0]).toMatch(
-    /Hesaplanmış yapısal görünüm · incelenmemiş|Computed structural view · unreviewed/i,
+    /Temsilî yapılar|Representative structures/i,
   );
   await expect(clusterButtons.first()).toBeVisible();
   await clusterButtons.first().click();
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
   const exactClusterUrl = page.url();
   expect(exactClusterUrl).toMatch(
-    /#cluster\/structural-similarity\/computed-structural-view-unreviewed$/,
+    /#cluster\/structural-similarity\/representative-structures$/,
   );
   const selectedBeforeReload = await sceneRoot(page).getAttribute("data-selected-molecule");
   expect(selectedBeforeReload).toBeTruthy();
@@ -255,6 +256,18 @@ test("cluster permalinks restore the public neutral cluster and reject raw draft
     "data-selected-molecule",
     selectedBeforeReload ?? "",
   );
+
+  await page.goto("/#cluster/structural-similarity/computed-structural-view-unreviewed", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page).toHaveURL(/#cluster\/structural-similarity\/representative-structures$/);
+  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
+
+  await page.goto("/#cluster/therapeutic/classification-review-in-progress", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page).toHaveURL(/#cluster\/therapeutic\/candidate-records$/);
+  await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
 
   await page.goto("/#cluster/therapeutic/Cardiovascular", {
     waitUntil: "domcontentloaded",
@@ -313,7 +326,7 @@ test("full-index Atenolol and Metoprolol aliases select the reviewed identity an
   }
 });
 
-test("an imported Metformin identity never falls back to Propranolol in curated workflows", async ({ page }) => {
+test("an imported Metformin identity opens its Basic Record and never falls back to Propranolol", async ({ page }) => {
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
   await expect(page.locator('[data-catalog-status="ready"][data-catalog-records="1552"]'))
     .toBeVisible();
@@ -321,9 +334,13 @@ test("an imported Metformin identity never falls back to Propranolol in curated 
   await expect(sceneRoot(page)).toHaveAttribute("data-selected-molecule", METFORMIN_ID);
 
   await page.goto(`/#drug/${METFORMIN_SLUG}`, { waitUntil: "domcontentloaded" });
-  const dossierUnavailable = page.locator('[data-dossier-unavailable="true"]');
-  await expect(dossierUnavailable).toBeVisible();
-  await expect(dossierUnavailable).not.toContainText("Propranolol");
+  const basicRecord = page.locator('[data-basic-molecular-record="true"]');
+  await expect(basicRecord).toBeVisible();
+  await expect(basicRecord).toHaveAttribute("data-record-id", METFORMIN_ID);
+  await expect(basicRecord).toHaveAttribute("data-pubchem-cid", "4091");
+  await expect(basicRecord.getByRole("heading", { name: "Metformin" })).toBeVisible();
+  await expect(basicRecord).not.toContainText("Propranolol");
+  await expect(page.locator('[data-dossier-unavailable="true"]')).toHaveCount(0);
 
   await page.goto(`/#academy/synthesis/${METFORMIN_SLUG}/overview`, {
     waitUntil: "domcontentloaded",
@@ -663,6 +680,7 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   await expect(near.root).toHaveAttribute("data-presentation-mode", "student");
   await expect(page.getByRole("button", { name: /Ayarlar|Settings/i })).toBeVisible();
   await expect(page.getByText(/curated-categorical-layout/i)).toHaveCount(0);
+  await expect(near.root).not.toContainText(STUDENT_FORBIDDEN_COPY);
   expect(
     telemetry.successfulThreeDStructureUrls.size,
     "student-first near LOD must load real 3D SDF assets on first view",
@@ -676,13 +694,13 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   await captureAcceptanceScreenshot(page, "1440x900-universe-near-3d.png");
 
   const regionList = page.getByRole("list", {
-    name: /Yakın ayrıntı düzeyi küme seçimi|Near-LOD cluster selection/i,
+    name: /Temsilî yapı bölgeleri|Representative structure regions/i,
   });
   await expect(regionList).toBeVisible();
   const regionButtons = regionList.getByRole("button");
   await expect(regionButtons).toHaveCount(1);
   await expect(regionButtons.first().locator("strong")).toHaveText(
-    /Sınıflandırma incelemesi sürüyor|Classification review in progress/i,
+    /Aday kayıtlar|Candidate records/i,
   );
   const regionCenters = await regionButtons.evaluateAll((buttons) =>
     buttons.map((button) => {
@@ -849,6 +867,7 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   await expect(page.locator("canvas[data-molecular-scene-canvas]")).toHaveCount(1);
   await expect(compare.scene).toHaveAttribute("data-active-webgl-contexts", "1");
   await expect(page.getByRole("button", { name: /Molekül pasaportunu aç|Open molecule passport/i })).toHaveCount(2);
+  await expect(compare.root).not.toContainText(STUDENT_FORBIDDEN_COPY);
   await captureAcceptanceScreenshot(page, "1440x900-molecule-compare.png");
   const compareMetrics = await attachAcceptanceMetrics(
     page,
@@ -883,8 +902,11 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   await expect(passport.getByText(/Sistematik ad|Systematic name/i)).toBeVisible();
   await expect(passport.getByText(
     /Fonksiyonel grup ipuçları|Functional-group motif hints/i,
-  )).toBeVisible();
-  await expect(passport.getByText(/İskelet ailesi|Scaffold family/i)).toBeVisible();
+  )).toHaveCount(0);
+  await expect(
+    passport.getByText(/^(?:Aday kayıtlar|Candidate records)$/i),
+  ).toBeVisible();
+  await expect(passport).not.toContainText(STUDENT_FORBIDDEN_COPY);
   const studentSources = passport.locator("details");
   await expect(studentSources).not.toHaveAttribute("open", "");
   const collapsedStudentSourceLink = studentSources.locator('a[href*="pubchem"]').first();
@@ -1085,9 +1107,11 @@ test("missing 3D asset fails closed without generated geometry", async ({ page }
   await expect(scene).toHaveAttribute("data-scene-status", "error");
   await expect(scene).toHaveAttribute("data-visible-count", "0");
   await expect(page.getByRole("alert")).toContainText(
-    /Doğrulanabilir yapı|Yapı yüklenemedi|Structure unavailable/i,
+    /Moleküler görünüm açılamadı|The molecular view could not be opened/i,
   );
-  await expect(page.getByRole("alert")).toContainText(/sahte|tahmini|fake|generated/i);
+  await expect(page.getByRole("alert")).toContainText(
+    /Yerine başka bir yapı gösterilmedi|No substitute structure was shown/i,
+  );
   await expect(
     page.getByRole("group", { name: /Yakınlaştırma|Zoom/i }).getByRole("button").first(),
   ).toBeDisabled();

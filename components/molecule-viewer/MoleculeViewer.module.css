@@ -320,22 +320,19 @@
 }
 
 .atomStatus {
-  position: absolute;
-  z-index: 3;
-  bottom: 0.78rem;
-  left: 0.78rem;
+  position: relative;
+  z-index: 2;
   display: grid;
-  min-width: 180px;
-  min-height: 48px;
+  width: 100%;
+  min-width: 0;
+  min-height: 64px;
   align-content: center;
   grid-template-columns: auto 1fr;
   column-gap: 0.48rem;
-  padding: 0.52rem 0.65rem;
-  border: 1px solid var(--viewer-line);
-  border-radius: 10px;
-  background: rgb(7 12 12 / 78%);
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--viewer-line);
+  background: rgb(7 12 12 / 94%);
   pointer-events: none;
-  backdrop-filter: blur(10px);
 }
 
 .atomStatus span {
@@ -491,5 +488,34 @@
 
   .zoomControls {
     margin-left: 0;
+  }
+}
+
+/* Shared public-viewer typography contract. Orientation-axis glyphs are
+   renderer annotations; every learner-facing identity, state and control is
+   kept at the 14px secondary/button floor. */
+.viewer {
+  font-size: 1rem;
+}
+
+.identity p,
+.originNote,
+.provenance,
+.provenance strong,
+.provenance a,
+.toolbar button,
+.stateOverlay strong,
+.stateOverlay small,
+.stateOverlay button,
+.atomStatus span,
+.atomStatus strong,
+.atomStatus small,
+.previewState {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 760px) {
+  .viewer {
+    font-size: 0.9375rem;
   }
 }

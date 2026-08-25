@@ -30,7 +30,17 @@ import type { MoleculeStructure } from "@/lib/structure/sdf";
 import { compareStructureGraphs } from "@/lib/application/structure-comparison";
 import { resolveExploreMoleculeLayout } from "@/lib/application/explore-molecule-layout";
 
-import { DEFAULT_MOLECULAR_SCENE_CAMERA } from "./camera";
+import {
+  DEFAULT_FOCUS_FIT_PADDING,
+  DEFAULT_MOLECULAR_SCENE_CAMERA,
+  fitSceneCameraToBoundingSphere,
+} from "./camera";
+import {
+  createLocalStructureFitEnvelope,
+  getStructureFitEnvelopeCacheKey,
+  transformStructureFitEnvelope,
+  type LocalStructureFitEnvelope,
+} from "./fit-envelope";
 import { BoundedSdfCache, validateSceneSdf } from "./sdf-cache";
 import type {
   MolecularSceneAtom,
@@ -66,6 +76,14 @@ interface MoleculeBounds {
   readonly box: Box3;
 }
 
+interface RawMoleculeScreenBounds {
+  readonly moleculeId: string;
+  readonly minimumX: number;
+  readonly maximumX: number;
+  readonly minimumY: number;
+  readonly maximumY: number;
+}
+
 interface AtomBatchData {
   readonly mesh: InstancedMesh;
   readonly references: readonly MolecularSceneAtom[];
@@ -74,6 +92,10 @@ interface AtomBatchData {
 export interface ThreeJsMolecularSceneAdapterOptions {
   readonly cache?: BoundedSdfCache;
   readonly backgroundColor?: string | number;
+  readonly onCameraChange?: (
+    camera: MolecularSceneCamera,
+    cameraRevision: number,
+  ) => void;
 }
 
 export class MolecularSceneLoadError extends Error {
@@ -211,8 +233,13 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
   private readonly moleculeProjectionPoint = new Vector3();
   private readonly renderRoot = new Group();
   private readonly cache: BoundedSdfCache;
+  private readonly onCameraChange?: (
+    camera: MolecularSceneCamera,
+    cameraRevision: number,
+  ) => void;
   private readonly descriptors = new Map<string, MolecularSceneMolecule>();
   private readonly structures = new Map<string, MoleculeStructure>();
+  private readonly localFitEnvelopes = new Map<string, LocalStructureFitEnvelope>();
   private readonly comparisonAnalyses = new Map<string, MolecularSceneComparisonAnalysis>();
   private readonly visibleIds = new Set<string>();
   private readonly atomWorldPositions = new Map<string, AtomInstance>();
@@ -246,6 +273,12 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
   private fullQualityRestoreTimer: number | null = null;
   private disposed = false;
   private cameraState = cameraCopy(DEFAULT_MOLECULAR_SCENE_CAMERA);
+  private cameraRevision = 0;
+  private viewportWidth = 0;
+  private viewportHeight = 0;
+  private reportedDevicePixelRatio = 1;
+  private focusAutoFit = false;
+  private focusFitPadding = DEFAULT_FOCUS_FIT_PADDING;
   private fullPixelRatio = 1;
   private appliedPixelRatio = 1;
   private usesInteractionResolution = false;
@@ -265,6 +298,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
   private loadMoleculesCount = 0;
   private updateVisibleMoleculesCount = 0;
   private rebuildSceneCount = 0;
+  private fitVisibleMoleculesCount = 0;
   private loadedMoleculesInput: readonly MolecularSceneMolecule[] | null = null;
   private layoutMetrics: MolecularSceneLayoutMetrics = EMPTY_LAYOUT_METRICS;
 
@@ -275,6 +309,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
 
     this.canvas = canvas;
     this.cache = options.cache ?? new BoundedSdfCache(40);
+    this.onCameraChange = options.onCameraChange;
     this.renderer = new WebGLRenderer({
       canvas,
       antialias: true,
@@ -426,7 +461,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
 
     this.recomputeComparisonAnalyses();
     this.rebuildScene();
-    if (this.focusedMoleculeId) this.fitFocusedMolecule();
+    if (this.focusedMoleculeId && this.focusAutoFit) this.fitFocusedMolecule();
     if (failures.length > 0) throw new MolecularSceneLoadError(failures);
   }
 
@@ -467,11 +502,14 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     this.camera.lookAt(camera.target.x, camera.target.y, camera.target.z);
     this.camera.updateMatrixWorld(true);
     this.camera.updateProjectionMatrix();
+    this.cameraRevision += 1;
+    this.publishSceneIntegrityTelemetry();
     this.publishMoleculeScreenBounds();
     if (interactive) this.beginUniverseInteractionResolution();
     this.cameraRenderRequestCount += 1;
     this.publishRenderQuality();
     this.requestRender();
+    this.onCameraChange?.(this.getCameraState(), this.cameraRevision);
   }
 
   getCameraState() {
@@ -488,9 +526,39 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
 
   fitVisibleMolecules() {
     this.assertActive();
+    this.fitVisibleMoleculesCount += 1;
+    this.publishOperationCounts();
     const camera = this.layoutMetrics.suggestedCamera;
     if (!camera) return null;
     this.setCamera(camera);
+    return this.getCameraState();
+  }
+
+  fitFocusedMolecule() {
+    this.assertActive();
+    if (!this.focusedMoleculeId) return null;
+    const descriptor = this.descriptors.get(this.focusedMoleculeId);
+    const structure = this.structures.get(this.focusedMoleculeId);
+    if (!descriptor || !structure) return null;
+    const cacheKey = getStructureFitEnvelopeCacheKey(
+      descriptor.structureUrl,
+      descriptor.expectedPubChemCid,
+    );
+    let localEnvelope = this.localFitEnvelopes.get(cacheKey);
+    if (!localEnvelope) {
+      localEnvelope = createLocalStructureFitEnvelope(structure);
+      this.localFitEnvelopes.set(cacheKey, localEnvelope);
+    }
+    this.canvas.dataset.fitEnvelopeCacheKey = cacheKey;
+    this.canvas.dataset.fitEnvelopeCacheSize = String(this.localFitEnvelopes.size);
+    const envelope = transformStructureFitEnvelope(localEnvelope, descriptor);
+    this.setCamera(fitSceneCameraToBoundingSphere(
+      this.cameraState,
+      envelope.center,
+      envelope.radius,
+      this.camera.aspect || 1,
+      this.focusFitPadding,
+    ));
     return this.getCameraState();
   }
 
@@ -499,14 +567,30 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     this.rebuildScene();
   }
 
-  focusMolecule(moleculeId: string | null) {
+  focusMolecule(
+    moleculeId: string | null,
+    options: { readonly autoFit?: boolean; readonly paddingFraction?: number } = {},
+  ) {
     this.assertActive();
     if (moleculeId !== null && !this.descriptors.has(moleculeId)) {
       throw new Error(`Cannot focus unknown molecule: ${moleculeId}`);
     }
+    const nextAutoFit = options.autoFit ?? this.focusAutoFit;
+    const nextPadding = Math.max(
+      0,
+      Math.min(options.paddingFraction ?? DEFAULT_FOCUS_FIT_PADDING, 0.3),
+    );
+    const focusChanged = moleculeId !== this.focusedMoleculeId;
+    const fitPolicyChanged =
+      nextAutoFit !== this.focusAutoFit ||
+      Math.abs(nextPadding - this.focusFitPadding) > 0.000_001;
+    if (!focusChanged && !fitPolicyChanged) return;
+
     this.focusedMoleculeId = moleculeId;
-    this.rebuildScene();
-    if (moleculeId) this.fitFocusedMolecule();
+    this.focusAutoFit = nextAutoFit;
+    this.focusFitPadding = nextPadding;
+    if (focusChanged) this.rebuildScene();
+    if (moleculeId && this.focusAutoFit) this.fitFocusedMolecule();
   }
 
   setEmphasizedMolecule(moleculeId: string | null) {
@@ -551,8 +635,38 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
 
   getVisibleMoleculeScreenBounds(): readonly MolecularSceneScreenBounds[] {
     this.assertActive();
-    this.camera.updateMatrixWorld(true);
     const projectedBounds: MolecularSceneScreenBounds[] = [];
+
+    for (const {
+      moleculeId,
+      minimumX,
+      maximumX,
+      minimumY,
+      maximumY,
+    } of this.getRawMoleculeScreenBounds()) {
+      if (
+        maximumX < 0 || minimumX > 100 || maximumY < 0 || minimumY > 100
+      ) continue;
+      const visibleMinimumX = clampScreenPercentage(minimumX);
+      const visibleMaximumX = clampScreenPercentage(maximumX);
+      const visibleMinimumY = clampScreenPercentage(minimumY);
+      const visibleMaximumY = clampScreenPercentage(maximumY);
+      projectedBounds.push({
+        moleculeId,
+        x: (visibleMinimumX + visibleMaximumX) / 2,
+        y: (visibleMinimumY + visibleMaximumY) / 2,
+        radiusX: Math.max(0.1, (visibleMaximumX - visibleMinimumX) / 2),
+        radiusY: Math.max(0.1, (visibleMaximumY - visibleMinimumY) / 2),
+      });
+    }
+
+    return projectedBounds.sort((left, right) =>
+      left.moleculeId.localeCompare(right.moleculeId));
+  }
+
+  private getRawMoleculeScreenBounds(): readonly RawMoleculeScreenBounds[] {
+    this.camera.updateMatrixWorld(true);
+    const projectedBounds: RawMoleculeScreenBounds[] = [];
 
     for (const [moleculeId, bounds] of this.moleculeBounds) {
       let minimumX = Number.POSITIVE_INFINITY;
@@ -579,24 +693,8 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
           }
         }
       }
-      if (
-        ![minimumX, maximumX, minimumY, maximumY].every(Number.isFinite)
-        || maximumX < 0
-        || minimumX > 100
-        || maximumY < 0
-        || minimumY > 100
-      ) continue;
-      const visibleMinimumX = clampScreenPercentage(minimumX);
-      const visibleMaximumX = clampScreenPercentage(maximumX);
-      const visibleMinimumY = clampScreenPercentage(minimumY);
-      const visibleMaximumY = clampScreenPercentage(maximumY);
-      projectedBounds.push({
-        moleculeId,
-        x: (visibleMinimumX + visibleMaximumX) / 2,
-        y: (visibleMinimumY + visibleMaximumY) / 2,
-        radiusX: Math.max(0.1, (visibleMaximumX - visibleMinimumX) / 2),
-        radiusY: Math.max(0.1, (visibleMaximumY - visibleMinimumY) / 2),
-      });
+      if (![minimumX, maximumX, minimumY, maximumY].every(Number.isFinite)) continue;
+      projectedBounds.push({ moleculeId, minimumX, maximumX, minimumY, maximumY });
     }
 
     return projectedBounds.sort((left, right) =>
@@ -607,18 +705,40 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     this.assertActive();
     const safeWidth = Math.max(1, Math.floor(width));
     const safeHeight = Math.max(1, Math.floor(height));
+    const meaningfulCssResize =
+      this.viewportWidth === 0 ||
+      this.viewportHeight === 0 ||
+      Math.abs(safeWidth - this.viewportWidth) >= 4 ||
+      Math.abs(safeHeight - this.viewportHeight) >= 4;
+    const nextDevicePixelRatio = Math.max(0.1, pixelRatio);
+    const pixelRatioChanged =
+      Math.abs(nextDevicePixelRatio - this.reportedDevicePixelRatio) >= 0.001;
+    if (!meaningfulCssResize && !pixelRatioChanged) {
+      this.publishSceneIntegrityTelemetry();
+      return;
+    }
+
+    this.reportedDevicePixelRatio = nextDevicePixelRatio;
     this.fullPixelRatio = Math.max(
       MIN_RENDER_PIXEL_RATIO,
-      Math.min(pixelRatio, MAX_RENDER_PIXEL_RATIO),
+      Math.min(nextDevicePixelRatio, MAX_RENDER_PIXEL_RATIO),
     );
     this.applyPixelRatio(
       this.usesInteractionResolution
         ? this.interactionPixelRatio()
         : this.fullPixelRatio,
     );
-    this.renderer.setSize(safeWidth, safeHeight, false);
-    this.camera.aspect = safeWidth / safeHeight;
-    this.camera.updateProjectionMatrix();
+    if (meaningfulCssResize) {
+      this.viewportWidth = safeWidth;
+      this.viewportHeight = safeHeight;
+      this.renderer.setSize(safeWidth, safeHeight, false);
+      this.camera.aspect = safeWidth / safeHeight;
+      this.camera.updateProjectionMatrix();
+      if (this.focusedMoleculeId && this.focusAutoFit) {
+        this.fitFocusedMolecule();
+      }
+    }
+    this.publishSceneIntegrityTelemetry();
     this.publishMoleculeScreenBounds();
     this.requestRender();
   }
@@ -726,6 +846,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.cache.clear();
+    this.localFitEnvelopes.clear();
     ACTIVE_CANVASES.delete(this.canvas);
     activeContextCount = Math.max(0, activeContextCount - 1);
   }
@@ -982,6 +1103,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     }
 
     this.updateHighlightMesh();
+    this.publishSceneIntegrityTelemetry();
     this.publishMoleculeScreenBounds();
     this.requestRender();
   }
@@ -1012,6 +1134,10 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
   }
 
   private publishLayoutMetrics() {
+    this.canvas.dataset.layoutViewportAspect = Math.max(
+      0.001,
+      this.camera.aspect || 1,
+    ).toFixed(6);
     this.canvas.dataset.visibleMoleculeCount = String(
       this.layoutMetrics.visibleMoleculeCount,
     );
@@ -1031,6 +1157,48 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     const bounds = this.getVisibleMoleculeScreenBounds();
     this.canvas.dataset.visibleMoleculeBoundsCount = String(bounds.length);
     this.canvas.dataset.visibleMoleculeBounds = JSON.stringify(bounds);
+  }
+
+  private publishSceneIntegrityTelemetry() {
+    const cssBounds = this.canvas.getBoundingClientRect();
+    const cssWidth = Math.max(1, cssBounds.width || this.viewportWidth || this.canvas.clientWidth);
+    const cssHeight = Math.max(1, cssBounds.height || this.viewportHeight || this.canvas.clientHeight);
+    const rawBounds = this.getRawMoleculeScreenBounds();
+    const minimumX = Math.min(...rawBounds.map((bounds) => bounds.minimumX));
+    const maximumX = Math.max(...rawBounds.map((bounds) => bounds.maximumX));
+    const minimumY = Math.min(...rawBounds.map((bounds) => bounds.minimumY));
+    const maximumY = Math.max(...rawBounds.map((bounds) => bounds.maximumY));
+    const hasModelBounds = rawBounds.length > 0 &&
+      [minimumX, maximumX, minimumY, maximumY].every(Number.isFinite);
+    const cameraDistance = Math.hypot(
+      this.cameraState.position.x - this.cameraState.target.x,
+      this.cameraState.position.y - this.cameraState.target.y,
+      this.cameraState.position.z - this.cameraState.target.z,
+    );
+
+    this.canvas.dataset.cameraState = JSON.stringify(this.cameraState);
+    this.canvas.dataset.cameraRevision = String(this.cameraRevision);
+    this.canvas.dataset.cameraDistance = cameraDistance.toFixed(6);
+    this.canvas.dataset.modelScreenCenterX = hasModelBounds
+      ? ((((minimumX + maximumX) / 2) / 100) * cssWidth).toFixed(3)
+      : "0";
+    this.canvas.dataset.modelScreenCenterY = hasModelBounds
+      ? ((((minimumY + maximumY) / 2) / 100) * cssHeight).toFixed(3)
+      : "0";
+    this.canvas.dataset.modelScreenWidth = hasModelBounds
+      ? (((maximumX - minimumX) / 100) * cssWidth).toFixed(3)
+      : "0";
+    this.canvas.dataset.modelScreenHeight = hasModelBounds
+      ? (((maximumY - minimumY) / 100) * cssHeight).toFixed(3)
+      : "0";
+    this.canvas.dataset.canvasCssWidth = cssWidth.toFixed(3);
+    this.canvas.dataset.canvasCssHeight = cssHeight.toFixed(3);
+    this.canvas.dataset.canvasBufferWidth = String(this.canvas.width);
+    this.canvas.dataset.canvasBufferHeight = String(this.canvas.height);
+    this.canvas.dataset.devicePixelRatio = this.reportedDevicePixelRatio.toFixed(3);
+    this.canvas.dataset.modelClipped = hasModelBounds && (
+      minimumX < 0 || maximumX > 100 || minimumY < 0 || maximumY > 100
+    ) ? "1" : "0";
   }
 
   private clearRenderBatches() {
@@ -1191,27 +1359,6 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
     }
   }
 
-  private fitFocusedMolecule() {
-    if (!this.focusedMoleculeId) return;
-    const bounds = this.moleculeBounds.get(this.focusedMoleculeId);
-    if (!bounds) return;
-    const currentDirection = new Vector3(
-      this.cameraState.position.x - this.cameraState.target.x,
-      this.cameraState.position.y - this.cameraState.target.y,
-      this.cameraState.position.z - this.cameraState.target.z,
-    );
-    if (currentDirection.lengthSq() < 0.0001) currentDirection.set(0, 0.16, 1);
-    currentDirection.normalize();
-    const fovRadians = ((this.camera.fov || 42) * Math.PI) / 180;
-    const distance = Math.max(3.5, (bounds.radius / Math.tan(fovRadians / 2)) * 1.3);
-    const position = bounds.center.clone().addScaledVector(currentDirection, distance);
-    this.setCamera({
-      ...this.cameraState,
-      position: { x: position.x, y: position.y, z: position.z },
-      target: { x: bounds.center.x, y: bounds.center.y, z: bounds.center.z },
-    });
-  }
-
   private updateHighlightMesh() {
     if (!this.highlightedAtom) {
       this.highlightMesh.visible = false;
@@ -1245,6 +1392,7 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
         this.lastFullQualityRenderDurationMs = renderDurationMs;
       }
       this.renderCount += 1;
+      this.publishSceneIntegrityTelemetry();
       this.publishRenderQuality();
       const timingFrame = window.requestAnimationFrame((nextFrameAt) => {
         this.renderTimingFrames.delete(timingFrame);
@@ -1300,6 +1448,9 @@ export class ThreeJsMolecularSceneAdapter implements MolecularScenePort {
       this.updateVisibleMoleculesCount,
     );
     this.canvas.dataset.rebuildSceneCount = String(this.rebuildSceneCount);
+    this.canvas.dataset.fitVisibleMoleculesCount = String(
+      this.fitVisibleMoleculesCount,
+    );
     this.canvas.dataset.pickAtomCount = String(this.pickAtomCount);
     this.canvas.dataset.pickMoleculeCount = String(this.pickMoleculeCount);
   }

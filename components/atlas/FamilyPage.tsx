@@ -38,6 +38,7 @@ const copyByLocale = {
     hide3d: "3B görünümü kapat",
     spatialLoading: "Aday 3B yapılar yükleniyor…",
     spatialScope: "Aday kayıt 3B örneklemi",
+    spatialDescription: "Aday yapılar arasındaki görsel ilişkileri incele.",
     spatialBoundary: "Yalnız seçilmiş aday kimlikler; bu sette üyelik kurulmamıştır.",
     fingerprint: "Yapısal fingerprint karşılaştırması",
     fingerprintBoundary: "Hesaplanmış ve incelenmemiştir; farmakolojik veya klinik benzerlik anlamına gelmez.",
@@ -73,6 +74,7 @@ const copyByLocale = {
     hide3d: "Close 3D view",
     spatialLoading: "Loading candidate 3D structures…",
     spatialScope: "Candidate-record 3D sample",
+    spatialDescription: "Explore visual relationships among the candidate structures.",
     spatialBoundary: "Selected candidate identities only; membership is not established in this set.",
     fingerprint: "Structural fingerprint comparison",
     fingerprintBoundary: "Computed and unreviewed; it does not imply pharmacological or clinical similarity.",
@@ -375,7 +377,11 @@ export function FamilyPage({
           <Suspense fallback={<p className={styles.loading} role="status">{copy.spatialLoading}</p>}>
             <LazyAtlasSpatialView
               configuration={spatial}
-              copy={{ scope: copy.spatialScope, bounded: copy.spatialBoundary }}
+              copy={{
+                scope: copy.spatialScope,
+                description: copy.spatialDescription,
+                bounded: copy.spatialBoundary,
+              }}
             />
           </Suspense>
         ) : (

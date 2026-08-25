@@ -29,7 +29,7 @@ function remFontSize(selector) {
   return Number(match[1]);
 }
 
-test("critical Spatial Atlas learner controls keep a 13px minimum type size", () => {
+test("critical Spatial Atlas learner controls keep a 14px minimum type size", () => {
   assert.notEqual(css.indexOf(contractMarker), -1);
 
   for (const selector of [
@@ -46,13 +46,13 @@ test("critical Spatial Atlas learner controls keep a 13px minimum type size", ()
     ".universeCamera output",
   ]) {
     assert.ok(
-      remFontSize(selector) >= 0.8125,
-      `${selector} must remain at least 0.8125rem (13px at the default root)`,
+      remFontSize(selector) >= 0.875,
+      `${selector} must remain at least 0.875rem (14px at the default root)`,
     );
   }
 });
 
-test("Spatial Atlas learner-facing prose keeps the 15px body-text floor", () => {
+test("Spatial Atlas learner-facing prose keeps the 16px desktop body-text floor", () => {
   for (const selector of [
     ".description",
     ".lensDescription",
@@ -65,8 +65,8 @@ test("Spatial Atlas learner-facing prose keeps the 15px body-text floor", () => 
     ".indexedResults > p",
   ]) {
     assert.ok(
-      remFontSize(selector) >= 0.9375,
-      `${selector} must remain at least 0.9375rem (15px at the default root)`,
+      remFontSize(selector) >= 1,
+      `${selector} must remain at least 1rem (16px at the default root)`,
     );
   }
 
@@ -79,4 +79,8 @@ test("mobile Spatial Atlas stacks status above its enlarged camera controls", ()
   assert.match(mobileContract, /\.lodStatus\s*\{[^}]*bottom:\s*4\.65rem/s);
   assert.match(mobileContract, /\.universeCamera\s*\{[^}]*left:\s*0\.75rem/s);
   assert.match(mobileContract, /\.universeCamera\s*\{[^}]*overflow-x:\s*auto/s);
+  assert.match(
+    mobileContract,
+    /\.universe\[data-presentation-mode="student"\][\s\S]*font-size:\s*0\.9375rem/s,
+  );
 });

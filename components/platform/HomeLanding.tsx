@@ -103,6 +103,33 @@ export default function HomeLanding({
         </div>
       </section>
 
+      <details className={styles.catalogScope} data-catalog-scope="collapsed">
+        <summary>
+          <span>{t("home.catalogScopeTitle")}</span>
+        </summary>
+        <div>
+          <p>{t("home.catalogScopeSummary")}</p>
+          <p>{t("home.catalogScopeBoundary")}</p>
+          <small>{t("home.catalogScopeRights")}</small>
+          <nav aria-label={t("home.catalogScopeTitle")}>
+            <a
+              href="https://drugcentral.org/static/FDA_Approved.csv"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("home.catalogScopeSource")}
+            </a>
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("home.catalogScopeLicense")}
+            </a>
+          </nav>
+        </div>
+      </details>
+
       <section className={styles.editorial} aria-labelledby="home-continue-heading">
         <div className={styles.editorialHeading}>
           <p>{t("home.continueKicker")}</p>

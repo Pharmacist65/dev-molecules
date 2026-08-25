@@ -192,10 +192,28 @@ test("runtime hydration remains bounded and imported classifications fail closed
   assert.equal(new Set(retained.map((record) => record.id)).size, retained.length);
 
   const view = createExpandedExploreMolecule(entity, "en", "/dev-molecules/");
-  assert.match(view.category, /^Unclassified/);
-  assert.match(view.studentProfile.scaffoldDetail, /^Unclassified/);
+  assert.equal(view.category, "Candidate records");
+  assert.equal(view.studentProfile.scaffoldDetail, "Candidate records");
+  assert.equal(view.lensKeys.therapeutic, "candidate-records");
+  assert.equal(view.lensValues["structural-similarity"], "Representative structures");
+  assert.equal(view.lensKeys["structural-similarity"], "representative-structures");
+  assert.equal(view.reviewerLensKeys.therapeutic, "unclassified");
+  assert.match(view.reviewerLensValues.therapeutic, /^Unclassified/);
+  assert.ok(view.lensAliases.therapeutic.includes("Unclassified · curation pending"));
+  assert.equal(
+    view.studentProfile.nomenclatureLesson,
+    "No reviewed molecule-specific nomenclature lesson is available yet.",
+  );
+  assert.ok(!view.studentProfile.nomenclatureLesson.includes(view.studentProfile.functionalGroups[0] ?? "\u0000"));
   assert.equal(view.structuralNeighbors.length, 0);
   assert.match(view.structure.threeDUrl, /^\/dev-molecules\/catalog\//);
+
+  const turkishView = createExpandedExploreMolecule(entity, "tr", "/dev-molecules/");
+  assert.equal(turkishView.category, "Aday kayıtlar");
+  assert.equal(turkishView.lensKeys.therapeutic, "candidate-records");
+  assert.equal(turkishView.lensValues["structural-similarity"], "Temsilî yapılar");
+  assert.equal(turkishView.lensKeys["structural-similarity"], "representative-structures");
+  assert.match(turkishView.reviewerLensValues.therapeutic, /^Sınıflandırılmamış/);
 });
 
 test("snapshot mismatch gates indexed results before entity hydration", async () => {

@@ -2,6 +2,7 @@
   width: min(1480px, calc(100% - 3rem));
   margin: 0 auto;
   padding: clamp(1.5rem, 3vw, 2.8rem) 0 5rem;
+  font-size: 1rem;
 }
 
 .hero {
@@ -72,9 +73,9 @@
 .startPaths button + button { padding-left: 1rem; }
 .startPaths button:last-child { border-right: 0; }
 .startPaths button:hover strong { color: var(--knowledge-blue, #2d5be3); }
-.startPaths button > span { color: #8791a1; font: 0.8125rem var(--font-geist-mono, ui-monospace, monospace); }
+.startPaths button > span { color: #8791a1; font: 0.875rem var(--font-geist-mono, ui-monospace, monospace); }
 .startPaths strong { overflow: hidden; font-size: 0.95rem; transition: color 150ms ease; }
-.startPaths small { overflow: hidden; color: var(--muted-text, #667085); font-size: 0.82rem; line-height: 1.35; }
+.startPaths small { overflow: hidden; color: var(--muted-text, #667085); font-size: 0.875rem; line-height: 1.45; }
 .startPaths i { position: absolute; right: 0.75rem; bottom: 1rem; color: var(--signal-orange, #f26422); font-size: 1.1rem; font-style: normal; }
 
 .stageHost { min-width: 0; min-height: 520px; background: var(--deep-stage, #07141a); }
@@ -99,6 +100,67 @@
 .stagePlaceholder span:nth-of-type(2) { top: 96px; left: 45px; width: 60px; transform: rotate(-26deg); }
 .stagePlaceholder span:nth-of-type(3) { top: 103px; left: 112px; width: 69px; transform: rotate(-2deg); }
 .stagePlaceholder p { margin: 1.2rem 0 0; font-size: 0.875rem; }
+
+.catalogScope {
+  border-bottom: 1px solid var(--warm-line, rgb(18 33 58 / 12%));
+  color: var(--ink-navy, #12213a);
+}
+
+.catalogScope summary {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 2vw, 1.6rem);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 720;
+  list-style: none;
+}
+
+.catalogScope summary::-webkit-details-marker { display: none; }
+.catalogScope summary::after {
+  color: var(--signal-orange, #f26422);
+  content: "+";
+  font-size: 1.1rem;
+  font-style: normal;
+  transition: transform 160ms ease;
+}
+.catalogScope[open] summary::after { transform: rotate(45deg); }
+
+.catalogScope > div {
+  display: grid;
+  max-width: 920px;
+  gap: 0.75rem;
+  padding: 0 clamp(1rem, 2vw, 1.6rem) 1.35rem;
+}
+
+.catalogScope p {
+  margin: 0;
+  color: var(--muted-text, #667085);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.catalogScope small {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.catalogScope nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+}
+
+.catalogScope a {
+  color: var(--knowledge-blue, #2d5be3);
+  font-size: 0.875rem;
+  font-weight: 680;
+  text-underline-offset: 0.2em;
+}
 
 .editorial {
   display: grid;
@@ -144,11 +206,11 @@
 }
 
 @media (max-width: 700px) {
-  .page { width: 100%; padding-top: 0; }
+  .page { width: 100%; padding-top: 0; font-size: 0.9375rem; }
   .hero { border-bottom: 0; }
   .introduction { min-height: auto; padding: 3.5rem 1.25rem 2.4rem; }
   .introduction h1 { font-size: clamp(2.55rem, 12vw, 3.4rem); }
-  .lede { font-size: 1rem; }
+  .lede { font-size: 0.9375rem; }
   .startPaths { grid-template-columns: 1fr; }
   .startPaths button,
   .startPaths button + button { min-height: 82px; padding: 0.9rem 2.4rem 0.9rem 0; border-right: 0; border-bottom: 1px solid var(--warm-line, rgb(18 33 58 / 12%)); }
@@ -158,6 +220,7 @@
   .editorialHeading { grid-column: auto; padding: 0; }
   .lessonFeature { min-height: 230px; margin-top: 1.8rem; }
   .familyIndex { padding: 2rem 0 0; }
+  .catalogScope p { font-size: 0.9375rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

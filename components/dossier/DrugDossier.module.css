@@ -179,7 +179,7 @@
 .forms > span,
 .descriptorBoundary > span {
   color: #557064;
-  font: 700 0.72rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 700 0.875rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: 0.13em;
 }
 
@@ -230,7 +230,7 @@
 
 .chemistryFacts dt {
   color: var(--muted);
-  font-size: 0.79rem;
+  font-size: 0.875rem;
 }
 
 .chemistryFacts dd {
@@ -386,6 +386,27 @@
   color: var(--muted);
 }
 
+.availabilityOverview {
+  padding: 1rem clamp(1rem, 5vw, 5rem) 0;
+  background: #fbfaf6;
+}
+
+.availabilityOverview .coverage {
+  gap: 1rem;
+  padding: 1.15rem;
+  border-radius: 1rem;
+}
+
+.availabilityOverview .coverage ul {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.coverage li[data-status="unavailable"] {
+  color: #748079;
+  border-style: dashed;
+  background: #f7f8f6;
+}
+
 .learningLinks {
   display: flex;
   gap: 2rem;
@@ -426,6 +447,64 @@
   margin-left: 0.4rem;
 }
 
+.sectionCoverageMessage {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border: 1px solid #d8dfda;
+  border-radius: 1rem;
+  background: #f8f6f0;
+}
+
+.sectionCoverageMessage > div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sectionCoverageMessage span {
+  color: #557064;
+  font: 700 0.875rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sectionCoverageMessage h2,
+.sectionCoverageMessage p {
+  margin: 0;
+}
+
+.sectionCoverageMessage h2 {
+  font: 560 clamp(1.15rem, 2vw, 1.45rem)/1.2 Georgia, "Times New Roman", serif;
+}
+
+.sectionCoverageMessage p {
+  max-width: 58rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.sectionCoverageMessage[data-coverage-state="unavailable"] {
+  border-style: dashed;
+  background: #fafafa;
+}
+
+.sectionCoverageMessage > button {
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  padding: 0.65rem 0.9rem;
+  color: white;
+  border: 0;
+  border-radius: 999px;
+  background: var(--forest);
+  cursor: pointer;
+}
+
+.sectionCoverageMessage > button i {
+  margin-left: 0.35rem;
+}
+
 .referenceMode {
   display: grid;
 }
@@ -452,6 +531,16 @@
 .referenceTabs button[aria-pressed="true"] {
   color: var(--ink);
   border-bottom-color: var(--forest);
+}
+
+.referenceTabs button[data-tab-availability="unavailable"] {
+  color: #8d9792;
+  opacity: 0.62;
+}
+
+.referenceTabs button[data-tab-availability="unavailable"][aria-pressed="true"] {
+  color: #58655f;
+  opacity: 1;
 }
 
 .referenceUnavailable,
@@ -575,6 +664,7 @@
   align-content: center;
   color: #f2f5f3;
   background: linear-gradient(145deg, #16251f, #294b3e);
+  font-size: 1rem;
 }
 
 .unavailableDossier > button {
@@ -584,11 +674,12 @@
   border: 1px solid rgb(255 255 255 / 25%);
   border-radius: 999px;
   background: transparent;
+  font-size: 0.875rem;
 }
 
 .unavailableDossier > span {
   color: #9eb6aa;
-  font: 700 0.73rem/1.2 ui-monospace, monospace;
+  font: 700 0.875rem/1.2 ui-monospace, monospace;
   letter-spacing: 0.14em;
 }
 
@@ -615,14 +706,16 @@
     max-width: none;
   }
 
-  .coverage ul {
+  .coverage ul,
+  .availabilityOverview .coverage ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 620px) {
   .headerActions,
-  .learningLinks {
+  .learningLinks,
+  .sectionCoverageMessage {
     align-items: stretch;
     flex-direction: column;
   }
@@ -636,7 +729,8 @@
     font-size: clamp(3rem, 17vw, 5rem);
   }
 
-  .coverage ul {
+  .coverage ul,
+  .availabilityOverview .coverage ul {
     grid-template-columns: 1fr;
   }
 
@@ -650,6 +744,38 @@
   .chemistryFacts dl div {
     grid-template-columns: 1fr;
     gap: 0.35rem;
+  }
+}
+
+/* Learner-facing typography contract: body 16px desktop / 15px mobile,
+   secondary copy and every interactive label remain at least 14px. */
+.dossier {
+  font-size: 1rem;
+}
+
+.dossier button,
+.dossier select,
+.dossier a,
+.dossier small,
+.identityHero > div > span,
+.classificationSummary > span,
+.referenceUnavailable > span,
+.identityHero dt,
+.storyRail li,
+.storyRail span,
+.coverage small,
+.sourceBody li > span,
+.dossierFooter > ul,
+.clinicalBoundary {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 620px) {
+  .dossier,
+  .sectionCoverageMessage p,
+  .unavailableDossier,
+  .unavailableDossier p {
+    font-size: 0.9375rem;
   }
 }
 

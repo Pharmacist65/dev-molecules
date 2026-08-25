@@ -186,12 +186,12 @@ test("project-base public-neutral cluster permalinks restore and reject raw draf
     .click();
   await expect(clusterButtons).toHaveCount(1);
   await expect(clusterButtons.first().locator("strong")).toHaveText(
-    /Hesaplanmış yapısal görünüm · incelenmemiş|Computed structural view · unreviewed/i,
+    /Temsilî yapılar|Representative structures/i,
   );
   await clusterButtons.first().click();
   const exactClusterUrl = page.url();
   expect(exactClusterUrl).toMatch(
-    /\/dev-molecules\/#cluster\/structural-similarity\/computed-structural-view-unreviewed$/,
+    /\/dev-molecules\/#cluster\/structural-similarity\/representative-structures$/,
   );
   await expect(page.locator('[data-explore-level="cluster"]')).toBeVisible();
 

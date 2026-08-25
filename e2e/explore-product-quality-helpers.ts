@@ -46,10 +46,10 @@ interface TextReadabilitySnapshot {
 }
 
 const MINIMUM_LABEL_HEIGHT_PX = 26;
-const MINIMUM_STRONG_FONT_SIZE_PX = 8;
+const MINIMUM_STRONG_FONT_SIZE_PX = 14;
 
 const NEAR_CLUSTER_LIST_NAME =
-  /Yakın ayrıntı düzeyi küme seçimi|Near-LOD cluster selection/i;
+  /Temsilî yapı bölgeleri|Representative structure regions/i;
 
 export const exploreRoot = (page: Page) =>
   page.locator("[data-explore-level]").first();

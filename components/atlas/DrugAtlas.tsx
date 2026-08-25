@@ -21,7 +21,7 @@ import {
   loadDrugAtlasWindow,
   type AtlasCoverageResolver,
   type AtlasFilterAdapter,
-  type AtlasFilterSelection,
+  type DrugAtlasBrowseState,
   type DrugAtlasView,
   type DrugAtlasWindow,
 } from "@/lib/application/drug-atlas";
@@ -43,6 +43,7 @@ const copyByLocale = {
     eyebrow: "Yaşayan Moleküler Atlas",
     title: "İlaç Atlası",
     description: "Seçilmiş DrugCentral FDA-listesi kaynak kesitindeki 2.331 satırın tamamından kesin kimlik ve eksiksiz 2B/3B yapı eşlemesiyle çözülen 1.552 moleküler kaydı ara. Bu indeks FDA ürün veya başvuru evreni değildir.",
+    spatialHeroDescription: "Temsilî yapılar arasındaki ilişkileri keşfet.",
     browse: "Göz at",
     spatial: "Mekânsal",
     browseDescription: "1.552 yapı-bütün indeks kaydı · alfabetik, sayfalı ve klavye erişilebilir",
@@ -65,20 +66,21 @@ const copyByLocale = {
     classification: "Sınıf",
     coverage: "İçerik kapsamı",
     identityCoverage: "Kimlik ve yapı indeksli",
-    openDrug: "İlaç dosyasını aç",
+    openDrug: "Moleküler kaydı aç",
     thumbnailWaiting: "2B sırada",
     thumbnailLoading: "2B yükleniyor",
     thumbnailMissing: "2B yok",
     thumbnailUnavailable: "2B açılamadı",
     spatialLoading: "Mekânsal atlas yükleniyor…",
     spatialUnavailable: "Bu yayında 3B örneklem yapılandırılmadı.",
-    spatialScope: "3B örneklem",
-    spatialBoundary: "FDA ürün veya başvuru evreni değildir; sahne 1.552 kayıtlık yapı-bütün indeksten yalnız temsilî yapıları yükler.",
+    spatialScope: "Temsilî yapılar",
+    spatialBoundary: "Belirli bir kaydı bulmak için Göz at görünümündeki yapı indeksini kullan.",
   },
   en: {
     eyebrow: "Living Molecular Atlas",
     title: "Drug Atlas",
     description: "Search 1,552 molecular records resolved by exact identity and complete 2D/3D structure matching from all 2,331 rows in the selected DrugCentral FDA-list source slice. This index is not an FDA product or application universe.",
+    spatialHeroDescription: "Explore relationships across representative structures.",
     browse: "Browse",
     spatial: "Spatial",
     browseDescription: "1,552 structure-complete index records · alphabetic, paginated, keyboard accessible",
@@ -101,15 +103,15 @@ const copyByLocale = {
     classification: "Class",
     coverage: "Content coverage",
     identityCoverage: "Identity and structure indexed",
-    openDrug: "Open drug dossier",
+    openDrug: "Open molecular record",
     thumbnailWaiting: "2D queued",
     thumbnailLoading: "Loading 2D",
     thumbnailMissing: "No 2D",
     thumbnailUnavailable: "2D unavailable",
     spatialLoading: "Loading the spatial atlas…",
     spatialUnavailable: "No 3D sample is configured in this publication.",
-    spatialScope: "3D sample",
-    spatialBoundary: "This is not an FDA product or application universe; the scene loads only representative structures from the 1,552-record structure-complete index.",
+    spatialScope: "Representative structures",
+    spatialBoundary: "Use Browse to find a specific record in the structure index.",
   },
 } as const;
 
@@ -130,6 +132,8 @@ export interface DrugAtlasProps {
   readonly view?: DrugAtlasView;
   readonly defaultView?: DrugAtlasView;
   readonly onViewChange?: (view: DrugAtlasView) => void;
+  readonly browseState?: DrugAtlasBrowseState;
+  readonly onBrowseStateChange?: (state: DrugAtlasBrowseState) => void;
   readonly catalogRecordCount?: number;
   readonly pageSize?: number;
   readonly assetBasePath?: string;
@@ -149,6 +153,8 @@ export function DrugAtlas({
   view: controlledView,
   defaultView = "browse",
   onViewChange,
+  browseState: controlledBrowseState,
+  onBrowseStateChange,
   catalogRecordCount,
   pageSize = DEFAULT_CATALOG_BROWSE_PAGE_SIZE,
   assetBasePath = "/",
@@ -164,10 +170,14 @@ export function DrugAtlas({
   const resultsId = useId();
   const [internalView, setInternalView] = useState<DrugAtlasView>(defaultView);
   const activeView = controlledView ?? internalView;
-  const [query, setQuery] = useState("");
-  const [offset, setOffset] = useState(0);
+  const [internalBrowseState, setInternalBrowseState] = useState<DrugAtlasBrowseState>({
+    query: "",
+    offset: 0,
+    filters: {},
+  });
+  const activeBrowseState = controlledBrowseState ?? internalBrowseState;
+  const { query, offset, filters } = activeBrowseState;
   const [retryRevision, setRetryRevision] = useState(0);
-  const [filters, setFilters] = useState<AtlasFilterSelection>({});
   const [loadState, setLoadState] = useState<LoadState>({ status: "loading", page: null });
   const requestSequenceRef = useRef(0);
   const recordRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -225,6 +235,14 @@ export function DrugAtlas({
     onViewChange?.(next);
   };
 
+  const changeBrowseState = (
+    update: (current: DrugAtlasBrowseState) => DrugAtlasBrowseState,
+  ) => {
+    const nextState = update(activeBrowseState);
+    if (controlledBrowseState === undefined) setInternalBrowseState(nextState);
+    onBrowseStateChange?.(nextState);
+  };
+
   const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
@@ -232,19 +250,19 @@ export function DrugAtlas({
   };
 
   const updateQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.currentTarget.value);
-    setOffset(0);
+    const nextQuery = event.currentTarget.value;
+    changeBrowseState((current) => ({ ...current, query: nextQuery, offset: 0 }));
   };
 
   const updateFilter = (facetId: string, value: string) => {
-    setOffset(0);
-    setFilters((current) => {
+    changeBrowseState((current) => {
+      const nextFilters: Record<string, string> = { ...current.filters };
       if (!value) {
-        const remaining = { ...current };
-        delete remaining[facetId];
-        return remaining;
+        delete nextFilters[facetId];
+      } else {
+        nextFilters[facetId] = value;
       }
-      return { ...current, [facetId]: value };
+      return { ...current, offset: 0, filters: nextFilters };
     });
   };
 
@@ -291,7 +309,7 @@ export function DrugAtlas({
         <div>
           <span className={styles.eyebrow}>{copy.eyebrow}</span>
           <h1>{copy.title}</h1>
-          <p>{copy.description}</p>
+          <p>{activeView === "spatial" ? copy.spatialHeroDescription : copy.description}</p>
         </div>
         {page ? (
           <strong className={styles.catalogTotal}>
@@ -331,7 +349,11 @@ export function DrugAtlas({
           <Suspense fallback={<p className={styles.routeState} role="status">{copy.spatialLoading}</p>}>
             <LazyAtlasSpatialView
               configuration={spatial}
-              copy={{ scope: copy.spatialScope, bounded: copy.spatialBoundary }}
+              copy={{
+                scope: copy.spatialScope,
+                description: copy.spatialHeroDescription,
+                bounded: copy.spatialBoundary,
+              }}
             />
           </Suspense>
         ) : (
@@ -354,7 +376,14 @@ export function DrugAtlas({
                 aria-controls={resultsId}
               />
               {query ? (
-                <button type="button" onClick={() => { setQuery(""); setOffset(0); }}>
+                <button
+                  type="button"
+                  onClick={() => changeBrowseState((current) => ({
+                    ...current,
+                    query: "",
+                    offset: 0,
+                  }))}
+                >
                   {copy.clear}
                 </button>
               ) : null}
@@ -453,7 +482,10 @@ export function DrugAtlas({
                 <button
                   type="button"
                   disabled={page.previousOffset === null || loadState.status === "loading"}
-                  onClick={() => setOffset(page.previousOffset ?? 0)}
+                  onClick={() => changeBrowseState((current) => ({
+                    ...current,
+                    offset: page.previousOffset ?? 0,
+                  }))}
                 >
                   <span aria-hidden="true">←</span>{copy.previous}
                 </button>
@@ -461,7 +493,10 @@ export function DrugAtlas({
                 <button
                   type="button"
                   disabled={page.nextOffset === null || loadState.status === "loading"}
-                  onClick={() => setOffset(page.nextOffset ?? page.offset)}
+                  onClick={() => changeBrowseState((current) => ({
+                    ...current,
+                    offset: page.nextOffset ?? page.offset,
+                  }))}
                 >
                   {copy.next}<span aria-hidden="true">→</span>
                 </button>

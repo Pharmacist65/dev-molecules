@@ -2811,18 +2811,18 @@
 }
 
 /* Spatial Atlas critical readability contract. These learner-facing controls
-   stay at a 13px minimum at the default 16px root size; dense molecular-canvas
+   stay at a 14px minimum at the default 16px root size; dense molecular-canvas
    and SDF-internal labels intentionally retain their compact renderer scale. */
 .eyebrow {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .description {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .headerSummary span {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.35;
 }
 
@@ -2833,7 +2833,7 @@
 .searchField label,
 .controlLabel,
 .searchLabelRow > button {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.35;
 }
 
@@ -2849,7 +2849,7 @@
 
 .clearButton {
   min-height: 36px;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .lensDisclosureButton {
@@ -2857,7 +2857,7 @@
 }
 
 .lensDisclosureButton span {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .lensDisclosureButton strong {
@@ -2867,14 +2867,14 @@
 
 .lensButton {
   min-height: 42px;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .lensDescription,
 .lensMeaning,
 .lensCaveat,
 .studentHint {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .lensDescription {
@@ -2886,19 +2886,19 @@
 
 .breadcrumb {
   min-height: 44px;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.35;
 }
 
 .axisLabel {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .clusterGlyph strong,
 .clusterGlyph small,
 .nearClusterRegions strong,
 .nearClusterRegions small {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.25;
 }
 
@@ -2913,28 +2913,28 @@
 .universeCamera button {
   min-height: 40px;
   padding-inline: 0.72rem;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .universeCamera output {
   min-width: 52px;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .lodStatus {
   max-width: calc(100% - 15rem);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
 .stageStatus {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
 .footer {
   min-height: 48px;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
@@ -2944,11 +2944,11 @@
 .indexedResults li span,
 .indexedResults li small,
 .indexedResults > footer button {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .indexedResults > p {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 720px) {
@@ -2970,5 +2970,90 @@
   .nearClusterRegions button {
     min-width: 104px;
     max-width: 132px;
+  }
+}
+
+/* Student presentation uses readable learning copy while Reviewer keeps its
+   intentionally dense evidence table and raw technical identifiers. */
+.universe[data-presentation-mode="student"] .description,
+.universe[data-presentation-mode="student"] .lensDescription,
+.universe[data-presentation-mode="student"] .lensMeaning,
+.universe[data-presentation-mode="student"] .lensCaveat,
+.universe[data-presentation-mode="student"] .stageStatus,
+.universe[data-presentation-mode="student"] .lodStatus,
+.universe[data-presentation-mode="student"] .summary,
+.universe[data-presentation-mode="student"] .learningLinks p,
+.universe[data-presentation-mode="student"] .similarMolecules > p,
+.universe[data-presentation-mode="student"] .passportGrid dd {
+  font-size: 1rem;
+}
+
+.universe[data-presentation-mode="student"] button,
+.universe[data-presentation-mode="student"] input,
+.universe[data-presentation-mode="student"] summary,
+.universe[data-presentation-mode="student"] a,
+.universe[data-presentation-mode="student"] small,
+.universe[data-presentation-mode="student"] .eyebrow,
+.universe[data-presentation-mode="student"] .headerSummary span,
+.universe[data-presentation-mode="student"] .headerSummary strong,
+.universe[data-presentation-mode="student"] .searchField label,
+.universe[data-presentation-mode="student"] .controlLabel,
+.universe[data-presentation-mode="student"] .studentHint,
+.universe[data-presentation-mode="student"] .breadcrumb,
+.universe[data-presentation-mode="student"] .axisLabel,
+.universe[data-presentation-mode="student"] .clusterGlyph strong,
+.universe[data-presentation-mode="student"] .clusterGlyph small,
+.universe[data-presentation-mode="student"] .nearClusterRegions strong,
+.universe[data-presentation-mode="student"] .nearClusterRegions small,
+.universe[data-presentation-mode="student"] .compareToolbar strong,
+.universe[data-presentation-mode="student"] .compareToolbar span,
+.universe[data-presentation-mode="student"] .compareOverlay > header p,
+.universe[data-presentation-mode="student"] .compareOverlay > header span,
+.universe[data-presentation-mode="student"] .compareScaffold span,
+.universe[data-presentation-mode="student"] .compareScaffold strong,
+.universe[data-presentation-mode="student"] .compareCards li > span,
+.universe[data-presentation-mode="student"] .compareCards li > strong,
+.universe[data-presentation-mode="student"] .compareCards li > p,
+.universe[data-presentation-mode="student"] .compareMessage,
+.universe[data-presentation-mode="student"] .passportGrid dt,
+.universe[data-presentation-mode="student"] .learningLinks span,
+.universe[data-presentation-mode="student"] .similarMolecules > span,
+.universe[data-presentation-mode="student"] .passportActions > span,
+.universe[data-presentation-mode="student"] .footer {
+  font-size: 0.875rem;
+}
+
+/* No learner-facing secondary or interactive label may fall below 14px,
+   including legacy dense selectors that remain available to Reviewer. */
+.universe[data-presentation-mode="student"] :where(
+  button,
+  input,
+  select,
+  summary,
+  a,
+  small,
+  span,
+  dt,
+  dd,
+  p,
+  label,
+  strong,
+  output
+) {
+  font-size: max(0.875rem, 1em);
+}
+
+@media screen and (max-width: 720px) {
+  .universe[data-presentation-mode="student"] .description,
+  .universe[data-presentation-mode="student"] .lensDescription,
+  .universe[data-presentation-mode="student"] .lensMeaning,
+  .universe[data-presentation-mode="student"] .lensCaveat,
+  .universe[data-presentation-mode="student"] .stageStatus,
+  .universe[data-presentation-mode="student"] .lodStatus,
+  .universe[data-presentation-mode="student"] .summary,
+  .universe[data-presentation-mode="student"] .learningLinks p,
+  .universe[data-presentation-mode="student"] .similarMolecules > p,
+  .universe[data-presentation-mode="student"] .passportGrid dd {
+    font-size: 0.9375rem;
   }
 }

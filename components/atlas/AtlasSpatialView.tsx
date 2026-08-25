@@ -9,6 +9,7 @@ export interface AtlasSpatialViewProps {
   readonly configuration: AtlasSpatialConfiguration;
   readonly copy: {
     readonly scope: string;
+    readonly description: string;
     readonly bounded: string;
   };
 }
@@ -21,7 +22,10 @@ export function AtlasSpatialView({
   return (
     <section className={styles.spatial} data-atlas-spatial="true">
       <p className={styles.spatialBoundary}>
-        <strong>{copy.scope}</strong>
+        <span className={styles.spatialBoundaryLead}>
+          <strong>{copy.scope}</strong>
+          <span>{copy.description}</span>
+        </span>
         <span>{copy.bounded}</span>
       </p>
       <MoleculeUniverse

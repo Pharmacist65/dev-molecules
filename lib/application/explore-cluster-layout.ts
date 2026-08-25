@@ -86,7 +86,7 @@ export function resolveExploreClusterLabelLayout(
   }
 
   const minimumHorizontalSeparation = clamp(
-    24 * ((16 / 9) / viewportAspect),
+    34 * ((16 / 9) / viewportAspect),
     20,
     38,
   );
@@ -163,7 +163,7 @@ export function countExploreClusterLabelCollisions(
     throw new Error("Explore cluster label collision count requires a positive viewport aspect.");
   }
   const minimumHorizontalSeparation = clamp(
-    24 * ((16 / 9) / viewportAspect),
+    34 * ((16 / 9) / viewportAspect),
     20,
     38,
   );

@@ -4,6 +4,7 @@ import test from "node:test";
 import { tsImport } from "tsx/esm/api";
 
 const {
+  fitSceneCameraToBoundingSphere,
   interpolateSceneCamera,
   orbitSceneCamera,
   panSceneCamera,
@@ -33,6 +34,42 @@ test("orbit preserves target and camera radius without an idle animation loop", 
       1e-9,
   );
   assert.notDeepEqual(rotated.position, camera.position);
+});
+
+test("focus fit reserves a deterministic 14 percent envelope", () => {
+  const radius = 5;
+  const fitted = fitSceneCameraToBoundingSphere(
+    camera,
+    { x: 2, y: -1, z: 3 },
+    radius,
+    16 / 9,
+    0.14,
+  );
+  const fittedDistance = distance(fitted.position, fitted.target);
+  const projectedRadius =
+    radius / (fittedDistance * Math.tan(((fitted.fov ?? 42) * Math.PI) / 360));
+
+  assert.deepEqual(fitted.target, { x: 2, y: -1, z: 3 });
+  assert.ok(Math.abs(projectedRadius - 0.72) < 1e-9);
+  assert.deepEqual(
+    fitSceneCameraToBoundingSphere(camera, { x: 2, y: -1, z: 3 }, radius, 16 / 9, 0.14),
+    fitted,
+  );
+
+  const zoomed = zoomSceneCamera(fitted, -120);
+  assert.deepEqual(
+    fitSceneCameraToBoundingSphere(zoomed, { x: 2, y: -1, z: 3 }, radius, 16 / 9, 0.14),
+    fitted,
+  );
+});
+
+test("focus fit honors the narrower horizontal field in portrait viewports", () => {
+  const landscape = fitSceneCameraToBoundingSphere(camera, camera.target, 5, 16 / 9, 0.14);
+  const portrait = fitSceneCameraToBoundingSphere(camera, camera.target, 5, 0.6, 0.14);
+  assert.ok(
+    distance(portrait.position, portrait.target) >
+      distance(landscape.position, landscape.target),
+  );
 });
 
 test("pan translates camera position and target by the same world vector", () => {

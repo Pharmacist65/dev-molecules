@@ -25,6 +25,13 @@ test("new product hashes resolve to stable primary sections", () => {
     section: "drug",
     slug: "celecoxib",
   });
+  assert.deepEqual(
+    parsePlatformHash("#drug/beta-sitosterol-kzjwdpnrjallns-vjsfxxlfsa-n"),
+    {
+      section: "drug",
+      slug: "beta-sitosterol-kzjwdpnrjallns-vjsfxxlfsa-n",
+    },
+  );
   assert.deepEqual(parsePlatformHash("#family/beta-blockers"), {
     section: "family",
     familyId: "beta-blockers",

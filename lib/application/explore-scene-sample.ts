@@ -1,7 +1,17 @@
+export type ExploreRepresentativeMapStatus =
+  | "curated-seed"
+  | "source-matched-unclassified";
+
 export interface ExploreSceneSampleCandidate {
   readonly id: string;
   readonly clusterKey: string;
   readonly projectedPosition: { readonly x: number; readonly y: number };
+  /**
+   * Product-scope eligibility, not a scientific verification claim. Imported
+   * identities without reviewed classification stay searchable and focusable,
+   * but cannot enter the curated/seed representative map.
+   */
+  readonly representativeMapStatus: ExploreRepresentativeMapStatus;
 }
 
 export interface ExploreSceneSampleInput {
@@ -19,9 +29,13 @@ function assertCandidateContract(candidates: readonly ExploreSceneSampleCandidat
       || ids.has(candidate.id)
       || !Number.isFinite(candidate.projectedPosition.x)
       || !Number.isFinite(candidate.projectedPosition.y)
+      || ![
+        "curated-seed",
+        "source-matched-unclassified",
+      ].includes(candidate.representativeMapStatus)
     ) {
       throw new Error(
-        "Explore scene sample candidates require unique IDs, cluster keys and finite positions.",
+        "Explore scene sample candidates require unique IDs, cluster keys, finite positions and a representative-map status.",
       );
     }
     ids.add(candidate.id);
@@ -42,10 +56,13 @@ export function selectExploreSceneSample({
     throw new Error("Explore scene sample limit must be a non-negative safe integer.");
   }
   assertCandidateContract(candidates);
-  if (limit === 0 || candidates.length === 0) return [];
+  const eligibleCandidates = candidates.filter(
+    (candidate) => candidate.representativeMapStatus === "curated-seed",
+  );
+  if (limit === 0 || eligibleCandidates.length === 0) return [];
 
   const groups = new Map<string, ExploreSceneSampleCandidate[]>();
-  for (const candidate of candidates) {
+  for (const candidate of eligibleCandidates) {
     const group = groups.get(candidate.clusterKey) ?? [];
     group.push(candidate);
     groups.set(candidate.clusterKey, group);
@@ -74,11 +91,13 @@ export function selectExploreSceneSample({
     if (!added) break;
   }
 
-  if (requiredId && candidates.some((candidate) => candidate.id === requiredId)) {
+  if (
+    requiredId
+    && eligibleCandidates.some((candidate) => candidate.id === requiredId)
+  ) {
     if (!selected.includes(requiredId)) {
       selected.splice(Math.max(0, selected.length - 1), 1, requiredId);
     }
   }
   return selected;
 }
-
