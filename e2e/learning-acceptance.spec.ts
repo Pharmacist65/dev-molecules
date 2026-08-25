@@ -11,7 +11,7 @@ const synthesisRoot = (page: Page) => page.locator("[data-synthesis-atlas]").fir
 const academyRoot = (page: Page) => page.getByTestId("nomenclature-academy");
 const longAcceptanceTimeout =
   process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer"
-    ? 180_000
+    ? 240_000
     : 60_000;
 
 test.use({ locale: "tr-TR" });
@@ -238,7 +238,11 @@ test("Synthesis Atlas exposes three molecules and the six-step reported Carvedil
   await expect(challenge.locator('[data-result="correct"]')).toBeVisible();
 
   await expectNoHorizontalOverflow(page, "English Synthesis Atlas at 1920x1080");
-  await captureAcceptanceScreenshot(page, "learn-synthesis-atlas-carvedilol-en-1920x1080.png");
+  await captureAcceptanceScreenshot(
+    page,
+    "learn-synthesis-atlas-carvedilol-en-1920x1080.png",
+    { timeout: 120_000 },
+  );
 
   // Selected foundational transformations use atom-indexed arrow endpoints;
   // no generic decorative curve substitutes for missing atom mapping.

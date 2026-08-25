@@ -8,7 +8,7 @@ import {
 
 const longAcceptanceTimeout =
   process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer"
-    ? 180_000
+    ? 240_000
     : 60_000;
 
 async function openAcademy(page: Page) {
@@ -115,7 +115,11 @@ test("Academy widgets manipulate real structures and curated scoring paths", asy
   await expectCorrect(page);
 
   await ez.scrollIntoViewIfNeeded();
-  await captureAcceptanceScreenshot(page, "nomenclature-widgets-stereo-tr-1440x900.png");
+  await captureAcceptanceScreenshot(
+    page,
+    "nomenclature-widgets-stereo-tr-1440x900.png",
+    { timeout: 120_000 },
+  );
 
   expectCleanRuntime(telemetry);
 });

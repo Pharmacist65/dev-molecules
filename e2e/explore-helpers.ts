@@ -381,7 +381,11 @@ export function screenshotPath(filename: string) {
   return path.resolve(process.cwd(), "work/playwright/screenshots", filename);
 }
 
-export async function captureAcceptanceScreenshot(page: Page, filename: string) {
+export async function captureAcceptanceScreenshot(
+  page: Page,
+  filename: string,
+  options: { readonly timeout?: number } = {},
+) {
   await page.evaluate(async () => {
     await document.fonts.ready;
     await new Promise<void>((resolve) =>
@@ -392,6 +396,7 @@ export async function captureAcceptanceScreenshot(page: Page, filename: string) 
     path: screenshotPath(filename),
     fullPage: false,
     animations: "disabled",
+    timeout: options.timeout,
   });
 }
 
