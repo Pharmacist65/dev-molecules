@@ -907,6 +907,7 @@ function DevMoleculesWorkspace() {
                     if (molecule) setSelectedId(molecule.id);
                     navigate(getSynthesisAcademyHash(
                       getMoleculeSlug(molecule?.id ?? moleculeIdOrSlug),
+                      "atlas",
                     ));
                   }}
                 />

@@ -9,6 +9,7 @@ const {
   getSynthesisAtlasGraphGeometry,
   getSynthesisAtlasRoutePresentation,
   getSynthesisAtlasStepForMaterial,
+  getSynthesisAtlasTargetProduct,
   requestSynthesisAtlasLevel,
   resolveSynthesisAtlasRoute,
 } = await tsImport("../lib/application/synthesis-atlas.ts", import.meta.url);
@@ -103,6 +104,39 @@ test("source-supported reported routes include defensible five-plus transformati
     assert.deepEqual(orders, Array.from({ length: orders.length }, (_, index) => index + 1));
     assert.equal(canPresentSynthesisAtlasRouteAsReported(route), true);
   }
+});
+
+test("target-product presentation accepts only an unconsumed terminal drug role", () => {
+  for (const route of synthesisAtlasRoutes) {
+    const target = getSynthesisAtlasTargetProduct(route);
+    assert.ok(target, route.id);
+    assert.ok(
+      target.material.role === "active-parent" || target.material.role === "chemical-form",
+      `${route.id}:${target.material.role}`,
+    );
+    assert.equal(target.step.outputMaterialId, target.material.id, route.id);
+    assert.equal(
+      route.transformations.some(
+        (step) => step.id !== target.step.id && step.inputMaterialIds.includes(target.material.id),
+      ),
+      false,
+      route.id,
+    );
+  }
+
+  const route = routeById.get("synthesis-atlas-route:propranolol-reported");
+  assert.ok(route);
+  const validTarget = getSynthesisAtlasTargetProduct(route);
+  assert.ok(validTarget);
+  const demotedMaterials = route.materials.map((material) => (
+    material.id === validTarget.material.id
+      ? { ...material, role: "intermediate" }
+      : material
+  ));
+  assert.equal(
+    getSynthesisAtlasTargetProduct({ ...route, materials: demotedMaterials }),
+    null,
+  );
 });
 
 test("forward and retro graph navigation is mirrored, deterministic and clamped", () => {

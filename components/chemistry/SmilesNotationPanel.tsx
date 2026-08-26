@@ -51,6 +51,19 @@ export function SmilesNotationPanel({
   const [copyState, setCopyState] = useState<CopyState>({ kind: "idle" });
   const { hasIsomericSmiles } = presentation;
   const hasNotationMarkers = presentation.hasAtomStereo || presentation.hasDirectionalBondMarkers;
+  const hasMixedStereoClasses = presentation.atomStereoMode === "mixed";
+  const teachesTetrahedralShorthand =
+    presentation.atomStereoMode === "tetrahedral-shorthand" || hasMixedStereoClasses;
+  const stereoLessonTitle = hasMixedStereoClasses
+    ? labels.mixedStereoTitle
+    : teachesTetrahedralShorthand
+      ? labels.stereoQuestion
+      : labels.explicitStereoTitle;
+  const stereoLessonAnswer = hasMixedStereoClasses
+    ? labels.mixedStereoAnswer
+    : teachesTetrahedralShorthand
+      ? labels.stereoAnswer
+      : labels.explicitStereoAnswer;
 
   useEffect(() => () => {
     if (clearStatusTimer.current !== null) clearTimeout(clearStatusTimer.current);
@@ -142,6 +155,7 @@ export function SmilesNotationPanel({
       className={styles.panel}
       data-smiles-notation={mode}
       data-isomeric-smiles={hasIsomericSmiles ? "present" : "missing"}
+      data-atom-stereo-mode={presentation.atomStereoMode ?? "none"}
     >
       <section className={styles.guide} aria-labelledby={guideTitleId}>
         <header className={styles.guideHeader}>
@@ -178,35 +192,54 @@ export function SmilesNotationPanel({
         </span>
 
         {presentation.hasAtomStereo ? (
-          <section className={styles.stereoLesson} aria-label={labels.stereoQuestion}>
-            <h4>{labels.stereoQuestion}</h4>
-            <p>{labels.stereoAnswer}</p>
-            <dl className={styles.markerLegend}>
-              <div>
-                <dt><code className={styles.marker}>@</code></dt>
-                <dd>{labels.atMeaning}</dd>
+          <section
+            className={styles.stereoLesson}
+            aria-label={stereoLessonTitle}
+          >
+            <h4>{stereoLessonTitle}</h4>
+            <p>{stereoLessonAnswer}</p>
+            {hasMixedStereoClasses ? (
+              <div className={styles.mixedLessons}>
+                <article>
+                  <h5>{labels.stereoQuestion}</h5>
+                  <p>{labels.stereoAnswer}</p>
+                </article>
+                <article>
+                  <h5>{labels.explicitStereoTitle}</h5>
+                  <p>{labels.explicitStereoAnswer}</p>
+                </article>
               </div>
-              <div>
-                <dt><code className={styles.marker}>@@</code></dt>
-                <dd>{labels.atAtMeaning}</dd>
-              </div>
-            </dl>
-            <p className={styles.tetrahedralContext}>{labels.tetrahedralContext}</p>
-            <p className={styles.absoluteRule}>{labels.absoluteConfiguration}</p>
-            {mode === "story" ? null : (
-              <details className={styles.exampleDetails}>
-                <summary>{labels.exampleSummary}</summary>
-                <div>
-                  <p>{labels.exampleIntro}</p>
-                  <div className={styles.exampleStrings} aria-label={labels.exampleSummary}>
-                    {presentation.equivalentTetrahedralExamples.map((example) => (
-                      <code key={example}>{example}</code>
-                    ))}
+            ) : null}
+            {teachesTetrahedralShorthand ? (
+              <>
+                <dl className={styles.markerLegend}>
+                  <div>
+                    <dt><code className={styles.marker}>@</code></dt>
+                    <dd>{labels.atMeaning}</dd>
                   </div>
-                  <p>{labels.exampleConclusion}</p>
-                </div>
-              </details>
-            )}
+                  <div>
+                    <dt><code className={styles.marker}>@@</code></dt>
+                    <dd>{labels.atAtMeaning}</dd>
+                  </div>
+                </dl>
+                <p className={styles.tetrahedralContext}>{labels.tetrahedralContext}</p>
+                <p className={styles.absoluteRule}>{labels.absoluteConfiguration}</p>
+                {mode === "story" ? null : (
+                  <details className={styles.exampleDetails}>
+                    <summary>{labels.exampleSummary}</summary>
+                    <div>
+                      <p>{labels.exampleIntro}</p>
+                      <div className={styles.exampleStrings} aria-label={labels.exampleSummary}>
+                        {presentation.equivalentTetrahedralExamples.map((example) => (
+                          <code key={example}>{example}</code>
+                        ))}
+                      </div>
+                      <p>{labels.exampleConclusion}</p>
+                    </div>
+                  </details>
+                )}
+              </>
+            ) : null}
           </section>
         ) : null}
 

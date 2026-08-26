@@ -38,6 +38,7 @@
 .notationTypes h4,
 .notationTypes p,
 .stereoLesson h4,
+.stereoLesson h5,
 .stereoLesson p,
 .markerLegend,
 .markerLegend dd,
@@ -158,6 +159,29 @@
   font-size: clamp(1.15rem, 1.6vw, 1.4rem);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
+}
+
+.mixedLessons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.mixedLessons article {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-sm);
+  background: var(--surface-ivory);
+}
+
+.mixedLessons h5 {
+  color: var(--color-deep-navy);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-ui);
 }
 
 .stereoLesson p strong {
@@ -412,6 +436,7 @@
 @media (max-width: 620px) {
   .notationTypes,
   .markerLegend,
+  .mixedLessons,
   .exampleStrings {
     grid-template-columns: 1fr;
   }

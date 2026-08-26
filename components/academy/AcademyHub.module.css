@@ -76,6 +76,25 @@
   line-height: 1.55;
 }
 
+.synthesisShortcut {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgb(45 91 227 / 18%);
+}
+
+.synthesisShortcut > span {
+  color: var(--signal-orange, #f26422);
+  font: 760 0.62rem var(--font-geist-mono, ui-monospace, monospace);
+  letter-spacing: 0.1em;
+}
+
+.synthesisShortcut strong {
+  font-size: 1.12rem;
+  line-height: 1.18;
+}
+
 .recommended button,
 .moduleCard footer > button,
 .synthesisPortal button,
@@ -818,6 +837,22 @@
 .recommended small {
   color: var(--color-text-muted-on-dark);
   font-size: var(--font-size-secondary);
+}
+
+.synthesisShortcut {
+  border-color: var(--border-color-on-dark-strong);
+}
+
+.synthesisShortcut > span {
+  color: var(--color-orange-highlight);
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-secondary);
+}
+
+.synthesisShortcut strong {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subtitle);
 }
 
 .recommended button,

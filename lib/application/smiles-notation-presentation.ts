@@ -12,6 +12,7 @@ export const OPENSMILES_EQUIVALENT_TETRAHEDRAL_EXAMPLES = [
 export interface SmilesNotationPresentation {
   readonly hasIsomericSmiles: boolean;
   readonly hasAtomStereo: boolean;
+  readonly atomStereoMode: "tetrahedral-shorthand" | "explicit-class" | "mixed" | null;
   readonly hasDirectionalBondMarkers: boolean;
   readonly equivalentTetrahedralExamples: typeof OPENSMILES_EQUIVALENT_TETRAHEDRAL_EXAMPLES;
   readonly copy: (typeof copyByLocale)[SmilesNotationLocale];
@@ -34,9 +35,15 @@ const copyByLocale = {
     statusBond: "Kaynak gösteriminde yönlü bağ işaretleri var",
     statusPresent: "Kaynakta izomerik SMILES var",
     statusMissing: "Kaynakta ayrı bir izomerik SMILES yok",
-    stereoQuestion: "@ = R, @@ = S mi?",
+    stereoQuestion: "SMILES stereokimyası: yerel yönelim ve mutlak konfigürasyon",
     stereoAnswer:
-      "Hayır. @ ve @@, ilgili atomun stereokimya sınıfına ve o SMILES'in dolaşım sırasına göre tanımlanan iki zıt yerel düzen işaretidir; sabit R/S etiketleri değildir.",
+      "@ ve @@, stereomerkez çevresindeki komşuların SMILES dizisindeki sırasına bağlı iki karşıt yerel yönelimi kodlar. Yaygın tetrahedral kullanımda sırasıyla @TH1 ve @TH2'nin kısaltılmış biçimleridir; doğrudan R veya S anlamına gelmez. Mutlak R/S konfigürasyonu, tüm yapıya Cahn–Ingold–Prelog (CIP) öncelik kuralları uygulanarak belirlenir.",
+    explicitStereoTitle: "Açık SMILES stereokimya sınıfları",
+    explicitStereoAnswer:
+      "Bu gösterimde @SP…, @AL…, @TB… veya @OH… biçiminde en az bir açık stereokimya sınıfı bulunur. Harfler yerel geometri sınıfını, sayı ise o sınıftaki düzeni belirtir. @ / @@ → @TH1 / @TH2 tetrahedral kısaltması bu merkezlere uygulanmaz; işaretler doğrudan R/S değildir ve sınıfın komşu sırasıyla birlikte okunmalıdır.",
+    mixedStereoTitle: "Birden fazla SMILES stereokimya sınıfı",
+    mixedStereoAnswer:
+      "Bu gösterimde hem tetrahedral @ / @@ kısaltması hem de açık sınıf işaretleri bulunur. Her stereomerkez kendi işareti, komşu sırası ve geometri sınıfıyla ayrı okunmalıdır; hiçbir işaret tek başına R/S etiketi değildir.",
     atMeaning:
       "SMILES dolaşımının ve atomun stereokimya sınıfının belirlediği yerel düzenlerden biri.",
     atAtMeaning:
@@ -82,9 +89,15 @@ const copyByLocale = {
     statusBond: "The source notation contains directional-bond markers",
     statusPresent: "The source provides an isomeric SMILES",
     statusMissing: "The source does not provide a separate isomeric SMILES",
-    stereoQuestion: "Does @ mean R and @@ mean S?",
+    stereoQuestion: "SMILES stereochemistry: local orientation and absolute configuration",
     stereoAnswer:
-      "No. @ and @@ are two opposite local-order markers defined by the atom's stereochemical class and the traversal order of that SMILES; they are not fixed R/S labels.",
+      "@ and @@ encode two opposite local orientations defined by the order of neighbours around the stereocentre in the SMILES string. In common tetrahedral use they abbreviate @TH1 and @TH2, respectively; neither directly means R or S. Absolute R/S configuration is assigned from the full structure using Cahn–Ingold–Prelog (CIP) priorities.",
+    explicitStereoTitle: "Explicit SMILES stereochemistry classes",
+    explicitStereoAnswer:
+      "This notation contains at least one explicit stereochemistry class such as @SP…, @AL…, @TB… or @OH…. The letters identify the local geometry class and the number identifies an ordering within that class. The tetrahedral @ / @@ → @TH1 / @TH2 shorthand does not apply to those centres; the markers are not direct R/S labels and must be read with the class-specific neighbour order.",
+    mixedStereoTitle: "Multiple SMILES stereochemistry classes",
+    mixedStereoAnswer:
+      "This notation contains both tetrahedral @ / @@ shorthand and explicit class markers. Each stereocentre must be read separately using its marker, neighbour order and geometry class; no marker is a direct R/S label by itself.",
     atMeaning:
       "One local ordering defined by the SMILES traversal and the atom's stereochemical class.",
     atAtMeaning:
@@ -129,10 +142,25 @@ export function createSmilesNotationPresentation({
   const values = isomericSmiles !== null && isomericSmiles.length > 0
     ? [canonicalSmiles, isomericSmiles]
     : [canonicalSmiles];
+  const explicitClassPattern = /@(?:AL|SP|TB|OH)\d+/gu;
+  const hasExplicitClassStereo = values.some((value) => (
+    /@(?:AL|SP|TB|OH)\d+/u.test(value)
+  ));
+  const hasTetrahedralShorthand = values.some((value) => (
+    value.replace(explicitClassPattern, "").includes("@")
+  ));
+  const atomStereoMode = hasExplicitClassStereo
+    ? hasTetrahedralShorthand
+      ? "mixed"
+      : "explicit-class"
+    : hasTetrahedralShorthand
+      ? "tetrahedral-shorthand"
+      : null;
 
   return {
     hasIsomericSmiles,
-    hasAtomStereo: values.some((value) => value.includes("@")),
+    hasAtomStereo: atomStereoMode !== null,
+    atomStereoMode,
     hasDirectionalBondMarkers: values.some(
       (value) => value.includes("/") || value.includes("\\"),
     ),

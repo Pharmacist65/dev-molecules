@@ -11,6 +11,10 @@ import {
   createAcademyModuleViews,
   getRecommendedAcademyModule,
 } from "@/lib/application/academy-learning-map";
+import {
+  resolveSynthesisCurriculumSelection,
+  synthesisCurriculumReadiness,
+} from "@/lib/application/synthesis-curriculum";
 import type {
   AcademyLocale,
   AcademyModuleId,
@@ -60,6 +64,10 @@ const copy = {
     mapAria: "Sekiz modüllük Akademi öğrenme haritası",
     recommended: "Önerilen sonraki modül",
     openRecommended: "Devam et",
+    synthesisShortcutEyebrow: "SENTEZ BASAMAKLARI",
+    synthesisShortcutTitle: "Başlangıç maddesinden nihai ilaç molekülüne",
+    synthesisShortcutMeta: "{drugs} kaynak kapılı ilaç · {steps} dönüşüm",
+    openSynthesisSteps: "Sentez basamaklarını aç",
     available: "Başlamaya hazır",
     coverageDependent: "İlaç seçimine göre",
     planned: "Yakında",
@@ -89,6 +97,10 @@ const copy = {
     mapAria: "Eight-module Academy learning map",
     recommended: "Recommended next module",
     openRecommended: "Continue",
+    synthesisShortcutEyebrow: "SYNTHESIS STEPS",
+    synthesisShortcutTitle: "From starting materials to the final drug molecule",
+    synthesisShortcutMeta: "{drugs} source-gated drugs · {steps} transformations",
+    openSynthesisSteps: "Open synthesis steps",
     available: "Ready to begin",
     coverageDependent: "Varies by medicine",
     planned: "Coming soon",
@@ -125,6 +137,14 @@ function moduleActionLabel(
   return labels.openModule;
 }
 
+const interpolate = (
+  template: string,
+  values: Readonly<Record<string, string | number>>,
+) => Object.entries(values).reduce(
+  (result, [key, value]) => result.replaceAll(`{${key}}`, String(value)),
+  template,
+);
+
 export function AcademyHub({
   locale,
   selectedMoleculeIdOrSlug = "molecule:propranolol",
@@ -155,6 +175,15 @@ export function AcademyHub({
   const recommendedModule = getRecommendedAcademyModule(modules);
   const currentModule = modules.find((module) => module.id === currentModuleId) ?? null;
   const labels = copy[locale];
+  const requestedSynthesisMoleculeId = synthesisCurriculumReadiness.flagships.find(
+    (entry) => entry.moleculeId && (
+      entry.moleculeId === selectedMoleculeIdOrSlug ||
+      entry.moleculeId.split(":").at(-1) === selectedMoleculeIdOrSlug
+    ),
+  )?.moleculeId;
+  const synthesisEntryMoleculeId = resolveSynthesisCurriculumSelection(
+    requestedSynthesisMoleculeId,
+  ).moleculeId;
 
   function selectModule(moduleId: AcademyModuleId | null) {
     if (activeModuleId === undefined) setInternalModuleId(moduleId);
@@ -162,8 +191,8 @@ export function AcademyHub({
   }
 
   function openSynthesis() {
-    if (onOpenSynthesis) {
-      onOpenSynthesis(selectedMoleculeIdOrSlug);
+    if (onOpenSynthesis && synthesisEntryMoleculeId) {
+      onOpenSynthesis(synthesisEntryMoleculeId);
       return;
     }
     selectModule("synthesis-atlas");
@@ -272,6 +301,24 @@ export function AcademyHub({
             >
               {labels.openRecommended} <i aria-hidden="true">→</i>
             </button>
+            {synthesisEntryMoleculeId ? (
+              <div
+                className={styles.synthesisShortcut}
+                data-academy-synthesis-shortcut="true"
+              >
+                <span>{labels.synthesisShortcutEyebrow}</span>
+                <strong>{labels.synthesisShortcutTitle}</strong>
+                <small>
+                  {interpolate(labels.synthesisShortcutMeta, {
+                    drugs: synthesisCurriculumReadiness.availableDrugCount,
+                    steps: synthesisCurriculumReadiness.transformationCount,
+                  })}
+                </small>
+                <button type="button" onClick={openSynthesis}>
+                  {labels.openSynthesisSteps} <i aria-hidden="true">→</i>
+                </button>
+              </div>
+            ) : null}
           </aside>
         ) : null}
       </header>

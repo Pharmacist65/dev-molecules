@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useEffect,
   useId,
   useMemo,
   useRef,
@@ -14,6 +15,7 @@ import {
   getSynthesisAtlasGraphGeometry,
   getSynthesisAtlasRoutePresentation,
   getSynthesisAtlasStepForMaterial,
+  getSynthesisAtlasTargetProduct,
   requestSynthesisAtlasLevel,
   resolveSynthesisAtlasRoute,
 } from "@/lib/application/synthesis-atlas";
@@ -109,6 +111,9 @@ const copy = {
     routeId: "Rota kimliği",
     version: "Veri sürümü",
     sourceGate: "Kaynak kapsamı",
+    targetProduct: "Hedef ürün",
+    targetProductBody: "Bu rotanın kaynak sınırları içinde ulaştığı son yapı.",
+    openFinalStep: "Son basamağı aç",
   },
   en: {
     eyebrow: "Synthesis Atlas",
@@ -170,6 +175,9 @@ const copy = {
     routeId: "Route identifier",
     version: "Data version",
     sourceGate: "Source scope",
+    targetProduct: "Target product",
+    targetProductBody: "The final structure reached within this route's source boundary.",
+    openFinalStep: "Open final step",
   },
 } as const;
 
@@ -202,6 +210,7 @@ function MaterialCard({
 }
 
 function StepDetail({
+  id,
   route,
   step,
   direction,
@@ -210,6 +219,7 @@ function StepDetail({
   onStepChange,
   onMechanism,
 }: {
+  readonly id?: string;
   readonly route: SynthesisAtlasRoute;
   readonly step: SynthesisAtlasTransformation;
   readonly direction: SynthesisAtlasDirection;
@@ -241,7 +251,12 @@ function StepDetail({
   }
 
   return (
-    <section className={atlas.stepDetail} data-active-step={step.id}>
+    <section
+      id={id}
+      className={atlas.stepDetail}
+      data-active-step={step.id}
+      tabIndex={id ? -1 : undefined}
+    >
       <header className={atlas.stepDetailHeader}>
         <div>
           <span>{labels.selectedStep} · {visibleIndex + 1}/{sequence.length}</span>
@@ -349,6 +364,7 @@ function AtlasWorkspace({
   const [zoom, setZoom] = useState(0.54);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const targetProductRef = useRef<HTMLElement | null>(null);
   const drag = useRef<{ pointerId: number; x: number; y: number; panX: number; panY: number } | null>(null);
   const rawMarkerId = useId();
   const markerId = `atlas-${rawMarkerId.replace(/[^a-z0-9_-]/giu, "-")}`;
@@ -371,6 +387,18 @@ function AtlasWorkspace({
   const labelEdges = geometry.edges.filter(
     (edge, index, edges) => edges.findIndex((candidate) => candidate.stepId === edge.stepId) === index,
   );
+  const target = getSynthesisAtlasTargetProduct(route);
+  const finalStep = target?.step ?? null;
+  const targetProduct = target?.material ?? null;
+  const finalStepDetailId = `synthesis-final-step-${route.id.replace(/[^a-z0-9_-]/giu, "-")}`;
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      targetProductRef.current?.focus({ preventScroll: true });
+      targetProductRef.current?.scrollIntoView({ block: "start", behavior: "auto" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [route.id]);
 
   function selectStep(stepId: SynthesisAtlasStepId) {
     setActiveStepId(stepId);
@@ -380,6 +408,25 @@ function AtlasWorkspace({
   function requestLevel(nextLevel: SynthesisAtlasLevel) {
     const transition = requestSynthesisAtlasLevel(route, nextLevel, effectiveStepId);
     setRequestedLevel(transition.level);
+  }
+
+  function openFinalStep() {
+    if (!finalStep) return;
+    setActiveStepId(finalStep.id);
+    setRequestedLevel("step");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const detail = document.getElementById(finalStepDetailId);
+        if (!detail) return;
+        detail.focus({ preventScroll: true });
+        detail.scrollIntoView({
+          block: "start",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+        });
+      });
+    });
   }
 
   function beginPan(event: ReactPointerEvent<HTMLDivElement>) {
@@ -425,6 +472,30 @@ function AtlasWorkspace({
 
   return (
     <>
+      {targetProduct ? (
+        <section
+          ref={targetProductRef}
+          className={atlas.targetProduct}
+          data-synthesis-target-product="true"
+          tabIndex={-1}
+          aria-labelledby={`${finalStepDetailId}-target-heading`}
+        >
+          <div>
+            <span>{labels.targetProduct}</span>
+            <h3 id={`${finalStepDetailId}-target-heading`}>{targetProduct.label[locale]}</h3>
+            <p>{labels.targetProductBody}</p>
+          </div>
+          <MaterialCard
+            material={targetProduct}
+            locale={locale}
+            className={atlas.targetProductStructure}
+          />
+          <button type="button" onClick={openFinalStep}>
+            {labels.openFinalStep} <span aria-hidden="true">→</span>
+          </button>
+        </section>
+      ) : null}
+
       <div className={atlas.atlasToolbar}>
         <div className={atlas.levelSwitch} role="tablist" aria-label={labels.route}>
           {(["route", "step", "mechanism"] as const).map((candidate) => {
@@ -553,6 +624,7 @@ function AtlasWorkspace({
 
       {level === "step" && activeStep ? (
         <StepDetail
+          id={finalStep?.id === activeStep.id ? finalStepDetailId : undefined}
           route={route}
           step={activeStep}
           direction={direction}

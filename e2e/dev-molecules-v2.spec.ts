@@ -346,14 +346,52 @@ test("Synthesis Academy reports actual scope and opens a source-gated route", as
 }) => {
   const telemetry = watchRuntime(page);
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/#academy/synthesis/propranolol/overview", {
-    waitUntil: "domcontentloaded",
-  });
+  await page.goto("/#academy", { waitUntil: "domcontentloaded" });
   await switchToEnglish(page);
+
+  const shortcut = page.locator('[data-academy-synthesis-shortcut="true"]');
+  await expect(shortcut).toBeVisible();
+  await expect(shortcut).toContainText("3 source-gated drugs · 20 transformations");
+  await shortcut.getByRole("button", { name: "Open synthesis steps" }).click();
+  await expect(page).toHaveURL(/#academy\/synthesis\/propranolol\/atlas$/);
 
   const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
   await expect(synthesis).toHaveAttribute("data-curated-drugs", "3");
   await expect(synthesis).toHaveAttribute("data-target-drugs", "12");
+  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
+  const targetProduct = synthesis.locator('[data-synthesis-target-product="true"]');
+  await expect(targetProduct).toBeVisible();
+  await expect(
+    targetProduct.getByRole("heading", { name: "Propranolol hydrochloride", exact: true }),
+  ).toBeVisible();
+  await expect(targetProduct.locator('[data-smiles-structure="ready"]')).toBeVisible();
+  const targetTop = () => targetProduct.evaluate((element) => (
+    Math.round(element.getBoundingClientRect().top)
+  ));
+  await expect.poll(targetTop).toBeGreaterThanOrEqual(0);
+  await expect.poll(targetTop).toBeLessThan(260);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(targetProduct).toBeVisible();
+  await expectNoHorizontalOverflow(page, "Mobile synthesis target product");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await targetProduct.getByRole("button", { name: "Open final step" }).click();
+  const finalStepDetail = synthesis.locator(
+    '[data-active-step="synthesis-atlas-step:propranolol-rep-03"]',
+  );
+  await expect(finalStepDetail).toBeVisible();
+  await expect(finalStepDetail).toBeFocused();
+  const stickyHeader = page.locator("header").first();
+  await expect.poll(async () => {
+    const [detailBox, headerBox] = await Promise.all([
+      finalStepDetail.boundingBox(),
+      stickyHeader.boundingBox(),
+    ]);
+    return detailBox && headerBox
+      ? Math.round(detailBox.y - (headerBox.y + headerBox.height))
+      : -1;
+  }).toBeGreaterThanOrEqual(0);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await synthesis.getByRole("button", { name: "Back to curriculum table" }).click();
   const metrics = synthesis
     .locator("#synthesis-coverage-heading")
     .locator("xpath=ancestor::section[1]")

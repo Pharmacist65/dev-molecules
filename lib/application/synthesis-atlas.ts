@@ -1,15 +1,18 @@
 import type {
   SynthesisAtlasDirection,
   SynthesisAtlasLevel,
+  SynthesisAtlasMaterial,
   SynthesisAtlasMaterialId,
   SynthesisAtlasRoute,
   SynthesisAtlasRouteId,
   SynthesisAtlasRouteKind,
   SynthesisAtlasStepId,
+  SynthesisAtlasTransformation,
 } from "../domain/synthesis-atlas";
 import {
   canOpenSynthesisAtlasMechanism,
   canPresentSynthesisAtlasRouteAsReported,
+  getSynthesisAtlasStepSequence,
   getSynthesisAtlasSourceGate,
 } from "../domain/synthesis-atlas";
 
@@ -44,6 +47,11 @@ export interface SynthesisAtlasLevelTransition {
   readonly reason: "allowed" | "step-required" | "mechanism-unavailable";
 }
 
+export interface SynthesisAtlasTargetProduct {
+  readonly step: SynthesisAtlasTransformation;
+  readonly material: SynthesisAtlasMaterial;
+}
+
 export type SynthesisAtlasRoutePresentation =
   | "foundational-education"
   | "source-reported"
@@ -66,6 +74,32 @@ export const getSynthesisAtlasRoutePresentation = (
   if (sourceGate === "context-supported") return "source-context-reconstruction";
   if (sourceGate === "partial-with-declared-gap") return "declared-gap-reconstruction";
   return "unavailable";
+};
+
+/**
+ * Resolves a route target only when the final forward transformation ends in
+ * a curator-declared terminal drug role. Intermediate or subsequently consumed
+ * outputs fail closed instead of being promoted to a target product in the UI.
+ */
+export const getSynthesisAtlasTargetProduct = (
+  route: SynthesisAtlasRoute,
+): SynthesisAtlasTargetProduct | null => {
+  const step = getSynthesisAtlasStepSequence(route, "forward").at(-1) ?? null;
+  if (!step?.outputMaterialId) return null;
+
+  const material = route.materials.find(
+    (candidate) => candidate.id === step.outputMaterialId,
+  );
+  if (!material || !["active-parent", "chemical-form"].includes(material.role)) {
+    return null;
+  }
+
+  const isConsumedElsewhere = route.transformations.some(
+    (candidate) =>
+      candidate.id !== step.id &&
+      candidate.inputMaterialIds.includes(material.id),
+  );
+  return isConsumedElsewhere ? null : { step, material };
 };
 
 const X_SPACING = 360;

@@ -20,9 +20,12 @@ test("SMILES presentation distinguishes atom stereo, directional bonds, and miss
   });
   assert.equal(atomStereo.hasIsomericSmiles, true);
   assert.equal(atomStereo.hasAtomStereo, true);
+  assert.equal(atomStereo.atomStereoMode, "tetrahedral-shorthand");
   assert.equal(atomStereo.hasDirectionalBondMarkers, false);
   assert.equal(atomStereo.copy.guideTitle, "SMILES nedir?");
-  assert.match(atomStereo.copy.stereoQuestion, /@ = R, @@ = S mi\?/u);
+  assert.match(atomStereo.copy.stereoQuestion, /yerel yönelim ve mutlak konfigürasyon/u);
+  assert.match(atomStereo.copy.stereoAnswer, /doğrudan R veya S anlamına gelmez/u);
+  assert.match(atomStereo.copy.stereoAnswer, /@TH1 ve @TH2/u);
   assert.match(atomStereo.copy.absoluteConfiguration, /Cahn–Ingold–Prelog \(CIP\)/u);
 
   const doubleBondStereo = createSmilesNotationPresentation({
@@ -42,8 +45,17 @@ test("SMILES presentation distinguishes atom stereo, directional bonds, and miss
     locale: "en",
   });
   assert.equal(explicitChiralClass.hasAtomStereo, true);
-  assert.match(explicitChiralClass.copy.stereoAnswer, /stereochemical class/u);
-  assert.match(explicitChiralClass.copy.tetrahedralContext, /non-tetrahedral/u);
+  assert.equal(explicitChiralClass.atomStereoMode, "explicit-class");
+  assert.match(explicitChiralClass.copy.explicitStereoAnswer, /class-specific neighbour order/u);
+  assert.match(explicitChiralClass.copy.explicitStereoAnswer, /does not apply to those centres/u);
+
+  const mixedStereoClasses = createSmilesNotationPresentation({
+    canonicalSmiles: "CC(O)F.F[Po](Cl)(Br)I",
+    isomericSmiles: "C[C@H](O)F.F[Po@SP1](Cl)(Br)I",
+    locale: "en",
+  });
+  assert.equal(mixedStereoClasses.atomStereoMode, "mixed");
+  assert.match(mixedStereoClasses.copy.mixedStereoAnswer, /both tetrahedral/u);
 
   const alleneLike = createSmilesNotationPresentation({
     canonicalSmiles: "OC(Cl)=[C@]=C(C)F",
@@ -52,7 +64,8 @@ test("SMILES presentation distinguishes atom stereo, directional bonds, and miss
   });
   assert.equal(alleneLike.hasIsomericSmiles, false);
   assert.equal(alleneLike.hasAtomStereo, true);
-  assert.match(alleneLike.copy.stereoAnswer, /not fixed R\/S labels/u);
+  assert.equal(alleneLike.atomStereoMode, "tetrahedral-shorthand");
+  assert.match(alleneLike.copy.stereoAnswer, /neither directly means R or S/u);
 
   const combined = createSmilesNotationPresentation({
     canonicalSmiles: "CC=CC(O)F",
@@ -69,6 +82,7 @@ test("SMILES presentation distinguishes atom stereo, directional bonds, and miss
     locale: "tr",
   });
   assert.equal(missing.hasIsomericSmiles, false);
+  assert.equal(missing.atomStereoMode, null);
   assert.match(missing.copy.missing, /tek başına molekülün akiral olduğunu/u);
   assert.equal(OPENSMILES_SPECIFICATION_URL, "https://opensmiles.org/opensmiles.html");
   assert.match(DAYLIGHT_SMILES_ISOMERISM_URL, /daylight\.com/u);
@@ -84,10 +98,13 @@ test("SMILES UI preserves exact notation while teaching the notation before expo
   assert.match(panel, /navigator\.clipboard\.writeText\(value\)/u);
   assert.match(panel, /Values are deliberately copied and rendered without trimming or normalizing/u);
   assert.match(panel, /createSmilesNotationPresentation\(\{[\s\S]*canonicalSmiles,[\s\S]*isomericSmiles,[\s\S]*locale,[\s\S]*\}\)/u);
+  assert.match(panel, /presentation\.atomStereoMode/u);
+  assert.match(panel, /labels\.mixedStereoTitle/u);
+  assert.match(panel, /labels\.stereoAnswer[\s\S]*labels\.explicitStereoAnswer/u);
   assert.doesNotMatch(panel, /const copyByLocale/u);
   assert.match(presentation, /Simplified Molecular Input Line Entry System/u);
-  assert.match(presentation, /@ = R, @@ = S mi\?/u);
-  assert.match(presentation, /Does @ mean R and @@ mean S\?/u);
+  assert.match(presentation, /SMILES stereokimyası: yerel yönelim ve mutlak konfigürasyon/u);
+  assert.match(presentation, /SMILES stereochemistry: local orientation and absolute configuration/u);
   assert.match(presentation, /N\[C@\]\(Br\)\(O\)C/u);
   assert.match(presentation, /C\[C@@\]\(Br\)\(O\)N/u);
   assert.doesNotMatch(presentation, /kaynakta kanonik|canonical at source/iu);

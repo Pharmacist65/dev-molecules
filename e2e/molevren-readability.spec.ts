@@ -373,13 +373,17 @@ test("Beta-sitosterol direct route explains SMILES and @/@@ before exposing sour
   await expect(record).toHaveAttribute("data-pubchem-cid", "222284");
   await expect(panel).toBeVisible();
   await expect(panel).toHaveAttribute("data-isomeric-smiles", "present");
+  await expect(panel).toHaveAttribute("data-atom-stereo-mode", "tetrahedral-shorthand");
   await expect(panel.getByRole("heading", { name: "SMILES nedir?", exact: true })).toBeVisible();
   await expect(panel).toContainText("Simplified Molecular Input Line Entry System");
   await expect(
-    panel.getByRole("heading", { name: "@ = R, @@ = S mi?", exact: true }),
+    panel.getByRole("heading", {
+      name: "SMILES stereokimyası: yerel yönelim ve mutlak konfigürasyon",
+      exact: true,
+    }),
   ).toBeVisible();
-  await expect(panel.getByText(/^Hayır\./u)).toBeVisible();
-  await expect(panel.getByText(/Cahn–Ingold–Prelog \(CIP\)/u)).toBeVisible();
+  await expect(panel.getByText(/@TH1 ve @TH2'nin/u)).toBeVisible();
+  await expect(panel.getByText(/Cahn–Ingold–Prelog \(CIP\)/u).first()).toBeVisible();
   await expect(
     panel.getByRole("link", { name: "OpenSMILES spesifikasyonu", exact: true }),
   ).toHaveAttribute("href", "https://opensmiles.org/opensmiles.html");
@@ -394,11 +398,11 @@ test("Beta-sitosterol direct route explains SMILES and @/@@ before exposing sour
   await expect(panel.getByRole("heading", { name: "What is SMILES?", exact: true })).toBeVisible();
   await expect(
     panel.getByRole("heading", {
-      name: "Does @ mean R and @@ mean S?",
+      name: "SMILES stereochemistry: local orientation and absolute configuration",
       exact: true,
     }),
   ).toBeVisible();
-  await expect(panel.getByText(/^No\./u)).toBeVisible();
+  await expect(panel.getByText(/@TH1 and @TH2/u)).toBeVisible();
 
   await page.setViewportSize({ width: 390, height: 844 });
   await expectNoHorizontalOverflow(page, "mobile SMILES guide");
