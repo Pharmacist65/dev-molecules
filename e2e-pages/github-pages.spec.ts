@@ -103,7 +103,10 @@ test("project-base deployment loads structures and the publication-gated synthes
     .getByRole("button", { name: /Sentez kanıtını aç|Open synthesis evidence/i })
     .first()
     .click();
-  await expect(synthesis.locator('[data-synthesis-atlas="coverage-only"]')).toBeVisible();
+  await expect(synthesis.locator('[data-synthesis-atlas="public-alpha-draft"]')).toBeVisible();
+  await expect(
+    synthesis.locator('[data-public-alpha-synthesis="source-supported-draft"]'),
+  ).toBeVisible();
   await expect(synthesis.locator('[data-synthesis-target-product="true"]')).toHaveCount(0);
   await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
 
