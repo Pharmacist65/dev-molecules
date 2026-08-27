@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 import { tsImport } from "tsx/esm/api";
@@ -23,6 +23,16 @@ const projectUrl = new URL("../", import.meta.url);
 const publicSynthesisUrl = new URL("public/catalog/synthesis/", projectUrl);
 const discoverySubjectsUrl = new URL("work/synthesis-discovery/v1/subjects/", projectUrl);
 const extractionUrl = new URL("work/synthesis-extraction/v2/", projectUrl);
+const privateAssemblyInputUrls = [
+  discoverySubjectsUrl,
+  new URL("assessments/", extractionUrl),
+  new URL("segments/", extractionUrl),
+  new URL("run-manifest.json", extractionUrl),
+  new URL("work/synthesis-source-content/v2/run-manifest.json", projectUrl),
+];
+const privateAssemblyInputsAvailable = await Promise.all(
+  privateAssemblyInputUrls.map((url) => access(url)),
+).then(() => true, () => false);
 
 const readJson = async (url) => JSON.parse(await readFile(url, "utf8"));
 
@@ -75,7 +85,11 @@ const loadRepresentativeGeneratedGraph = async () => {
   return { index, entry, detail, reference, expected };
 };
 
-test("public-alpha route assembly reproduces the exact accepted checkpoint counts and boundaries", async () => {
+test("private public-alpha route assembly reproduces the accepted checkpoint when extraction inputs are present", {
+  skip: privateAssemblyInputsAvailable
+    ? false
+    : "private extraction workspace is intentionally not checked into the release repository",
+}, async () => {
   const [subjects, assessmentShards, segmentShards, extractionManifest, sourceContent] =
     await Promise.all([
       readJsonDirectory(discoverySubjectsUrl),
