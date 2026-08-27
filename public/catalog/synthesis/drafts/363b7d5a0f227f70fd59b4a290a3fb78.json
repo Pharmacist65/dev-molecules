@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:363b7d5a0f227f70fd59b4a290a3fb78",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:brivaracetam-msykrhvooppjku-bdaknglrsa-n",
+    "catalogEntityId": "molecule:imported:brivaracetam-msykrhvooppjku-bdaknglrsa-n",
+    "preferredName": "Brivaracetam",
+    "pubChemCid": 9837243,
+    "inchiKey": "MSYKRHVOOPPJKU-BDAKNGLRSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0c3059230d5b49e3152c8422c4e35e1e",
+      "label": "NH3 isopropanol",
+      "displayRole": "source_input",
+      "sourceSmiles": "N.C(C)(C)O",
+      "inchiKey": "KQQCTWHSWXCZHB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:36b1fa5c5b008e4650bc2a76a493c6fa",
+      "label": "(2S)-2-aminobutyramide",
+      "displayRole": "source_input",
+      "sourceSmiles": "N[C@H](C(=O)N)CC",
+      "inchiKey": "HNNJFUDLLWOVKZ-VKHMYHEASA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "HCl",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b2524aaebbcb56699f7ed439ef9df570",
+      "label": "5-hydroxy-4-n-propyl-furan-2-one",
+      "displayRole": "source_input",
+      "sourceSmiles": "OC1=C(CC(O1)=O)CCC",
+      "inchiKey": "ZBDVMHLKEBXUQM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d465988cc85c8e85602e906e1a25457d",
+      "label": "(2S)-2-((4R)-2-oxo-4-n-propyl-1-pyrrolidinyl)butanamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "O=C1N(C[C@@H](C1)CCC)[C@H](C(=O)N)CC",
+      "inchiKey": "MSYKRHVOOPPJKU-BDAKNGLRSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:8c4e0238b7beca39689eae6ac3096b77",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:36b1fa5c5b008e4650bc2a76a493c6fa",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+        "synthesis-draft-material:0c3059230d5b49e3152c8422c4e35e1e",
+        "synthesis-draft-material:b2524aaebbcb56699f7ed439ef9df570"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d465988cc85c8e85602e906e1a25457d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1ce7d0a00137dd0f75e843eeb70d5a6a",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:8c4e0238b7beca39689eae6ac3096b77",
+      "finalStepId": "synthesis-draft-step:8c4e0238b7beca39689eae6ac3096b77",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1ce7d0a00137dd0f75e843eeb70d5a6a",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-96aa0228cc854c138804340a1ee5949d",
+      "label": "Open Reaction Database reaction ord-96aa0228cc854c138804340a1ee5949d",
+      "url": "https://open-reaction-database.org/id/ord-96aa0228cc854c138804340a1ee5949d",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-96aa0228cc854c138804340a1ee5949d"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

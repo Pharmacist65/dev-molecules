@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:0822f27da8cf7ceb36ff4cc7a7377881",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:brinzolamide-hcrkczrjwpkoar-jtqlqieisa-n",
+    "catalogEntityId": "molecule:imported:brinzolamide-hcrkczrjwpkoar-jtqlqieisa-n",
+    "preferredName": "Brinzolamide",
+    "pubChemCid": 68844,
+    "inchiKey": "HCRKCZRJWPKOAR-JTQLQIEISA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:00a31b111876debcc60f61f89c493fd9",
+      "label": "p-toluenesulfonyl chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(=CC=C(C=C1)S(=O)(=O)Cl)C",
+      "inchiKey": "YYROPELSRYBVMQ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:18517dbb252256f62ec11cbb707f3625",
+      "label": "trimethylorthoacetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C([O-])([O-])[O-])(C)C",
+      "inchiKey": "GDRSUKXDLSKTBB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+      "label": "triethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N(CC)CC",
+      "inchiKey": "ZMANZCXQSJIPKH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7be8c34a85a66881692ba0295028516b",
+      "label": "ethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N",
+      "inchiKey": "QUSNBJAOOMFDIB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8d22f2885961d9c5cf1652e512b3bc10",
+      "label": "(R)-3,4-Dihydro-4-ethylamino-2-(3-methoxypropyl)-2H-thieno[3,2-e]-1,2-thiazine-6-sulfonamide-1,1-dioxide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)N[C@H]1CN(S(C2=C1C=C(S2)S(=O)(=O)N)(=O)=O)CCCOC",
+      "inchiKey": "HCRKCZRJWPKOAR-JTQLQIEISA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "hydrochloric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a0e414d6c29f04c32c5e313bad2fd497",
+      "label": "(S)-3,4-dihydro-4-hydroxy-2-(3-methoxypropyl)-2H-thieno[3,2-e]-1,2-thiazine-6-sulfonamide-1,1-dioxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "O[C@@H]1CN(S(C2=C1C=C(S2)S(=O)(=O)N)(=O)=O)CCCOC",
+      "inchiKey": "UHIWBQIWXWWDKT-MRVPVSSYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:38203be3485a9e8504b3e3b42a20cf69",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:a0e414d6c29f04c32c5e313bad2fd497",
+        "synthesis-draft-material:18517dbb252256f62ec11cbb707f3625",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+        "synthesis-draft-material:00a31b111876debcc60f61f89c493fd9",
+        "synthesis-draft-material:7be8c34a85a66881692ba0295028516b",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8d22f2885961d9c5cf1652e512b3bc10"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d68b1c617316cbebbda692973b7ea9ab",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:38203be3485a9e8504b3e3b42a20cf69",
+      "finalStepId": "synthesis-draft-step:38203be3485a9e8504b3e3b42a20cf69",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:d68b1c617316cbebbda692973b7ea9ab",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-403ceba96e7f48aa80520601f10a5a7f",
+      "label": "Open Reaction Database reaction ord-403ceba96e7f48aa80520601f10a5a7f",
+      "url": "https://open-reaction-database.org/id/ord-403ceba96e7f48aa80520601f10a5a7f",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-403ceba96e7f48aa80520601f10a5a7f"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -94,9 +94,9 @@ const copyByLocale = {
     reportedGatedSummary: "{name} için doğrudan kaynak çözümlendi; rota ayrıntıları inceleme ve yeniden kullanım kapısı tamamlanana kadar kapalıdır.",
     teachingSummary: "{name} için kaynak segmentli bir eğitsel rekonstrüksiyon bulunur; tek bir eksiksiz raporlanmış rota değildir.",
     candidateCompleteTitle: "Aday kaynaklar değerlendirildi",
-    candidateCompleteSummary: "{name} için {count} aday kaynak eşleşmesinin değerlendirmesi sonuçlandı; henüz yayımlanabilir rota çözümlenmedi.",
+    candidateCompleteSummary: "Kaynaklar belirlendi; rota çıkarımı henüz çözümlenmedi. {name} için {count} aday eşleşmesi sonuçlandırıldı.",
     candidatePendingTitle: "Aday kaynaklar bulundu",
-    candidatePendingSummary: "Bu kayıt, aday kaynak değerlendirmesinin tamamlandığını henüz doğrulamıyor; adaylar rota olarak sunulmaz.",
+    candidatePendingSummary: "Kaynaklar belirlendi; rota çıkarımı henüz çözümlenmedi.",
     accessBlockedTitle: "Kaynak erişimi engellendi",
     accessBlockedSummary: "{count} aday belge erişim sınırı nedeniyle incelenemedi; sonuç rota yokluğu iddiası değildir.",
     scopedNoSupportTitle: "Kaydedilen araştırma kapsamında destekleyici kaynak çözümlenmedi",
@@ -108,7 +108,11 @@ const copyByLocale = {
     accessible: "Erişilebilir",
     unavailableSources: "Kullanılamayan",
     openSynthesisAtlas: "Sentez Atlası kapsam kaydını aç",
-    atlasGateBoundary: "Atlas tüm katalog kimliklerinde kapsam durumunu açar; rota ayrıntısı yalnız bilimsel inceleme ve yeniden kullanım kapısından sonra gösterilir.",
+    atlasGateBoundary: "Atlas tüm katalog kimliklerinde kapsam durumunu açar; kaynak destekli public-alpha taslaklar pending etiketiyle, incelenmiş rotalardan ayrı gösterilir.",
+    publicDraftTitle: "Kaynak destekli sentez taslağı",
+    publicDraftSummary: "{name} için {count} exact-target kaynak segmenti, uzman incelemesi bekleyen ve üst-akış boşluğu açık bir eğitim grafiğine dönüştürüldü.",
+    publicDraftBoundary: "Bu public-alpha içerik reviewed veya verified değildir; reaksiyon sınıfı, bağ değişimleri ve laboratuvar uygulanabilirliği çözümlenmemiştir.",
+    viewPartialRoute: "Kısmi rotayı görüntüle",
     assessment: "Değerlendirme",
     sourceEvidence: "Kaynak kanıtı",
     applicability: "Uygulanabilirlik",
@@ -304,9 +308,9 @@ const copyByLocale = {
     reportedGatedSummary: "A direct source is resolved for {name}; route details remain closed until review and reuse gates pass.",
     teachingSummary: "A source-segmented teaching reconstruction exists for {name}; it is not one completely reported route.",
     candidateCompleteTitle: "Candidate-source assessment complete",
-    candidateCompleteSummary: "Assessment is complete for all {count} candidate-source associations for {name}; no publishable route has been resolved yet.",
+    candidateCompleteSummary: "Sources identified; route extraction not yet resolved. {count} candidate associations for {name} were terminally assessed.",
     candidatePendingTitle: "Candidate sources found",
-    candidatePendingSummary: "This record does not yet confirm that candidate-source assessment is complete; candidates are not presented as routes.",
+    candidatePendingSummary: "Sources identified; route extraction not yet resolved.",
     accessBlockedTitle: "Source access blocked",
     accessBlockedSummary: "{count} candidate documents could not be inspected because of access boundaries; this is not a no-route claim.",
     scopedNoSupportTitle: "No supporting source resolved in the recorded search scope",
@@ -318,7 +322,11 @@ const copyByLocale = {
     accessible: "Accessible",
     unavailableSources: "Unavailable",
     openSynthesisAtlas: "Open this Synthesis Atlas coverage record",
-    atlasGateBoundary: "The Atlas opens coverage for every catalog identity; route detail appears only after scientific-review and reuse gates pass.",
+    atlasGateBoundary: "The Atlas opens coverage for every catalog identity; source-supported public-alpha drafts remain pending and separate from reviewed routes.",
+    publicDraftTitle: "Source-supported synthesis draft",
+    publicDraftSummary: "{count} exact-target source segments for {name} were projected into a teaching graph with explicit upstream gaps and expert review still pending.",
+    publicDraftBoundary: "This public-alpha content is neither reviewed nor verified; reaction class, bond changes, and laboratory applicability remain unresolved.",
+    viewPartialRoute: "View partial route",
     assessment: "Assessment",
     sourceEvidence: "Source evidence",
     applicability: "Applicability",
@@ -508,13 +516,25 @@ export function BasicMolecularRecord({
     (sum, provider) => sum + provider.queryCount,
     0,
   ) ?? 0;
-  const reportedSourceResolved = Boolean(
+  const publicDraftSegmentResolved = Boolean(
+    synthesisCoverage && synthesisCoverage.publicAlphaDrafts.length > 0,
+  );
+  const directSegmentResolved = Boolean(
+    synthesisCoverage?.sourceEvidenceState === "direct_source_resolved",
+  );
+  const reportedRouteSourceResolved = Boolean(
     synthesisCoverage &&
     (synthesisCoverage.reportedRouteFoundPendingReview ||
-      synthesisCoverage.sourceEvidenceState === "direct_source_resolved" ||
       synthesisSurfaceState === "reported_complete" ||
       synthesisSurfaceState === "reported_partial"),
   );
+  const synthesisEvidenceResolutionState = publicDraftSegmentResolved
+    ? "draft-segment-resolved"
+    : reportedRouteSourceResolved
+      ? "reported-source-resolved"
+      : directSegmentResolved
+        ? "direct-segment-gated"
+      : "not-resolved";
   const synthesisSurfaceTitle = synthesisSurfaceState === "candidate_extraction_complete"
     ? copy.candidateCompleteTitle
     : synthesisSurfaceState === "candidate_processing_incomplete"
@@ -523,6 +543,8 @@ export function BasicMolecularRecord({
         ? copy.accessBlockedTitle
         : synthesisSurfaceState === "no_supporting_source_resolved"
           ? copy.scopedNoSupportTitle
+          : synthesisSurfaceState === "public_draft_partial"
+            ? copy.publicDraftTitle
           : synthesisSurfaceState === "teaching_reconstruction"
             ? copy.routeTypes.teaching_reconstruction
             : copy.reportedResolved;
@@ -540,6 +562,11 @@ export function BasicMolecularRecord({
             count: partialReportedRouteCount,
           })
         : interpolate(copy.reportedGatedSummary, { name: synthesisTargetLabel })
+      : synthesisSurfaceState === "public_draft_partial"
+        ? interpolate(copy.publicDraftSummary, {
+            name: synthesisTargetLabel,
+            count: synthesisCoverage?.publicAlphaDrafts[0]?.draftRouteCount ?? 0,
+          })
       : synthesisSurfaceState === "direct_source_gated"
         ? interpolate(copy.reportedGatedSummary, { name: synthesisTargetLabel })
       : synthesisSurfaceState === "teaching_reconstruction"
@@ -758,14 +785,17 @@ export function BasicMolecularRecord({
 
             <div
               className={styles.reportedSynthesisState}
-              data-reported-synthesis-state={reportedSourceResolved ? "source-resolved" : "not-resolved"}
+              data-reported-synthesis-state={reportedRouteSourceResolved ? "source-resolved" : "not-resolved"}
+              data-synthesis-evidence-resolution-state={synthesisEvidenceResolutionState}
               data-synthesis-terminal-state={synthesisSurfaceState}
             >
-              <span aria-hidden="true">{reportedSourceResolved ? "●" : "○"}</span>
+              <span aria-hidden="true">{reportedRouteSourceResolved || directSegmentResolved || publicDraftSegmentResolved ? "●" : "○"}</span>
               <div>
                 <strong>{synthesisSurfaceTitle}</strong>
                 <small>{synthesisSurfaceSummary}</small>
-                {reportedSourceResolved && synthesisCoverage.reviewState !== "verified" ? (
+                {synthesisSurfaceState === "public_draft_partial" ? (
+                  <small>{copy.publicDraftBoundary}</small>
+                ) : reportedRouteSourceResolved && synthesisCoverage.reviewState !== "verified" ? (
                   <small>{copy.reportedPending}</small>
                 ) : null}
                 {synthesisCoverage.sourceEvidenceState === "candidate_sources" && !processing ? (
@@ -861,9 +891,24 @@ export function BasicMolecularRecord({
               <section className={styles.routeReferences} aria-labelledby="basic-record-synthesis-routes">
                 <header>
                   <h3 id="basic-record-synthesis-routes">{copy.routes}</h3>
-                  <span>{synthesisCoverage.routes.length}</span>
+                  <span>{synthesisCoverage.publicAlphaDrafts[0]?.draftRouteCount ?? synthesisCoverage.routes.length}</span>
                 </header>
-                {synthesisCoverage.routes.length === 0 ? (
+                {synthesisCoverage.publicAlphaDrafts.length > 0 ? (
+                  <article
+                    className={styles.publicDraftReference}
+                    data-public-alpha-synthesis="source-supported-draft"
+                    data-review-state="pending"
+                    data-verified-scientific-claim="false"
+                  >
+                    <strong>{copy.publicDraftTitle}</strong>
+                    <p>{copy.publicDraftBoundary}</p>
+                    <dl>
+                      <div><dt>{copy.completeness}</dt><dd>{copy.routeCompleteness[synthesisCoverage.publicAlphaDrafts[0].routeCompleteness]}</dd></div>
+                      <div><dt>{copy.numberOfSteps}</dt><dd>{synthesisCoverage.publicAlphaDrafts[0].extractedStepCount}</dd></div>
+                      <div><dt>{copy.review}</dt><dd>{copy.reviewStates.pending}</dd></div>
+                    </dl>
+                  </article>
+                ) : synthesisCoverage.routes.length === 0 ? (
                   <p className={styles.noRoutes}>{copy.noRouteReference}</p>
                 ) : (
                   <ul>
@@ -967,11 +1012,11 @@ export function BasicMolecularRecord({
 
             <div className={styles.synthesisAtlasAction}>
               <div>
-                <strong>{copy.openSynthesisAtlas}</strong>
-                <p>{copy.atlasGateBoundary}</p>
+                <strong>{synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.viewPartialRoute : copy.openSynthesisAtlas}</strong>
+                <p>{synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.publicDraftBoundary : copy.atlasGateBoundary}</p>
               </div>
               <a href={getSynthesisAcademyHash(record.stableSlug, "atlas")}>
-                {copy.openSynthesisAtlas} <span aria-hidden="true">→</span>
+                {synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.viewPartialRoute : copy.openSynthesisAtlas} <span aria-hidden="true">→</span>
               </a>
             </div>
           </section>

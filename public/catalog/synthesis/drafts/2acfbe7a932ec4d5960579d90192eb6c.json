@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:2acfbe7a932ec4d5960579d90192eb6c",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:rasagiline-ruokeqaagrxibm-gfccvegcsa-n",
+    "catalogEntityId": "molecule:imported:rasagiline-ruokeqaagrxibm-gfccvegcsa-n",
+    "preferredName": "Rasagiline",
+    "pubChemCid": 3052776,
+    "inchiKey": "RUOKEQAAGRXIBM-GFCCVEGCSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:10a49b8b5b0bffa0915512299f2583c6",
+      "label": "toluene",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(=CC=CC=C1)C",
+      "inchiKey": "YXFVVABEGXRONW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:613a69aa78e36275fa71e273cdc581d3",
+      "label": "Rasagiline",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C#CCN[C@@H]1CCC2=C1C=CC=C2",
+      "inchiKey": "RUOKEQAAGRXIBM-GFCCVEGCSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:df695c5cbce5d393daff8a8ec2980c4c",
+      "label": "rasagiline mesylate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CS(=O)(=O)O.C#CCN[C@@H]1CCC2=C1C=CC=C2",
+      "inchiKey": "JDBJJCWRXSVHOQ-UTONKHPSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f771e24d5341aa722261795305aff1e7",
+      "label": "NaOH",
+      "displayRole": "source_input",
+      "sourceSmiles": "[OH-].[Na+]",
+      "inchiKey": "HEMHJVSKTPXQMS-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:30ba9eb8e6f2462799ab8c7a3bcfe66a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:df695c5cbce5d393daff8a8ec2980c4c",
+        "synthesis-draft-material:10a49b8b5b0bffa0915512299f2583c6",
+        "synthesis-draft-material:f771e24d5341aa722261795305aff1e7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:613a69aa78e36275fa71e273cdc581d3"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0687ac02dbca40f7557aa6472fb87c43",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:30ba9eb8e6f2462799ab8c7a3bcfe66a",
+      "finalStepId": "synthesis-draft-step:30ba9eb8e6f2462799ab8c7a3bcfe66a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:0687ac02dbca40f7557aa6472fb87c43",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-6110342d560d4da6b9ef34a9ff8a38b7",
+      "label": "Open Reaction Database reaction ord-6110342d560d4da6b9ef34a9ff8a38b7",
+      "url": "https://open-reaction-database.org/id/ord-6110342d560d4da6b9ef34a9ff8a38b7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-6110342d560d4da6b9ef34a9ff8a38b7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

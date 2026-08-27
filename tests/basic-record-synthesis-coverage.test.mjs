@@ -167,7 +167,7 @@ test("safe pending-route flag is projected without exposing route identity or co
 
 test("access state and extraction outcome remain independent terminal dimensions", async () => {
   const evidenceProcessing = {
-    pipelineVersion: "synthesis-discovery-2.0.0",
+    pipelineVersion: "synthesis-extraction-2.0.0",
     completedAt: "2026-08-27T12:00:00.000Z",
     candidateAssociationCount: 3,
     terminalAssociationCount: 3,
@@ -208,6 +208,8 @@ test("access state and extraction outcome remain independent terminal dimensions
     },
   });
   assert.equal(coverage.bestOutcome, "no_supporting_source_resolved");
+  assert.equal(coverage.pipelineVersion, "synthesis-discovery-2.0.0");
+  assert.equal(coverage.evidenceProcessing.pipelineVersion, "synthesis-extraction-2.0.0");
   assert.equal(coverage.evidenceProcessing.accessBlockedCount, 2);
   assert.equal(coverage.evidenceProcessing.extractionOutcomeCounts.access_blocked, 0);
   assert.equal(getBasicRecordSynthesisSurfaceState(coverage), "no_supporting_source_resolved");
@@ -215,7 +217,7 @@ test("access state and extraction outcome remain independent terminal dimensions
 
 test("terminal evidence-processing summaries expose nuanced molecule states and reject unresolved work", async () => {
   const evidenceProcessing = {
-    pipelineVersion: "synthesis-discovery-2.0.0",
+    pipelineVersion: "synthesis-extraction-2.0.0",
     completedAt: "2026-08-27T12:00:00.000Z",
     candidateAssociationCount: 5,
     terminalAssociationCount: 5,
@@ -254,6 +256,8 @@ test("terminal evidence-processing summaries expose nuanced molecule states and 
     },
   });
   assert.equal(coverage.bestOutcome, "candidate_only");
+  assert.equal(coverage.pipelineVersion, "synthesis-discovery-2.0.0");
+  assert.equal(coverage.evidenceProcessing.pipelineVersion, "synthesis-extraction-2.0.0");
   assert.equal(coverage.evidenceProcessing.terminalAssociationCount, 5);
   assert.equal(getBasicRecordSynthesisSurfaceState(coverage), "candidate_extraction_complete");
   assert.equal(getBasicRecordSynthesisSurfaceState({
@@ -600,6 +604,8 @@ test("Basic Molecular Record UI exposes synthesis status without presenting cand
   );
   assert.match(source, /data-basic-record-synthesis-coverage="true"/u);
   assert.match(source, /data-reported-synthesis-state/u);
+  assert.match(source, /data-synthesis-evidence-resolution-state/u);
+  assert.match(source, /draft-segment-resolved/u);
   assert.match(source, /Reported synthesis: Not resolved/u);
   assert.match(source, /Candidate sources are discovery leads only/u);
   assert.match(source, /not a verified synthesis route/u);
@@ -616,7 +622,7 @@ test("Basic Molecular Record UI exposes synthesis status without presenting cand
   assert.match(source, /No supporting source resolved in the recorded search scope/u);
   assert.match(source, /data-synthesis-terminal-state/u);
   assert.match(source, /getSynthesisAcademyHash\(record\.stableSlug, "atlas"\)/u);
-  assert.match(source, /route detail appears only after scientific-review and reuse gates pass/u);
+  assert.match(source, /source-supported public-alpha drafts remain pending and separate from reviewed routes/u);
   assert.doesNotMatch(source, /candidate_sources[^\n]{0,120}verified/u);
 });
 

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:2b428a046b4bb50f6b29f7e43f2db0ac",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:9-cis-retinoic-acid-shgazhpcjjphsc-zvcimwczsa-n",
+    "catalogEntityId": "molecule:imported:9-cis-retinoic-acid-shgazhpcjjphsc-zvcimwczsa-n",
+    "preferredName": "9-Cis-Retinoic Acid",
+    "pubChemCid": 449171,
+    "inchiKey": "SHGAZHPCJJPHSC-ZVCIMWCZSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:32f02bdfed208ce8afd2a52a20c1035d",
+      "label": "9-cis-retinoic acid",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC1=C(C(CCC1)(C)C)/C=C/C(=C\\C=C\\C(=C\\C(=O)O)\\C)/C",
+      "inchiKey": "SHGAZHPCJJPHSC-ZVCIMWCZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+      "label": "CH3OH",
+      "displayRole": "source_input",
+      "sourceSmiles": "CO",
+      "inchiKey": "OKKJLVBELUTLKV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8f747f92c59de57a8e061aef2637c3dd",
+      "label": "9-cis-retinal",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1=C(C(CCC1)(C)C)/C=C/C(=C\\C=C\\C(=C\\C=O)\\C)/C",
+      "inchiKey": "NCYCYZXNIZJOKI-MKOSUFFBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2cbfd7e53abcf32e1b89e0c00ff60027",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:8f747f92c59de57a8e061aef2637c3dd",
+        "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+        "synthesis-draft-material:8f747f92c59de57a8e061aef2637c3dd"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:32f02bdfed208ce8afd2a52a20c1035d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:2f6ead13bb3c889563425adeabfc13f7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:2cbfd7e53abcf32e1b89e0c00ff60027",
+      "finalStepId": "synthesis-draft-step:2cbfd7e53abcf32e1b89e0c00ff60027",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:2f6ead13bb3c889563425adeabfc13f7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5182c36a74a54123969f067a9ca92e22",
+      "label": "Open Reaction Database reaction ord-5182c36a74a54123969f067a9ca92e22",
+      "url": "https://open-reaction-database.org/id/ord-5182c36a74a54123969f067a9ca92e22",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5182c36a74a54123969f067a9ca92e22"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:3efbe61b0e0e8df9d9ba64e4272157a5",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:alectinib-kdgfljkfzuijmx-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:alectinib-kdgfljkfzuijmx-uhfffaoysa-n",
+    "preferredName": "Alectinib",
+    "pubChemCid": 49806720,
+    "inchiKey": "KDGFLJKFZUIJMX-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:1ecd7cdcee7f6a837b3f7d0aa7c777da",
+      "label": "9-Ethyl-6,6-dimethyl-8-(4-morpholin-4-yl-piperidin-1-yl)-11-oxo-6,11-dihydro-5H-benzo[b]carbazole-3-carbonitrile",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)C1=CC2=C(C(C=3NC4=CC(=CC=C4C3C2=O)C#N)(C)C)C=C1N1CCC(CC1)N1CCOCC1",
+      "inchiKey": "KDGFLJKFZUIJMX-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:46c823cfa2ddbf8c86b2d8bbbec0a4f2",
+      "label": "6-Cyano-2-(2-(4-ethyl-3-(4-morpholin-4-yl-piperidin-1-yl)phenyl)propan-2-yl)-1H-indole-3-carboxylic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(#N)C1=CC=C2C(=C(NC2=C1)C(C)(C)C1=CC(=C(C=C1)CC)N1CCC(CC1)N1CCOCC1)C(=O)O",
+      "inchiKey": "FNWCKBDSBRNQIL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+      "label": "methanol",
+      "displayRole": "source_input",
+      "sourceSmiles": "CO",
+      "inchiKey": "OKKJLVBELUTLKV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+      "label": "water",
+      "displayRole": "source_input",
+      "sourceSmiles": "O",
+      "inchiKey": "XLYOFNOQVPJJNP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ed718566080b5db157ca058787bdc3ac",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:46c823cfa2ddbf8c86b2d8bbbec0a4f2",
+        "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:1ecd7cdcee7f6a837b3f7d0aa7c777da"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1494cdc0f78fe7d741d8ce91d9da4dcf",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:e150c08ce9ef1f2272ecd9bb13b6ea96",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:46c823cfa2ddbf8c86b2d8bbbec0a4f2",
+        "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:1ecd7cdcee7f6a837b3f7d0aa7c777da"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6b31351b249ad3786e5161ba2230ff04",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ed718566080b5db157ca058787bdc3ac",
+      "finalStepId": "synthesis-draft-step:ed718566080b5db157ca058787bdc3ac",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:e150c08ce9ef1f2272ecd9bb13b6ea96",
+      "finalStepId": "synthesis-draft-step:e150c08ce9ef1f2272ecd9bb13b6ea96",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1494cdc0f78fe7d741d8ce91d9da4dcf",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-db92dd1528e74322a0f7be4b9c2e98ce",
+      "label": "Open Reaction Database reaction ord-db92dd1528e74322a0f7be4b9c2e98ce",
+      "url": "https://open-reaction-database.org/id/ord-db92dd1528e74322a0f7be4b9c2e98ce",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-db92dd1528e74322a0f7be4b9c2e98ce"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:6b31351b249ad3786e5161ba2230ff04",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-9b011aed500d4bad9445f2c2cd2b41df",
+      "label": "Open Reaction Database reaction ord-9b011aed500d4bad9445f2c2cd2b41df",
+      "url": "https://open-reaction-database.org/id/ord-9b011aed500d4bad9445f2c2cd2b41df",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-9b011aed500d4bad9445f2c2cd2b41df"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

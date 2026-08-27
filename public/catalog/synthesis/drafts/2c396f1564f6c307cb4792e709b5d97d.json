@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:2c396f1564f6c307cb4792e709b5d97d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:taurine-xoaawqzatwqotb-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:taurine-xoaawqzatwqotb-uhfffaoysa-n",
+    "preferredName": "Taurine",
+    "pubChemCid": 1123,
+    "inchiKey": "XOAAWQZATWQOTB-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:20bfb8f2eaa0b310ad77c7f69e2deec7",
+      "label": "ethionic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "S(=O)(=O)(O)CCS(=O)(=O)O",
+      "inchiKey": "AFAXGSQYZLGZPG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9914ca75a4f0ec19b3ff12cb847e91ec",
+      "label": "sodium taurinate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CS(=O)(=O)[O-])N.[Na+]",
+      "inchiKey": "GWLWWNLFFNJPDP-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c9befec38cdb9a42247a10e3c6e94dce",
+      "label": "taurine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "NCCS(=O)(=O)O",
+      "inchiKey": "XOAAWQZATWQOTB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:be4f31b86faec90e68b8159ccdb80a76",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:20bfb8f2eaa0b310ad77c7f69e2deec7",
+        "synthesis-draft-material:9914ca75a4f0ec19b3ff12cb847e91ec"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c9befec38cdb9a42247a10e3c6e94dce"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c445db87ffd6d6ff2b1ae6e11dea52f0",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:be4f31b86faec90e68b8159ccdb80a76",
+      "finalStepId": "synthesis-draft-step:be4f31b86faec90e68b8159ccdb80a76",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c445db87ffd6d6ff2b1ae6e11dea52f0",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-79d8a957f034406a88e99f543d929c19",
+      "label": "Open Reaction Database reaction ord-79d8a957f034406a88e99f543d929c19",
+      "url": "https://open-reaction-database.org/id/ord-79d8a957f034406a88e99f543d929c19",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-79d8a957f034406a88e99f543d929c19"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

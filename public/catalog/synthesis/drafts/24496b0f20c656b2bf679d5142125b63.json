@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:24496b0f20c656b2bf679d5142125b63",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:encorafenib-cmjcxynucsmdby-zdusscgksa-n",
+    "catalogEntityId": "molecule:imported:encorafenib-cmjcxynucsmdby-zdusscgksa-n",
+    "preferredName": "Encorafenib",
+    "pubChemCid": 50922675,
+    "inchiKey": "CMJCXYNUCSMDBY-ZDUSSCGKSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:09e5f255fb486539f189b76654fe24a1",
+      "label": "Methanesulfonyl chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "CS(=O)(=O)Cl",
+      "inchiKey": "QARBMVPHQWIHKH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:26dd453b365ec51aad61de0e0d32c905",
+      "label": "Methyl N-[(2S)-1-({4-[3-(5-chloro-2-fluoro-3-methanesulfonamidophenyl)-1-(propan-2-yl)-1H-pyrazol-4-yl]pyrimidin-2-yl}amino)propan-2-yl]carbamate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC=1C=C(C(=C(C1)C1=NN(C=C1C1=NC(=NC=C1)NC[C@H](C)NC(OC)=O)C(C)C)F)NS(=O)(=O)C",
+      "inchiKey": "CMJCXYNUCSMDBY-ZDUSSCGKSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038",
+      "label": "sodium bicarbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([O-])(O)=O.[Na+]",
+      "inchiKey": "UIIMBOGNXHQVGW-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b99d9d4b266ca0bf7dacb2931b0aa01f",
+      "label": "(S)-methyl 1-(4-(3-(3-amino-5-chloro-2-fluorophenyl)-1-isopropyl-1H-pyrazol-4-yl)pyrimidin-2-ylamino)propan-2-ylcarbamate",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC=1C(=C(C=C(C1)Cl)C1=NN(C=C1C1=NC(=NC=C1)NC[C@H](C)NC(OC)=O)C(C)C)F",
+      "inchiKey": "RAQGRRSIZXWJDN-LBPRGKRZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:4fca957bc8c1735ec1f7b4b7048797e7",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:09e5f255fb486539f189b76654fe24a1",
+        "synthesis-draft-material:b99d9d4b266ca0bf7dacb2931b0aa01f",
+        "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:26dd453b365ec51aad61de0e0d32c905"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ed8fa62683fc14e744cea63cbc15824f",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:9a4a8f366882c2224957e54ed68c2269",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:09e5f255fb486539f189b76654fe24a1",
+        "synthesis-draft-material:b99d9d4b266ca0bf7dacb2931b0aa01f",
+        "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:26dd453b365ec51aad61de0e0d32c905"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e43baeb5f248ca222878cef7d9f01129",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:4fca957bc8c1735ec1f7b4b7048797e7",
+      "finalStepId": "synthesis-draft-step:4fca957bc8c1735ec1f7b4b7048797e7",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:9a4a8f366882c2224957e54ed68c2269",
+      "finalStepId": "synthesis-draft-step:9a4a8f366882c2224957e54ed68c2269",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:e43baeb5f248ca222878cef7d9f01129",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-8e192829b4274d54a4f189ca54b8c079",
+      "label": "Open Reaction Database reaction ord-8e192829b4274d54a4f189ca54b8c079",
+      "url": "https://open-reaction-database.org/id/ord-8e192829b4274d54a4f189ca54b8c079",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-8e192829b4274d54a4f189ca54b8c079"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:ed8fa62683fc14e744cea63cbc15824f",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-b7fb276cebea498b9f8ce6222fc51fc8",
+      "label": "Open Reaction Database reaction ord-b7fb276cebea498b9f8ce6222fc51fc8",
+      "url": "https://open-reaction-database.org/id/ord-b7fb276cebea498b9f8ce6222fc51fc8",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b7fb276cebea498b9f8ce6222fc51fc8"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

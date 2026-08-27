@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:76c87cdc182c3733ac9e4bd4c1cea2a4",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:enalaprilat-lzfzmumegbbdtc-qejzjmrpsa-n",
+    "catalogEntityId": "molecule:imported:enalaprilat-lzfzmumegbbdtc-qejzjmrpsa-n",
+    "preferredName": "Enalaprilat",
+    "pubChemCid": 5462501,
+    "inchiKey": "LZFZMUMEGBBDTC-QEJZJMRPSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:27f7386c71aff5228cc0bc72d8ac74f6",
+      "label": "2-phenylethenyl boronic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(=CC=CC=C1)C=CB(O)O",
+      "inchiKey": "VKIJXFIYBAYHOE-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:2e2119952444ce39c2ab56e1748ce299",
+      "label": "glyoxylic acid monohydrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "O.C(C=O)(=O)O",
+      "inchiKey": "MOOYVEVEDVVKGD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:331fb426ab2fb94f9461e8547051c080",
+      "label": "enalaprilat",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@@H](C(=O)N1CCC[C@H]1C(=O)O)N[C@@H](CCC=2C=CC=CC2)C(=O)O",
+      "inchiKey": "LZFZMUMEGBBDTC-QEJZJMRPSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9013b611be54b70a75cf36041db77da5",
+      "label": "Alanine proline",
+      "displayRole": "source_input",
+      "sourceSmiles": "N[C@@H](C)C(=O)O.N1[C@H](C(=O)O)CCC1",
+      "inchiKey": "MHJJUOJOAJLYBS-ZBRNBAAYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:1513094c17a8135b6fa331342209e5d8",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9013b611be54b70a75cf36041db77da5",
+        "synthesis-draft-material:2e2119952444ce39c2ab56e1748ce299",
+        "synthesis-draft-material:27f7386c71aff5228cc0bc72d8ac74f6"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:331fb426ab2fb94f9461e8547051c080"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d360739288803f18654c508c288ef1a4",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:1513094c17a8135b6fa331342209e5d8",
+      "finalStepId": "synthesis-draft-step:1513094c17a8135b6fa331342209e5d8",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:d360739288803f18654c508c288ef1a4",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-6d706c1099374b4d8a39f00fe67c8a4a",
+      "label": "Open Reaction Database reaction ord-6d706c1099374b4d8a39f00fe67c8a4a",
+      "url": "https://open-reaction-database.org/id/ord-6d706c1099374b4d8a39f00fe67c8a4a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-6d706c1099374b4d8a39f00fe67c8a4a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

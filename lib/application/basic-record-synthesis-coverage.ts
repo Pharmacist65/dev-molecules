@@ -17,6 +17,7 @@ import {
   type SynthesisReviewState,
   type SynthesisRouteCompleteness,
 } from "@/lib/domain/synthesis-route";
+import type { PublicAlphaSynthesisDraftReference } from "@/lib/domain/public-alpha-synthesis-draft";
 
 export interface BasicRecordSynthesisCoverageIdentity {
   readonly catalogEntityId: string;
@@ -121,6 +122,7 @@ export interface BasicRecordSynthesisEvidenceProcessing {
 }
 
 export type BasicRecordSynthesisSurfaceState =
+  | "public_draft_partial"
   | "direct_source_gated"
   | "reported_complete"
   | "reported_partial"
@@ -147,6 +149,7 @@ export interface BasicRecordSynthesisCoverage {
   readonly aliasesQueried: readonly string[];
   readonly providers: readonly BasicRecordSynthesisProviderAttempt[];
   readonly routes: readonly BasicRecordSynthesisRouteReference[];
+  readonly publicAlphaDrafts: readonly PublicAlphaSynthesisDraftReference[];
   readonly routeComparison: BasicRecordSynthesisRouteComparisonSet;
   readonly bestOutcome: BasicRecordSynthesisBestOutcome | null;
   readonly evidenceProcessing: BasicRecordSynthesisEvidenceProcessing | null;
@@ -351,10 +354,12 @@ export function getBasicRecordSynthesisSurfaceState(
     | "bestOutcome"
     | "evidenceProcessing"
     | "reportedRouteFoundPendingReview"
+    | "publicAlphaDrafts"
     | "routes"
     | "sourceEvidenceState"
   >,
 ): BasicRecordSynthesisSurfaceState {
+  if ((coverage.publicAlphaDrafts?.length ?? 0) > 0) return "public_draft_partial";
   const reportedRoutes = coverage.routes.filter((route) =>
     route.routeType === "patent_reported" || route.routeType === "literature_reported"
   );
@@ -426,6 +431,27 @@ const parseRoute = (value: unknown): BasicRecordSynthesisRouteReference => {
     reviewState: readEnum<SynthesisReviewState>(value.reviewState, REVIEW_STATES, "route review state"),
     licenseState: readEnum<SynthesisLicenseState>(value.licenseState, LICENSE_STATES, "route license state"),
   };
+};
+
+const parsePublicAlphaDraft = (value: unknown): PublicAlphaSynthesisDraftReference => {
+  if (
+    !isObject(value) || value.schemaVersion !== 1 ||
+    !nonblankString(value.graphId, 256) || !value.graphId.startsWith("synthesis-draft-graph:") ||
+    value.channel !== "public_alpha_source_supported_draft" ||
+    value.publicationState !== "source_supported_draft" ||
+    value.reviewState !== "pending" || value.verifiedScientificClaim !== false ||
+    !nonblankString(value.coverageId, 512) || !value.coverageId.startsWith("synthesis-coverage:") ||
+    !["partial", "upstream_gap", "convergent_partial"].includes(String(value.routeCompleteness)) ||
+    !Number.isSafeInteger(value.draftRouteCount) || Number(value.draftRouteCount) < 1 ||
+    !Number.isSafeInteger(value.extractedStepCount) || Number(value.extractedStepCount) < 1 ||
+    !Number.isSafeInteger(value.teachingReconstructionCount) || Number(value.teachingReconstructionCount) < 0 ||
+    !Number.isSafeInteger(value.resolvedIntermediateCount) || Number(value.resolvedIntermediateCount) < 0 ||
+    !Number.isSafeInteger(value.unresolvedGapCount) || Number(value.unresolvedGapCount) < 1 ||
+    value.licenseState !== "attribution_required" ||
+    !nonblankString(value.detailPath, 256) ||
+    !/^\/catalog\/synthesis\/drafts\/[a-f\d]{32}\.json$/u.test(value.detailPath)
+  ) throw new Error("Invalid public-alpha synthesis draft reference.");
+  return value as unknown as PublicAlphaSynthesisDraftReference;
 };
 
 const unavailableRouteComparison = (
@@ -647,6 +673,7 @@ const parseCoverageRecord = (
     search.providers.length > 12 ||
     !Array.isArray(value.routes) ||
     value.routes.length > 64 ||
+    (value.publicAlphaDrafts !== undefined && !Array.isArray(value.publicAlphaDrafts)) ||
     !Array.isArray(value.sourceEvidenceIds) ||
     value.sourceEvidenceIds.length > 512 ||
     !value.sourceEvidenceIds.every((id) => nonblankString(id, 512))
@@ -664,6 +691,11 @@ const parseCoverageRecord = (
     throw new Error("Invalid synthesis coverage form or stereoisomer scope.");
   }
   const routes = value.routes.map(parseRoute);
+  const publicAlphaDrafts = (value.publicAlphaDrafts ?? []).map(parsePublicAlphaDraft);
+  if (
+    publicAlphaDrafts.length > 1 ||
+    publicAlphaDrafts.some((draft) => draft.coverageId !== value.id)
+  ) throw new Error("Public-alpha synthesis draft does not match its coverage record.");
   const evidenceProcessing = parseEvidenceProcessing(value.evidenceProcessing);
   const bestOutcome = parseBestOutcome(value.bestOutcome);
   if (
@@ -674,9 +706,9 @@ const parseCoverageRecord = (
   }
   if (
     evidenceProcessing &&
-    evidenceProcessing.pipelineVersion !== search.pipelineVersion
+    !/^synthesis-extraction-\d+\.\d+\.\d+$/u.test(evidenceProcessing.pipelineVersion)
   ) {
-    throw new Error("Synthesis evidence processing belongs to a different pipeline version.");
+    throw new Error("Unsupported synthesis evidence-processing pipeline version.");
   }
   if (
     bestOutcome === "candidate_only" &&
@@ -734,6 +766,7 @@ const parseCoverageRecord = (
     aliasesQueried: readBoundedStrings(search.aliasesQueried, "queried aliases", 128),
     providers: search.providers.map(parseProvider),
     routes,
+    publicAlphaDrafts,
     routeComparison: unavailableRouteComparisonSet(routes),
     bestOutcome,
     evidenceProcessing,

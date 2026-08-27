@@ -852,7 +852,10 @@ function DevMoleculesWorkspace() {
         ) : null}
 
         {route.section === "atlas" ? (
-          <div className={styles.workspacePage}>
+          <div
+            className={styles.workspacePage}
+            data-atlas-workspace={route.atlasView ?? "browse"}
+          >
             {catalogLoadStatus === "fallback" ? (
               <div className={styles.catalogFallback} role="alert" data-catalog-fallback="true">
                 <div>

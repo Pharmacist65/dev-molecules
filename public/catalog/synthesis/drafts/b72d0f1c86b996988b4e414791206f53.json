@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:b72d0f1c86b996988b4e414791206f53",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:butorphanol-ifklaqqscnilhl-qhawajnxsa-n",
+    "catalogEntityId": "molecule:imported:butorphanol-ifklaqqscnilhl-qhawajnxsa-n",
+    "preferredName": "Butorphanol",
+    "pubChemCid": 5361092,
+    "inchiKey": "IFKLAQQSCNILHL-QHAWAJNXSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:27b311b90b6f5bd598f4742d61b0aa9e",
+      "label": "butorphanol tartrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CC2=C(C=C1O)[C@@]34CCCC[C@]3([C@@H](C2)N(CC4)CC5CCC5)O.C(C(C(=O)O)O)(C(=O)O)O",
+      "inchiKey": "GMTYREVWZXJPLF-SXWPHCFWSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:948dfca8377feb21317f95a34b06b109",
+      "label": "Span 85",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OC[C@H]([C@@H]1[C@@H]([C@H](CO1)OC(=O)CCCCCCC/C=C\\CCCCCCCC)OC(=O)CCCCCCC/C=C\\CCCCCCCC)O",
+      "inchiKey": "ZBNRGEMZNWHCGA-PDKVEDEMSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:afcf66ca5bc83d0c10879a78ec41574f",
+      "label": "Butorphanol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1=CC2=C(C=C1O)[C@@]34CCCC[C@]3([C@@H](C2)N(CC4)CC5CCC5)O",
+      "inchiKey": "IFKLAQQSCNILHL-QHAWAJNXSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:cd5cf620462f5075d5a1ef38c4fbcc58",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:27b311b90b6f5bd598f4742d61b0aa9e",
+        "synthesis-draft-material:948dfca8377feb21317f95a34b06b109"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:afcf66ca5bc83d0c10879a78ec41574f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:505d3f0a601e64ef0a26e01e5214bad4",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:cd5cf620462f5075d5a1ef38c4fbcc58",
+      "finalStepId": "synthesis-draft-step:cd5cf620462f5075d5a1ef38c4fbcc58",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:505d3f0a601e64ef0a26e01e5214bad4",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-45621093cbfc4595b29a2f2ac34ef050",
+      "label": "Open Reaction Database reaction ord-45621093cbfc4595b29a2f2ac34ef050",
+      "url": "https://open-reaction-database.org/id/ord-45621093cbfc4595b29a2f2ac34ef050",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-45621093cbfc4595b29a2f2ac34ef050"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

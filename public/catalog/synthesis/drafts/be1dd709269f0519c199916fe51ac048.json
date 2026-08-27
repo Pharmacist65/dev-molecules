@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:be1dd709269f0519c199916fe51ac048",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cefditoren-pivoxil-afzfflvorleppo-uvyjnclzsa-n",
+    "catalogEntityId": "molecule:imported:cefditoren-pivoxil-afzfflvorleppo-uvyjnclzsa-n",
+    "preferredName": "Cefditoren Pivoxil",
+    "pubChemCid": 6437877,
+    "inchiKey": "AFZFFLVORLEPPO-UVYJNCLZSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:2ac5422f7fc4e403c764248ab09383de",
+      "label": "Cefditoren Sodium",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1=C(SC=N1)/C=C\\C2=C(N3[C@@H]([C@@H](C3=O)NC(=O)/C(=N\\OC)/C4=CSC(=N4)N)SC2)C(=O)[O-].[Na+]",
+      "inchiKey": "VFUMWBZIKOREOO-WSWQWPGSSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:52e221f87a06f3b740ce5e88a88f6486",
+      "label": "iodomethyl pivalate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C(C)(C)C)(=O)OCI",
+      "inchiKey": "PELJISAVHGXLAL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038",
+      "label": "sodium bicarbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([O-])(O)=O.[Na+]",
+      "inchiKey": "UIIMBOGNXHQVGW-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b04327f22898fcd790b42af08a898393",
+      "label": "Cefditoren Pivoxil",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC1=C(SC=N1)/C=C\\C2=C(N3[C@@H]([C@@H](C3=O)NC(=O)/C(=N\\OC)/C4=CSC(=N4)N)SC2)C(=O)OCOC(=O)C(C)(C)C",
+      "inchiKey": "AFZFFLVORLEPPO-UVYJNCLZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f982910a0a3c0541e3b844fd26063aee",
+      "label": "isopropyl ether",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)OC(C)C",
+      "inchiKey": "ZAFNJMIOTHYJRJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:0663cb6a040599d637c55ad364aecfe1",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038",
+        "synthesis-draft-material:52e221f87a06f3b740ce5e88a88f6486",
+        "synthesis-draft-material:f982910a0a3c0541e3b844fd26063aee",
+        "synthesis-draft-material:2ac5422f7fc4e403c764248ab09383de"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:b04327f22898fcd790b42af08a898393"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:7cf10ccf3d65ce6e2fa2c487683963be",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:0663cb6a040599d637c55ad364aecfe1",
+      "finalStepId": "synthesis-draft-step:0663cb6a040599d637c55ad364aecfe1",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:7cf10ccf3d65ce6e2fa2c487683963be",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-aaa7e59a933d4814aef17dc9c80dc9f7",
+      "label": "Open Reaction Database reaction ord-aaa7e59a933d4814aef17dc9c80dc9f7",
+      "url": "https://open-reaction-database.org/id/ord-aaa7e59a933d4814aef17dc9c80dc9f7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-aaa7e59a933d4814aef17dc9c80dc9f7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:ee9b0602d492c09af709adcd4805218d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:sulfadiazine-seepanycngtzfq-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:sulfadiazine-seepanycngtzfq-uhfffaoysa-n",
+    "preferredName": "Sulfadiazine",
+    "pubChemCid": 5215,
+    "inchiKey": "SEEPANYCNGTZFQ-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3f80505ee3631aa1adb3737ff2faa8b1",
+      "label": "sulfadiazine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C=1C=NC(=NC1)NS(=O)(=O)C=2C=CC(=CC2)N",
+      "inchiKey": "SEEPANYCNGTZFQ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7f040bf994bd770f0644278459699e66",
+      "label": "sodium sulfate",
+      "displayRole": "source_input",
+      "sourceSmiles": "S(=O)(=O)([O-])[O-].[Na+].[Na+]",
+      "inchiKey": "PMZURENOXWZQFD-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "hydrochloric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:eb1adc638377a8c60693b2a774a8e0f3",
+      "label": "sodium sulfadiazine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CN=C(N=C1)[N-]S(=O)(=O)C2=CC=C(C=C2)N.[Na+]",
+      "inchiKey": "JLDCNMJPBBKAHH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:acf35c011554ae36bd1fd7dca4701fe5",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:eb1adc638377a8c60693b2a774a8e0f3",
+        "synthesis-draft-material:7f040bf994bd770f0644278459699e66",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:3f80505ee3631aa1adb3737ff2faa8b1"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:101f6499d1617b388ac0c983207c0e5b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:acf35c011554ae36bd1fd7dca4701fe5",
+      "finalStepId": "synthesis-draft-step:acf35c011554ae36bd1fd7dca4701fe5",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:101f6499d1617b388ac0c983207c0e5b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-bf57c3b2dabf41d1825b6a2669e8256b",
+      "label": "Open Reaction Database reaction ord-bf57c3b2dabf41d1825b6a2669e8256b",
+      "url": "https://open-reaction-database.org/id/ord-bf57c3b2dabf41d1825b6a2669e8256b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-bf57c3b2dabf41d1825b6a2669e8256b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

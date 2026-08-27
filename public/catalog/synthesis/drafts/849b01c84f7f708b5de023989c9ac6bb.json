@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:849b01c84f7f708b5de023989c9ac6bb",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:amprenavir-ymarzqaqmvyckc-oemfjlhtsa-n",
+    "catalogEntityId": "molecule:imported:amprenavir-ymarzqaqmvyckc-oemfjlhtsa-n",
+    "preferredName": "Amprenavir",
+    "pubChemCid": 65016,
+    "inchiKey": "YMARZQAQMVYCKC-OEMFJLHTSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:52af5f5093c1a35645cdf8d76fdb0f45",
+      "label": "DMP-323",
+      "displayRole": "source_input",
+      "sourceSmiles": "C=1C=CC(=CC1)C[C@@H]2[C@@H]([C@H]([C@H](N(C(=O)N2CC=3C=CC(=CC3)CO)CC=4C=CC(=CC4)CO)CC=5C=CC=CC5)O)O",
+      "inchiKey": "XCVGQMUMMDXKCY-WZJLIZBTSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bf3c5bf49163919e493d25fe258ba7a4",
+      "label": "AG1343",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1=C(C=CC=C1O)C(=O)N[C@@H](CSC=2C=CC=CC2)[C@@H](CN3C[C@H]4CCCC[C@H]4C[C@H]3C(=O)NC(C)(C)C)O.CS(=O)(=O)O",
+      "inchiKey": "NQHXCOAXSHGTIA-SKXNDZRYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c62075618260d1848ce6878d449b8204",
+      "label": "amprenavir",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(C)CN(C[C@H]([C@H](CC=1C=CC=CC1)NC(=O)O[C@H]2CCOC2)O)S(=O)(=O)C=3C=CC(=CC3)N",
+      "inchiKey": "YMARZQAQMVYCKC-OEMFJLHTSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fa20d2f54eaf43b326f0893c75767e59",
+      "label": "atazanavir",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C)(C)[C@@H](C(=O)N[C@@H](CC=1C=CC=CC1)[C@H](CN(CC=2C=CC(=CC2)C=3C=CC=CN3)NC(=O)[C@H](C(C)(C)C)NC(=O)OC)O)NC(=O)OC",
+      "inchiKey": "AXRYRYVKAWYZBR-GASGPIRDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ff2710b4fcedcf46d6ce6ff9714d50fa",
+      "label": "DMP-450",
+      "displayRole": "source_input",
+      "sourceSmiles": "C=1C=CC(=CC1)C[C@@H]2[C@@H]([C@H]([C@H](N(C(=O)N2CC3=CC=CC(=C3)N)CC=4C=CC=C(C4)N)CC=5C=CC=CC5)O)O",
+      "inchiKey": "KYRSNWPSSXSNEP-ZRTHHSRSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:a8869679ea6bed38dee1b17c7c3aaaba",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:52af5f5093c1a35645cdf8d76fdb0f45",
+        "synthesis-draft-material:ff2710b4fcedcf46d6ce6ff9714d50fa",
+        "synthesis-draft-material:bf3c5bf49163919e493d25fe258ba7a4",
+        "synthesis-draft-material:fa20d2f54eaf43b326f0893c75767e59"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c62075618260d1848ce6878d449b8204"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:92fbff0f223af5a497e883f4ea17d8ca",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:a8869679ea6bed38dee1b17c7c3aaaba",
+      "finalStepId": "synthesis-draft-step:a8869679ea6bed38dee1b17c7c3aaaba",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:92fbff0f223af5a497e883f4ea17d8ca",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-3040a2dfc8204e68b4f40186be8dfe0a",
+      "label": "Open Reaction Database reaction ord-3040a2dfc8204e68b4f40186be8dfe0a",
+      "url": "https://open-reaction-database.org/id/ord-3040a2dfc8204e68b4f40186be8dfe0a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3040a2dfc8204e68b4f40186be8dfe0a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

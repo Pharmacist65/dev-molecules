@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:bffb8e8a20468d63047089bf527b83d1",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:vericiguat-qzfhixarhdbpby-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:vericiguat-qzfhixarhdbpby-uhfffaoysa-n",
+    "preferredName": "Vericiguat",
+    "pubChemCid": 54674461,
+    "inchiKey": "QZFHIXARHDBPBY-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3ca1151f2bf659d9c7de09d60d3a2cbd",
+      "label": "Methyl {4,6-diamino-2-[5-fluoro-1-(2-fluorobenzyl)-1H-pyrazolo[3,4-b]pyridin-3-yl]pyrimidin-5-yl}carbamate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "NC1=NC(=NC(=C1NC(OC)=O)N)C1=NN(C2=NC=C(C=C21)F)CC2=C(C=CC=C2)F",
+      "inchiKey": "QZFHIXARHDBPBY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ac0e4b81cc2c864d851f8cf41970da0a",
+      "label": "2-[5-Fluoro-1-(2-fluorobenzyl)-1H-pyrazolo[3,4-b]pyridin-3-yl]pyrimidine-4,5,6-triamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "FC=1C=C2C(=NC1)N(N=C2C2=NC(=C(C(=N2)N)N)N)CC2=C(C=CC=C2)F",
+      "inchiKey": "DVTLORLSDKRODH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fd8931679411a33c05b783c35a3ded5b",
+      "label": "methyl chloroformate",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC(=O)OC",
+      "inchiKey": "XMJHPCRAQCTCFT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2098f5df5d3ec1f432f3e9f2b8b69127",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:fd8931679411a33c05b783c35a3ded5b",
+        "synthesis-draft-material:ac0e4b81cc2c864d851f8cf41970da0a"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:3ca1151f2bf659d9c7de09d60d3a2cbd"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:eee631b78e0ddcee0f8655d9a8a51bfb",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:32b586e4f9bee469b1701843586c3b45",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:ac0e4b81cc2c864d851f8cf41970da0a",
+        "synthesis-draft-material:fd8931679411a33c05b783c35a3ded5b"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:3ca1151f2bf659d9c7de09d60d3a2cbd"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e9c877c5c0b92b63400d8df39ccd1fb5",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:2098f5df5d3ec1f432f3e9f2b8b69127",
+      "finalStepId": "synthesis-draft-step:2098f5df5d3ec1f432f3e9f2b8b69127",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:32b586e4f9bee469b1701843586c3b45",
+      "finalStepId": "synthesis-draft-step:32b586e4f9bee469b1701843586c3b45",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:e9c877c5c0b92b63400d8df39ccd1fb5",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-fe85ecb170c04e6d92a8c97deaa2e1ca",
+      "label": "Open Reaction Database reaction ord-fe85ecb170c04e6d92a8c97deaa2e1ca",
+      "url": "https://open-reaction-database.org/id/ord-fe85ecb170c04e6d92a8c97deaa2e1ca",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-fe85ecb170c04e6d92a8c97deaa2e1ca"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:eee631b78e0ddcee0f8655d9a8a51bfb",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-70d41c8f133d4a84a09797b0ff684fec",
+      "label": "Open Reaction Database reaction ord-70d41c8f133d4a84a09797b0ff684fec",
+      "url": "https://open-reaction-database.org/id/ord-70d41c8f133d4a84a09797b0ff684fec",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-70d41c8f133d4a84a09797b0ff684fec"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

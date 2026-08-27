@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:2bccc3121a6720e6eb4d1cdd82ea1486",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:daunorubicin-stqgqhzavuobte-vgbvrhcvsa-n",
+    "catalogEntityId": "molecule:imported:daunorubicin-stqgqhzavuobte-vgbvrhcvsa-n",
+    "preferredName": "Daunorubicin",
+    "pubChemCid": 30323,
+    "inchiKey": "STQGQHZAVUOBTE-VGBVRHCVSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:11946141002091f0d0173ae0b8bd1096",
+      "label": "daunomycin hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@H]1[C@H]([C@H](C[C@@H](O1)O[C@H]2C[C@@](CC3=C(C4=C(C(=C23)O)C(=O)C5=C(C4=O)C=CC=C5OC)O)(C(=O)C)O)N)O.Cl",
+      "inchiKey": "GUGHGUXZJWAIAS-QQYBVWGSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b8dc1e26012d085901463662e270d628",
+      "label": "4-phenylbenzhydrazide",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(=CC=CC=C1)C1=CC=C(C(=O)NN)C=C1",
+      "inchiKey": "QEUAQXSDDNDOTG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b98a8ba1bb21d5bfd1688d4895fa9032",
+      "label": "3,4-dichlorobenzhydrazide",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC=1C=C(C(=O)NN)C=CC1Cl",
+      "inchiKey": "VEDIADQJSGNNQE-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e16cd2fdb0df76857636a9f667ff4459",
+      "label": "Daunomycin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@H]1[C@H]([C@H](C[C@@H](O1)O[C@H]2C[C@@](CC3=C(C4=C(C(=C23)O)C(=O)C5=C(C4=O)C=CC=C5OC)O)(C(=O)C)O)N)O",
+      "inchiKey": "STQGQHZAVUOBTE-VGBVRHCVSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:9143c78dbd1e91096dd2c4802a69fc24",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:11946141002091f0d0173ae0b8bd1096",
+        "synthesis-draft-material:b8dc1e26012d085901463662e270d628"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:e16cd2fdb0df76857636a9f667ff4459"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:60468cbc875aba8d02e19ab3e0ef9086",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:065cde40c8029ca6cae3ca55bf8f9599",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:11946141002091f0d0173ae0b8bd1096",
+        "synthesis-draft-material:b98a8ba1bb21d5bfd1688d4895fa9032"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:e16cd2fdb0df76857636a9f667ff4459"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:acc8e518d7872bd092b6f9fe171416c7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:9143c78dbd1e91096dd2c4802a69fc24",
+      "finalStepId": "synthesis-draft-step:9143c78dbd1e91096dd2c4802a69fc24",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:065cde40c8029ca6cae3ca55bf8f9599",
+      "finalStepId": "synthesis-draft-step:065cde40c8029ca6cae3ca55bf8f9599",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:60468cbc875aba8d02e19ab3e0ef9086",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-ad62024268224c8d916ae96891917c00",
+      "label": "Open Reaction Database reaction ord-ad62024268224c8d916ae96891917c00",
+      "url": "https://open-reaction-database.org/id/ord-ad62024268224c8d916ae96891917c00",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-ad62024268224c8d916ae96891917c00"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:acc8e518d7872bd092b6f9fe171416c7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-aa5bc5a831d343819d90ba8d84ba4dde",
+      "label": "Open Reaction Database reaction ord-aa5bc5a831d343819d90ba8d84ba4dde",
+      "url": "https://open-reaction-database.org/id/ord-aa5bc5a831d343819d90ba8d84ba4dde",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-aa5bc5a831d343819d90ba8d84ba4dde"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

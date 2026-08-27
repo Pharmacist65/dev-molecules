@@ -2,13 +2,16 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [atlas, family, spatial, universe, universeCss, scene, sceneTypes] =
+const [atlas, atlasCss, family, spatial, universe, universeCss, platformApp, platformCss, scene, sceneTypes] =
   await Promise.all([
     readFile(new URL("../components/atlas/DrugAtlas.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/atlas/DrugAtlas.module.css", import.meta.url), "utf8"),
     readFile(new URL("../components/atlas/FamilyPage.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/atlas/AtlasSpatialView.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/universe/MoleculeUniverse.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/universe/MoleculeUniverse.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../components/platform/DevMoleculesApp.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/platform/platform.module.css", import.meta.url), "utf8"),
     readFile(new URL("../components/molecular-scene/SharedMolecularScene.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/molecular-scene/types.ts", import.meta.url), "utf8"),
   ]);
@@ -20,14 +23,36 @@ test("only the main Drug Atlas opts into the immersive Spatial surface", () => {
   assert.match(spatial, /data-spatial-variant=\{variant\}/);
   assert.match(spatial, /variant === "embedded"/);
   assert.match(spatial, /surfaceVariant=\{variant\}/);
+  assert.match(spatial, /data-spatial-viewport=\{variant === "immersive" \? "primary" : "embedded"\}/);
 });
 
-test("immersive Spatial owns a 78vh stage, floating controls and drawer-safe renderer", () => {
-  assert.match(universeCss, /data-surface-variant="immersive"[\s\S]*?min-height:\s*78svh/);
+test("immersive Spatial starts below navigation without nested editorial chrome", () => {
+  assert.match(atlas, /data-atlas-hero="true"/);
+  assert.match(atlas, /data-atlas-browse-panel="true"/);
+  assert.match(atlas, /data-atlas-view-switcher="true"/);
+  assert.match(atlasCss, /data-atlas-view="spatial"\]\s+\.hero\s*\{[\s\S]*?display:\s*none/);
+  assert.match(
+    atlasCss,
+    /data-atlas-view="spatial"\]\s+\.viewTabs\s*\{[\s\S]*?position:\s*absolute[\s\S]*?border-radius:\s*999px/,
+  );
+  assert.match(platformApp, /data-atlas-workspace=\{route\.atlasView \?\? "browse"\}/);
+  assert.match(
+    platformCss,
+    /data-atlas-workspace="spatial"\]\s*\{[\s\S]*?width:\s*100%[\s\S]*?padding:\s*0/,
+  );
+});
+
+test("immersive Spatial owns an 80vh stage, floating controls and drawer-safe renderer", () => {
+  assert.match(universe, /IMMERSIVE_DESKTOP_MINIMUM_VIEWPORT_RATIO = 0\.8/);
+  assert.match(universeCss, /data-surface-variant="immersive"[\s\S]*?min-height:\s*80svh/);
   assert.match(
     universeCss,
     /data-surface-variant="immersive"\]\s+\.toolbar\s*\{[\s\S]*?position:\s*absolute[\s\S]*?pointer-events:\s*none/,
   );
+  assert.match(universe, /data-spatial-floating-controls=\{isImmersive \? "primary" : undefined\}/);
+  assert.match(universe, /data-spatial-control=\{isImmersive \? "search" : undefined\}/);
+  assert.match(universe, /data-spatial-control=\{isImmersive \? "lens" : undefined\}/);
+  assert.match(universe, /data-spatial-control=\{isImmersive \? "camera" : undefined\}/);
   assert.match(
     universeCss,
     /data-level="universe"\]\s*>\s*\.sceneTelemetry\s*\{[\s\S]*?top:\s*5\.75rem[\s\S]*?height:\s*calc\(100% - 5\.75rem\)/,

@@ -10,9 +10,11 @@ Source-content pipeline: `synthesis-source-content-2.0.0`
 
 This report records engineering and evidence-processing results. It does not claim that a candidate source is a synthesis route, that a pending draft is verified science, or that a scoped source-search miss establishes novelty, patentability, safety, or synthesizability.
 
+Update: the 2026-08-28 route-assembly sprint now publishes a separate pending public-alpha draft channel from the resolved direct segments. It does not change this report's discovery/extraction baseline or the zero canonical reviewed-route count. See [Public-Alpha Synthesis Route Assembly and Spatial Sprint](SYNTHESIS_ROUTE_ASSEMBLY_REPORT.md).
+
 ## 1. Spatial redesign
 
-Spatial is now a full-width immersive Atlas stage rather than a card nested inside repeated hero panels. The desktop stage has a 78 vh minimum, with floating search, lens, zoom and centre controls; molecule focus opens a right-side drawer. Student mode hides technical telemetry. Far LOD renders 4–6 large representative structures and near LOD renders 8–12 while retaining one WebGL context. The representative sample is not presented as catalog or therapeutic-family coverage.
+Spatial is now a full-width immersive Atlas stage rather than a card nested inside repeated hero panels. The desktop stage has an 80 svh minimum, with floating search, lens, zoom and centre controls; molecule focus opens a right-side drawer. Student mode hides technical telemetry. Far LOD renders 4–6 large representative structures and near LOD renders 8–12 while retaining one WebGL context. The representative sample is not presented as catalog or therapeutic-family coverage.
 
 The acceptance matrix covers 1440×900, 1920×1080, 125% zoom-equivalent (1152×720), 150% zoom-equivalent (960×600), and 390×844 mobile. Automated geometry assertions independently measure stage height, visual envelope, label boxes, clipping, overlap, control occlusion, horizontal overflow, and WebGL context count.
 
@@ -147,9 +149,9 @@ Legacy formed/broken-bond wording is retained only as an unreviewed transformati
 
 ## 13. Public Synthesis Atlas changes
 
-The public route index and detail set contain zero entries. Public synthesis shards contain coverage-only projections and expose no route IDs, source IDs, locators, materials, steps, route type, or completeness. Pending flagship synthesis stories, missions, and evidence cards were removed from public bundles. Public aggregate count reports are not route-detail publication and do not map private route properties back to molecular identities.
+The official reviewed/verified route index and detail set still contain zero entries. A separate `public_alpha_source_supported_draft` channel now contains 2,645 pending partial alternatives in 639 exact-identity graphs. Those graphs expose independent 2D redraw inputs, exact ORD locators, exact target identity, and explicit gaps. They exclude operational details and never enter the canonical route counter.
 
-The Academy’s published-route counter is derived from the validated public index. A missing or malformed index renders “unavailable,” not a scientifically meaningful zero. Reviewed/verified and reuse-eligible generated artifacts are the only path to future route detail.
+The Academy keeps reviewed-route counts separate from pending public-alpha counts. A missing, malformed, identity-drifted, rights-drifted, or operationalized draft fails closed to the coverage-only state. Candidate-only and scoped-none states remain visible across the rest of the 1,552-record catalog.
 
 ## 14. Accessibility results
 
@@ -157,18 +159,19 @@ Existing button and keyboard navigation remains. Any future publishable route ha
 
 ## 15. Test/CI results
 
-The 2026-08-27 release-candidate workspace passed TypeScript typecheck, ESLint,
+The 2026-08-28 release-candidate workspace passed TypeScript typecheck, ESLint,
 catalog validation (1,552 records, 25 alphabetic shards, and 3,104 structure
 assets), synthesis validation (1,552 coverage records, a six-route private
-aggregate attestation, zero public route details, zero warnings, and zero
-errors), third-party licence consistency, the
+aggregate attestation, 2,645 pending public-alpha alternatives in 639 detail
+graphs, zero official canonical reviewed/verified route details, zero warnings,
+and zero errors), third-party licence consistency, the
 Vinext production build, and the GitHub Pages static build. The complete Node
-suite passed 407/407 tests. The full Chromium suite passed 51 executed scenarios
+suite passed 413/413 tests. The full Chromium suite passed 51 executed scenarios
 with one documentation-capture scenario intentionally skipped; the separate
 Pages suite passed 5/5 scenarios. `npm audit --omit=dev --audit-level=high`
 reported zero vulnerabilities. The public-synthesis boundary scanner now uses
-12 generic, catalog-aware patterns and covers 227 generated release artifacts,
-28 public documentation artifacts, and 407 tracked-source artifacts; real
+12 generic, catalog-aware patterns and covers 1,509 generated release artifacts,
+29 public documentation artifacts, and 411 tracked-source artifacts; real
 private canary literals are not embedded in the scanner.
 
 GitHub Actions and Pages are commit-scoped gates rather than a property of an

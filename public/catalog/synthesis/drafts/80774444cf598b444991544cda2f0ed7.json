@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:80774444cf598b444991544cda2f0ed7",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:sonidegib-vzzjryrqspemtk-calchbbnsa-n",
+    "catalogEntityId": "molecule:imported:sonidegib-vzzjryrqspemtk-calchbbnsa-n",
+    "preferredName": "Sonidegib",
+    "pubChemCid": 24775005,
+    "inchiKey": "VZZJRYRQSPEMTK-CALCHBBNSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:2df888195f1ac68c1a2a956d2ec36cbd",
+      "label": "DME",
+      "displayRole": "source_input",
+      "sourceSmiles": "COCCOC",
+      "inchiKey": "XTHFKEDIFFGKHM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:31016dc98f2bc7a3f032e8edc506ea3f",
+      "label": "N-(6-((2S,6R)-2,6-dimethylmorpholino)pyridin-3-yl)-2-methyl-4′-(trifluoromethoxy)biphenyl-3-carboxamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@@H]1O[C@@H](CN(C1)C1=CC=C(C=N1)NC(=O)C=1C(=C(C=CC1)C1=CC=C(C=C1)OC(F)(F)F)C)C",
+      "inchiKey": "VZZJRYRQSPEMTK-CALCHBBNSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:568e31c16b26d2fd48ef75a66a2cfb00",
+      "label": "4-(trifluoromethoxy)phenylboronic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "FC(OC1=CC=C(C=C1)B(O)O)(F)F",
+      "inchiKey": "HUOFUOCSQCYFPW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:835cc7832016af66c24a96c203083b4b",
+      "label": "3-bromo-N-[6-(2,6-dimethyl-morpholin-4-yl)-pyridin-3-yl]-4-methyl-benzamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "BrC=1C=C(C(=O)NC=2C=NC(=CC2)N2CC(OC(C2)C)C)C=CC1C",
+      "inchiKey": "OVCBNQSONQSGJG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7",
+      "label": "Na2CO3",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)([O-])[O-].[Na+].[Na+]",
+      "inchiKey": "CDBYLPFSWZWCQE-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2cbaefd4afa5506288bb666587256ea3",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:568e31c16b26d2fd48ef75a66a2cfb00",
+        "synthesis-draft-material:835cc7832016af66c24a96c203083b4b",
+        "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7",
+        "synthesis-draft-material:2df888195f1ac68c1a2a956d2ec36cbd"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:31016dc98f2bc7a3f032e8edc506ea3f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:07a554d3c2a1c79be1878b03ee8a225b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:2cbaefd4afa5506288bb666587256ea3",
+      "finalStepId": "synthesis-draft-step:2cbaefd4afa5506288bb666587256ea3",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:07a554d3c2a1c79be1878b03ee8a225b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2640c321e51b41f48e6d1d76015374b0",
+      "label": "Open Reaction Database reaction ord-2640c321e51b41f48e6d1d76015374b0",
+      "url": "https://open-reaction-database.org/id/ord-2640c321e51b41f48e6d1d76015374b0",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2640c321e51b41f48e6d1d76015374b0"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

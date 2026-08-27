@@ -52,7 +52,7 @@ const evidenceSourceIds = (dossier) => {
   return ids;
 };
 
-test("flagship release contract keeps stable identities and complete audited sections in TR and EN", () => {
+test("flagship release contract keeps stable identities and required audited Phase A sections in TR and EN", () => {
   for (const scenario of scenarios) {
     for (const locale of ["tr", "en"]) {
       const bySlug = createDrugDossierByIdOrSlug(scenario.slug, locale);

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:18d0e9aa9fc7d18bc748e31c5e81ef6d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:valbenazine-gejdgvnqkabxkg-cfkgezkqsa-n",
+    "catalogEntityId": "molecule:imported:valbenazine-gejdgvnqkabxkg-cfkgezkqsa-n",
+    "preferredName": "Valbenazine",
+    "pubChemCid": 24795069,
+    "inchiKey": "GEJDGVNQKABXKG-CFKGEZKQSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:ae04bb375ffe49eabe66f4352ee122f5",
+      "label": "(S)-2-amino-3-methyl-butyric acid (2R,3R,11bR)-3-isobutyl-9,10-dimethoxy-1,3,4,6,7,11b-hexahydro-2H-pyrido[2,1-a]isoquinolin-2-yl ester",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C(C)C)[C@H]1[C@@H](C[C@H]2N(CCC3=CC(=C(C=C23)OC)OC)C1)OC([C@H](C(C)C)N)=O",
+      "inchiKey": "GEJDGVNQKABXKG-CFKGEZKQSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:db74bd60333515a06088db5c6cd7c238",
+      "label": "2-benzyloxycarbonylamino-3-methyl-butyric acid (2R,3R,11bR)-3-isobutyl-9,10-dimethoxy-1,3,4,6,7,11b-hexahydro-2H-pyrido[2,1-a]isoquinolin-2-yl ester",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C(C)C)[C@H]1[C@@H](C[C@H]2N(CCC3=CC(=C(C=C23)OC)OC)C1)OC(C(C(C)C)NC(=O)OCC1=CC=CC=C1)=O",
+      "inchiKey": "OHTGPAMRDCCCFJ-LOQIKKFYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:a31e48d5455727594e0a2203c0acb8e9",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:db74bd60333515a06088db5c6cd7c238"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ae04bb375ffe49eabe66f4352ee122f5"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6e06d5f8cddfe3e296a3aaabc7c20bbd",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:a31e48d5455727594e0a2203c0acb8e9",
+      "finalStepId": "synthesis-draft-step:a31e48d5455727594e0a2203c0acb8e9",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:6e06d5f8cddfe3e296a3aaabc7c20bbd",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-e922d2202096440b955c6df01fc5749f",
+      "label": "Open Reaction Database reaction ord-e922d2202096440b955c6df01fc5749f",
+      "url": "https://open-reaction-database.org/id/ord-e922d2202096440b955c6df01fc5749f",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-e922d2202096440b955c6df01fc5749f"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

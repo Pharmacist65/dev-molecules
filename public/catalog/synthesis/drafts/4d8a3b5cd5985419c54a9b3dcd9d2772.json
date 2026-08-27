@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:4d8a3b5cd5985419c54a9b3dcd9d2772",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:paromomycin-uozodpsajztqnh-lswijeobsa-n",
+    "catalogEntityId": "molecule:imported:paromomycin-uozodpsajztqnh-lswijeobsa-n",
+    "preferredName": "Paromomycin",
+    "pubChemCid": 165580,
+    "inchiKey": "UOZODPSAJZTQNH-LSWIJEOBSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:5a0293f0989dca34ad0274c29d854e8a",
+      "label": "5-carboxytetramethyl rhodamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C)C1=CC2=C(C=C1)C(=C3C=CC(=[N+](C)C)C=C3O2)C4=C(C=C(C=C4)C(=O)[O-])C(=O)O",
+      "inchiKey": "YMZMTOFQCVHHFB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:74958fd27d371f2fdfd772a88fd72f0d",
+      "label": "Paramomycin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1[C@H]([C@@H]([C@H]([C@@H]([C@H]1N)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)N)O[C@H]3[C@@H]([C@@H]([C@H](O3)CO)O[C@@H]4[C@@H]([C@H]([C@@H]([C@@H](O4)CN)O)O)N)O)O)N",
+      "inchiKey": "UOZODPSAJZTQNH-LSWIJEOBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e164917b1b70b582bc92c963cb8ba19c",
+      "label": "paramomycin sulphate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1[C@H]([C@@H]([C@H]([C@@H]([C@H]1N)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)N)O[C@H]3[C@@H]([C@@H]([C@H](O3)CO)O[C@@H]4[C@@H]([C@H]([C@@H]([C@@H](O4)CN)O)O)N)O)O)N.[O-]S(=O)(=O)[O-]",
+      "inchiKey": "LJRDOKAZOAKLDU-UDXJMMFXSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:de383463c976b97107743eae0092b05e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:e164917b1b70b582bc92c963cb8ba19c",
+        "synthesis-draft-material:5a0293f0989dca34ad0274c29d854e8a"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:74958fd27d371f2fdfd772a88fd72f0d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:42a2da8ee76cfc97edc842296a5db4a0",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:de383463c976b97107743eae0092b05e",
+      "finalStepId": "synthesis-draft-step:de383463c976b97107743eae0092b05e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:42a2da8ee76cfc97edc842296a5db4a0",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0619db7ecae64eb199805b39007943a6",
+      "label": "Open Reaction Database reaction ord-0619db7ecae64eb199805b39007943a6",
+      "url": "https://open-reaction-database.org/id/ord-0619db7ecae64eb199805b39007943a6",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0619db7ecae64eb199805b39007943a6"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

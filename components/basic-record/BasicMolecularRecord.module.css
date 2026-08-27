@@ -574,6 +574,22 @@
   color: var(--color-mole-teal);
 }
 
+.reportedSynthesisState[data-synthesis-evidence-resolution-state="draft-segment-resolved"] {
+  border-left-color: var(--color-metallic-orange);
+}
+
+.reportedSynthesisState[data-synthesis-evidence-resolution-state="draft-segment-resolved"] > span {
+  color: var(--color-metallic-orange);
+}
+
+.reportedSynthesisState[data-synthesis-evidence-resolution-state="direct-segment-gated"] {
+  border-left-color: var(--color-metallic-orange);
+}
+
+.reportedSynthesisState[data-synthesis-evidence-resolution-state="direct-segment-gated"] > span {
+  color: var(--color-metallic-orange);
+}
+
 .evidenceProcessing {
   margin-bottom: var(--space-4);
   overflow: hidden;
@@ -694,6 +710,30 @@
   color: var(--color-text-on-dark);
   box-shadow: var(--shadow-subtle);
 }
+
+.publicDraftReference {
+  padding: 1rem;
+  border: 1px solid #e89a5e;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fff7ed, #fffdf8);
+  color: #25334b;
+}
+
+.publicDraftReference > strong { color: #a64510; }
+.publicDraftReference > p { margin: 0.55rem 0 0; color: #6d5b4f; line-height: 1.55; }
+.publicDraftReference dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0.85rem 0 0;
+  overflow: hidden;
+  border: 1px solid #ead7c7;
+  border-radius: 10px;
+  background: #ead7c7;
+  gap: 1px;
+}
+.publicDraftReference dl > div { padding: 0.65rem; background: #fff; }
+.publicDraftReference dt { color: #7d7067; font-size: 0.78rem; }
+.publicDraftReference dd { margin: 0.3rem 0 0; color: #26344c; font-weight: 700; overflow-wrap: anywhere; }
 
 .synthesisAtlasAction strong {
   font-family: var(--font-family-display);

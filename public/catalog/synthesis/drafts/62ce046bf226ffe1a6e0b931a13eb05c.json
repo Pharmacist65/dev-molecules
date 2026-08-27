@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:62ce046bf226ffe1a6e0b931a13eb05c",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:haloperidol-lnepoxffqsencj-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:haloperidol-lnepoxffqsencj-uhfffaoysa-n",
+    "preferredName": "Haloperidol",
+    "pubChemCid": 3559,
+    "inchiKey": "LNEPOXFFQSENCJ-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:a4c720b188a47fac7c322dbc403c8c10",
+      "label": "Exact structure HEDRZPFGACZZDS",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC(Cl)Cl",
+      "inchiKey": "HEDRZPFGACZZDS-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b58c13e4e9f9d31438268c3aeebf1dd3",
+      "label": "γ-[4-(p-chlorophenyl)-4-hydroxypiperidino]-p-fluorobutyrophenone",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC1=CC=C(C=C1)C1(CCN(CC1)CCCC(=O)C1=CC=C(C=C1)F)O",
+      "inchiKey": "LNEPOXFFQSENCJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d50aa676b5e91ca9b41500634f842049",
+      "label": "1-(p-fluorophenyl)-4-[4-(p-chlorophenyl)-4-hydroxypiperidino]-1-butanol",
+      "displayRole": "source_input",
+      "sourceSmiles": "FC1=CC=C(C=C1)C(CCCN1CCC(CC1)(O)C1=CC=C(C=C1)Cl)O",
+      "inchiKey": "WNZBBTJFOIOEMP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:745836cd385c3dfbeb98c7fed97baae7",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:d50aa676b5e91ca9b41500634f842049"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:b58c13e4e9f9d31438268c3aeebf1dd3"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3eac46513ddb5d45c66a6edda4fcfaf6",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:e62199d1610d3c7a485e330e6c36769f",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:a4c720b188a47fac7c322dbc403c8c10",
+        "synthesis-draft-material:d50aa676b5e91ca9b41500634f842049"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:b58c13e4e9f9d31438268c3aeebf1dd3"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:68caeb5a7984bd20026376f2a551de03",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:745836cd385c3dfbeb98c7fed97baae7",
+      "finalStepId": "synthesis-draft-step:745836cd385c3dfbeb98c7fed97baae7",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:e62199d1610d3c7a485e330e6c36769f",
+      "finalStepId": "synthesis-draft-step:e62199d1610d3c7a485e330e6c36769f",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:3eac46513ddb5d45c66a6edda4fcfaf6",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c6f6cc5341bd4c88a181803460cd05ba",
+      "label": "Open Reaction Database reaction ord-c6f6cc5341bd4c88a181803460cd05ba",
+      "url": "https://open-reaction-database.org/id/ord-c6f6cc5341bd4c88a181803460cd05ba",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c6f6cc5341bd4c88a181803460cd05ba"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:68caeb5a7984bd20026376f2a551de03",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5104235145ae44678b60ff16ce0a5f9b",
+      "label": "Open Reaction Database reaction ord-5104235145ae44678b60ff16ce0a5f9b",
+      "url": "https://open-reaction-database.org/id/ord-5104235145ae44678b60ff16ce0a5f9b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-5104235145ae44678b60ff16ce0a5f9b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

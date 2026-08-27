@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:15601b8766c3aaf4ff712606c98de784",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:ramipril-hdacqvrgbovjii-jbdaphqksa-n",
+    "catalogEntityId": "molecule:imported:ramipril-hdacqvrgbovjii-jbdaphqksa-n",
+    "preferredName": "Ramipril",
+    "pubChemCid": 5362129,
+    "inchiKey": "HDACQVRGBOVJII-JBDAPHQKSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:163662dbd15d0a7cc04642ac1090096b",
+      "label": "(2S,3aS,6aS)-1-[(S)-2-[[(S)-1-(ethoxycarbonyl)-3-phenylpropyl]-amino]propanoyl]octahydrocyclopenta[b]pyrrole-2-carboxylic acid benzyl ester maleic acid salt",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(\\C=C/C(=O)O)(=O)O.C(C1=CC=CC=C1)OC(=O)[C@@H]1C[C@H]2[C@@H](N1C([C@H](C)N[C@@H](CCC1=CC=CC=C1)C(=O)OCC)=O)CCC2",
+      "inchiKey": "ZGBMYXWOJGTJKC-LOICLHKASA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6a3decceb183de665ba5298794dc280f",
+      "label": "Ramipril",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CCOC(=O)[C@H](CCC=1C=CC=CC1)N[C@@H](C)C(=O)N2[C@H]3CCC[C@H]3C[C@H]2C(=O)O",
+      "inchiKey": "HDACQVRGBOVJII-JBDAPHQKSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:879b26799ef5a0456cfeaa8c36f9a48d",
+      "label": "dichloromethane",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClCCl",
+      "inchiKey": "YMWUJEATGCHHMB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ccd7ad908cfa42169bf87fb5584bd16e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:163662dbd15d0a7cc04642ac1090096b",
+        "synthesis-draft-material:879b26799ef5a0456cfeaa8c36f9a48d"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:6a3decceb183de665ba5298794dc280f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:7ea5219fe1c4323079ab5013c7c28f67",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ccd7ad908cfa42169bf87fb5584bd16e",
+      "finalStepId": "synthesis-draft-step:ccd7ad908cfa42169bf87fb5584bd16e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:7ea5219fe1c4323079ab5013c7c28f67",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2ba52ce1ab474547a63de27377c6daf5",
+      "label": "Open Reaction Database reaction ord-2ba52ce1ab474547a63de27377c6daf5",
+      "url": "https://open-reaction-database.org/id/ord-2ba52ce1ab474547a63de27377c6daf5",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2ba52ce1ab474547a63de27377c6daf5"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

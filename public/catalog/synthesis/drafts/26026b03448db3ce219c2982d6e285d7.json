@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:26026b03448db3ce219c2982d6e285d7",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:regorafenib-fnhkpvjbjvtlmp-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:regorafenib-fnhkpvjbjvtlmp-uhfffaoysa-n",
+    "preferredName": "Regorafenib",
+    "pubChemCid": 11167602,
+    "inchiKey": "FNHKPVJBJVTLMP-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:7f5278c16244511b456a3a50c0e0b41c",
+      "label": "4-(4-amino-3-fluorophenoxy)pyridine-2-carboxylic acid methylamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "CNC(=O)C1=NC=CC(=C1)OC1=CC(=C(C=C1)N)F",
+      "inchiKey": "ZQHJPIPGBODVTG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a2290cfc326aed4eebe6cea7e8f1b5f9",
+      "label": "4{4-[3-(4-chloro-3-trifluoromethylphenyl)-ureido]-3-fluorophenoxy}-pyridine-2-carboxylic acid methylamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CNC(=O)C1=NC=CC(=C1)OC1=CC(=C(C=C1)NC(=O)NC1=CC(=C(C=C1)Cl)C(F)(F)F)F",
+      "inchiKey": "FNHKPVJBJVTLMP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b5dea550a207cfc81ab1dc0a902fd21e",
+      "label": "4-chloro-3-(trifluoromethyl)phenyl isocyanate",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=C(C=C(C=C1)N=C=O)C(F)(F)F",
+      "inchiKey": "NBJZEUQTGLSUOB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ef4fc0f60b9182d25a3a9c5c77cf3715",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7f5278c16244511b456a3a50c0e0b41c",
+        "synthesis-draft-material:b5dea550a207cfc81ab1dc0a902fd21e"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a2290cfc326aed4eebe6cea7e8f1b5f9"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d25b3455ac0c5e1b9b3c60e47e33ea08",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ef4fc0f60b9182d25a3a9c5c77cf3715",
+      "finalStepId": "synthesis-draft-step:ef4fc0f60b9182d25a3a9c5c77cf3715",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:d25b3455ac0c5e1b9b3c60e47e33ea08",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-a0df1dc4c8a148b386b384380c4fcb5a",
+      "label": "Open Reaction Database reaction ord-a0df1dc4c8a148b386b384380c4fcb5a",
+      "url": "https://open-reaction-database.org/id/ord-a0df1dc4c8a148b386b384380c4fcb5a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a0df1dc4c8a148b386b384380c4fcb5a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

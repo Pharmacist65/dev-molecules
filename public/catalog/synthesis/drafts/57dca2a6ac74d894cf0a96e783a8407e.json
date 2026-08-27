@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:57dca2a6ac74d894cf0a96e783a8407e",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:primaquine-indbqlzjxzlfit-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:primaquine-indbqlzjxzlfit-uhfffaoysa-n",
+    "preferredName": "Primaquine",
+    "pubChemCid": 4908,
+    "inchiKey": "INDBQLZJXZLFIT-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3cbb073a1b4856e48f4fd80f003f5a19",
+      "label": "Primaquine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(CCCN)NC1=CC(=CC2=C1N=CC=C2)OC",
+      "inchiKey": "INDBQLZJXZLFIT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:74131bb08571e7a494bf2dab72d8f0e3",
+      "label": "DDPC",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCCCCCCCCCCCCC(=O)NCC(COP(=O)([O-])OCC[N+](C)(C)C)NC(=O)CCCCCCCCCCCCC",
+      "inchiKey": "BLCRPWCTEAFGSY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7bec652c45902e44aa9f24a359ce5bcd",
+      "label": "Primaquine diphosphate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(CCCN)NC1=C2C(=CC(=C1)OC)C=CC=N2.OP(=O)(O)O.OP(=O)(O)O",
+      "inchiKey": "GJOHLWZHWQUKAU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ddc95724cb652c39ddc49bc5ad65374e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7bec652c45902e44aa9f24a359ce5bcd",
+        "synthesis-draft-material:74131bb08571e7a494bf2dab72d8f0e3"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:3cbb073a1b4856e48f4fd80f003f5a19"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6404ba15743c9ce505a8bbdaddb2bc51",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ddc95724cb652c39ddc49bc5ad65374e",
+      "finalStepId": "synthesis-draft-step:ddc95724cb652c39ddc49bc5ad65374e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:6404ba15743c9ce505a8bbdaddb2bc51",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-b3a6c3f5f81e45fc8f5b779079ba29ad",
+      "label": "Open Reaction Database reaction ord-b3a6c3f5f81e45fc8f5b779079ba29ad",
+      "url": "https://open-reaction-database.org/id/ord-b3a6c3f5f81e45fc8f5b779079ba29ad",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b3a6c3f5f81e45fc8f5b779079ba29ad"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

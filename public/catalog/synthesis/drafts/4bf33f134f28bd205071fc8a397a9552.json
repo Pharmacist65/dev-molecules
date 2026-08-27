@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:4bf33f134f28bd205071fc8a397a9552",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:sulfamethizole-vaccavuamidagb-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:sulfamethizole-vaccavuamidagb-uhfffaoysa-n",
+    "preferredName": "Sulfamethizole",
+    "pubChemCid": 5328,
+    "inchiKey": "VACCAVUAMIDAGB-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:41f929adaf3d5bc0ee7710a060210677",
+      "label": "4-Amino-N-(5-methyl-1,3,4-thiadiazol-2-yl)benzenesulfonamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "NC1=CC=C(C=C1)S(=O)(=O)NC=1SC(=NN1)C",
+      "inchiKey": "VACCAVUAMIDAGB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7",
+      "label": "Na2CO3",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)([O-])[O-].[Na+].[Na+]",
+      "inchiKey": "CDBYLPFSWZWCQE-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d47199b127e0fb05ff7f5649ed8d4f1f",
+      "label": "N-(4-(N-(5-Methyl-1,3,4-thiadiazol-2-yl)sulfamoyl)phenyl)acetamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1=NN=C(S1)NS(=O)(=O)C1=CC=C(C=C1)NC(C)=O",
+      "inchiKey": "PMDSJEXWWAYJPT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:b9e77012a6241521ea3dd9992acb3e75",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:d47199b127e0fb05ff7f5649ed8d4f1f",
+        "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:41f929adaf3d5bc0ee7710a060210677"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c10484b4907d4c98abaddb14bbe3c094",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:b9e77012a6241521ea3dd9992acb3e75",
+      "finalStepId": "synthesis-draft-step:b9e77012a6241521ea3dd9992acb3e75",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c10484b4907d4c98abaddb14bbe3c094",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-34bb1545e18d4b45864f64523c904264",
+      "label": "Open Reaction Database reaction ord-34bb1545e18d4b45864f64523c904264",
+      "url": "https://open-reaction-database.org/id/ord-34bb1545e18d4b45864f64523c904264",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-34bb1545e18d4b45864f64523c904264"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

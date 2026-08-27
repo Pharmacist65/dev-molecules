@@ -45,6 +45,11 @@ import {
   PUBLIC_SAFE_PRIVATE_ROUTE_AGGREGATE,
 } from "./public-safe-route-aggregate.mjs";
 import { aggregateLicenseState } from "./source-adapters.mjs";
+import {
+  assemblePublicAlphaSynthesisDrafts,
+  loadSynthesisSourceContentRunSummary,
+  writePublicAlphaSynthesisDraftAssembly,
+} from "./assemble-public-drafts.mjs";
 
 export const synthesisPublicOutputUrl = new URL(
   "../../public/catalog/synthesis/",
@@ -932,6 +937,8 @@ export interface PublishedSynthesisSnapshotSummary {
   readonly evidenceRecords: number;
   readonly privateRouteAggregateCount: number;
   readonly publishedRouteDetails: number;
+  readonly publicAlphaDraftRoutes: number;
+  readonly publicAlphaDraftGraphs: number;
   readonly shardCount: number;
   readonly outputPath: string;
 }
@@ -955,11 +962,34 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
     extraction.assessments,
     routes,
   );
-  const publicCoverage = createPublicSynthesisCoverageProjection(
+  const draftAssembly = assemblePublicAlphaSynthesisDrafts({
+    coverage: canonicalCoverage,
+    evidence,
+    assessments: extraction.assessments,
+    segments: extraction.resolvedSegments,
+    generatedAt,
+    sourceContent: await loadSynthesisSourceContentRunSummary(),
+  });
+  await writePublicAlphaSynthesisDraftAssembly(draftAssembly);
+  const publicCoverageProjection = createPublicSynthesisCoverageProjection(
     canonicalCoverage,
     routes,
     evidence,
   );
+  const publicCoverage = publicCoverageProjection.map((record) => {
+    const publicAlphaDrafts = draftAssembly.referencesByCoverageId.get(record.id) ?? [];
+    if (publicAlphaDrafts.length === 0) return { ...record, publicAlphaDrafts: [] };
+    return {
+      ...record,
+      publicAlphaDrafts,
+      unresolvedReasons: [
+        ...record.unresolvedReasons.filter((reason) =>
+          !reason.startsWith("Reported synthesis: Not resolved")
+        ),
+        "Source-supported public-alpha draft available; expert review, reaction classification and upstream completion remain pending.",
+      ],
+    };
+  });
   const canonicalEvidenceById = new Map(evidence.map((item) => [item.id, item] as const));
   const publicEvidence = uniqueEvidence(publicCoverage.flatMap((record) =>
     record.sourceEvidenceIds.flatMap((id) => {
@@ -1061,6 +1091,30 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
     generatedAt,
     routes: routeIndex,
   });
+  const publicDraftArtifacts = [];
+  for (const graph of draftAssembly.graphs) {
+    const artifact = await writePublicJson(
+      `drafts/${graph.graphId.slice("synthesis-draft-graph:".length)}.json`,
+      graph,
+    );
+    publicDraftArtifacts.push(artifact);
+  }
+  const publicDraftIndexArtifact = await writePublicJson("drafts/index.json", {
+    schemaVersion: 1,
+    channel: "public_alpha_source_supported_draft",
+    catalogSnapshotId: discovery.manifest.catalogSnapshotId,
+    generatedAt,
+    graphs: draftAssembly.graphs.map((graph) => {
+      const reference = draftAssembly.referencesByCoverageId.get(graph.identity.coverageId)?.[0];
+      if (!reference) throw new Error(`Missing public-alpha reference for ${graph.graphId}.`);
+      return {
+        ...reference,
+        catalogEntityId: graph.identity.catalogEntityId,
+        pubChemCid: graph.identity.pubChemCid,
+        inchiKey: graph.identity.inchiKey,
+      };
+    }),
+  });
 
   const discoveryMetadataByCoverageId = new Map(
     discovery.subjects.map((result) => [
@@ -1068,13 +1122,16 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
       result.adapters.map((adapter) => adapter.metadata),
     ] as const),
   );
-  const coverageReport = createCoverageReport(
+  const coverageReport = {
+    ...createCoverageReport(
     canonicalCoverage,
     routes,
     evidence,
     discoveryMetadataByCoverageId,
     generatedAt,
-  );
+    ),
+    publicAlphaDraftAssembly: draftAssembly.report,
+  };
   const licensingReport = createLicensingReport(
     canonicalCoverage,
     evidence,
@@ -1140,6 +1197,14 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
     bySourceFamily: PUBLIC_SAFE_PRIVATE_ROUTE_AGGREGATE.bySourceFamily,
     pendingDirectSegmentsExcludedFromRouteCount: extraction.ordAudit.directSegmentCandidateCount,
     routeDetailRecordsPublished: false,
+    publicAlphaDraftChannel: {
+      channel: "public_alpha_source_supported_draft",
+      publicDraftRoutes: draftAssembly.report.publicDraftRoutes,
+      partialRoutes: draftAssembly.report.partialRoutes,
+      routeGraphs: draftAssembly.report.routeGraphs,
+      teachingReconstructions: draftAssembly.report.teachingReconstructions,
+      reviewedRoutes: draftAssembly.report.reviewedRoutes,
+    },
   };
   const licenseRightsReport = {
     schemaVersion: 1,
@@ -1238,6 +1303,10 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
     "reports/ord-resolution.json",
     { schemaVersion: 1, generatedAt, ...extraction.ordAudit },
   );
+  const routeAssemblyArtifact = await writePublicJson(
+    "reports/route-assembly.json",
+    draftAssembly.report,
+  );
   const migrationReportArtifact = await writePublicJson(
     "reports/migration.json",
     {
@@ -1281,6 +1350,14 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
       withheldDetailCount:
         PUBLIC_SAFE_PRIVATE_ROUTE_AGGREGATE.routeCount - publishedRouteArtifacts.length,
     },
+    drafts: {
+      channel: "public_alpha_source_supported_draft",
+      index: publicDraftIndexArtifact,
+      details: publicDraftArtifacts,
+      publishedDraftCount: draftAssembly.report.publicDraftRoutes,
+      routeGraphCount: draftAssembly.report.routeGraphs,
+      reviewedRouteCount: 0,
+    },
     reports: {
       coverage: coverageReportArtifact,
       licensing: licensingReportArtifact,
@@ -1294,6 +1371,7 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
       licenseRights: licenseRightsArtifact,
       errorSummary: errorSummaryArtifact,
       ordResolution: ordResolutionArtifact,
+      routeAssembly: routeAssemblyArtifact,
       migration: migrationReportArtifact,
       validation: validationArtifact,
     },
@@ -1303,6 +1381,7 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
       rawProviderPayloadsPublished: false,
       extractionAssociationAuditsPublished: false,
       resolvedSegmentRecordsPublished: false,
+      independentOrdStructureRedrawsPublished: true,
     },
     extraction: extraction.manifest,
   };
@@ -1313,6 +1392,8 @@ export const publishSynthesisSnapshot = async (): Promise<PublishedSynthesisSnap
     evidenceRecords: publicEvidence.length,
     privateRouteAggregateCount: PUBLIC_SAFE_PRIVATE_ROUTE_AGGREGATE.routeCount,
     publishedRouteDetails: publishedRouteArtifacts.length,
+    publicAlphaDraftRoutes: draftAssembly.report.publicDraftRoutes,
+    publicAlphaDraftGraphs: draftAssembly.report.routeGraphs,
     shardCount: shardArtifacts.length,
     outputPath: synthesisPublicOutputUrl.pathname,
   };

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:23d5f294ec6022eeea7cdd95aa79d198",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:felbamate-wkgxyqfocvypac-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:felbamate-wkgxyqfocvypac-uhfffaoysa-n",
+    "preferredName": "Felbamate",
+    "pubChemCid": 3331,
+    "inchiKey": "WKGXYQFOCVYPAC-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:14a0bb28954ef74d9782cb4f23d6a0aa",
+      "label": "acetonitrile",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)#N",
+      "inchiKey": "WEVYAHXRMPXWCK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:25e5bfde6c8da83af4c8393aebbf3dc6",
+      "label": "2-phenyl-1,3-propanediol",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(=CC=CC=C1)C(CO)CO",
+      "inchiKey": "BPBDZXFJDMJLIB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:969cef16e54a9430fe2b2d95ad2cc8a9",
+      "label": "Felbamate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C=1C=CC(=CC1)C(COC(=O)N)COC(=O)N",
+      "inchiKey": "WKGXYQFOCVYPAC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e4245bd3a50c458754decc77a9fce102",
+      "label": "chlorosulfonyl isocyanate",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClS(=O)(=O)N=C=O",
+      "inchiKey": "WRJWRGBVPUUDLA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+      "label": "water",
+      "displayRole": "source_input",
+      "sourceSmiles": "O",
+      "inchiKey": "XLYOFNOQVPJJNP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:c6cc02ca4cf1aa1a614df9637058f61d",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:25e5bfde6c8da83af4c8393aebbf3dc6",
+        "synthesis-draft-material:14a0bb28954ef74d9782cb4f23d6a0aa",
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+        "synthesis-draft-material:e4245bd3a50c458754decc77a9fce102"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:969cef16e54a9430fe2b2d95ad2cc8a9"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:848409bafaa61d1ce1ccfb0ed78c18ba",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:c6cc02ca4cf1aa1a614df9637058f61d",
+      "finalStepId": "synthesis-draft-step:c6cc02ca4cf1aa1a614df9637058f61d",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:848409bafaa61d1ce1ccfb0ed78c18ba",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c58fdad8c9eb436590fffb75692ef5a1",
+      "label": "Open Reaction Database reaction ord-c58fdad8c9eb436590fffb75692ef5a1",
+      "url": "https://open-reaction-database.org/id/ord-c58fdad8c9eb436590fffb75692ef5a1",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c58fdad8c9eb436590fffb75692ef5a1"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

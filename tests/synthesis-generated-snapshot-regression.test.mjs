@@ -76,6 +76,8 @@ test("generated synthesis snapshot remains validator-clean at the audited releas
     coverageRecords: 1_552,
     evidenceRecords: 0,
     privateRouteAggregateCount: 6,
+    publicAlphaDraftRoutes: 2_645,
+    publicAlphaDraftGraphs: 639,
     shardCount: 25,
     warningCount: 0,
     errorCount: 0,
@@ -183,6 +185,11 @@ test("public synthesis shards and route artifacts exclude raw reaction data and 
   assert.equal(manifest.routes.publishedDetailCount, 0);
   assert.equal(manifest.routes.withheldDetailCount, 6);
   assert.deepEqual(manifest.routes.details, []);
+  assert.equal(manifest.drafts.channel, "public_alpha_source_supported_draft");
+  assert.equal(manifest.drafts.publishedDraftCount, 2_645);
+  assert.equal(manifest.drafts.routeGraphCount, 639);
+  assert.equal(manifest.drafts.reviewedRouteCount, 0);
+  assert.equal(manifest.drafts.details.length, 639);
 
   const publicRecords = [];
   for (const descriptor of manifest.shards) {
@@ -192,6 +199,14 @@ test("public synthesis shards and route artifacts exclude raw reaction data and 
   assert.equal(publicRecords.length, 1_552);
   assert.ok(publicRecords.every((record) => record.applicability === "unclear"));
   assert.ok(publicRecords.every((record) => record.routes.length === 0));
+  assert.equal(publicRecords.filter((record) => record.publicAlphaDrafts.length > 0).length, 639);
+  assert.equal(
+    publicRecords.flatMap((record) => record.publicAlphaDrafts).reduce(
+      (sum, draft) => sum + draft.draftRouteCount,
+      0,
+    ),
+    2_645,
+  );
   assert.ok(publicRecords.every((record) => record.sourceEvidenceIds.length === 0));
   assert.ok(publicRecords.every((record) => record.evidenceDetailsRedacted === true));
   assert.ok(publicRecords.every((record) =>
@@ -220,6 +235,48 @@ test("public synthesis shards and route artifacts exclude raw reaction data and 
 
   const routeIndex = await readJson("routes/index.json");
   assert.deepEqual(routeIndex.routes, []);
+
+  const draftIndex = await readJson("drafts/index.json");
+  assert.equal(draftIndex.channel, "public_alpha_source_supported_draft");
+  assert.equal(draftIndex.graphs.length, 639);
+  assert.equal(draftIndex.graphs.reduce((sum, graph) => sum + graph.draftRouteCount, 0), 2_645);
+});
+
+test("public-alpha assembly reports exact route, graph, bridge, and review boundaries", async () => {
+  const report = await readJson("reports/route-assembly.json");
+  assert.equal(report.directSourceSegmentsExamined, 2_645);
+  assert.equal(report.directSourceSegmentsAdmitted, 2_645);
+  assert.equal(report.directSourceSegmentsRejected, 0);
+  assert.equal(report.sourceLocatorCandidateDocumentsExamined, 1_720);
+  assert.equal(report.sourceLocatorCandidateDocumentsPromotedToSteps, 0);
+  assert.equal(report.accessibleFullTextDocumentsPreviouslyInspected, 4_644);
+  assert.equal(report.publicDraftRoutes, 2_645);
+  assert.equal(report.partialRoutes, 2_645);
+  assert.equal(report.routeGraphs, 639);
+  assert.equal(report.extractedSteps, 2_645);
+  assert.equal(report.resolvedIntermediates, 73);
+  assert.equal(report.exactTeachingBridgeCount, 3_033);
+  assert.equal(report.unresolvedGaps, 2_645);
+  assert.equal(report.teachingReconstructions, 231);
+  assert.equal(report.reviewedRoutes, 0);
+  assert.deepEqual(report.coverageSurfaceCounts, {
+    public_draft_partial: 639,
+    candidate_only: 529,
+    no_supporting_source_resolved: 384,
+  });
+  assert.deepEqual(report.byCompleteness, {
+    partial: 0,
+    upstream_gap: 2_587,
+    convergent_partial: 58,
+  });
+  assert.deepEqual(report.invariants, {
+    noNewDiscoveryPerformed: true,
+    everyPublishedStepHasExactTargetAssociation: true,
+    everyPublishedStepHasExactLocator: true,
+    everyPublishedStructureIsIndependentRedrawInput: true,
+    operationalDetailsPublished: false,
+    pendingDisplayedAsReviewedOrVerified: false,
+  });
 });
 
 test("terminalization reports prove complete independent dimensions and the stereo collision guard", async () => {

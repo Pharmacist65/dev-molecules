@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:c68d9e946a4e1a26df926887373d1454",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cabergoline-korntppjeajqiu-kjxaqdmksa-n",
+    "catalogEntityId": "molecule:imported:cabergoline-korntppjeajqiu-kjxaqdmksa-n",
+    "preferredName": "Cabergoline",
+    "pubChemCid": 54746,
+    "inchiKey": "KORNTPPJEAJQIU-KJXAQDMKSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0f0b0aa292501eb29a73cf5c95836f42",
+      "label": "allyl acetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OCC=C",
+      "inchiKey": "FWZUNOYOVVKUNF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+      "label": "ethyldiisopropylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N(C(C)C)C(C)C",
+      "inchiKey": "JGFZNNIVVJXRND-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6c0dfea646910bb6db82ad0fdb59c218",
+      "label": "cabergoline",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CCNC(=O)N(CCCN(C)C)C(=O)[C@@H]1C[C@@H]2C3=CC=CC4=C3C(=CN4)C[C@H]2N(C1)CC=C",
+      "inchiKey": "KORNTPPJEAJQIU-KJXAQDMKSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:75f1aadff566a2996749aa992ba35bb6",
+      "label": "N-(3-dimethylaminopropyl)-N′-ethylcarbodiimide hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl.CN(CCCN=C=NCC)C",
+      "inchiKey": "FPQQSJJWHUJYPU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7a9d8c6003261fff058494611aa32251",
+      "label": "dimethylformamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C=O)C",
+      "inchiKey": "ZMXDDKWLCZADIW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:aca7baf72e1b2557aaa448a5bfb4acb9",
+      "label": "N-[3-(dimethylamino)propyl]-N-[(ethylamino)carbonyl)-ergoline-8β-carboxamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(CCCN(C(=O)[C@H]1CN[C@@H]2CC3=CNC4=CC=CC([C@H]2C1)=C34)C(=O)NCC)C",
+      "inchiKey": "XOLPCQSBSDIBGB-YVWKXTFCSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e34415936f0502c492c45309dd596731",
+      "label": "(9R)-7-allyl-4,6,6a,7,8,9,10,10a-octahydroindolo[4,3-fg]quinoline-9-carboxylic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C=C)N1C[C@@H](CC2C3=C4C(CC12)=CNC4=CC=C3)C(=O)O",
+      "inchiKey": "YAICYXFUKKMAKO-XEBKBJJBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:d83c5dc179c9c714bb398b16d1702b1a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:e34415936f0502c492c45309dd596731",
+        "synthesis-draft-material:75f1aadff566a2996749aa992ba35bb6",
+        "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+        "synthesis-draft-material:7a9d8c6003261fff058494611aa32251"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:6c0dfea646910bb6db82ad0fdb59c218"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8f8a3c56e126cdbe0ff17d437844b304",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:b52b2f627b48d29bd2dea04ee83e3151",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:aca7baf72e1b2557aaa448a5bfb4acb9",
+        "synthesis-draft-material:0f0b0aa292501eb29a73cf5c95836f42"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:6c0dfea646910bb6db82ad0fdb59c218"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e67e29ed740078183159cd976344ade5",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:d83c5dc179c9c714bb398b16d1702b1a",
+      "finalStepId": "synthesis-draft-step:d83c5dc179c9c714bb398b16d1702b1a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:b52b2f627b48d29bd2dea04ee83e3151",
+      "finalStepId": "synthesis-draft-step:b52b2f627b48d29bd2dea04ee83e3151",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:8f8a3c56e126cdbe0ff17d437844b304",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-14e1ef68799b45b18b7a7591191fb501",
+      "label": "Open Reaction Database reaction ord-14e1ef68799b45b18b7a7591191fb501",
+      "url": "https://open-reaction-database.org/id/ord-14e1ef68799b45b18b7a7591191fb501",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-14e1ef68799b45b18b7a7591191fb501"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e67e29ed740078183159cd976344ade5",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c817a92571974bdc94728898e3237df6",
+      "label": "Open Reaction Database reaction ord-c817a92571974bdc94728898e3237df6",
+      "url": "https://open-reaction-database.org/id/ord-c817a92571974bdc94728898e3237df6",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c817a92571974bdc94728898e3237df6"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

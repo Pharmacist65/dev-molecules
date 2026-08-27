@@ -1,5 +1,8 @@
 import { discoverSynthesisCatalog } from "./discover-catalog.mjs";
-import { extractSynthesisEvidenceCandidates } from "./extract-candidates.mjs";
+import {
+  extractSynthesisEvidenceCandidates,
+  loadCompletedSynthesisExtraction,
+} from "./extract-candidates.mjs";
 import {
   migrateLegacySynthesisRoutes,
   type PrivateSynthesisMigrationInput,
@@ -9,6 +12,12 @@ import {
   readPublishedSynthesisCoverageReport,
 } from "./publish-snapshot.mjs";
 import { validateGeneratedSynthesisSnapshot } from "./validate-generated-snapshot.mjs";
+import { loadAcceptedSynthesisDiscoveryBaseline } from "./discover-catalog.mjs";
+import {
+  assemblePublicAlphaSynthesisDrafts,
+  loadSynthesisSourceContentRunSummary,
+  writePublicAlphaSynthesisDraftAssembly,
+} from "./assemble-public-drafts.mjs";
 
 const command = process.argv[2];
 const args = process.argv.slice(3);
@@ -79,6 +88,20 @@ const run = async (): Promise<unknown> => {
         journalIdentity: result.journalIdentityAudit,
       };
     }
+    case "assemble": {
+      const discovery = await loadAcceptedSynthesisDiscoveryBaseline();
+      const extraction = await loadCompletedSynthesisExtraction();
+      const result = assemblePublicAlphaSynthesisDrafts({
+        coverage: discovery.subjects.map((subject) => subject.coverage),
+        evidence: discovery.subjects.flatMap((subject) => subject.evidence),
+        assessments: extraction.assessments,
+        segments: extraction.resolvedSegments,
+        generatedAt: extraction.manifest.generatedAt,
+        sourceContent: await loadSynthesisSourceContentRunSummary(),
+      });
+      await writePublicAlphaSynthesisDraftAssembly(result);
+      return { ...result.report, rejectionCounts: result.rejectionCounts };
+    }
     case "publish":
       return publishSynthesisSnapshot();
     case "validate":
@@ -105,7 +128,7 @@ const run = async (): Promise<unknown> => {
     }
     default:
       throw new Error(
-        "Usage: cli.mts <discover|extract|migrate|publish|validate|report|all> " +
+        "Usage: cli.mts <discover|extract|assemble|migrate|publish|validate|report|all> " +
           "[--refresh] [--refresh-open-access] [--concurrency=N] [--access-concurrency=N] " +
           "[--timeout-ms=N] [--max-retries=N] [--max-candidates=N] " +
           "[--private-input=/path/to/private-canonical-input.json]",

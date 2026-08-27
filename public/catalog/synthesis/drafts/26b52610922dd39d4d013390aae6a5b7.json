@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:26b52610922dd39d4d013390aae6a5b7",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:dihydroergotamine-luzrjrnzxalnlm-jgrzulcmsa-n",
+    "catalogEntityId": "molecule:imported:dihydroergotamine-luzrjrnzxalnlm-jgrzulcmsa-n",
+    "preferredName": "Dihydroergotamine",
+    "pubChemCid": 10531,
+    "inchiKey": "LUZRJRNZXALNLM-JGRZULCMSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:157578a829db0a07940d0af4afb0af67",
+      "label": "sodium acetate acetic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)[O-].[Na+].C(C)(=O)O",
+      "inchiKey": "BHZOKUMUHVTPBX-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:66ddae7c27984a1910acee37f234e9ff",
+      "label": "dihydroergotamine mesylate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@@]1(C(=O)N2[C@H](C(=O)N3CCC[C@H]3[C@@]2(O1)O)CC=4C=CC=CC4)NC(=O)[C@@H]5C[C@@H]6C7=CC=CC8=C7C(=CN8)C[C@H]6N(C5)C.CS(=O)(=O)O",
+      "inchiKey": "ADYPXRFPBQGGAH-UMYZUSPBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ae557b13fce648e15b9c7c9582ca07b9",
+      "label": "ethylene oxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1CO1",
+      "inchiKey": "IAYPIBMASNFSPL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c5b05ece0047f33d946f6275803bc766",
+      "label": "Dihydroergotamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@@]1(C(=O)N2[C@H](C(=O)N3CCC[C@H]3[C@@]2(O1)O)CC=4C=CC=CC4)NC(=O)[C@@H]5C[C@@H]6C7=CC=CC8=C7C(=CN8)C[C@H]6N(C5)C",
+      "inchiKey": "LUZRJRNZXALNLM-JGRZULCMSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:eb161c6be96ce31bd44108155dd2915e",
+      "label": "cholesterin",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@H](CCCC(C)C)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC=C4[C@@]3(CC[C@@H](C4)O)C)C",
+      "inchiKey": "HVYWMOMLDIMFJA-DPAQBDIFSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:62964465537543ef4dddeb88ac552c84",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:66ddae7c27984a1910acee37f234e9ff",
+        "synthesis-draft-material:eb161c6be96ce31bd44108155dd2915e",
+        "synthesis-draft-material:ae557b13fce648e15b9c7c9582ca07b9",
+        "synthesis-draft-material:157578a829db0a07940d0af4afb0af67"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c5b05ece0047f33d946f6275803bc766"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6b3d37c076c09b08b9424078e8102cb4",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:62964465537543ef4dddeb88ac552c84",
+      "finalStepId": "synthesis-draft-step:62964465537543ef4dddeb88ac552c84",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:6b3d37c076c09b08b9424078e8102cb4",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-130b022a09fb456faddbc73aef3aa100",
+      "label": "Open Reaction Database reaction ord-130b022a09fb456faddbc73aef3aa100",
+      "url": "https://open-reaction-database.org/id/ord-130b022a09fb456faddbc73aef3aa100",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-130b022a09fb456faddbc73aef3aa100"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

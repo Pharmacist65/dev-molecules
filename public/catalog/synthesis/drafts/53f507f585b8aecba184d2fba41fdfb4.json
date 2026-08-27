@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:53f507f585b8aecba184d2fba41fdfb4",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:mirtazapine-ronzaemnmfqxra-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:mirtazapine-ronzaemnmfqxra-uhfffaoysa-n",
+    "preferredName": "Mirtazapine",
+    "pubChemCid": 4205,
+    "inchiKey": "RONZAEMNMFQXRA-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:4fbaaee3922b8a16e2475e3a103a169d",
+      "label": "K2CO3",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)([O-])[O-].[K+].[K+]",
+      "inchiKey": "BWHMMNNQKKPAPP-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7a9d8c6003261fff058494611aa32251",
+      "label": "DMF",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C)C=O",
+      "inchiKey": "ZMXDDKWLCZADIW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:aff94bec701fd34cb0881ee1e65d7e9e",
+      "label": "Mirtazapine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN1CCN2C3=C(C=CC=N3)CC=4C=CC=CC4C2C1",
+      "inchiKey": "RONZAEMNMFQXRA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:dee6890cba8432b380b934139dfb2096",
+      "label": "10,11-dihydro-5H-benzo[e]pyrido[2,3-b]azepine-10-yl-(2-chloroethyl)-methylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "N1=CC=CC2=C1NC(C1=C(C2)C=CC=C1)N(C)CCCl",
+      "inchiKey": "DXDAJTFFGIVFBC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:be0e6e63fddc193155042cbde96fc6e4",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:dee6890cba8432b380b934139dfb2096",
+        "synthesis-draft-material:4fbaaee3922b8a16e2475e3a103a169d",
+        "synthesis-draft-material:7a9d8c6003261fff058494611aa32251"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:aff94bec701fd34cb0881ee1e65d7e9e"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c7cbef27456c5bdf17c941e1fdf8b16c",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:be0e6e63fddc193155042cbde96fc6e4",
+      "finalStepId": "synthesis-draft-step:be0e6e63fddc193155042cbde96fc6e4",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c7cbef27456c5bdf17c941e1fdf8b16c",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-d05f32a8e48346cbb9ffd3805250145c",
+      "label": "Open Reaction Database reaction ord-d05f32a8e48346cbb9ffd3805250145c",
+      "url": "https://open-reaction-database.org/id/ord-d05f32a8e48346cbb9ffd3805250145c",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-d05f32a8e48346cbb9ffd3805250145c"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

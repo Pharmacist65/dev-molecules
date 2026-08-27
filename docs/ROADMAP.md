@@ -4,7 +4,7 @@
 
 Explore, Learn, Build, Teach, and Discover remain the product north star. Milestones sequence scientific, technical, and operational risk; they do not redefine the platform as a permanently small demo.
 
-The 15 curated molecule fixtures, 1,552-record generated catalog, privacy-safe six-route private migration aggregate, and 22 Nomenclature Academy exercises are current seed coverage. The withheld route rows live only in a local ignored review archive and are not revalidated by public CI. No schema, renderer, curriculum, or test may treat these counts as a product ceiling. The public synthesis-route index is currently empty by design.
+The 15 curated molecule fixtures, 1,552-record generated catalog, 2,645 pending public-alpha synthesis alternatives, privacy-safe six-route private migration aggregate, and 22 Nomenclature Academy exercises are current seed coverage. The withheld canonical route rows live only in a local ignored review archive and are not revalidated by public CI. No schema, renderer, curriculum, or test may treat these counts as a product ceiling. The official reviewed/verified synthesis-route index is currently empty by design.
 
 ## Current repository baseline
 
@@ -20,7 +20,7 @@ The current vertical slice implements:
 - 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors and the current Curated Dossier seed;
 - Story/Reference Curated Dossier surfaces whose classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review coverage fail independently;
 - an eight-module Academy map: five available modules, two coverage-dependent modules, and one planned standalone module;
-- a synthesis discovery and coverage pipeline spanning all 1,552 exact identities and 14,897 terminalized molecule–evidence associations, with a six-route private migration aggregate, locally archived withheld rows, and zero public route details;
+- a synthesis discovery and coverage pipeline spanning all 1,552 exact identities and 14,897 terminalized molecule–evidence associations, plus 2,645 pending public-alpha partial alternatives in 639 exact-identity graphs; the six-route private migration aggregate remains locally archived and official reviewed/verified route details remain zero;
 - eight Nomenclature Academy sections with 22 exercises over 20 parseable structures and 16 concrete response/widget types;
 - a route-lazy, on-device Ketcher 3.17.2 editor with exact static-catalog identity matching and explicit local JSON export;
 - a device-local Instructor package/progress-export boundary and an adapter-gated Reviewer Console;

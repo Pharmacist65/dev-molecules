@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:a236a9ab5787d7f0631fcca08f98e00d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:bupropion-snppwiuozrmyny-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:bupropion-snppwiuozrmyny-uhfffaoysa-n",
+    "preferredName": "Bupropion",
+    "pubChemCid": 444,
+    "inchiKey": "SNPPWIUOZRMYNY-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb",
+      "label": "Bupropion",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(C(=O)C=1C=CC=C(C1)Cl)NC(C)(C)C",
+      "inchiKey": "SNPPWIUOZRMYNY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a8a6e00e9f798f3f64c72f73b5635961",
+      "label": "HBr",
+      "displayRole": "source_input",
+      "sourceSmiles": "Br",
+      "inchiKey": "CPELXLSAUQHCOX-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7",
+      "label": "sodium carbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([O-])([O-])=O.[Na+].[Na+]",
+      "inchiKey": "CDBYLPFSWZWCQE-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+      "label": "Bupropion HCl",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C(=O)C=1C=CC=C(C1)Cl)NC(C)(C)C.Cl",
+      "inchiKey": "HEYVINCGKDONRU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:cb855c56efefa28f00eeea9d2e6155ac",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+        "synthesis-draft-material:a8a6e00e9f798f3f64c72f73b5635961"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:84876c86852f3bc4059e0279b21bce5a",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:1b89137cccdc7d4b908704d74c2433f6",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+        "synthesis-draft-material:a8a6e00e9f798f3f64c72f73b5635961"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:512b83e8d9da2ddfa64f440c8ab7cb75",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:f12e74ec45918a9d48b6ec2c6a4910ad",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+        "synthesis-draft-material:a8a6e00e9f798f3f64c72f73b5635961"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ca17db5e5672172b63551699d65587d7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:4c89dd8913e2285bc7b5ce4d01f22b14",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+        "synthesis-draft-material:a8a6e00e9f798f3f64c72f73b5635961"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0b7a8bbef5811c697b2260f39325a108",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:df0dad9f016fbb7e80a21e25a5d71437",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c2f381af8f23872ba90a693b4d48bf82",
+        "synthesis-draft-material:b6a603915f8d0ad3ec0ea19c73b06cb7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:8542b19ce4fd442d088957b2b3ce72bb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0f063ef1bde1bbff400ee6e50d050b9e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:cb855c56efefa28f00eeea9d2e6155ac",
+      "finalStepId": "synthesis-draft-step:cb855c56efefa28f00eeea9d2e6155ac",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:1b89137cccdc7d4b908704d74c2433f6",
+      "finalStepId": "synthesis-draft-step:1b89137cccdc7d4b908704d74c2433f6",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:f12e74ec45918a9d48b6ec2c6a4910ad",
+      "finalStepId": "synthesis-draft-step:f12e74ec45918a9d48b6ec2c6a4910ad",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:4c89dd8913e2285bc7b5ce4d01f22b14",
+      "finalStepId": "synthesis-draft-step:4c89dd8913e2285bc7b5ce4d01f22b14",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:df0dad9f016fbb7e80a21e25a5d71437",
+      "finalStepId": "synthesis-draft-step:df0dad9f016fbb7e80a21e25a5d71437",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:0b7a8bbef5811c697b2260f39325a108",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-3b0ddbd6c5e14446ae96e7cfcf942fef",
+      "label": "Open Reaction Database reaction ord-3b0ddbd6c5e14446ae96e7cfcf942fef",
+      "url": "https://open-reaction-database.org/id/ord-3b0ddbd6c5e14446ae96e7cfcf942fef",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3b0ddbd6c5e14446ae96e7cfcf942fef"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:0f063ef1bde1bbff400ee6e50d050b9e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1084c52b361d49a995c461e86b173649",
+      "label": "Open Reaction Database reaction ord-1084c52b361d49a995c461e86b173649",
+      "url": "https://open-reaction-database.org/id/ord-1084c52b361d49a995c461e86b173649",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1084c52b361d49a995c461e86b173649"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:512b83e8d9da2ddfa64f440c8ab7cb75",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2be4a9f0c4234b1583fcb1c5a1bfc8b9",
+      "label": "Open Reaction Database reaction ord-2be4a9f0c4234b1583fcb1c5a1bfc8b9",
+      "url": "https://open-reaction-database.org/id/ord-2be4a9f0c4234b1583fcb1c5a1bfc8b9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2be4a9f0c4234b1583fcb1c5a1bfc8b9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:84876c86852f3bc4059e0279b21bce5a",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0bdec235c312411fb41ac88aa27777e9",
+      "label": "Open Reaction Database reaction ord-0bdec235c312411fb41ac88aa27777e9",
+      "url": "https://open-reaction-database.org/id/ord-0bdec235c312411fb41ac88aa27777e9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0bdec235c312411fb41ac88aa27777e9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:ca17db5e5672172b63551699d65587d7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-123f2fbbee374d2bb470ef9e5103ce1c",
+      "label": "Open Reaction Database reaction ord-123f2fbbee374d2bb470ef9e5103ce1c",
+      "url": "https://open-reaction-database.org/id/ord-123f2fbbee374d2bb470ef9e5103ce1c",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-123f2fbbee374d2bb470ef9e5103ce1c"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

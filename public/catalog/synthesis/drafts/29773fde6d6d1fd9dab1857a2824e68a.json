@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:29773fde6d6d1fd9dab1857a2824e68a",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:spironolactone-lxmszdcajnlera-zhyrcanasa-n",
+    "catalogEntityId": "molecule:imported:spironolactone-lxmszdcajnlera-zhyrcanasa-n",
+    "preferredName": "Spironolactone",
+    "pubChemCid": 5833,
+    "inchiKey": "LXMSZDCAJNLERA-ZHYRCANASA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:154348af6b6cb79a852ad9bbbd771988",
+      "label": "thioacetic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=S)O",
+      "inchiKey": "DUYAAUVXQSMXQP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:1a4fb181820adc2f76702118a1171ba3",
+      "label": "p-toluene-sulfonic acid monohydrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "O.C1(=CC=C(C=C1)S(=O)(=O)O)C",
+      "inchiKey": "KJIFKLIQANRMOU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:92c060606d621dc87e51a7aa8ac397ef",
+      "label": "spironolactone",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(=O)S[C@@H]1CC2=CC(=O)CC[C@@]2([C@@H]3[C@@H]1[C@@H]4CC[C@]5([C@]4(CC3)C)CCC(=O)O5)C",
+      "inchiKey": "LXMSZDCAJNLERA-ZHYRCANASA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a3f3b01091d389602db45acf7dcbda01",
+      "label": "N-methyl-2-pyrrolidone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1C(CCC1)=O",
+      "inchiKey": "SECXISVLQFMRJM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ab6c9bdc690258c8c5de2d64dd02ff28",
+      "label": "17-hydroxy-3-oxo-17α-pregna-4,6-diene- 21-carboxylic acid γ-lactone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC12CCC(=O)C=C1C=CC3C2CCC4(C3CCC45CCC(=O)O5)C",
+      "inchiKey": "UJVLDDZCTMKXJK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:b486504f5b22d8eb9823e622c92a41b0",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:ab6c9bdc690258c8c5de2d64dd02ff28",
+        "synthesis-draft-material:a3f3b01091d389602db45acf7dcbda01",
+        "synthesis-draft-material:1a4fb181820adc2f76702118a1171ba3",
+        "synthesis-draft-material:154348af6b6cb79a852ad9bbbd771988"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:92c060606d621dc87e51a7aa8ac397ef"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:53da8cc35edb434813c846e02f831913",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:b486504f5b22d8eb9823e622c92a41b0",
+      "finalStepId": "synthesis-draft-step:b486504f5b22d8eb9823e622c92a41b0",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:53da8cc35edb434813c846e02f831913",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-a3936b898072444c81ec9c5d22f1ce68",
+      "label": "Open Reaction Database reaction ord-a3936b898072444c81ec9c5d22f1ce68",
+      "url": "https://open-reaction-database.org/id/ord-a3936b898072444c81ec9c5d22f1ce68",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a3936b898072444c81ec9c5d22f1ce68"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

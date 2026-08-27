@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:5d9380bb114278b7bd6774d727553e7a",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:terbinafine-domxuemwdbaqbq-wevvvxlnsa-n",
+    "catalogEntityId": "molecule:imported:terbinafine-domxuemwdbaqbq-wevvvxlnsa-n",
+    "preferredName": "Terbinafine",
+    "pubChemCid": 1549008,
+    "inchiKey": "DOMXUEMWDBAQBQ-WEVVVXLNSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:391d302fa87a19a97bf37bac812d0336",
+      "label": "EDTA disodium salt",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CN(CC(=O)O)CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Na+]",
+      "inchiKey": "ZGTMUACCHSMWAC-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:67bb79e1a4ec8c0e758f8059f1e2fbb2",
+      "label": "N-(trans-3-chloro-2-propenyl)-N-methyl-1-naphthalene-methylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl/C=C/CN(CC1=CC=CC2=CC=CC=C12)C",
+      "inchiKey": "IPIOOPDWWWBYPQ-BJMVGYQFSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c355d4222d6dd99aff7bd10bb411f7c6",
+      "label": "terbinafine hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C)(C)C#C/C=C/CN(C)CC=1C=CC=C2C1C=CC=C2.Cl",
+      "inchiKey": "BWMISRWJRUSYEX-SZKNIZGXSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d7d0333d1d53c0b6650d024fa70d0c33",
+      "label": "terbinafine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(C)(C)C#C/C=C/CN(C)CC=1C=CC=C2C1C=CC=C2",
+      "inchiKey": "DOMXUEMWDBAQBQ-WEVVVXLNSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:c4422734fdb4348e5ec5acb122c8620b",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:67bb79e1a4ec8c0e758f8059f1e2fbb2",
+        "synthesis-draft-material:391d302fa87a19a97bf37bac812d0336"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d7d0333d1d53c0b6650d024fa70d0c33"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b31fcb4295f8637c22f01430df8c7f49",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:eab7e6ec1b9365fdc721c2ce4821a813",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c355d4222d6dd99aff7bd10bb411f7c6"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d7d0333d1d53c0b6650d024fa70d0c33"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e67c2415dfa3a714adf447a6060627c8",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:c4422734fdb4348e5ec5acb122c8620b",
+      "finalStepId": "synthesis-draft-step:c4422734fdb4348e5ec5acb122c8620b",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:eab7e6ec1b9365fdc721c2ce4821a813",
+      "finalStepId": "synthesis-draft-step:eab7e6ec1b9365fdc721c2ce4821a813",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:b31fcb4295f8637c22f01430df8c7f49",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f4bb78528cd24f21ac9fcd3b7ec3fc94",
+      "label": "Open Reaction Database reaction ord-f4bb78528cd24f21ac9fcd3b7ec3fc94",
+      "url": "https://open-reaction-database.org/id/ord-f4bb78528cd24f21ac9fcd3b7ec3fc94",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f4bb78528cd24f21ac9fcd3b7ec3fc94"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e67c2415dfa3a714adf447a6060627c8",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-264059eabc304be78d9bf253c3e9b904",
+      "label": "Open Reaction Database reaction ord-264059eabc304be78d9bf253c3e9b904",
+      "url": "https://open-reaction-database.org/id/ord-264059eabc304be78d9bf253c3e9b904",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-264059eabc304be78d9bf253c3e9b904"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

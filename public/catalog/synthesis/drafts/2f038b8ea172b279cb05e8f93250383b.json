@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:2f038b8ea172b279cb05e8f93250383b",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:5-aza-2-deoxycytidine-xaudjqyhkzqpeu-kvqbguixsa-n",
+    "catalogEntityId": "molecule:imported:5-aza-2-deoxycytidine-xaudjqyhkzqpeu-kvqbguixsa-n",
+    "preferredName": "5-Aza-2'-deoxycytidine",
+    "pubChemCid": 451668,
+    "inchiKey": "XAUDJQYHKZQPEU-KVQBGUIXSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:23de86b3270041765323f6298b488a90",
+      "label": "4-amino-1-[3,5-di-O-(4-chloro-benzoyl)-2-deoxy-α-D-ribofuranosyl]-1H-[1,3,5]triazin-2-one",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC1=NC(N(C=N1)[C@@H]1C[C@H](OC(C2=CC=C(C=C2)Cl)=O)[C@H](O1)COC(C1=CC=C(C=C1)Cl)=O)=O",
+      "inchiKey": "TWEZWUPSUOJPMB-KSZLIROESA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c259b1a35aaf4293a5b6af08f7bbdf57",
+      "label": "decitabine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1[C@@H]([C@H](O[C@H]1N2C=NC(=NC2=O)N)CO)O",
+      "inchiKey": "XAUDJQYHKZQPEU-KVQBGUIXSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:da310a249de211890f5266a73e118b95",
+      "label": "Sodium methoxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[O-].[Na+]",
+      "inchiKey": "WQDUMFSSJAZKTM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f138717156674e1b0fcab2f26a7d4029",
+      "label": "4-amino-1-[3,5-di-O-(4-chloro-benzoyl)-2-deoxy-β-D-ribofuranosyl]-1H-[1,3,5]triazin-2-one",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC1=NC(N(C=N1)[C@H]1C[C@H](OC(C2=CC=C(C=C2)Cl)=O)[C@H](O1)COC(C1=CC=C(C=C1)Cl)=O)=O",
+      "inchiKey": "TWEZWUPSUOJPMB-RCCFBDPRSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:e9ffc12c11c2b1370b593a44dec7b80e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:f138717156674e1b0fcab2f26a7d4029",
+        "synthesis-draft-material:23de86b3270041765323f6298b488a90",
+        "synthesis-draft-material:da310a249de211890f5266a73e118b95"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c259b1a35aaf4293a5b6af08f7bbdf57"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3d820e422673ec10129219f26807a8e7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:e9ffc12c11c2b1370b593a44dec7b80e",
+      "finalStepId": "synthesis-draft-step:e9ffc12c11c2b1370b593a44dec7b80e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:3d820e422673ec10129219f26807a8e7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-dae8519b40a5496e8ebcdd2b77e48abb",
+      "label": "Open Reaction Database reaction ord-dae8519b40a5496e8ebcdd2b77e48abb",
+      "url": "https://open-reaction-database.org/id/ord-dae8519b40a5496e8ebcdd2b77e48abb",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-dae8519b40a5496e8ebcdd2b77e48abb"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

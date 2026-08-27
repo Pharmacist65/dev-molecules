@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:76cf032019e7262c6ad2b88135842258",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cortisol-jygxadmdtfjgbt-vwumjdoosa-n",
+    "catalogEntityId": "molecule:imported:cortisol-jygxadmdtfjgbt-vwumjdoosa-n",
+    "preferredName": "Cortisol",
+    "pubChemCid": 5754,
+    "inchiKey": "JYGXADMDTFJGBT-VWUMJDOOSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0b7db6d03a32078bf427274fe946fbda",
+      "label": "NADPH",
+      "displayRole": "source_input",
+      "sourceSmiles": "C=1N=C(C2=C(N1)N(C=N2)[C@H]3[C@@H]([C@@H]([C@H](O3)COP(=O)(O)OP(=O)(O)OC[C@@H]4[C@H]([C@H]([C@@H](O4)N5C=CCC(=C5)C(=O)N)O)O)O)OP(=O)(O)O)N",
+      "inchiKey": "ACFIXJIJDZMPPO-NNYOXOHSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:0f6d6061d55af97fe5e2321831cda4e4",
+      "label": "cortisone",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2C(=O)C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C",
+      "inchiKey": "MFYSYFVPBJMHGN-ZPOLXVRWSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:21694a6e917e626db20183966ca08db6",
+      "label": "glucose 6-phosphate",
+      "displayRole": "source_input",
+      "sourceSmiles": "P(=O)(O)(O)OC[C@H]([C@H]([C@@H]([C@H](C=O)O)O)O)O",
+      "inchiKey": "VFRROHXSMXFLSN-SLPGGIOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:77eb44af13d6cd321ad84a79a6102f9c",
+      "label": "cortisol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C)O",
+      "inchiKey": "JYGXADMDTFJGBT-VWUMJDOOSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c061243aa8913fd6a8e8dafd07770e01",
+      "label": "carbenoxolone",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@]12CC[C@](C[C@H]1C3=CC(=O)[C@@H]4[C@]5(CC[C@@H](C([C@@H]5CC[C@]4([C@@]3(CC2)C)C)(C)C)OC(=O)CCC(=O)O)C)(C)C(=O)O",
+      "inchiKey": "OBZHEBDUNPOCJG-WBXJDKIVSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:dcbb2f39789056d889d044ee391cd564",
+      "label": "magnesium chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Cl-].[Mg+2].[Cl-]",
+      "inchiKey": "TWRXJAOTZQYOKJ-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:1f7035c15f6e332d8450ded0ce96dfe6",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:0b7db6d03a32078bf427274fe946fbda",
+        "synthesis-draft-material:21694a6e917e626db20183966ca08db6",
+        "synthesis-draft-material:21694a6e917e626db20183966ca08db6",
+        "synthesis-draft-material:dcbb2f39789056d889d044ee391cd564",
+        "synthesis-draft-material:0f6d6061d55af97fe5e2321831cda4e4",
+        "synthesis-draft-material:c061243aa8913fd6a8e8dafd07770e01"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:77eb44af13d6cd321ad84a79a6102f9c"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d5a1a0e37f48b143900027d0f56026a1",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:1f7035c15f6e332d8450ded0ce96dfe6",
+      "finalStepId": "synthesis-draft-step:1f7035c15f6e332d8450ded0ce96dfe6",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:d5a1a0e37f48b143900027d0f56026a1",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5ff24abd4cfe4af096225f4452a1b8b8",
+      "label": "Open Reaction Database reaction ord-5ff24abd4cfe4af096225f4452a1b8b8",
+      "url": "https://open-reaction-database.org/id/ord-5ff24abd4cfe4af096225f4452a1b8b8",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5ff24abd4cfe4af096225f4452a1b8b8"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

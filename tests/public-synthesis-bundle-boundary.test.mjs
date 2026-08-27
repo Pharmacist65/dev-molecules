@@ -68,7 +68,7 @@ test("release artifacts are rejected for positive route claims and forced pendin
   ]);
 });
 
-test("built public artifacts contain no pending synthesis-detail canaries", async (context) => {
+test("built public artifacts contain no private canonical synthesis-detail canaries", async (context) => {
   try {
     await access(outputRoot);
   } catch {

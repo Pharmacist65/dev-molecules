@@ -1,0 +1,2579 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:4a3f38cf857e0b16b0c4022d32c2abf8",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:oxymorphone-uqcnkqcjzoaftq-iswurrpusa-n",
+    "catalogEntityId": "molecule:imported:oxymorphone-uqcnkqcjzoaftq-iswurrpusa-n",
+    "preferredName": "Oxymorphone",
+    "pubChemCid": 5284604,
+    "inchiKey": "UQCNKQCJZOAFTQ-ISWURRPUSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "convergent_partial",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+      "label": "noroxymorphone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23[C@@H]4C(=O)C=C[C@]2([C@H]1CC5=C3C(=C(C=C5)O)O4)O",
+      "inchiKey": "VFNHLTBRAFJQER-ISWURRPUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:162039c8a192e3e744f924bb2247c892",
+      "label": "hydrocodone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C4=C5C=CC(=C4O[C@H]2C(=O)CC[C@H]3[C@H]1C5)OC",
+      "inchiKey": "LLPOLZWFYMWNKH-CMKMFDCUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+      "label": "hydrogen",
+      "displayRole": "source_input",
+      "sourceSmiles": "[H][H]",
+      "inchiKey": "UFHFLCQGNIYNRP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:22fb44e9bbf129c38133a567a5f52590",
+      "label": "arsenic",
+      "displayRole": "source_input",
+      "sourceSmiles": "[As]",
+      "inchiKey": "RQNWIZPPADIBDY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:236938232c998626e692d55e73a1e306",
+      "label": "sodium percarbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)([O-])[O-].C(=O)([O-])[O-].OO.OO.OO.[Na+].[Na+].[Na+].[Na+]",
+      "inchiKey": "MSLRPWGRFCKNIZ-UHFFFAOYSA-J",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:25ceaa0f78a06838f88c8aba0ec31289",
+      "label": "Exact structure JMMWKPVZQRWMSS",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(=O)OC(C)C",
+      "inchiKey": "JMMWKPVZQRWMSS-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:26a2c1556a1eb52c12460e6035e8d59a",
+      "label": "arsenic sulfide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[S-2].[S-2].[S-2].[As+3].[As+3]",
+      "inchiKey": "CUGMJFZCCDSABL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:29aa9873e194cb901a3c0b9a2e3410f5",
+      "label": "DL-Methionine",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC(CCSC)C(=O)O",
+      "inchiKey": "FFEARJCKVFRZRR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:2aa5a0d5e43d0c07c08045b37b5b7dbf",
+      "label": "Oxycodone hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C4=C5C=CC(=C4O[C@H]2C(=O)CC[C@]3([C@H]1C5)O)OC.Cl",
+      "inchiKey": "MUZQPDBAOYKNLO-RKXJKUSZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:2cedc3684b54da2ab9b01eb4b40984a7",
+      "label": "oxygen",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=O",
+      "inchiKey": "MYMOFIZGZYHOMD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "label": "hydrogen peroxide",
+      "displayRole": "route_intermediate",
+      "sourceSmiles": "OO",
+      "inchiKey": "MHAJPDPJQMAIIY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+      "label": "Oripavine",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C4=C5C=CC(=C4O[C@H]2C(=CC=C3[C@H]1C5)OC)O",
+      "inchiKey": "ZKLXUUYLEHCAMF-UUWFMWQGSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:338c0d17f0f01fbefa79c87a64b0ead9",
+      "label": "N-cyclopropylmethyl-N-(2-ethyl-7-iodopyrazolo[1,5-a]pyridin e-3-yl)-N-(tetrahydro-2H-4-pyranylmethyl)amine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(CC1)CN(CC1CCOCC1)C=1C(=NN2C1C=CC=C2I)CC",
+      "inchiKey": "UDZCZUBVRLQXSO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+      "label": "N,N-diisopropylethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)N(C(C)C)CC",
+      "inchiKey": "JGFZNNIVVJXRND-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+      "label": "2-[(4-bromobenzyl)oxy]pyridine",
+      "displayRole": "source_input",
+      "sourceSmiles": "BrC1=CC=C(COC2=NC=CC=C2)C=C1",
+      "inchiKey": "BQHIGHWZFXQXAC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:41218f120c3902aeaf4b7e690afa9f07",
+      "label": "1-benzyl-3-(3,5-dichlorophenyl)-4-(phenylsulfonyl)-3-(trifluoromethyl)pyrrolidine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C1=CC=CC=C1)N1CC(C(C1)S(=O)(=O)C1=CC=CC=C1)(C(F)(F)F)C1=CC(=CC(=C1)Cl)Cl",
+      "inchiKey": "SXFWZFZAJQJTBI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:420dde67f48fa253c16c42e6f8cde31d",
+      "label": "Caro's acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "OOS(=O)(=O)O",
+      "inchiKey": "FHHJDRFHHWUPDG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:44fca20987cef77257ee584c3f0f6d46",
+      "label": "cAMP",
+      "displayRole": "source_input",
+      "sourceSmiles": "C=1N=C(C2=C(N1)N(C=N2)[C@H]3[C@@H]([C@H]4[C@H](O3)COP(=O)(O4)O)O)N",
+      "inchiKey": "IVOMOUWHDPKRLL-KQYNXXCUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:49421131222d5c77ee3980081af06c0a",
+      "label": "Urate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C12=C(NC(=O)N1)NC(=O)NC2=O",
+      "inchiKey": "LEHOTFFKMJEONL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4ba575d1ad73d3d71491be8da80434e2",
+      "label": "meta-chloroperoxybenzoic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC=1C=C(C(=O)OO)C=CC1",
+      "inchiKey": "NHQDETIJWKXCTC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+      "label": "Et3N",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCN(CC)CC",
+      "inchiKey": "ZMANZCXQSJIPKH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:517b9b28bc880266bf652a1bcdfb8bf7",
+      "label": "sodium iodide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[I-].[Na+]",
+      "inchiKey": "FVAUCKIRQBBSSJ-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:577bf186bf3b0f57070f1052cdbd90ca",
+      "label": "cyclopropylcarboxaldehyde",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1CC1C(C#N)O",
+      "inchiKey": "ILJKKAIQFPEIBL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5ac9e8d37954a4c6aaa0e20b7080d371",
+      "label": "thiourea",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC(=S)N",
+      "inchiKey": "UMGDCJDMYOKAJW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5c13a144ddf9796ac76d734c2ced77da",
+      "label": "Oxycodone acetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C4=C5C=CC(=C4O[C@H]2C(=O)CC[C@]3([C@H]1C5)O)OC.C(C)(=O)[O-]",
+      "inchiKey": "PVXJBXPACSLCEX-RKXJKUSZSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5d01db2436243a2199584910bd0086a2",
+      "label": "theophylline",
+      "displayRole": "source_input",
+      "sourceSmiles": "N1(C)C(=O)N(C)C=2N=CNC2C1=O",
+      "inchiKey": "ZFXYFBGIUFBOJW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+      "label": "Exact structure OKKJLVBELUTLKV",
+      "displayRole": "source_input",
+      "sourceSmiles": "CO",
+      "inchiKey": "OKKJLVBELUTLKV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6696db6a2695e61e2e90f7a96565376c",
+      "label": "n-butyllithium hexane",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCCCCC.C(CCC)[Li]",
+      "inchiKey": "ANUZKYYBDVLEEI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6e64a8deda19e2258852648b0c894ac8",
+      "label": "acetaminophen",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(=O)NC=1C=CC(=CC1)O",
+      "inchiKey": "RZVAJINKPMORJF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6ee60171a2b74644b63ab0c96a3a6067",
+      "label": "hydromorphone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C=4C5=CC=C(C4O[C@H]2C(=O)CC[C@H]3[C@H]1C5)O",
+      "inchiKey": "WVLOADHCBXTIJK-YNHQPCIGSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7207864bba633fa56cf1fa1f7b666752",
+      "label": "ammonium hydroxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[OH-].[NH4+]",
+      "inchiKey": "VHUUQVKOLVNVRT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:733deb73a84bda6694faeb6c820c7601",
+      "label": "4-{8-(cyclopentylamino)-3-[2-(cyclopentylamino)-4-pyrimidinyl]imidazo[1,2-α]pyridin-2-yl}benzonitrile",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(CCCC1)NC=1C=2N(C=CC1)C(=C(N2)C2=CC=C(C#N)C=C2)C2=NC(=NC=C2)NC2CCCC2",
+      "inchiKey": "WJDLDBKLZHQTFK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7443739b094f257cb0215901aea056c9",
+      "label": "roflumilast",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CC(=C(C=C1C(=O)NC=2C(=CN=CC2Cl)Cl)OCC3CC3)OC(F)F",
+      "inchiKey": "MNDBXUUTURYVHR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7d65c0da8ee99ce418170b1f68dd05a5",
+      "label": "methane sulphonic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "CS(=O)(=O)O",
+      "inchiKey": "AFVFQIVMOAPDHO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7d859e6f8112e00f7f1a2653f2e95af3",
+      "label": "dimethyl carbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(OC)(OC)=O",
+      "inchiKey": "IEJIGPNLZYLLBP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7f040bf994bd770f0644278459699e66",
+      "label": "sodium sulfate",
+      "displayRole": "source_input",
+      "sourceSmiles": "S(=O)(=O)([O-])[O-].[Na+].[Na+]",
+      "inchiKey": "PMZURENOXWZQFD-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:801afdf8736d3f6642553deaae86f862",
+      "label": "peracetic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OO",
+      "inchiKey": "KFSLWBXXFJQRDL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "label": "iso-propanol",
+      "displayRole": "route_intermediate",
+      "sourceSmiles": "C(C)(C)O",
+      "inchiKey": "KFZMGEQAYNKOFK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8a0ea2de3eb8d2bf08a05c1f55bcd450",
+      "label": "Magnesium",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Mg]",
+      "inchiKey": "FYYHWMGAXLPEAU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038",
+      "label": "sodium bicarbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([O-])(O)=O.[Na+]",
+      "inchiKey": "UIIMBOGNXHQVGW-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8db9b448b7ae0da2a9e2bc59b8d93905",
+      "label": "Ozone Hydrogen Peroxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=[O+][O-].OO",
+      "inchiKey": "ARYKTOJCZLAFIS-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9285d145b0908e34b95edbe652b6cd05",
+      "label": "Exact structure HZCDANOFLILNSA",
+      "displayRole": "source_input",
+      "sourceSmiles": "CO[PH](=O)OC",
+      "inchiKey": "HZCDANOFLILNSA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "hydrochloric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "label": "oxycodone",
+      "displayRole": "route_intermediate",
+      "sourceSmiles": "CN1CC[C@]23C4=C5C=CC(=C4O[C@H]2C(=O)CC[C@]3([C@H]1C5)O)OC",
+      "inchiKey": "BRUQQQPBMZOVGD-XFKAJCMBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a2809a050405d3fb61a0f1b5d8350198",
+      "label": "Ozone",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=[O+][O-]",
+      "inchiKey": "CBENFWSGALASAD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a66664fe2c88ada542cbcb98b3cee8ca",
+      "label": "noroxycodone",
+      "displayRole": "source_input",
+      "sourceSmiles": "COC1=C2C3=C(C[C@@H]4[C@]5([C@]3(CCN4)[C@@H](O2)C(=O)CC5)O)C=C1",
+      "inchiKey": "RIKMCJUNPCRFMW-ISWURRPUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+      "label": "Cyclopropylmethyl bromide",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1(CC1)CBr",
+      "inchiKey": "AEILLAXRDHDKDY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b7b4497ff8046c0cddb403c6fd952112",
+      "label": "triacetin",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(OCC(OC(C)=O)COC(C)=O)=O",
+      "inchiKey": "URAYPUMNDPQOKB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c1a34be77b2da3fe0f7bfc6f145a4b84",
+      "label": "Exact structure KXKVLQRXCPHEJC",
+      "displayRole": "source_input",
+      "sourceSmiles": "COC(C)=O",
+      "inchiKey": "KXKVLQRXCPHEJC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "label": "naltrexone",
+      "displayRole": "route_intermediate",
+      "sourceSmiles": "C1=CC(=C2C3=C1C[C@@H]4[C@]5([C@]3(CCN4CC6CC6)[C@@H](O2)C(=O)CC5)O)O",
+      "inchiKey": "DQCKKXVULJGBQN-XFWGSAIBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c87001f82f96eab89ad8c21b3381efc7",
+      "label": "morphine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CC(O)=C2C=3[C@@]45[C@@H](O2)[C@@H](O)C=C[C@H]4[C@@H](CC13)N(C)CC5",
+      "inchiKey": "BQJCRHHNABKAKU-KBQPJGBKSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c8fa8e1bef73ddd1e7a502b9dde01bc9",
+      "label": "lithium chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Cl-].[Li+]",
+      "inchiKey": "KWGKDLIKAYFUFQ-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+      "label": "14-hydroxymorphinone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23[C@@H]4C(=O)C=C[C@]2([C@@H]1CC5=C3C(=C(C=C5)O)O4)O",
+      "inchiKey": "VFNHLTBRAFJQER-OSMBCOQSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d4df907598b50320288c0efc9aee02f4",
+      "label": "14-hydroxycodeinone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CC[C@]23C4C(=O)C=C[C@]2([C@H]1CC5=C3C(=C(C=C5)OC)O4)O",
+      "inchiKey": "YYCRAERBSFHMPL-FSFXSCMFSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:db752d1edf7616606b3ccd24f5a83370",
+      "label": "phosphoric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "P(O)(O)(O)=O",
+      "inchiKey": "NBIIXXVUZAFLBC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:dbf27d7ee89c1eec7339f53e723dd8b7",
+      "label": "triisopropoxy borane",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)OB(OC(C)C)OC(C)C",
+      "inchiKey": "NHDIQVFFNDKAQU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e7598261f8d084b9cc0e66e28b2c85db",
+      "label": "N-ethyl-2-pyrrolidinone",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N1C(CCC1)=O",
+      "inchiKey": "ZFPGARUNNKGOBB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ec75512296b6fa6907fa34aa6cedfb48",
+      "label": "Ethyl tert-Butyl Ether",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)(C)OCC",
+      "inchiKey": "NUMQCACRALPSHD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a",
+      "label": "Oxymorphone",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN1CC[C@]23C=4C5=CC=C(C4O[C@H]2C(=O)CC[C@]3([C@H]1C5)O)O",
+      "inchiKey": "UQCNKQCJZOAFTQ-ISWURRPUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f771e24d5341aa722261795305aff1e7",
+      "label": "sodium hydroxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[OH-].[Na+]",
+      "inchiKey": "HEMHJVSKTPXQMS-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+      "label": "water",
+      "displayRole": "source_input",
+      "sourceSmiles": "O",
+      "inchiKey": "XLYOFNOQVPJJNP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fc141d30a908e62e22796aae634d4ca9",
+      "label": "tetrahydrofuran",
+      "displayRole": "source_input",
+      "sourceSmiles": "O1CCCC1",
+      "inchiKey": "WYURNTSHIVDZCO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fe35204496ef48977c3017613839748f",
+      "label": "N-cyclopropylmethylnoroxycodone",
+      "displayRole": "source_input",
+      "sourceSmiles": "COC1=C2C3=C(C[C@@H]4[C@]5([C@]3(CCN4CC6CC6)[C@@H](O2)C(=O)CC5)O)C=C1",
+      "inchiKey": "DSMNGWOUQMYTJH-MBPVOVBZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ffa2e55ebff978acffa14f13e699ddc0",
+      "label": "tetrahydrofuran methanol",
+      "displayRole": "source_input",
+      "sourceSmiles": "O1CCCC1.CO",
+      "inchiKey": "GRWIABMEEKERFV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2404f6f55a31c9a83f1b97f4cb340141",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:577bf186bf3b0f57070f1052cdbd90ca",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:bf7c10044d835fe29c5b701c75b9690f",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:02b9720507a82f6068c3131da7c2d82e",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0201b395654fe26632d0961e4a820f37",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:29d96984385003d07c436c1aa8959363",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b7b4497ff8046c0cddb403c6fd952112",
+        "synthesis-draft-material:236938232c998626e692d55e73a1e306",
+        "synthesis-draft-material:801afdf8736d3f6642553deaae86f862"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6752292e7d29cf315b9df7aa7e2dde47",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:2381d2144cdd85e7782d8aa79df19e4a",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:8c2b92cf50ff58e56653271f97f47038",
+        "synthesis-draft-material:517b9b28bc880266bf652a1bcdfb8bf7",
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:33d8dcb8cfe48809f117deefcf4daa32",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:fa92b8738c5788758eb3a3315765d980",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:49421131222d5c77ee3980081af06c0a",
+        "synthesis-draft-material:49421131222d5c77ee3980081af06c0a",
+        "synthesis-draft-material:2cedc3684b54da2ab9b01eb4b40984a7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c4b97fb27c246b9e51a0ce94fdbbc772",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:fc4d91a17cc059ccf2714e5d12bd99c4",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:2aa5a0d5e43d0c07c08045b37b5b7dbf"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:59e972054daceba02682fac40ab1ec96",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:0cd0342b9682f61ca6b74492469669db",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:8a0ea2de3eb8d2bf08a05c1f55bcd450",
+        "synthesis-draft-material:c8fa8e1bef73ddd1e7a502b9dde01bc9",
+        "synthesis-draft-material:41218f120c3902aeaf4b7e690afa9f07",
+        "synthesis-draft-material:8a0ea2de3eb8d2bf08a05c1f55bcd450",
+        "synthesis-draft-material:8a0ea2de3eb8d2bf08a05c1f55bcd450",
+        "synthesis-draft-material:8a0ea2de3eb8d2bf08a05c1f55bcd450",
+        "synthesis-draft-material:f771e24d5341aa722261795305aff1e7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:587377b4a74e3f9b15034fa7edde4d86",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:d03417e8562f3242b161b5c1b0788970",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:ffa2e55ebff978acffa14f13e699ddc0",
+        "synthesis-draft-material:733deb73a84bda6694faeb6c820c7601",
+        "synthesis-draft-material:7207864bba633fa56cf1fa1f7b666752"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b7c1e6085cb2fc6dd90696f7bcca341b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:9cdc6b999403a32aa8d48d99606a06f1",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+        "synthesis-draft-material:a66664fe2c88ada542cbcb98b3cee8ca",
+        "synthesis-draft-material:fe35204496ef48977c3017613839748f",
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:fcb60a4958902090277681ba391417e5",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:74fad713d261f785e966f1108ef3aece",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:db752d1edf7616606b3ccd24f5a83370",
+        "synthesis-draft-material:f771e24d5341aa722261795305aff1e7",
+        "synthesis-draft-material:5ac9e8d37954a4c6aaa0e20b7080d371",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+        "synthesis-draft-material:d4df907598b50320288c0efc9aee02f4",
+        "synthesis-draft-material:d4df907598b50320288c0efc9aee02f4"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:384843ed2ec47be7b5ff404a2e1d703c",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:eccec159351f62802880117ec77abba4",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:4ba575d1ad73d3d71491be8da80434e2",
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:29fc6205706b0bc7ef293dec4ad47ced",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:1338cd6e1552afa3c165323df5436a21",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:aba3f6b256f8a5adfa0420faff9c7c06",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:3bfacd789446dc763286e5d0f2de40fa",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b7b4497ff8046c0cddb403c6fd952112",
+        "synthesis-draft-material:236938232c998626e692d55e73a1e306",
+        "synthesis-draft-material:801afdf8736d3f6642553deaae86f862"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b23069359ab35161b6c771277d87e03b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:3b9069ea3e5bf31fea5140fc40213481",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:4ba575d1ad73d3d71491be8da80434e2",
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0",
+        "synthesis-draft-material:cb6f4f1e79c09db4f2fe8264a3a3fc00"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6cf71489398a1cc3e9bfc3ef60097a24",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:87319833c6b2b9c643cba1dca7b343fe",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:2aa5a0d5e43d0c07c08045b37b5b7dbf"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6f0d22b689a59626e54eb8ce599c95c7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:b521635a17fad797ddbdba7263571094",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:d4df907598b50320288c0efc9aee02f4"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1718b09f8ba8f217f7ac4368602898a1",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:874a73b2c69f5d82d8d26abf78a7ed0e",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:a2809a050405d3fb61a0f1b5d8350198",
+        "synthesis-draft-material:ec75512296b6fa6907fa34aa6cedfb48",
+        "synthesis-draft-material:a2809a050405d3fb61a0f1b5d8350198",
+        "synthesis-draft-material:8db9b448b7ae0da2a9e2bc59b8d93905",
+        "synthesis-draft-material:a2809a050405d3fb61a0f1b5d8350198",
+        "synthesis-draft-material:a2809a050405d3fb61a0f1b5d8350198"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:abcbe899aee500c425e65da7b3c9ba3e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:f05cc88032df512f416b28a4181d878a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:32ec2dd253734d08b660aac08fb65901",
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e638b01fafc63b528c3d767d534ebb0b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:08eefb803af2c0684b52dfd21b0062fe",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:5c13a144ddf9796ac76d734c2ced77da",
+        "synthesis-draft-material:7207864bba633fa56cf1fa1f7b666752",
+        "synthesis-draft-material:7f040bf994bd770f0644278459699e66"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:34ba3a0b906d66953ff45ab3fc542efa",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:86f7f358ef28efbabf666a4c328d5d6f",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c1a34be77b2da3fe0f7bfc6f145a4b84",
+        "synthesis-draft-material:25ceaa0f78a06838f88c8aba0ec31289",
+        "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+        "synthesis-draft-material:9285d145b0908e34b95edbe652b6cd05",
+        "synthesis-draft-material:5fc41aa695615cc38e5f7baed8b1b1b1",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:4ab5c02985268d4b129ce6395344d3e6",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:261f38cc452267d859e2ff6de0b7c4f5",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:44fca20987cef77257ee584c3f0f6d46",
+        "synthesis-draft-material:44fca20987cef77257ee584c3f0f6d46",
+        "synthesis-draft-material:7443739b094f257cb0215901aea056c9",
+        "synthesis-draft-material:5d01db2436243a2199584910bd0086a2",
+        "synthesis-draft-material:6e64a8deda19e2258852648b0c894ac8"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8b1016fdb2d54ec66acfe7c8fc8cd2d4",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:09fd5fb909f5e90ec30d7cad2677eb4d",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:fc141d30a908e62e22796aae634d4ca9",
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:6696db6a2695e61e2e90f7a96565376c",
+        "synthesis-draft-material:dbf27d7ee89c1eec7339f53e723dd8b7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:fbb7e0897d2839c31344398bfa7b9041",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:29aa9873e194cb901a3c0b9a2e3410f5",
+        "synthesis-draft-material:7d65c0da8ee99ce418170b1f68dd05a5",
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:ecd13f14b0e574b54c50553d0d63b91a"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:f418078056467b0de7a3675da8b3876a",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:01941c59c40d6c1ef9f8bbb10160d6f3",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:22fb44e9bbf129c38133a567a5f52590",
+        "synthesis-draft-material:420dde67f48fa253c16c42e6f8cde31d",
+        "synthesis-draft-material:420dde67f48fa253c16c42e6f8cde31d",
+        "synthesis-draft-material:26a2c1556a1eb52c12460e6035e8d59a"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:78883883c30f734879e1ec0283c15d13",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:da25fea69c887eccdd69286ef8faacdf",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:e7598261f8d084b9cc0e66e28b2c85db",
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+        "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:cdf28bde2386a2f2bd24fb0c1cc6c4e0",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:62cf31de7c0a32cf1a174982f45effbf",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:577bf186bf3b0f57070f1052cdbd90ca",
+        "synthesis-draft-material:208d757b4cd378f3c8cf1a56162289f0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:4dddecc8e15d517e31b7d5f70ec170af",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:1b9f2de12d1394799a89573080b3dad5",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:fc141d30a908e62e22796aae634d4ca9",
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:6696db6a2695e61e2e90f7a96565376c",
+        "synthesis-draft-material:dbf27d7ee89c1eec7339f53e723dd8b7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0687d97e6bc52bcfa9c9e75db49a280e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:f300900451a86ca0a9106488a0bb5d8f",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:45325b7a5cdee1551f54fdf6d5e00294",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:0fd5fdd5edb3afef57db23b01b3789a8",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:162039c8a192e3e744f924bb2247c892",
+        "synthesis-draft-material:6ee60171a2b74644b63ab0c96a3a6067",
+        "synthesis-draft-material:c87001f82f96eab89ad8c21b3381efc7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:4e1e13ff2852eb45ceb06144238e477b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:3455d7cf6df5fabcf4031ce8bff91257",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:e7598261f8d084b9cc0e66e28b2c85db",
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500",
+        "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:91e51d4fc5673fde0773d7efed2e71c2",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:209b9ee2c28e2bc4ffc14af889f6afd6",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:08fc45ae4b9d72b7777c19675f9b7c65",
+        "synthesis-draft-material:b697a9b63f6d433c26d37594e197d500"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:fbf707c6b6d9a640ed45ab090084a0ff",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:2ca6390eb23d8deaeb62e01c3a957dca",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:2aa5a0d5e43d0c07c08045b37b5b7dbf"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8480c6a6c992757b2a89a6e5db669c3d",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:c6711300735426ce4d1c41e99c0c1500",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7d859e6f8112e00f7f1a2653f2e95af3",
+        "synthesis-draft-material:338c0d17f0f01fbefa79c87a64b0ead9",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+        "synthesis-draft-material:7d859e6f8112e00f7f1a2653f2e95af3",
+        "synthesis-draft-material:7d859e6f8112e00f7f1a2653f2e95af3"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e2393ddce69b33214113428058b9108b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:f2aa04f21b2d152ffcc4aa2de65d1533",
+      "relationship": "upstream_source_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:fc141d30a908e62e22796aae634d4ca9",
+        "synthesis-draft-material:3fa20990693ec1dce7ad1a23cb7ded9b",
+        "synthesis-draft-material:6696db6a2695e61e2e90f7a96565376c",
+        "synthesis-draft-material:dbf27d7ee89c1eec7339f53e723dd8b7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:9fa61091beb49463ddd684080c81d4fe",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [
+    {
+      "id": "synthesis-draft-bridge:0b0eb1bfe52696d3ea2167946f214508",
+      "fromStepId": "synthesis-draft-step:f300900451a86ca0a9106488a0bb5d8f",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:112e61df13af1165c10a9af08c4640e0",
+      "fromStepId": "synthesis-draft-step:62cf31de7c0a32cf1a174982f45effbf",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:1317574d7471024cad91e4996f7446ea",
+      "fromStepId": "synthesis-draft-step:0fd5fdd5edb3afef57db23b01b3789a8",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:28936c569cf761c42b81448a934a6b71",
+      "fromStepId": "synthesis-draft-step:74fad713d261f785e966f1108ef3aece",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:2de4d97bf445fc0abf48d354d600d002",
+      "fromStepId": "synthesis-draft-step:261f38cc452267d859e2ff6de0b7c4f5",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:326b588879b6e10f36bd725bfddb14ea",
+      "fromStepId": "synthesis-draft-step:08eefb803af2c0684b52dfd21b0062fe",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:3c9e7ef36e05cb04a032fb7d6429952f",
+      "fromStepId": "synthesis-draft-step:02b9720507a82f6068c3131da7c2d82e",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:3f1248e7e6014e9ded5d4316a83f7c94",
+      "fromStepId": "synthesis-draft-step:b521635a17fad797ddbdba7263571094",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:42946899003262d598d9b2d5f5311a83",
+      "fromStepId": "synthesis-draft-step:0cd0342b9682f61ca6b74492469669db",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:4818e74e7e9653a0ef315a8eaec003a8",
+      "fromStepId": "synthesis-draft-step:fa92b8738c5788758eb3a3315765d980",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:4bda071c007248eab9d211ff24bd5fa4",
+      "fromStepId": "synthesis-draft-step:2404f6f55a31c9a83f1b97f4cb340141",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:636cd97590bcdaa1d0b5b838f200f0b3",
+      "fromStepId": "synthesis-draft-step:c6711300735426ce4d1c41e99c0c1500",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:6618731178454115eca7ec94c8679ece",
+      "fromStepId": "synthesis-draft-step:3bfacd789446dc763286e5d0f2de40fa",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:6d002b694b85ca00b88c6a81c26051c3",
+      "fromStepId": "synthesis-draft-step:d03417e8562f3242b161b5c1b0788970",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:6d89f508e491def42b1a7a9e931e6d7e",
+      "fromStepId": "synthesis-draft-step:87319833c6b2b9c643cba1dca7b343fe",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:75d1a315e217d378e19604140a94cade",
+      "fromStepId": "synthesis-draft-step:0fd5fdd5edb3afef57db23b01b3789a8",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:7f3d89f75785b02f3ee5351829a0ae0e",
+      "fromStepId": "synthesis-draft-step:874a73b2c69f5d82d8d26abf78a7ed0e",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:7ff509d34ad188858fab31afc1baa2d1",
+      "fromStepId": "synthesis-draft-step:b521635a17fad797ddbdba7263571094",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:889ee82ac3c833f90761056d1b48fc8b",
+      "fromStepId": "synthesis-draft-step:fc4d91a17cc059ccf2714e5d12bd99c4",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:8a7d4a32fa671b291402cee60464627c",
+      "fromStepId": "synthesis-draft-step:fc4d91a17cc059ccf2714e5d12bd99c4",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:99f4655b17eb66abe10c7c89fcb6b0a1",
+      "fromStepId": "synthesis-draft-step:2ca6390eb23d8deaeb62e01c3a957dca",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:9e267de07c33634bd54f1f5a626355b5",
+      "fromStepId": "synthesis-draft-step:87319833c6b2b9c643cba1dca7b343fe",
+      "toStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:9ed573343973f7032520cdd94d0b5d2b",
+      "fromStepId": "synthesis-draft-step:da25fea69c887eccdd69286ef8faacdf",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:acd20d3dde90a28ffbc68ea89cf865a9",
+      "fromStepId": "synthesis-draft-step:86f7f358ef28efbabf666a4c328d5d6f",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:af932f42f72caceb667a0dfb680ce314",
+      "fromStepId": "synthesis-draft-step:2381d2144cdd85e7782d8aa79df19e4a",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:bc242e9bb595531bd67e2179ea5284d7",
+      "fromStepId": "synthesis-draft-step:1b9f2de12d1394799a89573080b3dad5",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:be7b897a560f4c638c4225d16ff118bc",
+      "fromStepId": "synthesis-draft-step:09fd5fb909f5e90ec30d7cad2677eb4d",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:c99b5d1ac1007fadaab2c2f2faaed014",
+      "fromStepId": "synthesis-draft-step:08eefb803af2c0684b52dfd21b0062fe",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:cc8b92867915e355c4f8143406f3a938",
+      "fromStepId": "synthesis-draft-step:29d96984385003d07c436c1aa8959363",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:d3f262e2eb20aaf3c8673c42065bbd9a",
+      "fromStepId": "synthesis-draft-step:f2aa04f21b2d152ffcc4aa2de65d1533",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:85430d5ab21e8f5d46dca3bfc389e809",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:d7074d7789b4045140b43a794e4483b5",
+      "fromStepId": "synthesis-draft-step:01941c59c40d6c1ef9f8bbb10160d6f3",
+      "toStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "boundaryMaterialId": "synthesis-draft-material:2f4efdc5a915860194f0094da8c9ee42",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:ebf9c8c82ff14cd3d74e59f488522dd6",
+      "fromStepId": "synthesis-draft-step:3455d7cf6df5fabcf4031ce8bff91257",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:f63ec65c40027dde737de9f42dd0b593",
+      "fromStepId": "synthesis-draft-step:209b9ee2c28e2bc4ffc14af889f6afd6",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:c7154d6112dbc055a2955b7b26d4fe31",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:facae90b7ac304d6004d1b7ecd497ee3",
+      "fromStepId": "synthesis-draft-step:74fad713d261f785e966f1108ef3aece",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    },
+    {
+      "id": "synthesis-draft-bridge:fefdf116339f35d479ac8987e6a7e842",
+      "fromStepId": "synthesis-draft-step:2ca6390eb23d8deaeb62e01c3a957dca",
+      "toStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "boundaryMaterialId": "synthesis-draft-material:9f02e339e2b57718db3a16dba07d156b",
+      "identityMatch": "exact_inchi_key",
+      "editorialBridge": "teaching_reconstruction",
+      "reportedAsOneCompleteRoute": false
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:09905d2c5db166f7ee0427bbcf15a88c",
+      "finalStepId": "synthesis-draft-step:09905d2c5db166f7ee0427bbcf15a88c",
+      "upstreamStepIds": [
+        "synthesis-draft-step:29d96984385003d07c436c1aa8959363",
+        "synthesis-draft-step:fa92b8738c5788758eb3a3315765d980",
+        "synthesis-draft-step:0cd0342b9682f61ca6b74492469669db",
+        "synthesis-draft-step:d03417e8562f3242b161b5c1b0788970",
+        "synthesis-draft-step:3bfacd789446dc763286e5d0f2de40fa",
+        "synthesis-draft-step:874a73b2c69f5d82d8d26abf78a7ed0e",
+        "synthesis-draft-step:86f7f358ef28efbabf666a4c328d5d6f",
+        "synthesis-draft-step:09fd5fb909f5e90ec30d7cad2677eb4d",
+        "synthesis-draft-step:01941c59c40d6c1ef9f8bbb10160d6f3",
+        "synthesis-draft-step:1b9f2de12d1394799a89573080b3dad5",
+        "synthesis-draft-step:c6711300735426ce4d1c41e99c0c1500",
+        "synthesis-draft-step:f2aa04f21b2d152ffcc4aa2de65d1533"
+      ],
+      "routeType": "teaching_reconstruction",
+      "routeCompleteness": "convergent_partial",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:e6b80b4474379a583ee2b50174500627",
+      "finalStepId": "synthesis-draft-step:e6b80b4474379a583ee2b50174500627",
+      "upstreamStepIds": [
+        "synthesis-draft-step:2404f6f55a31c9a83f1b97f4cb340141",
+        "synthesis-draft-step:02b9720507a82f6068c3131da7c2d82e",
+        "synthesis-draft-step:2381d2144cdd85e7782d8aa79df19e4a",
+        "synthesis-draft-step:fc4d91a17cc059ccf2714e5d12bd99c4",
+        "synthesis-draft-step:74fad713d261f785e966f1108ef3aece",
+        "synthesis-draft-step:87319833c6b2b9c643cba1dca7b343fe",
+        "synthesis-draft-step:b521635a17fad797ddbdba7263571094",
+        "synthesis-draft-step:08eefb803af2c0684b52dfd21b0062fe",
+        "synthesis-draft-step:261f38cc452267d859e2ff6de0b7c4f5",
+        "synthesis-draft-step:da25fea69c887eccdd69286ef8faacdf",
+        "synthesis-draft-step:62cf31de7c0a32cf1a174982f45effbf",
+        "synthesis-draft-step:f300900451a86ca0a9106488a0bb5d8f",
+        "synthesis-draft-step:0fd5fdd5edb3afef57db23b01b3789a8",
+        "synthesis-draft-step:3455d7cf6df5fabcf4031ce8bff91257",
+        "synthesis-draft-step:209b9ee2c28e2bc4ffc14af889f6afd6",
+        "synthesis-draft-step:2ca6390eb23d8deaeb62e01c3a957dca"
+      ],
+      "routeType": "teaching_reconstruction",
+      "routeCompleteness": "convergent_partial",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:eccec159351f62802880117ec77abba4",
+      "finalStepId": "synthesis-draft-step:eccec159351f62802880117ec77abba4",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:1338cd6e1552afa3c165323df5436a21",
+      "finalStepId": "synthesis-draft-step:1338cd6e1552afa3c165323df5436a21",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:3b9069ea3e5bf31fea5140fc40213481",
+      "finalStepId": "synthesis-draft-step:3b9069ea3e5bf31fea5140fc40213481",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:f05cc88032df512f416b28a4181d878a",
+      "finalStepId": "synthesis-draft-step:f05cc88032df512f416b28a4181d878a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:8351f58e52e9354ed6f76027bd2d3807",
+      "finalStepId": "synthesis-draft-step:8351f58e52e9354ed6f76027bd2d3807",
+      "upstreamStepIds": [
+        "synthesis-draft-step:fc4d91a17cc059ccf2714e5d12bd99c4",
+        "synthesis-draft-step:74fad713d261f785e966f1108ef3aece",
+        "synthesis-draft-step:87319833c6b2b9c643cba1dca7b343fe",
+        "synthesis-draft-step:b521635a17fad797ddbdba7263571094",
+        "synthesis-draft-step:08eefb803af2c0684b52dfd21b0062fe",
+        "synthesis-draft-step:0fd5fdd5edb3afef57db23b01b3789a8",
+        "synthesis-draft-step:2ca6390eb23d8deaeb62e01c3a957dca"
+      ],
+      "routeType": "teaching_reconstruction",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:0201b395654fe26632d0961e4a820f37",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-7ba99108b8064310a386ee5913d2f4d0",
+      "label": "Open Reaction Database reaction ord-7ba99108b8064310a386ee5913d2f4d0",
+      "url": "https://open-reaction-database.org/id/ord-7ba99108b8064310a386ee5913d2f4d0",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-7ba99108b8064310a386ee5913d2f4d0"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:0687d97e6bc52bcfa9c9e75db49a280e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-94abade915e24c83953b09acda9c7114",
+      "label": "Open Reaction Database reaction ord-94abade915e24c83953b09acda9c7114",
+      "url": "https://open-reaction-database.org/id/ord-94abade915e24c83953b09acda9c7114",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-94abade915e24c83953b09acda9c7114"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:1718b09f8ba8f217f7ac4368602898a1",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-190cfc1c9d394de69600f360139a158f",
+      "label": "Open Reaction Database reaction ord-190cfc1c9d394de69600f360139a158f",
+      "url": "https://open-reaction-database.org/id/ord-190cfc1c9d394de69600f360139a158f",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-190cfc1c9d394de69600f360139a158f"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:29fc6205706b0bc7ef293dec4ad47ced",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-77666998ad2e45f9998a258abc68db97",
+      "label": "Open Reaction Database reaction ord-77666998ad2e45f9998a258abc68db97",
+      "url": "https://open-reaction-database.org/id/ord-77666998ad2e45f9998a258abc68db97",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-77666998ad2e45f9998a258abc68db97"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:33d8dcb8cfe48809f117deefcf4daa32",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-89510c03d4a44bdf8f13a124d4305ff7",
+      "label": "Open Reaction Database reaction ord-89510c03d4a44bdf8f13a124d4305ff7",
+      "url": "https://open-reaction-database.org/id/ord-89510c03d4a44bdf8f13a124d4305ff7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-89510c03d4a44bdf8f13a124d4305ff7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:34ba3a0b906d66953ff45ab3fc542efa",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0924ff5c6bfd4539af6b02492c10d760",
+      "label": "Open Reaction Database reaction ord-0924ff5c6bfd4539af6b02492c10d760",
+      "url": "https://open-reaction-database.org/id/ord-0924ff5c6bfd4539af6b02492c10d760",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0924ff5c6bfd4539af6b02492c10d760"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:384843ed2ec47be7b5ff404a2e1d703c",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1fa2ba475a8c427c8914a6f9aa3a427b",
+      "label": "Open Reaction Database reaction ord-1fa2ba475a8c427c8914a6f9aa3a427b",
+      "url": "https://open-reaction-database.org/id/ord-1fa2ba475a8c427c8914a6f9aa3a427b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1fa2ba475a8c427c8914a6f9aa3a427b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:45325b7a5cdee1551f54fdf6d5e00294",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-4e2e0a887a6049d6bd6983442f05f009",
+      "label": "Open Reaction Database reaction ord-4e2e0a887a6049d6bd6983442f05f009",
+      "url": "https://open-reaction-database.org/id/ord-4e2e0a887a6049d6bd6983442f05f009",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-4e2e0a887a6049d6bd6983442f05f009"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:4ab5c02985268d4b129ce6395344d3e6",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-fc3c58a706dd42fa99423686b7e8dbae",
+      "label": "Open Reaction Database reaction ord-fc3c58a706dd42fa99423686b7e8dbae",
+      "url": "https://open-reaction-database.org/id/ord-fc3c58a706dd42fa99423686b7e8dbae",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-fc3c58a706dd42fa99423686b7e8dbae"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:4dddecc8e15d517e31b7d5f70ec170af",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0d3f4d3a9a6c48438f37592a57437359",
+      "label": "Open Reaction Database reaction ord-0d3f4d3a9a6c48438f37592a57437359",
+      "url": "https://open-reaction-database.org/id/ord-0d3f4d3a9a6c48438f37592a57437359",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0d3f4d3a9a6c48438f37592a57437359"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:4e1e13ff2852eb45ceb06144238e477b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-07dfa4e53db742cf82802f28e70b4e98",
+      "label": "Open Reaction Database reaction ord-07dfa4e53db742cf82802f28e70b4e98",
+      "url": "https://open-reaction-database.org/id/ord-07dfa4e53db742cf82802f28e70b4e98",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-07dfa4e53db742cf82802f28e70b4e98"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:587377b4a74e3f9b15034fa7edde4d86",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0e2860d41a224227acb47d29c912e7d7",
+      "label": "Open Reaction Database reaction ord-0e2860d41a224227acb47d29c912e7d7",
+      "url": "https://open-reaction-database.org/id/ord-0e2860d41a224227acb47d29c912e7d7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0e2860d41a224227acb47d29c912e7d7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:59e972054daceba02682fac40ab1ec96",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1a9e4f48a67d40b2b45543bd010484ec",
+      "label": "Open Reaction Database reaction ord-1a9e4f48a67d40b2b45543bd010484ec",
+      "url": "https://open-reaction-database.org/id/ord-1a9e4f48a67d40b2b45543bd010484ec",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1a9e4f48a67d40b2b45543bd010484ec"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:6752292e7d29cf315b9df7aa7e2dde47",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1424a77c5ffb4f15918f7c2ea353446b",
+      "label": "Open Reaction Database reaction ord-1424a77c5ffb4f15918f7c2ea353446b",
+      "url": "https://open-reaction-database.org/id/ord-1424a77c5ffb4f15918f7c2ea353446b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1424a77c5ffb4f15918f7c2ea353446b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:6cf71489398a1cc3e9bfc3ef60097a24",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-3ba60a5aa2bc4e939ef2eb95e757bdc3",
+      "label": "Open Reaction Database reaction ord-3ba60a5aa2bc4e939ef2eb95e757bdc3",
+      "url": "https://open-reaction-database.org/id/ord-3ba60a5aa2bc4e939ef2eb95e757bdc3",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3ba60a5aa2bc4e939ef2eb95e757bdc3"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:6f0d22b689a59626e54eb8ce599c95c7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-00f16a5986e248da93937df8a16b6763",
+      "label": "Open Reaction Database reaction ord-00f16a5986e248da93937df8a16b6763",
+      "url": "https://open-reaction-database.org/id/ord-00f16a5986e248da93937df8a16b6763",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-00f16a5986e248da93937df8a16b6763"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:78883883c30f734879e1ec0283c15d13",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2a9f6d28f9a844d0a72a9441af6bc2b0",
+      "label": "Open Reaction Database reaction ord-2a9f6d28f9a844d0a72a9441af6bc2b0",
+      "url": "https://open-reaction-database.org/id/ord-2a9f6d28f9a844d0a72a9441af6bc2b0",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2a9f6d28f9a844d0a72a9441af6bc2b0"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:8480c6a6c992757b2a89a6e5db669c3d",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1727427bc4344234922a0a7b40b50242",
+      "label": "Open Reaction Database reaction ord-1727427bc4344234922a0a7b40b50242",
+      "url": "https://open-reaction-database.org/id/ord-1727427bc4344234922a0a7b40b50242",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1727427bc4344234922a0a7b40b50242"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:8b1016fdb2d54ec66acfe7c8fc8cd2d4",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-30902d54f66049f18a30733c453110c3",
+      "label": "Open Reaction Database reaction ord-30902d54f66049f18a30733c453110c3",
+      "url": "https://open-reaction-database.org/id/ord-30902d54f66049f18a30733c453110c3",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-30902d54f66049f18a30733c453110c3"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:91e51d4fc5673fde0773d7efed2e71c2",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-205f3fc709404ad384c8b1889ffd8756",
+      "label": "Open Reaction Database reaction ord-205f3fc709404ad384c8b1889ffd8756",
+      "url": "https://open-reaction-database.org/id/ord-205f3fc709404ad384c8b1889ffd8756",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-205f3fc709404ad384c8b1889ffd8756"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:9cdc6b999403a32aa8d48d99606a06f1",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-73543c32842a49d9939e7cada9b7a8ed",
+      "label": "Open Reaction Database reaction ord-73543c32842a49d9939e7cada9b7a8ed",
+      "url": "https://open-reaction-database.org/id/ord-73543c32842a49d9939e7cada9b7a8ed",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-73543c32842a49d9939e7cada9b7a8ed"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:9fa61091beb49463ddd684080c81d4fe",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-85aec208a536457face797a04ab1f702",
+      "label": "Open Reaction Database reaction ord-85aec208a536457face797a04ab1f702",
+      "url": "https://open-reaction-database.org/id/ord-85aec208a536457face797a04ab1f702",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-85aec208a536457face797a04ab1f702"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:aba3f6b256f8a5adfa0420faff9c7c06",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-3ea81f9ceff148578563211c5d844345",
+      "label": "Open Reaction Database reaction ord-3ea81f9ceff148578563211c5d844345",
+      "url": "https://open-reaction-database.org/id/ord-3ea81f9ceff148578563211c5d844345",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3ea81f9ceff148578563211c5d844345"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:abcbe899aee500c425e65da7b3c9ba3e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-30a8bffd86224d9a87fcbdb6db2904f4",
+      "label": "Open Reaction Database reaction ord-30a8bffd86224d9a87fcbdb6db2904f4",
+      "url": "https://open-reaction-database.org/id/ord-30a8bffd86224d9a87fcbdb6db2904f4",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-30a8bffd86224d9a87fcbdb6db2904f4"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:b23069359ab35161b6c771277d87e03b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2eb40da2578e4c3980b20f6b3c95502e",
+      "label": "Open Reaction Database reaction ord-2eb40da2578e4c3980b20f6b3c95502e",
+      "url": "https://open-reaction-database.org/id/ord-2eb40da2578e4c3980b20f6b3c95502e",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2eb40da2578e4c3980b20f6b3c95502e"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:b7c1e6085cb2fc6dd90696f7bcca341b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2d1dcb3e7e8a46e68eeb27d186cf90f9",
+      "label": "Open Reaction Database reaction ord-2d1dcb3e7e8a46e68eeb27d186cf90f9",
+      "url": "https://open-reaction-database.org/id/ord-2d1dcb3e7e8a46e68eeb27d186cf90f9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2d1dcb3e7e8a46e68eeb27d186cf90f9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:bf7c10044d835fe29c5b701c75b9690f",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-4a51b4cb82964715a28fc88de151e5c3",
+      "label": "Open Reaction Database reaction ord-4a51b4cb82964715a28fc88de151e5c3",
+      "url": "https://open-reaction-database.org/id/ord-4a51b4cb82964715a28fc88de151e5c3",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-4a51b4cb82964715a28fc88de151e5c3"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:c4b97fb27c246b9e51a0ce94fdbbc772",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-3bf1c30860f143f59dd659ddc56d2770",
+      "label": "Open Reaction Database reaction ord-3bf1c30860f143f59dd659ddc56d2770",
+      "url": "https://open-reaction-database.org/id/ord-3bf1c30860f143f59dd659ddc56d2770",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3bf1c30860f143f59dd659ddc56d2770"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:cdf28bde2386a2f2bd24fb0c1cc6c4e0",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-a7a23e5c317b4a429759676c009ad4f9",
+      "label": "Open Reaction Database reaction ord-a7a23e5c317b4a429759676c009ad4f9",
+      "url": "https://open-reaction-database.org/id/ord-a7a23e5c317b4a429759676c009ad4f9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a7a23e5c317b4a429759676c009ad4f9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e2393ddce69b33214113428058b9108b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-7596db0fae704709a2e2478791fc24bd",
+      "label": "Open Reaction Database reaction ord-7596db0fae704709a2e2478791fc24bd",
+      "url": "https://open-reaction-database.org/id/ord-7596db0fae704709a2e2478791fc24bd",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-7596db0fae704709a2e2478791fc24bd"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e638b01fafc63b528c3d767d534ebb0b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-07e0f95b47c7429195863e741d0009ca",
+      "label": "Open Reaction Database reaction ord-07e0f95b47c7429195863e741d0009ca",
+      "url": "https://open-reaction-database.org/id/ord-07e0f95b47c7429195863e741d0009ca",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-07e0f95b47c7429195863e741d0009ca"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:f418078056467b0de7a3675da8b3876a",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-7a59f33a2d6740b1b3b227357dfd6211",
+      "label": "Open Reaction Database reaction ord-7a59f33a2d6740b1b3b227357dfd6211",
+      "url": "https://open-reaction-database.org/id/ord-7a59f33a2d6740b1b3b227357dfd6211",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-7a59f33a2d6740b1b3b227357dfd6211"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:fbb7e0897d2839c31344398bfa7b9041",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-8927335e5fe5416d9518d2b75f850413",
+      "label": "Open Reaction Database reaction ord-8927335e5fe5416d9518d2b75f850413",
+      "url": "https://open-reaction-database.org/id/ord-8927335e5fe5416d9518d2b75f850413",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-8927335e5fe5416d9518d2b75f850413"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:fbf707c6b6d9a640ed45ab090084a0ff",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-8a7572152f29450f905480eeb6671348",
+      "label": "Open Reaction Database reaction ord-8a7572152f29450f905480eeb6671348",
+      "url": "https://open-reaction-database.org/id/ord-8a7572152f29450f905480eeb6671348",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-8a7572152f29450f905480eeb6671348"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:fcb60a4958902090277681ba391417e5",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-4d852c20e85a470898c60d29ac637275",
+      "label": "Open Reaction Database reaction ord-4d852c20e85a470898c60d29ac637275",
+      "url": "https://open-reaction-database.org/id/ord-4d852c20e85a470898c60d29ac637275",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-4d852c20e85a470898c60d29ac637275"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

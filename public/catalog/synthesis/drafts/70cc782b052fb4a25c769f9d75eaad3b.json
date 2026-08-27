@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:70cc782b052fb4a25c769f9d75eaad3b",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:raltegravir-czffbexekngxks-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:raltegravir-czffbexekngxks-uhfffaoysa-n",
+    "preferredName": "Raltegravir",
+    "pubChemCid": 54671008,
+    "inchiKey": "CZFFBEXEKNGXKS-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:64e0ffc55580e9ea5cd4ed7a67fbcd84",
+      "label": "Raltegravir",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC1=NN=C(O1)C(=O)NC(C)(C)C2=NC(=C(C(=O)N2C)O)C(=O)NCC=3C=CC(=CC3)F",
+      "inchiKey": "CZFFBEXEKNGXKS-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "HCl",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:cc624eac9a6d0fa9dd32dca29c7b996f",
+      "label": "Raltegravir potassium",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1=NN=C(O1)C(=O)NC(C)(C)C2=NC(=C(C(=O)N2C)[O-])C(=O)NCC=3C=CC(=CC3)F.[K+]",
+      "inchiKey": "IFUKBHBISRAZTF-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:26f051d8ec1cc8bd61a837cee0dc0782",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:cc624eac9a6d0fa9dd32dca29c7b996f",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:64e0ffc55580e9ea5cd4ed7a67fbcd84"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:140a5439aebc95086f308fdfbedddf08",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:6698ee5bf8aeb49d3c0d8ab4a8220fc1",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:cc624eac9a6d0fa9dd32dca29c7b996f",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:64e0ffc55580e9ea5cd4ed7a67fbcd84"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:2fcb8adf2d8565d22ef72f7de06d4309",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:26f051d8ec1cc8bd61a837cee0dc0782",
+      "finalStepId": "synthesis-draft-step:26f051d8ec1cc8bd61a837cee0dc0782",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:6698ee5bf8aeb49d3c0d8ab4a8220fc1",
+      "finalStepId": "synthesis-draft-step:6698ee5bf8aeb49d3c0d8ab4a8220fc1",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:140a5439aebc95086f308fdfbedddf08",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-e51e73c68482498aa2114bea5e5e4f2a",
+      "label": "Open Reaction Database reaction ord-e51e73c68482498aa2114bea5e5e4f2a",
+      "url": "https://open-reaction-database.org/id/ord-e51e73c68482498aa2114bea5e5e4f2a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-e51e73c68482498aa2114bea5e5e4f2a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:2fcb8adf2d8565d22ef72f7de06d4309",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-e62f058f5185464aa178bf975f4c4aa7",
+      "label": "Open Reaction Database reaction ord-e62f058f5185464aa178bf975f4c4aa7",
+      "url": "https://open-reaction-database.org/id/ord-e62f058f5185464aa178bf975f4c4aa7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-e62f058f5185464aa178bf975f4c4aa7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

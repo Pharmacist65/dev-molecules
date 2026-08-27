@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:a9f1b10905a6119a3406fcfae13b2325",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:4-aminosalicylic-acid-wubbrnoqwqtfex-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:4-aminosalicylic-acid-wubbrnoqwqtfex-uhfffaoysa-n",
+    "preferredName": "4-Aminosalicylic Acid",
+    "pubChemCid": 4649,
+    "inchiKey": "WUBBRNOQWQTFEX-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:10af631505339b2f201e70af4529f7e9",
+      "label": "4-Amino-5-fluorosalicylic Acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC=1C=C(C(C(=O)O)=CC1F)O",
+      "inchiKey": "VEAKICTWBOTIQF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:39076b03863977feb2de4c99b0ab81cd",
+      "label": "Exact structure OLJXRTRRJSMURJ",
+      "displayRole": "source_input",
+      "sourceSmiles": "COc1cc(N)ccc1C(=O)O",
+      "inchiKey": "OLJXRTRRJSMURJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a3b1260fe781a86f088586949fe29879",
+      "label": "Exact structure WUBBRNOQWQTFEX",
+      "displayRole": "exact_target",
+      "sourceSmiles": "Nc1ccc(C(=O)O)c(O)c1",
+      "inchiKey": "WUBBRNOQWQTFEX-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b722a150ca9d2c0f427790bdc4158065",
+      "label": "Exact structure ILAHWRKJUDSMFH",
+      "displayRole": "source_input",
+      "sourceSmiles": "BrB(Br)Br",
+      "inchiKey": "ILAHWRKJUDSMFH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:be54e447aca4f39ee058cdc4f547a1a6",
+      "label": "Methyl 4-Acetamido-5-fluorosalicylate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)NC=1C=C(C(C(=O)OC)=CC1F)O",
+      "inchiKey": "XRWFNOPBWQRVEY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:aa31d4aac9d7bada9e3ff5fab692d728",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b722a150ca9d2c0f427790bdc4158065",
+        "synthesis-draft-material:39076b03863977feb2de4c99b0ab81cd"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a3b1260fe781a86f088586949fe29879"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:37aaa564b7ed4f06ee559a1a533cf44c",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:44cf3523f2bb7c1ae84b0f29b7a7ab24",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:be54e447aca4f39ee058cdc4f547a1a6",
+        "synthesis-draft-material:10af631505339b2f201e70af4529f7e9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a3b1260fe781a86f088586949fe29879"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c5c920d87c861dcad3ef488b0868cc37",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:aa31d4aac9d7bada9e3ff5fab692d728",
+      "finalStepId": "synthesis-draft-step:aa31d4aac9d7bada9e3ff5fab692d728",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:44cf3523f2bb7c1ae84b0f29b7a7ab24",
+      "finalStepId": "synthesis-draft-step:44cf3523f2bb7c1ae84b0f29b7a7ab24",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:37aaa564b7ed4f06ee559a1a533cf44c",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-a0b8c2372c72454b87837260c32bad01",
+      "label": "Open Reaction Database reaction ord-a0b8c2372c72454b87837260c32bad01",
+      "url": "https://open-reaction-database.org/id/ord-a0b8c2372c72454b87837260c32bad01",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-a0b8c2372c72454b87837260c32bad01"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:c5c920d87c861dcad3ef488b0868cc37",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-97770a9d9eeb456cac635b22f449f211",
+      "label": "Open Reaction Database reaction ord-97770a9d9eeb456cac635b22f449f211",
+      "url": "https://open-reaction-database.org/id/ord-97770a9d9eeb456cac635b22f449f211",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-97770a9d9eeb456cac635b22f449f211"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

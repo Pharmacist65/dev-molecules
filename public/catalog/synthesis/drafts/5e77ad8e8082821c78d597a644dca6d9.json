@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:5e77ad8e8082821c78d597a644dca6d9",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:prasugrel-dtglzdawlrgwqn-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:prasugrel-dtglzdawlrgwqn-uhfffaoysa-n",
+    "preferredName": "Prasugrel",
+    "pubChemCid": 6918456,
+    "inchiKey": "DTGLZDAWLRGWQN-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0912d6bfce665e8f6cf3038aad508b4a",
+      "label": "ethyl acetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OCC",
+      "inchiKey": "XEKOWRVHYACXOJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:1498413e85d82b3c77861c4803d93ef1",
+      "label": "2-Acetoxy-5-(α-cyclopropylcarbonyl-2-fluorobenzyl)4,5,6,7-tetrahydrothieno[3,2-c]pyridine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)(=O)OC1=CC=2CN(CCC2S1)C(C1=C(C=CC=C1)F)C(=O)C1CC1",
+      "inchiKey": "DTGLZDAWLRGWQN-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:30a69f0382f1e85a1efd42c30913941b",
+      "label": "5-(α-cyclopropylcarbonyl-2-fluorobenzyl)-2-oxo-2,4,5,6,7,7a-hexahydrothieno[3,2-c]pyridine pyridine",
+      "displayRole": "source_input",
+      "sourceSmiles": "N1=CC=CC=C1.C1(CC1)C(=O)C(C1=C(C=CC=C1)F)N1CC=2C(CC1)SC(C2)=O",
+      "inchiKey": "JBIQYAIQLRATGG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:3436aaf923d1a06af69393cdf64135e0",
+      "label": "sodium hydride",
+      "displayRole": "source_input",
+      "sourceSmiles": "[H-].[Na+]",
+      "inchiKey": "BZKBCQXYZZXSCO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:36e7658b09639d4394f08d03c2963a84",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:30a69f0382f1e85a1efd42c30913941b",
+        "synthesis-draft-material:3436aaf923d1a06af69393cdf64135e0",
+        "synthesis-draft-material:0912d6bfce665e8f6cf3038aad508b4a"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:1498413e85d82b3c77861c4803d93ef1"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1e1a80f318e83111650033f7d4e0f6f1",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:36e7658b09639d4394f08d03c2963a84",
+      "finalStepId": "synthesis-draft-step:36e7658b09639d4394f08d03c2963a84",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1e1a80f318e83111650033f7d4e0f6f1",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f6fac6878de5482daf050cded7109608",
+      "label": "Open Reaction Database reaction ord-f6fac6878de5482daf050cded7109608",
+      "url": "https://open-reaction-database.org/id/ord-f6fac6878de5482daf050cded7109608",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f6fac6878de5482daf050cded7109608"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

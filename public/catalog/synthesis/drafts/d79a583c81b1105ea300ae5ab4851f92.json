@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:d79a583c81b1105ea300ae5ab4851f92",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:nizatidine-sgxxnsqhwdmggp-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:nizatidine-sgxxnsqhwdmggp-uhfffaoysa-n",
+    "preferredName": "Nizatidine",
+    "pubChemCid": 4513,
+    "inchiKey": "SGXXNSQHWDMGGP-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:09420202e4884bcfe4c12525a4394446",
+      "label": "Exact structure BTANRVKWQNVYAZ",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCC(C)O",
+      "inchiKey": "BTANRVKWQNVYAZ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:2683e8acd524d1ef0656e114fb1b59db",
+      "label": "N-methyl-N'-[2-(2-dimethylaminomethylthiazol-4-ylmethylthio)ethyl]-2-nitro-1,1-ethenediamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CNC(=C[N+](=O)[O-])NCCSCC=1N=C(SC1)CN(C)C",
+      "inchiKey": "SGXXNSQHWDMGGP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:779a46346a1537c444063ac6ae828f03",
+      "label": "N-methyl-S-methyl-N'-[2-(2-dimethylaminomethylthiazol-4-ylmethylthio)ethyl]isothiourea",
+      "displayRole": "source_input",
+      "sourceSmiles": "CNC(SC)=NCCSCC=1N=C(SC1)CN(C)C",
+      "inchiKey": "RCDORMPTQRGGHF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7ddc522492492779d532747aade6a0c0",
+      "label": "nitromethane",
+      "displayRole": "source_input",
+      "sourceSmiles": "[N+](=O)([O-])C",
+      "inchiKey": "LYGJENNIWJXYER-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:53156253378544d5ff0720a7effca02e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:779a46346a1537c444063ac6ae828f03",
+        "synthesis-draft-material:7ddc522492492779d532747aade6a0c0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2683e8acd524d1ef0656e114fb1b59db"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:95f91a0bdd507b96ef0439104d7e5959",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:3211aa8192e700f6b1b86de74a22078e",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:779a46346a1537c444063ac6ae828f03",
+        "synthesis-draft-material:09420202e4884bcfe4c12525a4394446",
+        "synthesis-draft-material:7ddc522492492779d532747aade6a0c0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2683e8acd524d1ef0656e114fb1b59db"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:fc976f9cfbb990310bbae8a55aa0f523",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:53156253378544d5ff0720a7effca02e",
+      "finalStepId": "synthesis-draft-step:53156253378544d5ff0720a7effca02e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:3211aa8192e700f6b1b86de74a22078e",
+      "finalStepId": "synthesis-draft-step:3211aa8192e700f6b1b86de74a22078e",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:95f91a0bdd507b96ef0439104d7e5959",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-7b9c7badf1d647d691a4153fcd09e24a",
+      "label": "Open Reaction Database reaction ord-7b9c7badf1d647d691a4153fcd09e24a",
+      "url": "https://open-reaction-database.org/id/ord-7b9c7badf1d647d691a4153fcd09e24a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-7b9c7badf1d647d691a4153fcd09e24a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:fc976f9cfbb990310bbae8a55aa0f523",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-687ea6e8d79d4faf98503fa006d93537",
+      "label": "Open Reaction Database reaction ord-687ea6e8d79d4faf98503fa006d93537",
+      "url": "https://open-reaction-database.org/id/ord-687ea6e8d79d4faf98503fa006d93537",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-687ea6e8d79d4faf98503fa006d93537"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

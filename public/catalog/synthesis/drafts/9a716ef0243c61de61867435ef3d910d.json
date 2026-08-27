@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:9a716ef0243c61de61867435ef3d910d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cladribine-ptoaarawebmlno-kvqbguixsa-n",
+    "catalogEntityId": "molecule:imported:cladribine-ptoaarawebmlno-kvqbguixsa-n",
+    "preferredName": "Cladribine",
+    "pubChemCid": 20279,
+    "inchiKey": "PTOAARAWEBMLNO-KVQBGUIXSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:5c0aa8c9ddbea73ef67488f5dd13f03f",
+      "label": "3-benzyl-1-{2-chloro-9-[2-deoxy-3,5-di-O-(p-toluoyl)-β-D-erythro-pentofuranosyl]purin-6-yl}-2-propylimidazolium iodide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[I-].C(C1=CC=CC=C1)N1C(=[N+](C=C1)C1=C2N=CN(C2=NC(=N1)Cl)[C@H]1C[C@H](OC(=O)C2=CC=C(C=C2)C)[C@H](O1)COC(=O)C1=CC=C(C=C1)C)CCC",
+      "inchiKey": "XREWQXUXXGJCQU-IHTTUQTDSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:65ad34393f0ba454c333854c385f1b10",
+      "label": "6-amino-2-chloro-9-(2-deoxy-β-D-erythro-pentofuranosyl)purine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "NC1=C2N=CN(C2=NC(=N1)Cl)[C@H]1C[C@H](O)[C@H](O1)CO",
+      "inchiKey": "PTOAARAWEBMLNO-KVQBGUIXSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:78c4c8af5181e8d510e0a5d94d1071e6",
+      "label": "NH3 MeOH",
+      "displayRole": "source_input",
+      "sourceSmiles": "N.CO",
+      "inchiKey": "CBHOOMGKXCMKIR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f67904ba14b60516462aa02d94d745b6",
+      "label": "2-chloro-9-[2-deoxy-3,5-di-O-(p-toluoyl)-β-D-erythro-pentofuranosyl]-6-(2-pentylimidazol-1-yl)purine",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=NC(=C2N=CN(C2=N1)[C@H]1C[C@H](OC(=O)C2=CC=C(C=C2)C)[C@H](O1)COC(=O)C1=CC=C(C=C1)C)N1C(=NC=C1)CCCCC",
+      "inchiKey": "MEEUYOLJJVKVNH-ZRRKCSAHSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:58e7237ff2eed6e27c4087fa81e46df2",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:5c0aa8c9ddbea73ef67488f5dd13f03f",
+        "synthesis-draft-material:78c4c8af5181e8d510e0a5d94d1071e6"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:65ad34393f0ba454c333854c385f1b10"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:24fe99a092a46e639c938fc788f766a4",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:b54c60bd96b552d66216dbddffe79173",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:f67904ba14b60516462aa02d94d745b6"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:65ad34393f0ba454c333854c385f1b10"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:a69b65fd7367b5eb42c313d300a10943",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:58e7237ff2eed6e27c4087fa81e46df2",
+      "finalStepId": "synthesis-draft-step:58e7237ff2eed6e27c4087fa81e46df2",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:b54c60bd96b552d66216dbddffe79173",
+      "finalStepId": "synthesis-draft-step:b54c60bd96b552d66216dbddffe79173",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:24fe99a092a46e639c938fc788f766a4",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-a812c18a1eac475d9ffcd1ba355f3b6e",
+      "label": "Open Reaction Database reaction ord-a812c18a1eac475d9ffcd1ba355f3b6e",
+      "url": "https://open-reaction-database.org/id/ord-a812c18a1eac475d9ffcd1ba355f3b6e",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a812c18a1eac475d9ffcd1ba355f3b6e"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:a69b65fd7367b5eb42c313d300a10943",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-46f14745b5a348259a3a6b8b2ed81a83",
+      "label": "Open Reaction Database reaction ord-46f14745b5a348259a3a6b8b2ed81a83",
+      "url": "https://open-reaction-database.org/id/ord-46f14745b5a348259a3a6b8b2ed81a83",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-46f14745b5a348259a3a6b8b2ed81a83"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

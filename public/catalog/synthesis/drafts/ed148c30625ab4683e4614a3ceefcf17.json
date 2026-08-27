@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:ed148c30625ab4683e4614a3ceefcf17",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:pargyline-dpwpwrlqfgfjfi-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:pargyline-dpwpwrlqfgfjfi-uhfffaoysa-n",
+    "preferredName": "Pargyline",
+    "pubChemCid": 4688,
+    "inchiKey": "DPWPWRLQFGFJFI-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:28469b7735c0a05b891e15059d27c1d7",
+      "label": "N-(2-chlorobenzyl)-N-methyl-2-propinylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=C(CN(C)CC#C)C=CC=C1",
+      "inchiKey": "MHSYOEXUHOXGIY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:762ead4bbc55647b1dce4ca1b23e1a46",
+      "label": "N-(4-chlorobenzyl)-N-methyl-2-propinylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=CC=C(CN(C)CC#C)C=C1",
+      "inchiKey": "BOVOUAAQVSTIKY-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9627262e05e859e7c61d0321d29d3d0f",
+      "label": "N-benzyl-N-methyl-2-propinylamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C1=CC=CC=C1)N(C)CC#C",
+      "inchiKey": "DPWPWRLQFGFJFI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:1350d9aca09fe9f74f331eb2d81b9e43",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:762ead4bbc55647b1dce4ca1b23e1a46",
+        "synthesis-draft-material:28469b7735c0a05b891e15059d27c1d7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9627262e05e859e7c61d0321d29d3d0f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:27fe0838e02d373c85bdba5b182787fd",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:1350d9aca09fe9f74f331eb2d81b9e43",
+      "finalStepId": "synthesis-draft-step:1350d9aca09fe9f74f331eb2d81b9e43",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:27fe0838e02d373c85bdba5b182787fd",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-8997f7bdeb834981b4b060624cd6489b",
+      "label": "Open Reaction Database reaction ord-8997f7bdeb834981b4b060624cd6489b",
+      "url": "https://open-reaction-database.org/id/ord-8997f7bdeb834981b4b060624cd6489b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-8997f7bdeb834981b4b060624cd6489b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

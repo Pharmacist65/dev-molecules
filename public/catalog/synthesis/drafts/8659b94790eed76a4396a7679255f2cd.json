@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:8659b94790eed76a4396a7679255f2cd",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:bexarotene-navmqtyzdkmpeu-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:bexarotene-navmqtyzdkmpeu-uhfffaoysa-n",
+    "preferredName": "Bexarotene",
+    "pubChemCid": 82146,
+    "inchiKey": "NAVMQTYZDKMPEU-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:089ab8a61d934f12127392bb66326e3c",
+      "label": "potassium hydroxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[OH-].[K+]",
+      "inchiKey": "KWYUFKZDYYNOTN-UHFFFAOYSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:09129dbdc95b81939a33a5bbbf369374",
+      "label": "4-[1-(5,6,7,8-Tetrahydro-3,5,5,8,8-pentamethyl-2-naphthalenyl)-1-ethenyl]benzoic acid",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC=1C(=CC=2C(CCC(C2C1)(C)C)(C)C)C(=C)C1=CC=C(C(=O)O)C=C1",
+      "inchiKey": "NAVMQTYZDKMPEU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "hydrochloric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bd36f380a814870d310b55e8d24e6941",
+      "label": "Methyl 4-[1-(5,6,7,8-tetrahydro-3,5,5,8,8-pentamethyl-2-naphthalenyl)-1-ethenyl]benzoate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC=1C(=CC=2C(CCC(C2C1)(C)C)(C)C)C(=C)C1=CC=C(C(=O)OC)C=C1",
+      "inchiKey": "VSMOGQLTPWIBNI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:7a8b14324ffecea40be69526e14ba438",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:bd36f380a814870d310b55e8d24e6941",
+        "synthesis-draft-material:089ab8a61d934f12127392bb66326e3c",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:09129dbdc95b81939a33a5bbbf369374"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0eb6bc38a4eafe3b1091473ce1598c30",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:1e58dc7ae73d3e109f0c0afe2e095c4d",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:bd36f380a814870d310b55e8d24e6941",
+        "synthesis-draft-material:089ab8a61d934f12127392bb66326e3c",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:09129dbdc95b81939a33a5bbbf369374"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3255ee2c2bca92d1e0f9b374cd04f44d",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:7a8b14324ffecea40be69526e14ba438",
+      "finalStepId": "synthesis-draft-step:7a8b14324ffecea40be69526e14ba438",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:1e58dc7ae73d3e109f0c0afe2e095c4d",
+      "finalStepId": "synthesis-draft-step:1e58dc7ae73d3e109f0c0afe2e095c4d",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:0eb6bc38a4eafe3b1091473ce1598c30",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f1d2e81236fe4b1a9391f0be8a00da42",
+      "label": "Open Reaction Database reaction ord-f1d2e81236fe4b1a9391f0be8a00da42",
+      "url": "https://open-reaction-database.org/id/ord-f1d2e81236fe4b1a9391f0be8a00da42",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f1d2e81236fe4b1a9391f0be8a00da42"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:3255ee2c2bca92d1e0f9b374cd04f44d",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-b524db2b94a54b42a1f69828380c0b6c",
+      "label": "Open Reaction Database reaction ord-b524db2b94a54b42a1f69828380c0b6c",
+      "url": "https://open-reaction-database.org/id/ord-b524db2b94a54b42a1f69828380c0b6c",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b524db2b94a54b42a1f69828380c0b6c"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

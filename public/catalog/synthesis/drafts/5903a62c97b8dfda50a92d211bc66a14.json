@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:5903a62c97b8dfda50a92d211bc66a14",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:pindolol-jzqkkslkjuagic-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:pindolol-jzqkkslkjuagic-uhfffaoysa-n",
+    "preferredName": "Pindolol",
+    "pubChemCid": 4828,
+    "inchiKey": "JZQKKSLKJUAGIC-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:2a53968c7deb218d7bd3571c2bbedba8",
+      "label": "ethanol water glycerine glycerol monooleate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)O.O.OCC(O)CO.C(CCCCCCC\\C=C/CCCCCCCC)(=O)OCC(O)CO",
+      "inchiKey": "ZLEXDKBGJBPLIR-BZKIHGKGSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:480248dc5ff1e5a92ba665e913e41cf3",
+      "label": "isopropyl alcohol methyl laurate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)O.C(CCCCCCCCCCC)(=O)OC",
+      "inchiKey": "ZWLNARDAXBKTJZ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:88ee48f32a7e0b99d720114e2f21304d",
+      "label": "pindolol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(C)NCC(COC=1C=CC=C2C1C=CN2)O",
+      "inchiKey": "JZQKKSLKJUAGIC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:adc0bdea170c0290e385f1f8c43d59c5",
+      "label": "pindolol HCl",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C)NCC(COC1=CC=CC2=C1C=CN2)O.Cl",
+      "inchiKey": "MAUPDHMFNIUWSK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:c3fe59cd960fd76a623c5cb4f0acfbe7",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:480248dc5ff1e5a92ba665e913e41cf3",
+        "synthesis-draft-material:adc0bdea170c0290e385f1f8c43d59c5"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:88ee48f32a7e0b99d720114e2f21304d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b86d8661ff2007db2cfd95fb10ce326e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:53aacf85803ef0aded5a1d26786dfe3a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:adc0bdea170c0290e385f1f8c43d59c5",
+        "synthesis-draft-material:2a53968c7deb218d7bd3571c2bbedba8"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:88ee48f32a7e0b99d720114e2f21304d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b3ead83ba9ff7dd0e3e99a8d89eb99fd",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:c3fe59cd960fd76a623c5cb4f0acfbe7",
+      "finalStepId": "synthesis-draft-step:c3fe59cd960fd76a623c5cb4f0acfbe7",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:53aacf85803ef0aded5a1d26786dfe3a",
+      "finalStepId": "synthesis-draft-step:53aacf85803ef0aded5a1d26786dfe3a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:b3ead83ba9ff7dd0e3e99a8d89eb99fd",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-d31ec64a41a34b659da59451bdb031b9",
+      "label": "Open Reaction Database reaction ord-d31ec64a41a34b659da59451bdb031b9",
+      "url": "https://open-reaction-database.org/id/ord-d31ec64a41a34b659da59451bdb031b9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-d31ec64a41a34b659da59451bdb031b9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:b86d8661ff2007db2cfd95fb10ce326e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-57afe2770b114105a743a30a79fb8101",
+      "label": "Open Reaction Database reaction ord-57afe2770b114105a743a30a79fb8101",
+      "url": "https://open-reaction-database.org/id/ord-57afe2770b114105a743a30a79fb8101",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-57afe2770b114105a743a30a79fb8101"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

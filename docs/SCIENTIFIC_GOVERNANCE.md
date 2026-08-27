@@ -91,7 +91,7 @@ See [Catalog pipeline](CATALOG_PIPELINE.md).
 
 ## Synthesis governance
 
-Every synthesis record declares independent route type, completeness, applicability, review, access, and reuse states. Discovery candidates, source locators, route segments, teaching reconstructions, and computational proposals are separate layers; no layer upgrades another by implication. The current migration retains six legacy route drafts in the private canonical review layer. All six are pending and link-only, so none is eligible for the public route index or detail renderer. The public application may expose an identity-scoped coverage state—including the safe fact that reported-route evidence is pending review—but not a pending route ID, type, completeness, step, material, source, locator, mechanism, or learning task.
+Every synthesis record declares independent route type, completeness, applicability, review, access, and reuse states. Discovery candidates, source locators, route segments, teaching reconstructions, public-alpha drafts, and computational proposals are separate layers; no layer upgrades another by implication. The current migration retains six legacy route drafts in the private canonical review layer. All six are pending and link-only, so none is eligible for the official canonical route index or reviewed detail renderer. A separate public-alpha channel may expose pending exact-target source segments and exact-identity teaching bridges only after identity, locator, independent-redraw rights, non-operational-content, and explicit-gap gates pass. That channel must display `pending` and `verifiedScientificClaim: false` and must not supply reviewed curriculum or answer keys.
 
 ### Current educational safety boundary
 
@@ -105,7 +105,7 @@ The private review representation may include the following only when its typed 
 - atom-anchored electron-flow arrows only from the two complete mappings defined by foundational transformations; reported steps with a different material context stay closed, and unmapped moves draw no decorative arrows;
 - exact primary-document links and human-resolvable example locators.
 
-These fields remain private while review or reuse is pending. A future public route must pass canonical validation, applicability, review, and source-specific reuse gates before the minimal public route schema can be generated.
+Canonical route fields remain private while review or reuse is pending. A future reviewed public route must pass canonical validation, applicability, review, and source-specific reuse gates before the minimal canonical route schema can be generated. Public-alpha draft fields use a separate, smaller schema and cannot be consumed as canonical routes.
 
 They intentionally omit:
 

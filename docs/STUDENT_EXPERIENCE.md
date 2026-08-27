@@ -76,7 +76,7 @@ The 15 curated seed identities continue into a Curated Dossier rather than losin
 - an explicit unavailable pharmacology state because no reviewed target-interaction snapshot is checked in;
 - exact product/form administration context where the curated record supplies it, while all quantitative ADME phase fields remain empty;
 - an explicit empty metabolite state because no reviewed metabolite edge is configured;
-- identity-scoped synthesis coverage that fails closed unless a reviewed, reuse-eligible public route projection exists;
+- identity-scoped synthesis coverage that may open a separately validated, explicitly pending public-alpha partial graph; malformed drafts fail closed, and only reviewed/reuse-eligible canonical projections may appear as reviewed routes;
 - a nomenclature learning cue;
 - collapsed structure and regulatory sources.
 
@@ -101,9 +101,9 @@ Academy opens on an eight-module map rather than dropping the learner into a tec
 
 ### Synthesis Atlas
 
-Synthesis Atlas is currently a catalog-wide coverage surface. Every one of the 1,552 Basic Molecular Records reports the recorded search scope, terminal candidate-processing counts, access limitations, identity/form/stereo scope, review state, and reuse state. A source candidate or an ORD fragment is never shown as a route.
+Synthesis Atlas is currently a catalog-wide coverage surface. Every one of the 1,552 Basic Molecular Records reports the recorded search scope, terminal candidate-processing counts, access limitations, identity/form/stereo scope, review state, and reuse state. A source candidate or ORD fragment is never shown as a reported or reviewed canonical route. An eligible exact-target fragment may appear only in the separate, permanently pending public-alpha draft channel described below.
 
-A local private migration archive records six historical drafts whose attested review state is pending and reuse mode is link-only. The current tracked public tree retains only aggregate counts/digests and three identity-scoped pending-review booleans; public CI cannot revalidate the withheld route rows. The generated public route index therefore contains zero entries and no public route detail file exists. The three affected molecular records may state only that reported-route evidence is pending review; they do not disclose route identity, type, completeness, steps, materials, sources, locators, mechanism content, or synthesis answer keys.
+A local private migration archive records six historical canonical drafts whose attested review state is pending and reuse mode is link-only. The tracked public tree retains only their aggregate counts/digests and three identity-scoped pending-review booleans; public CI cannot revalidate the withheld rows. The generated canonical reviewed-route index therefore contains zero entries. Separately, 639 identities may open validated public-alpha partial graphs assembled from exact-target ORD source segments. These views disclose only independent 2D redraw inputs, exact dataset locators, explicit teaching bridges/gaps, and pending-review metadata; they exclude operational procedures, reviewed mechanism claims, and synthesis answer keys.
 
 The public renderer already supports an accessible ordered step list for a future eligible route. It loads only the minimal generated route schema and fails closed unless exact molecular identity, canonical validation, applicability, review, reuse, index/detail consistency, and safe-path checks all pass. Any future step exposes reactants, transformation, product, and evidence status in text. Operational quantities, scale, concentration, apparatus, temperature schedules, duration, work-up, purification, yield, and execution instructions remain excluded.
 

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:33b9d19940114f0a8aa01a2c25c5b287",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:apraclonidine-iejxvryneisikr-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:apraclonidine-iejxvryneisikr-uhfffaoysa-n",
+    "preferredName": "Apraclonidine",
+    "pubChemCid": 2216,
+    "inchiKey": "IEJXVRYNEISIKR-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:8c28eadc6d39a1c285073b72e5c117b8",
+      "label": "aluminum stearate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CCCCCCCCCCCCCCCCC)(=O)[O-].[Al+3].C(CCCCCCCCCCCCCCCCC)(=O)[O-].C(CCCCCCCCCCCCCCCCC)(=O)[O-]",
+      "inchiKey": "CEGOLXSVJUTHNZ-UHFFFAOYSA-K",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a921b8f7a22ade7fa8f150ba60e81831",
+      "label": "p-Amino Clonidine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1CN=C(N1)NC2=C(C=C(C=C2Cl)N)Cl",
+      "inchiKey": "IEJXVRYNEISIKR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f541907297186d473f9b5a610cad91b3",
+      "label": "p-Amino Clonidine dihydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1CN=C(N1)NC2=C(C=C(C=C2Cl)N)Cl.Cl.Cl",
+      "inchiKey": "XLKICJXKWJUSPK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:aca957f1ae13221ef89012b3c582f4f4",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:8c28eadc6d39a1c285073b72e5c117b8",
+        "synthesis-draft-material:f541907297186d473f9b5a610cad91b3"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a921b8f7a22ade7fa8f150ba60e81831"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ebe6d791f59971eacc69d6686690e9da",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:aca957f1ae13221ef89012b3c582f4f4",
+      "finalStepId": "synthesis-draft-step:aca957f1ae13221ef89012b3c582f4f4",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:ebe6d791f59971eacc69d6686690e9da",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c167cef229d340d2aba763d3cc9a83b8",
+      "label": "Open Reaction Database reaction ord-c167cef229d340d2aba763d3cc9a83b8",
+      "url": "https://open-reaction-database.org/id/ord-c167cef229d340d2aba763d3cc9a83b8",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c167cef229d340d2aba763d3cc9a83b8"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

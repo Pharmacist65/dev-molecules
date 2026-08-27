@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:a0ed77661bfabee286323ca3b792569e",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:sulfoxone-nedppchneomtjv-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:sulfoxone-nedppchneomtjv-uhfffaoysa-n",
+    "preferredName": "Sulfoxone",
+    "pubChemCid": 5351,
+    "inchiKey": "NEDPPCHNEOMTJV-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:03cfe1e8bc6342197e2c00a1c7f425ef",
+      "label": "Sulfoxone",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1=CC(=CC=C1NCS(=O)O)S(=O)(=O)C=2C=CC(=CC2)NCS(=O)O",
+      "inchiKey": "NEDPPCHNEOMTJV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5eb804e773d64319a1c33f5f1f04897a",
+      "label": "sulfoxone sodium",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CC(=CC=C1NCS(=O)[O-])S(=O)(=O)C=2C=CC(=CC2)NCS(=O)[O-].[Na+].[Na+]",
+      "inchiKey": "AZBNFLZFSZDPQF-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:90023f75043baf813f4f60f04640818e",
+      "label": "streptomycin sulfate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@H]1[C@@]([C@H]([C@@H](O1)O[C@@H]2[C@H]([C@@H]([C@H]([C@@H]([C@H]2O)O)N=C(N)N)O)N=C(N)N)O[C@H]3[C@H]([C@@H]([C@H]([C@@H](O3)CO)O)O)NC)(C=O)O.OS(=O)(=O)O",
+      "inchiKey": "CFCMMYICHMLDCC-RMIBZTJPSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a2e54fafd7f9ca701ae2aa6eaa54e2ea",
+      "label": "sodium ascorbate",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=C1C(O)=C([O-])[C@H](O1)[C@@H](O)CO.[Na+]",
+      "inchiKey": "PPASLZSBLFJQEF-RXSVEWSESA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:b5f994dd7aadbc6aac17a12a3152a1c6",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:5eb804e773d64319a1c33f5f1f04897a",
+        "synthesis-draft-material:a2e54fafd7f9ca701ae2aa6eaa54e2ea",
+        "synthesis-draft-material:90023f75043baf813f4f60f04640818e"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:03cfe1e8bc6342197e2c00a1c7f425ef"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6687555df7f3c4c94990835b61c1051e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:04df96b19c9a28eb814d362ad33d4426",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:5eb804e773d64319a1c33f5f1f04897a",
+        "synthesis-draft-material:a2e54fafd7f9ca701ae2aa6eaa54e2ea",
+        "synthesis-draft-material:90023f75043baf813f4f60f04640818e"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:03cfe1e8bc6342197e2c00a1c7f425ef"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:4f4a63dabeab117d23835adf7ce7196a",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:b5f994dd7aadbc6aac17a12a3152a1c6",
+      "finalStepId": "synthesis-draft-step:b5f994dd7aadbc6aac17a12a3152a1c6",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:04df96b19c9a28eb814d362ad33d4426",
+      "finalStepId": "synthesis-draft-step:04df96b19c9a28eb814d362ad33d4426",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:4f4a63dabeab117d23835adf7ce7196a",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-be9d9e42ddae4b5aad68502328374e5d",
+      "label": "Open Reaction Database reaction ord-be9d9e42ddae4b5aad68502328374e5d",
+      "url": "https://open-reaction-database.org/id/ord-be9d9e42ddae4b5aad68502328374e5d",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-be9d9e42ddae4b5aad68502328374e5d"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:6687555df7f3c4c94990835b61c1051e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-26d301f8372640fe8b11b198fbca8fef",
+      "label": "Open Reaction Database reaction ord-26d301f8372640fe8b11b198fbca8fef",
+      "url": "https://open-reaction-database.org/id/ord-26d301f8372640fe8b11b198fbca8fef",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-26d301f8372640fe8b11b198fbca8fef"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

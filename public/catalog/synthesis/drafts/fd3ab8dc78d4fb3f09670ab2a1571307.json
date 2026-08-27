@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:fd3ab8dc78d4fb3f09670ab2a1571307",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:spirapril-hrwcvuifmszdjs-szmvwbnqsa-n",
+    "catalogEntityId": "molecule:imported:spirapril-hrwcvuifmszdjs-szmvwbnqsa-n",
+    "preferredName": "Spirapril",
+    "pubChemCid": 5311447,
+    "inchiKey": "HRWCVUIFMSZDJS-SZMVWBNQSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:27640b086b4548a10d5f4bfe53dbd50f",
+      "label": "(S,S,S)-7-[2-[(1-ethoxycarbonyl-3-phenylpropyl)amino]-1-oxopropyl]-1,4-dithia-7-azaspiro[4.4]nonane-8-carboxylic acid",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)OC(=O)[C@H](CCC1=CC=CC=C1)N[C@H](C(=O)N1CC2(SCCS2)C[C@H]1C(=O)O)C",
+      "inchiKey": "HRWCVUIFMSZDJS-SZMVWBNQSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9655c023159a463f3912529e17ddf914",
+      "label": "(S,S,S)-7-[2-[(1-ethoxycarbonyl-3-phenylpropyl)amino]-1-oxopropyl]-1,4-dithia-7-azaspiro[4.4]nonane-8-carboxylic acid, diphenylmethyl ester",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)OC(=O)[C@H](CCC1=CC=CC=C1)N[C@H](C(=O)N1CC2(SCCS2)C[C@H]1C(=O)OC(C1=CC=CC=C1)C1=CC=CC=C1)C",
+      "inchiKey": "KGCQTYJWXPUMDM-ARVREXMNSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:366e828bac1a41fe0bad54b926f4e956",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9655c023159a463f3912529e17ddf914"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:27640b086b4548a10d5f4bfe53dbd50f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:6c640f2bba582ca60e6ca0d4db5d8027",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:366e828bac1a41fe0bad54b926f4e956",
+      "finalStepId": "synthesis-draft-step:366e828bac1a41fe0bad54b926f4e956",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:6c640f2bba582ca60e6ca0d4db5d8027",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-bed9253f9b5b40d3a4f3d2d5bd406be6",
+      "label": "Open Reaction Database reaction ord-bed9253f9b5b40d3a4f3d2d5bd406be6",
+      "url": "https://open-reaction-database.org/id/ord-bed9253f9b5b40d3a4f3d2d5bd406be6",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-bed9253f9b5b40d3a4f3d2d5bd406be6"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

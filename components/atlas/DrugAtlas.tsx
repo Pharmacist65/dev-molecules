@@ -305,7 +305,7 @@ export function DrugAtlas({
       data-drug-atlas="true"
       data-atlas-view={activeView}
     >
-      <header className={styles.hero}>
+      <header className={styles.hero} data-atlas-hero="true">
         <div>
           <span className={styles.eyebrow}>{copy.eyebrow}</span>
           <h1>{copy.title}</h1>
@@ -319,7 +319,12 @@ export function DrugAtlas({
         ) : null}
       </header>
 
-      <div className={styles.viewTabs} role="tablist" aria-label={copy.title}>
+      <div
+        className={styles.viewTabs}
+        role="tablist"
+        aria-label={copy.title}
+        data-atlas-view-switcher="true"
+      >
         <button
           type="button"
           role="tab"
@@ -361,7 +366,11 @@ export function DrugAtlas({
           <p className={styles.routeState}>{copy.spatialUnavailable}</p>
         )
       ) : (
-        <div className={styles.browsePanel} role="tabpanel">
+        <div
+          className={styles.browsePanel}
+          role="tabpanel"
+          data-atlas-browse-panel="true"
+        >
           <div className={styles.searchArea}>
             <label htmlFor={searchId}>{copy.searchLabel}</label>
             <div className={styles.searchControl}>

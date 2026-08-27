@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:0e6d083bf36179a2980c4c0edfcd73d0",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cortisone-acetate-itrjwomzkqryta-rfzyenfjsa-n",
+    "catalogEntityId": "molecule:imported:cortisone-acetate-itrjwomzkqryta-rfzyenfjsa-n",
+    "preferredName": "Cortisone Acetate",
+    "pubChemCid": 5745,
+    "inchiKey": "ITRJWOMZKQRYTA-RFZYENFJSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:2b349ee9567c7c60960c03987c97966e",
+      "label": "cortisone acetate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(=O)OCC(=O)[C@]1(CC[C@@H]2[C@@]1(CC(=O)[C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)C)O",
+      "inchiKey": "ITRJWOMZKQRYTA-RFZYENFJSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:acbb7d113355d929f2e200254701fa95",
+      "label": "21-acetoxy-17,20-dihydroxy-pregn-4-en-3,11-dione",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OCC([C@]1(CC[C@H]2[C@@H]3CCC4=CC(CC[C@]4(C)[C@H]3C(C[C@]12C)=O)=O)O)O",
+      "inchiKey": "FYYJWGJXCGWAHJ-TVJCDXMSSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:be6b67a0ebc88c61c642d2c450cea7f3",
+      "label": "o-iodoxybenzoic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "I(=O)(=O)C1=C(C(=O)O)C=CC=C1",
+      "inchiKey": "FIYYMXYOBLWYQO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ed9be822cefeb555af7b99f8dc346128",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:acbb7d113355d929f2e200254701fa95",
+        "synthesis-draft-material:be6b67a0ebc88c61c642d2c450cea7f3"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2b349ee9567c7c60960c03987c97966e"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:4c20b9bffc7eba50e3a2067ef228f2b7",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ed9be822cefeb555af7b99f8dc346128",
+      "finalStepId": "synthesis-draft-step:ed9be822cefeb555af7b99f8dc346128",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:4c20b9bffc7eba50e3a2067ef228f2b7",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-bf8d308aa8594aef9154c7fe5ab941e3",
+      "label": "Open Reaction Database reaction ord-bf8d308aa8594aef9154c7fe5ab941e3",
+      "url": "https://open-reaction-database.org/id/ord-bf8d308aa8594aef9154c7fe5ab941e3",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-bf8d308aa8594aef9154c7fe5ab941e3"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -119,7 +119,7 @@ test("Synthesis Academy exposes complete-index search without importing pending 
   ]);
   assert.match(hub, /data-synthesis-catalog-navigator="complete-index"/u);
   assert.match(hub, /data-synthesis-public-coverage-only=/u);
-  assert.match(hub, /Unreviewed reaction sequences and completeness are excluded from the client bundle/u);
+  assert.match(hub, /Public-alpha drafts stay permanently labelled pending here/u);
   assert.match(hub, /loadPublishedSynthesisRouteCount/u);
   assert.match(hub, /data-published-route-details=\{publishedRouteCount \?\?/u);
   assert.doesNotMatch(hub, /data-published-route-details="0"/u);

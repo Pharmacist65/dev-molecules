@@ -2521,11 +2521,11 @@
    retains the editorial header, bounded toolbar and compact stage above. */
 .universe[data-surface-variant="immersive"] {
   width: 100%;
-  min-height: 78svh;
+  min-height: 80svh;
   overflow: visible;
   border: 0;
   border-radius: 0;
-  background: var(--surface-midnight, #0d172b);
+  background: #071126;
   box-shadow: none;
 }
 
@@ -2556,9 +2556,11 @@
   padding: 0.48rem;
   border: 1px solid rgb(184 202 236 / 18%);
   border-radius: 14px;
-  background: rgb(9 20 40 / 82%);
-  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
-  backdrop-filter: blur(16px);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 7%), transparent 48%),
+    rgb(7 17 37 / 84%);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 7%);
+  backdrop-filter: blur(18px) saturate(125%);
 }
 
 .universe[data-surface-variant="immersive"] .searchLabelRow {
@@ -2580,9 +2582,11 @@
 
 .universe[data-surface-variant="immersive"] .lensDisclosureButton {
   border-radius: 14px;
-  background: rgb(9 20 40 / 82%);
-  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
-  backdrop-filter: blur(16px);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 7%), transparent 48%),
+    rgb(7 17 37 / 84%);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 7%);
+  backdrop-filter: blur(18px) saturate(125%);
 }
 
 .universe[data-surface-variant="immersive"] .lensDisclosureButton strong {
@@ -2634,19 +2638,24 @@
 }
 
 .universe[data-surface-variant="immersive"] .exploreStage {
-  min-height: 78svh;
+  min-height: 80svh;
   border: 0;
   background:
-    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 18%), transparent 43%),
-    linear-gradient(rgb(112 145 210 / 4%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(112 145 210 / 4%) 1px, transparent 1px),
-    #0d172b;
-  background-size: auto, 64px 64px, 64px 64px, auto;
+    radial-gradient(ellipse at 50% 42%, rgb(45 91 188 / 23%), transparent 48%),
+    radial-gradient(circle at 12% 24%, rgb(255 139 54 / 8%), transparent 20rem),
+    radial-gradient(circle at 86% 78%, rgb(0 188 198 / 7%), transparent 24rem),
+    linear-gradient(rgb(112 145 210 / 3.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(112 145 210 / 3.5%) 1px, transparent 1px),
+    #071126;
+  background-size: auto, auto, auto, 72px 72px, 72px 72px, auto;
+  box-shadow:
+    inset 0 1px rgb(255 255 255 / 5%),
+    inset 0 -8rem 11rem rgb(1 7 19 / 52%);
 }
 
 .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] {
-  height: max(78svh, var(--explore-stage-viewport-height, 78svh));
-  min-height: max(78svh, var(--explore-stage-viewport-height, 78svh));
+  height: max(80svh, var(--explore-stage-viewport-height, 80svh));
+  min-height: max(80svh, var(--explore-stage-viewport-height, 80svh));
 }
 
 /* The floating controls own this top dock. The WebGL viewport starts below it,
@@ -2666,8 +2675,9 @@
 
 .universe[data-surface-variant="immersive"] .sceneTelemetry {
   background:
-    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 17%), transparent 44%),
-    #0d172b;
+    radial-gradient(ellipse at 50% 43%, rgb(52 103 209 / 19%), transparent 48%),
+    radial-gradient(circle at 50% 108%, rgb(0 188 198 / 6%), transparent 34%),
+    transparent;
 }
 
 .universe[data-surface-variant="immersive"] .clusterGlyph small,
@@ -2685,8 +2695,8 @@
   padding: 0.35rem 0.7rem;
   border-left: 3px solid var(--color-metallic-orange, #ff8a00);
   color: #cbd5e8;
-  background: rgb(9 20 40 / 70%);
-  box-shadow: 0 10px 28px rgb(0 0 0 / 20%);
+  background: rgb(7 17 37 / 74%);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 24%), inset 0 1px rgb(255 255 255 / 5%);
   font-size: 0.875rem;
   font-weight: 650;
   line-height: 1.25;
@@ -2708,9 +2718,17 @@
   bottom: 1rem;
   border-color: rgb(184 202 236 / 20%);
   border-radius: 13px;
-  background: rgb(9 20 40 / 86%);
-  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
-  backdrop-filter: blur(16px);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 6%), transparent 54%),
+    rgb(7 17 37 / 88%);
+  box-shadow: 0 16px 42px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 7%);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+
+@media (max-width: 1100px) and (min-width: 721px) {
+  .universe[data-surface-variant="immersive"] .toolbar {
+    grid-template-columns: minmax(14rem, 18rem) minmax(13rem, 16rem);
+  }
 }
 
 .universe[data-surface-variant="immersive"] .footer {
@@ -2749,7 +2767,7 @@
   }
 
   .universe[data-surface-variant="immersive"] .toolbar {
-    top: 0.65rem;
+    top: 4.45rem;
     right: 0.65rem;
     left: 0.65rem;
     grid-template-columns: minmax(0, 1fr);
@@ -2784,8 +2802,8 @@
   }
 
   .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] > .sceneTelemetry {
-    top: 10.25rem;
-    height: calc(100% - 10.25rem);
+    top: 13.65rem;
+    height: calc(100% - 13.65rem);
   }
 
   .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] .sharedScene,

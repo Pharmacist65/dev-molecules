@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:452e6f914aa319ecf95a2da47ef2a9df",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:mazindol-zpxscakfgyxmga-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:mazindol-zpxscakfgyxmga-uhfffaoysa-n",
+    "preferredName": "Mazindol",
+    "pubChemCid": 4020,
+    "inchiKey": "ZPXSCAKFGYXMGA-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:00eafd6c9a0abd2a10ed4bd1176b2d02",
+      "label": "5-(4-chlorophenyl)-2,3-dihydro-5H-imidazo [2,1-a]isoindol-5-ol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC1=CC=C(C=C1)C1(N2C(C3=CC=CC=C13)=NCC2)O",
+      "inchiKey": "ZPXSCAKFGYXMGA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9a63c462a8e4bafefb32216b4bdc503b",
+      "label": "1-(p-chlorophenyl)-1,2,3,4,5,6-hexahydro-2,5-benzodiazocine dihydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl.Cl.ClC1=CC=C(C=C1)C1NCCNCC2=C1C=CC=C2",
+      "inchiKey": "YSEKTJDZLUWDBU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:afdd7aaa40424e3cbcc0e4ae69a12c30",
+      "label": "potassium permanganate",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Mn](=O)(=O)(=O)[O-].[K+]",
+      "inchiKey": "VZJVWSHVAAUDKD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:0843d9409f147e55491115d6081d3d58",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9a63c462a8e4bafefb32216b4bdc503b",
+        "synthesis-draft-material:afdd7aaa40424e3cbcc0e4ae69a12c30"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:00eafd6c9a0abd2a10ed4bd1176b2d02"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c8877898c15bf03f8890c3fc2faf1c0e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:0843d9409f147e55491115d6081d3d58",
+      "finalStepId": "synthesis-draft-step:0843d9409f147e55491115d6081d3d58",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c8877898c15bf03f8890c3fc2faf1c0e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-432bfa76e7be42b7ae6706f73d8af0c7",
+      "label": "Open Reaction Database reaction ord-432bfa76e7be42b7ae6706f73d8af0c7",
+      "url": "https://open-reaction-database.org/id/ord-432bfa76e7be42b7ae6706f73d8af0c7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-432bfa76e7be42b7ae6706f73d8af0c7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

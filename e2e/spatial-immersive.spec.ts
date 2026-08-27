@@ -25,6 +25,15 @@ const boxesIntersect = (left: RenderedBox, right: RenderedBox) =>
   left.top < right.bottom - 1 &&
   left.bottom > right.top + 1;
 
+const locatorBoxesIntersect = (
+  left: { readonly x: number; readonly y: number; readonly width: number; readonly height: number },
+  right: { readonly x: number; readonly y: number; readonly width: number; readonly height: number },
+) =>
+  left.x < right.x + right.width - 1 &&
+  left.x + left.width > right.x + 1 &&
+  left.y < right.y + right.height - 1 &&
+  left.y + left.height > right.y + 1;
+
 async function readVisibleBoxes(locator: Locator): Promise<readonly RenderedBox[]> {
   return locator.evaluateAll((elements) => elements.flatMap((element) => {
     if (!(element instanceof HTMLElement)) return [];
@@ -189,26 +198,50 @@ test("immersive Spatial meets desktop, zoom-equivalent and mobile geometry contr
     await page.setViewportSize({ width: qualityCase.width, height: qualityCase.height });
     await page.goto("./#atlas/spatial", { waitUntil: "domcontentloaded" });
     const { spatial, universe, scene } = await waitForImmersiveAtlas(page);
+    const atlas = page.locator('[data-drug-atlas="true"][data-atlas-view="spatial"]');
+    const topbar = page.getByRole("banner").first();
     const stage = universe.locator('div[data-level="universe"][data-flight]');
     const canvas = universe.locator("canvas[data-molecular-scene-canvas]");
-    const [stageBox, canvasBox, searchBox, lensBox, zoomBox, representativeBox] = await Promise.all([
+    const viewSwitcher = atlas.locator('[data-atlas-view-switcher="true"]');
+    const floatingControls = universe.locator('[data-spatial-floating-controls="primary"]');
+    const [topbarBox, stageBox, canvasBox, switcherBox, searchBox, lensBox, zoomBox, representativeBox] = await Promise.all([
+      topbar.boundingBox(),
       stage.boundingBox(),
       canvas.boundingBox(),
+      viewSwitcher.boundingBox(),
       universe.getByRole("searchbox").boundingBox(),
       universe.getByRole("button", { name: /Kümelenme merceği|Clustering lens/i }).boundingBox(),
       universe.getByRole("button", { name: /Yakınlaştır|Zoom in/i }).boundingBox(),
       universe.locator('[data-representative-scope="true"]').boundingBox(),
     ]);
+    expect(topbarBox, `${qualityCase.name}: topbar box`).not.toBeNull();
     expect(stageBox, `${qualityCase.name}: stage box`).not.toBeNull();
     expect(canvasBox, `${qualityCase.name}: canvas box`).not.toBeNull();
+    expect(switcherBox, `${qualityCase.name}: floating view switcher`).not.toBeNull();
     expect(searchBox, `${qualityCase.name}: floating search`).not.toBeNull();
     expect(lensBox, `${qualityCase.name}: floating lens`).not.toBeNull();
     expect(zoomBox, `${qualityCase.name}: floating zoom`).not.toBeNull();
     expect(representativeBox, `${qualityCase.name}: representative scope`).not.toBeNull();
+    await expect(atlas.locator('[data-atlas-hero="true"]')).toBeHidden();
+    await expect(atlas.locator('[data-atlas-browse-panel="true"]')).toHaveCount(0);
+    await expect(floatingControls).toHaveCSS("position", "absolute");
+    await expect(viewSwitcher).toHaveCSS("position", "absolute");
+    expect(switcherBox?.y ?? -1, `${qualityCase.name}: view switcher top is visible`)
+      .toBeGreaterThanOrEqual(0);
+    expect(
+      (switcherBox?.y ?? Infinity) + (switcherBox?.height ?? Infinity),
+      `${qualityCase.name}: view switcher bottom is visible`,
+    ).toBeLessThanOrEqual(qualityCase.height);
+    expect(
+      Math.abs((stageBox?.y ?? Infinity) - ((topbarBox?.y ?? 0) + (topbarBox?.height ?? 0))),
+      `${qualityCase.name}: stage begins directly below navigation`,
+    ).toBeLessThanOrEqual(2);
+    expect(stageBox?.width ?? 0, `${qualityCase.name}: stage uses full viewport width`)
+      .toBeGreaterThanOrEqual(qualityCase.width - 1);
     if (qualityCase.desktop) {
       // CSS viewport units can resolve to a fractional device pixel which the
       // browser exposes rounded down by <1px in getBoundingClientRect().
-      expect(((stageBox?.height ?? 0) + 1) / qualityCase.height).toBeGreaterThanOrEqual(0.78);
+      expect(((stageBox?.height ?? 0) + 1) / qualityCase.height).toBeGreaterThanOrEqual(0.8);
     }
     expect(
       searchBox ? searchBox.y + searchBox.height : Infinity,
@@ -222,6 +255,25 @@ test("immersive Spatial meets desktop, zoom-equivalent and mobile geometry contr
     expect(
       canvasBox ? canvasBox.y + canvasBox.height : Infinity,
     ).toBeLessThanOrEqual((representativeBox?.y ?? 0) + 1);
+    const switcherIsOutsideCanvas = Boolean(
+      switcherBox && canvasBox && (
+        switcherBox.y + switcherBox.height <= canvasBox.y + 1 ||
+        switcherBox.y >= canvasBox.y + canvasBox.height - 1
+      )
+    );
+    expect(switcherIsOutsideCanvas, `${qualityCase.name}: view switcher clears molecule canvas`)
+      .toBe(true);
+    for (const [controlName, controlBox] of [
+      ["search", searchBox],
+      ["lens", lensBox],
+      ["camera", zoomBox],
+      ["representative scope", representativeBox],
+    ] as const) {
+      expect(
+        switcherBox && controlBox ? locatorBoxesIntersect(switcherBox, controlBox) : true,
+        `${qualityCase.name}: view switcher does not overlap ${controlName}`,
+      ).toBe(false);
+    }
     expect(await canvas.count()).toBe(1);
     expect(Number(await scene.getAttribute("data-visible-count"))).toBeGreaterThanOrEqual(4);
     expect(Number(await scene.getAttribute("data-visible-count"))).toBeLessThanOrEqual(6);
@@ -304,4 +356,19 @@ test("near LOD expands to 8–12 structures and molecule activation opens the ri
   ).toBeLessThanOrEqual(
     (inspectorBox?.x ?? 0) + 1,
   );
+  const [viewSwitcherBox, focusActionBoxes] = await Promise.all([
+    page.locator('[data-atlas-view-switcher="true"]').boundingBox(),
+    universe.locator("header").first().getByRole("button").evaluateAll((buttons) =>
+      buttons.map((button) => {
+        const box = button.getBoundingClientRect();
+        return { x: box.x, y: box.y, width: box.width, height: box.height };
+      }),
+    ),
+  ]);
+  for (const actionBox of focusActionBoxes) {
+    expect(
+      viewSwitcherBox ? locatorBoxesIntersect(viewSwitcherBox, actionBox) : true,
+      "floating view switcher must not cover focus actions",
+    ).toBe(false);
+  }
 });

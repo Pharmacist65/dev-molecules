@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:847ebc257040048dfc1c6a974ba095e1",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:topiramate-kjadkkwyzyxhbb-xbwdgyhzsa-n",
+    "catalogEntityId": "molecule:imported:topiramate-kjadkkwyzyxhbb-xbwdgyhzsa-n",
+    "preferredName": "Topiramate",
+    "pubChemCid": 5284627,
+    "inchiKey": "KJADKKWYZYXHBB-XBWDGYHZSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:5969cdfa66cfb4e4947746b7010d1be0",
+      "label": "2,3:4,5-bis-O-(1-methylethylidene)-β-D-fructopyranose sulfamate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC1(O[C@@H]2CO[C@@]3([C@H]([C@@H]2O1)OC(O3)(C)C)COS(=O)(=O)N)C",
+      "inchiKey": "KJADKKWYZYXHBB-XBWDGYHZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:59b161af666051666a3b8d0aa82f9269",
+      "label": "sulfuryl chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "S(=O)(=O)(Cl)Cl",
+      "inchiKey": "YBBRCQOCSYXUOC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6680d41ec7b46f45b26b479d7f72ca0d",
+      "label": "pyridine",
+      "displayRole": "source_input",
+      "sourceSmiles": "N1=CC=CC=C1",
+      "inchiKey": "JUJWROOIHBZHMG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7a9d5ff32e4e9ee40429871d9db49085",
+      "label": "2,3:4,5-bis-O-(1-methylethylidene)-β-D-fructopyranose",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1(O[C@@H]2CO[C@@]3([C@H]([C@@H]2O1)OC(O3)(C)C)CO)C",
+      "inchiKey": "PSSHGMIAIUYOJF-XBWDGYHZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:b62cbde1349e51f97bdca95aa7a85586",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7a9d5ff32e4e9ee40429871d9db49085",
+        "synthesis-draft-material:6680d41ec7b46f45b26b479d7f72ca0d",
+        "synthesis-draft-material:59b161af666051666a3b8d0aa82f9269"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:5969cdfa66cfb4e4947746b7010d1be0"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:9b59c7b5505a84cf38f1b9a8e7520142",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:b62cbde1349e51f97bdca95aa7a85586",
+      "finalStepId": "synthesis-draft-step:b62cbde1349e51f97bdca95aa7a85586",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:9b59c7b5505a84cf38f1b9a8e7520142",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-569c3dcb837f4c9c859d4a8cc35bf0a7",
+      "label": "Open Reaction Database reaction ord-569c3dcb837f4c9c859d4a8cc35bf0a7",
+      "url": "https://open-reaction-database.org/id/ord-569c3dcb837f4c9c859d4a8cc35bf0a7",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-569c3dcb837f4c9c859d4a8cc35bf0a7"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:15d6aa43793a2010d0589965a4dcae48",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:alacepril-fhhhoyxprdyhez-coxvudfisa-n",
+    "catalogEntityId": "molecule:imported:alacepril-fhhhoyxprdyhez-coxvudfisa-n",
+    "preferredName": "Alacepril",
+    "pubChemCid": 71992,
+    "inchiKey": "FHHHOYXPRDYHEZ-COXVUDFISA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:9b85f1a27a2f6265eb49833f20e91fe3",
+      "label": "1-[(2S)-3-(Acetylthio)-2-methyl-1-oxopropyl]-L-prolyl-L-phenylalanine tert-butyl ester",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)(C)OC([C@@H](NC([C@H]1N(CCC1)C([C@@H](CSC(C)=O)C)=O)=O)CC1=CC=CC=C1)=O",
+      "inchiKey": "KDNJTLJZSHIBDD-UXPWSPDFSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:df1400efc66b6285700e5aea1ed15899",
+      "label": "1-[(2S)-3-(acetylthio)-2-methyl-1-oxopropyl]-L-prolyl-L-phenylalanine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)(=O)SC[C@H](C(=O)N1[C@H](C(=O)N[C@@H](CC2=CC=CC=C2)C(=O)O)CCC1)C",
+      "inchiKey": "FHHHOYXPRDYHEZ-COXVUDFISA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:462a33461578795acbbdef5ed1c98604",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9b85f1a27a2f6265eb49833f20e91fe3"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:df1400efc66b6285700e5aea1ed15899"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:988859f0f1edfd5733b144b15ebeed7e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:462a33461578795acbbdef5ed1c98604",
+      "finalStepId": "synthesis-draft-step:462a33461578795acbbdef5ed1c98604",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:988859f0f1edfd5733b144b15ebeed7e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5176682f705445cfa7456e5068f0c417",
+      "label": "Open Reaction Database reaction ord-5176682f705445cfa7456e5068f0c417",
+      "url": "https://open-reaction-database.org/id/ord-5176682f705445cfa7456e5068f0c417",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5176682f705445cfa7456e5068f0c417"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

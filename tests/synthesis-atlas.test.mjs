@@ -13,7 +13,7 @@ const { synthesisAtlasChallenges } = await tsImport(
   import.meta.url,
 );
 
-test("public source contains no pending synthesis route graph or derived challenge", () => {
+test("legacy canonical source contains no pending route graph or derived challenge", () => {
   assert.deepEqual(synthesisAtlasRoutes, []);
   assert.equal(synthesisAtlasRouteById.size, 0);
   assert.equal(synthesisAtlasRoutesByMoleculeId.size, 0);

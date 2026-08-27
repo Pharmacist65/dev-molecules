@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:04b9c69eea51a8bf6ab8000559ffcd4f",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:amitriptyline-krmdcwkbezimab-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:amitriptyline-krmdcwkbezimab-uhfffaoysa-n",
+    "preferredName": "Amitriptyline",
+    "pubChemCid": 2160,
+    "inchiKey": "KRMDCWKBEZIMAB-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0a57fe30a70db788718afa25166c5ed5",
+      "label": "1-Chloro-amitriptyline",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C)CCC=C1C=2C=CC=CC2CCC3=C1C=CC=C3Cl",
+      "inchiKey": "CMGZPJIHOZMOKL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4d730fe3860bcbb55e13dac8a33e90e4",
+      "label": "d-tartaric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([C@@H](O)[C@H](O)C(=O)O)(=O)O",
+      "inchiKey": "FEWJPZIEWOKRBE-LWMBPPNESA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:eaadcfc76950592d25d5c11cab90d897",
+      "label": "amitriptyline",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN(C)CCC=C1C=2C=CC=CC2CCC3=C1C=CC=C3",
+      "inchiKey": "KRMDCWKBEZIMAB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:c665a421509acbdaf0acdf6ca39f6706",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:0a57fe30a70db788718afa25166c5ed5",
+        "synthesis-draft-material:4d730fe3860bcbb55e13dac8a33e90e4"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:eaadcfc76950592d25d5c11cab90d897"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:a7c1000e13b85fc15ebd81f6a1ac5b1b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:c665a421509acbdaf0acdf6ca39f6706",
+      "finalStepId": "synthesis-draft-step:c665a421509acbdaf0acdf6ca39f6706",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:a7c1000e13b85fc15ebd81f6a1ac5b1b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-b196b6985ee74a0ebcf6527350330854",
+      "label": "Open Reaction Database reaction ord-b196b6985ee74a0ebcf6527350330854",
+      "url": "https://open-reaction-database.org/id/ord-b196b6985ee74a0ebcf6527350330854",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b196b6985ee74a0ebcf6527350330854"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

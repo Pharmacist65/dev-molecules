@@ -27,6 +27,7 @@ export function AtlasSpatialView({
       className={styles.spatial}
       data-atlas-spatial="true"
       data-spatial-variant={variant}
+      data-spatial-viewport={variant === "immersive" ? "primary" : "embedded"}
     >
       {variant === "embedded" ? (
         <p className={styles.spatialBoundary}>

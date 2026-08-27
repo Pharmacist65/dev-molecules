@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:e5d1b02a64c3d2d5ab083eebccfc9064",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:estetrol-ajipijnnojssqc-nylirdpksa-n",
+    "catalogEntityId": "molecule:imported:estetrol-ajipijnnojssqc-nylirdpksa-n",
+    "preferredName": "Estetrol",
+    "pubChemCid": 27125,
+    "inchiKey": "AJIPIJNNOJSSQC-NYLIRDPKSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:510f9bd852a0ec813980505fb0e8496a",
+      "label": "estra-1,3,5(10)-triene-3,15β,16β,17β-tetrol-3,17 diacetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OC1=CC=2CC[C@H]3[C@@H]4[C@@H]([C@@H]([C@@H]([C@@]4(C)CC[C@@H]3C2C=C1)OC(C)=O)O)O",
+      "inchiKey": "JCBSFUFZMPRJJS-PQWGXEMDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8285bdca8d32566dc6abb5ff944a14b0",
+      "label": "estra-1,3,5(10)-triene-3,15α,16α,17α-tetraol-3,17-diacetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(=O)OC1=CC=2CC[C@H]3[C@@H]4[C@H]([C@H]([C@H]([C@@]4(C)CC[C@@H]3C2C=C1)OC(C)=O)O)O",
+      "inchiKey": "JCBSFUFZMPRJJS-YPMIVSHASA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b764e089fef1f9c0543ff9439a42941f",
+      "label": "estetrol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@]12CC[C@H]3[C@H]([C@@H]1[C@H]([C@H]([C@@H]2O)O)O)CCC4=C3C=CC(=C4)O",
+      "inchiKey": "AJIPIJNNOJSSQC-NYLIRDPKSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:a106967ce479f4ce36fe7a99cf2c2173",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:510f9bd852a0ec813980505fb0e8496a",
+        "synthesis-draft-material:8285bdca8d32566dc6abb5ff944a14b0"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:b764e089fef1f9c0543ff9439a42941f"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ff5457fa737cb5183a903ea5e5a88756",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:a106967ce479f4ce36fe7a99cf2c2173",
+      "finalStepId": "synthesis-draft-step:a106967ce479f4ce36fe7a99cf2c2173",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:ff5457fa737cb5183a903ea5e5a88756",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-65c7d4366f584f438391f0e35fcc07c0",
+      "label": "Open Reaction Database reaction ord-65c7d4366f584f438391f0e35fcc07c0",
+      "url": "https://open-reaction-database.org/id/ord-65c7d4366f584f438391f0e35fcc07c0",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-65c7d4366f584f438391f0e35fcc07c0"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

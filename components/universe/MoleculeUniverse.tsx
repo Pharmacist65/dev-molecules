@@ -333,6 +333,7 @@ const IMMERSIVE_OVERVIEW_SAMPLE_SIZE = 6;
 const IMMERSIVE_NARROW_OVERVIEW_SAMPLE_SIZE = 4;
 const IMMERSIVE_NEAR_SAMPLE_SIZE = 10;
 const IMMERSIVE_NARROW_NEAR_SAMPLE_SIZE = 6;
+const IMMERSIVE_DESKTOP_MINIMUM_VIEWPORT_RATIO = 0.8;
 const CLUSTER_VISIBLE_SAMPLE_SIZE = 10;
 const VIEWPORT_SELECTION_SETTLE_MS = 650;
 
@@ -893,7 +894,7 @@ export function MoleculeUniverse({
       // 1440x900 / 150% zoom equivalent, where font metrics move the stage top.
       const available = Math.max(1, Math.floor(window.innerHeight - top - 1));
       const immersiveMinimum = window.innerWidth > 720
-        ? Math.floor(window.innerHeight * 0.78)
+        ? Math.floor(window.innerHeight * IMMERSIVE_DESKTOP_MINIMUM_VIEWPORT_RATIO)
         : 1;
       const nextHeight = isImmersive
         ? Math.max(available, immersiveMinimum)
@@ -2397,9 +2398,13 @@ export function MoleculeUniverse({
         </header>
       )}
 
-      <div className={styles.toolbar}>
+      <div
+        className={styles.toolbar}
+        data-spatial-floating-controls={isImmersive ? "primary" : undefined}
+      >
         <div
           className={styles.searchField}
+          data-spatial-control={isImmersive ? "search" : undefined}
           data-indexed-search={indexedCatalog ? indexedStatus : "disabled"}
           data-indexed-error={presentationMode === "reviewer" ? indexedErrorMessage : undefined}
         >
@@ -2439,7 +2444,11 @@ export function MoleculeUniverse({
             ) : null}
           </div>
         </div>
-        <div className={styles.lensPanel} data-open={lensDrawerOpen ? "true" : "false"}>
+        <div
+          className={styles.lensPanel}
+          data-open={lensDrawerOpen ? "true" : "false"}
+          data-spatial-control={isImmersive ? "lens" : undefined}
+        >
           <button
             type="button"
             className={styles.lensDisclosureButton}
@@ -2922,6 +2931,7 @@ export function MoleculeUniverse({
                 role="group"
                 aria-label={t("explore.universeZoom")}
                 data-spatial-label-obstacle="camera-controls"
+                data-spatial-control={isImmersive ? "camera" : undefined}
               >
                 <button type="button" aria-label={t("explore.zoomOut")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button>
                 <output>{Math.round(universeZoom * 100)}%</output>

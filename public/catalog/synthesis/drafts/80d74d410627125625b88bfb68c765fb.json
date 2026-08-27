@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:80d74d410627125625b88bfb68c765fb",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:warfarin-pjvwktkqmonhti-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:warfarin-pjvwktkqmonhti-uhfffaoysa-n",
+    "preferredName": "Warfarin",
+    "pubChemCid": 54678486,
+    "inchiKey": "PJVWKTKQMONHTI-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:04750b8829022dec9e2fd6c3594b2cdc",
+      "label": "Fusidic Acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C[C@H]1[C@@H]2CC[C@]3([C@H]([C@]2(CC[C@H]1O)C)[C@@H](C[C@@H]\\4[C@@]3(C[C@@H](/C4=C(/CCC=C(C)C)\\C(=O)O)OC(=O)C)C)O)C",
+      "inchiKey": "IECPWNUMDGFDKC-MZJAQBGESA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:836f36a6cd01af5db23a2fec1eda78fb",
+      "label": "Bacitracin",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC[C@H](C)[C@H]1C(=O)N[C@@H](C(=O)N[C@H](C(=O)N[C@@H](C(=O)N[C@H](C(=O)NCCCC[C@@H](C(=O)N[C@@H](C(=O)N1)CCCN)NC(=O)[C@H]([C@@H](C)CC)NC(=O)[C@@H](CCC(=O)O)NC(=O)[C@H](CC(C)C)NC(=O)[C@@H]2CSC(=N2)[C@H]([C@@H](C)CC)N)CC(=O)N)CC(=O)O)CC3=CN=CN3)CC=4C=CC=CC4",
+      "inchiKey": "CLKOFPXJLQSYAH-ABRJDSQDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:acbc771247e000c079a46b6f591d06fd",
+      "label": "Erythromycin",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC[C@@H]1[C@@]([C@@H]([C@H](C(=O)[C@@H](C[C@@]([C@@H]([C@H]([C@@H]([C@H](C(=O)O1)C)O[C@H]2C[C@@]([C@H]([C@@H](O2)C)O)(C)OC)C)O[C@H]3[C@@H]([C@H](C[C@H](O3)C)N(C)C)O)(C)O)C)C)O)(C)O",
+      "inchiKey": "ULGZDMOVFRHVEP-RWJQBGPGSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f64b584a74923672ec873204e4476172",
+      "label": "Warfarin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(=O)CC(C=1C=CC=CC1)C2=C(C=3C=CC=CC3OC2=O)O",
+      "inchiKey": "PJVWKTKQMONHTI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:6bcad0101e3589a71582f61ca248cf5f",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:836f36a6cd01af5db23a2fec1eda78fb",
+        "synthesis-draft-material:acbc771247e000c079a46b6f591d06fd",
+        "synthesis-draft-material:04750b8829022dec9e2fd6c3594b2cdc"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:f64b584a74923672ec873204e4476172"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3b2774b142e1836f02ef2f7cfec99d4e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:6bcad0101e3589a71582f61ca248cf5f",
+      "finalStepId": "synthesis-draft-step:6bcad0101e3589a71582f61ca248cf5f",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:3b2774b142e1836f02ef2f7cfec99d4e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-05fc60831dd942ff80692d79ec7bcffc",
+      "label": "Open Reaction Database reaction ord-05fc60831dd942ff80692d79ec7bcffc",
+      "url": "https://open-reaction-database.org/id/ord-05fc60831dd942ff80692d79ec7bcffc",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-05fc60831dd942ff80692d79ec7bcffc"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

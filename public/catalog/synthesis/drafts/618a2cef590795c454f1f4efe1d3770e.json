@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:618a2cef590795c454f1f4efe1d3770e",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:amrinone-rnlqibcllyyyfj-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:amrinone-rnlqibcllyyyfj-uhfffaoysa-n",
+    "preferredName": "Amrinone",
+    "pubChemCid": 3698,
+    "inchiKey": "RNLQIBCLLYYYFJ-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0fbd01077be7e05b536aa97b64c1730f",
+      "label": "1,2-dihydro-2-oxo-5-(4,6-dimethyl-2-pyridinyl)-nicotinamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=C1C(C(=O)N)=CC(=CN1)C1=NC(=CC(=C1)C)C",
+      "inchiKey": "JJNRODWRQULWNK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7e4f84315b6d87d553893ba89618cad4",
+      "label": "N-hydroxy-1,6-diethyl-1,2-dihydro-2-oxo-5-(4-pyridinyl)nicotinimidamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "ONC(C=1C(N(C(=C(C1)C1=CC=NC=C1)CC)CC)=O)=N",
+      "inchiKey": "NSOXQPXRTUGNOI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:af649112ac1e7434a8328b3a0cfccf5b",
+      "label": "3-Amino-5-(4-pyridinyl)-2(1H)pyridinone",
+      "displayRole": "exact_target",
+      "sourceSmiles": "NC=1C(NC=C(C1)C1=CC=NC=C1)=O",
+      "inchiKey": "RNLQIBCLLYYYFJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ca42c851196abe47c5798bd597408dea",
+      "label": "3-Amino-5-(4,6-dimethyl-2-pyridinyl)-2(1H)-pyridinone",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC=1C(NC=C(C1)C1=NC(=CC(=C1)C)C)=O",
+      "inchiKey": "FYHMYZJGKDAYRW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:de9371fce858222d90bde6fd94660f1e",
+      "label": "3-Amino-1,6-diethyl-5-(4-pyridinyl)-2(1H)pyridinone",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC=1C(N(C(=C(C1)C1=CC=NC=C1)CC)CC)=O",
+      "inchiKey": "YPGVFYQQZUFHDD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ab4e0703ceb910c5c9d60932c9350621",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:de9371fce858222d90bde6fd94660f1e",
+        "synthesis-draft-material:7e4f84315b6d87d553893ba89618cad4"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:af649112ac1e7434a8328b3a0cfccf5b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8ee7b92fa9f5da17df5162914c667a2d",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:9e23add50c54894d19e3b67143a1d194",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:ca42c851196abe47c5798bd597408dea",
+        "synthesis-draft-material:0fbd01077be7e05b536aa97b64c1730f"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:af649112ac1e7434a8328b3a0cfccf5b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:f6cfc532b5d615ad5a8c9da26a04fc22",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ab4e0703ceb910c5c9d60932c9350621",
+      "finalStepId": "synthesis-draft-step:ab4e0703ceb910c5c9d60932c9350621",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:9e23add50c54894d19e3b67143a1d194",
+      "finalStepId": "synthesis-draft-step:9e23add50c54894d19e3b67143a1d194",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:8ee7b92fa9f5da17df5162914c667a2d",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c88072cca0c444b0b73aa3653b7139cf",
+      "label": "Open Reaction Database reaction ord-c88072cca0c444b0b73aa3653b7139cf",
+      "url": "https://open-reaction-database.org/id/ord-c88072cca0c444b0b73aa3653b7139cf",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c88072cca0c444b0b73aa3653b7139cf"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:f6cfc532b5d615ad5a8c9da26a04fc22",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-2d09084ce3164452afc847223fec382d",
+      "label": "Open Reaction Database reaction ord-2d09084ce3164452afc847223fec382d",
+      "url": "https://open-reaction-database.org/id/ord-2d09084ce3164452afc847223fec382d",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2d09084ce3164452afc847223fec382d"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

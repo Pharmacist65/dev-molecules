@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:fcf3c05b6699ca5dea9973288bb0e165",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:levmetamfetamine-mywuzjcmwcohba-secbinfhsa-n",
+    "catalogEntityId": "molecule:imported:levmetamfetamine-mywuzjcmwcohba-secbinfhsa-n",
+    "preferredName": "Levmetamfetamine",
+    "pubChemCid": 36604,
+    "inchiKey": "MYWUZJCMWCOHBA-SECBINFHSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0705a8d88fb41e6b75db0a84cd974c5b",
+      "label": "(2R)—N-methyl-1-phenyl-2-propanamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN[C@@H](CC1=CC=CC=C1)C",
+      "inchiKey": "MYWUZJCMWCOHBA-SECBINFHSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c4457277eb79c464ff34488edff6b1b3",
+      "label": "LiAlH4",
+      "displayRole": "source_input",
+      "sourceSmiles": "[H-].[H-].[H-].[H-].[Li+].[Al+3]",
+      "inchiKey": "BJKLPLABXHXMIM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f1eb9942a4dd4b99e4d3897debf6a67d",
+      "label": "1,1-dimethylethyl[(1R)-1-methyl-2-phenylethyl]carbamate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(C)(C)N(C([O-])=O)[C@@H](CC1=CC=CC=C1)C",
+      "inchiKey": "CXXFYUREEOVOKO-LLVKDONJSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ceb730c78a3f72bb2fb79bd7d7a8f72a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c4457277eb79c464ff34488edff6b1b3",
+        "synthesis-draft-material:f1eb9942a4dd4b99e4d3897debf6a67d"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:0705a8d88fb41e6b75db0a84cd974c5b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:0bdd9bd191b5fb8043dc412429a8d777",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ceb730c78a3f72bb2fb79bd7d7a8f72a",
+      "finalStepId": "synthesis-draft-step:ceb730c78a3f72bb2fb79bd7d7a8f72a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:0bdd9bd191b5fb8043dc412429a8d777",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-cef34ec4568b49d39ec8e00873a8e6df",
+      "label": "Open Reaction Database reaction ord-cef34ec4568b49d39ec8e00873a8e6df",
+      "url": "https://open-reaction-database.org/id/ord-cef34ec4568b49d39ec8e00873a8e6df",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-cef34ec4568b49d39ec8e00873a8e6df"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

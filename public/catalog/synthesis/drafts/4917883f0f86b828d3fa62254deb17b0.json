@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:4917883f0f86b828d3fa62254deb17b0",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:ibutilide-alobuehuhmbrle-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:ibutilide-alobuehuhmbrle-uhfffaoysa-n",
+    "preferredName": "Ibutilide",
+    "pubChemCid": 60753,
+    "inchiKey": "ALOBUEHUHMBRLE-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0a308b32fa6e68741143e4a805884506",
+      "label": "potassium tartrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)([O-])C(O)C(O)C(=O)[O-].[K+].[K+]",
+      "inchiKey": "AVTYONGGKAJVTE-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8795d588f447d68958392eed8eb9e1fd",
+      "label": "N-ethyl-N-heptyl-γ-oxo-4-[(methylsulfonyl)amino]benzenebutanamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N(C(CCC(C1=CC=C(C=C1)NS(=O)(=O)C)=O)=O)CCCCCCC",
+      "inchiKey": "IJUIQGJHHJVHKP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b704a3869393d32c7736e43c09671ad9",
+      "label": "sodium",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Na]",
+      "inchiKey": "KEAYESYHFKHZAL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c4457277eb79c464ff34488edff6b1b3",
+      "label": "lithium aluminum hydride",
+      "displayRole": "source_input",
+      "sourceSmiles": "[H-].[Al+3].[Li+].[H-].[H-].[H-]",
+      "inchiKey": "BJKLPLABXHXMIM-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ec9e3664850493a50682db3ac68dcc19",
+      "label": "3'-Methyl-4'-((methylsulfonyl)amino)acetophenone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC=1C=C(C=CC1NS(=O)(=O)C)C(C)=O",
+      "inchiKey": "WFIPAQURZXTIPV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f5b5af45b23513e6894e8b011c39f246",
+      "label": "N-[4-[4-(ethylheptylamino)-1-hydroxybutyl]phenyl]methanesulfonamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)N(CCCC(O)C1=CC=C(C=C1)NS(=O)(=O)C)CCCCCCC",
+      "inchiKey": "ALOBUEHUHMBRLE-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:3c4951c42c6d9617602334e2c2247dff",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:c4457277eb79c464ff34488edff6b1b3",
+        "synthesis-draft-material:8795d588f447d68958392eed8eb9e1fd",
+        "synthesis-draft-material:ec9e3664850493a50682db3ac68dcc19",
+        "synthesis-draft-material:b704a3869393d32c7736e43c09671ad9",
+        "synthesis-draft-material:0a308b32fa6e68741143e4a805884506"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:f5b5af45b23513e6894e8b011c39f246"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ad674cff975cbd9509c4a381c059fe69",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:3c4951c42c6d9617602334e2c2247dff",
+      "finalStepId": "synthesis-draft-step:3c4951c42c6d9617602334e2c2247dff",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:ad674cff975cbd9509c4a381c059fe69",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-fb0211ba58e54922a4a3be53e4193a78",
+      "label": "Open Reaction Database reaction ord-fb0211ba58e54922a4a3be53e4193a78",
+      "url": "https://open-reaction-database.org/id/ord-fb0211ba58e54922a4a3be53e4193a78",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-fb0211ba58e54922a4a3be53e4193a78"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

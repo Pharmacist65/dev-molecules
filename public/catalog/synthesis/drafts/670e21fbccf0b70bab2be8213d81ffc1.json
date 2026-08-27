@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:670e21fbccf0b70bab2be8213d81ffc1",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:ertapenem-juznimufdbijcm-anedzvcmsa-n",
+    "catalogEntityId": "molecule:imported:ertapenem-juznimufdbijcm-anedzvcmsa-n",
+    "preferredName": "Ertapenem",
+    "pubChemCid": 150610,
+    "inchiKey": "JUZNIMUFDBIJCM-ANEDZVCMSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:214cc8e6f4006ad80b820d5908dbbf42",
+      "label": "3-[[[(2S,4S)-4-mercapto-1-(4-nitrobenzyloxy)carbonyl-2-pyrrolidinyl]carbonyl]amino]benzoic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "S[C@H]1C[C@H](N(C1)C(=O)OCC1=CC=C(C=C1)[N+](=O)[O-])C(=O)NC=1C=C(C(=O)O)C=CC1",
+      "inchiKey": "RTQKWWOSWDCUMA-IRXDYDNUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+      "label": "N,N-diisopropylethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)N(C(C)C)CC",
+      "inchiKey": "JGFZNNIVVJXRND-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:40ecdb8c48595a23b0980bec06f4dd4c",
+      "label": "p-nitrobenzyl (1R,5R,6S)-6-[(1R)-1-hydroxyethyl]-2-[(diphenylphosphono)oxy]-1-methylcarbapen-2em-3-carboxylate",
+      "displayRole": "source_input",
+      "sourceSmiles": "O[C@H](C)[C@@H]1[C@@H]2N(C(=C([C@@H]2C)OP(=O)(OC2=CC=CC=C2)OC2=CC=CC=C2)C(=O)OCC2=CC=C(C=C2)[N+](=O)[O-])C1=O",
+      "inchiKey": "STULDTCHQXVRIX-PIYXRGFCSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:66972e0c7cdc617bd5edbbb6dd4087a2",
+      "label": "Ertapenem",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C[C@@H]1[C@@H]2[C@H](C(=O)N2C(=C1S[C@H]3C[C@H](NC3)C(=O)NC=4C=CC=C(C4)C(=O)O)C(=O)O)[C@@H](C)O",
+      "inchiKey": "JUZNIMUFDBIJCM-ANEDZVCMSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69",
+      "label": "water",
+      "displayRole": "source_input",
+      "sourceSmiles": "O",
+      "inchiKey": "XLYOFNOQVPJJNP-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ab8409ae2442eecd1474b853d312d9f1",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:214cc8e6f4006ad80b820d5908dbbf42",
+        "synthesis-draft-material:40ecdb8c48595a23b0980bec06f4dd4c",
+        "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+        "synthesis-draft-material:fbb43a76028efd895b5449f85a214d69"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:66972e0c7cdc617bd5edbbb6dd4087a2"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1ff33cec441db86ebed68eed03eff102",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ab8409ae2442eecd1474b853d312d9f1",
+      "finalStepId": "synthesis-draft-step:ab8409ae2442eecd1474b853d312d9f1",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1ff33cec441db86ebed68eed03eff102",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-74a0627d0e6644a7bd9fc3bf79cda160",
+      "label": "Open Reaction Database reaction ord-74a0627d0e6644a7bd9fc3bf79cda160",
+      "url": "https://open-reaction-database.org/id/ord-74a0627d0e6644a7bd9fc3bf79cda160",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-74a0627d0e6644a7bd9fc3bf79cda160"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -14,6 +14,11 @@ import {
   SYNTHESIS_ROUTE_TYPES,
 } from "../../lib/domain/synthesis-route";
 import type { SynthesisEvidenceExtractionManifest } from "../../lib/domain/synthesis-extraction";
+import type {
+  PublicAlphaSynthesisDraftGraph,
+  PublicAlphaSynthesisDraftReference,
+} from "../../lib/domain/public-alpha-synthesis-draft";
+import { validatePublicAlphaSynthesisDraftGraph } from "../../lib/application/public-alpha-synthesis-draft";
 import {
   SYNTHESIS_CANDIDATE_SOURCE_EVIDENCE_STATES,
   SYNTHESIS_EVIDENCE_ACCESS_STATES,
@@ -56,6 +61,14 @@ interface PublicSynthesisManifest extends SynthesisCoverageSnapshotManifest {
     readonly publishedDetailCount: number;
     readonly withheldDetailCount: number;
   };
+  readonly drafts: {
+    readonly channel: "public_alpha_source_supported_draft";
+    readonly index: ArtifactDescriptor;
+    readonly details: readonly ArtifactDescriptor[];
+    readonly publishedDraftCount: number;
+    readonly routeGraphCount: number;
+    readonly reviewedRouteCount: 0;
+  };
   readonly reports: Readonly<Record<string, ArtifactDescriptor>>;
   readonly extraction: SynthesisEvidenceExtractionManifest;
   readonly licenseNotice: {
@@ -64,6 +77,7 @@ interface PublicSynthesisManifest extends SynthesisCoverageSnapshotManifest {
     readonly rawProviderPayloadsPublished: false;
     readonly extractionAssociationAuditsPublished: false;
     readonly resolvedSegmentRecordsPublished: false;
+    readonly independentOrdStructureRedrawsPublished: true;
   };
 }
 
@@ -101,6 +115,7 @@ const REQUIRED_REPORT_PATHS = {
   licenseRights: "/catalog/synthesis/reports/license-rights.json",
   errorSummary: "/catalog/synthesis/reports/error-summary.json",
   ordResolution: "/catalog/synthesis/reports/ord-resolution.json",
+  routeAssembly: "/catalog/synthesis/reports/route-assembly.json",
   migration: "/catalog/synthesis/reports/migration.json",
   validation: "/catalog/synthesis/reports/validation.json",
 } as const;
@@ -239,6 +254,8 @@ export interface GeneratedSynthesisValidationSummary {
   readonly coverageRecords: number;
   readonly evidenceRecords: number;
   readonly privateRouteAggregateCount: number;
+  readonly publicAlphaDraftRoutes: number;
+  readonly publicAlphaDraftGraphs: number;
   readonly shardCount: number;
   readonly warningCount: number;
   readonly errorCount: 0;
@@ -482,6 +499,85 @@ export const validateGeneratedSynthesisSnapshot = async (): Promise<GeneratedSyn
     }
     publicRouteDetails.push(artifact.value);
   }
+  const draftIndexArtifact = await readArtifact<{
+    readonly schemaVersion: 1;
+    readonly channel: string;
+    readonly catalogSnapshotId: string;
+    readonly generatedAt: string;
+    readonly graphs: readonly (PublicAlphaSynthesisDraftReference & {
+      readonly catalogEntityId: string;
+      readonly pubChemCid: number;
+      readonly inchiKey: string;
+    })[];
+  }>(manifest.drafts.index);
+  if (
+    manifest.drafts.channel !== "public_alpha_source_supported_draft" ||
+    draftIndexArtifact.value.schemaVersion !== 1 ||
+    draftIndexArtifact.value.channel !== manifest.drafts.channel ||
+    draftIndexArtifact.value.catalogSnapshotId !== manifest.catalogSnapshotId ||
+    draftIndexArtifact.value.generatedAt !== manifest.generatedAt ||
+    draftIndexArtifact.value.graphs.length !== manifest.drafts.routeGraphCount ||
+    manifest.drafts.details.length !== manifest.drafts.routeGraphCount ||
+    manifest.drafts.reviewedRouteCount !== 0 ||
+    draftIndexArtifact.value.graphs.reduce((sum, entry) => sum + entry.draftRouteCount, 0) !==
+      manifest.drafts.publishedDraftCount
+  ) {
+    throw new Error("Public-alpha synthesis draft index does not match its manifest.");
+  }
+  const draftEntryByPath = new Map<string, (typeof draftIndexArtifact.value.graphs)[number]>(
+    draftIndexArtifact.value.graphs.map((entry) => [entry.detailPath, entry] as const),
+  );
+  if (
+    draftEntryByPath.size !== draftIndexArtifact.value.graphs.length ||
+    new Set(draftIndexArtifact.value.graphs.map((entry) => entry.graphId)).size !==
+      draftIndexArtifact.value.graphs.length ||
+    new Set(manifest.drafts.details.map((detail) => detail.path)).size !==
+      manifest.drafts.details.length
+  ) throw new Error("Public-alpha synthesis draft descriptors are duplicated.");
+  const recordsByCoverageId = new Map(records.map((record) => [record.id, record] as const));
+  const publicDraftDetails: PublicAlphaSynthesisDraftGraph[] = [];
+  for (const descriptor of manifest.drafts.details) {
+    const entry = draftEntryByPath.get(descriptor.path);
+    if (!entry) throw new Error(`Public-alpha draft detail is not indexed: ${descriptor.path}.`);
+    const record = recordsByCoverageId.get(entry.coverageId);
+    const reference = record?.publicAlphaDrafts?.find((item) => item.graphId === entry.graphId);
+    if (!record || !reference || JSON.stringify(reference) !== JSON.stringify({
+      schemaVersion: entry.schemaVersion,
+      graphId: entry.graphId,
+      channel: entry.channel,
+      publicationState: entry.publicationState,
+      reviewState: entry.reviewState,
+      verifiedScientificClaim: entry.verifiedScientificClaim,
+      coverageId: entry.coverageId,
+      routeCompleteness: entry.routeCompleteness,
+      draftRouteCount: entry.draftRouteCount,
+      extractedStepCount: entry.extractedStepCount,
+      teachingReconstructionCount: entry.teachingReconstructionCount,
+      resolvedIntermediateCount: entry.resolvedIntermediateCount,
+      unresolvedGapCount: entry.unresolvedGapCount,
+      licenseState: entry.licenseState,
+      detailPath: entry.detailPath,
+    })) throw new Error(`Public-alpha draft coverage reference mismatch: ${descriptor.path}.`);
+    const artifact = await readArtifact<unknown>(descriptor);
+    const graph = validatePublicAlphaSynthesisDraftGraph(artifact.value, {
+      catalogSnapshotId: manifest.catalogSnapshotId,
+      catalogEntityId: record.identityScope.catalogEntityId,
+      coverageId: record.id,
+      preferredName: record.identityScope.preferredName,
+      pubChemCid: record.identityScope.pubChemCid,
+      inchiKey: record.identityScope.inchiKey,
+      chemicalForm: record.identityScope.chemicalForm.normalizedKind,
+      stereochemistrySpecified: record.identityScope.stereoisomer.specified,
+    }, reference);
+    publicDraftDetails.push(graph);
+  }
+  const coverageDraftReferences = records.flatMap((record) => record.publicAlphaDrafts ?? []);
+  if (
+    coverageDraftReferences.length !== manifest.drafts.routeGraphCount ||
+    publicDraftDetails.length !== manifest.drafts.routeGraphCount ||
+    coverageDraftReferences.reduce((sum, entry) => sum + entry.draftRouteCount, 0) !==
+      manifest.drafts.publishedDraftCount
+  ) throw new Error("Public-alpha synthesis graph coverage is incomplete or orphaned.");
   if (new Set(manifest.routes.details.map((detail) => detail.path)).size !==
       manifest.routes.details.length) {
     throw new Error("Generated synthesis route detail descriptors are duplicated.");
@@ -822,11 +918,38 @@ export const validateGeneratedSynthesisSnapshot = async (): Promise<GeneratedSyn
   ) {
     throw new Error("Identity-hardened ORD resolution report drifted.");
   }
+  const routeAssemblyReport = await readReport("routeAssembly");
+  const routeAssemblySurfaceCounts = numberRecord(
+    routeAssemblyReport.coverageSurfaceCounts,
+    "routeAssembly.coverageSurfaceCounts",
+  );
+  if (
+    routeAssemblyReport.pipelineVersion !== "synthesis-route-assembly-1.0.0" ||
+    routeAssemblyReport.catalogCoverageCount !== manifest.recordCount ||
+    routeAssemblyReport.directSourceSegmentsExamined !== extraction.directSegmentCandidateCount ||
+    routeAssemblyReport.directSourceSegmentsAdmitted !== extraction.directSegmentCandidateCount ||
+    routeAssemblyReport.directSourceSegmentsRejected !== 0 ||
+    routeAssemblyReport.publicDraftRoutes !== manifest.drafts.publishedDraftCount ||
+    routeAssemblyReport.partialRoutes !== manifest.drafts.publishedDraftCount ||
+    routeAssemblyReport.routeGraphs !== manifest.drafts.routeGraphCount ||
+    routeAssemblyReport.extractedSteps !== extraction.directSegmentCandidateCount ||
+    routeAssemblyReport.reviewedRoutes !== 0 ||
+    routeAssemblySurfaceCounts.public_draft_partial !== manifest.drafts.routeGraphCount ||
+    routeAssemblySurfaceCounts.candidate_only !== 529 ||
+    routeAssemblySurfaceCounts.no_supporting_source_resolved !== 384 ||
+    sumCounts(routeAssemblySurfaceCounts) !== manifest.recordCount ||
+    routeAssemblyReport.sourceLocatorCandidateDocumentsPromotedToSteps !== 0 ||
+    !isObjectRecord(routeAssemblyReport.invariants) ||
+    routeAssemblyReport.invariants.noNewDiscoveryPerformed !== true ||
+    routeAssemblyReport.invariants.operationalDetailsPublished !== false ||
+    routeAssemblyReport.invariants.pendingDisplayedAsReviewedOrVerified !== false
+  ) throw new Error("Public-alpha synthesis route-assembly report drifted from its artifacts.");
   if (
     manifest.licenseNotice.publisherTextRedistributed !== false ||
     manifest.licenseNotice.rawProviderPayloadsPublished !== false ||
     manifest.licenseNotice.extractionAssociationAuditsPublished !== false ||
     manifest.licenseNotice.resolvedSegmentRecordsPublished !== false ||
+    manifest.licenseNotice.independentOrdStructureRedrawsPublished !== true ||
     !manifest.licenseNotice.ordData.includes("CC-BY-SA-4.0")
   ) {
     throw new Error("Generated synthesis license notice is incomplete.");
@@ -859,6 +982,8 @@ export const validateGeneratedSynthesisSnapshot = async (): Promise<GeneratedSyn
     coverageRecords: records.length,
     evidenceRecords: evidence.length,
     privateRouteAggregateCount: PUBLIC_SAFE_PRIVATE_ROUTE_AGGREGATE.routeCount,
+    publicAlphaDraftRoutes: manifest.drafts.publishedDraftCount,
+    publicAlphaDraftGraphs: manifest.drafts.routeGraphCount,
     shardCount: manifest.shardCount,
     warningCount: issues.filter((issue) => issue.severity === "warning").length,
     errorCount: 0,

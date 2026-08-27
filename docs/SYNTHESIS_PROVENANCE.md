@@ -8,8 +8,8 @@ Molevren records how synthesis evidence was searched, accessed, classified, and 
 
 1. **Coverage and candidate discovery** — all 1,552 exact catalog identities have one coverage record. The accepted discovery snapshot contains 14,897 molecule–evidence associations, all with terminal extraction outcomes.
 2. **Source-content inspection** — accessible documents are inspected without bypassing access controls. The pipeline stores access and rights decisions, content hashes, structured locator tokens, and generated non-quoting review cues; it does not store source body text, schemes, figures, or procedure windows.
-3. **Private canonical review** — exact source segments may support pending route drafts. A candidate source or metadata-only record cannot create a route. A local ignored retirement archive records six historical drafts over three identities, all attested pending and link-only. The current tracked public tree contains only aggregate counts/digests and cannot revalidate those withheld rows.
-4. **Public projection** — only reviewed or verified, reuse-eligible routes can enter the generated public index. Current snapshot: zero public route details. Public coverage shards expose no route, source, locator, material, or step identifiers.
+3. **Private canonical review** — exact source segments may support canonical route drafts. A candidate source or metadata-only record cannot create one. A local ignored retirement archive records six historical drafts over three identities, all attested pending and link-only. The current tracked public tree contains only aggregate counts/digests and cannot revalidate those withheld rows.
+4. **Public projection** — two channels remain separate. The reviewed/verified, reuse-eligible canonical index currently contains zero route details. A distinct public-alpha channel exposes 2,645 pending source-supported alternatives in 639 exact-identity graphs; every graph is non-operational, independently redrawn, explicitly incomplete, and never represented as reviewed, verified, or one completely reported route.
 
 These layers are intentionally independent. A successful network request is not a reuse licence; an open-access label is not permission to redistribute a figure; an exact product match is not a complete route; and “not found in the recorded scope” is not novelty, patentability, or synthesizability.
 
@@ -27,7 +27,7 @@ A teaching reconstruction may join source segments only through a structurally r
 
 ## Partial routes
 
-A directly reported route may be `partial`, `upstream_gap`, or `convergent_partial`. Resolved source segments are retained alongside explicit gaps; no single complete-route source is required for a partial route. A partial draft is never presented as complete. The current public projection remains empty because the private migration aggregate records all six historical drafts as pending and link-only; public CI validates that aggregate and the zero-detail boundary, not the withheld rows.
+A directly reported route may be `partial`, `upstream_gap`, or `convergent_partial`. Resolved source segments are retained alongside explicit gaps; no single complete-route source is required for a partial route. A partial draft is never presented as complete. The official canonical public projection remains empty because the private migration aggregate records all six historical drafts as pending and link-only. Separately, the public-alpha projection exposes only exact-target source fragments and exact-identity teaching bridges, with all 2,645 alternatives carrying an explicit gap.
 
 ## Reaction extraction and ORD boundary
 
@@ -35,7 +35,7 @@ Reaction participants, class, bond changes, atom mapping, and stereochemical res
 
 Legacy qualitative formed/broken-bond descriptions are unreviewed transformation annotations while their mapping state is `not_mapped`; they are not computed atom-mapped bond changes and cannot support publication without qualified review or removal.
 
-Decoded Open Reaction Database fragments remain private discovery candidates. They become source-segment evidence only after exact reactant/product identity, route-segment relevance, form/stereo compatibility, locator, review, and rights gates pass. The raw exact-target baseline and the active post-terminalization candidate subset are reported under different, explicitly defined metrics.
+Decoded Open Reaction Database fragments begin as private discovery candidates. After exact reactant/product identity, route-segment relevance, form/stereo compatibility, locator, non-operational-content, and rights gates pass, they may enter the separate pending public-alpha channel. They do not enter the canonical reviewed-route index without qualified review. The raw exact-target baseline, active post-terminalization candidate subset, public-alpha steps, and canonical routes are reported as different metrics.
 
 ## Public and accessible presentation
 
@@ -49,10 +49,12 @@ If a route eventually passes publication gates, the public detail renderer provi
 - terminal molecule–evidence associations: 14,897 / 14,897;
 - unique source/reaction candidates in the accepted deduplicated snapshot: 14,616;
 - private migration audit aggregate: 6 (withheld rows require separate private revalidation);
-- public route index entries and detail artifacts: 0;
+- public-alpha pending alternatives: 2,645 across 639 exact target graphs;
+- public-alpha teaching-reconstruction graphs: 231;
+- canonical reviewed/verified route index entries and detail artifacts: 0;
 - operational synthesis detail published: false.
 
-The complete distributions and limitations are recorded in [Synthesis Evidence Extraction Report](SYNTHESIS_EVIDENCE_EXTRACTION_REPORT.md) and the generated aggregate reports under `public/catalog/synthesis/reports/`.
+The baseline evidence distributions are recorded in [Synthesis Evidence Extraction Report](SYNTHESIS_EVIDENCE_EXTRACTION_REPORT.md). Current public-alpha route-assembly counts and limitations are recorded in [Public-Alpha Synthesis Route Assembly and Spatial Sprint](SYNTHESIS_ROUTE_ASSEMBLY_REPORT.md) and the generated aggregate reports under `public/catalog/synthesis/reports/`.
 
 The current-tree retirement is forward-only. Earlier public commits may retain retired alpha fixtures; this release does not claim that those historical objects became confidential or that repository history was rewritten.
 

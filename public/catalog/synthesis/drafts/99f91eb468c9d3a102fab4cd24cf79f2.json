@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:99f91eb468c9d3a102fab4cd24cf79f2",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:relebactam-smobclhazxokdq-zjuuuordsa-n",
+    "catalogEntityId": "molecule:imported:relebactam-smobclhazxokdq-zjuuuordsa-n",
+    "preferredName": "Relebactam",
+    "pubChemCid": 44129647,
+    "inchiKey": "SMOBCLHAZXOKDQ-ZJUUUORDSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:03964a91c103139af2f7a8eaa14200d5",
+      "label": "(2S,5R)-7-oxo-N-piperidin-4-yl-6-(sulfooxy)-1,6-diazabicyclo[3.2.1]octane-2-carboxamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "O=C1N([C@@H]2CC[C@H](N1C2)C(=O)NC2CCNCC2)OS(=O)(=O)O",
+      "inchiKey": "SMOBCLHAZXOKDQ-ZJUUUORDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4ef9d0cd5d898439ed441f18fabe42db",
+      "label": "N,N,N-tributylbutan-1-aminium [({(2S,5R)-7-oxo-2-[(piperidin-4-ylamino)carbonyl]-1,6-diazabicyclo[3.2.1]oct-6-yl}oxy)sulfonyl]oxidanide",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=C1N([C@@H]2CC[C@H](N1C2)C(=O)NC2CCNCC2)OS(=O)(=O)[O-].C(CCC)[N+](CCCC)(CCCC)CCCC",
+      "inchiKey": "QLSOXURODUQPJR-MDOMKXGZSA-M",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a95c79a0266af3b00acbfb5205b2bece",
+      "label": "trifluoroacetic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "FC(C(=O)O)(F)F",
+      "inchiKey": "DTQVDTLACAAQTR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:e703bdaa42d1e485168de788b01a5863",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:4ef9d0cd5d898439ed441f18fabe42db",
+        "synthesis-draft-material:a95c79a0266af3b00acbfb5205b2bece"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:03964a91c103139af2f7a8eaa14200d5"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c090b32a42d19e414c05723629ccb37a",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:e703bdaa42d1e485168de788b01a5863",
+      "finalStepId": "synthesis-draft-step:e703bdaa42d1e485168de788b01a5863",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c090b32a42d19e414c05723629ccb37a",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-78479ac7c54a4b16ac515e6d4cc5f62a",
+      "label": "Open Reaction Database reaction ord-78479ac7c54a4b16ac515e6d4cc5f62a",
+      "url": "https://open-reaction-database.org/id/ord-78479ac7c54a4b16ac515e6d4cc5f62a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-78479ac7c54a4b16ac515e6d4cc5f62a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

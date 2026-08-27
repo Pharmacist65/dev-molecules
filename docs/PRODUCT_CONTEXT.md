@@ -52,7 +52,7 @@ The current slice proves the product loop with a source-versioned approved-list 
 - Browse over the 1,552 imported structure records in the checked snapshot, a stable Basic Molecular Record boundary for every resolved identity, an optional representative Spatial Atlas, and Curated Dossier depth limited to the 15 seed records;
 - Basic Molecular Records with source-matched identity, real 2D structure, separately labelled computed 3D conformer, provenance, conservative properties when present, and explicit nine-dimension coverage; non-seed records no longer end at an unavailable Dossier;
 - Story and Reference Curated Dossier modes with independent coverage indicators; reviewed target interactions, quantitative ADME fields, and reviewed metabolite edges are currently unavailable;
-- catalog-wide synthesis coverage for all 1,552 records, with six migrated route drafts retained only in the private pending-review layer and zero public route details until review and reuse gates pass;
+- catalog-wide synthesis coverage for all 1,552 records, with 2,645 pending public-alpha partial alternatives across 639 exact-identity graphs, six historical canonical drafts retained only in the private pending-review layer, and zero official reviewed/verified route details;
 - an eight-module Academy map plus an eight-section, 22-exercise Nomenclature Academy over 20 parseable structures and 16 concrete response/widget types;
 - five guided missions covering recognition, scaffold building, repair, synthesis ordering and evidence reading;
 - an on-device Ketcher 3.17.2 editor with exact static-catalog matching and opt-in local JSON export, not a research-grade cloud sketching suite;

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:f529855f877e40011a068ebaf4d3f2bf",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:isotretinoin-shgazhpcjjphsc-xfyacqkrsa-n",
+    "catalogEntityId": "molecule:imported:isotretinoin-shgazhpcjjphsc-xfyacqkrsa-n",
+    "preferredName": "Isotretinoin",
+    "pubChemCid": 5282379,
+    "inchiKey": "SHGAZHPCJJPHSC-XFYACQKRSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:19025bff4f2010de6fea4b40e7e161de",
+      "label": "isotretinoin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C/C(=C\\C(=O)O)/C)/C",
+      "inchiKey": "SHGAZHPCJJPHSC-XFYACQKRSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+      "label": "triethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N(CC)CC",
+      "inchiKey": "ZMANZCXQSJIPKH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:749d197df34222648da028e79c12f711",
+      "label": "5-hydroxy-4-methyl-2[5H]-furanone",
+      "displayRole": "source_input",
+      "sourceSmiles": "OC1C(=CC(O1)=O)C",
+      "inchiKey": "XRNPHZPFAWLRNJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bf1a571cefe4d07b0c125c58252a2137",
+      "label": "[3-methyl-5-(2,6,6-trimethyl-1-cyclohexen-1-yl)-2,4-pentadienyl] triphenyl phosphonium",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(=CC[P+](C1=CC=CC=C1)(C1=CC=CC=C1)C1=CC=CC=C1)C=CC1=C(CCCC1(C)C)C",
+      "inchiKey": "UJUZVVSRNMBGRO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:dcbb2f39789056d889d044ee391cd564",
+      "label": "magnesium chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Cl-].[Mg+2].[Cl-]",
+      "inchiKey": "TWRXJAOTZQYOKJ-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:5b37e75f4403c620d09994d3f268d9c3",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:dcbb2f39789056d889d044ee391cd564",
+        "synthesis-draft-material:749d197df34222648da028e79c12f711",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+        "synthesis-draft-material:bf1a571cefe4d07b0c125c58252a2137"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:19025bff4f2010de6fea4b40e7e161de"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8b0eccbeedbb3e42105899d768a93559",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:5b37e75f4403c620d09994d3f268d9c3",
+      "finalStepId": "synthesis-draft-step:5b37e75f4403c620d09994d3f268d9c3",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:8b0eccbeedbb3e42105899d768a93559",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-4f710e3958934aada8e95763a5a48533",
+      "label": "Open Reaction Database reaction ord-4f710e3958934aada8e95763a5a48533",
+      "url": "https://open-reaction-database.org/id/ord-4f710e3958934aada8e95763a5a48533",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-4f710e3958934aada8e95763a5a48533"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

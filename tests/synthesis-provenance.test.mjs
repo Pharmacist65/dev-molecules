@@ -12,7 +12,7 @@ const { synthesisSourceRegistry } = await tsImport(
   import.meta.url,
 );
 
-test("public provenance layer contains no pending route story or source locator", () => {
+test("legacy canonical provenance contains no pending route story or source locator", () => {
   assert.deepEqual(synthesisStories, []);
   assert.deepEqual(synthesisSourceRegistry, []);
 });

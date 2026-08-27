@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:6690af4c6843d2511130cf3937a12493",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:oxprenolol-cemawmomdpgjmb-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:oxprenolol-cemawmomdpgjmb-uhfffaoysa-n",
+    "preferredName": "Oxprenolol",
+    "pubChemCid": 4631,
+    "inchiKey": "CEMAWMOMDPGJMB-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:10c48209d90f88a1c1be0fd1856a3632",
+      "label": "1-(iso-propyl)-3-azetidinol",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)N1CC(C1)O",
+      "inchiKey": "XSGMJDQRZDWEPW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d9714fc5a22f11205966f97e74e8d199",
+      "label": "1-(2-allyloxyphenoxy)-3-(iso-propylamino)-2-propanol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C=C)OC1=C(OCC(CNC(C)C)O)C=CC=C1",
+      "inchiKey": "CEMAWMOMDPGJMB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f407ad82a0989994a8990950d1ef504c",
+      "label": "2-allyloxyphenol",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C=C)OC1=C(C=CC=C1)O",
+      "inchiKey": "FNEJKCGACRPXBT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:525ce04f5819d047c6ce0cf3d69e01b4",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:10c48209d90f88a1c1be0fd1856a3632",
+        "synthesis-draft-material:f407ad82a0989994a8990950d1ef504c"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d9714fc5a22f11205966f97e74e8d199"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:8f4cf8a59e0f075c4f3df4a6338c226e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:525ce04f5819d047c6ce0cf3d69e01b4",
+      "finalStepId": "synthesis-draft-step:525ce04f5819d047c6ce0cf3d69e01b4",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:8f4cf8a59e0f075c4f3df4a6338c226e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-05a7c1fb76ba4cf999af9f7fce424ecf",
+      "label": "Open Reaction Database reaction ord-05a7c1fb76ba4cf999af9f7fce424ecf",
+      "url": "https://open-reaction-database.org/id/ord-05a7c1fb76ba4cf999af9f7fce424ecf",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-05a7c1fb76ba4cf999af9f7fce424ecf"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

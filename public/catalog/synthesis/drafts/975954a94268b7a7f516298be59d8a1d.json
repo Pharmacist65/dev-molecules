@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:975954a94268b7a7f516298be59d8a1d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:lasmiditan-xedhvzkdsyzqbf-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:lasmiditan-xedhvzkdsyzqbf-uhfffaoysa-n",
+    "preferredName": "Lasmiditan",
+    "pubChemCid": 11610526,
+    "inchiKey": "XEDHVZKDSYZQBF-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:4ce8fef248cb17577f72e52b294fdc02",
+      "label": "Exact structure SIFIJQFBERMWMU",
+      "displayRole": "source_input",
+      "sourceSmiles": "O=C(Cl)c1c(F)cc(F)cc1F",
+      "inchiKey": "SIFIJQFBERMWMU-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4d0f5012c9179f56bd6a42421e78615c",
+      "label": "Exact structure YLTJVIIEHKBRPA",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN1CCC(C(=O)c2cccc(N)n2)CC1",
+      "inchiKey": "YLTJVIIEHKBRPA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b311e539157daa98aa633aa164422b4e",
+      "label": "Exact structure RYHBNJHYFVUHQT",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1COCCO1",
+      "inchiKey": "RYHBNJHYFVUHQT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:daa1062f9cc19db8eea52855c6a73f7c",
+      "label": "Exact structure XEDHVZKDSYZQBF",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN1CCC(C(=O)c2cccc(NC(=O)c3c(F)cc(F)cc3F)n2)CC1",
+      "inchiKey": "XEDHVZKDSYZQBF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ac70f5630c95e3f05d53106aec7b637a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b311e539157daa98aa633aa164422b4e",
+        "synthesis-draft-material:4ce8fef248cb17577f72e52b294fdc02",
+        "synthesis-draft-material:4d0f5012c9179f56bd6a42421e78615c"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:daa1062f9cc19db8eea52855c6a73f7c"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3283635b6fb0701a476107c294e69fff",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ac70f5630c95e3f05d53106aec7b637a",
+      "finalStepId": "synthesis-draft-step:ac70f5630c95e3f05d53106aec7b637a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:3283635b6fb0701a476107c294e69fff",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f29f53b320a9414897dc9fce4c1c4e0a",
+      "label": "Open Reaction Database reaction ord-f29f53b320a9414897dc9fce4c1c4e0a",
+      "url": "https://open-reaction-database.org/id/ord-f29f53b320a9414897dc9fce4c1c4e0a",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-f29f53b320a9414897dc9fce4c1c4e0a"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

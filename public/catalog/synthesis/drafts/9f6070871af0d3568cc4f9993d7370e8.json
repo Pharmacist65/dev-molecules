@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:9f6070871af0d3568cc4f9993d7370e8",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:diltiazem-hsugrbwqsszjop-rtwawaebsa-n",
+    "catalogEntityId": "molecule:imported:diltiazem-hsugrbwqsszjop-rtwawaebsa-n",
+    "preferredName": "Diltiazem",
+    "pubChemCid": 39186,
+    "inchiKey": "HSUGRBWQSSZJOP-RTWAWAEBSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "HCl",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d907691e770c765ea20e2747290a9d7b",
+      "label": "Diltiazem",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(=O)O[C@@H]1[C@@H](SC=2C=CC=CC2N(C1=O)CCN(C)C)C=3C=CC(=CC3)OC",
+      "inchiKey": "HSUGRBWQSSZJOP-RTWAWAEBSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:feee2b0b0189d846ad9dbe9edcf11fcd",
+      "label": "3-acetoxy-5-(2-dimethylaminoethyl)-2,3-dihydro-2-(4-methoxyphenyl)-1,5-benzothiazepin-4(5H)-one hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl.C(C)(=O)OC1C(SC2=C(N(C1=O)CCN(C)C)C=CC=C2)C2=CC=C(C=C2)OC",
+      "inchiKey": "HDRXZJPWHTXQRI-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:e11820e8ec855b208c9a01ea07b4ff05",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+        "synthesis-draft-material:feee2b0b0189d846ad9dbe9edcf11fcd"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d907691e770c765ea20e2747290a9d7b"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ad14e8427d375cda38df09b011bf9066",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:e11820e8ec855b208c9a01ea07b4ff05",
+      "finalStepId": "synthesis-draft-step:e11820e8ec855b208c9a01ea07b4ff05",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:ad14e8427d375cda38df09b011bf9066",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-08a9a6154bcd484089b5fe97fcff2854",
+      "label": "Open Reaction Database reaction ord-08a9a6154bcd484089b5fe97fcff2854",
+      "url": "https://open-reaction-database.org/id/ord-08a9a6154bcd484089b5fe97fcff2854",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-08a9a6154bcd484089b5fe97fcff2854"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

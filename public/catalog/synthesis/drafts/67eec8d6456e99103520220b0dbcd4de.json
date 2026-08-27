@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:67eec8d6456e99103520220b0dbcd4de",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:permethrin-rllpvahgxhcwkj-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:permethrin-rllpvahgxhcwkj-uhfffaoysa-n",
+    "preferredName": "Permethrin",
+    "pubChemCid": 40326,
+    "inchiKey": "RLLPVAHGXHCWKJ-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:89ce0483245d8d5a1eae8979ec3aefae",
+      "label": "2-(2,2-dichlorovinyl)-3,3-dimethylcyclopropanecarboxylic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC(=CC1C(C1(C)C)C(=O)O)Cl",
+      "inchiKey": "LLMLSUSAKZVFOA-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b704a3869393d32c7736e43c09671ad9",
+      "label": "sodium",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Na]",
+      "inchiKey": "KEAYESYHFKHZAL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b9f198f731b07670d0db1f42440290c9",
+      "label": "3-phenoxybenzylchloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "O(C1=CC=CC=C1)C=1C=C(CCl)C=CC1",
+      "inchiKey": "QUYVTGFWFHQVRO-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:eca88e757ddab3a37f741300c3400fdb",
+      "label": "3-phenoxybenzyl 2-(2,2-dichlorovinyl)3,3-dimethylcyclopropanecarboxylate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC(=CC1C(C1(C)C)C(=O)OCC1=CC(=CC=C1)OC1=CC=CC=C1)Cl",
+      "inchiKey": "RLLPVAHGXHCWKJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2cf9a452f8f119d0dd4efca93998feee",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b9f198f731b07670d0db1f42440290c9",
+        "synthesis-draft-material:b704a3869393d32c7736e43c09671ad9",
+        "synthesis-draft-material:89ce0483245d8d5a1eae8979ec3aefae"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:eca88e757ddab3a37f741300c3400fdb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3a7f3b57ac1a039a736cbce563725368",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:18e0a3143d89e1a4b4e0db3efd67e135",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:89ce0483245d8d5a1eae8979ec3aefae",
+        "synthesis-draft-material:b704a3869393d32c7736e43c09671ad9",
+        "synthesis-draft-material:b9f198f731b07670d0db1f42440290c9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:eca88e757ddab3a37f741300c3400fdb"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d8d92f4df95e63379ac810e5392a29da",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:2cf9a452f8f119d0dd4efca93998feee",
+      "finalStepId": "synthesis-draft-step:2cf9a452f8f119d0dd4efca93998feee",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:18e0a3143d89e1a4b4e0db3efd67e135",
+      "finalStepId": "synthesis-draft-step:18e0a3143d89e1a4b4e0db3efd67e135",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:3a7f3b57ac1a039a736cbce563725368",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-0fbf2e758fe645eab1b8d16a0e60a055",
+      "label": "Open Reaction Database reaction ord-0fbf2e758fe645eab1b8d16a0e60a055",
+      "url": "https://open-reaction-database.org/id/ord-0fbf2e758fe645eab1b8d16a0e60a055",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0fbf2e758fe645eab1b8d16a0e60a055"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:d8d92f4df95e63379ac810e5392a29da",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1b63d176bc054f8cac7e0b345b29eb60",
+      "label": "Open Reaction Database reaction ord-1b63d176bc054f8cac7e0b345b29eb60",
+      "url": "https://open-reaction-database.org/id/ord-1b63d176bc054f8cac7e0b345b29eb60",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-1b63d176bc054f8cac7e0b345b29eb60"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

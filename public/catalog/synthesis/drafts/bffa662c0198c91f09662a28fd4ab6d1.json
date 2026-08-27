@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:bffa662c0198c91f09662a28fd4ab6d1",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:crizotinib-kteifnkaunynju-gfccvegcsa-n",
+    "catalogEntityId": "molecule:imported:crizotinib-kteifnkaunynju-gfccvegcsa-n",
+    "preferredName": "Crizotinib",
+    "pubChemCid": 11626560,
+    "inchiKey": "KTEIFNKAUNYNJU-GFCCVEGCSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:411558dda3247d6929054618a559ab1b",
+      "label": "HCl Dioxane",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl.O1CCOCC1",
+      "inchiKey": "WORJRXHJTUTINR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a8a17970b59826a240a125a2d98817f7",
+      "label": "3-[(R)-1-(2,6-dichloro-3-fluoro-phenyl)-ethoxy]-5-(1-piperidin-4-yl-1H-pyrazol-4-yl)-pyridin-2-ylamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC1=C(C(=CC=C1F)Cl)[C@@H](C)OC=1C(=NC=C(C1)C=1C=NN(C1)C1CCNCC1)N",
+      "inchiKey": "KTEIFNKAUNYNJU-GFCCVEGCSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bada4bce08049a091fc69ef00178fe3c",
+      "label": "4-(4-{6-amino-5-[(R)-1-(2,6-dichloro-3-fluoro-phenyl)-ethoxy]-pyridin-3-yl}-pyrazol-1-yl)-piperidine-1-carboxylic acid tert-butyl ester",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)(C)(C)OC(=O)N1CCC(CC1)N1N=CC(=C1)C=1C=NC(=C(C1)O[C@H](C)C1=C(C(=CC=C1Cl)F)Cl)N",
+      "inchiKey": "QDGJKKNXEBCNJI-OAHLLOKOSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:7275def6da650c2457b615df7b187257",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:bada4bce08049a091fc69ef00178fe3c",
+        "synthesis-draft-material:411558dda3247d6929054618a559ab1b",
+        "synthesis-draft-material:411558dda3247d6929054618a559ab1b"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a8a17970b59826a240a125a2d98817f7"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c9c35773cd6b741ffdd75c5c331a27a6",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:a7b8daa6b4fb07721edcbc68700aa14f",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:bada4bce08049a091fc69ef00178fe3c",
+        "synthesis-draft-material:411558dda3247d6929054618a559ab1b",
+        "synthesis-draft-material:411558dda3247d6929054618a559ab1b"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:a8a17970b59826a240a125a2d98817f7"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:b217b2c9387d77c88a416c822a4aac7f",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:7275def6da650c2457b615df7b187257",
+      "finalStepId": "synthesis-draft-step:7275def6da650c2457b615df7b187257",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:a7b8daa6b4fb07721edcbc68700aa14f",
+      "finalStepId": "synthesis-draft-step:a7b8daa6b4fb07721edcbc68700aa14f",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:b217b2c9387d77c88a416c822a4aac7f",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-151ae711ed5842cfb5631bc32a459a62",
+      "label": "Open Reaction Database reaction ord-151ae711ed5842cfb5631bc32a459a62",
+      "url": "https://open-reaction-database.org/id/ord-151ae711ed5842cfb5631bc32a459a62",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-151ae711ed5842cfb5631bc32a459a62"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:c9c35773cd6b741ffdd75c5c331a27a6",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-57e11e4be60e4e258d1b37ed07d49379",
+      "label": "Open Reaction Database reaction ord-57e11e4be60e4e258d1b37ed07d49379",
+      "url": "https://open-reaction-database.org/id/ord-57e11e4be60e4e258d1b37ed07d49379",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-57e11e4be60e4e258d1b37ed07d49379"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:91d55cb9d42cc6788cfd95a64fd709fb",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:oleic-acid-zqppmhvwecsirj-ktkrtigzsa-n",
+    "catalogEntityId": "molecule:imported:oleic-acid-zqppmhvwecsirj-ktkrtigzsa-n",
+    "preferredName": "Oleic Acid",
+    "pubChemCid": 445639,
+    "inchiKey": "ZQPPMHVWECSIRJ-KTKRTIGZSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3370f95f774d7b859c6d0c99a5258c15",
+      "label": "methyl 9-decenoate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CCCCCCCC=C)(=O)OC",
+      "inchiKey": "SBIGSHCJXYGFMX-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:446e94841f97358d14c5aefcccee998d",
+      "label": "oleic acid",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(CCCCCCC\\C=C/CCCCCCCC)(=O)O",
+      "inchiKey": "ZQPPMHVWECSIRJ-KTKRTIGZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:51a25ed67966be87bb4777c289621f54",
+      "label": "stearic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CCCCCCCCCCCCCCCCC)(=O)O",
+      "inchiKey": "QIQXTHQIDYTFRH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:595e12fd5c436a661f7d64b29e9daa92",
+      "label": "acrylonitrile",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C=C)#N",
+      "inchiKey": "NLHHRLWOUZZQLW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:94349d52e7c6c98673282c6ca138303c",
+      "label": "9-decenoic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CCCCCCCC=C)(=O)O",
+      "inchiKey": "KHAVLLBUVKBTBG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:6ed065db988d0bd7c9a8f12e42fc1e95",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:595e12fd5c436a661f7d64b29e9daa92",
+        "synthesis-draft-material:94349d52e7c6c98673282c6ca138303c",
+        "synthesis-draft-material:3370f95f774d7b859c6d0c99a5258c15"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:446e94841f97358d14c5aefcccee998d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e5d792e68333c4779bdbd5095031ee80",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:d54b209d4f2abea85f7ac24bc702b191",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:51a25ed67966be87bb4777c289621f54"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:446e94841f97358d14c5aefcccee998d"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:d1931ae7b6ae30a140accdcdee19ccef",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:6ed065db988d0bd7c9a8f12e42fc1e95",
+      "finalStepId": "synthesis-draft-step:6ed065db988d0bd7c9a8f12e42fc1e95",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:d54b209d4f2abea85f7ac24bc702b191",
+      "finalStepId": "synthesis-draft-step:d54b209d4f2abea85f7ac24bc702b191",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:d1931ae7b6ae30a140accdcdee19ccef",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-10d03c6b6d9643ad9d210d5017657e4d",
+      "label": "Open Reaction Database reaction ord-10d03c6b6d9643ad9d210d5017657e4d",
+      "url": "https://open-reaction-database.org/id/ord-10d03c6b6d9643ad9d210d5017657e4d",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-10d03c6b6d9643ad9d210d5017657e4d"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e5d792e68333c4779bdbd5095031ee80",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-01b38aafc2e240f397d62824ba5b3379",
+      "label": "Open Reaction Database reaction ord-01b38aafc2e240f397d62824ba5b3379",
+      "url": "https://open-reaction-database.org/id/ord-01b38aafc2e240f397d62824ba5b3379",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-01b38aafc2e240f397d62824ba5b3379"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

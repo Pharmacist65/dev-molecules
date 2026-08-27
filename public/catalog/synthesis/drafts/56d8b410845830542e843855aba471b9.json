@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:56d8b410845830542e843855aba471b9",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:tivozanib-spmvmdhwkhcidt-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:tivozanib-spmvmdhwkhcidt-uhfffaoysa-n",
+    "preferredName": "Tivozanib",
+    "pubChemCid": 9911830,
+    "inchiKey": "SPMVMDHWKHCIDT-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+      "label": "triethylamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N(CC)CC",
+      "inchiKey": "ZMANZCXQSJIPKH-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:68c9ecfc43851e280d79f0e4f4a29f9d",
+      "label": "2-Chloro-4-[(6,7-dimethoxy-4-quinolyl)oxy]aniline",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=C(N)C=CC(=C1)OC1=CC=NC2=CC(=C(C=C12)OC)OC",
+      "inchiKey": "MSAYDMJFSCQXQL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b01683cc8cfe58092cbf3b7a781c94e2",
+      "label": "N-{2-Chloro-4-[(6,7-dimethoxy-4-quinolyl)oxy]phenyl}-N′-(5-methyl-3-isoxazolyl)urea",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC1=C(C=CC(=C1)OC1=CC=NC2=CC(=C(C=C12)OC)OC)NC(=O)NC1=NOC(=C1)C",
+      "inchiKey": "SPMVMDHWKHCIDT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b269843e83fcaa08c3bf330c87459fb4",
+      "label": "3-amino-5-methylisoxazole",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC1=NOC(=C1)C",
+      "inchiKey": "FKPXGNGUVSHWQQ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bf1fa47b0d575e5823cebeabd4e6a0aa",
+      "label": "triphosgene",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC(Cl)(OC(OC(Cl)(Cl)Cl)=O)Cl",
+      "inchiKey": "UCPYLLCMEDAXFR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:ec99c65e9dc4fcc08455b6b43f038c3d",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:68c9ecfc43851e280d79f0e4f4a29f9d",
+        "synthesis-draft-material:4f13e70370a75312e961e2553238663e",
+        "synthesis-draft-material:bf1fa47b0d575e5823cebeabd4e6a0aa",
+        "synthesis-draft-material:b269843e83fcaa08c3bf330c87459fb4"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:b01683cc8cfe58092cbf3b7a781c94e2"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:fd0dae9e5f3939582a596e6cdb606059",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:ec99c65e9dc4fcc08455b6b43f038c3d",
+      "finalStepId": "synthesis-draft-step:ec99c65e9dc4fcc08455b6b43f038c3d",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:fd0dae9e5f3939582a596e6cdb606059",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-ca8348f6ee0f49d0bbb84e87b1b6504b",
+      "label": "Open Reaction Database reaction ord-ca8348f6ee0f49d0bbb84e87b1b6504b",
+      "url": "https://open-reaction-database.org/id/ord-ca8348f6ee0f49d0bbb84e87b1b6504b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-ca8348f6ee0f49d0bbb84e87b1b6504b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:907aed6c443f526f20b37b4108b79a96",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:levobupivacaine-lebvlxferqhonn-inizcteosa-n",
+    "catalogEntityId": "molecule:imported:levobupivacaine-lebvlxferqhonn-inizcteosa-n",
+    "preferredName": "Levobupivacaine",
+    "pubChemCid": 92253,
+    "inchiKey": "LEBVLXFERQHONN-INIZCTEOSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:7207864bba633fa56cf1fa1f7b666752",
+      "label": "ammonium hydroxide",
+      "displayRole": "source_input",
+      "sourceSmiles": "[OH-].[NH4+]",
+      "inchiKey": "VHUUQVKOLVNVRT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:72ddeccc9a15d7038c1782cd723cf92e",
+      "label": "levobupivacaine tartrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCCCN1CCCC[C@H]1C(=O)NC=2C(=CC=CC2C)C.C(=O)([O-])C(O)C(O)C(=O)[O-]",
+      "inchiKey": "RJNAJMHSZCZJJT-NTISSMGPSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c03fe4440a900542220ca98f7d9eaca5",
+      "label": "Levobupivacaine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CCCCN1CCCC[C@H]1C(=O)NC=2C(=CC=CC2C)C",
+      "inchiKey": "LEBVLXFERQHONN-INIZCTEOSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:9c6f2ca71b359d8259afb42ab79e5c6a",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:72ddeccc9a15d7038c1782cd723cf92e",
+        "synthesis-draft-material:7207864bba633fa56cf1fa1f7b666752"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:c03fe4440a900542220ca98f7d9eaca5"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c2d51eb23e24aae7f141f2f7ba0e0c4d",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:9c6f2ca71b359d8259afb42ab79e5c6a",
+      "finalStepId": "synthesis-draft-step:9c6f2ca71b359d8259afb42ab79e5c6a",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c2d51eb23e24aae7f141f2f7ba0e0c4d",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-73b4d2ebe2184472a1829a8c3c010dc1",
+      "label": "Open Reaction Database reaction ord-73b4d2ebe2184472a1829a8c3c010dc1",
+      "url": "https://open-reaction-database.org/id/ord-73b4d2ebe2184472a1829a8c3c010dc1",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-73b4d2ebe2184472a1829a8c3c010dc1"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

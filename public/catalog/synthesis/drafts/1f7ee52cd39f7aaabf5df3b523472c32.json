@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:1f7ee52cd39f7aaabf5df3b523472c32",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:isosorbide-mononitrate-ywxyyjsyqoxtpl-slpggioysa-n",
+    "catalogEntityId": "molecule:imported:isosorbide-mononitrate-ywxyyjsyqoxtpl-slpggioysa-n",
+    "preferredName": "Isosorbide Mononitrate",
+    "pubChemCid": 27661,
+    "inchiKey": "YWXYYJSYQOXTPL-SLPGGIOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:4fbaaee3922b8a16e2475e3a103a169d",
+      "label": "potassium carbonate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C([O-])([O-])=O.[K+].[K+]",
+      "inchiKey": "BWHMMNNQKKPAPP-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7b3ec611ea75b1dcde85efd7e2b9dd75",
+      "label": "isosorbide-2-acetate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(=O)O[C@H]1CO[C@H]2[C@@H]1OC[C@H]2O",
+      "inchiKey": "ASUQMWUAFHPXOG-ULAWRXDQSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:c78e62bcbcde388e9b83496b5c7a5c9d",
+      "label": "nitric acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "[N+](=O)(O)[O-]",
+      "inchiKey": "GRYLNZFGIOXLOG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:fc8afc42f4a80d76787793a6ef34e8c0",
+      "label": "isosorbide-5-nitrate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1[C@@H]([C@@H]2[C@H](O1)[C@@H](CO2)O[N+](=O)[O-])O",
+      "inchiKey": "YWXYYJSYQOXTPL-SLPGGIOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:75f3aa177cb1dfb33239a3a3fd1cb1b2",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7b3ec611ea75b1dcde85efd7e2b9dd75",
+        "synthesis-draft-material:c78e62bcbcde388e9b83496b5c7a5c9d",
+        "synthesis-draft-material:4fbaaee3922b8a16e2475e3a103a169d"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:fc8afc42f4a80d76787793a6ef34e8c0"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:61a0d95fa9b9081679219d531a2c8c61",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:4a52d1019fa9fea20b50b5c2ff71a363",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:7b3ec611ea75b1dcde85efd7e2b9dd75",
+        "synthesis-draft-material:c78e62bcbcde388e9b83496b5c7a5c9d",
+        "synthesis-draft-material:4fbaaee3922b8a16e2475e3a103a169d"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:fc8afc42f4a80d76787793a6ef34e8c0"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e8025313c5809055a75ccdbdadfd2b8b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:75f3aa177cb1dfb33239a3a3fd1cb1b2",
+      "finalStepId": "synthesis-draft-step:75f3aa177cb1dfb33239a3a3fd1cb1b2",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:4a52d1019fa9fea20b50b5c2ff71a363",
+      "finalStepId": "synthesis-draft-step:4a52d1019fa9fea20b50b5c2ff71a363",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:61a0d95fa9b9081679219d531a2c8c61",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5c0e6cbd81b24705889798c2a33ccf82",
+      "label": "Open Reaction Database reaction ord-5c0e6cbd81b24705889798c2a33ccf82",
+      "url": "https://open-reaction-database.org/id/ord-5c0e6cbd81b24705889798c2a33ccf82",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5c0e6cbd81b24705889798c2a33ccf82"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e8025313c5809055a75ccdbdadfd2b8b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-5eb9a2d9d1864d7c83b213b846710d42",
+      "label": "Open Reaction Database reaction ord-5eb9a2d9d1864d7c83b213b846710d42",
+      "url": "https://open-reaction-database.org/id/ord-5eb9a2d9d1864d7c83b213b846710d42",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5eb9a2d9d1864d7c83b213b846710d42"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:9408b269493fcb06d6b3b7bc2b1d68da",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:dinoprost-pxgpltodnuvgfl-ynnpmvkqsa-n",
+    "catalogEntityId": "molecule:imported:dinoprost-pxgpltodnuvgfl-ynnpmvkqsa-n",
+    "preferredName": "Dinoprost",
+    "pubChemCid": 5280363,
+    "inchiKey": "PXGPLTODNUVGFL-YNNPMVKQSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:1052c23d8d397f9e6df2389f4a3eb792",
+      "label": "(Z)-7-[(1R,2R,3R,5S)-3,5-dihydroxy-2-{(E)-(3S)-3-hydroxy-1-octenyl}-cyclopentyl]-5-heptenoic acid",
+      "displayRole": "exact_target",
+      "sourceSmiles": "O[C@H]1[C@@H]([C@H]([C@H](C1)O)C\\C=C/CCCC(=O)O)\\C=C\\[C@H](CCCCC)O",
+      "inchiKey": "PXGPLTODNUVGFL-YNNPMVKQSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:16ddb46c147cff56921d99ab70bf854a",
+      "label": "isopropyl(Z)-7-[(1R,2R,3R,5S)-3,5-dihydroxy-2-{3-oxo-1-decyl}cyclopentyl]-hept-5-enoate",
+      "displayRole": "source_input",
+      "sourceSmiles": "O[C@H]1[C@@H]([C@H]([C@H](C1)O)C\\C=C/CCCC(=O)OC(C)C)CCC(CCCCCCC)=O",
+      "inchiKey": "XXUPXHKCPIKWLR-JHUOEJJVSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a011884de1277e1c67d09a3a920d8c4c",
+      "label": "13,14-dihydro-15-keto-20-ethyl-PGF2",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCCCCCCC(=O)CC[C@H]1[C@@H](C[C@@H]([C@@H]1C/C=C/CCCC(=O)OC(C)C)O)O",
+      "inchiKey": "XXUPXHKCPIKWLR-IZYGNDRDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:d747b8e3d059b4e5a9eb336118153463",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:a011884de1277e1c67d09a3a920d8c4c",
+        "synthesis-draft-material:16ddb46c147cff56921d99ab70bf854a"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:1052c23d8d397f9e6df2389f4a3eb792"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:2dff21949240e1a2b61504e43e611a6e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:d747b8e3d059b4e5a9eb336118153463",
+      "finalStepId": "synthesis-draft-step:d747b8e3d059b4e5a9eb336118153463",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:2dff21949240e1a2b61504e43e611a6e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-9416798fc379474097a7b8bae7ea6e65",
+      "label": "Open Reaction Database reaction ord-9416798fc379474097a7b8bae7ea6e65",
+      "url": "https://open-reaction-database.org/id/ord-9416798fc379474097a7b8bae7ea6e65",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-9416798fc379474097a7b8bae7ea6e65"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

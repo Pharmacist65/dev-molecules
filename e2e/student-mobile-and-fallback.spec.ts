@@ -89,7 +89,8 @@ test.describe("student mobile experience", () => {
     const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
     await expect(synthesis).toBeVisible();
     await synthesis.getByRole("button", { name: /Sentez kanıtını aç|Open synthesis evidence/i }).click();
-    await expect(synthesis.locator('[data-synthesis-atlas-coverage-only="true"]')).toBeVisible();
+    await expect(synthesis.locator('[data-synthesis-atlas="public-alpha-draft"]')).toBeVisible();
+    await expect(synthesis.locator('[data-public-alpha-synthesis="source-supported-draft"]')).toBeVisible();
     await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
     await expectNoHorizontalOverflow(page);
     await captureAcceptanceScreenshot(page, "student-synthesis-atlas-390x844.png");

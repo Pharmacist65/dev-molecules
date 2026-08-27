@@ -66,7 +66,7 @@ Changing language must not move a molecule, change a source, promote a verificat
 1. Add or update the English key in `lib/i18n/messages.ts`.
 2. Add the Turkish value with the same placeholders.
 3. Use a stable domain ID for scientific content; do not use translated text as a lookup key.
-4. Add route-derived copy only from a reviewed and rights-cleared public projection; never copy private locators, materials, steps, or atom maps into localization.
+4. Add canonical route-derived copy only from a reviewed and rights-cleared projection. Pending public-alpha copy may describe only fields in its validated public schema and must preserve its review-pending, incomplete, non-operational boundary; never copy private locators, materials, steps, or atom maps into localization.
 5. For Atlas, Academy, or future publishable challenge content, update both values in the paired localized record.
 6. Keep formulas, identifiers, provenance, review states, and scoring outside component prose.
 7. Test both locales and inspect the rendered page at the target viewport sizes.

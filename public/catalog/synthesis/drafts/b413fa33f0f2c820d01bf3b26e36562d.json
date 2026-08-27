@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:b413fa33f0f2c820d01bf3b26e36562d",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:tobramycin-nlvfbuxfdbbnbw-pbsuhmdjsa-n",
+    "catalogEntityId": "molecule:imported:tobramycin-nlvfbuxfdbbnbw-pbsuhmdjsa-n",
+    "preferredName": "Tobramycin",
+    "pubChemCid": 36294,
+    "inchiKey": "NLVFBUXFDBBNBW-PBSUHMDJSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:17b3b317cd12a4469b9aafacdae81890",
+      "label": "Tobramycin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1[C@@H]([C@H]([C@@H]([C@H]([C@@H]1N)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)N)O)O)O[C@@H]3[C@@H](C[C@@H]([C@H](O3)CN)O)N)N",
+      "inchiKey": "NLVFBUXFDBBNBW-PBSUHMDJSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:661ec8c76354780c9cb17b4f0b22b2ae",
+      "label": "tobramycin sulfate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1[C@@H]([C@H]([C@@H]([C@H]([C@@H]1N)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)N)O)O)O[C@@H]3[C@@H](C[C@@H]([C@H](O3)CN)O)N)N.OS(=O)(=O)O",
+      "inchiKey": "ZEUUPKVZFKBXPW-TWDWGCDDSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:d5fa3cc990b9b2197a7cb2941d48b448",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:661ec8c76354780c9cb17b4f0b22b2ae"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:17b3b317cd12a4469b9aafacdae81890"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e6455faa988b4368e989d4d00943f34d",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:f391346c5271a7d78123517309feb3dd",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:661ec8c76354780c9cb17b4f0b22b2ae"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:17b3b317cd12a4469b9aafacdae81890"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c7157951e7c546c1e5afbc30d8cc6e58",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:d5fa3cc990b9b2197a7cb2941d48b448",
+      "finalStepId": "synthesis-draft-step:d5fa3cc990b9b2197a7cb2941d48b448",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:f391346c5271a7d78123517309feb3dd",
+      "finalStepId": "synthesis-draft-step:f391346c5271a7d78123517309feb3dd",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c7157951e7c546c1e5afbc30d8cc6e58",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-905e4c58834248fdad85170d3c81d257",
+      "label": "Open Reaction Database reaction ord-905e4c58834248fdad85170d3c81d257",
+      "url": "https://open-reaction-database.org/id/ord-905e4c58834248fdad85170d3c81d257",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-905e4c58834248fdad85170d3c81d257"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:e6455faa988b4368e989d4d00943f34d",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-c938fb36e94549409128815a37398402",
+      "label": "Open Reaction Database reaction ord-c938fb36e94549409128815a37398402",
+      "url": "https://open-reaction-database.org/id/ord-c938fb36e94549409128815a37398402",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c938fb36e94549409128815a37398402"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

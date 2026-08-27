@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:b2913ce7f6f152d10ccb01a9ef930832",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:almotriptan-wkemjkqolohjlz-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:almotriptan-wkemjkqolohjlz-uhfffaoysa-n",
+    "preferredName": "Almotriptan",
+    "pubChemCid": 123606,
+    "inchiKey": "WKEMJKQOLOHJLZ-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:0912d6bfce665e8f6cf3038aad508b4a",
+      "label": "Exact structure XEKOWRVHYACXOJ",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCOC(C)=O",
+      "inchiKey": "XEKOWRVHYACXOJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:350c60a8e48922863e3557b89995fc61",
+      "label": "Exact structure DPNOUXJERSIDDG",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C)CCc1c(C(=O)O)[nH]c2ccc(CS(=O)(=O)N3CCCC3)cc12",
+      "inchiKey": "DPNOUXJERSIDDG-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "Exact structure VEXZGXHMUGYJMC",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ba08dedda285c1c532f6307d0f466109",
+      "label": "Exact structure SMWDFEZZVXVKRB",
+      "displayRole": "source_input",
+      "sourceSmiles": "c1ccc2ncccc2c1",
+      "inchiKey": "SMWDFEZZVXVKRB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d78b76d7eda76dadaa788757d1fc99dc",
+      "label": "Exact structure WKEMJKQOLOHJLZ",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CN(C)CCc1c[nH]c2ccc(CS(=O)(=O)N3CCCC3)cc12",
+      "inchiKey": "WKEMJKQOLOHJLZ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:10fabb9e53e0395f449a7e964b274d76",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:350c60a8e48922863e3557b89995fc61",
+        "synthesis-draft-material:0912d6bfce665e8f6cf3038aad508b4a",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+        "synthesis-draft-material:ba08dedda285c1c532f6307d0f466109"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:d78b76d7eda76dadaa788757d1fc99dc"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:ee09f99be8f9dd89a48795f60ddf42bf",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:10fabb9e53e0395f449a7e964b274d76",
+      "finalStepId": "synthesis-draft-step:10fabb9e53e0395f449a7e964b274d76",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:ee09f99be8f9dd89a48795f60ddf42bf",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-66e29aab37c345008da1c0b980903e0b",
+      "label": "Open Reaction Database reaction ord-66e29aab37c345008da1c0b980903e0b",
+      "url": "https://open-reaction-database.org/id/ord-66e29aab37c345008da1c0b980903e0b",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-66e29aab37c345008da1c0b980903e0b"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

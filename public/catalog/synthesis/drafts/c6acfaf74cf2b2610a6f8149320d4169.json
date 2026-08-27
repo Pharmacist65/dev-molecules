@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:c6acfaf74cf2b2610a6f8149320d4169",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:miconazole-byblewfaakgycd-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:miconazole-byblewfaakgycd-uhfffaoysa-n",
+    "preferredName": "Miconazole",
+    "pubChemCid": 4189,
+    "inchiKey": "BYBLEWFAAKGYCD-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:417cb6719a7d224eaac8c05f097feae7",
+      "label": "erucic acid",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(CCCCCCCCCCC\\C=C/CCCCCCCC)(=O)O",
+      "inchiKey": "DPUOLQHDNGRHBS-KTKRTIGZSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8d1cef0855639c7fc8bd4cbd4274f05c",
+      "label": "miconazole nitrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "C1=CC(=C(C=C1Cl)Cl)COC(CN2C=CN=C2)C=3C=CC(=CC3Cl)Cl.[N+](=O)(O)[O-]",
+      "inchiKey": "MCCACAIVAXEFAL-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:bf59b330b72db5882d4eb3054c2ab33c",
+      "label": "miconazole",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C1=CC(=C(C=C1Cl)Cl)COC(CN2C=CN=C2)C=3C=CC(=CC3Cl)Cl",
+      "inchiKey": "BYBLEWFAAKGYCD-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:595e80e7009e61987c3b5b15105cc31c",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:417cb6719a7d224eaac8c05f097feae7",
+        "synthesis-draft-material:8d1cef0855639c7fc8bd4cbd4274f05c",
+        "synthesis-draft-material:417cb6719a7d224eaac8c05f097feae7"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:bf59b330b72db5882d4eb3054c2ab33c"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1e5a038f5edc8dab67d613dd343c104e",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:595e80e7009e61987c3b5b15105cc31c",
+      "finalStepId": "synthesis-draft-step:595e80e7009e61987c3b5b15105cc31c",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1e5a038f5edc8dab67d613dd343c104e",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f883f6771dc7411d8bccb6ef72bd2ff1",
+      "label": "Open Reaction Database reaction ord-f883f6771dc7411d8bccb6ef72bd2ff1",
+      "url": "https://open-reaction-database.org/id/ord-f883f6771dc7411d8bccb6ef72bd2ff1",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f883f6771dc7411d8bccb6ef72bd2ff1"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

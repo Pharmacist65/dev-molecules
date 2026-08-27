@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:eee8cb4bfd41d4aef4fc1f5477676827",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:deoxycorticosterone-acetate-vpgryofkcnulnk-acxqxyjusa-n",
+    "catalogEntityId": "molecule:imported:deoxycorticosterone-acetate-vpgryofkcnulnk-acxqxyjusa-n",
+    "preferredName": "Deoxycorticosterone acetate",
+    "pubChemCid": 5952,
+    "inchiKey": "VPGRYOFKCNULNK-ACXQXYJUSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3709fc4e9813812e36a65e372a928f06",
+      "label": "4-pregnene-3,20-dione-21-ol acetate",
+      "displayRole": "exact_target",
+      "sourceSmiles": "C(C)(=O)OCC([C@H]1CC[C@H]2[C@@H]3CCC4=CC(CC[C@]4(C)[C@H]3CC[C@]12C)=O)=O",
+      "inchiKey": "VPGRYOFKCNULNK-ACXQXYJUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b311e539157daa98aa633aa164422b4e",
+      "label": "dioxane",
+      "displayRole": "source_input",
+      "sourceSmiles": "O1CCOCC1",
+      "inchiKey": "RYHBNJHYFVUHQT-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:d772f03da46c200d02989a2c7722b9db",
+      "label": "4-pregnene-3,20-dione-21-ol",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C([C@H]1CC[C@H]2[C@@H]3CCC4=CC(CC[C@]4(C)[C@H]3CC[C@]12C)=O)=O)O",
+      "inchiKey": "ZESRJSPZRDMNHY-YFWFAHHUSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:8fde39379c201d0cb372b7189e4856cf",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b311e539157daa98aa633aa164422b4e",
+        "synthesis-draft-material:d772f03da46c200d02989a2c7722b9db"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:3709fc4e9813812e36a65e372a928f06"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:28033b3a616209b0bee2b7c2e4c35e79",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:8fde39379c201d0cb372b7189e4856cf",
+      "finalStepId": "synthesis-draft-step:8fde39379c201d0cb372b7189e4856cf",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:28033b3a616209b0bee2b7c2e4c35e79",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-f428ed2e43094318850dfe7b99c22288",
+      "label": "Open Reaction Database reaction ord-f428ed2e43094318850dfe7b99c22288",
+      "url": "https://open-reaction-database.org/id/ord-f428ed2e43094318850dfe7b99c22288",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f428ed2e43094318850dfe7b99c22288"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

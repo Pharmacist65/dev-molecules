@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:22b3a4e1e48cf687c9d0592e48737657",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:pyrazinamide-ipehbumcgvemrf-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:pyrazinamide-ipehbumcgvemrf-uhfffaoysa-n",
+    "preferredName": "Pyrazinamide",
+    "pubChemCid": 1046,
+    "inchiKey": "IPEHBUMCGVEMRF-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+      "label": "DIEA",
+      "displayRole": "source_input",
+      "sourceSmiles": "CCN(C(C)C)C(C)C",
+      "inchiKey": "JGFZNNIVVJXRND-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:588639b17ee16ecc77e5b824915dfafb",
+      "label": "dimethylcarbamoyl chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C(=O)Cl)C",
+      "inchiKey": "YIIMEMSDCNDGTB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:7a9d8c6003261fff058494611aa32251",
+      "label": "DMF",
+      "displayRole": "source_input",
+      "sourceSmiles": "CN(C)C=O",
+      "inchiKey": "ZMXDDKWLCZADIW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:8020f8ec821afa71d328d0d2968ce945",
+      "label": "3,5-diamino-6-chloro-N-[[(aminocarbonyl)amino]iminomethyl]-2-pyrazinecarboxamide",
+      "displayRole": "source_input",
+      "sourceSmiles": "NC=1C(=NC(=C(N1)N)Cl)C(=O)NC=NNC(=O)N",
+      "inchiKey": "BGTYSUDOPGYISC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+      "label": "hydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "Cl",
+      "inchiKey": "VEXZGXHMUGYJMC-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a95c79a0266af3b00acbfb5205b2bece",
+      "label": "TFA",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(=O)(C(F)(F)F)O",
+      "inchiKey": "DTQVDTLACAAQTR-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:ddb7d659551db3ffdea105564277bd29",
+      "label": "4-methylcyclohexanone",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC1CCC(CC1)=O",
+      "inchiKey": "VGVHNLRUAMRIEW-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:e07222c539e7e23b36c3f660a0d4ada0",
+      "label": "2-pyrazinecarboxamide",
+      "displayRole": "exact_target",
+      "sourceSmiles": "N1=C(C=NC=C1)C(=O)N",
+      "inchiKey": "IPEHBUMCGVEMRF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:a62d78d5e247926a830fa218708a5940",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:8020f8ec821afa71d328d0d2968ce945",
+        "synthesis-draft-material:ddb7d659551db3ffdea105564277bd29"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:e07222c539e7e23b36c3f660a0d4ada0"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:5fd4e9b5ad4b65314d82f302a96f6f8c",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:501cc7c92918874e2ac6b6d75166e7af",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9",
+        "synthesis-draft-material:7a9d8c6003261fff058494611aa32251",
+        "synthesis-draft-material:35b92559ef2ce830ad18a7d46f511c29",
+        "synthesis-draft-material:588639b17ee16ecc77e5b824915dfafb",
+        "synthesis-draft-material:a95c79a0266af3b00acbfb5205b2bece",
+        "synthesis-draft-material:9474b17456a65376657551a1adc7cad9"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:e07222c539e7e23b36c3f660a0d4ada0"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:80c3c2b8bf768854f6c09a1e40ef000b",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:a62d78d5e247926a830fa218708a5940",
+      "finalStepId": "synthesis-draft-step:a62d78d5e247926a830fa218708a5940",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:501cc7c92918874e2ac6b6d75166e7af",
+      "finalStepId": "synthesis-draft-step:501cc7c92918874e2ac6b6d75166e7af",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:5fd4e9b5ad4b65314d82f302a96f6f8c",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-709ab9cfb43448e4a59b7d2a49172b6c",
+      "label": "Open Reaction Database reaction ord-709ab9cfb43448e4a59b7d2a49172b6c",
+      "url": "https://open-reaction-database.org/id/ord-709ab9cfb43448e4a59b7d2a49172b6c",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-709ab9cfb43448e4a59b7d2a49172b6c"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:80c3c2b8bf768854f6c09a1e40ef000b",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-407eefc4e7304a6c99ce5334c68dd478",
+      "label": "Open Reaction Database reaction ord-407eefc4e7304a6c99ce5334c68dd478",
+      "url": "https://open-reaction-database.org/id/ord-407eefc4e7304a6c99ce5334c68dd478",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-407eefc4e7304a6c99ce5334c68dd478"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

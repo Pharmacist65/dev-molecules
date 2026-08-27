@@ -254,7 +254,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const scenario of scenarios) {
-  test(`${scenario.name} flagship is complete across TR/EN Story/Reference and 390px`, async ({
+  test(`${scenario.name} renders the required Phase A sections across TR/EN Story/Reference and 390px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });

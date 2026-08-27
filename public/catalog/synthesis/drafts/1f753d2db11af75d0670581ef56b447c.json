@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:1f753d2db11af75d0670581ef56b447c",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:ethambutol-aeutyovwovbaks-uwvggrqhsa-n",
+    "catalogEntityId": "molecule:imported:ethambutol-aeutyovwovbaks-uwvggrqhsa-n",
+    "preferredName": "Ethambutol",
+    "pubChemCid": 14052,
+    "inchiKey": "AEUTYOVWOVBAKS-UWVGGRQHSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:72fbbaf37b8a5c8ef521ece29ad1a802",
+      "label": "Ethambutol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC[C@@H](CO)NCCN[C@@H](CC)CO",
+      "inchiKey": "AEUTYOVWOVBAKS-UWVGGRQHSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:b15e16d2972d9947b49aa23bb623bf6c",
+      "label": "Ethambutol Dihydrochloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC[C@@H](CO)NCCN[C@@H](CC)CO.Cl.Cl",
+      "inchiKey": "AUAHHJJRFHRVPV-BZDVOYDHSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:519388844f0bd91908a98f8d62db6d0d",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:b15e16d2972d9947b49aa23bb623bf6c",
+        "synthesis-draft-material:b15e16d2972d9947b49aa23bb623bf6c",
+        "synthesis-draft-material:b15e16d2972d9947b49aa23bb623bf6c"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:72fbbaf37b8a5c8ef521ece29ad1a802"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:e1961760d3702bc81b9fe0b313ddad5f",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:519388844f0bd91908a98f8d62db6d0d",
+      "finalStepId": "synthesis-draft-step:519388844f0bd91908a98f8d62db6d0d",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:e1961760d3702bc81b9fe0b313ddad5f",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-bc6a8db3687a4cab96373542461f07a9",
+      "label": "Open Reaction Database reaction ord-bc6a8db3687a4cab96373542461f07a9",
+      "url": "https://open-reaction-database.org/id/ord-bc6a8db3687a4cab96373542461f07a9",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-bc6a8db3687a4cab96373542461f07a9"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

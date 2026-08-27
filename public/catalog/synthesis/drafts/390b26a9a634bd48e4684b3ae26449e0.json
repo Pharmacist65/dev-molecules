@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:390b26a9a634bd48e4684b3ae26449e0",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:cephaloglycin-fubbgqltscsaon-pbfpgscmsa-n",
+    "catalogEntityId": "molecule:imported:cephaloglycin-fubbgqltscsaon-pbfpgscmsa-n",
+    "preferredName": "Cephaloglycin",
+    "pubChemCid": 19150,
+    "inchiKey": "FUBBGQLTSCSAON-PBFPGSCMSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:3359d2171a5242801ab4ccf6a979d092",
+      "label": "magnesium sulfate",
+      "displayRole": "source_input",
+      "sourceSmiles": "S(=O)(=O)([O-])[O-].[Mg+2]",
+      "inchiKey": "CSNNHWWHGAXBCP-UHFFFAOYSA-L",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:879b26799ef5a0456cfeaa8c36f9a48d",
+      "label": "methylene chloride",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(Cl)Cl",
+      "inchiKey": "YMWUJEATGCHHMB-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9a05b57d0797f268585810513e88b316",
+      "label": "cephaloglycin",
+      "displayRole": "exact_target",
+      "sourceSmiles": "CC(=O)OCC1=C(N2[C@@H]([C@@H](C2=O)NC(=O)[C@@H](C=3C=CC=CC3)N)SC1)C(=O)O",
+      "inchiKey": "FUBBGQLTSCSAON-PBFPGSCMSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:a902d8a5a71b9c9527b13cc398b147f5",
+      "label": "cephaloglycin monohydrate",
+      "displayRole": "source_input",
+      "sourceSmiles": "CC(=O)OCC1=C(N2[C@@H]([C@@H](C2=O)NC(=O)[C@@H](C3=CC=CC=C3)N)SC1)C(=O)O.O",
+      "inchiKey": "FFOHOZBDRVVZIM-PFBPGKLMSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:f5336b6eb8df2c7748db86c00df22fd1",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:a902d8a5a71b9c9527b13cc398b147f5",
+        "synthesis-draft-material:3359d2171a5242801ab4ccf6a979d092",
+        "synthesis-draft-material:879b26799ef5a0456cfeaa8c36f9a48d"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9a05b57d0797f268585810513e88b316"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:3042dd8a055163e2d74ddd6a2f033e3f",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    },
+    {
+      "id": "synthesis-draft-step:37e399811bdc64c6ba8a89c078b83416",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:879b26799ef5a0456cfeaa8c36f9a48d",
+        "synthesis-draft-material:a902d8a5a71b9c9527b13cc398b147f5",
+        "synthesis-draft-material:3359d2171a5242801ab4ccf6a979d092"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:9a05b57d0797f268585810513e88b316"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:2bcb0b9570f30dda2e29204a9bcb9490",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:f5336b6eb8df2c7748db86c00df22fd1",
+      "finalStepId": "synthesis-draft-step:f5336b6eb8df2c7748db86c00df22fd1",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    },
+    {
+      "id": "synthesis-draft-alternative:37e399811bdc64c6ba8a89c078b83416",
+      "finalStepId": "synthesis-draft-step:37e399811bdc64c6ba8a89c078b83416",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:2bcb0b9570f30dda2e29204a9bcb9490",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-30755719325545ef874dc2b560e95ab6",
+      "label": "Open Reaction Database reaction ord-30755719325545ef874dc2b560e95ab6",
+      "url": "https://open-reaction-database.org/id/ord-30755719325545ef874dc2b560e95ab6",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-30755719325545ef874dc2b560e95ab6"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    },
+    {
+      "id": "synthesis-draft-citation:3042dd8a055163e2d74ddd6a2f033e3f",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-53f06f6a2a0f4de68eb9ffbfcae2a0bb",
+      "label": "Open Reaction Database reaction ord-53f06f6a2a0f4de68eb9ffbfcae2a0bb",
+      "url": "https://open-reaction-database.org/id/ord-53f06f6a2a0f4de68eb9ffbfcae2a0bb",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-53f06f6a2a0f4de68eb9ffbfcae2a0bb"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

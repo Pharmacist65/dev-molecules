@@ -120,7 +120,7 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
   expectCleanRuntime(telemetry);
 });
 
-test("Synthesis Atlas keeps pending route shape private while all-catalog coverage remains usable", async ({
+test("Synthesis Atlas exposes source-supported drafts without upgrading their review state", async ({
   page,
 }) => {
   test.setTimeout(longAcceptanceTimeout);
@@ -136,18 +136,22 @@ test("Synthesis Atlas keeps pending route shape private while all-catalog covera
   await expect(synthesisHub.locator('[data-synthesis-public-coverage-only="true"]')).toBeVisible();
   await expect(synthesisHub.locator('[data-synthesis-catalog-navigator="complete-index"]'))
     .toHaveAttribute("data-catalog-record-count", "1552");
-  await expect(synthesisHub).toContainText("Unreviewed reaction sequences and completeness are excluded from the client bundle.");
+  await expect(synthesisHub).toContainText("Public-alpha drafts stay permanently labelled pending here");
 
   await synthesisHub.getByRole("button", { name: "Open synthesis evidence" }).click();
   const synthesis = synthesisRoot(page);
   await expect(synthesis).toBeVisible();
-  await expect(synthesis).toHaveAttribute("data-synthesis-atlas", "coverage-only");
-  await expect(synthesis).toHaveAttribute("data-synthesis-atlas-coverage-only", "true");
+  await expect(synthesis).toHaveAttribute("data-synthesis-atlas", "public-alpha-draft");
+  await expect(synthesis).toHaveAttribute("data-synthesis-atlas-coverage-only", "false");
+  await expect(synthesis.locator('[data-public-alpha-synthesis="source-supported-draft"]')).toBeVisible();
+  await expect(synthesis).toContainText("SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING");
+  await expect(synthesis).toContainText("Exact source locator");
+  await expect(synthesis.getByRole("link", { name: /Open ORD record/ }).first()).toBeVisible();
   await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
   await expect(synthesis.locator("[data-active-step]")).toHaveCount(0);
   await expect(synthesis.locator("[data-synthesis-target-product]")).toHaveCount(0);
   await expect(synthesis.locator("[data-synthesis-catalog-coverage]")).toBeVisible();
-  await expect(synthesis).toContainText("No publishable route detail is currently available for this identity.");
+  await expect(synthesis).toContainText("Accuracy, completeness, applicability, and reproducibility have not been expert-verified.");
 
   await expectNoHorizontalOverflow(page, "English synthesis coverage at 1920x1080");
   await captureAcceptanceScreenshot(

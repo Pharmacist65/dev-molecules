@@ -14,6 +14,7 @@ import type {
   SynthesisEvidenceProcessingSummary,
   SynthesisMoleculeBestOutcome,
 } from "./synthesis-extraction";
+import type { PublicAlphaSynthesisDraftReference } from "./public-alpha-synthesis-draft";
 
 export const SYNTHESIS_ASSESSMENT_STATES = [
   "not_assessed",
@@ -106,6 +107,11 @@ export interface SynthesisCoverageRecord {
   readonly evidenceDetailsRedacted?: true;
   /** Safe aggregate flag; it exposes no route type, steps, locator or completeness. */
   readonly reportedRouteFoundPendingReview?: boolean;
+  /**
+   * Separately gated public-alpha educational drafts. These never participate
+   * in canonical published-route, curriculum, or verified-science counts.
+   */
+  readonly publicAlphaDrafts?: readonly PublicAlphaSynthesisDraftReference[];
   readonly updatedAt: string;
 }
 

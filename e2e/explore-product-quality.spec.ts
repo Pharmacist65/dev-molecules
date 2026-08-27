@@ -812,8 +812,8 @@ test.describe("Explore product-quality acceptance", () => {
       if (measurement.effectiveViewport.width > 720) {
         expect.soft(
           ((measurement.stageBox?.height ?? 0) + 1) / measurement.effectiveViewport.height,
-          `${measurement.name} must retain the 78vh desktop stage`,
-        ).toBeGreaterThanOrEqual(0.78);
+          `${measurement.name} must retain the 80vh desktop stage`,
+        ).toBeGreaterThanOrEqual(0.8);
       }
     }
   });

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:fd5f40d896875e4a612d865f5c902866",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:efinaconazole-nfezzticauwdhu-rdtxwamcsa-n",
+    "catalogEntityId": "molecule:imported:efinaconazole-nfezzticauwdhu-rdtxwamcsa-n",
+    "preferredName": "Efinaconazole",
+    "pubChemCid": 489181,
+    "inchiKey": "NFEZZTICAUWDHU-RDTXWAMCSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": true
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:14a0bb28954ef74d9782cb4f23d6a0aa",
+      "label": "acetonitrile",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)#N",
+      "inchiKey": "WEVYAHXRMPXWCK-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:5dec85221bb77db2dc491730a9bc2972",
+      "label": "(2R,3R)-2-(2,4-difluorophenyl)-3-(4-methylenepiperidin-1-yl)-1-(1H-1,2,4-triazol-1-yl)butan-2-ol",
+      "displayRole": "exact_target",
+      "sourceSmiles": "FC1=C(C=CC(=C1)F)[C@@](CN1N=CN=C1)([C@@H](C)N1CCC(CC1)=C)O",
+      "inchiKey": "NFEZZTICAUWDHU-RDTXWAMCSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:6c31360548a6e4d18360aa5ca45b4dfd",
+      "label": "(2R,3S)-2-(2,4-difluorophenyl)-3-methyl-2-[(1H-1,2,4-triazol-1-yl)methyl]oxirane",
+      "displayRole": "source_input",
+      "sourceSmiles": "FC1=C(C=CC(=C1)F)[C@@]1(O[C@H]1C)CN1N=CN=C1",
+      "inchiKey": "QANJLSHZDUOBBP-QPUJVOFHSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:e40d76ab169bb196c1e62dff05677b36",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:6c31360548a6e4d18360aa5ca45b4dfd",
+        "synthesis-draft-material:14a0bb28954ef74d9782cb4f23d6a0aa"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:5dec85221bb77db2dc491730a9bc2972"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:c994fc8e9959b00e520ec13f638534e3",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:e40d76ab169bb196c1e62dff05677b36",
+      "finalStepId": "synthesis-draft-step:e40d76ab169bb196c1e62dff05677b36",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:c994fc8e9959b00e520ec13f638534e3",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-1c949d4a2db146d892c62822d9539674",
+      "label": "Open Reaction Database reaction ord-1c949d4a2db146d892c62822d9539674",
+      "url": "https://open-reaction-database.org/id/ord-1c949d4a2db146d892c62822d9539674",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1c949d4a2db146d892c62822d9539674"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

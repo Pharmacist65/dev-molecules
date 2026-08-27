@@ -12,7 +12,7 @@ const { synthesisStories } = await tsImport(
   import.meta.url,
 );
 
-test("public source contains no pending route-derived story or challenge", () => {
+test("canonical curriculum contains no pending route-derived story or challenge", () => {
   assert.deepEqual(synthesisStories, []);
   assert.deepEqual(synthesisChallenges, []);
 });

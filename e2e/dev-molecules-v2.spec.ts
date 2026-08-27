@@ -343,7 +343,7 @@ test("Academy exposes exactly eight modules and opens the real nomenclature less
   expectCleanRuntime(telemetry);
 });
 
-test("Synthesis Academy exposes all-catalog coverage and keeps pending routes closed", async ({
+test("Synthesis Academy exposes all-catalog coverage and separately gated pending drafts", async ({
   page,
 }) => {
   const telemetry = watchRuntime(page);
@@ -353,7 +353,7 @@ test("Synthesis Academy exposes all-catalog coverage and keeps pending routes cl
 
   const shortcut = page.locator('[data-academy-synthesis-shortcut="true"]');
   await expect(shortcut).toBeVisible();
-  await expect(shortcut).toContainText("1,552 catalog identities · route detail review-gated");
+  await expect(shortcut).toContainText("1,552 catalog identities · drafts pending, reviewed routes separate");
   await shortcut.getByRole("button", { name: "Open synthesis coverage" }).click();
   await expect(page).toHaveURL(/#academy\/synthesis\/propranolol\/atlas$/);
 
@@ -362,22 +362,24 @@ test("Synthesis Academy exposes all-catalog coverage and keeps pending routes cl
   await expect(synthesis).toHaveAttribute("data-catalog-records", "1552");
   await expect(synthesis.locator('[data-synthesis-catalog-navigator="complete-index"]'))
     .toHaveAttribute("data-catalog-record-count", "1552");
-  const coverageOnly = synthesis.locator('[data-synthesis-atlas-coverage-only="true"]');
-  await expect(coverageOnly).toBeVisible();
-  await expect(coverageOnly).toHaveAttribute("data-catalog-entity-id", /propranolol/i);
-  await expect(coverageOnly.locator("[data-synthesis-catalog-coverage]"))
+  const draftAtlas = synthesis.locator('[data-synthesis-atlas="public-alpha-draft"]');
+  await expect(draftAtlas).toBeVisible();
+  await expect(draftAtlas).toHaveAttribute("data-catalog-entity-id", /propranolol/i);
+  await expect(draftAtlas.locator("[data-synthesis-catalog-coverage]"))
     .toBeVisible();
+  await expect(draftAtlas.locator('[data-public-alpha-synthesis="source-supported-draft"]')).toBeVisible();
+  await expect(draftAtlas).toContainText("SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING");
   await expect(synthesis.locator('[data-synthesis-target-product="true"]')).toHaveCount(0);
   await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(coverageOnly).toBeVisible();
+  await expect(draftAtlas).toBeVisible();
   await expectNoHorizontalOverflow(page, "Mobile synthesis coverage");
   await page.setViewportSize({ width: 1440, height: 900 });
   await synthesis.getByRole("button", { name: "Back to synthesis coverage" }).click();
   const publicCoverage = synthesis.locator('[data-synthesis-public-coverage-only="true"]');
   await expect(publicCoverage).toBeVisible();
   await expect(publicCoverage).toContainText("All 1,552 exact catalog identities");
-  await expect(publicCoverage).toContainText("Unreviewed reaction sequences and completeness are excluded from the client bundle.");
+  await expect(publicCoverage).toContainText("Public-alpha drafts stay permanently labelled pending here");
   await expect(publicCoverage.locator('[data-status="curated-route-available"]')).toHaveCount(0);
 
   await page.goto(

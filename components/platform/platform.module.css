@@ -1481,6 +1481,15 @@
   width: min(1500px, calc(100% - 2 * var(--space-page-inline)));
 }
 
+/* Spatial is the Atlas' primary viewport. Let it meet the navigation rail and
+   use the available canvas width; the Browse route keeps the editorial page
+   gutter and reading-width ceiling above. */
+.app[data-working-brand="molevren"] .workspacePage[data-atlas-workspace="spatial"] {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .app[data-working-brand="molevren"] .routeLoading {
   color: var(--color-text-muted-on-dark);
 }

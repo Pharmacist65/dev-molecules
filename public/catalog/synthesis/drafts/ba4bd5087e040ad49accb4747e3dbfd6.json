@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:ba4bd5087e040ad49accb4747e3dbfd6",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:3-4-diaminopyridine-oytkinvcdfnren-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:3-4-diaminopyridine-oytkinvcdfnren-uhfffaoysa-n",
+    "preferredName": "3,4-Diaminopyridine",
+    "pubChemCid": 5918,
+    "inchiKey": "OYTKINVCDFNREN-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:1a2d73fbb5d80ed612b4647f9b939880",
+      "label": "LiN(SiMe3)2",
+      "displayRole": "source_input",
+      "sourceSmiles": "[Li]N([Si](C)(C)C)[Si](C)(C)C",
+      "inchiKey": "YNESATAKKCNGOF-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:282ced0bb9588f4d644c22a2a6847065",
+      "label": "N4-(1-ethyl-propyl)-6-methyl-2-(2,4,6-trimethyl-phenoxy)-pyridine-3,4-diamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)C(CC)NC1=C(C(=NC(=C1)C)OC1=C(C=C(C=C1C)C)C)N",
+      "inchiKey": "GXJXXGCWKAUWAN-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:be74078172153c7e36c60cc6326ff1cc",
+      "label": "methyl iodide",
+      "displayRole": "source_input",
+      "sourceSmiles": "CI",
+      "inchiKey": "INQOMBQAUSQDDS-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:f5c37b89abcd309212f5e0675ab567ee",
+      "label": "pyridine-3,4-diamine",
+      "displayRole": "exact_target",
+      "sourceSmiles": "N1=CC(=C(C=C1)N)N",
+      "inchiKey": "OYTKINVCDFNREN-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:4b2a78233e17eac2e6dc2f13caa2ddd8",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:282ced0bb9588f4d644c22a2a6847065",
+        "synthesis-draft-material:1a2d73fbb5d80ed612b4647f9b939880",
+        "synthesis-draft-material:be74078172153c7e36c60cc6326ff1cc"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:f5c37b89abcd309212f5e0675ab567ee"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:1e6f9cc8b1cd59ae6db535ae07197f00",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:4b2a78233e17eac2e6dc2f13caa2ddd8",
+      "finalStepId": "synthesis-draft-step:4b2a78233e17eac2e6dc2f13caa2ddd8",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:1e6f9cc8b1cd59ae6db535ae07197f00",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-b9fcad36dba14aeeb4a5b96506198056",
+      "label": "Open Reaction Database reaction ord-b9fcad36dba14aeeb4a5b96506198056",
+      "url": "https://open-reaction-database.org/id/ord-b9fcad36dba14aeeb4a5b96506198056",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b9fcad36dba14aeeb4a5b96506198056"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}

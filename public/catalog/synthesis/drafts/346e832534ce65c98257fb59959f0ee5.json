@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "graphId": "synthesis-draft-graph:346e832534ce65c98257fb59959f0ee5",
+  "channel": "public_alpha_source_supported_draft",
+  "publicationState": "source_supported_draft",
+  "publicationLabel": {
+    "tr": "KAYNAK DESTEKLİ TASLAK — UZMAN İNCELEMESİ BEKLİYOR",
+    "en": "SOURCE-SUPPORTED DRAFT — EXPERT REVIEW PENDING"
+  },
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "identity": {
+    "coverageId": "synthesis-coverage:molecule:imported:infigratinib-qadpyrihxkwusv-uhfffaoysa-n",
+    "catalogEntityId": "molecule:imported:infigratinib-qadpyrihxkwusv-uhfffaoysa-n",
+    "preferredName": "Infigratinib",
+    "pubChemCid": 53235510,
+    "inchiKey": "QADPYRIHXKWUSV-UHFFFAOYSA-N",
+    "chemicalForm": "unresolved",
+    "stereochemistrySpecified": false
+  },
+  "assurance": {
+    "reviewState": "pending",
+    "expertReviewRequired": true,
+    "verifiedScientificClaim": false,
+    "exactTargetIdentity": true,
+    "formConflict": false,
+    "stereochemistryConflict": false,
+    "operationalDetailsIncluded": false,
+    "contentOrigin": "independent_smiles_redraw",
+    "rightsDecisionState": "approved_for_independent_redraw_with_attribution",
+    "rightsPolicyVersion": "ord-independent-redraw-1.0.0",
+    "sourceTextReused": false,
+    "sourceFigureOrSchemeReused": false
+  },
+  "routeCompleteness": "upstream_gap",
+  "materials": [
+    {
+      "id": "synthesis-draft-material:2df70affde8fa5eeb93d0a4a4b82d308",
+      "label": "3-(2,6-Dichloro-3,5-dimethoxy-phenyl)-1-{6-[4-(4-ethyl-piperazin-1-yl)-phenylamino]-pyrimidin-4-yl}-1-methyl-urea",
+      "displayRole": "exact_target",
+      "sourceSmiles": "ClC1=C(C(=C(C=C1OC)OC)Cl)NC(N(C)C1=NC=NC(=C1)NC1=CC=C(C=C1)N1CCN(CC1)CC)=O",
+      "inchiKey": "QADPYRIHXKWUSV-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:4e743b6f72c1bfe97a9ae7e1c6a23819",
+      "label": "N-[4-(4-ethyl-piperazin-1-yl)-phenyl]-N′-methyl-pyrimidine-4,6-diamine",
+      "displayRole": "source_input",
+      "sourceSmiles": "C(C)N1CCN(CC1)C1=CC=C(C=C1)NC1=NC=NC(=C1)NC",
+      "inchiKey": "DYLFXITZFJHFFJ-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    },
+    {
+      "id": "synthesis-draft-material:9b00acd68f8be725a9c32159199fce43",
+      "label": "2,6-dichloro-3,5-dimethoxyphenyl-isocyanate",
+      "displayRole": "source_input",
+      "sourceSmiles": "ClC1=C(C(=C(C=C1OC)OC)Cl)N=C=O",
+      "inchiKey": "VJFDWELAHZSVEE-UHFFFAOYSA-N",
+      "identityResolution": "exact_inchi_key_computed",
+      "structureRepresentation": "independent_smiles_redraw"
+    }
+  ],
+  "steps": [
+    {
+      "id": "synthesis-draft-step:2a17e3bf1a5c4e0dcc1e1f57397eb179",
+      "relationship": "target_forming_segment",
+      "inputMaterialIds": [
+        "synthesis-draft-material:9b00acd68f8be725a9c32159199fce43",
+        "synthesis-draft-material:4e743b6f72c1bfe97a9ae7e1c6a23819"
+      ],
+      "outputMaterialIds": [
+        "synthesis-draft-material:2df70affde8fa5eeb93d0a4a4b82d308"
+      ],
+      "transformationClass": {
+        "label": "Unclassified",
+        "resolutionState": "not_computed"
+      },
+      "reactionOrderState": "not_resolved",
+      "formedBondState": "not_resolved",
+      "brokenBondState": "not_resolved",
+      "atomMappingState": "not_mapped",
+      "evidenceMode": "direct_structured_dataset_segment",
+      "citationId": "synthesis-draft-citation:a11e83648ae75728e1f0351ca3b8b971",
+      "reviewState": "pending",
+      "operationalDetailsIncluded": false
+    }
+  ],
+  "bridges": [],
+  "alternatives": [
+    {
+      "id": "synthesis-draft-alternative:2a17e3bf1a5c4e0dcc1e1f57397eb179",
+      "finalStepId": "synthesis-draft-step:2a17e3bf1a5c4e0dcc1e1f57397eb179",
+      "upstreamStepIds": [],
+      "routeType": "source_supported_fragment",
+      "routeCompleteness": "upstream_gap",
+      "unresolvedGapCount": 1
+    }
+  ],
+  "citations": [
+    {
+      "id": "synthesis-draft-citation:a11e83648ae75728e1f0351ca3b8b971",
+      "sourceKind": "open_reaction_dataset",
+      "sourceDocumentId": "ord-35e3f060db1b4e85bef87a33ad141e40",
+      "label": "Open Reaction Database reaction ord-35e3f060db1b4e85bef87a33ad141e40",
+      "url": "https://open-reaction-database.org/id/ord-35e3f060db1b4e85bef87a33ad141e40",
+      "locator": {
+        "kind": "dataset_record",
+        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-35e3f060db1b4e85bef87a33ad141e40"
+      },
+      "supportScope": "single_step",
+      "license": {
+        "state": "attribution_required",
+        "identifier": "CC-BY-SA-4.0",
+        "attribution": "Open Reaction Database (ORD), CC BY-SA 4.0"
+      },
+      "sourceTextReused": false,
+      "sourceFigureOrSchemeReused": false
+    }
+  ],
+  "limitations": [
+    "Each displayed step is an independently redrawn projection of one exact-target ORD dataset record; it is not an expert-reviewed reported route.",
+    "Exact-structure bridges join separate source records for teaching only and are never presented as one source-reported complete route.",
+    "Reaction class, atom mapping, formed bonds and broken bonds remain unresolved and are not inferred.",
+    "No quantities, conditions, time, temperature, workup, purification, yield or scale are published.",
+    "Every alternative retains an explicit upstream gap; completeness and laboratory reproducibility have not been established."
+  ]
+}
