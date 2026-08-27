@@ -83,7 +83,7 @@ test("evidence API fails closed to the curated card without a key", async () => 
   const card = await response.json();
   assert.equal(card.mode, "curated-fallback");
   assert.equal(card.identityStatus, "exact-curated-match");
-  assert.equal(card.synthesisStatus, "educational-story-only");
+  assert.equal(card.synthesisStatus, "not-assessed");
   assert.equal(card.biologicalStatus, "not-assessed");
   assert.equal(card.notFoundIsNoveltyEvidence, false);
   assert.equal(card.notClinicalOrPatentAdvice, true);

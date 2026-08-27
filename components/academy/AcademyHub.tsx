@@ -11,10 +11,6 @@ import {
   createAcademyModuleViews,
   getRecommendedAcademyModule,
 } from "@/lib/application/academy-learning-map";
-import {
-  resolveSynthesisCurriculumSelection,
-  synthesisCurriculumReadiness,
-} from "@/lib/application/synthesis-curriculum";
 import type {
   AcademyLocale,
   AcademyModuleId,
@@ -43,6 +39,7 @@ export interface AcademyHubProps {
   readonly locale: AcademyLocale;
   readonly selectedMoleculeIdOrSlug?: string;
   readonly assetBasePath?: string;
+  readonly catalogRecordCount?: number;
   readonly nomenclatureProgress?: NomenclatureProgressSnapshot | null;
   readonly completedMissionIds?: ReadonlySet<string>;
   /** Supply this for URL-controlled routing; omit it for the built-in state. */
@@ -64,10 +61,10 @@ const copy = {
     mapAria: "Sekiz modüllük Akademi öğrenme haritası",
     recommended: "Önerilen sonraki modül",
     openRecommended: "Devam et",
-    synthesisShortcutEyebrow: "SENTEZ BASAMAKLARI",
-    synthesisShortcutTitle: "Başlangıç maddesinden nihai ilaç molekülüne",
-    synthesisShortcutMeta: "{drugs} kaynak kapılı ilaç · {steps} dönüşüm",
-    openSynthesisSteps: "Sentez basamaklarını aç",
+    synthesisShortcutEyebrow: "SENTEZ KANITI",
+    synthesisShortcutTitle: "Katalog kimliğinden kaynak sınırları tanımlı sentez kanıtına",
+    synthesisShortcutMeta: "{records} katalog kimliği · rota ayrıntısı inceleme kapılı",
+    openSynthesisSteps: "Sentez kapsamını aç",
     available: "Başlamaya hazır",
     coverageDependent: "İlaç seçimine göre",
     planned: "Yakında",
@@ -83,11 +80,11 @@ const copy = {
     back: "Öğrenme haritasına dön",
     loading: "Ders alanı yükleniyor…",
     synthesisEyebrow: "AKADEMİDEN ATLASA",
-    synthesisTitle: "Kaynak sınırı tanımlı dönüşümleri Sentez Atlası'nda aç.",
-    synthesisBody: "Bu geçiş yalnız çalışan rota ve basamakları açar. Kaynaklandırılmamış upstream adımlar veya dekoratif mekanizmalar üretilmez.",
+    synthesisTitle: "Kesin molekül kimliğinin sentez kanıtı kapsamını aç.",
+    synthesisBody: "Her kayıt araştırma kapsamını ve sonuçlandırılmış kaynak değerlendirmelerini taşır. Rota ve basamak ayrıntıları yalnız bilimsel inceleme ile yeniden kullanım izni tamamlanırsa görünür; kaynaklandırılmamış öncül basamaklar üretilmez.",
     openSynthesis: "Sentez Atlası'nı aç",
     synthesisUnavailable: "Bu host, Sentez Atlası geçişini henüz bağlamadı.",
-    plannedBoundary: "Bağımsız mekanizma modülünün ilerleme takibi planlandı; mevcut kürate edilmiş basamaklar Sentez Atlası'nda çalışır.",
+    plannedBoundary: "Bağımsız mekanizma modülü planlandı; herkese açık sürümde inceleme ve yeniden kullanım izni kapısını geçmiş sentez basamağı yoktur.",
     reviewEyebrow: "BİTİRME PROJESİ",
   },
   en: {
@@ -97,10 +94,10 @@ const copy = {
     mapAria: "Eight-module Academy learning map",
     recommended: "Recommended next module",
     openRecommended: "Continue",
-    synthesisShortcutEyebrow: "SYNTHESIS STEPS",
-    synthesisShortcutTitle: "From starting materials to the final drug molecule",
-    synthesisShortcutMeta: "{drugs} source-gated drugs · {steps} transformations",
-    openSynthesisSteps: "Open synthesis steps",
+    synthesisShortcutEyebrow: "SYNTHESIS EVIDENCE",
+    synthesisShortcutTitle: "From an exact catalog identity to source-bounded synthesis evidence",
+    synthesisShortcutMeta: "{records} catalog identities · route detail review-gated",
+    openSynthesisSteps: "Open synthesis coverage",
     available: "Ready to begin",
     coverageDependent: "Varies by medicine",
     planned: "Coming soon",
@@ -116,11 +113,11 @@ const copy = {
     back: "Back to learning map",
     loading: "Loading lesson space…",
     synthesisEyebrow: "FROM ACADEMY TO ATLAS",
-    synthesisTitle: "Open source-bounded transformations in Synthesis Atlas.",
-    synthesisBody: "This transition opens only working routes and steps. It does not generate unsourced upstream steps or decorative mechanisms.",
+    synthesisTitle: "Open synthesis-evidence coverage for the exact molecular identity.",
+    synthesisBody: "Every record carries its search scope and terminal outcome. Route and step detail appears only after scientific review and reuse gates pass; unsourced upstream steps are never generated.",
     openSynthesis: "Open Synthesis Atlas",
     synthesisUnavailable: "This host has not connected the Synthesis Atlas transition yet.",
-    plannedBoundary: "Independent mechanism-module progress is planned; existing curated steps work inside Synthesis Atlas.",
+    plannedBoundary: "The independent mechanism module is planned; no synthesis step has passed the public review-and-reuse gate yet.",
     reviewEyebrow: "CAPSTONE PROJECT",
   },
 } as const;
@@ -149,6 +146,7 @@ export function AcademyHub({
   locale,
   selectedMoleculeIdOrSlug = "molecule:propranolol",
   assetBasePath = "/",
+  catalogRecordCount = 1552,
   nomenclatureProgress = null,
   completedMissionIds = emptyMissionIds,
   activeModuleId,
@@ -175,15 +173,7 @@ export function AcademyHub({
   const recommendedModule = getRecommendedAcademyModule(modules);
   const currentModule = modules.find((module) => module.id === currentModuleId) ?? null;
   const labels = copy[locale];
-  const requestedSynthesisMoleculeId = synthesisCurriculumReadiness.flagships.find(
-    (entry) => entry.moleculeId && (
-      entry.moleculeId === selectedMoleculeIdOrSlug ||
-      entry.moleculeId.split(":").at(-1) === selectedMoleculeIdOrSlug
-    ),
-  )?.moleculeId;
-  const synthesisEntryMoleculeId = resolveSynthesisCurriculumSelection(
-    requestedSynthesisMoleculeId,
-  ).moleculeId;
+  const synthesisEntryMoleculeId = selectedMoleculeIdOrSlug.trim() || "molecule:propranolol";
 
   function selectModule(moduleId: AcademyModuleId | null) {
     if (activeModuleId === undefined) setInternalModuleId(moduleId);
@@ -310,8 +300,7 @@ export function AcademyHub({
                 <strong>{labels.synthesisShortcutTitle}</strong>
                 <small>
                   {interpolate(labels.synthesisShortcutMeta, {
-                    drugs: synthesisCurriculumReadiness.availableDrugCount,
-                    steps: synthesisCurriculumReadiness.transformationCount,
+                    records: catalogRecordCount.toLocaleString(locale === "tr" ? "tr-TR" : "en-US"),
                   })}
                 </small>
                 <button type="button" onClick={openSynthesis}>

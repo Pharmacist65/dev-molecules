@@ -151,11 +151,33 @@
       "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
-        "Reported synthesis: Not resolved within the recorded automated search scope.",
-        "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
-        "No validated retrosynthesis engine is configured; no computational route was fabricated."
+        "Reported synthesis: Not resolved within the recorded search scope; no supporting source candidate remained after evidence processing."
       ],
-      "updatedAt": "2026-08-27T11:05:09.449Z"
+      "updatedAt": "2026-08-27T11:05:09.449Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 0,
+        "terminalAssociationCount": 0,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 0,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 0,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "no_supporting_source_resolved",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -289,28 +311,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:aa21c711e26ae9fe9a0b7969",
-        "synthesis-source-evidence:europe-pmc:cb269677b66083f320720f1f",
-        "synthesis-source-evidence:ord:809a53beeea7a1175fc6a54a",
-        "synthesis-source-evidence:patent:0d00d65fb05cd2fa07b81215",
-        "synthesis-source-evidence:patent:d7a634adb6c2f684e82038df",
-        "synthesis-source-evidence:patent:4d91abc6610e7d503162cefd",
-        "synthesis-source-evidence:patent:129e4ff4b31173b210b82aa4",
-        "synthesis-source-evidence:patent:5b7f0e2637ebda894034898c",
-        "synthesis-source-evidence:patent:35d775e479de92a311e687ee",
-        "synthesis-source-evidence:patent:e328c7b2c11c7cc225092a81",
-        "synthesis-source-evidence:patent:d471c36185e19aa2e961e0f4",
-        "synthesis-source-evidence:patent:87fc380c1f6ed2e49c6b215c",
-        "synthesis-source-evidence:patent:44fcd48317cb625052856874"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:19:49.329Z"
+      "updatedAt": "2026-08-27T10:19:49.329Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 13,
+        "terminalAssociationCount": 13,
+        "accessibleCount": 1,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 10,
+        "unavailableCount": 2,
+        "extractionOutcomeCounts": {
+          "resolved": 1,
+          "irrelevant": 7,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 3,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 2
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -444,16 +476,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:d445df426558a42726a3ec39"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:21:04.115Z"
+      "updatedAt": "2026-08-27T10:21:04.115Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 1,
+        "terminalAssociationCount": 1,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 1,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 1,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -587,28 +641,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:473ea25ca25605af382c12c8",
-        "synthesis-source-evidence:ord:7e9d61a40ff2b821d817ac18",
-        "synthesis-source-evidence:ord:9340d4d9970c9bc32d1bc7a1",
-        "synthesis-source-evidence:ord:31e168dfbfbd44c064617d83",
-        "synthesis-source-evidence:ord:f2c7639177e47ea09c784f68",
-        "synthesis-source-evidence:ord:648980fd7fc79d0ae346cda8",
-        "synthesis-source-evidence:ord:d18b05763042bef5e8e134ce",
-        "synthesis-source-evidence:ord:d62fea626a4855cbe2d7b7ec",
-        "synthesis-source-evidence:ord:00b6daa8978eafd9edb680a7",
-        "synthesis-source-evidence:ord:582445c654a60f53ac4e2b8b",
-        "synthesis-source-evidence:ord:340483ae473b2d385aa1e0a0",
-        "synthesis-source-evidence:patent:e852f0bd22e91af6e7bcdc63",
-        "synthesis-source-evidence:patent:71baef5fd3ad388c278a0db1"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:22:30.475Z"
+      "updatedAt": "2026-08-27T10:22:30.475Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 13,
+        "terminalAssociationCount": 13,
+        "accessibleCount": 11,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 2,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 9,
+          "irrelevant": 2,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 2,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -742,23 +806,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:736619d21e2f262f18d2517e",
-        "synthesis-source-evidence:europe-pmc:ebf51b303da2764b9229372a",
-        "synthesis-source-evidence:europe-pmc:3a676e3b28b6d6cf67a21945",
-        "synthesis-source-evidence:patent:39a313dc5e2636d6d8db6922",
-        "synthesis-source-evidence:patent:4a1f66563ce48ee144b7b7ef",
-        "synthesis-source-evidence:patent:b60d673a21fa4547ffefa570",
-        "synthesis-source-evidence:patent:443e7ba98cd4d39ee7650911",
-        "synthesis-source-evidence:patent:f61c0223226217b2fac1e2ef"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:25:59.358Z"
+      "updatedAt": "2026-08-27T10:25:59.358Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 8,
+        "terminalAssociationCount": 8,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 5,
+        "unavailableCount": 3,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 5,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 3
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -892,34 +971,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:4f5805fb3bed8d7353848ac7",
-        "synthesis-source-evidence:ord:c3e9404b2295b92ca7c64b9f",
-        "synthesis-source-evidence:ord:fd312a7a6ac6178f45b756a5",
-        "synthesis-source-evidence:ord:725eea540caff5d52ad33813",
-        "synthesis-source-evidence:ord:2febdc8dfbac7afb268e3e26",
-        "synthesis-source-evidence:ord:c21c7dc33c3a7729c109b73f",
-        "synthesis-source-evidence:ord:0d857a24bc59df108c1144f1",
-        "synthesis-source-evidence:ord:0984a3876c146f513e7863ca",
-        "synthesis-source-evidence:ord:7b1cf2161f91d9e6307210f1",
-        "synthesis-source-evidence:ord:2390ade7ff65e44d96ad0cdb",
-        "synthesis-source-evidence:ord:20dcd44688648aea83ffc3e9",
-        "synthesis-source-evidence:patent:c4b684798765a84d1c44e5dd",
-        "synthesis-source-evidence:patent:e33a610a9fc697e95e70e38b",
-        "synthesis-source-evidence:patent:6e4aa4dc44e487436d07a4b4",
-        "synthesis-source-evidence:patent:b6d226685a6f1ab789bf6bd9",
-        "synthesis-source-evidence:patent:0124f5953784e946293dabf1",
-        "synthesis-source-evidence:patent:58b8c9686e5508d83b371595",
-        "synthesis-source-evidence:patent:090c9ee6cfcfe959c97e347e",
-        "synthesis-source-evidence:patent:2c2832cabbb5e2d319e2e46e"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:27:01.442Z"
+      "updatedAt": "2026-08-27T10:27:01.442Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 19,
+        "terminalAssociationCount": 19,
+        "accessibleCount": 10,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 8,
+        "unavailableCount": 1,
+        "extractionOutcomeCounts": {
+          "resolved": 10,
+          "irrelevant": 6,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 2,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 1
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1053,16 +1136,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:pubchem:3d0c52042f581f253273558a"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:28:56.004Z"
+      "updatedAt": "2026-08-27T10:28:56.004Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 1,
+        "terminalAssociationCount": 1,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 1,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 1,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1196,42 +1301,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:b620f4b6fdeaf8b4d57db1f1",
-        "synthesis-source-evidence:europe-pmc:0a665b7949615980a30c7ae6",
-        "synthesis-source-evidence:europe-pmc:69ccc01764faa5d01f5f7e50",
-        "synthesis-source-evidence:europe-pmc:feec13f46c8f748ac0b2c935",
-        "synthesis-source-evidence:europe-pmc:8c7242dfeb715810b50983ef",
-        "synthesis-source-evidence:europe-pmc:09f32239a1d7a9f5b527cd5a",
-        "synthesis-source-evidence:europe-pmc:ef30bed43399aa756fd982d3",
-        "synthesis-source-evidence:europe-pmc:e47804d02be9c1d931a9c273",
-        "synthesis-source-evidence:ord:f7bb59e0478756ef097ad4ba",
-        "synthesis-source-evidence:ord:d9233b9c75ca19ddf39c98d1",
-        "synthesis-source-evidence:ord:2ff1dfc0311cf6ff173a0be3",
-        "synthesis-source-evidence:ord:62967f4efad0651761559509",
-        "synthesis-source-evidence:ord:2c9665630165a3aa23635f1b",
-        "synthesis-source-evidence:ord:d82077400fdb90f1d12a4e1a",
-        "synthesis-source-evidence:ord:af8c03e11e05661d1d800396",
-        "synthesis-source-evidence:ord:80c44962cd8f143d18fa899c",
-        "synthesis-source-evidence:ord:a81fc6980d47a4941d8c7a6b",
-        "synthesis-source-evidence:patent:4d8c9a3cf0652d2fc80dbbd5",
-        "synthesis-source-evidence:patent:740722c7eeb7fc1dd55a19f5",
-        "synthesis-source-evidence:patent:a373d1f26bbfe6698bd63226",
-        "synthesis-source-evidence:patent:36f26a25cc33557144c04120",
-        "synthesis-source-evidence:patent:69cd275e33f03b26d9b8225b",
-        "synthesis-source-evidence:patent:ed70de2e5e979b01e101d067",
-        "synthesis-source-evidence:patent:f9095783cff3a8e9725bb242",
-        "synthesis-source-evidence:patent:af6e3c6ca56cddd8ce39d260",
-        "synthesis-source-evidence:patent:9ef4477ef1d2a715f58b5eab",
-        "synthesis-source-evidence:patent:50dd1e0640268350c5ed7e82"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:30:21.058Z"
+      "updatedAt": "2026-08-27T10:30:21.058Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 27,
+        "terminalAssociationCount": 27,
+        "accessibleCount": 9,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 12,
+        "unavailableCount": 6,
+        "extractionOutcomeCounts": {
+          "resolved": 9,
+          "irrelevant": 8,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 4,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 6
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1368,11 +1469,33 @@
       "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
-        "Reported synthesis: Not resolved within the recorded automated search scope.",
-        "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
-        "No validated retrosynthesis engine is configured; no computational route was fabricated."
+        "Reported synthesis: Not resolved within the recorded search scope; no supporting source candidate remained after evidence processing."
       ],
-      "updatedAt": "2026-08-27T10:30:53.989Z"
+      "updatedAt": "2026-08-27T10:30:53.989Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 0,
+        "terminalAssociationCount": 0,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 0,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 0,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "no_supporting_source_resolved",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1506,29 +1629,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:70d8924cb46e2d4e964b1e4e",
-        "synthesis-source-evidence:ord:912a2c8fa0c3b7fcc75825c0",
-        "synthesis-source-evidence:ord:895fcbc9674c1053f02a73d4",
-        "synthesis-source-evidence:patent:ce4ca32b906425c08642c1f9",
-        "synthesis-source-evidence:patent:cee639646d09bb877ee64607",
-        "synthesis-source-evidence:patent:04317bc34df7aa4fb865dc37",
-        "synthesis-source-evidence:patent:faa73521fe0cc0a1386ea338",
-        "synthesis-source-evidence:patent:d9abe0ec4d856b50eb33ad33",
-        "synthesis-source-evidence:patent:a82b3adc52cd941cc82142d0",
-        "synthesis-source-evidence:patent:ddf48a5a9d43deb21089f6fa",
-        "synthesis-source-evidence:patent:84fd803c75bfc3862bd93bb6",
-        "synthesis-source-evidence:patent:c3e4f011c9f6705ca1912598",
-        "synthesis-source-evidence:patent:270d97f71dcc71b72f499e67",
-        "synthesis-source-evidence:pubchem:bbbd44fe2414c0138c741081"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:32:19.014Z"
+      "updatedAt": "2026-08-27T10:32:19.014Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 14,
+        "terminalAssociationCount": 14,
+        "accessibleCount": 2,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 12,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 1,
+          "irrelevant": 9,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 4,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1662,42 +1794,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:ccad08b61cfe90142c447e48",
-        "synthesis-source-evidence:europe-pmc:611680edbddfb8cf4a8d676b",
-        "synthesis-source-evidence:europe-pmc:9068bec276de6611a5bee9cb",
-        "synthesis-source-evidence:europe-pmc:edb75eb67fd816530024d619",
-        "synthesis-source-evidence:europe-pmc:38c1fa45154a0aaaa7350849",
-        "synthesis-source-evidence:europe-pmc:155befda5d730c64290e2692",
-        "synthesis-source-evidence:ord:17ba616c3019af8fd5ae1501",
-        "synthesis-source-evidence:ord:96370dec09a77c2ed6f8775c",
-        "synthesis-source-evidence:ord:c49549d0c40b4bdfb4aea3bd",
-        "synthesis-source-evidence:ord:941ef8d25031e71e1320d617",
-        "synthesis-source-evidence:ord:a5d5dd727b7255ea108b2e8d",
-        "synthesis-source-evidence:ord:293b9ead24cb2c9f82250a0e",
-        "synthesis-source-evidence:ord:262a8e44f0f9fca3f5dc2214",
-        "synthesis-source-evidence:ord:0c0a52fad6ba62ba23ec6977",
-        "synthesis-source-evidence:ord:79776da0de78655b24543155",
-        "synthesis-source-evidence:ord:50f2a104cc715f573a047612",
-        "synthesis-source-evidence:patent:2fbc1ac8fb3133d56bbc8dd2",
-        "synthesis-source-evidence:patent:aa3a16a583c223fa36463ca4",
-        "synthesis-source-evidence:patent:41e13552a9efcbfe0c52f70f",
-        "synthesis-source-evidence:patent:a9485cbb303bc4b1aaea2c0d",
-        "synthesis-source-evidence:patent:e1d371a7e7cbaa090721506c",
-        "synthesis-source-evidence:patent:14856077cde30a005d807026",
-        "synthesis-source-evidence:patent:9b774c73b4ddd1b2b102092d",
-        "synthesis-source-evidence:patent:a94f77eb390172585dc42fad",
-        "synthesis-source-evidence:patent:7ac884c1f3c6823664e636f9",
-        "synthesis-source-evidence:patent:b248dfa53b14fdd3b60f89ab",
-        "synthesis-source-evidence:pubchem:68dfb0e82ead993486ff6bf6"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:36:51.423Z"
+      "updatedAt": "2026-08-27T10:36:51.423Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 27,
+        "terminalAssociationCount": 27,
+        "accessibleCount": 10,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 13,
+        "unavailableCount": 4,
+        "extractionOutcomeCounts": {
+          "resolved": 8,
+          "irrelevant": 11,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 4,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 4
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1834,11 +1962,33 @@
       "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
-        "Reported synthesis: Not resolved within the recorded automated search scope.",
-        "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
-        "No validated retrosynthesis engine is configured; no computational route was fabricated."
+        "Reported synthesis: Not resolved within the recorded search scope; no supporting source candidate remained after evidence processing."
       ],
-      "updatedAt": "2026-08-27T10:39:24.192Z"
+      "updatedAt": "2026-08-27T10:39:24.192Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 0,
+        "terminalAssociationCount": 0,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 0,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 0,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "no_supporting_source_resolved",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -1975,11 +2125,33 @@
       "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
-        "Reported synthesis: Not resolved within the recorded automated search scope.",
-        "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
-        "No validated retrosynthesis engine is configured; no computational route was fabricated."
+        "Reported synthesis: Not resolved within the recorded search scope; no supporting source candidate remained after evidence processing."
       ],
-      "updatedAt": "2026-08-27T10:40:14.840Z"
+      "updatedAt": "2026-08-27T10:40:14.840Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 0,
+        "terminalAssociationCount": 0,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 0,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 0,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "no_supporting_source_resolved",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -2113,31 +2285,38 @@
         ],
         "exhaustiveInternetSearch": false
       },
-      "sourceEvidenceIds": [
-        "synthesis-source-evidence:europe-pmc:e4fe58057218dfcb7dce0d44",
-        "synthesis-source-evidence:europe-pmc:571b52f4bc4bbb111e95d904",
-        "synthesis-source-evidence:europe-pmc:11b4ae48e192a2d73eed292b",
-        "synthesis-source-evidence:europe-pmc:ab6d71b4994073687a3370be",
-        "synthesis-source-evidence:europe-pmc:8fdf8aa46141b8838b4cf183",
-        "synthesis-source-evidence:ord:b5f5d4d9d35ab9f8ace4ce42",
-        "synthesis-source-evidence:patent:06f279d47a4374a574d40f85",
-        "synthesis-source-evidence:patent:c62ca111e69bea6452d81ea9",
-        "synthesis-source-evidence:patent:39496ae898e09feda9d52e41",
-        "synthesis-source-evidence:patent:eb7d55c0a69ac16206e578ec",
-        "synthesis-source-evidence:patent:baf2168cd32faf50430e92b6",
-        "synthesis-source-evidence:patent:3478e9a72f4a380d28aa210d",
-        "synthesis-source-evidence:patent:021d29cf0e49e564899bbefe",
-        "synthesis-source-evidence:patent:c457a6877d7b4e59293ba0cc",
-        "synthesis-source-evidence:patent:d7ef31d7cad2682df87615d4",
-        "synthesis-source-evidence:pubchem:c4b61d13c8f98f005a8920f0"
-      ],
+      "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
         "Reported synthesis remains unresolved until an exact direct source and locator support a route.",
         "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
         "No validated retrosynthesis engine is configured; no computational route was fabricated."
       ],
-      "updatedAt": "2026-08-27T10:41:45.534Z"
+      "updatedAt": "2026-08-27T10:41:45.534Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 16,
+        "terminalAssociationCount": 16,
+        "accessibleCount": 1,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 12,
+        "unavailableCount": 3,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 9,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 4,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 3
+        }
+      },
+      "bestOutcome": "candidate_only",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     },
     {
       "schemaVersion": 1,
@@ -2274,3491 +2453,35 @@
       "sourceEvidenceIds": [],
       "routes": [],
       "unresolvedReasons": [
-        "Reported synthesis: Not resolved within the recorded automated search scope.",
-        "Free parent, salt, hydrate and solvate relationships remain unresolved unless separately source-backed.",
-        "No validated retrosynthesis engine is configured; no computational route was fabricated."
+        "Reported synthesis: Not resolved within the recorded search scope; no supporting source candidate remained after evidence processing."
       ],
-      "updatedAt": "2026-08-27T10:41:55.232Z"
+      "updatedAt": "2026-08-27T10:41:55.232Z",
+      "evidenceProcessing": {
+        "pipelineVersion": "synthesis-extraction-2.0.0",
+        "completedAt": "2026-08-27T18:06:21.530Z",
+        "candidateAssociationCount": 0,
+        "terminalAssociationCount": 0,
+        "accessibleCount": 0,
+        "accessBlockedCount": 0,
+        "metadataOnlyCount": 0,
+        "unavailableCount": 0,
+        "extractionOutcomeCounts": {
+          "resolved": 0,
+          "irrelevant": 0,
+          "identity_mismatch": 0,
+          "access_blocked": 0,
+          "insufficient_detail": 0,
+          "parse_error": 0,
+          "retryable_error": 0,
+          "duplicate": 0,
+          "superseded": 0
+        }
+      },
+      "bestOutcome": "no_supporting_source_resolved",
+      "evidenceDetailsRedacted": true,
+      "reportedRouteFoundPendingReview": false
     }
   ],
-  "sourceEvidence": [
-    {
-      "id": "synthesis-source-evidence:europe-pmc:09f32239a1d7a9f5b527cd5a",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1248/cpb.c16-00831",
-      "patentFamilyId": null,
-      "title": "Synthesis of Linezolid Metabolites PNU-142300 and PNU-142586 toward the Exploration of Metabolite-Related Events.",
-      "url": "https://doi.org/10.1248/cpb.c16-00831",
-      "publicationYear": 2017,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:0a665b7949615980a30c7ae6",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:c934a6d2306fd38d",
-      "patentFamilyId": null,
-      "title": "Synthesis of linezolid",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:11b4ae48e192a2d73eed292b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1111/j.1365-2125.1996.tb00168.x",
-      "patentFamilyId": null,
-      "title": "Dose dependent time course of the analgesic effect of a sustained-release preparation of tramadol on experimental phasic and tonic pain.",
-      "url": "https://doi.org/10.1111/j.1365-2125.1996.tb00168.x",
-      "publicationYear": 1996,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:155befda5d730c64290e2692",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:5a9ed4131bb1e61c",
-      "patentFamilyId": null,
-      "title": "Microorganism and the process for preparation of pravastatin sodium",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:38c1fa45154a0aaaa7350849",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:a33c18e3c415a25f",
-      "patentFamilyId": null,
-      "title": "FERMENTATION PROCESS FOR THE PREPARATION OF PRAVASTATIN",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:3a676e3b28b6d6cf67a21945",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:a4fd2443c2c3109e",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE.",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:473ea25ca25605af382c12c8",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1002/cssc.202500457",
-      "patentFamilyId": null,
-      "title": "Beyond Simple Grinding: Methylammonium Chloride Promotes Sustainable, Cylinder-Free Mechanochemical Synthesis of Deferiprone.",
-      "url": "https://doi.org/10.1002/cssc.202500457",
-      "publicationYear": 2025,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "unknown",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:4f5805fb3bed8d7353848ac7",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:0c6ff667045947f1",
-      "patentFamilyId": null,
-      "title": "PREPARATION OF GABAPENTIN ENACARBIL INTERMEDIATE",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:571b52f4bc4bbb111e95d904",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:23d3849c258ec733",
-      "patentFamilyId": null,
-      "title": "Sustained release preparation comprising tramadol and a preparation for its production",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 1999,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:611680edbddfb8cf4a8d676b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1002/mrc.70131",
-      "patentFamilyId": null,
-      "title": "Complexation Process of Pravastatin With Metal Ions (Gadolinium, Nickel, Zinc) by NMR Spectroscopy.",
-      "url": "https://doi.org/10.1002/mrc.70131",
-      "publicationYear": 2026,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:69ccc01764faa5d01f5f7e50",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:419190a05e1d9f68",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF LINEZOLID",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:70d8924cb46e2d4e964b1e4e",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1002/ardp.19803130403",
-      "patentFamilyId": null,
-      "title": "New findings in the synthesis of metoclopramide.",
-      "url": "https://doi.org/10.1002/ardp.19803130403",
-      "publicationYear": 1980,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:736619d21e2f262f18d2517e",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:c8d26ee3cd31845d",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:8c7242dfeb715810b50983ef",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:14c2238066fbac22",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION OF LINEZOLID INTERMEDIATE",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:8fdf8aa46141b8838b4cf183",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1039/c5cc05948h",
-      "patentFamilyId": null,
-      "title": "Biomimetic synthesis of Tramadol.",
-      "url": "https://doi.org/10.1039/c5cc05948h",
-      "publicationYear": 2015,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:9068bec276de6611a5bee9cb",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.21203/rs.3.rs-7027909/v1",
-      "patentFamilyId": null,
-      "title": "Investigation of the transition metal ions (Co2+ , Mn2+ ) complexation process with pravastatin by high-resolution NMR spectroscopy and MD methods",
-      "url": "https://doi.org/10.21203/rs.3.rs-7027909/v1",
-      "publicationYear": 2025,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:aa21c711e26ae9fe9a0b7969",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:f6ce00c1b505e009",
-      "patentFamilyId": null,
-      "title": "Green synthesis of carbidopa midbody",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:ab6d71b4994073687a3370be",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:50f9ac85c822edfa",
-      "patentFamilyId": null,
-      "title": "DRUG PREPARATION OF TRAMADOL AND ACETAMINOPHEN",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:b620f4b6fdeaf8b4d57db1f1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:8663c0eeb9f79c80",
-      "patentFamilyId": null,
-      "title": "Process for the preparation of linezolid and related compounds",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:cb269677b66083f320720f1f",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:edff409ad5417d16",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF CARBIDOPA",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:ccad08b61cfe90142c447e48",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:7b5917b4146d7933",
-      "patentFamilyId": null,
-      "title": "THE MICROORGANISM AND THE PROCESS FOR PREPARATION OF PRAVASTATIN",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:d445df426558a42726a3ec39",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1080/03639045.2016.1225753",
-      "patentFamilyId": null,
-      "title": "Comparative study of different approaches for preparation of chlorzoxazone orodispersible tablets.",
-      "url": "https://doi.org/10.1080/03639045.2016.1225753",
-      "publicationYear": 2017,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:e47804d02be9c1d931a9c273",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:bcf26f4d93cce081",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION OF LINEZOLID",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:e4fe58057218dfcb7dce0d44",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:659aafcbab86729e",
-      "patentFamilyId": null,
-      "title": "Combination preparation containing tramadol and a calcium channel antagonist",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 1999,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:ebf51b303da2764b9229372a",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:63906304f9db3f1d",
-      "patentFamilyId": null,
-      "title": "Process for the preparation of fenoldopam mesylate",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:edb75eb67fd816530024d619",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:6c235fca331eded4",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF PRAVASTATIN",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2005,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:ef30bed43399aa756fd982d3",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "doi:10.1002/anie.201901814",
-      "patentFamilyId": null,
-      "title": "Seven-Step Continuous Flow Synthesis of Linezolid Without Intermediate Purification.",
-      "url": "https://doi.org/10.1002/anie.201901814",
-      "publicationYear": 2019,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:europe-pmc:feec13f46c8f748ac0b2c935",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "journal",
-      "documentId": "europe-pmc:bf968e4e189e706c",
-      "patentFamilyId": null,
-      "title": "Processes for the preparation of linezolid intermediate",
-      "url": "https://europepmc.org/article/MED/",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:00b6daa8978eafd9edb680a7",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-6e003add9127493e91524fff428807eb",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-6e003add9127493e91524fff428807eb",
-      "url": "https://open-reaction-database.org/id/ord-6e003add9127493e91524fff428807eb",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-6e003add9127493e91524fff428807eb",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:0984a3876c146f513e7863ca",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-67c2575901d44143b82ddf25c02faef2",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-67c2575901d44143b82ddf25c02faef2",
-      "url": "https://open-reaction-database.org/id/ord-67c2575901d44143b82ddf25c02faef2",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-67c2575901d44143b82ddf25c02faef2",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:0c0a52fad6ba62ba23ec6977",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-82d7570c24c94f39b85d5dae856fb3b7",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-82d7570c24c94f39b85d5dae856fb3b7",
-      "url": "https://open-reaction-database.org/id/ord-82d7570c24c94f39b85d5dae856fb3b7",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-82d7570c24c94f39b85d5dae856fb3b7",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:0d857a24bc59df108c1144f1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-2850feb1ba9f46dd99853ed56947bc4b",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-2850feb1ba9f46dd99853ed56947bc4b",
-      "url": "https://open-reaction-database.org/id/ord-2850feb1ba9f46dd99853ed56947bc4b",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2850feb1ba9f46dd99853ed56947bc4b",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:17ba616c3019af8fd5ae1501",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-680565ef24b748ac80e9784cac744b64",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-680565ef24b748ac80e9784cac744b64",
-      "url": "https://open-reaction-database.org/id/ord-680565ef24b748ac80e9784cac744b64",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-680565ef24b748ac80e9784cac744b64",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:20dcd44688648aea83ffc3e9",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-2f6a36ef9d804b6f8ca88b24d51148a4",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-2f6a36ef9d804b6f8ca88b24d51148a4",
-      "url": "https://open-reaction-database.org/id/ord-2f6a36ef9d804b6f8ca88b24d51148a4",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-2f6a36ef9d804b6f8ca88b24d51148a4",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:2390ade7ff65e44d96ad0cdb",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-3f5fa7b35b8f40caab56e0df7f730e98",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-3f5fa7b35b8f40caab56e0df7f730e98",
-      "url": "https://open-reaction-database.org/id/ord-3f5fa7b35b8f40caab56e0df7f730e98",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-3f5fa7b35b8f40caab56e0df7f730e98",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:262a8e44f0f9fca3f5dc2214",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-f1598551c8444418a8d7e373a537e680",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-f1598551c8444418a8d7e373a537e680",
-      "url": "https://open-reaction-database.org/id/ord-f1598551c8444418a8d7e373a537e680",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f1598551c8444418a8d7e373a537e680",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:293b9ead24cb2c9f82250a0e",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-f900093f906349849904fa1faa0f337e",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-f900093f906349849904fa1faa0f337e",
-      "url": "https://open-reaction-database.org/id/ord-f900093f906349849904fa1faa0f337e",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f900093f906349849904fa1faa0f337e",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:2c9665630165a3aa23635f1b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-c878a9396d47408694c32ef55762e810",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-c878a9396d47408694c32ef55762e810",
-      "url": "https://open-reaction-database.org/id/ord-c878a9396d47408694c32ef55762e810",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-c878a9396d47408694c32ef55762e810",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:2febdc8dfbac7afb268e3e26",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-a643fef4224741f0869724a787e190f8",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-a643fef4224741f0869724a787e190f8",
-      "url": "https://open-reaction-database.org/id/ord-a643fef4224741f0869724a787e190f8",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a643fef4224741f0869724a787e190f8",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:2ff1dfc0311cf6ff173a0be3",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-f2a30be05fab400fbe9a38e4006650b6",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-f2a30be05fab400fbe9a38e4006650b6",
-      "url": "https://open-reaction-database.org/id/ord-f2a30be05fab400fbe9a38e4006650b6",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-f2a30be05fab400fbe9a38e4006650b6",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:31e168dfbfbd44c064617d83",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-40e1410ad2e94c0fb6add2a9cec9e4ab",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-40e1410ad2e94c0fb6add2a9cec9e4ab",
-      "url": "https://open-reaction-database.org/id/ord-40e1410ad2e94c0fb6add2a9cec9e4ab",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-40e1410ad2e94c0fb6add2a9cec9e4ab",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:340483ae473b2d385aa1e0a0",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-736f74b19f0246bcbff4b17292d4b883",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-736f74b19f0246bcbff4b17292d4b883",
-      "url": "https://open-reaction-database.org/id/ord-736f74b19f0246bcbff4b17292d4b883",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-736f74b19f0246bcbff4b17292d4b883",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:50f2a104cc715f573a047612",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-0a16bb1b5fcb4ca8ba63a277dff6e8c0",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-0a16bb1b5fcb4ca8ba63a277dff6e8c0",
-      "url": "https://open-reaction-database.org/id/ord-0a16bb1b5fcb4ca8ba63a277dff6e8c0",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0a16bb1b5fcb4ca8ba63a277dff6e8c0",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:582445c654a60f53ac4e2b8b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-5d8943e80b1b4b288d354a37d59bc273",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-5d8943e80b1b4b288d354a37d59bc273",
-      "url": "https://open-reaction-database.org/id/ord-5d8943e80b1b4b288d354a37d59bc273",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5d8943e80b1b4b288d354a37d59bc273",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:62967f4efad0651761559509",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-9723d301c6724fb4adcec6349da2c489",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-9723d301c6724fb4adcec6349da2c489",
-      "url": "https://open-reaction-database.org/id/ord-9723d301c6724fb4adcec6349da2c489",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-9723d301c6724fb4adcec6349da2c489",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:648980fd7fc79d0ae346cda8",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-a31650e7fa0c42cabb08b06bd6a77799",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-a31650e7fa0c42cabb08b06bd6a77799",
-      "url": "https://open-reaction-database.org/id/ord-a31650e7fa0c42cabb08b06bd6a77799",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-a31650e7fa0c42cabb08b06bd6a77799",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:725eea540caff5d52ad33813",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-73d7796045b8420ea9181232f8fe6033",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-73d7796045b8420ea9181232f8fe6033",
-      "url": "https://open-reaction-database.org/id/ord-73d7796045b8420ea9181232f8fe6033",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-73d7796045b8420ea9181232f8fe6033",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:79776da0de78655b24543155",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-06e7f3239d4041a089f33e4d997eab74",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-06e7f3239d4041a089f33e4d997eab74",
-      "url": "https://open-reaction-database.org/id/ord-06e7f3239d4041a089f33e4d997eab74",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-06e7f3239d4041a089f33e4d997eab74",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:7b1cf2161f91d9e6307210f1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-1570e925a91e42cf93bbf232624772ed",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-1570e925a91e42cf93bbf232624772ed",
-      "url": "https://open-reaction-database.org/id/ord-1570e925a91e42cf93bbf232624772ed",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-1570e925a91e42cf93bbf232624772ed",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:7e9d61a40ff2b821d817ac18",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-40992e21567c4b20bcecab63b4454a51",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-40992e21567c4b20bcecab63b4454a51",
-      "url": "https://open-reaction-database.org/id/ord-40992e21567c4b20bcecab63b4454a51",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-40992e21567c4b20bcecab63b4454a51",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:809a53beeea7a1175fc6a54a",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-63192a2fe1f54bafafb08780368c4579",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-63192a2fe1f54bafafb08780368c4579",
-      "url": "https://open-reaction-database.org/id/ord-63192a2fe1f54bafafb08780368c4579",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-63192a2fe1f54bafafb08780368c4579",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:80c44962cd8f143d18fa899c",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-cc8a9fcd38c64c68973cc27bcdf0eef9",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-cc8a9fcd38c64c68973cc27bcdf0eef9",
-      "url": "https://open-reaction-database.org/id/ord-cc8a9fcd38c64c68973cc27bcdf0eef9",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-cc8a9fcd38c64c68973cc27bcdf0eef9",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:895fcbc9674c1053f02a73d4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-db250146f73f470c953ef796ed32a455",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-db250146f73f470c953ef796ed32a455",
-      "url": "https://open-reaction-database.org/id/ord-db250146f73f470c953ef796ed32a455",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-db250146f73f470c953ef796ed32a455",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:912a2c8fa0c3b7fcc75825c0",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-af0ccddcd7ad4acb95c4651623f58d3d",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-af0ccddcd7ad4acb95c4651623f58d3d",
-      "url": "https://open-reaction-database.org/id/ord-af0ccddcd7ad4acb95c4651623f58d3d",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-e7830cd6b11158b43994ccfb5ee9acb3/ord-af0ccddcd7ad4acb95c4651623f58d3d",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:9340d4d9970c9bc32d1bc7a1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-69d841679ad645cdb75e4b78af585880",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-69d841679ad645cdb75e4b78af585880",
-      "url": "https://open-reaction-database.org/id/ord-69d841679ad645cdb75e4b78af585880",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-69d841679ad645cdb75e4b78af585880",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:941ef8d25031e71e1320d617",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-b45b6ded4d094fdf8fffb71944a57164",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-b45b6ded4d094fdf8fffb71944a57164",
-      "url": "https://open-reaction-database.org/id/ord-b45b6ded4d094fdf8fffb71944a57164",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-b45b6ded4d094fdf8fffb71944a57164",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:96370dec09a77c2ed6f8775c",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-0108cd5e40dc40eaa818e9ad9d74c339",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-0108cd5e40dc40eaa818e9ad9d74c339",
-      "url": "https://open-reaction-database.org/id/ord-0108cd5e40dc40eaa818e9ad9d74c339",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0108cd5e40dc40eaa818e9ad9d74c339",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:a5d5dd727b7255ea108b2e8d",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-553594d1644946f187991e86e96ab4fa",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-553594d1644946f187991e86e96ab4fa",
-      "url": "https://open-reaction-database.org/id/ord-553594d1644946f187991e86e96ab4fa",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-553594d1644946f187991e86e96ab4fa",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:a81fc6980d47a4941d8c7a6b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-10d3d96acc28400a897c3bafc737ac6c",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-10d3d96acc28400a897c3bafc737ac6c",
-      "url": "https://open-reaction-database.org/id/ord-10d3d96acc28400a897c3bafc737ac6c",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-10d3d96acc28400a897c3bafc737ac6c",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:af8c03e11e05661d1d800396",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-88a3e2ff98284d29809171362a7793e8",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-88a3e2ff98284d29809171362a7793e8",
-      "url": "https://open-reaction-database.org/id/ord-88a3e2ff98284d29809171362a7793e8",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-88a3e2ff98284d29809171362a7793e8",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:b5f5d4d9d35ab9f8ace4ce42",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-bfb169778fad4603a0f1ef7648eeb019",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-bfb169778fad4603a0f1ef7648eeb019",
-      "url": "https://open-reaction-database.org/id/ord-bfb169778fad4603a0f1ef7648eeb019",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-bfb169778fad4603a0f1ef7648eeb019",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:c21c7dc33c3a7729c109b73f",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-051901597d044e4caf9cd3efaa4e7679",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-051901597d044e4caf9cd3efaa4e7679",
-      "url": "https://open-reaction-database.org/id/ord-051901597d044e4caf9cd3efaa4e7679",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-051901597d044e4caf9cd3efaa4e7679",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:c3e9404b2295b92ca7c64b9f",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-191ae72a0ffa4cf7a192af7f165a1881",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-191ae72a0ffa4cf7a192af7f165a1881",
-      "url": "https://open-reaction-database.org/id/ord-191ae72a0ffa4cf7a192af7f165a1881",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-191ae72a0ffa4cf7a192af7f165a1881",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:c49549d0c40b4bdfb4aea3bd",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-fd675ec37843414ba3fc379686210a0d",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-fd675ec37843414ba3fc379686210a0d",
-      "url": "https://open-reaction-database.org/id/ord-fd675ec37843414ba3fc379686210a0d",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-fd675ec37843414ba3fc379686210a0d",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:d18b05763042bef5e8e134ce",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-948fca1b37ec43e0b815acb8108cf76d",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-948fca1b37ec43e0b815acb8108cf76d",
-      "url": "https://open-reaction-database.org/id/ord-948fca1b37ec43e0b815acb8108cf76d",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-948fca1b37ec43e0b815acb8108cf76d",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:d62fea626a4855cbe2d7b7ec",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-5eb3ec4cddeb4dac99a9fbaa781fa493",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-5eb3ec4cddeb4dac99a9fbaa781fa493",
-      "url": "https://open-reaction-database.org/id/ord-5eb3ec4cddeb4dac99a9fbaa781fa493",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-5eb3ec4cddeb4dac99a9fbaa781fa493",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:d82077400fdb90f1d12a4e1a",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-7d088d57876841848e04e42cad2c39d7",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-7d088d57876841848e04e42cad2c39d7",
-      "url": "https://open-reaction-database.org/id/ord-7d088d57876841848e04e42cad2c39d7",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-7d088d57876841848e04e42cad2c39d7",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:d9233b9c75ca19ddf39c98d1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-dc1e91c11d964356aea8cd205c5bcf32",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-dc1e91c11d964356aea8cd205c5bcf32",
-      "url": "https://open-reaction-database.org/id/ord-dc1e91c11d964356aea8cd205c5bcf32",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-dc1e91c11d964356aea8cd205c5bcf32",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:f2c7639177e47ea09c784f68",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-667df60da1de4860a421f74428d4bef0",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-667df60da1de4860a421f74428d4bef0",
-      "url": "https://open-reaction-database.org/id/ord-667df60da1de4860a421f74428d4bef0",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-667df60da1de4860a421f74428d4bef0",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:f7bb59e0478756ef097ad4ba",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-28569bd637f947beb183784d41d0f04b",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-28569bd637f947beb183784d41d0f04b",
-      "url": "https://open-reaction-database.org/id/ord-28569bd637f947beb183784d41d0f04b",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-28569bd637f947beb183784d41d0f04b",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:ord:fd312a7a6ac6178f45b756a5",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "open_reaction_dataset",
-      "documentId": "ord-0276a05a94164b37bd71d81020eb73ac",
-      "patentFamilyId": null,
-      "title": "Open Reaction Database reaction ord-0276a05a94164b37bd71d81020eb73ac",
-      "url": "https://open-reaction-database.org/id/ord-0276a05a94164b37bd71d81020eb73ac",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": {
-        "kind": "dataset_record",
-        "value": "ord_dataset-1158e351757f315b93cbcbe7bc55f38e/ord-0276a05a94164b37bd71d81020eb73ac",
-        "page": null,
-        "scheme": null,
-        "example": null
-      },
-      "supportScope": "single_step",
-      "licenseState": "attribution_required",
-      "reuseMode": "derived_facts_with_attribution"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:0124f5953784e946293dabf1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2010004485",
-      "patentFamilyId": null,
-      "title": "GABAPENTIN ENACARBIL SALTS AND PROCESSES FOR THEIR PREPARATION",
-      "url": "https://europepmc.org/article/PAT/US2010004485",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:021d29cf0e49e564899bbefe",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1346978",
-      "patentFamilyId": null,
-      "title": "Process for preparing tramadol hydrochloride and/or tramadol monohydrate",
-      "url": "https://europepmc.org/article/PAT/EP1346978",
-      "publicationYear": 2003,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:04317bc34df7aa4fb865dc37",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US4656024",
-      "patentFamilyId": null,
-      "title": "Galenical administration form of METOCLOPRAMIDE, method for its preparation and medicament comprising the new form",
-      "url": "https://europepmc.org/article/PAT/US4656024",
-      "publicationYear": 1987,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:06f279d47a4374a574d40f85",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2008064854",
-      "patentFamilyId": null,
-      "title": "DRUG PREPARATION OF TRAMADOL AND ACETAMINOPHEN",
-      "url": "https://europepmc.org/article/PAT/WO2008064854",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:090c9ee6cfcfe959c97e347e",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2010063002",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION AND PURIFICATION OF GABAPENTIN ENACARBIL",
-      "url": "https://europepmc.org/article/PAT/WO2010063002",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:0d00d65fb05cd2fa07b81215",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP2397121",
-      "patentFamilyId": null,
-      "title": "Pharmaceutical preparation containing Entacapone, Levodopa and Carbidopa",
-      "url": "https://europepmc.org/article/PAT/EP2397121",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:129e4ff4b31173b210b82aa4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101172960",
-      "patentFamilyId": null,
-      "title": "Green synthesis of carbidopa midbody",
-      "url": "https://europepmc.org/article/PAT/CN101172960",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:14856077cde30a005d807026",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2008071673",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/WO2008071673",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:270d97f71dcc71b72f499e67",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101461796",
-      "patentFamilyId": null,
-      "title": "Method for preparing metoclopramide hydrochloride sustained-release capsule",
-      "url": "https://europepmc.org/article/PAT/CN101461796",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:2c2832cabbb5e2d319e2e46e",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2010003046",
-      "patentFamilyId": null,
-      "title": "GABAPENTIN ENACARBIL SALTS AND PROCESSES FOR THEIR PREPARATION",
-      "url": "https://europepmc.org/article/PAT/WO2010003046",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:2fbc1ac8fb3133d56bbc8dd2",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101558152",
-      "patentFamilyId": null,
-      "title": "Process for preparing pravastatin",
-      "url": "https://europepmc.org/article/PAT/CN101558152",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:3478e9a72f4a380d28aa210d",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN1762340",
-      "patentFamilyId": null,
-      "title": "Composite tramadol hydrochloride formulation and preparation process thereof",
-      "url": "https://europepmc.org/article/PAT/CN1762340",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:35d775e479de92a311e687ee",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "JP2008156373",
-      "patentFamilyId": null,
-      "title": "LEVODOPA/CARBIDOPA/ENTACAPONE PHARMACEUTICAL PREPARATION",
-      "url": "https://europepmc.org/article/PAT/JP2008156373",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:36f26a25cc33557144c04120",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "ZA200808308",
-      "patentFamilyId": null,
-      "title": "Process for preparing linezolid",
-      "url": "https://europepmc.org/article/PAT/ZA200808308",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:39496ae898e09feda9d52e41",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "SK15972002",
-      "patentFamilyId": null,
-      "title": "Process for preparation and purification of tramadol and tramadol hydrogen chloride",
-      "url": "https://europepmc.org/article/PAT/SK15972002",
-      "publicationYear": 2004,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:39a313dc5e2636d6d8db6922",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2006079090",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE",
-      "url": "https://europepmc.org/article/PAT/WO2006079090",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:41e13552a9efcbfe0c52f70f",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2011080346",
-      "patentFamilyId": null,
-      "title": "PELLETS AND MICROPARTICLES OF PRAVASTATIN SODIUM AND A PROCESS OF MAKING THEM",
-      "url": "https://europepmc.org/article/PAT/WO2011080346",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:443e7ba98cd4d39ee7650911",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1725517",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE",
-      "url": "https://europepmc.org/article/PAT/EP1725517",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:44fcd48317cb625052856874",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "HR20020088",
-      "patentFamilyId": null,
-      "title": "LEVODOPA/CARBIDOPA/ENTACAPONE PHARMACEUTICAL PREPARATION",
-      "url": "https://europepmc.org/article/PAT/HR20020088",
-      "publicationYear": 2005,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:4a1f66563ce48ee144b7b7ef",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "MX2007008849",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE.",
-      "url": "https://europepmc.org/article/PAT/MX2007008849",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:4d8c9a3cf0652d2fc80dbbd5",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "MX2008012941",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING LINEZOLID.",
-      "url": "https://europepmc.org/article/PAT/MX2008012941",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:4d91abc6610e7d503162cefd",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "BG65364B",
-      "patentFamilyId": null,
-      "title": "LEVODOPA/CARBIDOPA/ENTACAPONE PHARMACEUTICAL PREPARATION",
-      "url": "https://europepmc.org/article/PAT/BG65364B",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:50dd1e0640268350c5ed7e82",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2012019862",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR MAKING LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/WO2012019862",
-      "publicationYear": 2012,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:58b8c9686e5508d83b371595",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2010160665",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION AND PURIFICATION OF GABAPENTIN ENACARBIL",
-      "url": "https://europepmc.org/article/PAT/US2010160665",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:5b7f0e2637ebda894034898c",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "HU0500940",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF CARBIDOPA",
-      "url": "https://europepmc.org/article/PAT/HU0500940",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:69cd275e33f03b26d9b8225b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2011159092",
-      "patentFamilyId": null,
-      "title": "EXTENDED RELEASE PHARMACEUTICAL COMPOSITION COMPRISING LINEZOLID AND PROCESS FOR PREPARING THE SAME",
-      "url": "https://europepmc.org/article/PAT/US2011159092",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:6e4aa4dc44e487436d07a4b4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2010160666",
-      "patentFamilyId": null,
-      "title": "PREPARATION OF GABAPENTIN ENACARBIL INTERMEDIATE",
-      "url": "https://europepmc.org/article/PAT/US2010160666",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:71baef5fd3ad388c278a0db1",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101352438",
-      "patentFamilyId": null,
-      "title": "Uses of deferiprone and formulation thereof in preparing medicament for preventing and treating cardiotoxicity induced by anthracyclines",
-      "url": "https://europepmc.org/article/PAT/CN101352438",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:740722c7eeb7fc1dd55a19f5",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "KR20080104178",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/KR20080104178",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:7ac884c1f3c6823664e636f9",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2010217032",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/US2010217032",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:84fd803c75bfc3862bd93bb6",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP0606031",
-      "patentFamilyId": null,
-      "title": "Powder to prepare drinkable solutions containing lysine acetylsalicylate and metoclopramide",
-      "url": "https://europepmc.org/article/PAT/EP0606031",
-      "publicationYear": 1994,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:87fc380c1f6ed2e49c6b215c",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2007042848",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF CARBIDOPA",
-      "url": "https://europepmc.org/article/PAT/WO2007042848",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:9b774c73b4ddd1b2b102092d",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2008092950",
-      "patentFamilyId": null,
-      "title": "FERMENTATION PROCESS FOR PREPARING PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/WO2008092950",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:9ef4477ef1d2a715f58b5eab",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2012019632",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR MAKING LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/WO2012019632",
-      "publicationYear": 2012,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:a373d1f26bbfe6698bd63226",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2011077310",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/WO2011077310",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:a82b3adc52cd941cc82142d0",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1112737",
-      "patentFamilyId": null,
-      "title": "Oral pharmaceutical preparation comprising paracetamol and metoclopramide",
-      "url": "https://europepmc.org/article/PAT/EP1112737",
-      "publicationYear": 2001,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:a9485cbb303bc4b1aaea2c0d",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2006046130",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/WO2006046130",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:a94f77eb390172585dc42fad",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1953233",
-      "patentFamilyId": null,
-      "title": "Fermentation process for preparing pravastatin",
-      "url": "https://europepmc.org/article/PAT/EP1953233",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:aa3a16a583c223fa36463ca4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US2006281155",
-      "patentFamilyId": null,
-      "title": "Microbial process for preparing pravastatin",
-      "url": "https://europepmc.org/article/PAT/US2006281155",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:af6e3c6ca56cddd8ce39d260",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2009032294",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION OF A LINEZOLID INTERMEDIATE, LINEZOLID HYDROXIDE",
-      "url": "https://europepmc.org/article/PAT/WO2009032294",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:b248dfa53b14fdd3b60f89ab",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP2094841",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/EP2094841",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:b60d673a21fa4547ffefa570",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101107216",
-      "patentFamilyId": null,
-      "title": "Process for the preparation of fenoldopam mesylate",
-      "url": "https://europepmc.org/article/PAT/CN101107216",
-      "publicationYear": 2008,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:b6d226685a6f1ab789bf6bd9",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "KR20110028320",
-      "patentFamilyId": null,
-      "title": "GABAPENTIN ENACARBIL SALTS AND PROCESSES FOR THEIR PREPARATION",
-      "url": "https://europepmc.org/article/PAT/KR20110028320",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:baf2168cd32faf50430e92b6",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CZ20033024",
-      "patentFamilyId": null,
-      "title": "Process for preparing and purifying tramadol and tramadol-hydrochloride",
-      "url": "https://europepmc.org/article/PAT/CZ20033024",
-      "publicationYear": 2004,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:c3e4f011c9f6705ca1912598",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "US5437874",
-      "patentFamilyId": null,
-      "title": "Pharmaceutical composition for the preparation of a stable powder containing an association of acetylsalicylic acid and metoclopramide as the active ingredients",
-      "url": "https://europepmc.org/article/PAT/US5437874",
-      "publicationYear": 1995,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:c457a6877d7b4e59293ba0cc",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1785412",
-      "patentFamilyId": null,
-      "title": "Tramadol recovery process",
-      "url": "https://europepmc.org/article/PAT/EP1785412",
-      "publicationYear": 2007,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:c4b684798765a84d1c44e5dd",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2010075520",
-      "patentFamilyId": null,
-      "title": "PREPARATION OF GABAPENTIN ENACARBIL INTERMEDIATE",
-      "url": "https://europepmc.org/article/PAT/WO2010075520",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:c62ca111e69bea6452d81ea9",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN101612144",
-      "patentFamilyId": null,
-      "title": "Sustained-release preparation containing paracetamol and tramadol",
-      "url": "https://europepmc.org/article/PAT/CN101612144",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:ce4ca32b906425c08642c1f9",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "KR20090030464",
-      "patentFamilyId": null,
-      "title": "DOUBLE-FILM-COATING TABLET CONTAINING METOCLOPRAMIDE AND PANCREATIN AND PREPARATION METHOD THEREOF",
-      "url": "https://europepmc.org/article/PAT/KR20090030464",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:cee639646d09bb877ee64607",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP0693926",
-      "patentFamilyId": null,
-      "title": "NOVEL PHARMACEUTICAL COMPOSITION FOR THE PREPARATION OF A STABLE POWDER CONTAINING AN ACTIVE PRINCIPLE COMPRISING AN ASSOCIATION OF ACETYLSALICYLIC ACID AND METOCLOPRAMIDE",
-      "url": "https://europepmc.org/article/PAT/EP0693926",
-      "publicationYear": 1996,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:d471c36185e19aa2e961e0f4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "IL146807",
-      "patentFamilyId": null,
-      "title": "LEVODOPA/CARBIDOPA/ENTACAPONE PHARMACEUTICAL PREPARATION",
-      "url": "https://europepmc.org/article/PAT/IL146807",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:d7a634adb6c2f684e82038df",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EA004503",
-      "patentFamilyId": null,
-      "title": "LEVODOPA/CARBIDOPA/ENTACAPONE PHARMACEUTICAL PREPARATION",
-      "url": "https://europepmc.org/article/PAT/EA004503",
-      "publicationYear": 2004,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:d7ef31d7cad2682df87615d4",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "SK165698",
-      "patentFamilyId": null,
-      "title": "Process for production of trans-tramadol and salts thereof by epimerisation of cis-tramadol",
-      "url": "https://europepmc.org/article/PAT/SK165698",
-      "publicationYear": 2004,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:d9abe0ec4d856b50eb33ad33",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP1586313",
-      "patentFamilyId": null,
-      "title": "Pharmaceutical composition with metoclopramide and process for its preparation",
-      "url": "https://europepmc.org/article/PAT/EP1586313",
-      "publicationYear": 2005,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:ddf48a5a9d43deb21089f6fa",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO9514462",
-      "patentFamilyId": null,
-      "title": "NOVEL PHARMACEUTICAL COMPOSITION FOR THE PREPARATION OF A STABLE POWDER CONTAINING AN ACTIVE PRINCIPLE COMPRISING AN ASSOCIATION OF ACETYLSALICYLIC ACID AND METOCLOPRAMIDE",
-      "url": "https://europepmc.org/article/PAT/WO9514462",
-      "publicationYear": 1995,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:e1d371a7e7cbaa090721506c",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP2115152",
-      "patentFamilyId": null,
-      "title": "FERMENTATION PROCESS FOR PREPARING PRAVASTATIN",
-      "url": "https://europepmc.org/article/PAT/EP2115152",
-      "publicationYear": 2009,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:e328c7b2c11c7cc225092a81",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "HK1047040",
-      "patentFamilyId": null,
-      "title": "Levodopa/carbidopa/entacapone pharmaceutical preparation.",
-      "url": "https://europepmc.org/article/PAT/HK1047040",
-      "publicationYear": 2005,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:e33a610a9fc697e95e70e38b",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "EP2315742",
-      "patentFamilyId": null,
-      "title": "GABAPENTIN ENACARBIL SALTS AND PROCESSES FOR THEIR PREPARATION",
-      "url": "https://europepmc.org/article/PAT/EP2315742",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:e852f0bd22e91af6e7bcdc63",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "IL153733",
-      "patentFamilyId": null,
-      "title": "USE OF DEFERIPRONE FOR THE PREPARATION OF IRON CHELATING AGENTS",
-      "url": "https://europepmc.org/article/PAT/IL153733",
-      "publicationYear": 2010,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:eb7d55c0a69ac16206e578ec",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO03078380",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR PREPARING TRAMADOL HYDROCHLORIDE AND/OR TRAMADOL MOMOHYDRATE",
-      "url": "https://europepmc.org/article/PAT/WO03078380",
-      "publicationYear": 2003,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:ed70de2e5e979b01e101d067",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2011114210",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR THE PREPARATION OF LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/WO2011114210",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:f61c0223226217b2fac1e2ef",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CA2593667",
-      "patentFamilyId": null,
-      "title": "PROCESS FOR THE PREPARATION OF FENOLDOPAM MESYLATE",
-      "url": "https://europepmc.org/article/PAT/CA2593667",
-      "publicationYear": 2006,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:f9095783cff3a8e9725bb242",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "WO2011137222",
-      "patentFamilyId": null,
-      "title": "PROCESSES FOR PREPARING LINEZOLID",
-      "url": "https://europepmc.org/article/PAT/WO2011137222",
-      "publicationYear": 2011,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:patent:faa73521fe0cc0a1386ea338",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "patent",
-      "documentId": "CN1485093",
-      "patentFamilyId": null,
-      "title": "Compound acyeterion - metoclopramide preparation",
-      "url": "https://europepmc.org/article/PAT/CN1485093",
-      "publicationYear": 2004,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "link_only",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:pubchem:3d0c52042f581f253273558a",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "aggregator",
-      "documentId": "pubchem-cid-3742-manufacturing",
-      "patentFamilyId": null,
-      "title": "PubChem Methods of Manufacturing — Ioxaglic Acid",
-      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/3742#section=Methods-of-Manufacturing",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "mixed",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:pubchem:68dfb0e82ead993486ff6bf6",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "aggregator",
-      "documentId": "pubchem-cid-54687-manufacturing",
-      "patentFamilyId": null,
-      "title": "PubChem Methods of Manufacturing — Pravastatin",
-      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/54687#section=Methods-of-Manufacturing",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "mixed",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:pubchem:bbbd44fe2414c0138c741081",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "aggregator",
-      "documentId": "pubchem-cid-4168-manufacturing",
-      "patentFamilyId": null,
-      "title": "PubChem Methods of Manufacturing — Metoclopramide",
-      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/4168#section=Methods-of-Manufacturing",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "mixed",
-      "reuseMode": "metadata_and_link_only"
-    },
-    {
-      "id": "synthesis-source-evidence:pubchem:c4b61d13c8f98f005a8920f0",
-      "resolutionState": "candidate",
-      "sourceId": null,
-      "sourceKind": "aggregator",
-      "documentId": "pubchem-cid-33741-manufacturing",
-      "patentFamilyId": null,
-      "title": "PubChem Methods of Manufacturing — Tramadol",
-      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/33741#section=Methods-of-Manufacturing",
-      "publicationYear": null,
-      "retrievedAt": "2026-08-27T10:14:21.872Z",
-      "documentSha256": null,
-      "locator": null,
-      "supportScope": "route_segment",
-      "licenseState": "mixed",
-      "reuseMode": "metadata_and_link_only"
-    }
-  ],
-  "discovery": [
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:4-4-stilbenedicarboxamidine-2-hydroxy-tueswzzjyclfnl-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T11:04:34.307Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T11:04:34.307Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T11:04:34.307Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T11:04:34.307Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:carbidopa-tzfnlomsolwidk-jtqlqieisa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 2,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:chlorzoxazone-tzfwdzfkrbeliq-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:deferiprone-tzxkocqbrnjulo-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 2,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:fenoldopam-tvurrhshrrelcg-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 3,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 5,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:gabapentin-enacarbil-tzduhajsibhxdl-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 8,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:ioxaglic-acid-tyybfxnzmfnzjt-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:linezolid-tyzrovqlwokykf-zdusscgksa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 8,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 9,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:mafenide-tymrlrrvmhjftf-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:metoclopramide-ttwjbbzezqicbi-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 2,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:pravastatin-tuzyxoixsaxugo-pzawkzkusa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 6,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 10,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:sofosbuvir-ttzhdvovkqgiba-iqwmdfibsa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:tafamidis-txeiipdjkfweec-uhfffaoysa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:tramadol-tvyllzqtglzfbw-zbfhggjfsa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 5,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 9,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 1,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    },
-    {
-      "coverageId": "synthesis-coverage:molecule:imported:triamcinolone-hexacetonide-tzizwyvvglxxfv-flrhrwpcsa-n",
-      "adapters": [
-        {
-          "adapterId": "pubchem-manufacturing",
-          "attempt": {
-            "provider": "aggregator",
-            "adapterId": "pubchem-manufacturing",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 3,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc",
-          "attempt": {
-            "provider": "journal",
-            "adapterId": "europe-pmc",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "europe-pmc-patents",
-          "attempt": {
-            "provider": "patent",
-            "adapterId": "europe-pmc-patents",
-            "adapterVersion": "1.0.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        },
-        {
-          "adapterId": "open-reaction-database",
-          "attempt": {
-            "provider": "open_reaction_dataset",
-            "adapterId": "open-reaction-database",
-            "adapterVersion": "1.1.0",
-            "status": "completed",
-            "queryCount": 1,
-            "candidateCount": 0,
-            "searchedAt": "2026-08-27T10:14:21.872Z",
-            "errors": []
-          }
-        }
-      ]
-    }
-  ]
+  "sourceEvidence": [],
+  "discovery": []
 }

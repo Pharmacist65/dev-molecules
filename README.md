@@ -44,7 +44,7 @@ Catalog breadth and scientific depth are separate:
 - Atlas Browse searches and pages through all 1,552 imported records, then loads one shard/entity and requested structure through bounded caches.
 - Every one of the 1,552 resolved identities has a stable record route and a Basic Molecular Record boundary: source-matched identity, real 2D and computed 3D structures, provenance, conservative properties when present, and explicit nine-dimension coverage.
 - The fixed Atlas seed remains 15 records. A separately reviewed Omeprazole identity brings the Curated Dossier registry to 16 without widening the seed Atlas.
-- Exactly three dossiers—Propranolol, Celecoxib, and Omeprazole—implement the Phase A flagship chain across source-scoped pharmacology, route/form-specific ADME, metabolite boundaries, synthesis, nomenclature, comparisons, and learning. The other 13 curated records retain their explicit V2.1 gaps.
+- Exactly three dossiers—Propranolol, Celecoxib, and Omeprazole—implement the Phase A flagship chain across source-scoped pharmacology, route/form-specific ADME, metabolite boundaries, nomenclature, comparisons, and learning. Their static dossier synthesis sections make no evidence or route claim; each exact identity's current state comes from the generated Synthesis Atlas coverage record and remains coverage-only until the publication gates pass. The other 13 curated records retain their explicit V2.1 gaps.
 - The scalable enrichment readiness report still has two active source adapters, zero configured enrichment snapshots, zero enriched classifications, zero enriched pharmacology profiles, and zero enriched ADME profiles. The three hand-curated flagship records do not masquerade as catalog-wide enrichment coverage.
 - Basic Record and Curated Dossier identity/structure fields are source-linked. Classification, target, ADME, metabolite, synthesis, nomenclature, and learning coverage are independently gated.
 - The generated catalog has no reviewed target-interaction or ADME snapshot. Only the three named flagship dossiers carry audited, source-resolved target/action and route/form-specific ADME records; their metabolite edges preserve activity holds and never generalize beyond the cited context.
@@ -57,11 +57,11 @@ The Academy map has eight modules:
 
 - five currently available routes: Structure Language, Organic Nomenclature, Pharmaceutical Nomenclature, Synthesis Atlas, and Drug Review Project;
 - two coverage-dependent shells: Pharmacology and ADME;
-- one planned standalone curriculum: Reaction Mechanisms. Its nearest working material is the curated mechanism layer inside Synthesis Atlas.
+- one planned standalone curriculum: Reaction Mechanisms. No route-derived mechanism task has passed the public review-and-reuse gate yet.
 
 The interactive Nomenclature Academy contains eight ordered sections and 22 exercises over 20 parseable 2D structures, using 16 concrete response/widget contracts. Evaluation is deterministic; the four-record local name↔structure adapter is not a general IUPAC parser.
 
-Synthesis Academy derives its current metrics from the route data: three drugs, six routes, 20 transformations, and 12 mechanism records. All six routes pass their declared source gate; three are direct-source supported and three are source-context supported. Only the Atenolol and Carvedilol reported routes qualify for the strict `source-reported` presentation. The Propranolol reported-kind route remains a source-context reconstruction. Nine positions in the 12-drug publication target are intentionally unassigned.
+Every one of the 1,552 Basic Molecular Records now exposes a synthesis coverage record. The accepted discovery snapshot contains 14,897 molecule–evidence associations, all with terminal extraction outcomes. A local private migration archive records six historical pending/link-only drafts, while the current tracked public tree retains only a privacy-safe aggregate attestation and three identity-scoped pending-review booleans. Public CI does not revalidate the withheld route rows, and the public route index/detail set is empty. Public Synthesis Atlas and Academy surfaces show coverage and publication-boundary explanations only. Count-only aggregate reports are not route publication and never expose route IDs, steps, materials, sources, or locators.
 
 Synthesis content is non-operational: it omits quantities, scale, apparatus, execution conditions, work-up, purification, yield, and manufacturing instructions. See [Synthesis provenance](docs/SYNTHESIS_PROVENANCE.md).
 
@@ -69,7 +69,7 @@ Synthesis content is non-operational: it omits quantities, scale, apparatus, exe
 
 Ketcher `3.17.2` is route-lazy and runs its standalone chemistry engine in the browser. The Lab can export SMILES, molfile, and InChIKey through the editor adapter, compare an exact InChIKey against the static catalog, compute a clearly labelled unreviewed path-fingerprint ranking against the curated seed, and create a local JSON project only when the user chooses to export. The public build has no account, upload, private cloud store, or automatic structure transmission.
 
-Instructor Studio builds local lesson packages from real Nomenclature Academy and Synthesis Atlas task IDs. Package and connected progress exports are device-local JSON artifacts; there are no learner accounts, server sync, cohort analytics, or automatic delivery.
+Instructor Studio builds local lesson packages from currently publishable Academy tasks. Pending synthesis-route tasks are withheld; package and connected progress exports are device-local JSON artifacts, with no learner accounts, server sync, cohort analytics, or automatic delivery.
 
 Reviewer Console requires an injected adapter that authenticates, authorizes, lists provenance-complete records, and returns audited action receipts. The static public application passes no adapter, so the console fails closed.
 
@@ -104,6 +104,8 @@ npm run typecheck
 npm run lint
 npm run catalog:validate
 npm run catalog:report
+npm run synthesis:validate
+npm run synthesis:boundary
 npm run licenses:check
 npm run build
 npm run build:pages
@@ -116,13 +118,11 @@ git diff --check
 
 `npm run catalog:enrich` regenerates the current readiness report; it does not create scientific coverage because no enrichment snapshot is configured. Passing engineering gates is not scientific peer review.
 
+The catalog-wide synthesis processing totals, publication boundary, Spatial acceptance matrix, and remaining limitations are recorded in the [Synthesis Evidence Extraction and Spatial Integrity Report](docs/SYNTHESIS_EVIDENCE_EXTRACTION_REPORT.md).
+
 ## Visual review evidence
 
-[Watch the 75-second silent Molevren Phase A walkthrough](docs/assets/molevren/molevren-phase-a-walkthrough.mp4). It covers Home, Atlas Browse and Spatial, Basic Record, flagship Story/Reference, Academy, Synthesis, Nomenclature, and Lab against the same production-derived brand system.
-
-[![Molevren Phase A brand board](docs/assets/molevren/brand-board.png)](docs/assets/molevren/molevren-phase-a-walkthrough.mp4)
-
-The exact 18-image acceptance set and checksums are recorded in the [capture manifest](docs/assets/molevren/capture-manifest.json). Screenshots are product evidence, not scientific or trademark clearance.
+The remaining 17-image Molevren Phase A set is a brand and layout reference from before the current synthesis publication-boundary sprint. Its retired Synthesis capture and walkthrough were removed because they displayed pending route content that is no longer eligible for a public/student artifact. File checksums and this scope boundary are recorded in the [capture manifest](docs/assets/molevren/capture-manifest.json). These screenshots are design references, not current synthesis acceptance evidence, scientific review, or trademark clearance.
 
 [Watch the V2.1 ten-second Home stability recording](docs/assets/v21/home-featured-10s.mp4). It contains exactly 300 frames at 30 FPS and accompanies the fixed-size idle captures.
 
@@ -130,11 +130,20 @@ The exact 18-image acceptance set and checksums are recorded in the [capture man
 
 The committed V2.1 acceptance set covers the [pre-fix clipped Home](docs/assets/v21/home-featured-before-tr-start.png), [stable Home at start](docs/assets/v21/home-featured-idle-start.png), [the same Home after three idle seconds](docs/assets/v21/home-featured-idle-after-3s.png), [the non-selectable Home molecule](docs/assets/v21/home-featured-selected-state.png), [Beta-sitosterol Basic Molecular Record](docs/assets/v21/beta-sitosterol-basic-record.png), [Propranolol Curated Dossier](docs/assets/v21/propranolol-curated-dossier.png), [compact empty ADME state](docs/assets/v21/empty-adme-compact.png), [Student Spatial Atlas](docs/assets/v21/atlas-spatial-student.png), and [the real Ketcher Lab editor](docs/assets/v21/lab-ketcher.png). Screenshots demonstrate routed behavior and explicit gaps; they are not evidence of scientific review.
 
-[Watch the 86-second silent V2.0 baseline walkthrough](docs/assets/demo/dev-molecules-v2-walkthrough.mp4). It predates the V2.1 Basic Molecular Record and product-integrity changes.
-
-[![Dev Molecules V2.0 baseline Home](docs/assets/screenshots/home-en.png)](docs/assets/demo/dev-molecules-v2-walkthrough.mp4)
-
-The older V2.0 baseline capture set remains available for regression comparison: [Home in Turkish](docs/assets/screenshots/home-tr.png), [Atlas Browse](docs/assets/screenshots/atlas-browse.png), [Atlas Spatial](docs/assets/screenshots/atlas-spatial.png), [Dossier overview](docs/assets/screenshots/dossier-overview.png), [Pharmacology](docs/assets/screenshots/dossier-pharmacology.png), [ADME](docs/assets/screenshots/dossier-adme.png), [Synthesis](docs/assets/screenshots/dossier-synthesis.png), [Nomenclature lesson](docs/assets/screenshots/nomenclature-lesson.png), [Synthesis route learning](docs/assets/screenshots/synthesis-route.png), [Lab](docs/assets/screenshots/lab.png), [the fail-closed Family review workspace](docs/assets/screenshots/family-page.png), and [mobile Home](docs/assets/screenshots/mobile-home.png).
+The older V2.0 non-synthesis captures remain available for regression comparison:
+[Home in Turkish](docs/assets/screenshots/home-tr.png),
+[Atlas Browse](docs/assets/screenshots/atlas-browse.png),
+[Atlas Spatial](docs/assets/screenshots/atlas-spatial.png),
+[Dossier overview](docs/assets/screenshots/dossier-overview.png),
+[Pharmacology](docs/assets/screenshots/dossier-pharmacology.png),
+[ADME](docs/assets/screenshots/dossier-adme.png),
+[the fail-closed Dossier Synthesis gap](docs/assets/screenshots/dossier-synthesis.png),
+[Nomenclature lesson](docs/assets/screenshots/nomenclature-lesson.png),
+[Lab](docs/assets/screenshots/lab.png),
+[the fail-closed Family review workspace](docs/assets/screenshots/family-page.png), and
+[mobile Home](docs/assets/screenshots/mobile-home.png). The old walkthrough and
+route-detail captures were removed because they exposed pre-gate pending synthesis
+content; age or an archive label does not make that content publishable.
 
 ## Delivery architecture
 

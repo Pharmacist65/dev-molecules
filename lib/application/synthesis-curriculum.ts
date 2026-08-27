@@ -98,18 +98,6 @@ export const SYNTHESIS_DEEP_LEARNING_TARGET = 12 as const;
 
 const text = (tr: string, en: string): SynthesisCurriculumLocalizedText => ({ tr, en });
 
-const knownMoleculeLabels: Readonly<Record<string, SynthesisCurriculumLocalizedText>> = {
-  "molecule:propranolol": text("Propranolol", "Propranolol"),
-  "molecule:atenolol": text("Atenolol", "Atenolol"),
-  "molecule:carvedilol": text("Carvedilol", "Carvedilol"),
-};
-
-const curriculumOrder = [
-  "molecule:propranolol",
-  "molecule:atenolol",
-  "molecule:carvedilol",
-] as const;
-
 const routeReadiness = (
   route: SynthesisAtlasRoute,
 ): SynthesisCurriculumRouteReadiness => {
@@ -134,16 +122,11 @@ const routeReadiness = (
 };
 
 const compareMoleculeIds = (left: string, right: string): number => {
-  const leftIndex = curriculumOrder.indexOf(left as (typeof curriculumOrder)[number]);
-  const rightIndex = curriculumOrder.indexOf(right as (typeof curriculumOrder)[number]);
-  if (leftIndex >= 0 && rightIndex >= 0) return leftIndex - rightIndex;
-  if (leftIndex >= 0) return -1;
-  if (rightIndex >= 0) return 1;
   return left.localeCompare(right, "en");
 };
 
 const getMoleculeLabel = (moleculeId: string): SynthesisCurriculumLocalizedText =>
-  knownMoleculeLabels[moleculeId] ?? text(
+  text(
     moleculeId.replace(/^molecule:/u, ""),
     moleculeId.replace(/^molecule:/u, ""),
   );

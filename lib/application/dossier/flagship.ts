@@ -6,6 +6,7 @@ import {
 import type { AdmeEvidenceField, AdmeProfile } from "@/lib/domain/adme";
 import type { SourceReference } from "@/lib/domain/evidence";
 import type {
+  DossierLocale,
   FlagshipDossierSeed,
   FlagshipDossierContent,
 } from "@/lib/domain/dossier";
@@ -47,6 +48,34 @@ export function collectFlagshipSourceIds(
   const ids = new Set<SourceId>();
   collectSourceIdsFromValue(seedOrContent, ids, new Set());
   return [...ids];
+}
+
+/**
+ * Legacy flagship seeds predate the canonical synthesis publication contract:
+ * they do not carry an independently verified reviewState plus an explicit
+ * reuse-rights decision. They therefore cannot publish route summaries,
+ * materials, steps, citations, or locators. Preserve the rest of the dossier
+ * and expose only an unavailable publication state until a canonical generated
+ * route passes the strict public loader. Legacy content alone cannot assert
+ * that direct synthesis evidence exists.
+ */
+export function gateLegacyFlagshipSynthesisForPublic(
+  content: FlagshipDossierContent,
+  locale: DossierLocale,
+): FlagshipDossierContent {
+  return {
+    ...content,
+    synthesis: {
+      status: "unavailable",
+      content: null,
+      sourceIds: [],
+      limitations: [
+        locale === "tr"
+          ? "Bu statik dossier kaydı sentez kanıtı veya rota yayımlamaz; güncel durum doğrulanmış Sentez Atlası kapsam kaydından okunmalıdır."
+          : "This static dossier publishes no synthesis-evidence or route claim; consult the validated Synthesis Atlas coverage record for current status.",
+      ],
+    },
+  };
 }
 
 export interface FlagshipValidationIssue {
@@ -96,7 +125,10 @@ export function validateFlagshipDossierSeed(
       issues.push({ code: "adme-form-missing", path: `admeProfiles.${index}`, message: "ADME formulation is required." });
     }
   });
-  if (seed.content.synthesis.content?.operationalDetailsIncluded !== false) {
+  if (
+    seed.content.synthesis.content &&
+    seed.content.synthesis.content.operationalDetailsIncluded !== false
+  ) {
     issues.push({
       code: "synthesis-operational-content",
       path: "content.synthesis",

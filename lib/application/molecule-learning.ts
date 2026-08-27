@@ -5,6 +5,7 @@ import {
 import { getPrimaryClassification, type MoleculeRecord } from "../domain/molecule";
 import type { Locale } from "../i18n/locale";
 import { pubChemSystematicNameByCid } from "../data/pubchem-systematic-names";
+import type { PublishedSynthesisRouteLoadResult } from "./published-synthesis-route";
 
 export interface StudentMoleculeProfile {
   readonly systematicName?: string;
@@ -128,6 +129,7 @@ export function presentLearningClassification(
 export function createStudentMoleculeProfile(
   record: MoleculeRecord,
   locale: Locale,
+  publishedSynthesis: PublishedSynthesisRouteLoadResult | null = null,
 ): StudentMoleculeProfile {
   const structural = getPrimaryClassification(record, "structural-family");
   const pharmacologic = getPrimaryClassification(record, "pharmacologic-class");
@@ -143,11 +145,11 @@ export function createStudentMoleculeProfile(
     locale,
   );
   const functionalGroups = identifyFunctionalGroups(record.identity.canonicalSmiles, locale);
-  const routeAvailable = [
-    "molecule:propranolol",
-    "molecule:atenolol",
-    "molecule:carvedilol",
-  ].includes(record.id);
+  // The caller may supply only the result of the strict public route loader.
+  // Explore does not infer availability from molecule identity or legacy seed
+  // content; absent runtime projection data therefore fails closed.
+  const routeAvailable =
+    publishedSynthesis?.state === "available" && publishedSynthesis.routes.length > 0;
 
   return {
     systematicName: pubChemSystematicNameByCid[record.identity.pubChemCid],
@@ -169,11 +171,11 @@ export function createStudentMoleculeProfile(
         : "No sourced mechanism lesson is available for this record yet.",
     synthesisScope: routeAvailable
       ? locale === "tr"
-        ? "Sentez Atlası'nda kaynak bağlantılı eğitim rotası var."
-        : "A source-linked educational route is available in Synthesis Atlas."
+        ? "Sentez Atlası'nda incelemesi tamamlanmış yayımlanabilir bir rota var."
+        : "A reviewed public synthesis route is available in Synthesis Atlas."
       : locale === "tr"
-        ? "Bu molekül için kürate edilmiş rota henüz yok."
-        : "No curated route is available for this molecule yet.",
+        ? "Bu kimlik için yayımlanabilir rota gösterilmiyor; sentez kanıtı durumu Sentez Atlası kapsam kaydından okunmalıdır."
+        : "No publishable route is shown for this identity; consult its Synthesis Atlas coverage record for evidence status.",
     nomenclatureLesson: locale === "tr"
       ? "Bu kayıt için incelenmiş molekül-özel nomenklatür dersi henüz yok."
       : "No reviewed molecule-specific nomenclature lesson is available yet.",

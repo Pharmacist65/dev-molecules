@@ -48,7 +48,7 @@ jobs:
           do
             test -s "$file"
           done
-      - name: Validate Molevren Phase A visual release evidence
+      - name: Validate retained Molevren Phase A brand references
         run: |
           for file in \
             docs/assets/molevren/brand-board.png \
@@ -65,12 +65,10 @@ jobs:
             docs/assets/molevren/dossier-story.png \
             docs/assets/molevren/dossier-reference.png \
             docs/assets/molevren/academy.png \
-            docs/assets/molevren/synthesis.png \
             docs/assets/molevren/nomenclature.png \
             docs/assets/molevren/lab.png \
             docs/assets/molevren/mobile-home.png \
-            docs/assets/molevren/capture-manifest.json \
-            docs/assets/molevren/molevren-phase-a-walkthrough.mp4
+            docs/assets/molevren/capture-manifest.json
           do
             test -s "$file"
           done
@@ -105,6 +103,8 @@ jobs:
           PLAYWRIGHT_PERFORMANCE_PROFILE: shared-software-renderer
       - run: npm run build:pages
         if: matrix.release_artifact
+      - run: npm run synthesis:boundary
+        if: matrix.release_artifact
       - run: npm run e2e:pages
         if: matrix.release_artifact
         env:
@@ -119,6 +119,15 @@ jobs:
           test -s dist-pages/catalog/synthesis/manifest.json
           test -s dist-pages/catalog/synthesis/reports/coverage.json
           test -s dist-pages/catalog/synthesis/reports/licensing.json
+          test -s dist-pages/catalog/synthesis/reports/baseline-candidate-snapshot.json
+          test -s dist-pages/catalog/synthesis/reports/candidate-terminalization.json
+          test -s dist-pages/catalog/synthesis/reports/document-dedupe.json
+          test -s dist-pages/catalog/synthesis/reports/journal-identity-audit.json
+          test -s dist-pages/catalog/synthesis/reports/molecule-best-outcome.json
+          test -s dist-pages/catalog/synthesis/reports/route-distribution.json
+          test -s dist-pages/catalog/synthesis/reports/license-rights.json
+          test -s dist-pages/catalog/synthesis/reports/error-summary.json
+          test -s dist-pages/catalog/synthesis/reports/ord-resolution.json
           test -z "$(find dist-pages -type f \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.p8' -o -name '*.key' -o -name '*.p12' -o -name '*.jks' -o -name '*.keystore' \) -print -quit)"
           test -z "$(find dist-pages -type d -name server -print -quit)"
           if grep -RIlE \

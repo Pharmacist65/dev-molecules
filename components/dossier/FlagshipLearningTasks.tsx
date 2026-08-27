@@ -81,6 +81,7 @@ export function FlagshipLearningTasks({
               <form
                 key={`${taskIndex}:${task.prompt}`}
                 className={styles.task}
+                data-learning-kind={task.kind}
                 onSubmit={(event) => {
                   event.preventDefault();
                   if (selectedIndex === undefined) return;

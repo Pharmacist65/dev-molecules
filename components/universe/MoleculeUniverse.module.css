@@ -2517,6 +2517,311 @@
   }
 }
 
+/* Immersive is exclusive to the main Drug Atlas. The embedded Family surface
+   retains the editorial header, bounded toolbar and compact stage above. */
+.universe[data-surface-variant="immersive"] {
+  width: 100%;
+  min-height: 78svh;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: var(--surface-midnight, #0d172b);
+  box-shadow: none;
+}
+
+.universe[data-surface-variant="immersive"] .toolbar {
+  position: absolute;
+  z-index: 45;
+  top: 0.85rem;
+  right: clamp(0.85rem, 2vw, 1.5rem);
+  left: clamp(0.85rem, 2vw, 1.5rem);
+  display: grid;
+  grid-template-columns: minmax(17rem, 25rem) minmax(16rem, 22rem);
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.universe[data-surface-variant="immersive"] .searchField,
+.universe[data-surface-variant="immersive"] .lensPanel {
+  min-width: 0;
+  pointer-events: auto;
+}
+
+.universe[data-surface-variant="immersive"] .searchField {
+  padding: 0.48rem;
+  border: 1px solid rgb(184 202 236 / 18%);
+  border-radius: 14px;
+  background: rgb(9 20 40 / 82%);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
+  backdrop-filter: blur(16px);
+}
+
+.universe[data-surface-variant="immersive"] .searchLabelRow {
+  padding-inline: 0.2rem;
+}
+
+.universe[data-surface-variant="immersive"] .searchControl input,
+.universe[data-surface-variant="immersive"] .lensDisclosureButton {
+  border-color: rgb(184 202 236 / 20%);
+  background: rgb(255 255 255 / 6%);
+  color: #f2f5fb;
+  box-shadow: none;
+}
+
+.universe[data-surface-variant="immersive"] .searchControl input::placeholder,
+.universe[data-surface-variant="immersive"] .lensDisclosureButton span {
+  color: #aebbd2;
+}
+
+.universe[data-surface-variant="immersive"] .lensDisclosureButton {
+  border-radius: 14px;
+  background: rgb(9 20 40 / 82%);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
+  backdrop-filter: blur(16px);
+}
+
+.universe[data-surface-variant="immersive"] .lensDisclosureButton strong {
+  color: #f2f5fb;
+}
+
+.universe[data-surface-variant="immersive"] .lensDrawer {
+  top: calc(100% + 0.55rem);
+  right: 0;
+  left: auto;
+  width: min(46rem, calc(100vw - 2rem));
+  max-height: min(64svh, 34rem);
+  border: 1px solid rgb(184 202 236 / 22%);
+  border-radius: 14px;
+  background: rgb(10 21 42 / 97%);
+  color: #f2f5fb;
+}
+
+.universe[data-surface-variant="immersive"] .lensButton {
+  border-color: rgb(184 202 236 / 18%);
+  background: rgb(255 255 255 / 5%);
+  color: #cbd5e8;
+}
+
+.universe[data-surface-variant="immersive"] .lensButton[aria-pressed="true"] {
+  border-color: #6f96e6;
+  background: rgb(36 87 214 / 30%);
+  color: #fff;
+}
+
+.universe[data-surface-variant="immersive"] .lensDescription,
+.universe[data-surface-variant="immersive"] .lensMeaning {
+  color: #d3dbea;
+}
+
+.universe[data-surface-variant="immersive"] .lensCaveat,
+.universe[data-surface-variant="immersive"] .studentHint {
+  color: #dfb68f;
+}
+
+.universe[data-surface-variant="immersive"][data-explore-level="universe"] .breadcrumb,
+.universe[data-surface-variant="immersive"][data-explore-level="focus"] .breadcrumb,
+.universe[data-surface-variant="immersive"][data-explore-level="compare"] .breadcrumb {
+  display: none;
+}
+
+.universe[data-surface-variant="immersive"]:not([data-explore-level="universe"]) .toolbar {
+  display: none;
+}
+
+.universe[data-surface-variant="immersive"] .exploreStage {
+  min-height: 78svh;
+  border: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 18%), transparent 43%),
+    linear-gradient(rgb(112 145 210 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(112 145 210 / 4%) 1px, transparent 1px),
+    #0d172b;
+  background-size: auto, 64px 64px, 64px 64px, auto;
+}
+
+.universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] {
+  height: max(78svh, var(--explore-stage-viewport-height, 78svh));
+  min-height: max(78svh, var(--explore-stage-viewport-height, 78svh));
+}
+
+/* The floating controls own this top dock. The WebGL viewport starts below it,
+   so fitting and collision metrics are measured only in unobstructed space. */
+.universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] > .sceneTelemetry {
+  top: 5.75rem;
+  height: calc(100% - 5.75rem);
+  min-height: 0;
+}
+
+.universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] .sharedScene,
+.universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] .sceneHidden {
+  --molecular-scene-height: calc(100% - 4.5rem);
+  height: calc(100% - 4.5rem);
+  min-height: 0;
+}
+
+.universe[data-surface-variant="immersive"] .sceneTelemetry {
+  background:
+    radial-gradient(circle at 50% 44%, rgb(55 105 205 / 17%), transparent 44%),
+    #0d172b;
+}
+
+.universe[data-surface-variant="immersive"] .clusterGlyph small,
+.universe[data-surface-variant="immersive"] .nearClusterRegions small,
+.universe[data-surface-variant="immersive"][data-presentation-mode="student"] .lodStatus {
+  display: none;
+}
+
+.universe[data-surface-variant="immersive"] .representativeScope {
+  position: absolute;
+  z-index: 46;
+  bottom: 1.3rem;
+  left: clamp(1rem, 2vw, 1.5rem);
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  border-left: 3px solid var(--color-metallic-orange, #ff8a00);
+  color: #cbd5e8;
+  background: rgb(9 20 40 / 70%);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 20%);
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.25;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+}
+
+.universe[data-surface-variant="immersive"] .nearClusterRegions button {
+  min-width: 10rem;
+  max-width: 15rem;
+  padding: 0.5rem 0.8rem;
+  border-color: rgb(184 202 236 / 18%);
+  background: rgb(10 21 42 / 78%);
+  backdrop-filter: blur(12px);
+}
+
+.universe[data-surface-variant="immersive"] .universeCamera {
+  right: 1rem;
+  bottom: 1rem;
+  border-color: rgb(184 202 236 / 20%);
+  border-radius: 13px;
+  background: rgb(9 20 40 / 86%);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 25%);
+  backdrop-filter: blur(16px);
+}
+
+.universe[data-surface-variant="immersive"] .footer {
+  border-top-color: rgb(184 202 236 / 14%);
+  background: #0a1428;
+  color: #aebbd2;
+}
+
+/* Opening the existing inspector resizes the actual renderer, rather than
+   laying an opaque drawer over the fitted molecule. */
+.universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sharedScene,
+.universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sceneHidden {
+  width: calc(100% - 360px);
+}
+
+.universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .twoDStage,
+.universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .missingStructure {
+  right: 360px;
+}
+
+@media (max-width: 900px) and (min-width: 721px) {
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sharedScene,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sceneHidden {
+    width: calc(100% - 300px);
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .twoDStage,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .missingStructure {
+    right: 300px;
+  }
+}
+
+@media (max-width: 720px) {
+  .universe[data-surface-variant="immersive"] {
+    min-height: 44rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .toolbar {
+    top: 0.65rem;
+    right: 0.65rem;
+    left: 0.65rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .searchField {
+    padding: 0.38rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .searchLabelRow label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .universe[data-surface-variant="immersive"] .lensDrawer {
+    right: 0;
+    width: calc(100vw - 1.3rem);
+  }
+
+  .universe[data-surface-variant="immersive"] .lensButtons {
+    overflow-x: auto;
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] {
+    height: 44rem;
+    min-height: 44rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] > .sceneTelemetry {
+    top: 10.25rem;
+    height: calc(100% - 10.25rem);
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] .sharedScene,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-level="universe"] .sceneHidden {
+    --molecular-scene-height: calc(100% - 7.25rem);
+    height: calc(100% - 7.25rem);
+  }
+
+  .universe[data-surface-variant="immersive"] .representativeScope {
+    bottom: 4.75rem;
+    left: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    font-size: 0.875rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .universeCamera {
+    right: 0.65rem;
+    bottom: 0.65rem;
+    left: 0.65rem;
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sharedScene,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .sceneHidden {
+    width: 100%;
+  }
+
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .twoDStage,
+  .universe[data-surface-variant="immersive"] .exploreStage[data-inspector-open="true"] .missingStructure {
+    right: 0;
+  }
+
+  .universe[data-surface-variant="immersive"] .footer > span:last-child {
+    display: none;
+  }
+}
+
 .compareToolbar {
   position: absolute;
   z-index: 8;

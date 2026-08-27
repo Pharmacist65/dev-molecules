@@ -10,6 +10,7 @@ const {
   curatedDossierMolecules,
   flagshipSourceRegistry,
   flagshipDossierMoleculeIds,
+  gateLegacyFlagshipSynthesisForPublic,
   hasCompleteEvidenceField,
   moleculeCatalog,
   resolveMolecularRecordRoute,
@@ -20,6 +21,38 @@ const {
   "./helpers/flagship-phase-a-test-api.ts",
   import.meta.url,
 );
+
+test("legacy flagship synthesis fails closed without discarding non-synthesis dossier content", () => {
+  const seed = createFlagshipDossierSeed("molecule:propranolol", "en");
+  assert.ok(seed);
+  const injectedLegacyContent = {
+    ...seed.content,
+    synthesis: {
+      status: "source-supported",
+      sourceIds: ["source:synthetic-evidence-fixture"],
+      limitations: ["synthetic fixture limitation"],
+      content: {
+        id: "synthesis:synthetic-route-alpha",
+        title: "Synthetic fixture route title",
+        summary: "Synthetic fixture route summary",
+        materials: [],
+        steps: [],
+        sourceIds: ["source:synthetic-evidence-fixture"],
+        reviewStatus: "source-supported",
+        operationalDetailsIncluded: false,
+        limitations: [],
+      },
+    },
+  };
+  const gated = gateLegacyFlagshipSynthesisForPublic(injectedLegacyContent, "en");
+
+  assert.equal(gated.productAnchor, seed.content.productAnchor);
+  assert.equal(gated.nomenclature, seed.content.nomenclature);
+  assert.equal(gated.synthesis.status, "unavailable");
+  assert.equal(gated.synthesis.content, null);
+  assert.deepEqual(gated.synthesis.sourceIds, []);
+  assert.doesNotMatch(gated.synthesis.limitations.join(" "), /private/i);
+});
 
 const flagshipScenarios = [
   {
@@ -147,12 +180,9 @@ test("flagship science is source-supported, route/form scoped, and never padded 
 
     assert.equal(dossier.metabolites.edges.length, scenario.metaboliteEdges);
     assert.equal(dossier.metabolites.availability, "source-supported");
-    assert.equal(dossier.flagship.synthesis.content?.operationalDetailsIncluded, false);
-    assert.ok(
-      dossier.flagship.synthesis.content?.materials
-        .filter((material) => material.structureReviewStatus === "pending-review")
-        .every((material) => material.smiles === null),
-    );
+    assert.equal(dossier.flagship.synthesis.status, "unavailable");
+    assert.equal(dossier.flagship.synthesis.content, null);
+    assert.deepEqual(dossier.flagship.synthesis.sourceIds, []);
 
     const coverage = new Map(
       dossier.coverage.map((indicator) => [indicator.dimension, indicator]),
@@ -161,13 +191,14 @@ test("flagship science is source-supported, route/form scoped, and never padded 
       "classification",
       "pharmacology",
       "adme",
-      "synthesis",
       "nomenclature",
       "learning",
     ]) {
       assert.equal(coverage.get(dimension)?.status, "source-supported");
       assert.ok((coverage.get(dimension)?.availableFields ?? 0) > 0);
     }
+    assert.equal(coverage.get("synthesis")?.status, "unavailable");
+    assert.equal(coverage.get("synthesis")?.availableFields, 0);
   }
 });
 
@@ -345,7 +376,7 @@ test("route/form conditions and explicit scientific holds remain visible", () =>
   assert.equal(omeprazole.chemistry.isomericSmiles, null);
 });
 
-test("synthesis, nomenclature, and comparisons expose complete bounded graphs", () => {
+test("unpublished synthesis stays unavailable while nomenclature and comparisons expose bounded graphs", () => {
   const propranolol = createDrugDossierByIdOrSlug("propranolol", "en");
   const celecoxib = createDrugDossierByIdOrSlug("celecoxib", "en");
   const omeprazole = createDrugDossierByIdOrSlug("omeprazole", "en");
@@ -353,18 +384,10 @@ test("synthesis, nomenclature, and comparisons expose complete bounded graphs", 
 
   for (const dossier of [propranolol, celecoxib, omeprazole]) {
     const synthesis = dossier.flagship.synthesis.content;
-    assert.ok(synthesis);
-    const materialIds = new Set(synthesis.materials.map((material) => material.id));
-    for (const step of synthesis.steps) {
-      assert.ok(step.inputMaterialIds.length > 0);
-      assert.ok(step.inputMaterialIds.every((id) => materialIds.has(id)));
-      assert.ok(step.outputMaterialId === null || materialIds.has(step.outputMaterialId));
-    }
-    assert.ok(
-      synthesis.materials
-        .filter((material) => material.smiles !== null)
-        .every((material) => material.structureReviewStatus === "source-supported"),
-    );
+    assert.equal(synthesis, null);
+    assert.equal(dossier.flagship.synthesis.status, "unavailable");
+    assert.deepEqual(dossier.flagship.synthesis.sourceIds, []);
+    assert.match(dossier.flagship.synthesis.limitations.join(" "), /publishes no|yayımlamaz/i);
     for (const comparator of dossier.flagship.comparisons.content) {
       assert.ok(comparator.changedGroups.length > 0);
       assert.ok(comparator.propertyDifferences.length > 0);
@@ -474,6 +497,10 @@ test("TR and EN materializations keep scientific values and provenance stable", 
       en.pharmacology.primaryTargets.map((target) => target.sourceIds),
     );
     assert.notEqual(tr.flagship.productAnchor.boundary, en.flagship.productAnchor.boundary);
+    assert.equal(tr.flagship.synthesis.content, null);
+    assert.equal(en.flagship.synthesis.content, null);
+    assert.equal(tr.flagship.synthesis.status, "unavailable");
+    assert.equal(en.flagship.synthesis.status, "unavailable");
   }
 });
 

@@ -3,18 +3,10 @@ import test from "node:test";
 
 import { tsImport } from "tsx/esm/api";
 
-const { synthesisAtlasRoutes } = await tsImport(
-  "../lib/data/synthesis-atlas.ts",
-  import.meta.url,
-);
-const { validateCanonicalSynthesisRoute } = await tsImport(
-  "../lib/domain/synthesis-validation.ts",
-  import.meta.url,
-);
-const { loadSynthesisDiscoverySubjects } = await tsImport(
-  "../scripts/synthesis/catalog-input.mts",
-  import.meta.url,
-);
+import {
+  makeSyntheticPrivateMigrationInput,
+} from "./fixtures/synthetic-synthesis-migration-fixture.mjs";
+
 const {
   LEGACY_SYNTHESIS_ROUTE_COUNT,
   migrateLegacySynthesisRoutes,
@@ -22,230 +14,194 @@ const {
   "../scripts/synthesis/migrate-legacy-routes.mts",
   import.meta.url,
 );
+const { validateCanonicalSynthesisRoute } = await tsImport(
+  "../lib/domain/synthesis-validation.ts",
+  import.meta.url,
+);
 
-const migration = await migrateLegacySynthesisRoutes();
-const routeById = new Map(migration.routes.map((route) => [route.id, route]));
-const legacyRouteById = new Map(synthesisAtlasRoutes.map((route) => [route.id, route]));
+const cloneInput = () => structuredClone(makeSyntheticPrivateMigrationInput());
 
-const canonicalRouteForLegacy = (legacyRouteId) => {
-  const entry = migration.migrationReport.entries.find(
-    (candidate) => candidate.legacyRouteId === legacyRouteId,
-  );
-  assert.ok(entry, legacyRouteId);
-  const route = routeById.get(entry.canonicalRouteId);
-  assert.ok(route, entry.canonicalRouteId);
-  return { entry, route };
-};
-
-test("legacy migration accounts for all 6 routes and yields validator-clean canonical records", () => {
-  const { migrationReport, routes, evidence } = migration;
-
+test("public migration fails closed when private canonical input is absent", async () => {
   assert.equal(LEGACY_SYNTHESIS_ROUTE_COUNT, 6);
-  assert.equal(migrationReport.expectedLegacyRouteCount, 6);
-  assert.equal(migrationReport.legacyRouteCount, 6);
-  assert.equal(migrationReport.accountedRouteCount, 6);
-  assert.equal(routes.length, 6);
-  assert.equal(new Set(routes.map((route) => route.id)).size, 6);
-  assert.equal(new Set(migrationReport.entries.map((entry) => entry.legacyRouteId)).size, 6);
-  assert.deepEqual(
-    new Set(migrationReport.entries.map((entry) => entry.legacyRouteId)),
-    new Set(synthesisAtlasRoutes.map((route) => route.id)),
+  await assert.rejects(
+    migrateLegacySynthesisRoutes(),
+    /Private synthesis migration input is required/u,
   );
-  assert.deepEqual(migrationReport.routeTypeCounts, {
+});
+
+test("private migration re-derives the accepted six-route aggregate and runs canonical validation", async () => {
+  const input = cloneInput();
+  const result = await migrateLegacySynthesisRoutes({ privateInput: input });
+
+  assert.notStrictEqual(result.migrationReport, input.migrationReport);
+  assert.deepEqual(result.migrationReport, input.migrationReport);
+  assert.equal(result.routes.length, 6);
+  assert.equal(result.evidence.length, 6);
+  assert.deepEqual(result.migrationReport.routeTypeCounts, {
     patent_reported: 5,
     literature_reported: 0,
     teaching_reconstruction: 1,
     computational_proposed: 0,
   });
-  assert.equal(migrationReport.invariants.allSixLegacyRoutesAccounted, true);
-  assert.equal(migrationReport.invariants.exactCidAndInchiKeyJoin, true);
-  assert.equal(migrationReport.invariants.operationalDetailsIncluded, false);
+  assert.deepEqual(result.migrationReport.routeCompletenessCounts, {
+    complete: 2,
+    partial: 0,
+    upstream_gap: 3,
+    convergent_partial: 1,
+    unknown: 0,
+  });
+  assert.deepEqual(result.migrationReport.reviewStateCounts, {
+    pending: 6,
+    reviewed: 0,
+    verified: 0,
+    withdrawn: 0,
+  });
+  assert.deepEqual(result.migrationReport.licenseStateCounts, {
+    permitted: 0,
+    attribution_required: 0,
+    link_only: 6,
+    restricted: 0,
+    mixed: 0,
+    unknown: 0,
+  });
+  assert.deepEqual(result.migrationReport.evidenceSourceKindCounts, {
+    patent: 6,
+    journal: 0,
+    aggregator: 0,
+    open_reaction_dataset: 0,
+  });
+  assert.equal(result.migrationReport.patentFamilyCount, 6);
+  assert.equal(result.migrationReport.excludedSourceContextStepCount, 3);
+  assert.equal(result.migrationReport.excludedTargetFormStepCount, 1);
+  assert.deepEqual(result.migrationReport.invariants, {
+    allSixLegacyRoutesAccounted: true,
+    exactCidAndInchiKeyJoin: true,
+    operationalDetailsIncluded: false,
+  });
 
-  for (const route of routes) {
-    const errors = validateCanonicalSynthesisRoute(route, evidence).filter(
-      (issue) => issue.severity === "error",
-    );
-    assert.deepEqual(errors, [], `${route.id}: ${JSON.stringify(errors)}`);
-    assert.equal(route.safety.operationalDetailsIncluded, false);
-    assert.ok(route.stereochemicalStrategy.trim().length > 0, route.id);
-  }
-});
-
-test("every route joins the exact catalog CID and InChIKey and targets that exact identity", () => {
-  const expected = new Map([
-    ["molecule:propranolol", [4946, "AQHHHDLHHXJYJD-UHFFFAOYSA-N"]],
-    ["molecule:atenolol", [2249, "METKIMKYRPQLGS-UHFFFAOYSA-N"]],
-    ["molecule:carvedilol", [2585, "OGHNVEJMJSYVRP-UHFFFAOYSA-N"]],
-  ]);
-
-  for (const entry of migration.migrationReport.entries) {
-    const legacyRoute = legacyRouteById.get(entry.legacyRouteId);
-    const canonicalRoute = routeById.get(entry.canonicalRouteId);
-    assert.ok(legacyRoute);
-    assert.ok(canonicalRoute);
-    const [cid, inchiKey] = expected.get(legacyRoute.moleculeId);
-    assert.equal(entry.joinedPubChemCid, cid);
-    assert.equal(entry.joinedInchiKey, inchiKey);
-    assert.equal(canonicalRoute.identityScope.pubChemCid, cid);
-    assert.equal(canonicalRoute.identityScope.inchiKey, inchiKey);
-    assert.equal(
-      canonicalRoute.coverageId,
-      `synthesis-coverage:${canonicalRoute.identityScope.catalogEntityId}`,
-    );
-    assert.equal(
-      canonicalRoute.stereochemicalStrategy,
-      legacyRoute.stereochemistryScope.en,
-    );
-
-    const target = canonicalRoute.materials.find(
-      (material) => material.id === canonicalRoute.targetMaterialId,
-    );
-    assert.ok(target);
-    assert.equal(target.role, "target_parent");
-    assert.equal(target.identityResolution, "exact_inchi_key");
-    assert.equal(target.inchiKey, inchiKey);
-    assert.equal(target.canonicalSmiles, canonicalRoute.identityScope.canonicalSmiles);
-    assert.ok(
-      canonicalRoute.steps.some((step) =>
-        step.outputMaterialIds.includes(canonicalRoute.targetMaterialId),
-      ),
-      canonicalRoute.id,
+  for (const route of result.routes) {
+    assert.deepEqual(
+      validateCanonicalSynthesisRoute(route, result.evidence),
+      [],
+      route.id,
     );
   }
 });
 
-test("source-context upstream chemistry is excluded from reported steps and retained as gaps", () => {
-  assert.equal(migration.migrationReport.excludedSourceContextStepCount, 3);
-  assert.equal(migration.migrationReport.excludedTargetFormStepCount, 1);
-
-  for (const entry of migration.migrationReport.entries) {
-    const legacyRoute = legacyRouteById.get(entry.legacyRouteId);
-    const canonicalRoute = routeById.get(entry.canonicalRouteId);
-    assert.ok(legacyRoute);
-    assert.ok(canonicalRoute);
-    const retained = new Set(entry.retainedLegacyStepIds);
-    const excluded = new Set(entry.exclusions.map((exclusion) => exclusion.legacyStepId));
-    assert.equal(retained.size + excluded.size, legacyRoute.transformations.length);
-
-    for (const stepId of retained) {
-      assert.equal(
-        legacyRoute.transformations.find((step) => step.id === stepId)?.evidenceState,
-        "direct-source",
-        stepId,
-      );
-    }
-    for (const legacyStep of legacyRoute.transformations.filter(
-      (step) => step.evidenceState === "source-context",
-    )) {
-      assert.ok(excluded.has(legacyStep.id), legacyStep.id);
-      assert.equal(
-        entry.exclusions.find((exclusion) => exclusion.legacyStepId === legacyStep.id)?.reason,
-        "source_context_not_promoted",
-      );
-    }
-    assert.ok(
-      canonicalRoute.steps.every((step) => step.evidenceMode === "direct_reported"),
-      canonicalRoute.id,
-    );
-    if (entry.exclusions.some((item) => item.reason === "source_context_not_promoted")) {
-      assert.ok(
-        canonicalRoute.gaps.some((gap) => gap.kind === "upstream_precursor"),
-        canonicalRoute.id,
-      );
-      assert.equal(canonicalRoute.routeCompleteness, "upstream_gap");
-    }
-  }
-});
-
-test("the two-patent carvedilol composite is a source-bounded teaching reconstruction", () => {
-  const { route } = canonicalRouteForLegacy(
-    "synthesis-atlas-route:carvedilol-reported",
-  );
-  assert.equal(route.routeType, "teaching_reconstruction");
-  assert.equal(route.reviewState, "pending");
-  assert.equal(route.routeCompleteness, "convergent_partial");
-  assert.equal(route.segments.length, 2);
-  assert.equal(new Set(route.segments.flatMap((segment) => segment.sourceEvidenceIds)).size, 2);
-  assert.deepEqual(
-    new Set(route.segments.flatMap((segment) => segment.stepIds)),
-    new Set(route.steps.map((step) => step.id)),
-  );
-  const families = new Set(
-    route.sourceEvidenceIds.map(
-      (evidenceId) => migration.evidence.find((item) => item.id === evidenceId)?.patentFamilyId,
-    ),
-  );
-  assert.equal(families.size, 2);
-  assert.ok(route.gaps.some((gap) => /N-benzyl amine branch/u.test(gap.description)));
-});
-
-test("propranolol free-base migration does not turn hydrochloride formation into a covalent target step", () => {
-  const { entry, route } = canonicalRouteForLegacy(
-    "synthesis-atlas-route:propranolol-reported",
-  );
-  assert.equal(route.identityScope.pubChemCid, 4946);
-  assert.equal(route.identityScope.inchiKey, "AQHHHDLHHXJYJD-UHFFFAOYSA-N");
-  assert.equal(
-    entry.exclusions.find(
-      (exclusion) => exclusion.legacyStepId === "synthesis-atlas-step:propranolol-rep-03",
-    )?.reason,
-    "target_form_identity_divergence",
-  );
-  assert.ok(route.materials.every((material) => !/hydrochloride/iu.test(material.label)));
-  assert.ok(route.materials.every((material) => !material.canonicalSmiles?.includes(".")));
-  assert.ok(
-    route.steps.every((step) =>
-      step.stateChanges.every((change) => change.kind !== "counterion_association"),
-    ),
-  );
-  assert.ok(
-    route.steps.flatMap((step) => step.bondChanges).every(
-      (change) =>
-        change.mappingState === "not_mapped" &&
-        change.atoms === null &&
-        change.beforeOrder === null &&
-        change.afterOrder === null &&
-        change.description.trim().length > 0,
-    ),
-  );
-  assert.match(
-    route.steps.at(-1).limitations.join(" "),
-    /distinct chemical form.*not a covalent target transformation/iu,
-  );
-});
-
-test("resolved migration evidence preserves each exact legacy document anchor and locator", () => {
-  for (const legacyRoute of synthesisAtlasRoutes) {
-    for (const anchor of legacyRoute.sourceAnchors) {
-      const evidence = migration.evidence.find((item) => item.sourceId === anchor.sourceId);
-      assert.ok(evidence, anchor.sourceId);
-      assert.equal(evidence.resolutionState, "resolved");
-      assert.equal(evidence.sourceKind, "patent");
-      assert.equal(evidence.title, anchor.title);
-      assert.equal(evidence.url, anchor.url);
-      assert.equal(evidence.locator?.value, anchor.locator.en);
-      assert.match(evidence.locator?.kind ?? "", /^patent_(?:example|scheme)$/u);
-      assert.equal(evidence.licenseState, "link_only");
-      assert.equal(evidence.reuseMode, "metadata_and_link_only");
-    }
-  }
-});
-
-test("a CID-only match cannot bypass an InChIKey mismatch", async () => {
-  const subjects = await loadSynthesisDiscoverySubjects();
-  const tampered = subjects.map((subject) =>
-    subject.identity.pubChemCid === 4946
-      ? {
-          ...subject,
-          identity: {
-            ...subject.identity,
-            inchiKey: "AAAAAAAAAAAAAA-UHFFFAOYSA-N",
-          },
-        }
-      : subject,
-  );
+test("caller-reported route type counts cannot override the derived route aggregate", async () => {
+  const input = cloneInput();
+  input.migrationReport.routeTypeCounts.patent_reported = 4;
+  input.migrationReport.routeTypeCounts.literature_reported = 1;
   await assert.rejects(
-    migrateLegacySynthesisRoutes({ subjects: tampered }),
-    /Exact CID\/InChIKey synthesis identity join failed/u,
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /attestation does not match the derived payload/u,
+  );
+});
+
+test("legacy exclusions must be enumerated and still match the accepted disposition counts", async () => {
+  const input = cloneInput();
+  const disposition = input.legacyAudit[0].stepDispositions.find(
+    (item) => item.disposition === "excluded",
+  );
+  disposition.exclusionReason = "outside_exact_target_path";
+  input.migrationReport.excludedTargetFormStepCount = 0;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /does not match the accepted six-route aggregate/u,
+  );
+});
+
+test("migration requires exactly six unique, fully associated evidence records", async () => {
+  const input = cloneInput();
+  input.evidence.pop();
+  input.migrationReport.evidenceCount = 5;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /exactly six unique evidence records/u,
+  );
+});
+
+test("exact CID and InChIKey join is derived from the audit, route and target material", async () => {
+  const input = cloneInput();
+  input.legacyAudit[0].legacyTargetIdentity.pubChemCid += 1;
+  input.migrationReport.invariants.exactCidAndInchiKeyJoin = false;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /does not match the accepted six-route aggregate/u,
+  );
+});
+
+test("review state distribution is derived and fixed to six pending routes", async () => {
+  const input = cloneInput();
+  const route = input.routes[0];
+  route.reviewState = "withdrawn";
+  route.reviewEvents = [{
+    reviewerId: "synthetic-test-only-reviewer",
+    reviewerName: "Synthetic test-only reviewer",
+    role: "chemistry_reviewer",
+    routeVersion: route.version,
+    scopes: ["identity", "route"],
+    decision: "withdraw",
+    reviewedAt: "2026-01-03T00:00:00.000Z",
+  }];
+  input.migrationReport.reviewStateCounts.pending = 5;
+  input.migrationReport.reviewStateCounts.withdrawn = 1;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /does not match the accepted six-route aggregate/u,
+  );
+});
+
+test("route and evidence licensing cannot drift from the six link-only boundary", async () => {
+  const routeInput = cloneInput();
+  routeInput.routes[0].licenseState = "unknown";
+  routeInput.migrationReport.licenseStateCounts.link_only = 5;
+  routeInput.migrationReport.licenseStateCounts.unknown = 1;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: routeInput }),
+    /does not match the accepted six-route aggregate/u,
+  );
+
+  const evidenceInput = cloneInput();
+  evidenceInput.evidence[0].licenseState = "unknown";
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: evidenceInput }),
+    /six unique patent-family, link-only evidence records/u,
+  );
+});
+
+test("completeness distribution is derived and fixed to 2 complete, 3 upstream-gap and 1 convergent-partial", async () => {
+  const input = cloneInput();
+  const route = input.routes[0];
+  route.routeCompleteness = "upstream_gap";
+  route.reportedCompleteRouteSourceIds = [];
+  route.gaps = [{
+    positionAfterStepId: null,
+    kind: "upstream_precursor",
+    description: "Synthetic test-only tamper gap.",
+  }];
+  input.migrationReport.routeCompletenessCounts.complete = 1;
+  input.migrationReport.routeCompletenessCounts.upstream_gap = 4;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /does not match the accepted six-route aggregate/u,
+  );
+});
+
+test("caller invariant booleans are checked rather than trusted", async () => {
+  const input = cloneInput();
+  input.migrationReport.invariants.allSixLegacyRoutesAccounted = false;
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /attestation does not match the derived payload/u,
+  );
+});
+
+test("canonical route validation remains a final fail-closed gate", async () => {
+  const input = cloneInput();
+  input.routes[0].title = "";
+  await assert.rejects(
+    migrateLegacySynthesisRoutes({ privateInput: input }),
+    /failed canonical validation/u,
   );
 });

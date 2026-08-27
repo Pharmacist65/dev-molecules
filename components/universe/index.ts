@@ -6,6 +6,7 @@ export {
 
 export type {
   ExplorePresentationMode,
+  ExploreSurfaceVariant,
   MoleculeEvidenceTone,
   MoleculeUniverseProps,
   UniverseLens,

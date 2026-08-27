@@ -157,41 +157,6 @@ export const learningMissions: readonly LearningMission[] = [
     },
   },
   {
-    id: "mission:propranolol-route-order",
-    slug: "propranolol-route-order",
-    title: "Order the scaffold story",
-    kind: "synthesis-route-puzzle",
-    level: "advanced",
-    objective:
-      "Follow a non-operational educational transformation story and keep it distinct from a published laboratory route.",
-    moleculeIds: ["molecule:propranolol"],
-    synthesisStoryIds: ["synthesis:propranolol-educational-scaffold"],
-    tasks: [
-      {
-        id: "order-propranolol-story",
-        type: "ordering",
-        prompt: "Put the two educational scaffold transformations in narrative order.",
-        itemIds: [
-          "synthesis-step:propranolol-02",
-          "synthesis-step:propranolol-01",
-        ],
-        correctOrder: [
-          "synthesis-step:propranolol-01",
-          "synthesis-step:propranolol-02",
-        ],
-      },
-    ],
-    sourceIds: [
-      "source:pubchem-4946",
-      "source:dev-molecules-educational-draft-001",
-    ],
-    estimatedMinutes: 7,
-    verification: {
-      status: "pending-review",
-      note: "The story is deliberately educational and not yet literature-linked.",
-    },
-  },
-  {
     id: "mission:evidence-boundaries",
     slug: "evidence-boundaries",
     title: "Evidence Hunt: reject false certainty",
@@ -226,4 +191,3 @@ export const learningMissions: readonly LearningMission[] = [
     },
   },
 ] satisfies readonly LearningMission[];
-

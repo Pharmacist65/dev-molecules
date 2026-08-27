@@ -37,7 +37,7 @@ async function openFullCatalogResult(
   return result;
 }
 
-test("project-base deployment loads structures and the source-gated Academy routes", async ({ page }) => {
+test("project-base deployment loads structures and the publication-gated synthesis coverage", async ({ page }) => {
   const consoleErrors: string[] = [];
   const pageErrors: string[] = [];
   const failedRequests: string[] = [];
@@ -98,11 +98,14 @@ test("project-base deployment loads structures and the source-gated Academy rout
   });
   const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
   await expect(synthesis).toBeVisible();
+  await expect(synthesis).toHaveAttribute("data-published-route-details", "0");
   await synthesis
-    .getByRole("button", { name: /Rota dersini aç|Open route lesson/i })
+    .getByRole("button", { name: /Sentez kanıtını aç|Open synthesis evidence/i })
     .first()
     .click();
-  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
+  await expect(synthesis.locator('[data-synthesis-atlas="coverage-only"]')).toBeVisible();
+  await expect(synthesis.locator('[data-synthesis-target-product="true"]')).toHaveCount(0);
+  await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
 
   await page.goto("./#academy/nomenclature/pharmaceutical", {
     waitUntil: "domcontentloaded",
@@ -175,20 +178,12 @@ test("project-base public-neutral cluster permalinks restore and reject raw draf
   await expect(page.locator('[data-catalog-status="ready"][data-catalog-records="1552"]'))
     .toBeVisible();
 
-  const clusterButtons = page.getByRole("button", {
-    name: /kümesi,?\s*\d+\s*molekül|cluster,?\s*\d+\s*molecules?/i,
-  });
-  await page
-    .getByRole("button", { name: /Kümelenme merceği|Clustering lens/i })
-    .click();
-  await page
-    .getByRole("button", { name: /Yapısal benzerlik|Structural similarity/i, exact: true })
-    .click();
-  await expect(clusterButtons).toHaveCount(1);
-  await expect(clusterButtons.first().locator("strong")).toHaveText(
+  await expect(page.locator('[data-representative-scope="true"]')).toHaveText(
     /Temsilî yapılar|Representative structures/i,
   );
-  await clusterButtons.first().click();
+  await page.goto("./#cluster/structural-similarity/representative-structures", {
+    waitUntil: "domcontentloaded",
+  });
   const exactClusterUrl = page.url();
   expect(exactClusterUrl).toMatch(
     /\/dev-molecules\/#cluster\/structural-similarity\/representative-structures$/,

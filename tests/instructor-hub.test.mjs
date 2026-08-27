@@ -17,19 +17,14 @@ const { academyExercises } = await tsImport(
   "../lib/data/nomenclature-academy-curriculum.ts",
   import.meta.url,
 );
-const { synthesisAtlasChallenges } = await tsImport(
-  "../lib/data/synthesis-atlas-challenges.ts",
-  import.meta.url,
-);
-
 const capturedAt = "2026-08-23T08:30:00.000Z";
 
-test("Instructor task catalog reuses every real nomenclature and synthesis task ID", () => {
+test("public Instructor catalog omits synthesis tasks until review and reuse gates pass", () => {
   for (const locale of ["tr", "en"]) {
     const catalog = buildInstructorTaskCatalog(locale);
     assert.equal(
       catalog.length,
-      academyExercises.length + synthesisAtlasChallenges.length,
+      academyExercises.length,
     );
     const references = new Set(
       catalog.map((entry) => `${entry.reference.kind}:${entry.reference.taskId}`),
@@ -38,24 +33,22 @@ test("Instructor task catalog reuses every real nomenclature and synthesis task 
     for (const exercise of academyExercises) {
       assert.ok(references.has(`nomenclature:${exercise.id}`), exercise.id);
     }
-    for (const challenge of synthesisAtlasChallenges) {
-      assert.ok(references.has(`synthesis:${challenge.id}`), challenge.id);
-    }
+    assert.equal(catalog.some((entry) => entry.reference.kind === "synthesis"), false);
     assert.ok(catalog.every((entry) => entry.title.length > 5));
     assert.ok(catalog.every((entry) => entry.contentBoundary.length > 25));
   }
 });
 
-test("local package composition validates IDs, source gates, and deduplicates tasks", () => {
+test("local package composition validates IDs and deduplicates published tasks", () => {
   const catalog = buildInstructorTaskCatalog("en");
   const nomenclature = catalog.find(
     (entry) => entry.reference.kind === "nomenclature" && entry.availability === "available",
   );
-  const synthesis = catalog.find(
-    (entry) => entry.reference.kind === "synthesis" && entry.availability === "available",
+  const secondNomenclature = catalog.find(
+    (entry) => entry.reference.kind === "nomenclature" && entry.reference.taskId !== nomenclature?.reference.taskId,
   );
   assert.ok(nomenclature);
-  assert.ok(synthesis);
+  assert.ok(secondNomenclature);
 
   const result = createDeviceLocalLessonPackage({
     draftToken: "Beta Blocker Week 01",
@@ -63,7 +56,7 @@ test("local package composition validates IDs, source gates, and deduplicates ta
     locale: "en",
     taskReferences: [
       nomenclature.reference,
-      synthesis.reference,
+      secondNomenclature.reference,
       nomenclature.reference,
     ],
     createdAt: capturedAt,
@@ -89,6 +82,16 @@ test("local package composition validates IDs, source gates, and deduplicates ta
   );
   assert.deepEqual(
     createDeviceLocalLessonPackage({
+      draftToken: "pending-synthesis",
+      title: "Pending synthesis",
+      locale: "en",
+      taskReferences: [{ kind: "synthesis", taskId: "synthesis-atlas-challenge:synthetic-test-only" }],
+      createdAt: capturedAt,
+    }),
+    { ok: false, reason: "unknown-task" },
+  );
+  assert.deepEqual(
+    createDeviceLocalLessonPackage({
       draftToken: "empty",
       title: "Valid title",
       locale: "en",
@@ -104,19 +107,19 @@ test("progress remains unmeasured without a device snapshot and exports exact se
   const nomenclature = catalog.find(
     (entry) => entry.reference.kind === "nomenclature" && entry.availability === "available",
   );
-  const synthesis = catalog.find(
-    (entry) => entry.reference.kind === "synthesis" && entry.availability === "available",
+  const secondNomenclature = catalog.find(
+    (entry) => entry.reference.kind === "nomenclature" && entry.reference.taskId !== nomenclature?.reference.taskId,
   );
   assert.ok(nomenclature);
-  assert.ok(synthesis);
-  const taskReferences = [nomenclature.reference, synthesis.reference];
+  assert.ok(secondNomenclature);
+  const taskReferences = [nomenclature.reference, secondNomenclature.reference];
 
   const disconnected = buildInstructorAssignmentSummary(taskReferences, null);
   assert.equal(disconnected.completedTaskCount, null);
   assert.equal(disconnected.completionPercent, null);
   assert.equal(disconnected.progressBoundary, "not-connected");
   assert.equal(disconnected.hasNomenclatureTask, true);
-  assert.equal(disconnected.hasSynthesisTask, true);
+  assert.equal(disconnected.hasSynthesisTask, false);
 
   const snapshot = {
     scope: "device-local",

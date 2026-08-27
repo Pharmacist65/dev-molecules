@@ -78,6 +78,58 @@ export interface BasicRecordSynthesisRouteComparisonSet {
   readonly routes: readonly BasicRecordSynthesisRouteComparison[];
 }
 
+export const SYNTHESIS_EXTRACTION_OUTCOMES = [
+  "resolved",
+  "irrelevant",
+  "identity_mismatch",
+  "access_blocked",
+  "insufficient_detail",
+  "parse_error",
+  "retryable_error",
+  "duplicate",
+  "superseded",
+] as const;
+
+export type BasicRecordSynthesisExtractionOutcome =
+  (typeof SYNTHESIS_EXTRACTION_OUTCOMES)[number];
+
+export const SYNTHESIS_BEST_OUTCOMES = [
+  "direct_complete_reported",
+  "direct_partial_reported",
+  "teaching_reconstruction_complete",
+  "teaching_reconstruction_partial",
+  "candidate_only",
+  "access_blocked_only",
+  "no_supporting_source_resolved",
+] as const;
+
+export type BasicRecordSynthesisBestOutcome =
+  (typeof SYNTHESIS_BEST_OUTCOMES)[number];
+
+export interface BasicRecordSynthesisEvidenceProcessing {
+  readonly pipelineVersion: string;
+  readonly completedAt: string;
+  readonly candidateAssociationCount: number;
+  readonly terminalAssociationCount: number;
+  readonly accessBlockedCount: number;
+  readonly accessibleCount: number;
+  readonly metadataOnlyCount: number;
+  readonly unavailableCount: number;
+  readonly extractionOutcomeCounts: Readonly<
+    Record<BasicRecordSynthesisExtractionOutcome, number>
+  >;
+}
+
+export type BasicRecordSynthesisSurfaceState =
+  | "direct_source_gated"
+  | "reported_complete"
+  | "reported_partial"
+  | "teaching_reconstruction"
+  | "candidate_extraction_complete"
+  | "candidate_processing_incomplete"
+  | "source_access_blocked"
+  | "no_supporting_source_resolved";
+
 /**
  * Browser-facing projection of the canonical coverage record. It deliberately
  * contains discovery and review status, not operational reaction conditions.
@@ -96,8 +148,12 @@ export interface BasicRecordSynthesisCoverage {
   readonly providers: readonly BasicRecordSynthesisProviderAttempt[];
   readonly routes: readonly BasicRecordSynthesisRouteReference[];
   readonly routeComparison: BasicRecordSynthesisRouteComparisonSet;
+  readonly bestOutcome: BasicRecordSynthesisBestOutcome | null;
+  readonly evidenceProcessing: BasicRecordSynthesisEvidenceProcessing | null;
   readonly sourceEvidenceCount: number;
   readonly unresolvedReasons: readonly string[];
+  /** Safe aggregate only; it exposes no route identity, type or completeness. */
+  readonly reportedRouteFoundPendingReview: boolean;
   readonly chemicalFormKind:
     | "free_parent"
     | "salt"
@@ -128,6 +184,8 @@ const REVIEW_STATES = new Set<string>(SYNTHESIS_REVIEW_STATES);
 const LICENSE_STATES = new Set<string>(SYNTHESIS_LICENSE_STATES);
 const ROUTE_TYPES = new Set<string>(SYNTHESIS_ROUTE_TYPES);
 const ROUTE_COMPLETENESS_STATES = new Set<string>(SYNTHESIS_ROUTE_COMPLETENESS_STATES);
+const EXTRACTION_OUTCOMES = new Set<string>(SYNTHESIS_EXTRACTION_OUTCOMES);
+const BEST_OUTCOMES = new Set<string>(SYNTHESIS_BEST_OUTCOMES);
 const ROUTE_PUBLICATION_STATES = new Set([
   "reported_route",
   "teaching_reconstruction",
@@ -215,6 +273,143 @@ const parseProvider = (value: unknown): BasicRecordSynthesisProviderAttempt => {
     errorCount: value.errors.length,
   };
 };
+
+const parseEvidenceProcessing = (
+  value: unknown,
+): BasicRecordSynthesisEvidenceProcessing | null => {
+  if (value === undefined || value === null) return null;
+  if (
+    !isObject(value) ||
+    !nonblankString(value.pipelineVersion, 128) ||
+    !isIsoDate(value.completedAt) ||
+    !isSafeCount(value.candidateAssociationCount) ||
+    !isSafeCount(value.terminalAssociationCount) ||
+    !isSafeCount(value.accessBlockedCount) ||
+    !isSafeCount(value.accessibleCount) ||
+    !isSafeCount(value.metadataOnlyCount) ||
+    !isSafeCount(value.unavailableCount) ||
+    !isObject(value.extractionOutcomeCounts)
+  ) {
+    throw new Error("Invalid synthesis evidence-processing summary.");
+  }
+
+  const rawOutcomeCounts = value.extractionOutcomeCounts as JsonObject;
+
+  const counts = Object.fromEntries(
+    SYNTHESIS_EXTRACTION_OUTCOMES.map((outcome) => {
+      const count = rawOutcomeCounts[outcome];
+      if (!isSafeCount(count)) {
+        throw new Error(`Invalid synthesis extraction count for ${outcome}.`);
+      }
+      return [outcome, count] as const;
+    }),
+  ) as Readonly<Record<BasicRecordSynthesisExtractionOutcome, number>>;
+  const unexpectedOutcomes = Object.keys(rawOutcomeCounts).filter(
+    (outcome) => !EXTRACTION_OUTCOMES.has(outcome),
+  );
+  const terminalCount = Object.values(counts).reduce((sum, count) => sum + count, 0);
+  const accessCount = Number(value.accessBlockedCount) +
+    Number(value.accessibleCount) +
+    Number(value.metadataOnlyCount) +
+    Number(value.unavailableCount);
+  if (
+    unexpectedOutcomes.length > 0 ||
+    terminalCount !== value.terminalAssociationCount ||
+    value.terminalAssociationCount !== value.candidateAssociationCount ||
+    accessCount !== value.candidateAssociationCount
+  ) {
+    throw new Error("Synthesis evidence processing is not terminal or internally consistent.");
+  }
+
+  return {
+    pipelineVersion: value.pipelineVersion,
+    completedAt: value.completedAt,
+    candidateAssociationCount: Number(value.candidateAssociationCount),
+    terminalAssociationCount: Number(value.terminalAssociationCount),
+    accessBlockedCount: Number(value.accessBlockedCount),
+    accessibleCount: Number(value.accessibleCount),
+    metadataOnlyCount: Number(value.metadataOnlyCount),
+    unavailableCount: Number(value.unavailableCount),
+    extractionOutcomeCounts: counts,
+  };
+};
+
+const parseBestOutcome = (
+  value: unknown,
+): BasicRecordSynthesisBestOutcome | null => {
+  if (value === undefined || value === null) return null;
+  return readEnum<BasicRecordSynthesisBestOutcome>(
+    value,
+    BEST_OUTCOMES,
+    "best outcome",
+  );
+};
+
+export function getBasicRecordSynthesisSurfaceState(
+  coverage: Pick<
+    BasicRecordSynthesisCoverage,
+    | "bestOutcome"
+    | "evidenceProcessing"
+    | "reportedRouteFoundPendingReview"
+    | "routes"
+    | "sourceEvidenceState"
+  >,
+): BasicRecordSynthesisSurfaceState {
+  const reportedRoutes = coverage.routes.filter((route) =>
+    route.routeType === "patent_reported" || route.routeType === "literature_reported"
+  );
+  if (coverage.bestOutcome === "direct_complete_reported") {
+    return reportedRoutes.some((route) => route.routeCompleteness === "complete")
+      ? "reported_complete"
+      : "direct_source_gated";
+  }
+  if (coverage.bestOutcome === "direct_partial_reported") {
+    return reportedRoutes.length > 0 ? "reported_partial" : "direct_source_gated";
+  }
+  if (
+    coverage.bestOutcome === "teaching_reconstruction_complete" ||
+    coverage.bestOutcome === "teaching_reconstruction_partial"
+  ) {
+    return "teaching_reconstruction";
+  }
+  // Public snapshots deliberately remove pending route IDs, types,
+  // completeness and source locators. This aggregate boolean is the only
+  // permitted way to distinguish an internally identified reported route
+  // from a generic candidate-only record before review/reuse gates pass.
+  if (coverage.reportedRouteFoundPendingReview) return "direct_source_gated";
+  if (coverage.bestOutcome === "access_blocked_only") return "source_access_blocked";
+  if (coverage.bestOutcome === "no_supporting_source_resolved") {
+    return "no_supporting_source_resolved";
+  }
+  if (coverage.bestOutcome === "candidate_only") {
+    if (coverage.sourceEvidenceState === "direct_source_resolved") {
+      return "direct_source_gated";
+    }
+    return coverage.evidenceProcessing
+      ? "candidate_extraction_complete"
+      : "candidate_processing_incomplete";
+  }
+
+  if (reportedRoutes.some((route) => route.routeCompleteness === "complete")) {
+    return "reported_complete";
+  }
+  if (reportedRoutes.length > 0) return "reported_partial";
+  if (coverage.routes.some((route) => route.routeType === "teaching_reconstruction")) {
+    return "teaching_reconstruction";
+  }
+  if ((coverage.evidenceProcessing?.accessBlockedCount ?? 0) > 0) {
+    return "source_access_blocked";
+  }
+  if (coverage.sourceEvidenceState === "candidate_sources") {
+    return coverage.evidenceProcessing
+      ? "candidate_extraction_complete"
+      : "candidate_processing_incomplete";
+  }
+  if (coverage.sourceEvidenceState === "direct_source_resolved") {
+    return "direct_source_gated";
+  }
+  return "no_supporting_source_resolved";
+}
 
 const parseRoute = (value: unknown): BasicRecordSynthesisRouteReference => {
   if (!isObject(value) || !nonblankString(value.routeId, 512) || !value.routeId.startsWith("synthesis-route:")) {
@@ -469,6 +664,51 @@ const parseCoverageRecord = (
     throw new Error("Invalid synthesis coverage form or stereoisomer scope.");
   }
   const routes = value.routes.map(parseRoute);
+  const evidenceProcessing = parseEvidenceProcessing(value.evidenceProcessing);
+  const bestOutcome = parseBestOutcome(value.bestOutcome);
+  if (
+    value.reportedRouteFoundPendingReview !== undefined &&
+    typeof value.reportedRouteFoundPendingReview !== "boolean"
+  ) {
+    throw new Error("Invalid pending reported-route coverage flag.");
+  }
+  if (
+    evidenceProcessing &&
+    evidenceProcessing.pipelineVersion !== search.pipelineVersion
+  ) {
+    throw new Error("Synthesis evidence processing belongs to a different pipeline version.");
+  }
+  if (
+    bestOutcome === "candidate_only" &&
+    evidenceProcessing &&
+    evidenceProcessing.candidateAssociationCount === 0
+  ) {
+    throw new Error("Candidate-only synthesis outcome has no candidate associations.");
+  }
+  if (
+    bestOutcome === "access_blocked_only" &&
+    evidenceProcessing &&
+    evidenceProcessing.accessBlockedCount === 0
+  ) {
+    throw new Error("Access-blocked synthesis outcome has no blocked associations.");
+  }
+  if (evidenceProcessing) {
+    const activeOutcomeCount =
+      evidenceProcessing.extractionOutcomeCounts.resolved +
+      evidenceProcessing.extractionOutcomeCounts.insufficient_detail +
+      evidenceProcessing.extractionOutcomeCounts.parse_error +
+      evidenceProcessing.extractionOutcomeCounts.retryable_error +
+      evidenceProcessing.extractionOutcomeCounts.access_blocked;
+    if (bestOutcome === "candidate_only" && activeOutcomeCount === 0) {
+      throw new Error("Candidate-only synthesis outcome has no active candidate assessment.");
+    }
+    if (
+      bestOutcome === "no_supporting_source_resolved" &&
+      activeOutcomeCount > 0
+    ) {
+      throw new Error("No-support synthesis outcome conflicts with active processed candidates.");
+    }
+  }
   return {
     coverageId: value.id as `synthesis-coverage:${string}`,
     catalogSnapshotId,
@@ -495,8 +735,11 @@ const parseCoverageRecord = (
     providers: search.providers.map(parseProvider),
     routes,
     routeComparison: unavailableRouteComparisonSet(routes),
+    bestOutcome,
+    evidenceProcessing,
     sourceEvidenceCount: value.sourceEvidenceIds.length,
     unresolvedReasons: readBoundedStrings(value.unresolvedReasons, "unresolved reasons", 128),
+    reportedRouteFoundPendingReview: value.reportedRouteFoundPendingReview === true,
     chemicalFormKind: String(chemicalForm.normalizedKind) as BasicRecordSynthesisCoverage["chemicalFormKind"],
     stereochemistrySpecified: stereoisomer.specified,
     exhaustiveInternetSearch: false,

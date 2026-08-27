@@ -15,6 +15,7 @@ import {
   getSynthesisAtlasStepSequence,
   getSynthesisAtlasSourceGate,
 } from "../domain/synthesis-atlas";
+import type { BasicRecordSynthesisCoverage } from "./basic-record-synthesis-coverage";
 
 export interface SynthesisAtlasPoint {
   readonly x: number;
@@ -58,6 +59,46 @@ export type SynthesisAtlasRoutePresentation =
   | "source-context-reconstruction"
   | "declared-gap-reconstruction"
   | "unavailable";
+
+export type SynthesisAtlasRouteDetailMode = "student" | "reviewer";
+
+export const getCanonicalCoverageRouteIdForAtlasRoute = (
+  route: SynthesisAtlasRoute,
+): `synthesis-route:${string}` =>
+  route.id.replace(
+    /^synthesis-atlas-route:/u,
+    "synthesis-route:legacy-",
+  ) as `synthesis-route:${string}`;
+
+/**
+ * Public route detail is admitted only by the canonical review + reuse
+ * projection. The reviewer surface may inspect the curated draft, but never
+ * changes its pending evidence label or makes it public.
+ */
+export const canOpenSynthesisAtlasRouteDetail = (
+  route: SynthesisAtlasRoute,
+  coverage: BasicRecordSynthesisCoverage | null,
+  mode: SynthesisAtlasRouteDetailMode,
+): boolean => {
+  if (getSynthesisAtlasRoutePresentation(route) === "unavailable") return false;
+  if (mode === "reviewer") return true;
+  if (!coverage) return false;
+
+  const routeId = getCanonicalCoverageRouteIdForAtlasRoute(route);
+  const reference = coverage.routes.find((candidate) => candidate.routeId === routeId);
+  const comparison = coverage.routeComparison.routes.find(
+    (candidate) => candidate.routeId === routeId,
+  );
+  if (!reference || !comparison) return false;
+  return (
+    (reference.reviewState === "reviewed" || reference.reviewState === "verified") &&
+    (reference.licenseState === "permitted" ||
+      reference.licenseState === "attribution_required") &&
+    comparison.comparisonAvailability === "available" &&
+    comparison.publicationState !== "withheld" &&
+    comparison.publicationState !== "unavailable"
+  );
+};
 
 /**
  * Converts scientific evidence state into a fail-closed presentation state.

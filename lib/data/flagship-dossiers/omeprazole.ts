@@ -241,29 +241,13 @@ export function createOmeprazoleFlagshipSeed(
         { id: "journey:omeprazole:metabolism", kind: "metabolism", label: localized(locale, "Metabolizma", "Metabolism"), evidence: journey("CYP2C19 · CYP3A4", metabolismConditions.note, metabolismConditions), unavailableReason: null },
         { id: "journey:omeprazole:excretion", kind: "excretion", label: localized(locale, "Atılım", "Excretion"), evidence: journey(localized(locale, "Tamponlanmış oral çözelti çalışmasında metabolitler halinde üriner ve fekal eliminasyon", "Urinary and fecal elimination as metabolites in the buffered oral-solution study"), radiolabelConditions.note, radiolabelConditions), unavailableReason: null },
       ], [labelSource, "source:uniprot-p20648", "source:pubmed-9593713"]),
-      synthesis: section("source-supported", {
-        id: "synthesis:omeprazole-flagship-phase-a",
-        title: localized(locale, "Omeprazole: raporlanmış sülfid–sülfoxit rotası", "Omeprazole: reported sulfide-to-sulfoxide route"),
-        summary: localized(locale, "Sübstitüe 2-merkaptobenzimidazol ve klorometilpiridinden sülfid; kontrollü oksidasyonla sülfoxit.", "A sulfide from substituted 2-mercaptobenzimidazole and chloromethylpyridine; controlled oxidation to the sulfoxide."),
-        materials: [
-          { id: "material:omeprazole:mercaptobenzimidazole", label: "5-Methoxy-2-mercaptobenzimidazole", role: "starting-material", smiles: "COC1=CC2=C(C=C1)NC(=S)N2", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-665603"] },
-          { id: "material:omeprazole:chloromethylpyridine", label: "2-(chloromethyl)-4-methoxy-3,5-dimethylpyridine hydrochloride", role: "starting-material", smiles: "CC1=CN=C(C(=C1OC)C)CCl.Cl", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-11694258"] },
-          { id: "material:omeprazole:sulfide", label: "Omeprazole sulfide", role: "intermediate", smiles: "CC1=CN=C(C(=C1OC)C)CSC2=NC3=C(N2)C=C(C=C3)OC", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-155794"] },
-          { id: "material:omeprazole:product", label: "Racemic omeprazole connectivity", role: "final-product", smiles: "CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC", structureReviewStatus: "source-supported", sourceIds: [identitySource] },
-        ],
-        steps: [
-          { id: "flagship-step:omeprazole:sulfide", order: 1, title: localized(locale, "Sülfid bağlantısı", "Sulfide connectivity"), inputMaterialIds: ["material:omeprazole:mercaptobenzimidazole", "material:omeprazole:chloromethylpyridine"], outputMaterialId: "material:omeprazole:sulfide", reactionClass: localized(locale, "S-alkilasyon / tiyoeter oluşumu", "S-alkylation / thioether formation"), bondChangeSummary: localized(locale, "Kaynak bağlantısı korunur; atom map inceleme bekler.", "Source linkage is preserved; atom mapping awaits review."), sourceIds: ["source:patent-ep0005129a1"], reviewStatus: "source-supported" },
-          { id: "flagship-step:omeprazole:oxidation", order: 2, title: localized(locale, "Sülfoxit oluşumu", "Sulfoxide formation"), inputMaterialIds: ["material:omeprazole:sulfide"], outputMaterialId: "material:omeprazole:product", reactionClass: localized(locale, "Kontrollü sülfid oksidasyonu", "Controlled sulfide oxidation"), bondChangeSummary: localized(locale, "Sülfid sülfoxide dönüşür; mutlak konfigürasyon atanmaz.", "Sulfide becomes sulfoxide; no absolute configuration is assigned."), sourceIds: ["source:patent-ep0005129a1", "source:patent-us5386032a"], reviewStatus: "source-supported" },
-        ],
-        sourceIds: ["source:patent-ep0005129a1", "source:patent-us5386032a", identitySource],
-        reviewStatus: "source-supported",
-        operationalDetailsIncluded: false,
-        limitations: [
-          localized(locale, "Operasyon parametreleri, üretim veya FTO iddiası içermez.", "Contains no operating parameters, manufacturing claim, or FTO opinion."),
-          localized(locale, "PubChem başlangıç materyalini thione tautomer biçiminde serileştirir; görsel kimliği destekler, atom-kusursuz mekanizma veya proton aktarımı iddiası oluşturmaz.", "PubChem serializes the starting material in its thione tautomer form; the drawing supports material identity but makes no atom-perfect mechanism or proton-transfer claim."),
-          localized(locale, "Klorometilpiridin hidroklorür kaynağı ayrık nötr Cl biçiminde serileştirilir; protonlanma konumu veya yük durumu bu kayıttan çıkarılmaz.", "The chloromethylpyridine hydrochloride source is serialized with disconnected neutral Cl; no protonation site or charge state is inferred from this record."),
-        ],
-      }, ["source:patent-ep0005129a1", "source:patent-us5386032a", identitySource]),
+      synthesis: section("unavailable", null, [], [
+        localized(
+          locale,
+          "Bu statik dossier sentez kanıtı veya rota iddiası yayımlamaz; güncel durum doğrulanmış Sentez Atlası kapsam kaydından okunmalıdır.",
+          "This static dossier publishes no synthesis-evidence or route claim; consult the validated Synthesis Atlas coverage record for current status.",
+        ),
+      ]),
       nomenclature: section("source-supported", {
         variants: [
           { id: "name:omeprazole:pubchem", role: "source-specific", name: evidenceField("6-methoxy-2-[(4-methoxy-3,5-dimethylpyridin-2-yl)methylsulfinyl]-1H-benzimidazole", identitySource, { note: localized(locale, "PubChem hesaplanmış sistematik ad formu; 6-methoxy locantını kullanır.", "PubChem computed systematic-name form using the 6-methoxy locant.") }, { evidenceType: "curated-database", reviewStatus: "source-supported" }) },

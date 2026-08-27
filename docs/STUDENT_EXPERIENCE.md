@@ -76,7 +76,7 @@ The 15 curated seed identities continue into a Curated Dossier rather than losin
 - an explicit unavailable pharmacology state because no reviewed target-interaction snapshot is checked in;
 - exact product/form administration context where the curated record supplies it, while all quantitative ADME phase fields remain empty;
 - an explicit empty metabolite state because no reviewed metabolite edge is configured;
-- source-linked synthesis availability;
+- identity-scoped synthesis coverage that fails closed unless a reviewed, reuse-eligible public route projection exists;
 - a nomenclature learning cue;
 - collapsed structure and regulatory sources.
 
@@ -101,13 +101,11 @@ Academy opens on an eight-module map rather than dropping the learner into a tec
 
 ### Synthesis Atlas
 
-Synthesis Atlas contains paired foundational-education and reported-kind routes for propranolol, atenolol, and carvedilol: six routes, 40 source-associated material records, and 20 conceptual transformations in total. The reported atenolol route contains five transformations; the reported carvedilol route contains six.
+Synthesis Atlas is currently a catalog-wide coverage surface. Every one of the 1,552 Basic Molecular Records reports the recorded search scope, terminal candidate-processing counts, access limitations, identity/form/stereo scope, review state, and reuse state. A source candidate or an ORD fragment is never shown as a route.
 
-The interaction moves from a zoomable/pannable route graph to a selected transformation and, only where a curated source-gated interpretation exists, to a mechanism layer. Twelve transformations carry curated mechanism teaching records. The two complete atom/bond endpoint mappings originate in foundational transformations and remain bound to those material contexts. Reported steps with incompatible materials fail closed. Unmapped movements remain explanatory text and draw no decorative arrow; steps without an eligible mechanism fail closed. Forward and retrosynthetic reading use the same route data in reversed deterministic order. Four route-bound challenge types cover reaction class, step order, missing intermediate, and mechanism choice.
+A local private migration archive records six historical drafts whose attested review state is pending and reuse mode is link-only. The current tracked public tree retains only aggregate counts/digests and three identity-scoped pending-review booleans; public CI cannot revalidate the withheld route rows. The generated public route index therefore contains zero entries and no public route detail file exists. The three affected molecular records may state only that reported-route evidence is pending review; they do not disclose route identity, type, completeness, steps, materials, sources, locators, mechanism content, or synthesis answer keys.
 
-Every route has a direct HTTPS patent-document anchor and human-resolvable locator. A bad/search URL, missing anchor, missing step-source mapping, or declared evidence gap prevents presentation as a fully source-supported reported route. The current route gates split into three direct-source-supported and three source-context-supported routes. Only the Atenolol and Carvedilol reported-kind routes qualify for strict source-reported presentation; Propranolol remains a source-context reconstruction. Mechanism arrows are curated teaching interpretations consistent with the cited connectivity; they are not claimed to be diagrams published in the patent.
-
-All Atlas records set `operationalDetailsIncluded: false`. The interface includes general reaction-class, reagent-family, condition-family, functional-group, and bond-change language, but excludes quantity, scale, concentration, apparatus, temperature, duration, work-up, purification, yield, and execution instructions. The linked third-party patents may themselves contain operational information.
+The public renderer already supports an accessible ordered step list for a future eligible route. It loads only the minimal generated route schema and fails closed unless exact molecular identity, canonical validation, applicability, review, reuse, index/detail consistency, and safe-path checks all pass. Any future step exposes reactants, transformation, product, and evidence status in text. Operational quantities, scale, concentration, apparatus, temperature schedules, duration, work-up, purification, yield, and execution instructions remain excluded.
 
 See [Synthesis provenance](SYNTHESIS_PROVENANCE.md) for exact route/source boundaries.
 
@@ -124,7 +122,7 @@ Academy progress is device-local and content-versioned. It stores identifiers an
 - The Ketcher 3.17.2 editor is loaded only on the Lab route and processes structures in the browser. It creates a file only after an explicit local export; the public build has no upload or private cloud persistence.
 - Exact InChIKey matching uses the 1,552-record static search index. A non-match is only a non-match in that snapshot and never evidence of novelty, patentability, activity, or synthesizability.
 - Computed comparison uses the versioned canonical-SMILES path fingerprint against the curated seed and remains labelled unreviewed.
-- Instructor Studio composes local packages from real Academy and Synthesis task IDs. It has no learner account, LMS, server delivery, or cohort backend.
+- Instructor Studio currently composes local packages from eligible Nomenclature Academy task IDs. The public catalog contains zero eligible synthesis tasks; a synthesis task may enter only through a reviewed and reuse-rights-gated generated projection. It has no learner account, LMS, server delivery, or cohort backend.
 - Reviewer Console requires an injected authenticated, authorized, audited persistence adapter. The public route intentionally supplies `null` and stays locked.
 
 ## Scientific and accessibility safeguards

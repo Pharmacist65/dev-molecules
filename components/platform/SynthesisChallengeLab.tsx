@@ -38,7 +38,7 @@ function initialAnswers(challenge: SynthesisChallenge): SynthesisChallengeOption
 export function SynthesisChallengeLab({ onStoryChange }: SynthesisChallengeLabProps) {
   const { locale, t } = useI18n();
   const [challengeId, setChallengeId] = useState<SynthesisChallengeId>(
-    synthesisChallenges[0]?.id ?? "synthesis-challenge:unavailable",
+    synthesisChallenges[0]?.id ?? "synthesis-challenge:synthetic-test-only-unavailable",
   );
   const challenge = useMemo(
     () => synthesisChallenges.find((candidate) => candidate.id === challengeId) ?? synthesisChallenges[0],

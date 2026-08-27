@@ -23,7 +23,10 @@ test("Home featured molecule is idle by default and cannot pick atoms", () => {
   assert.match(home, /focusFitPadding=\{0\.14\}/);
   assert.doesNotMatch(home, /requestAnimationFrame|\.setCamera\(/);
   assert.match(shared, /if \(!atomSelectionEnabled\)/);
-  assert.match(shared, /aria-keyshortcuts=\{atomSelectionEnabled/);
+  assert.match(
+    shared,
+    /aria-keyshortcuts=\{\s*atomSelectionEnabled \|\| onMoleculeSelect/,
+  );
   assert.match(shared, /atomSelectionEnabled && \(isPreviousAtomKey \|\| isNextAtomKey\)/);
 });
 

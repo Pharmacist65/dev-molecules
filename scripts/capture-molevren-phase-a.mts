@@ -52,7 +52,6 @@ const requiredScreenshots = [
   "dossier-story.png",
   "dossier-reference.png",
   "academy.png",
-  "synthesis.png",
   "nomenclature.png",
   "lab.png",
   "mobile-home.png",
@@ -746,19 +745,6 @@ async function captureProductEvidence(
     const academy = await waitForAcademy(page);
     await captureProductViewport(page, "academy.png", academy, 78);
 
-    await openProductRoute(
-      page,
-      "#academy/synthesis/propranolol/atlas",
-      staticState,
-    );
-    const synthesis = await waitForSynthesis(page);
-    await captureProductViewport(
-      page,
-      "synthesis.png",
-      synthesis.locator("#synthesis-atlas-panel"),
-      86,
-    );
-
     await openProductRoute(page, "#academy/nomenclature/organic", staticState);
     const nomenclature = await waitForNomenclature(page);
     await captureProductViewport(page, "nomenclature.png", nomenclature, 76);
@@ -1114,26 +1100,24 @@ async function inspectVideo() {
 
 async function verifyEvidence(runtimeErrors: readonly string[]): Promise<void> {
   const screenshots = await Promise.all(requiredScreenshots.map(inspectPng));
-  const video = await inspectVideo();
   const manifest = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     baseUrl,
     productionLogoSource: "public/brand/molevren-symbol-flat.svg",
+    scope: "brand_layout_reference_only",
+    currentSynthesisAcceptanceEvidence: false,
+    scopeBoundary:
+      "The retired synthesis capture and walkthrough predated the current pending-content publication gate and are excluded from this retained reference set.",
     screenshotCount: screenshots.length,
     requiredScreenshotCount: requiredScreenshots.length,
     screenshots,
-    walkthrough: video,
     runtimeErrors,
     checks: {
       everyRequiredScreenshotPresent: screenshots.length === requiredScreenshots.length,
       everyArtifactNonempty: true,
-      walkthroughDurationWithin60To90Seconds:
-        video.durationSeconds >= 60 && video.durationSeconds <= 90,
-      walkthroughSilent: video.audioStreamCount === 0,
       desktopViewport: DESKTOP_VIEWPORT,
       mobileViewport: MOBILE_VIEWPORT,
-      walkthroughViewport: VIDEO_VIEWPORT,
     },
   };
   await writeFile(
@@ -1151,8 +1135,6 @@ async function verifyEvidence(runtimeErrors: readonly string[]): Promise<void> {
       {
         outputDirectory,
         screenshotCount: screenshots.length,
-        videoDurationSeconds: video.durationSeconds,
-        videoBytes: video.bytes,
         runtimeErrorCount: runtimeErrors.length,
       },
       null,
@@ -1160,6 +1142,12 @@ async function verifyEvidence(runtimeErrors: readonly string[]): Promise<void> {
     )}\n`,
   );
 }
+
+// Kept as inactive migration helpers only. The committed Phase A reference set
+// deliberately excludes the retired walkthrough until a new coverage-only
+// walkthrough is captured and reviewed as a separate release artifact.
+void captureWalkthrough;
+void inspectVideo;
 
 async function capture(): Promise<void> {
   await mkdir(outputDirectory, { recursive: true });
@@ -1175,7 +1163,6 @@ async function capture(): Promise<void> {
       await brandContext.close();
     }
     await captureProductEvidence(browser, runtimeErrors);
-    await captureWalkthrough(browser);
   } finally {
     await browser.close();
   }

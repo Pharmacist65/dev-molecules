@@ -53,12 +53,6 @@ const stableJson = (value: unknown): string => `${JSON.stringify(value, null, 2)
 const sha256 = (value: string): string =>
   createHash("sha256").update(value).digest("hex");
 
-const LEGACY_DISCOVERY_ADAPTERS = SYNTHESIS_DISCOVERY_ADAPTERS.map((adapter) =>
-  adapter.id === "open-reaction-database"
-    ? { ...adapter, version: "1.0.0" }
-    : adapter
-);
-
 const configurationFor = (
   options: DiscoverSynthesisCatalogOptions,
   pipelineVersion = SYNTHESIS_DISCOVERY_PIPELINE_VERSION,
@@ -73,13 +67,6 @@ const configurationFor = (
 
 const configurationHashFor = (options: DiscoverSynthesisCatalogOptions): string =>
   sha256(JSON.stringify(configurationFor(options)));
-
-const legacyConfigurationHashFor = (options: DiscoverSynthesisCatalogOptions): string =>
-  sha256(JSON.stringify(configurationFor(
-    options,
-    "synthesis-discovery-1.0.0",
-    LEGACY_DISCOVERY_ADAPTERS,
-  )));
 
 const subjectCacheUrl = (subject: SynthesisDiscoverySubject): URL =>
   new URL(`subjects/${subject.identity.inchiKey.toLowerCase()}.json`, synthesisDiscoveryWorkUrl);
@@ -257,7 +244,7 @@ const reactionCandidateFromCached = (
   };
 };
 
-/** Upgrades the private v1.0.0 cache's audit projection without re-querying. */
+/** Normalizes only a cache already produced by the exact current adapter set. */
 const normalizeCachedSearchAudit = (
   cached: SynthesisDiscoverySubjectResult,
   configurationHash: string,
@@ -350,7 +337,6 @@ const readCachedSubject = async (
   subject: SynthesisDiscoverySubject,
   configurationHash: string,
   allowIncomplete = false,
-  compatibleConfigurationHashes: readonly string[] = [],
 ): Promise<SynthesisDiscoverySubjectResult | null> => {
   try {
     const cached = JSON.parse(await readFile(subjectCacheUrl(subject), "utf8")) as
@@ -358,11 +344,15 @@ const readCachedSubject = async (
     if (
       cached.schemaVersion !== 1 ||
       !COMPATIBLE_DISCOVERY_PIPELINE_VERSIONS.has(cached.pipelineVersion) ||
-      ![configurationHash, ...compatibleConfigurationHashes].includes(
-        cached.configurationHash,
-      ) ||
+      cached.configurationHash !== configurationHash ||
       stableJson(cached.subject) !== stableJson(subject) ||
-      cached.adapters.length !== SYNTHESIS_DISCOVERY_ADAPTERS.length
+      cached.adapters.length !== SYNTHESIS_DISCOVERY_ADAPTERS.length ||
+      cached.adapters.some((adapter) => {
+        const definition = SYNTHESIS_DISCOVERY_ADAPTERS.find(
+          (candidate) => candidate.id === adapter.adapterId,
+        );
+        return !definition || definition.version !== adapter.attempt.adapterVersion;
+      })
     ) {
       return null;
     }
@@ -544,7 +534,6 @@ export const discoverSynthesisCatalog = async (
 ): Promise<SynthesisDiscoveryRunResult> => {
   const subjects = await loadSynthesisDiscoverySubjects();
   const configurationHash = configurationHashFor(options);
-  const legacyConfigurationHash = legacyConfigurationHashFor(options);
   const searchedAt = options.searchedAt ?? new Date().toISOString();
   const concurrency = options.concurrency ?? 4;
   if (!Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 16) {
@@ -568,12 +557,11 @@ export const discoverSynthesisCatalog = async (
             subject,
             configurationHash,
             false,
-            [legacyConfigurationHash],
           );
       if (result) {
         cached += 1;
-        // Persist any compatible private-cache upgrade so future runs and
-        // forensic inspection share the same truthful query audit.
+        // Persist projection-only normalization. Adapter version/configuration
+        // guards above ensure no historical provider attempt is re-stamped.
         await writeJsonAtomic(subjectCacheUrl(subject), result);
       } else {
         result = await discoverSynthesisSubject(
@@ -657,5 +645,61 @@ export const loadCompletedSynthesisDiscovery = async (): Promise<SynthesisDiscov
   ) {
     throw new Error("Synthesis discovery run is incomplete.");
   }
+  return { manifest, subjects: results, cachedSubjectCount: results.length };
+};
+
+/**
+ * Read the immutable accepted pre-journal-identity-fix discovery snapshot for
+ * extraction/audit replay. This deliberately does not normalize or re-stamp
+ * historical provider attempts as the current adapter implementation.
+ */
+export const loadAcceptedSynthesisDiscoveryBaseline = async (): Promise<
+  SynthesisDiscoveryRunResult
+> => {
+  const subjects = await loadSynthesisDiscoverySubjects();
+  const manifest = JSON.parse(
+    await readFile(new URL("run-manifest.json", synthesisDiscoveryWorkUrl), "utf8"),
+  ) as SynthesisDiscoveryRunManifest;
+  const acceptedAdapters = SYNTHESIS_DISCOVERY_ADAPTERS.map((adapter) =>
+    adapter.id === "europe-pmc"
+      ? { ...adapter, version: "1.0.0" }
+      : adapter
+  );
+  if (
+    manifest.schemaVersion !== 1 ||
+    manifest.pipelineVersion !== SYNTHESIS_DISCOVERY_PIPELINE_VERSION ||
+    manifest.catalogSnapshotId !== subjects[0]?.sourceIdentity.snapshotId ||
+    manifest.subjectCount !== subjects.length ||
+    manifest.completedSubjectCount !== subjects.length ||
+    manifest.assessedSubjectCount !== subjects.length ||
+    manifest.searchingSubjectCount !== 0 ||
+    manifest.completedAt === null ||
+    stableJson(manifest.adapters) !== stableJson(acceptedAdapters)
+  ) {
+    throw new Error(
+      "The immutable accepted synthesis discovery baseline is missing or has been overwritten.",
+    );
+  }
+  const results = await Promise.all(subjects.map(async (subject) => {
+    const result = JSON.parse(
+      await readFile(subjectCacheUrl(subject), "utf8"),
+    ) as SynthesisDiscoverySubjectResult;
+    const adapterVersionsMatch = result.adapters.every((adapter) => {
+      const definition = acceptedAdapters.find((item) => item.id === adapter.adapterId);
+      return definition?.version === adapter.attempt.adapterVersion;
+    });
+    if (
+      result.schemaVersion !== 1 ||
+      result.pipelineVersion !== manifest.pipelineVersion ||
+      result.configurationHash !== manifest.configurationHash ||
+      stableJson(result.subject) !== stableJson(subject) ||
+      result.coverage.assessmentState !== "assessed" ||
+      result.coverage.sourceSearchScope.completedAt === null ||
+      !adapterVersionsMatch
+    ) {
+      throw new Error(`Accepted synthesis baseline subject drifted: ${subject.subjectId}.`);
+    }
+    return result;
+  }));
   return { manifest, subjects: results, cachedSubjectCount: results.length };
 };

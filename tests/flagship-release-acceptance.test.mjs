@@ -84,9 +84,9 @@ test("flagship release contract keeps stable identities and complete audited sec
       }
 
       const flagship = bySlug.flagship;
-      assert.equal(flagship.synthesis.status, "source-supported");
-      assert.ok((flagship.synthesis.content?.steps.length ?? 0) > 0);
-      assert.equal(flagship.synthesis.content?.operationalDetailsIncluded, false);
+      assert.equal(flagship.synthesis.status, "unavailable");
+      assert.equal(flagship.synthesis.content, null);
+      assert.deepEqual(flagship.synthesis.sourceIds, []);
       assert.equal(flagship.nomenclature.status, "source-supported");
       assert.ok((flagship.nomenclature.content?.segments.length ?? 0) > 0);
       assert.equal(flagship.comparisons.status, "source-supported");
@@ -97,7 +97,8 @@ test("flagship release contract keeps stable identities and complete audited sec
         comparison.targetActionDifference.sourceIds.length >= 2
       ));
       assert.equal(flagship.learning.status, "source-supported");
-      assert.ok(flagship.learning.content.length >= 3);
+      assert.ok(flagship.learning.content.length >= 2);
+      assert.equal(flagship.learning.content.some((task) => task.kind === "synthesis"), false);
       assert.ok(flagship.explicitMissingFields.length > 0);
 
       for (const task of flagship.learning.content) {

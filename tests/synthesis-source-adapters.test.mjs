@@ -4,10 +4,6 @@ import test from "node:test";
 import reactionPb from "ord-schema";
 import { tsImport } from "tsx/esm/api";
 
-const { loadSynthesisDiscoverySubjects } = await tsImport(
-  "../scripts/synthesis/catalog-input.mts",
-  import.meta.url,
-);
 const {
   decodeOrdCandidate,
   discoverEuropePmc,
@@ -28,15 +24,59 @@ const jsonResponse = (value, status = 200) =>
     headers: { "content-type": "application/json" },
   });
 
-const loadPropranololSubject = async () => {
-  const subjects = await loadSynthesisDiscoverySubjects();
-  const subject = subjects.find((candidate) => candidate.identity.pubChemCid === 4_946);
-  assert.ok(subject, "checked catalog must contain the exact propranolol subject");
-  return subject;
+const syntheticSubject = {
+  schemaVersion: 1,
+  subjectId: "synthesis-discovery-subject:synthetic-compound-alpha",
+  catalogEntityId: "molecule:synthetic-fixture-alpha",
+  preferredName: "Synthetic Compound Alpha",
+  aliases: ["Synthetic Alpha", "Fixture Compound Alpha"],
+  identity: {
+    pubChemCid: 990_000_001,
+    inchiKey: "AAAAAAAAAAAAAA-BBBBBBBBBB-N",
+    connectivityKey: "AAAAAAAAAAAAAA",
+    stereochemicalAndProtonationKey: "BBBBBBBBBB-N",
+    canonicalSmiles: "C",
+    isomericSmiles: null,
+    molecularFormula: "CH4",
+  },
+  formIdentity: {
+    chemicalFormId: "chemical-form:synthetic-fixture-alpha",
+    kind: "single_component",
+    componentCount: 1,
+    sourceFormSmiles: "C",
+    sourceInchi: "InChI=1S/CH4/h1H4",
+    sourceInchiKey: "AAAAAAAAAAAAAA-BBBBBBBBBB-N",
+    chargeLayer: "N",
+  },
+  stereochemistryIdentity: {
+    stereoisomerId: "stereoisomer:synthetic-fixture-alpha",
+    specifiedInSourceInchi: false,
+    isomericSmiles: null,
+    inchiKeyStereoAndProtonationBlock: "BBBBBBBBBB-N",
+  },
+  parentResolution: {
+    catalogParentEntityId: "molecule:synthetic-fixture-alpha",
+    catalogRelation: "self",
+    catalogResolutionStatus: "self",
+    chemicalFormParentResolutionStatus: "not-applicable",
+    parentInchiKey: null,
+    freeParentSaltHydrateSolvateRelation: "unresolved",
+    limitations: ["Synthetic test fixture; no scientific identity is asserted."],
+  },
+  sourceIdentity: {
+    snapshotId: "snapshot:synthetic-fixture",
+    sourceRecordId: "drugcentral:990000001",
+    drugCentralId: 990_000_001,
+    approvalName: "Synthetic Compound Alpha",
+    inn: "synthetic-compound-alpha",
+    casNumber: "0000-00-0",
+    sourceIds: ["source:synthetic-fixture-alpha"],
+    capturedAt: "2026-08-27T00:00:00.000Z",
+  },
 };
 
 test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as candidates", async () => {
-  const subject = await loadPropranololSubject();
+  const subject = syntheticSubject;
   const requestedUrls = [];
   const originalFetch = globalThis.fetch;
 
@@ -52,8 +92,8 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
               TOCHeading: "Methods of Manufacturing",
               Information: [
                 {
-                  Reference: ["US 3,337,628 A"],
-                  ExtendedReference: [{ Citation: "A journal manufacturing citation" }],
+                  Reference: ["Synthetic patent fixture citation"],
+                  ExtendedReference: [{ Citation: "Synthetic journal fixture citation" }],
                   Value: {
                     StringWithMarkup: [
                       {
@@ -76,10 +116,10 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
           Information: [
             {
               Synonym: [
-                "Propranolol",
-                "dl-Propranolol",
-                "Propranolol hydrochloride",
-                "525-66-6",
+                "Synthetic Compound Alpha",
+                "Synthetic Alpha",
+                "Fixture Compound Alpha",
+                "0000-00-0",
                 "InChI=not-an-alias",
               ],
             },
@@ -88,7 +128,7 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
       });
     }
     if (url.host === "pubchem.ncbi.nlm.nih.gov" && url.pathname.endsWith("/cids/JSON")) {
-      return jsonResponse({ IdentifierList: { CID: [62_882] } });
+      return jsonResponse({ IdentifierList: { CID: [990_000_002] } });
     }
     if (url.host === "www.ebi.ac.uk") {
       const query = url.searchParams.get("query") ?? "";
@@ -98,9 +138,9 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
             result: [
               {
                 source: "PAT",
-                id: "US3337628A",
-                title: "Process for preparation of Propranolol",
-                pubYear: "1967",
+                id: "synthetic-patent-document-alpha",
+                title: "Process for preparation of Synthetic Compound Alpha",
+                pubYear: "2099",
               },
             ],
           },
@@ -110,17 +150,22 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
         resultList: {
           result: [
             {
-              title: "Synthesis of Propranolol",
-              doi: "10.1000/example-propranolol",
-              pmid: "12345678",
-              pubYear: "2024",
+              title: "Synthesis of Synthetic Compound Alpha",
+              pmcid: "PMC-SYNTHETIC-FIXTURE-ALPHA",
+              pubYear: "2099",
               isOpenAccess: "Y",
-              journalTitle: "Journal of Example Chemistry",
+              journalTitle: "Synthetic Fixture Journal",
             },
             {
               title: "Unrelated clinical observation",
-              pmid: "99999999",
-              pubYear: "2023",
+              pmid: "fixture-unrelated-record",
+              pubYear: "2098",
+              isOpenAccess: "N",
+            },
+            {
+              source: "PAT",
+              title: "Synthesis of Synthetic Compound Alpha",
+              pubYear: "2099",
               isOpenAccess: "N",
             },
           ],
@@ -171,22 +216,31 @@ test("automated source adapters retain PubChem, Europe PMC and exact ORD hits as
     assert.equal(pubChem.evidence[0].locator, null);
     assert.match(pubChem.evidence[0].url, /Methods-of-Manufacturing/u);
     assert.deepEqual(pubChem.metadata.identityAliases, [
-      "Propranolol",
-      "dl-Propranolol",
-      "Propranolol hydrochloride",
+      "Synthetic Compound Alpha",
+      "Synthetic Alpha",
+      "Fixture Compound Alpha",
     ]);
-    assert.deepEqual(pubChem.metadata.parentCids, [62_882]);
+    assert.deepEqual(pubChem.metadata.parentCids, [990_000_002]);
     assert.equal(pubChem.metadata.parentRelationCandidate, "different_parent_candidate");
 
     assert.equal(journal.evidence[0].sourceKind, "journal");
-    assert.equal(journal.evidence[0].documentId, "doi:10.1000/example-propranolol");
-    assert.equal(journal.evidence[0].url, "https://doi.org/10.1000/example-propranolol");
+    assert.equal(
+      journal.evidence[0].documentId,
+      "pmcid:PMC-SYNTHETIC-FIXTURE-ALPHA",
+    );
+    assert.equal(
+      journal.evidence[0].url,
+      "https://europepmc.org/articles/PMC-SYNTHETIC-FIXTURE-ALPHA",
+    );
     assert.equal(journal.evidence[0].licenseState, "unknown");
     assert.equal(journal.evidence[0].reuseMode, "metadata_and_link_only");
     assert.equal(journal.evidence[0].locator, null);
+    assert.equal(journal.metadata.rejectedMissingStableDocumentIdentityCount, 1);
+    assert.equal(journal.metadata.stableDocumentIdentityRequired, true);
+    assert.match(journal.metadata.apiUrl, /SRC%3AMED/u);
 
     assert.equal(patent.evidence[0].sourceKind, "patent");
-    assert.equal(patent.evidence[0].documentId, "US3337628A");
+    assert.equal(patent.evidence[0].documentId, "SYNTHETICPATENTDOCUMENTALPHA");
     assert.equal(patent.evidence[0].licenseState, "link_only");
     assert.equal(patent.evidence[0].reuseMode, "metadata_and_link_only");
     assert.equal(patent.evidence[0].locator, null);
@@ -272,14 +326,14 @@ test("decoded exact ORD product match is a normalized pending fragment, never a 
   productInchiKey.setType(
     reactionPb.CompoundIdentifier.CompoundIdentifierType.INCHI_KEY,
   );
-  productInchiKey.setValue("LFQSCWFLJHTTHZ-UHFFFAOYSA-N");
+  productInchiKey.setValue("CCCCCCCCCCCCCC-DDDDDDDDDD-N");
   const productSmiles = product.addIdentifiers();
   productSmiles.setType(reactionPb.CompoundIdentifier.CompoundIdentifierType.SMILES);
   productSmiles.setValue("CC=O");
 
   const provenance = new reactionPb.ReactionProvenance();
   provenance.setDoi("10.1000/example");
-  provenance.setPatent("US1234567A");
+  provenance.setPatent("synthetic-patent-document-beta");
   provenance.setPublicationUrl("https://example.test/source");
   provenance.setIsMined(true);
   reaction.setProvenance(provenance);
@@ -288,7 +342,7 @@ test("decoded exact ORD product match is a normalized pending fragment, never a 
     dataset_id: "ord-dataset-example",
     reaction_id: "ord-reaction-decoded",
     proto: Buffer.from(reaction.serializeBinary()).toString("base64"),
-  }, "LFQSCWFLJHTTHZ-UHFFFAOYSA-N");
+  }, "CCCCCCCCCCCCCC-DDDDDDDDDD-N");
 
   assert.equal(fragment.candidateState, "candidate");
   assert.equal(fragment.reviewState, "pending");
@@ -312,7 +366,7 @@ test("decoded exact ORD product match is a normalized pending fragment, never a 
       name: null,
       smiles: "CC=O",
       inchi: null,
-      inchiKey: "LFQSCWFLJHTTHZ-UHFFFAOYSA-N",
+      inchiKey: "CCCCCCCCCCCCCC-DDDDDDDDDD-N",
       casNumber: null,
       pubChemCid: null,
       identityResolution: "exact_inchi_key",
@@ -333,7 +387,7 @@ test("decoded exact ORD product match is a normalized pending fragment, never a 
     datasetId: "ord-dataset-example",
     reactionId: "ord-reaction-decoded",
     doi: "10.1000/example",
-    patent: "US1234567A",
+    patent: "synthetic-patent-document-beta",
     publicationUrl: "https://example.test/source",
     isMined: true,
   });
@@ -382,21 +436,21 @@ test("decoded exact ORD product match is a normalized pending fragment, never a 
 });
 
 test("candidate evidence assertions are scoped to the exact target identity", async () => {
-  const subject = await loadPropranololSubject();
+  const subject = syntheticSubject;
   const secondIdentity = {
     ...subject,
-    subjectId: "synthesis-discovery-subject:bsynrymutsbxsq-uhfffaoysa-n",
-    catalogEntityId: "molecule:test-propranolol-name-second-identity",
+    subjectId: "synthesis-discovery-subject:synthetic-compound-beta",
+    catalogEntityId: "molecule:synthetic-fixture-alpha-second-identity",
     identity: {
       ...subject.identity,
-      inchiKey: "BSYNRYMUTXBXSQ-UHFFFAOYSA-N",
+      inchiKey: "EEEEEEEEEEEEEE-FFFFFFFFFF-N",
     },
   };
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => jsonResponse({
     resultList: {
       result: [{
-        title: "Synthesis of Propranolol",
+        title: "Synthesis of Synthetic Compound Alpha",
         doi: "10.1000/shared-document",
         pubYear: "2000",
         isOpenAccess: "N",
@@ -416,7 +470,7 @@ test("candidate evidence assertions are scoped to the exact target identity", as
 });
 
 test("adapter HTTP failure is retained as completed_with_errors without evidence", async () => {
-  const subject = await loadPropranololSubject();
+  const subject = syntheticSubject;
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => jsonResponse({ error: "temporarily unavailable" }, 503);
 

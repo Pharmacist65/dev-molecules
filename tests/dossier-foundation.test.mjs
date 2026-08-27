@@ -48,11 +48,11 @@ test("drug-specific lesson links fail closed against dossier coverage", () => {
     nomenclature: false,
   });
   assert.deepEqual(getDossierLearningAvailability(propranolol), {
-    synthesis: true,
+    synthesis: false,
     nomenclature: true,
   });
   assert.deepEqual(getDossierLearningAvailability(celecoxib), {
-    synthesis: true,
+    synthesis: false,
     nomenclature: true,
   });
 });

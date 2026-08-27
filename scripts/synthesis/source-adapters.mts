@@ -18,7 +18,7 @@ import type {
 
 export const SYNTHESIS_DISCOVERY_ADAPTERS = [
   { id: "pubchem-manufacturing", version: "1.0.0", required: true },
-  { id: "europe-pmc", version: "1.0.0", required: true },
+  { id: "europe-pmc", version: "1.1.0", required: true },
   { id: "europe-pmc-patents", version: "1.0.0", required: true },
   { id: "open-reaction-database", version: "1.1.0", required: true },
 ] as const;
@@ -374,17 +374,19 @@ export const discoverEuropePmc = async (
   const adapterId = "europe-pmc" as const;
   const evidence = new Map<string, SynthesisSourceEvidence>();
   const errors: string[] = [];
+  let rejectedMissingStableDocumentIdentityCount = 0;
   const names = queryNames(subject, additionalNames);
   const url = new URL("https://www.ebi.ac.uk/europepmc/webservices/rest/search");
+  const titleClauses = names
+    .flatMap((name) => [
+      `TITLE:"synthesis of ${europePmcPhrase(name)}"`,
+      `TITLE:"preparation of ${europePmcPhrase(name)}"`,
+      `TITLE:"process for ${europePmcPhrase(name)}"`,
+    ])
+    .join(" OR ");
   url.searchParams.set(
     "query",
-    names
-      .flatMap((name) => [
-        `TITLE:"synthesis of ${europePmcPhrase(name)}"`,
-        `TITLE:"preparation of ${europePmcPhrase(name)}"`,
-        `TITLE:"process for ${europePmcPhrase(name)}"`,
-      ])
-      .join(" OR "),
+    `SRC:MED AND (${titleClauses})`,
   );
   url.searchParams.set("format", "json");
   url.searchParams.set("pageSize", String(context.maxCandidatesPerAdapter));
@@ -398,13 +400,19 @@ export const discoverEuropePmc = async (
       if (!names.some((name) => identityMatches(title, name)) || !synthesisTerms.test(title)) {
         continue;
       }
+        if (!candidate.doi && !candidate.pmcid && !candidate.pmid) {
+          // Historical adapter versions minted a title-hash fallback and an
+          // empty MED URL here. Those unstable candidates are now excluded;
+          // the extraction audit preserves the historical associations as
+          // `superseded` rather than silently overwriting them.
+          rejectedMissingStableDocumentIdentityCount += 1;
+          continue;
+        }
         const documentId = candidate.doi
           ? `doi:${candidate.doi.toLowerCase()}`
           : candidate.pmcid
             ? `pmcid:${candidate.pmcid}`
-            : candidate.pmid
-              ? `pmid:${candidate.pmid}`
-              : `europe-pmc:${sha256(title).slice(0, 16)}`;
+            : `pmid:${candidate.pmid}`;
         const directUrl = candidate.doi
           ? `https://doi.org/${candidate.doi}`
           : candidate.pmcid
@@ -443,7 +451,12 @@ export const discoverEuropePmc = async (
       errors,
     ),
     evidence: [...evidence.values()].slice(0, context.maxCandidatesPerAdapter),
-    metadata: { queryNames: names, apiUrl: url.toString() },
+    metadata: {
+      queryNames: names,
+      apiUrl: url.toString(),
+      rejectedMissingStableDocumentIdentityCount,
+      stableDocumentIdentityRequired: true,
+    },
   };
 };
 

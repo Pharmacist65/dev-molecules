@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-27T19:52:12.021Z",
+  "pipelineVersion": "synthesis-source-content-2.0.0",
+  "parserVersion": "2.0.0",
+  "runId": "synthesis-source-content-run:20260827182521",
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "runState": "complete",
+  "denominators": {
+    "catalogCoverageIdentities": 1552,
+    "acceptedCandidateAssociations": 14897,
+    "sourceContentInventoryCoverageIdentities": 1064,
+    "sourceContentAssociations": 10248,
+    "sourceContentDocuments": 9992,
+    "completedSourceContentAssociations": 10248,
+    "completedSourceContentDocuments": 9992,
+    "remainingSourceContentDocuments": 0
+  },
+  "documentCountsBySourceKind": {
+    "journal": 4052,
+    "patent": 5940
+  },
+  "routeExtractionStateCounts": {
+    "source_locator_candidate": 1720,
+    "inspected_no_segment": 2924,
+    "metadata_only": 3047,
+    "access_blocked": 0,
+    "retryable_error": 0,
+    "parse_error": 665,
+    "unsupported": 1636
+  },
+  "accessStateCounts": {
+    "full_text_accessible": 4644,
+    "metadata_only": 3047,
+    "access_blocked": 0,
+    "retryable_error": 0,
+    "parse_error": 665,
+    "unsupported": 1636
+  },
+  "rightsStateCounts": {
+    "open_license_detected": 23,
+    "public_access_no_reuse_inference": 4621,
+    "metadata_only": 5348,
+    "unknown": 0
+  },
+  "locatorContextTotals": {
+    "located": 23914,
+    "admitted": 23725,
+    "ambiguous": 189,
+    "truncated": 9933,
+    "retained": 13981,
+    "unitBoundary": "Generated structured locator-context candidates; not molecules, reactions, route segments, steps, or routes."
+  },
+  "evidenceBoundary": {
+    "canonicalRouteCreatedCount": 0,
+    "directReportedEvidenceClaimedCount": 0,
+    "sourceDocumentBodyStored": false,
+    "operationalDetailsIncluded": false,
+    "sourceContentPipelineWrotePublicArtifacts": false,
+    "openAccessLabelAloneUsedAsReusePermission": false,
+    "absenceMeansNoveltyPatentabilityOrSynthesizability": false
+  },
+  "rejectedPredecessor": {
+    "pipelineVersion": "synthesis-source-content-1.0.0",
+    "reusePermitted": false,
+    "reason": "V1 retained source-text windows and was rejected; no V1 checkpoint or attempt was reused by V2."
+  },
+  "recordSetSha256": "254891232ab2c7612920b0e1434818deb8b4b9bcd1fb8fdd47a341e7ed6600fd"
+}

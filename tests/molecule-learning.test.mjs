@@ -219,13 +219,14 @@ test("Student structural lens exposes only a locale-stable representative region
   assert.deepEqual([...keysByDisplayedFamily.keys()], ["Temsilî yapılar"]);
 });
 
-test("route availability is stated narrowly and does not imply missing synthesis knowledge", () => {
+test("route availability fails closed without a validated public route projection", () => {
   const propranolol = moleculeCatalog.find((item) => item.id === "molecule:propranolol");
   const aspirin = moleculeCatalog.find((item) => item.id === "molecule:aspirin");
   assert.ok(propranolol);
   assert.ok(aspirin);
 
-  assert.match(createStudentMoleculeProfile(propranolol, "en").synthesisScope, /source-linked/i);
-  assert.match(createStudentMoleculeProfile(aspirin, "en").synthesisScope, /no curated route/i);
+  assert.match(createStudentMoleculeProfile(propranolol, "en").synthesisScope, /no publishable route/i);
+  assert.match(createStudentMoleculeProfile(aspirin, "en").synthesisScope, /no publishable route/i);
+  assert.match(createStudentMoleculeProfile(propranolol, "en").synthesisScope, /coverage record/i);
   assert.doesNotMatch(createStudentMoleculeProfile(aspirin, "en").synthesisScope, /impossible|novel/i);
 });

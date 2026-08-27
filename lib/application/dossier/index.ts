@@ -5,6 +5,7 @@ import { createPharmacologyProfile } from "@/lib/application/pharmacology";
 import {
   collectFlagshipSourceIds,
   filterFlagshipAdmeProfiles,
+  gateLegacyFlagshipSynthesisForPublic,
   validateFlagshipDossierSeed,
 } from "./flagship";
 export {
@@ -16,8 +17,6 @@ import { curatedDossierMolecules } from "@/lib/data/curated-dossier-catalog";
 import { createFlagshipDossierSeed } from "@/lib/data/flagship-dossiers";
 import { pubChemSystematicNameByCid } from "@/lib/data/pubchem-systematic-names";
 import { sourceById } from "@/lib/data/sources";
-import { synthesisStories } from "@/lib/data/synthesis-stories";
-import { canPresentAsSourceReported } from "@/lib/domain/synthesis";
 import type {
   EvidenceLevel,
   SourceKind,
@@ -191,7 +190,13 @@ export function createDrugDossier(
   const candidateFlagshipSeed = createFlagshipDossierSeed(record.id, locale);
   const flagshipSeed = candidateFlagshipSeed &&
     validateFlagshipDossierSeed(candidateFlagshipSeed, resolveSource).length === 0
-      ? candidateFlagshipSeed
+      ? {
+          ...candidateFlagshipSeed,
+          content: gateLegacyFlagshipSynthesisForPublic(
+            candidateFlagshipSeed.content,
+            locale,
+          ),
+        }
       : null;
   const identitySourceId = record.identity.sourceIds[0];
   const identityNote = localized(
@@ -231,10 +236,8 @@ export function createDrugDossier(
     resolveSource,
     locale,
   );
-  const synthesisStory = synthesisStories.find((story) =>
-    story.moleculeId === record.id && canPresentAsSourceReported(story));
   const flagshipSynthesis = flagshipSeed?.content.synthesis.content ?? null;
-  const synthesisStatus = flagshipSynthesis || synthesisStory
+  const synthesisStatus = flagshipSynthesis
     ? "source-supported"
     : "unavailable";
   const dossierSourceIds = [
@@ -243,7 +246,6 @@ export function createDrugDossier(
     record.structures.threeDimensional.sourceId,
     ...reviewedForms.flatMap((form) => form.sourceIds),
     ...admeProfiles.flatMap((profile) => profile.sourceIds),
-    ...(synthesisStory?.sourceIds ?? []),
     ...(flagshipSeed ? collectFlagshipSourceIds(flagshipSeed) : []),
   ];
 
@@ -377,19 +379,23 @@ export function createDrugDossier(
     ), admeFieldCount, null),
     coverage("synthesis", synthesisStatus, localized(
       locale,
-      flagshipSynthesis || synthesisStory ? "Kaynak denetimli eğitim rotası mevcut; uzman inceleme durumu ayrıca korunur." : "Bu ilaç için kürate edilmiş rota henüz yok.",
-      flagshipSynthesis || synthesisStory ? "A source-audited educational route is available; its expert-review boundary remains visible." : "No curated route is available for this drug yet.",
-    ), flagshipSynthesis || synthesisStory ? 1 : 0, null),
+      flagshipSynthesis
+        ? "Yayın kapısını geçen sentez rotası mevcuttur."
+        : "Bu statik dossier sentez kanıtı iddiası yayımlamaz; güncel durum Sentez Atlası kapsam kaydından okunur.",
+      flagshipSynthesis
+        ? "A synthesis route has passed the publication gate."
+        : "This static dossier publishes no synthesis-evidence claim; current status comes from the Synthesis Atlas coverage record.",
+    ), flagshipSynthesis ? 1 : 0, null),
     coverage("nomenclature", nomenclatureFieldCount > 0 ? "source-supported" : "unavailable", localized(
       locale,
       nomenclatureFieldCount > 0 ? "Kaynak-spesifik ilaç nomenklatür çözümlemesi mevcuttur; uzman inceleme sınırı korunur." : systematicName ? "Kaynaklı sistematik ad kimya özetinde gösterilir; ilaç-özel etkileşimli nomenklatür dersi henüz yok." : "İlaç-özel nomenklatür çözümlemesi henüz yok.",
       nomenclatureFieldCount > 0 ? "A source-specific drug nomenclature decomposition is available; its expert-review boundary remains visible." : systematicName ? "The sourced systematic name appears in the chemistry summary; no drug-specific interactive nomenclature lesson is available yet." : "No drug-specific nomenclature decomposition is available yet.",
     ), nomenclatureFieldCount, null),
-    coverage("learning", learningFieldCount > 0 || synthesisStory ? "source-supported" : "pending-review", localized(
+    coverage("learning", learningFieldCount > 0 ? "source-supported" : "pending-review", localized(
       locale,
       "Derin öğrenme içeriği katalog genişliğinden ayrı kürate edilir.",
       "Deep-learning content is curated separately from catalog breadth.",
-    ), learningFieldCount || (synthesisStory ? 1 : 0), null),
+    ), learningFieldCount, null),
     coverage("review", "source-supported", localized(
       locale,
       "Kimlik ve yapı incelendi; diğer bilimsel katmanlar kendi kaynak ve inceleme kapılarında kalır.",
@@ -399,7 +405,7 @@ export function createDrugDossier(
       classificationFieldCount,
       pharmacologyFieldCount,
       admeFieldCount,
-      synthesisAvailable: Boolean(flagshipSynthesis || synthesisStory),
+      synthesisAvailable: Boolean(flagshipSynthesis),
       nomenclatureFieldCount,
       learningFieldCount,
     }), 9),

@@ -28,96 +28,97 @@ const LATER = "2026-08-27T08:05:00.000Z";
 const HASH_A = "a".repeat(64);
 const HASH_B = "b".repeat(64);
 
-const propranololIdentity = {
-  catalogEntityId: "molecule:propranolol",
-  preferredName: "Propranolol",
-  aliases: ["Propanolol"],
-  casNumber: "525-66-6",
-  pubChemCid: 4946,
-  inchiKey: "KZJWDPNRJALLNS-VJSFXXLFSA-N",
-  connectivityKey: "KZJWDPNRJALLNS",
-  stereochemicalKey: "VJSFXXLFSA",
-  canonicalSmiles: "CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O",
+const syntheticIdentity = {
+  catalogEntityId: "molecule:synthetic-test-only",
+  preferredName: "Synthetic test molecule",
+  aliases: ["Synthetic test alias"],
+  casNumber: "99999-99-9",
+  pubChemCid: 999999999,
+  inchiKey: "AAAAAAAAAAAAAA-BBBBBBBBBB-C",
+  connectivityKey: "AAAAAAAAAAAAAA",
+  stereochemicalKey: "BBBBBBBBBB",
+  canonicalSmiles: "CCO",
   isomericSmiles: null,
-  sourceFormSmiles: "CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O",
+  sourceFormSmiles: "CCO",
   parentEntity: {
-    id: "parent:KZJWDPNRJALLNS",
+    id: "parent:AAAAAAAAAAAAAA",
     relation: "self",
     resolutionStatus: "self",
     exactIdentity: {
-      catalogEntityId: "molecule:propranolol",
-      pubChemCid: 4946,
-      inchiKey: "KZJWDPNRJALLNS-VJSFXXLFSA-N",
+      catalogEntityId: "molecule:synthetic-test-only",
+      pubChemCid: 999999999,
+      inchiKey: "AAAAAAAAAAAAAA-BBBBBBBBBB-C",
     },
     resolutionEvidenceIds: [],
   },
   chemicalForm: {
-    id: "form:kzjwdpnrjallns-vjsfxxlfsa-n:components-1",
+    id: "form:synthetic-test-only:components-1",
     sourceKind: "single-component-source-form",
     normalizedKind: "free_parent",
     componentCount: 1,
     parentResolutionStatus: "not_applicable",
   },
   stereoisomer: {
-    id: "stereo:KZJWDPNRJALLNS-VJSFXXLFSA-N",
+    id: "stereo:AAAAAAAAAAAAAA-BBBBBBBBBB-C",
     specified: false,
   },
 };
 
-const aspirinIdentity = {
-  ...propranololIdentity,
-  catalogEntityId: "molecule:aspirin",
-  preferredName: "Aspirin",
-  aliases: ["Acetylsalicylic acid"],
-  casNumber: "50-78-2",
-  pubChemCid: 2244,
-  inchiKey: "BSYNRYMUTXBXSQ-UHFFFAOYSA-N",
-  connectivityKey: "BSYNRYMUTXBXSQ",
-  stereochemicalKey: "UHFFFAOYSA",
-  canonicalSmiles: "CC(=O)OC1=CC=CC=C1C(=O)O",
-  sourceFormSmiles: "CC(=O)OC1=CC=CC=C1C(=O)O",
+const secondSyntheticIdentity = {
+  ...syntheticIdentity,
+  catalogEntityId: "molecule:synthetic-test-only-secondary",
+  preferredName: "Synthetic test molecule secondary",
+  aliases: ["Synthetic test alias secondary"],
+  casNumber: "88888-88-8",
+  pubChemCid: 888888888,
+  inchiKey: "CCCCCCCCCCCCCC-DDDDDDDDDD-N",
+  connectivityKey: "CCCCCCCCCCCCCC",
+  stereochemicalKey: "DDDDDDDDDD",
+  canonicalSmiles: "CCN",
+  sourceFormSmiles: "CCN",
   parentEntity: {
-    id: "parent:BSYNRYMUTXBXSQ",
+    id: "parent:CCCCCCCCCCCCCC",
     relation: "self",
     resolutionStatus: "self",
     exactIdentity: {
-      catalogEntityId: "molecule:aspirin",
-      pubChemCid: 2244,
-      inchiKey: "BSYNRYMUTXBXSQ-UHFFFAOYSA-N",
+      catalogEntityId: "molecule:synthetic-test-only-secondary",
+      pubChemCid: 888888888,
+      inchiKey: "CCCCCCCCCCCCCC-DDDDDDDDDD-N",
     },
     resolutionEvidenceIds: [],
   },
   chemicalForm: {
-    id: "form:bsynrymutxbxsq-uhfffaoysa-n:components-1",
+    id: "form:synthetic-test-only-secondary:components-1",
     sourceKind: "single-component-source-form",
     normalizedKind: "free_parent",
     componentCount: 1,
     parentResolutionStatus: "not_applicable",
   },
   stereoisomer: {
-    id: "stereo:BSYNRYMUTXBXSQ-UHFFFAOYSA-N",
+    id: "stereo:CCCCCCCCCCCCCC-DDDDDDDDDD-N",
     specified: false,
   },
 };
 
+// Fully synthetic test-only evidence; it is not a real source or route record.
 const patentEvidence = {
-  id: "synthesis-source-evidence:us3337628a-example-4",
+  id: "synthesis-source-evidence:synthetic-test-only-patent-example",
   resolutionState: "resolved",
-  sourceId: "source:patent-us3337628a",
+  sourceId: "source:synthetic-test-only-patent",
   sourceKind: "patent",
-  documentId: "US3337628A",
-  patentFamilyId: "family:us3337628",
-  title: "3-Naphthyloxy-2-hydroxypropylamines",
-  url: "https://patents.google.com/patent/US3337628A/en",
-  publicationYear: 1967,
+  documentId: "TEST-DOCUMENT-001",
+  patentFamilyId: "synthetic-family:test-only",
+  title: "Synthetic test-only transformation record",
+  url: "https://example.invalid/synthetic-test-only",
+  publicationYear: 2026,
   retrievedAt: NOW,
   documentSha256: HASH_A,
   locator: {
     kind: "patent_example",
-    value: "Example 4, named starting pair and product paragraph",
-    page: "7",
+    value: "Synthetic example locator",
+    page: "1",
     scheme: null,
-    example: "4",
+    example: "test-only",
   },
   supportScope: "complete_route",
   licenseState: "permitted",
@@ -216,46 +217,59 @@ const noRouteCoverage = (identity) => ({
 });
 
 const startingA = {
-  id: "synthesis-material:propranolol-epoxide",
+  id: "synthesis-material:test-only-start-a",
   role: "starting_material",
-  label: "Naphthoxy epoxide",
+  label: "Synthetic starting material A",
   identityResolution: "name_only",
-  canonicalSmiles: null,
+  canonicalSmiles: "CN",
   isomericSmiles: null,
   inchiKey: null,
   sourceEvidenceIds: [patentEvidence.id],
 };
 const startingB = {
-  id: "synthesis-material:isopropylamine",
+  id: "synthesis-material:test-only-start-b",
   role: "starting_material",
-  label: "Isopropylamine",
+  label: "Synthetic starting material B",
   identityResolution: "connectivity_only",
-  canonicalSmiles: "CC(C)N",
+  canonicalSmiles: "CO",
   isomericSmiles: null,
   inchiKey: null,
   sourceEvidenceIds: [patentEvidence.id],
 };
 const target = {
-  id: "synthesis-material:propranolol-parent",
+  id: "synthesis-material:test-only-target",
   role: "target_parent",
-  label: "Propranolol parent",
+  label: "Synthetic test-only target",
   identityResolution: "exact_inchi_key",
-  canonicalSmiles: propranololIdentity.canonicalSmiles,
+  canonicalSmiles: syntheticIdentity.canonicalSmiles,
   isomericSmiles: null,
-  inchiKey: propranololIdentity.inchiKey,
+  inchiKey: syntheticIdentity.inchiKey,
   sourceEvidenceIds: [patentEvidence.id],
 };
 
 const reportedStep = {
-  id: "synthesis-route-step:propranolol-01",
+  id: "synthesis-route-step:test-only-01",
   order: 1,
   inputMaterialIds: [startingA.id, startingB.id],
   outputMaterialIds: [target.id],
-  title: "Open the epoxide with the amine",
+  title: "Synthetic test-only transformation",
   reactionClass: {
-    taxonomyId: "rxn:epoxide-aminolysis",
-    label: "Amine epoxide opening",
+    taxonomyId: "rxn:test-only-transformation",
+    label: "Amine test transformation",
     normalizationState: "normalized",
+    provenance: {
+      taxonomyName: "Molevren reaction taxonomy",
+      taxonomyVersion: "test-v1",
+      confidence: 1,
+      state: "reviewed",
+    },
+  },
+  atomMapping: {
+    mapperName: "manual-test-fixture-review",
+    mapperVersion: "test-v1",
+    confidence: 1,
+    state: "reviewed",
+    reason: "The test fixture's mapped bond change was explicitly reviewed.",
   },
   evidenceMode: "direct_reported",
   sourceEvidenceIds: [patentEvidence.id],
@@ -289,19 +303,19 @@ const reportedStep = {
 
 const validReportedRoute = {
   schemaVersion: 1,
-  id: "synthesis-route:propranolol-us3337628a-example-4",
-  coverageId: `synthesis-coverage:${propranololIdentity.catalogEntityId}`,
+  id: "synthesis-route:synthetic-test-only-test-document-example-4",
+  coverageId: `synthesis-coverage:${syntheticIdentity.catalogEntityId}`,
   version: "1.0.0",
-  identityScope: propranololIdentity,
+  identityScope: syntheticIdentity,
   applicability: "applicable",
   routeCompleteness: "complete",
   reviewState: "reviewed",
   licenseState: "permitted",
-  routeFamilyId: "route-family:propranolol-epoxide-opening",
+  routeFamilyId: "route-family:synthetic-test-only",
   variantKind: "original_patent",
-  publicationYear: 1967,
-  title: "Propranolol patent-reported epoxide opening",
-  startBoundary: "Preformed naphthoxy epoxide and isopropylamine",
+  publicationYear: 2026,
+  title: "Synthetic test molecule patent-reported test transformation",
+  startBoundary: "Preformed synthetic precursor A and synthetic precursor B",
   stereochemicalStrategy: "Racemic connectivity; no absolute configuration claim.",
   targetMaterialId: target.id,
   materials: [startingA, startingB, target],
@@ -321,6 +335,11 @@ const validReportedRoute = {
   ],
   safety: { operationalDetailsIncluded: false },
   routeType: "patent_reported",
+  reportedSegments: [{
+    sourceSegmentId: "synthetic-source-segment:test-only",
+    stepIds: [reportedStep.id],
+    sourceEvidenceIds: [patentEvidence.id],
+  }],
   reportedCompleteRouteSourceIds: [patentEvidence.id],
 };
 
@@ -357,11 +376,12 @@ test("canonical status vocabularies preserve the exact requested values", () => 
     "partial",
     "upstream_gap",
     "convergent_partial",
+    "unknown",
   ]);
 });
 
 test("an assessed no-route record remains publishable without implying novelty or impossibility", () => {
-  const coverage = noRouteCoverage(aspirinIdentity);
+  const coverage = noRouteCoverage(secondSyntheticIdentity);
   assert.deepEqual(validateSynthesisCoverageRecord(coverage), []);
   assert.deepEqual(getSynthesisCoveragePublicationDecision(coverage), {
     coverageAllowed: true,
@@ -377,7 +397,7 @@ test("an assessed no-route record remains publishable without implying novelty o
 
 test("pending discovery cannot inflate applicability without resolved direct route evidence", () => {
   const noneFoundApplicable = {
-    ...noRouteCoverage(aspirinIdentity),
+    ...noRouteCoverage(secondSyntheticIdentity),
     applicability: "applicable",
   };
   assert.ok(
@@ -395,10 +415,10 @@ test("pending discovery cannot inflate applicability without resolved direct rou
     supportScope: "route_segment",
   };
   const candidateApplicable = {
-    ...noRouteCoverage(propranololIdentity),
+    ...noRouteCoverage(syntheticIdentity),
     sourceEvidenceState: "candidate_sources",
     applicability: "applicable",
-    sourceSearchScope: searchScope(propranololIdentity, 1),
+    sourceSearchScope: searchScope(syntheticIdentity, 1),
     sourceEvidenceIds: [candidateEvidence.id],
   };
   assert.ok(
@@ -411,10 +431,10 @@ test("pending discovery cannot inflate applicability without resolved direct rou
 
 test("assessed coverage separates exact identity from the CID, name and SMILES actually queried", () => {
   const missingSmilesQuery = {
-    ...noRouteCoverage(propranololIdentity),
+    ...noRouteCoverage(syntheticIdentity),
     sourceSearchScope: {
-      ...searchScope(propranololIdentity),
-      identifiersQueried: searchScope(propranololIdentity)
+      ...searchScope(syntheticIdentity),
+      identifiersQueried: searchScope(syntheticIdentity)
         .identifiersQueried.filter((query) => query.kind !== "canonical_smiles"),
     },
   };
@@ -422,16 +442,16 @@ test("assessed coverage separates exact identity from the CID, name and SMILES a
     .map((issue) => issue.code);
   assert.ok(codes.includes("missing-synthesis-smiles-query"));
   assert.equal(
-    searchScope(propranololIdentity).identifiersQueried.some(
+    searchScope(syntheticIdentity).identifiersQueried.some(
       (query) => query.kind === "cas_number" || query.kind === "inchi_key",
     ),
     false,
   );
 
   const missingPatentProvider = {
-    ...noRouteCoverage(propranololIdentity),
+    ...noRouteCoverage(syntheticIdentity),
     sourceSearchScope: {
-      ...searchScope(propranololIdentity),
+      ...searchScope(syntheticIdentity),
       providers: searchProviders().filter((item) => item.provider !== "patent"),
     },
   };
@@ -443,8 +463,8 @@ test("assessed coverage separates exact identity from the CID, name and SMILES a
 
 test("coverage snapshot validation enforces one exact form/stereo identity per catalog record", () => {
   const records = [
-    noRouteCoverage(propranololIdentity),
-    noRouteCoverage(aspirinIdentity),
+    noRouteCoverage(syntheticIdentity),
+    noRouteCoverage(secondSyntheticIdentity),
   ];
   const manifest = {
     schemaVersion: 1,
@@ -457,7 +477,7 @@ test("coverage snapshot validation enforces one exact form/stereo identity per c
   assert.deepEqual(
     validateSynthesisCoverageSnapshot(
       records,
-      [propranololIdentity, aspirinIdentity],
+      [syntheticIdentity, secondSyntheticIdentity],
       manifest,
     ),
     [],
@@ -476,14 +496,14 @@ test("coverage snapshot validation enforces one exact form/stereo identity per c
   assert.ok(
     validateSynthesisCoverageSnapshot(
       drifted,
-      [propranololIdentity, aspirinIdentity],
+      [syntheticIdentity, secondSyntheticIdentity],
       manifest,
     ).some((issue) => issue.code === "synthesis-coverage-identity-drift"),
   );
   assert.ok(
     validateSynthesisCoverageSnapshot(
       records.slice(0, 1),
-      [propranololIdentity, aspirinIdentity],
+      [syntheticIdentity, secondSyntheticIdentity],
       manifest,
     ).some((issue) => issue.code === "synthesis-coverage-count-mismatch"),
   );
@@ -520,12 +540,12 @@ test("a direct, reviewed reported route passes the scientific publication gate",
 
 test("coverage route summaries remain linked to the exact canonical route identity", () => {
   const coverage = {
-    ...noRouteCoverage(propranololIdentity),
+    ...noRouteCoverage(syntheticIdentity),
     sourceEvidenceState: "direct_source_resolved",
     applicability: "applicable",
     reviewState: "reviewed",
     licenseState: "permitted",
-    sourceSearchScope: searchScope(propranololIdentity, 1),
+    sourceSearchScope: searchScope(syntheticIdentity, 1),
     sourceEvidenceIds: [patentEvidence.id],
     routes: [{
       routeId: validReportedRoute.id,
@@ -569,7 +589,9 @@ test("candidate evidence and source-context steps never pass as a reported route
   };
   const codes = validateCanonicalSynthesisRoute(contextRoute, [candidate])
     .map((issue) => issue.code);
-  assert.ok(codes.includes("reported-synthesis-without-complete-direct-source"));
+  assert.ok(
+    codes.includes("complete-reported-synthesis-without-complete-direct-source"),
+  );
   assert.ok(codes.includes("reported-synthesis-has-nondirect-step"));
   assert.equal(
     getSynthesisRoutePublicationDecision(contextRoute, [candidate]).presentation,
@@ -584,8 +606,23 @@ test("a teaching reconstruction requires multiple direct documents and cannot be
     reviewState: "verified",
     steps: [{ ...reportedStep, reviewState: "verified" }],
     segments: [{
+      sourceSegmentId: "source-segment:teaching-patent-example-4",
       stepIds: [reportedStep.id],
       sourceEvidenceIds: [patentEvidence.id],
+      sourceLocator: patentEvidence.locator,
+      identityResolution: {
+        molecularIdentity: "exact_inchi_key",
+        formRelationship: "exact",
+        stereochemistry: "exact",
+      },
+      editorialBridge: {
+        state: "none",
+        fromSourceSegmentId: null,
+        boundaryMaterialId: null,
+        reportedAsOneCompleteRoute: false,
+        description: null,
+      },
+      reviewState: "reviewed",
     }],
   };
   const codes = validateCanonicalSynthesisRoute(reconstruction, [patentEvidence])
@@ -599,18 +636,18 @@ test("a teaching reconstruction requires multiple direct documents and cannot be
     supportScope: "single_step",
   };
   const reconstructedIntermediate = {
-    id: "synthesis-material:propranolol-reconstructed-intermediate",
+    id: "synthesis-material:synthetic-test-only-reconstructed-intermediate",
     role: "intermediate",
     label: "Source-bounded intermediate",
-    identityResolution: "name_only",
-    canonicalSmiles: null,
+    identityResolution: "exact_inchi_key",
+    canonicalSmiles: "CCO",
     isomericSmiles: null,
-    inchiKey: null,
-    sourceEvidenceIds: [patentEvidence.id],
+    inchiKey: "LFQSCWFLJHTTHZ-UHFFFAOYSA-N",
+    sourceEvidenceIds: [patentEvidence.id, secondDocument.id],
   };
   const firstSegmentStep = {
     ...reportedStep,
-    id: "synthesis-route-step:propranolol-reconstruction-01",
+    id: "synthesis-route-step:synthetic-test-only-reconstruction-01",
     inputMaterialIds: [startingA.id],
     outputMaterialIds: [reconstructedIntermediate.id],
     sourceEvidenceIds: [patentEvidence.id],
@@ -625,7 +662,7 @@ test("a teaching reconstruction requires multiple direct documents and cannot be
   };
   const secondSegmentStep = {
     ...reportedStep,
-    id: "synthesis-route-step:propranolol-reconstruction-02",
+    id: "synthesis-route-step:synthetic-test-only-reconstruction-02",
     order: 2,
     inputMaterialIds: [reconstructedIntermediate.id, startingB.id],
     sourceEvidenceIds: [secondDocument.id],
@@ -644,12 +681,42 @@ test("a teaching reconstruction requires multiple direct documents and cannot be
     ],
     segments: [
       {
+        sourceSegmentId: "source-segment:teaching-patent-example-4",
         stepIds: [firstSegmentStep.id],
         sourceEvidenceIds: [patentEvidence.id],
+        sourceLocator: patentEvidence.locator,
+        identityResolution: {
+          molecularIdentity: "exact_inchi_key",
+          formRelationship: "exact",
+          stereochemistry: "exact",
+        },
+        editorialBridge: {
+          state: "none",
+          fromSourceSegmentId: null,
+          boundaryMaterialId: null,
+          reportedAsOneCompleteRoute: false,
+          description: null,
+        },
+        reviewState: "reviewed",
       },
       {
+        sourceSegmentId: "source-segment:teaching-journal-scheme-2",
         stepIds: [secondSegmentStep.id],
         sourceEvidenceIds: [secondDocument.id],
+        sourceLocator: secondDocument.locator,
+        identityResolution: {
+          molecularIdentity: "exact_inchi_key",
+          formRelationship: "source_backed_compatible",
+          stereochemistry: "source_backed_compatible",
+        },
+        editorialBridge: {
+          state: "educational_bridge",
+          fromSourceSegmentId: "source-segment:teaching-patent-example-4",
+          boundaryMaterialId: reconstructedIntermediate.id,
+          reportedAsOneCompleteRoute: false,
+          description: "This connection is an explicitly disclosed educational bridge between independently sourced segments.",
+        },
+        reviewState: "reviewed",
       },
     ],
   };
@@ -672,6 +739,7 @@ test("a teaching reconstruction requires multiple direct documents and cannot be
     ...twoSourceReconstruction,
     segments: [
       {
+        ...twoSourceReconstruction.segments[0],
         stepIds: [firstSegmentStep.id],
         sourceEvidenceIds: [secondDocument.id],
       },
@@ -737,7 +805,7 @@ test("target identity drift, operational fields and covalent-less frames fail cl
     targetMaterialId: target.id,
     materials: [startingA, startingB, {
       ...target,
-      inchiKey: aspirinIdentity.inchiKey,
+      inchiKey: secondSyntheticIdentity.inchiKey,
     }],
     steps: [{
       ...reportedStep,

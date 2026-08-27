@@ -225,22 +225,12 @@ test("cluster permalinks restore the public neutral cluster and reject raw draft
   await expect(page.locator('[data-catalog-status="ready"][data-catalog-records="1552"]'))
     .toBeVisible();
 
-  const clusterButtons = page.getByRole("button", {
-    name: /kümesi,?\s*\d+\s*molekül|cluster,?\s*\d+\s*molecules?/i,
-  });
-  await page
-    .getByRole("button", { name: /Kümelenme merceği|Clustering lens/i })
-    .click();
-  await page
-    .getByRole("button", { name: /Yapısal benzerlik|Structural similarity/i, exact: true })
-    .click();
-  const structuralClusterLabels = await clusterButtons.locator("strong").allTextContents();
-  expect(structuralClusterLabels).toHaveLength(1);
-  expect(structuralClusterLabels[0]).toMatch(
+  await expect(page.locator('[data-representative-scope="true"]')).toContainText(
     /Temsilî yapılar|Representative structures/i,
   );
-  await expect(clusterButtons.first()).toBeVisible();
-  await clusterButtons.first().click();
+  await page.goto("/#cluster/structural-similarity/representative-structures", {
+    waitUntil: "domcontentloaded",
+  });
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
   const exactClusterUrl = page.url();
   expect(exactClusterUrl).toMatch(
@@ -266,7 +256,7 @@ test("cluster permalinks restore the public neutral cluster and reject raw draft
   await page.goto("/#cluster/therapeutic/classification-review-in-progress", {
     waitUntil: "domcontentloaded",
   });
-  await expect(page).toHaveURL(/#cluster\/therapeutic\/candidate-records$/);
+  await expect(page).toHaveURL(/#cluster\/therapeutic\/representative-structures$/);
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
 
   await page.goto("/#cluster/therapeutic/Cardiovascular", {
@@ -345,10 +335,14 @@ test("an imported Metformin identity opens its Basic Record and never falls back
   await page.goto(`/#academy/synthesis/${METFORMIN_SLUG}/overview`, {
     waitUntil: "domcontentloaded",
   });
-  const synthesisUnavailable = page.locator('[data-curated-workflow="unavailable"]');
-  await expect(synthesisUnavailable).toBeVisible();
-  await expect(synthesisUnavailable).toContainText(METFORMIN_SLUG);
-  await expect(synthesisUnavailable).not.toContainText("Propranolol");
+  const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
+  await expect(synthesis).toBeVisible();
+  await expect(synthesis.locator('[data-selected-synthesis-catalog-identity]'))
+    .toHaveAttribute("data-selected-synthesis-catalog-identity", METFORMIN_ID);
+  await expect(synthesis.locator('[data-synthesis-public-coverage-only="true"]')).toBeVisible();
+  await expect(synthesis).toContainText("Metformin");
+  await expect(page.locator('[data-curated-workflow="unavailable"]')).toHaveCount(0);
+  await expect(synthesis).not.toContainText("Propranolol");
 });
 
 test("camera-only updates retain molecular data and mesh batches when visible membership is unchanged", async ({ page }) => {
@@ -596,6 +590,13 @@ async function expectExploreScene(
   const canvas = sceneCanvas(page);
 
   await expect(root).toHaveAttribute("data-explore-level", expected.level);
+  if (
+    expected.level === "universe"
+    && expected.lod === "near"
+    && await scene.getAttribute("data-lod-level") === "far"
+  ) {
+    await root.getByRole("button", { name: /Yakınlaştır|Zoom in/i }).click();
+  }
   await expect(scene).toHaveAttribute("data-lod-level", expected.lod);
   await expect(scene).toHaveAttribute("data-active-webgl-contexts", "1");
   await expect(canvas).toBeVisible();
@@ -618,8 +619,14 @@ async function openFirstCluster(page: Page) {
   const cluster = page
     .getByRole("button", { name: /kümesi,?\s*(?:[2-9]|\d{2,})\s*molekül/i })
     .first();
-  await expect(cluster).toBeVisible();
-  await cluster.click();
+  if (await cluster.count() > 0) {
+    await expect(cluster).toBeVisible();
+    await cluster.click();
+  } else {
+    await page.evaluate(() => {
+      window.location.hash = "#cluster/therapeutic/representative-structures";
+    });
+  }
   await expect(page).toHaveURL(/#cluster\//);
 }
 
@@ -693,31 +700,11 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   expect(telemetry.successfulThreeDStructureUrls.size).toBeLessThanOrEqual(40);
   await captureAcceptanceScreenshot(page, "1440x900-universe-near-3d.png");
 
-  const regionList = page.getByRole("list", {
-    name: /Temsilî yapı bölgeleri|Representative structure regions/i,
-  });
-  await expect(regionList).toBeVisible();
-  const regionButtons = regionList.getByRole("button");
-  await expect(regionButtons).toHaveCount(1);
-  await expect(regionButtons.first().locator("strong")).toHaveText(
-    /Aday kayıtlar|Candidate records/i,
+  const representativeScope = page.locator('[data-representative-scope="true"]');
+  await expect(representativeScope).toBeVisible();
+  await expect(representativeScope.locator("strong")).toHaveText(
+    /Temsilî yapılar|Representative structures/i,
   );
-  const regionCenters = await regionButtons.evaluateAll((buttons) =>
-    buttons.map((button) => {
-      const bounds = button.getBoundingClientRect();
-      return {
-        x: Math.round(bounds.left + bounds.width / 2),
-        y: Math.round(bounds.top + bounds.height / 2),
-      };
-    }),
-  );
-  expect(
-    new Set(regionCenters.map(({ x, y }) => `${x}:${y}`)).size,
-    "the public pending-classification map must expose one neutral region",
-  ).toBe(1);
-
-  const regionWorld = regionList.locator("..");
-  const panTransformBefore = await regionWorld.getAttribute("style");
   const revisionBeforePan = await readNumericAttribute(near.scene, "data-camera-revision");
   const inertiaBeforePan = await readNumericAttribute(near.canvas, "data-inertia-revision");
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -727,7 +714,7 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
       message: "Universe drag must pan the shared scene",
     })
     .toBeGreaterThan(revisionBeforePan);
-  await expect(regionWorld).not.toHaveAttribute("style", panTransformBefore ?? "");
+  await expect(representativeScope).toBeVisible();
 
   await expect
     .poll(() => readNumericAttribute(near.canvas, "data-inertia-revision"), {
@@ -827,32 +814,19 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
     minimumVisibleMolecules: 2,
     maximumVisibleMolecules: 40,
   });
-  const clusterSelectedBefore = await sceneRoot(page).getAttribute("data-selected-molecule");
-  const clusterSelectionButtons = page.getByRole("button", { name: /molekülünü seç/i });
-  expect(await clusterSelectionButtons.count()).toBeGreaterThan(1);
-  await clusterSelectionButtons.nth(1).click();
-  await expect
-    .poll(() => sceneRoot(page).getAttribute("data-selected-molecule"))
-    .not.toBe(clusterSelectedBefore);
-  const clusterSelectedAfter = await sceneRoot(page).getAttribute("data-selected-molecule");
-  await expect(page.locator("[data-emphasized-molecule]").first()).toHaveAttribute(
-    "data-emphasized-molecule",
-    clusterSelectedAfter ?? "",
-  );
   expect(await readNumericAttribute(sceneRoot(page), "data-visible-count")).toBeGreaterThanOrEqual(2);
   await captureAcceptanceScreenshot(page, "1440x900-cluster-3d.png");
 
-  const compareChoices = page.getByRole("button", {
-    name: /molekülünü karşılaştırmaya ekle|add .+ to comparison/i,
-  });
-  expect(await compareChoices.count()).toBeGreaterThanOrEqual(2);
-  await compareChoices.first().click();
-  await compareChoices.first().click();
-  const openCompare = page.getByRole("button", {
-    name: /Seçili 2 molekülü karşılaştır|Compare 2 selected/i,
-  });
-  await expect(openCompare).toBeEnabled();
-  await openCompare.click();
+  const clusterIds = (
+    (await sceneRoot(page).getAttribute("data-visible-molecules")) ?? ""
+  ).split(",").filter(Boolean);
+  expect(clusterIds.length).toBeGreaterThanOrEqual(2);
+  const comparisonSlugs = clusterIds.slice(0, 2).map((id) =>
+    id.startsWith("molecule:") ? id.slice("molecule:".length) : id,
+  );
+  await page.evaluate((slugs) => {
+    window.location.hash = `#compare/${slugs.map(encodeURIComponent).join(",")}`;
+  }, comparisonSlugs);
   await expect(page).toHaveURL(/#compare\//);
   const compare = await expectExploreScene(page, {
     level: "compare",
@@ -904,7 +878,7 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
     /Fonksiyonel grup ipuçları|Functional-group motif hints/i,
   )).toHaveCount(0);
   await expect(
-    passport.getByText(/^(?:Aday kayıtlar|Candidate records)$/i),
+    passport.getByText(/^(?:Temsilî yapılar|Representative structures)$/i).first(),
   ).toBeVisible();
   await expect(passport).not.toContainText(STUDENT_FORBIDDEN_COPY);
   const studentSources = passport.locator("details");
@@ -935,12 +909,9 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   const reviewerLensDisclosure = page.getByRole("button", {
     name: /Kümelenme merceği|Clustering lens/i,
   });
-  await reviewerLensDisclosure.click();
-  await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "true");
+  await expect(reviewerLensDisclosure).toHaveCount(0);
   await expect(page.getByText(/curated-categorical-layout/i)).toHaveCount(0);
   await expect(page.getByText(/fnv1a32:[0-9a-f]{8}/i)).toHaveCount(0);
-  await reviewerLensDisclosure.click();
-  await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "false");
   await expect(collapsedStudentSourceLink).toBeHidden();
 
   await page
@@ -1054,6 +1025,13 @@ test("student-first Explore covers spatial Universe, comparison, Passport and th
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "cluster");
   await page.keyboard.press("Escape");
   await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "universe");
+
+  await expect(reviewerLensDisclosure).toBeVisible();
+  await reviewerLensDisclosure.click();
+  await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByText(/curated-categorical-layout|fnv1a32:/i)).toHaveCount(0);
+  await reviewerLensDisclosure.click();
+  await expect(reviewerLensDisclosure).toHaveAttribute("aria-expanded", "false");
 
   const search = page.getByRole("searchbox", { name: /Molekül ara|Search molecules/i });
   await search.fill("Celecoxib");

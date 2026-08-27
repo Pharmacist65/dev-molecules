@@ -161,7 +161,11 @@ async function expectStory(
     await expect(pharmacology.getByText(target, { exact: true })).toBeVisible();
   }
   await expect(dossier.locator('[data-flagship-journey="story"]')).toBeVisible();
-  await expect(dossier.locator('[data-flagship-synthesis="story"]')).toBeVisible();
+  const synthesis = dossier.locator('[data-flagship-synthesis="story"]');
+  await expect(synthesis).toBeVisible();
+  await expect(synthesis).toHaveAttribute("data-synthesis-publication-state", "unavailable");
+  await expect(synthesis.locator('[data-synthesis-detail-available="false"]')).toBeVisible();
+  await expect(synthesis.locator("h3, ol, code, a")).toHaveCount(0);
   await expect(dossier.locator('[data-flagship-nomenclature="story"]')).toBeVisible();
   await expect(
     dossier
@@ -177,10 +181,11 @@ async function expectStory(
 
   const learning = dossier.locator('[data-flagship-learning="story"]');
   const tasks = learning.locator("form");
-  await expect(tasks.nth(2)).toBeVisible();
-  expect(await tasks.count()).toBeGreaterThanOrEqual(3);
+  await expect(learning.locator('[data-learning-kind="synthesis"]')).toHaveCount(0);
+  const taskCount = await tasks.count();
+  expect(taskCount).toBeGreaterThanOrEqual(2);
   if (checkTasks) {
-    for (let index = 0; index < 3; index += 1) {
+    for (let index = 0; index < taskCount; index += 1) {
       const task = tasks.nth(index);
       await task.locator("label").first().click();
       await task
@@ -297,9 +302,11 @@ for (const scenario of scenarios) {
     ).toBe(true);
 
     await openReferenceTab(dossier, "tr", "synthesis");
-    await expect(
-      dossier.locator('[data-flagship-synthesis="reference"]'),
-    ).toBeVisible();
+    const synthesis = dossier.locator('[data-flagship-synthesis="reference"]');
+    await expect(synthesis).toBeVisible();
+    await expect(synthesis).toHaveAttribute("data-synthesis-publication-state", "unavailable");
+    await expect(synthesis.locator('[data-synthesis-detail-available="false"]')).toBeVisible();
+    await expect(synthesis.locator("h3, ol, code, a")).toHaveCount(0);
     await openReferenceTab(dossier, "tr", "nomenclature");
     await expect(
       dossier.locator('[data-flagship-nomenclature="reference"]'),
@@ -312,8 +319,8 @@ for (const scenario of scenarios) {
     const referenceTasks = dossier.locator(
       '[data-flagship-learning="reference"] form',
     );
-    await expect(referenceTasks.nth(2)).toBeVisible();
-    expect(await referenceTasks.count()).toBeGreaterThanOrEqual(3);
+    await expect(dossier.locator('[data-flagship-learning="reference"] [data-learning-kind="synthesis"]')).toHaveCount(0);
+    expect(await referenceTasks.count()).toBeGreaterThanOrEqual(2);
     await openReferenceTab(dossier, "tr", "sources");
     await expectDrawersClosed(dossier, `${scenario.slug}/tr/reference/sources`);
     const technicalSources = dossier.locator(

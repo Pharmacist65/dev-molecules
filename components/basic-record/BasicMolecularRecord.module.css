@@ -574,6 +574,67 @@
   color: var(--color-mole-teal);
 }
 
+.evidenceProcessing {
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+  border: var(--border-subtle-ivory);
+  border-radius: var(--radius-lg);
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-subtle);
+}
+
+.evidenceProcessing > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: var(--border-subtle-ivory);
+  background: color-mix(in srgb, var(--color-parliament-blue) 7%, var(--surface-paper));
+}
+
+.evidenceProcessing h3 {
+  margin: 0;
+  color: var(--color-text-on-ivory);
+  font-size: var(--font-size-body);
+}
+
+.evidenceProcessing code {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+  overflow-wrap: anywhere;
+}
+
+.evidenceProcessing dl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+}
+
+.evidenceProcessing dl > div {
+  min-width: 0;
+  padding: var(--space-4) var(--space-5);
+  border-right: var(--border-subtle-ivory);
+}
+
+.evidenceProcessing dl > div:last-child {
+  border-right: 0;
+}
+
+.evidenceProcessing dt {
+  color: var(--color-text-muted-on-ivory);
+  font-size: var(--font-size-secondary);
+  line-height: 1.35;
+}
+
+.evidenceProcessing dd {
+  margin: var(--space-2) 0 0;
+  color: var(--color-parliament-blue);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-semibold);
+}
+
 .synthesisStateGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -618,6 +679,54 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+.synthesisAtlasAction {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border: var(--border-subtle-dark);
+  border-radius: var(--radius-xl);
+  background: var(--gradient-parliament-depth);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-subtle);
+}
+
+.synthesisAtlasAction strong {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subtitle);
+}
+
+.synthesisAtlasAction p {
+  max-width: 76ch;
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
+}
+
+.synthesisAtlasAction > a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width-hairline) solid var(--color-metallic-orange);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-on-dark);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  text-decoration: none;
+}
+
+.synthesisAtlasAction > a:hover {
+  background: var(--color-metallic-orange);
+  color: var(--color-deep-navy);
 }
 
 .searchScope,
@@ -1299,6 +1408,18 @@
   .routeComparison > header {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .evidenceProcessing dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .evidenceProcessing dl > div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .synthesisAtlasAction {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 620px) {
@@ -1348,6 +1469,24 @@
   .synthesisStateGrid,
   .identityScope dl {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .evidenceProcessing > header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .evidenceProcessing dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .evidenceProcessing dl > div {
+    border-right: 0;
+    border-bottom: var(--border-subtle-ivory);
+  }
+
+  .evidenceProcessing dl > div:last-child {
+    border-bottom: 0;
   }
 
   .detailGrid > div,

@@ -1,4 +1,3 @@
-import { getSynthesisAtlasSourceGate } from "../domain/synthesis-atlas";
 import type {
   DeviceLocalLessonPackage,
   InstructorAssignmentSummary,
@@ -9,10 +8,7 @@ import type {
   NomenclatureInstructorTaskId,
   RoleExperienceLocale,
 } from "../domain/role-experience";
-import type { SynthesisAtlasChallengeId } from "../domain/synthesis-atlas";
 import { academyExercises } from "../data/nomenclature-academy-curriculum";
-import { synthesisAtlasChallenges } from "../data/synthesis-atlas-challenges";
-import { synthesisAtlasRouteById } from "../data/synthesis-atlas";
 
 export interface LessonPackageBuildInput {
   readonly draftToken: string;
@@ -75,28 +71,11 @@ export function buildInstructorTaskCatalog(
     }),
   );
 
-  const synthesis: InstructorTaskCatalogEntry[] = synthesisAtlasChallenges.map(
-    (challenge) => {
-      const route = synthesisAtlasRouteById.get(challenge.routeId);
-      const gate = route ? getSynthesisAtlasSourceGate(route) : "blocked";
-      const available = gate !== "blocked";
-      return {
-        reference: {
-          kind: "synthesis" as const,
-          taskId: challenge.id as SynthesisAtlasChallengeId,
-        },
-        title: challenge.prompt[locale],
-        description: route?.title[locale] ?? challenge.routeId,
-        moduleLabel: labels.synthesis,
-        availability: available ? "available" : "blocked-source-gate",
-        contentBoundary: available
-          ? labels.synthesisSupported
-          : labels.synthesisBlocked,
-      };
-    },
-  );
-
-  return [...nomenclature, ...synthesis];
+  // Public instructor bundles must not import pending synthesis challenges or
+  // route fixtures. Synthesis tasks may enter this catalog only through a
+  // generated, review-and-rights-gated public projection; the current
+  // projection contains zero eligible tasks.
+  return nomenclature;
 }
 
 const sanitizeDraftToken = (value: string): string | null => {

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readdir, readFile, stat } from "node:fs/promises";
+import { access, readdir, readFile, stat } from "node:fs/promises";
 import test from "node:test";
 import { inflateSync } from "node:zlib";
 
@@ -293,7 +293,7 @@ test("the default public HTML exposes Molevren and confines Dev Molecules to tec
   assert.doesNotMatch(publicShell, /<title>Dev Molecules|application-name" content="Dev Molecules/iu);
 });
 
-test("the committed Phase A evidence set is complete, internally consistent, and uses production video", async () => {
+test("the retained Phase A brand-reference set is complete and excludes retired synthesis evidence", async () => {
   const requiredScreenshots = [
     "academy.png",
     "atlas-browse.png",
@@ -312,12 +312,10 @@ test("the committed Phase A evidence set is complete, internally consistent, and
     "logo-light.png",
     "mobile-home.png",
     "nomenclature.png",
-    "synthesis.png",
   ];
   const expectedFiles = [
     ...requiredScreenshots,
     "capture-manifest.json",
-    "molevren-phase-a-walkthrough.mp4",
   ].sort();
   assert.deepEqual((await readdir(evidenceRoot)).sort(), expectedFiles);
 
@@ -333,6 +331,25 @@ test("the committed Phase A evidence set is complete, internally consistent, and
     requiredScreenshots,
   );
   assert.deepEqual(manifest.runtimeErrors, []);
+  assert.equal(manifest.scope, "brand_layout_reference_only");
+  assert.equal(manifest.currentSynthesisAcceptanceEvidence, false);
+  assert.equal("walkthrough" in manifest, false);
+
+  for (const retiredArtifact of [
+    "../assets/demo/dev-molecules-v2-walkthrough.mp4",
+    "../assets/screenshots/synthesis-en.webp",
+    "../assets/screenshots/synthesis-route.png",
+    "../assets/screenshots/synthesis-tr.webp",
+    "../../../scripts/capture-v2-demo.mts",
+    "synthesis.png",
+    "molevren-phase-a-walkthrough.mp4",
+  ]) {
+    await assert.rejects(
+      access(new URL(retiredArtifact, evidenceRoot)),
+      undefined,
+      `${retiredArtifact}: retired pending-route evidence must stay absent`,
+    );
+  }
 
   for (const item of manifest.screenshots) {
     const bytes = await readFile(new URL(item.filename, evidenceRoot));
@@ -347,19 +364,4 @@ test("the committed Phase A evidence set is complete, internally consistent, and
     );
   }
 
-  const video = await readFile(
-    new URL("molevren-phase-a-walkthrough.mp4", evidenceRoot),
-  );
-  assert.equal(video.byteLength, manifest.walkthrough.bytes);
-  assert.equal(
-    createHash("sha256").update(video).digest("hex"),
-    manifest.walkthrough.sha256,
-  );
-  assert.equal(video.subarray(4, 8).toString("ascii"), "ftyp");
-  assert.ok(video.includes(Buffer.from("avc1")), "walkthrough must contain H.264/AVC video");
-  assert.ok(video.includes(Buffer.from("vide")), "walkthrough must contain a video handler");
-  assert.equal(video.includes(Buffer.from("soun")), false, "walkthrough must be silent");
-  assert.ok(manifest.walkthrough.durationSeconds >= 60);
-  assert.ok(manifest.walkthrough.durationSeconds <= 90);
-  assert.equal(manifest.walkthrough.audioStreamCount, 0);
 });

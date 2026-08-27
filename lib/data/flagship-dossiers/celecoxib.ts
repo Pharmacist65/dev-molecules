@@ -251,26 +251,13 @@ export function createCelecoxibFlagshipSeed(
         { id: "journey:celecoxib:metabolism", kind: "metabolism", label: localized(locale, "Metabolizma", "Metabolism"), evidence: journey(localized(locale, "Başlıca CYP2C9 ile oksidatif metabolizma", "Oxidative metabolism primarily through CYP2C9"), metabolismConditions), unavailableReason: null },
         { id: "journey:celecoxib:excretion", kind: "excretion", label: localized(locale, "Atılım", "Excretion"), evidence: journey(localized(locale, "Tek oral radyoişaretli dozdan sonra yaklaşık %57 feçes ve %27 idrar geri kazanımı", "After a single oral radiolabeled dose, approximately 57% is recovered in feces and 27% in urine"), radiolabelConditions), unavailableReason: null },
       ], [labelSource, "source:uniprot-p35354"]),
-      synthesis: section("source-supported", {
-        id: "synthesis:celecoxib-flagship-phase-a",
-        title: localized(locale, "Celecoxib: raporlanmış diarilpirazol rotası", "Celecoxib: reported diarylpyrazole route"),
-        summary: localized(locale, "p-Metilasetofenon ve etil trifluoroasetattan 1,3-diketon; 4-sülfamoilfenilhidrazin ile pirazol oluşumu.", "A 1,3-diketone from p-methylacetophenone and ethyl trifluoroacetate; pyrazole formation with 4-sulfamoylphenylhydrazine."),
-        materials: [
-          { id: "material:celecoxib:p-methylacetophenone", label: "p-methylacetophenone", role: "starting-material", smiles: "CC1=CC=C(C=C1)C(=O)C", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-8500", "source:patent-us5466823a"] },
-          { id: "material:celecoxib:ethyl-trifluoroacetate", label: "ethyl trifluoroacetate", role: "starting-material", smiles: "CCOC(=O)C(F)(F)F", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-9794", "source:patent-us5466823a"] },
-          { id: "material:celecoxib:sulfamoylphenylhydrazine-hcl", label: "4-hydrazinylbenzenesulfonamide hydrochloride", role: "starting-material", smiles: "C1=CC(=CC=C1NN)S(=O)(=O)N.Cl", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-2794567", "source:patent-us5466823a"] },
-          { id: "material:celecoxib:diketone", label: "4,4,4-trifluoro-1-(4-methylphenyl)butane-1,3-dione", role: "intermediate", smiles: "CC1=CC=C(C=C1)C(=O)CC(=O)C(F)(F)F", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-550193", "source:patent-us5466823a"] },
-          { id: "material:celecoxib:product", label: "celecoxib connectivity", role: "final-product", smiles: "CC1=CC=C(C=C1)C2=CC(=NN2C3=CC=C(C=C3)S(=O)(=O)N)C(F)(F)F", structureReviewStatus: "source-supported", sourceIds: [identitySource, "source:patent-us5466823a"] },
-        ],
-        steps: [
-          { id: "flagship-step:celecoxib:diketone", order: 1, title: localized(locale, "Trifluorlanmış 1,3-diketon", "Trifluorinated 1,3-diketone"), inputMaterialIds: ["material:celecoxib:p-methylacetophenone", "material:celecoxib:ethyl-trifluoroacetate"], outputMaterialId: "material:celecoxib:diketone", reactionClass: localized(locale, "1,3-dikarbonil oluşumu", "1,3-dicarbonyl formation"), bondChangeSummary: localized(locale, "Kaynak bağlantısı korunur; atom mapping inceleme bekler.", "Source linkage is preserved; atom mapping awaits review."), sourceIds: ["source:patent-us5466823a"], reviewStatus: "source-supported" },
-          { id: "flagship-step:celecoxib:pyrazole", order: 2, title: localized(locale, "Pirazol halkası oluşumu", "Pyrazole ring formation"), inputMaterialIds: ["material:celecoxib:diketone", "material:celecoxib:sulfamoylphenylhydrazine-hcl"], outputMaterialId: "material:celecoxib:product", reactionClass: localized(locale, "Hidrazin kondenzasyonu / siklizasyon", "Hydrazine condensation / cyclization"), bondChangeSummary: localized(locale, "Pirazol bağlantısı kaynakla desteklenir; operasyonel koşullar dışarıda tutulur.", "Pyrazole connectivity is supported by the cited source; operational conditions are excluded."), sourceIds: ["source:patent-us5466823a"], reviewStatus: "source-supported" },
-        ],
-        sourceIds: ["source:patent-us5466823a", identitySource],
-        reviewStatus: "source-supported",
-        operationalDetailsIncluded: false,
-        limitations: [localized(locale, "Protokol, yield veya pratik sentezlenebilirlik iddiası değildir.", "Not a protocol, yield, or practical-synthesizability claim.")],
-      }, ["source:patent-us5466823a", identitySource]),
+      synthesis: section("unavailable", null, [], [
+        localized(
+          locale,
+          "Bu statik dossier sentez kanıtı veya rota iddiası yayımlamaz; güncel durum doğrulanmış Sentez Atlası kapsam kaydından okunmalıdır.",
+          "This static dossier publishes no synthesis-evidence or route claim; consult the validated Synthesis Atlas coverage record for current status.",
+        ),
+      ]),
       nomenclature: section("source-supported", {
         variants: [{ id: "name:celecoxib:pubchem", role: "preferred", name: evidenceField("4-[5-(4-methylphenyl)-3-(trifluoromethyl)pyrazol-1-yl]benzenesulfonamide", identitySource, { note: localized(locale, "Kontrol edilen PubChem sistematik adı.", "Checked PubChem systematic name.") }, { evidenceType: "curated-database", reviewStatus: "source-supported" }) }],
         segments: [
@@ -333,8 +320,7 @@ export function createCelecoxibFlagshipSeed(
       learning: section("source-supported", [
         { id: "learning:celecoxib:structure", kind: "structure", prompt: localized(locale, "Celecoxib yapısında hangi iki motif birlikte görünür?", "Which two motifs occur together in celecoxib?"), options: [{ id: "pyrazole-sulfonamide", label: localized(locale, "Diarilpirazol ve primer sülfonamid", "Diarylypyrazole and primary sulfonamide") }, { id: "amino-alcohol", label: localized(locale, "Ariloksi amino-alkol", "Aryloxy amino-alcohol") }], correctOptionId: "pyrazole-sulfonamide", explanation: localized(locale, "Yanıt yapı kimliğiyle sınırlıdır.", "The answer is limited to structure identity."), sourceIds: [identitySource], reviewStatus: "source-supported" },
         { id: "learning:celecoxib:pharmacology", kind: "pharmacology", prompt: localized(locale, "Birincil hedef eşlemesi hangisidir?", "What is the primary target mapping?"), options: [{ id: "ptgs2", label: "PTGS2 / COX-2" }, { id: "adrb1", label: "ADRB1" }], correctOptionId: "ptgs2", explanation: localized(locale, "Bu eşleme “yalnız COX-2” anlamına gelmez.", "This mapping does not mean “COX-2 only.”"), sourceIds: ["source:uniprot-p35354", labelSource], reviewStatus: "source-supported" },
-        { id: "learning:celecoxib:synthesis", kind: "synthesis", prompt: localized(locale, "Raporlanmış rotada hangi halka oluşur?", "Which ring forms in the reported route?"), options: [{ id: "pyrazole", label: localized(locale, "Pirazol", "Pyrazole") }, { id: "naphthalene", label: localized(locale, "Naftalen", "Naphthalene") }], correctOptionId: "pyrazole", explanation: localized(locale, "Kaynaklandırılmış dönüşüm özeti protokol değildir.", "The sourced transformation summary is not a protocol."), sourceIds: ["source:patent-us5466823a"], reviewStatus: "source-supported" },
-      ], [identitySource, "source:uniprot-p35354", labelSource, "source:patent-us5466823a"]),
+      ], [identitySource, "source:uniprot-p35354", labelSource]),
       explicitMissingFields: [
         localized(locale, "Mutlak oral biyoyararlanım: çalışılmamış — null.", "Absolute oral bioavailability: not studied — null."),
         localized(locale, "Celecoxib glukuronid yapısı: CID çözümü hold; yanlış CID 131770042 dışlandı.", "Celecoxib glucuronide structure: CID resolution on hold; incorrect CID 131770042 excluded."),

@@ -5,6 +5,7 @@ import test from "node:test";
 import { tsImport } from "tsx/esm/api";
 
 const {
+  getBasicRecordSynthesisSurfaceState,
   loadBasicRecordSynthesisCoverage,
   loadBasicRecordSynthesisRouteComparisons,
 } = await tsImport(
@@ -75,7 +76,7 @@ const jsonResponse = (value, status = 200) => new Response(
 );
 
 const patentRouteReference = {
-  routeId: "synthesis-route:future-patent-route",
+  routeId: "synthesis-route:synthetic-test-only-future-patent-route",
   routeType: "patent_reported",
   routeCompleteness: "complete",
   reviewState: "reviewed",
@@ -83,7 +84,7 @@ const patentRouteReference = {
 };
 
 const literatureRouteReference = {
-  routeId: "synthesis-route:future-literature-route",
+  routeId: "synthesis-route:synthetic-test-only-future-literature-route",
   routeType: "literature_reported",
   routeCompleteness: "upstream_gap",
   reviewState: "reviewed",
@@ -134,6 +135,7 @@ test("synthesis coverage client loads only the exact safe InChIKey shard and pro
   assert.equal(coverage.coverageId, "synthesis-coverage:molecule-example");
   assert.equal(coverage.sourceEvidenceState, "candidate_sources");
   assert.equal(coverage.exhaustiveInternetSearch, false);
+  assert.equal(coverage.reportedRouteFoundPendingReview, false);
   assert.equal(coverage.providers[0].candidateCount, 2);
   assert.equal(coverage.providers[0].errorCount, 0);
   assert.deepEqual(coverage.routeComparison, {
@@ -143,6 +145,157 @@ test("synthesis coverage client loads only the exact safe InChIKey shard and pro
   assert.deepEqual(coverage.aliasesQueried, ["Example", "Example free base"]);
   assert.equal("conditions" in coverage, false);
   assert.equal("steps" in coverage, false);
+});
+
+test("safe pending-route flag is projected without exposing route identity or completeness", async () => {
+  const coverage = await loadBasicRecordSynthesisCoverage(identity, {
+    async fetchImpl() {
+      return jsonResponse({
+        schemaVersion: 1,
+        catalogSnapshotId: "catalog-snapshot-v1",
+        shardKey: "a",
+        records: [createCoverageRecord({ reportedRouteFoundPendingReview: true })],
+      });
+    },
+  });
+  assert.equal(coverage.reportedRouteFoundPendingReview, true);
+  assert.deepEqual(coverage.routes, []);
+  assert.equal(getBasicRecordSynthesisSurfaceState(coverage), "direct_source_gated");
+  assert.equal("reportedRouteId" in coverage, false);
+  assert.equal("reportedRouteCompleteness" in coverage, false);
+});
+
+test("access state and extraction outcome remain independent terminal dimensions", async () => {
+  const evidenceProcessing = {
+    pipelineVersion: "synthesis-discovery-2.0.0",
+    completedAt: "2026-08-27T12:00:00.000Z",
+    candidateAssociationCount: 3,
+    terminalAssociationCount: 3,
+    accessBlockedCount: 2,
+    accessibleCount: 0,
+    metadataOnlyCount: 1,
+    unavailableCount: 0,
+    extractionOutcomeCounts: {
+      resolved: 0,
+      irrelevant: 2,
+      identity_mismatch: 0,
+      access_blocked: 0,
+      insufficient_detail: 0,
+      parse_error: 0,
+      retryable_error: 0,
+      duplicate: 0,
+      superseded: 1,
+    },
+  };
+  const record = createCoverageRecord({
+    bestOutcome: "no_supporting_source_resolved",
+    evidenceProcessing,
+    sourceEvidenceIds: [],
+    sourceEvidenceState: "none_found",
+    sourceSearchScope: {
+      ...createCoverageRecord().sourceSearchScope,
+      pipelineVersion: "synthesis-discovery-2.0.0",
+    },
+  });
+  const coverage = await loadBasicRecordSynthesisCoverage(identity, {
+    async fetchImpl() {
+      return jsonResponse({
+        schemaVersion: 1,
+        catalogSnapshotId: "catalog-snapshot-v1",
+        shardKey: "a",
+        records: [record],
+      });
+    },
+  });
+  assert.equal(coverage.bestOutcome, "no_supporting_source_resolved");
+  assert.equal(coverage.evidenceProcessing.accessBlockedCount, 2);
+  assert.equal(coverage.evidenceProcessing.extractionOutcomeCounts.access_blocked, 0);
+  assert.equal(getBasicRecordSynthesisSurfaceState(coverage), "no_supporting_source_resolved");
+});
+
+test("terminal evidence-processing summaries expose nuanced molecule states and reject unresolved work", async () => {
+  const evidenceProcessing = {
+    pipelineVersion: "synthesis-discovery-2.0.0",
+    completedAt: "2026-08-27T12:00:00.000Z",
+    candidateAssociationCount: 5,
+    terminalAssociationCount: 5,
+    accessBlockedCount: 1,
+    accessibleCount: 2,
+    metadataOnlyCount: 1,
+    unavailableCount: 1,
+    extractionOutcomeCounts: {
+      resolved: 1,
+      irrelevant: 1,
+      identity_mismatch: 0,
+      access_blocked: 1,
+      insufficient_detail: 1,
+      parse_error: 0,
+      retryable_error: 1,
+      duplicate: 0,
+      superseded: 0,
+    },
+  };
+  const record = createCoverageRecord({
+    bestOutcome: "candidate_only",
+    evidenceProcessing,
+    sourceSearchScope: {
+      ...createCoverageRecord().sourceSearchScope,
+      pipelineVersion: "synthesis-discovery-2.0.0",
+    },
+  });
+  const coverage = await loadBasicRecordSynthesisCoverage(identity, {
+    async fetchImpl() {
+      return jsonResponse({
+        schemaVersion: 1,
+        catalogSnapshotId: "catalog-snapshot-v1",
+        shardKey: "a",
+        records: [record],
+      });
+    },
+  });
+  assert.equal(coverage.bestOutcome, "candidate_only");
+  assert.equal(coverage.evidenceProcessing.terminalAssociationCount, 5);
+  assert.equal(getBasicRecordSynthesisSurfaceState(coverage), "candidate_extraction_complete");
+  assert.equal(getBasicRecordSynthesisSurfaceState({
+    ...coverage,
+    bestOutcome: "access_blocked_only",
+  }), "source_access_blocked");
+  assert.equal(getBasicRecordSynthesisSurfaceState({
+    ...coverage,
+    bestOutcome: "direct_complete_reported",
+    sourceEvidenceState: "direct_source_resolved",
+    routes: [],
+  }), "direct_source_gated");
+  assert.equal(getBasicRecordSynthesisSurfaceState({
+    ...coverage,
+    bestOutcome: "candidate_only",
+    sourceEvidenceState: "direct_source_resolved",
+    routes: [],
+  }), "direct_source_gated");
+  assert.equal(getBasicRecordSynthesisSurfaceState({
+    ...coverage,
+    bestOutcome: "no_supporting_source_resolved",
+  }), "no_supporting_source_resolved");
+
+  await assert.rejects(
+    loadBasicRecordSynthesisCoverage(identity, {
+      async fetchImpl() {
+        return jsonResponse({
+          schemaVersion: 1,
+          catalogSnapshotId: "catalog-snapshot-v1",
+          shardKey: "a",
+          records: [{
+            ...record,
+            evidenceProcessing: {
+              ...evidenceProcessing,
+              terminalAssociationCount: 4,
+            },
+          }],
+        });
+      },
+    }),
+    /not terminal or internally consistent/u,
+  );
 });
 
 test("route comparison loader joins only two exact comparison-ready route IDs", async () => {
@@ -162,7 +315,7 @@ test("route comparison loader joins only two exact comparison-ready route IDs", 
             keyTransformations: ["Protection", "Cross-coupling", "Deprotection"],
             sourceYear: 2025,
           }),
-          { routeId: "synthesis-route:unreferenced-private-row", malformed: true },
+          { routeId: "synthesis-route:synthetic-test-only-unreferenced-row", malformed: true },
         ]));
       },
     },
@@ -458,5 +611,31 @@ test("Basic Molecular Record UI exposes synthesis status without presenting cand
   assert.match(source, /Stereochemical strategy/u);
   assert.match(source, /Key transformations/u);
   assert.match(source, /Source class \/ year/u);
+  assert.match(source, /Candidate-source assessment complete/u);
+  assert.match(source, /Source access blocked/u);
+  assert.match(source, /No supporting source resolved in the recorded search scope/u);
+  assert.match(source, /data-synthesis-terminal-state/u);
+  assert.match(source, /getSynthesisAcademyHash\(record\.stableSlug, "atlas"\)/u);
+  assert.match(source, /route detail appears only after scientific-review and reuse gates pass/u);
   assert.doesNotMatch(source, /candidate_sources[^\n]{0,120}verified/u);
+});
+
+test("Basic Molecular Record keeps a fail-closed Synthesis area when its coverage artifact is unavailable", async () => {
+  const source = await readFile(
+    new URL("../components/basic-record/BasicMolecularRecord.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(source, /data-basic-record-synthesis-coverage="unavailable"/u);
+  assert.match(source, /data-synthesis-surface-state="coverage_unavailable"/u);
+  assert.match(source, /data-synthesis-coverage-load-state="unavailable"/u);
+  assert.match(source, /Sentez kapsam artefaktı güvenli biçimde yüklenemedi\./u);
+  assert.match(source, /kaynak bulunmadığının, rota bulunmadığının/u);
+  assert.match(source, /sentezlenebilir ya da sentezlenemez olduğunun kanıtı değildir/u);
+  assert.match(source, /The synthesis coverage artifact could not be loaded safely\./u);
+  assert.match(source, /not evidence that no source or route exists/u);
+  assert.match(source, /does not establish whether the molecule is synthesizable or unsynthesizable/u);
+  assert.doesNotMatch(
+    source,
+    /data-synthesis-coverage-load-state="unavailable"[^]{0,500}Reported synthesis: Not resolved/u,
+  );
 });

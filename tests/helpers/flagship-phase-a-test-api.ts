@@ -1,6 +1,7 @@
 export { resolveMolecularRecordRoute } from "../../lib/application/basic-molecular-record";
 export {
   collectFlagshipSourceIds,
+  gateLegacyFlagshipSynthesisForPublic,
   validateFlagshipDossierSeed,
 } from "../../lib/application/dossier/flagship";
 export { createDrugDossierByIdOrSlug } from "../../lib/application/dossier";

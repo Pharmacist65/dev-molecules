@@ -38,6 +38,7 @@ export const SYNTHESIS_ROUTE_COMPLETENESS_STATES = [
   "partial",
   "upstream_gap",
   "convergent_partial",
+  "unknown",
 ] as const;
 
 export type SynthesisRouteCompleteness =
@@ -240,6 +241,19 @@ export interface CanonicalSynthesisStep {
       | "normalized"
       | "candidate"
       | "unclassified";
+    readonly provenance: {
+      readonly taxonomyName: string | null;
+      readonly taxonomyVersion: string | null;
+      readonly confidence: number | null;
+      readonly state: "not_computed" | "computed" | "reviewed";
+    };
+  };
+  readonly atomMapping: {
+    readonly mapperName: string | null;
+    readonly mapperVersion: string | null;
+    readonly confidence: number | null;
+    readonly state: "not_mapped" | "computed" | "reviewed";
+    readonly reason: string;
   };
   readonly evidenceMode:
     | "direct_reported"
@@ -315,9 +329,30 @@ export interface CanonicalSynthesisRouteBase {
   };
 }
 
-export interface CanonicalReportedSynthesisRoute
+export interface CanonicalReportedRouteSegment {
+  readonly sourceSegmentId: string;
+  readonly stepIds: readonly [
+    CanonicalSynthesisStepId,
+    ...CanonicalSynthesisStepId[],
+  ];
+  readonly sourceEvidenceIds: readonly [
+    SynthesisSourceEvidenceId,
+    ...SynthesisSourceEvidenceId[],
+  ];
+}
+
+interface CanonicalReportedSynthesisRouteBase
   extends CanonicalSynthesisRouteBase {
   readonly routeType: "patent_reported" | "literature_reported";
+  readonly reportedSegments: readonly [
+    CanonicalReportedRouteSegment,
+    ...CanonicalReportedRouteSegment[],
+  ];
+}
+
+export interface CanonicalCompleteReportedSynthesisRoute
+  extends CanonicalReportedSynthesisRouteBase {
+  readonly routeCompleteness: "complete";
   /** Sources that explicitly report this declared route, rather than fragments. */
   readonly reportedCompleteRouteSourceIds: readonly [
     SynthesisSourceEvidenceId,
@@ -325,10 +360,26 @@ export interface CanonicalReportedSynthesisRoute
   ];
 }
 
+export interface CanonicalPartialReportedSynthesisRoute
+  extends CanonicalReportedSynthesisRouteBase {
+  readonly routeCompleteness:
+    | "partial"
+    | "upstream_gap"
+    | "convergent_partial"
+    | "unknown";
+  /** A partial route must not imply that any source reports it end-to-end. */
+  readonly reportedCompleteRouteSourceIds: readonly [];
+}
+
+export type CanonicalReportedSynthesisRoute =
+  | CanonicalCompleteReportedSynthesisRoute
+  | CanonicalPartialReportedSynthesisRoute;
+
 export interface CanonicalTeachingReconstructionRoute
   extends CanonicalSynthesisRouteBase {
   readonly routeType: "teaching_reconstruction";
   readonly segments: readonly {
+    readonly sourceSegmentId: string;
     readonly stepIds: readonly [
       CanonicalSynthesisStepId,
       ...CanonicalSynthesisStepId[],
@@ -337,6 +388,30 @@ export interface CanonicalTeachingReconstructionRoute
       SynthesisSourceEvidenceId,
       ...SynthesisSourceEvidenceId[],
     ];
+    readonly sourceLocator: SynthesisSourceLocator;
+    readonly identityResolution: {
+      readonly molecularIdentity: "exact_inchi_key";
+      readonly formRelationship: "exact" | "source_backed_compatible";
+      readonly stereochemistry: "exact" | "source_backed_compatible";
+    };
+    readonly editorialBridge:
+      | {
+          readonly state: "none";
+          readonly fromSourceSegmentId: null;
+          readonly boundaryMaterialId: null;
+          readonly reportedAsOneCompleteRoute: false;
+          readonly description: null;
+        }
+      | {
+          readonly state: "educational_bridge";
+          /** The exact structure shared by the independently sourced segments. */
+          readonly fromSourceSegmentId: string;
+          readonly boundaryMaterialId: CanonicalSynthesisMaterialId;
+          /** This bridge is editorial and must never imply an end-to-end report. */
+          readonly reportedAsOneCompleteRoute: false;
+          readonly description: string;
+        };
+    readonly reviewState: SynthesisReviewState;
   }[];
 }
 

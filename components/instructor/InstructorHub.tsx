@@ -46,6 +46,7 @@ const copy = {
     taskLibrary: "Görev kütüphanesi",
     nomenclature: "Nomenklatür görevleri",
     synthesis: "Sentez görevleri",
+    synthesisUnavailable: "İnceleme ve yeniden kullanım kapısını geçen yayımlanmış sentez görevi henüz yok.",
     selected: "Seçili",
     available: "Eklenebilir",
     blocked: "Kaynak kapısı kapalı",
@@ -86,6 +87,7 @@ const copy = {
     taskLibrary: "Task library",
     nomenclature: "Nomenclature tasks",
     synthesis: "Synthesis tasks",
+    synthesisUnavailable: "No published synthesis task has passed both scientific review and the reuse-rights gate yet.",
     selected: "Selected",
     available: "Available",
     blocked: "Blocked by source gate",
@@ -303,6 +305,11 @@ export function InstructorHub({
           </div>
 
           <div className={styles.taskList} role="tabpanel">
+            {activeKind === "synthesis" && visibleTasks.length === 0 ? (
+              <p role="status" data-instructor-synthesis-tasks="withheld">
+                {labels.synthesisUnavailable}
+              </p>
+            ) : null}
             {visibleTasks.map((task) => {
               const key = referenceKey(task.reference);
               const disabled = task.availability !== "available";

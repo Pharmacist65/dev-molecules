@@ -1,8 +1,7 @@
 import { moleculeById } from "@/lib/data/catalog";
 import { sourceById } from "@/lib/data/sources";
-import { synthesisStories } from "@/lib/data/synthesis-stories";
 import type { MoleculeId } from "@/lib/domain";
-import { getSynthesisStoryContent, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 export interface EvidenceCardFinding {
   readonly label: string;
@@ -48,17 +47,12 @@ export function createLocalEvidenceCard(
   const molecule = moleculeById.get(moleculeId as MoleculeId);
   if (!molecule) return null;
 
-  const story = synthesisStories.find((item) => item.moleculeId === molecule.id);
-  const localizedStory = story
-    ? getSynthesisStoryContent(locale, story.id)
-    : null;
   const sourceIds = Array.from(
     new Set([
       ...molecule.identity.sourceIds,
       ...(molecule.stereochemistry.verification.status.startsWith("source")
         ? molecule.identity.sourceIds
         : []),
-      ...(story?.sourceIds ?? []),
     ]),
   );
 
@@ -83,16 +77,12 @@ export function createLocalEvidenceCard(
     question,
     structuralStatus: "valid-record",
     identityStatus: "exact-curated-match",
-    synthesisStatus: story ? "educational-story-only" : "not-assessed",
+    synthesisStatus: "not-assessed",
     biologicalStatus: "not-assessed",
     confidence: "source-supported",
     summary: locale === "tr"
-      ? story
-        ? `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı ve uzman incelemesi bekleyen, operasyonel ayrıntı içermeyen bir eğitim sentez hikâyesi mevcut.`
-        : `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı mevcut; sentez ve biyolojik kanıt bu kartta değerlendirilmedi.`
-      : story
-        ? `${molecule.identity.preferredName} has a verified identity record and a non-operational educational synthesis story pending named expert review.`
-        : `${molecule.identity.preferredName} has a verified identity record; synthesis and biological evidence were not assessed in this card.`,
+      ? `${molecule.identity.preferredName} için doğrulanmış kimlik kaydı mevcut; sentez ve biyolojik kanıt bu kartta değerlendirilmedi.`
+      : `${molecule.identity.preferredName} has a verified identity record; synthesis and biological evidence were not assessed in this card.`,
     findings: [
       {
         label: locale === "tr" ? "Kimlik" : "Identity",
@@ -115,11 +105,11 @@ export function createLocalEvidenceCard(
       },
       {
         label: locale === "tr" ? "Sentez anlatısı" : "Synthesis narrative",
-        value: localizedStory?.summary ?? (locale === "tr"
-          ? "Bu molekül için henüz kontrollü bir anlatı yok."
-          : "No curated narrative is available for this molecule yet."),
-        status: story ? "pending" : "unknown",
-        sourceIds: story?.sourceIds ?? [],
+        value: locale === "tr"
+          ? "Bu kartta yayımlanabilir bir sentez rotası değerlendirilmedi."
+          : "No publishable synthesis route was assessed in this card.",
+        status: "unknown",
+        sourceIds: [],
       },
       {
         label: locale === "tr" ? "Biyolojik hüküm" : "Biological conclusion",
@@ -134,12 +124,12 @@ export function createLocalEvidenceCard(
     limitations: locale === "tr"
       ? [
           "Kimlik kaydı; tuz, ürün, doz veya klinik kullanım kaydıyla aynı değildir.",
-          "Eğitim sentez hikâyesi laboratuvar protokolü değildir ve uzman incelemesi bekler.",
+          "İnceleme ve yeniden kullanım kapısını geçmeyen sentez ayrıntıları bu karta alınmaz.",
           "Veritabanında bulunmaması yenilik, patentlenebilirlik veya sentezlenebilirlik kanıtı değildir.",
         ]
       : [
           "An identity record is not the same as a salt, product, dose, or clinical-use record.",
-          "An educational synthesis story is not a laboratory protocol and remains subject to expert review.",
+          "Synthesis detail that has not passed review and reuse gates is excluded from this card.",
           "Absence from a database is not evidence of novelty, patentability, or synthesizability.",
         ],
     notFoundIsNoveltyEvidence: false,

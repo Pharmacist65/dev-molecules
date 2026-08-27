@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
   "pipelineVersion": "synthesis-discovery-1.0.1",
-  "generatedAt": "2026-08-27T11:05:11.867Z",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
   "coverage": {
     "requiredRecords": 1552,
     "coverageRecords": 1552,
@@ -12,17 +12,18 @@
   },
   "requestedOutcomes": {
     "moleculesWithDirectReportedRoute": 3,
-    "moleculesWithCandidateSource": 1279,
+    "moleculesWithCandidateSource": 1168,
     "moleculesWithTeachingReconstruction": 1,
-    "moleculesWithNoSourceFoundInRecordedScope": 273,
+    "moleculesWithNoSourceFoundInRecordedScope": 384,
     "moleculesWithComputationalProposal": 0,
     "reportedSynthesisNotResolved": 1549
   },
   "evidenceBoundaryMetrics": {
-    "exactOrdProductCandidateRecords": 763,
+    "activePostTerminalizationOrdCandidateEvidenceRecords": 733,
+    "activePostTerminalizationOrdCandidateEvidenceDefinition": "Coverage records retaining at least one active open-reaction-dataset candidate association after terminal outcome classification and supersession.",
     "exactOrdProductCandidatesAreNotReportedRoutes": true,
     "resolvedDirectEvidenceRecords": 3,
-    "candidateEvidenceRecords": 1279,
+    "candidateEvidenceRecords": 1168,
     "sourceEvidenceCounts": {
       "candidate": 14897,
       "resolved": 6
@@ -35,7 +36,8 @@
     }
   },
   "normalizedCandidateExtraction": {
-    "recordsWithExactOrdReactionFragment": 763,
+    "rawBaselineRecordsWithExactOrdReactionFragment": 763,
+    "rawBaselineDefinition": "Coverage records with at least one exact-target ORD reaction fragment in the immutable extraction baseline, before candidate-association terminalization and supersession.",
     "exactOrdReactionFragmentCount": 3982,
     "decodedFragmentCount": 3982,
     "upstreamGapFragmentCount": 0,
@@ -46,24 +48,33 @@
     "boundary": "Normalized ORD reaction fragments remain private discovery candidates until direct-source resolution, applicability review, atom mapping and reuse gates pass."
   },
   "routes": {
-    "migratedRouteCount": 6,
+    "scope": "private_pending_aggregate",
+    "privateRouteAggregateCount": 6,
     "byType": {
       "patent_reported": 5,
-      "teaching_reconstruction": 1
+      "literature_reported": 0,
+      "teaching_reconstruction": 1,
+      "computational_proposed": 0
     },
     "byCompleteness": {
       "complete": 2,
+      "partial": 0,
+      "upstream_gap": 3,
       "convergent_partial": 1,
-      "upstream_gap": 3
+      "unknown": 0
     },
     "byReviewState": {
-      "pending": 6
+      "pending": 6,
+      "reviewed": 0,
+      "verified": 0,
+      "withdrawn": 0
     },
-    "publicDetailAllowed": 0
+    "publicDetailAllowed": 0,
+    "routeDetailRecordsPublished": false
   },
   "bestAvailableCoverage": {
-    "candidate_sources_only": 1276,
-    "none_found_in_scope": 273,
+    "candidate_sources_only": 1165,
+    "none_found_in_scope": 384,
     "reported_route_pending_or_better": 3
   },
   "providerAttempts": {

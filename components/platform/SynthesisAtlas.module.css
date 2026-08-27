@@ -84,6 +84,98 @@
   text-align: center;
 }
 
+.catalogCoverageBanner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(440px, 0.9fr);
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 2.8vw, 2.2rem);
+  border-bottom: 1px solid var(--atlas-line);
+  background: #fff;
+}
+
+.catalogCoverageBanner > div > span {
+  color: var(--atlas-orange);
+  font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.catalogCoverageBanner h2 {
+  margin: 0.55rem 0 0;
+  color: var(--atlas-navy);
+  font-size: clamp(1.45rem, 2.5vw, 2.6rem);
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.catalogCoverageBanner > div > p {
+  max-width: 72ch;
+  margin: 0.75rem 0 0;
+  color: var(--atlas-muted);
+  line-height: 1.6;
+}
+
+.catalogCoverageBanner dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: stretch;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--atlas-line);
+  border-radius: 12px;
+  background: var(--atlas-line);
+  gap: 1px;
+}
+
+.catalogCoverageBanner dl > div {
+  min-width: 0;
+  padding: 0.8rem;
+  background: var(--atlas-soft);
+}
+
+.catalogCoverageBanner dt {
+  color: var(--atlas-muted);
+  font-size: var(--atlas-ui-label-size);
+  line-height: 1.35;
+}
+
+.catalogCoverageBanner dd {
+  margin: 0.4rem 0 0;
+  color: var(--atlas-navy);
+  font: 650 var(--atlas-secondary-size) var(--font-geist-mono), monospace;
+  overflow-wrap: anywhere;
+}
+
+.coverageOnlyBoundary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 260px;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  background:
+    radial-gradient(circle at 82% 20%, rgb(49 96 189 / 13%), transparent 24rem),
+    var(--atlas-soft);
+}
+
+.coverageOnlyBoundary strong {
+  max-width: 60ch;
+  color: var(--atlas-navy);
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  line-height: 1.45;
+}
+
+.coverageOnlyBoundary button {
+  min-height: 46px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--atlas-blue);
+  border-radius: 10px;
+  background: var(--atlas-blue);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 720;
+}
+
 .moleculeTabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -638,6 +730,105 @@
 .mechanismError p { margin: 0; color: #6e5142; font-size: var(--atlas-secondary-size); line-height: 1.5; }
 .mechanismUnavailable { padding: 1rem; border: 1px solid #efcfbb; border-radius: 12px; background: #fff4ed; color: #9e4b20; }
 
+.linearRoute {
+  margin: clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  border: 1px solid var(--atlas-line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.linearRoute > header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: end;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.linearRoute h2 {
+  margin: 0;
+  color: var(--atlas-navy);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.linearRoute > header p {
+  margin: 0;
+  color: var(--atlas-muted);
+  font-size: var(--atlas-secondary-size);
+  line-height: 1.55;
+}
+
+.linearRoute > ol {
+  display: grid;
+  gap: 0;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linearRoute > ol > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+}
+
+.linearStepNumber {
+  color: var(--atlas-orange);
+  font: 700 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.linearRoute dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--atlas-line);
+  border-radius: 10px;
+  background: var(--atlas-line);
+}
+
+.linearRoute dl > div {
+  min-width: 0;
+  padding: 0.8rem;
+  background: var(--atlas-soft);
+}
+
+.linearRoute dt {
+  margin-bottom: 0.4rem;
+  color: var(--atlas-muted);
+  font: 650 var(--atlas-ui-label-size) var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+}
+
+.linearRoute dd {
+  margin: 0;
+  color: var(--atlas-ink);
+  font-size: var(--atlas-secondary-size);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.linearArrow {
+  position: absolute;
+  bottom: -0.55rem;
+  left: 2.1rem;
+  z-index: 1;
+  display: grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--atlas-navy);
+  color: #fff;
+}
+
 .sourceDrawer {
   border: 1px solid var(--atlas-line);
   border-radius: 16px;
@@ -770,6 +961,8 @@
   .electronFlow li { grid-template-columns: 32px 1fr; }
   .electronFlow li > p { grid-column: 2; }
   .electronFlow li > small { grid-column: 2; }
+  .linearRoute dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .catalogCoverageBanner { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 620px) {
@@ -802,6 +995,12 @@
   .electronFlow li > small { grid-column: 1; }
   .electronDiagram { grid-template-columns: 1fr 76px 1fr; }
   .challengeTabs { flex-wrap: wrap; }
+  .catalogCoverageBanner dl,
+  .coverageOnlyBoundary { grid-template-columns: minmax(0, 1fr); }
+  .linearRoute > header,
+  .linearRoute > ol > li,
+  .linearRoute dl { grid-template-columns: minmax(0, 1fr); }
+  .linearArrow { position: static; margin: 0.25rem auto -0.8rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1123,5 +1322,224 @@
   .sourceDrawer,
   .focusAction {
     margin-inline: var(--space-2);
+  }
+}
+
+.publishedRoutes {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.35rem, 3vw, 2.6rem);
+  background: var(--atlas-soft);
+}
+
+.publishedRoutes > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.publishedRoutes > header span,
+.publishedRouteHeader span,
+.publishedRouteStep span {
+  display: block;
+  color: var(--atlas-muted);
+  font: 700 var(--atlas-ui-label-size)/1.3 var(--font-geist-mono), monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.publishedRoutes > header h2 {
+  margin: 0.35rem 0 0;
+  color: var(--atlas-navy);
+  font-size: clamp(1.55rem, 2.5vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+.publishedRoutes > header button {
+  min-height: 46px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--atlas-blue);
+  border-radius: 10px;
+  background: var(--atlas-blue);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 720;
+}
+
+.publishedRoute {
+  overflow: hidden;
+  border: 1px solid var(--atlas-line);
+  border-radius: 20px;
+  background: var(--atlas-surface);
+  box-shadow: 0 14px 40px rgb(19 33 60 / 9%);
+}
+
+.publishedRouteHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.publishedRouteHeader span {
+  color: var(--atlas-orange);
+}
+
+.publishedRouteHeader h2 {
+  margin: 0.45rem 0 0;
+  color: var(--atlas-navy);
+  font-size: clamp(1.4rem, 2.2vw, 2.15rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.publishedRouteHeader > strong {
+  flex: 0 0 auto;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--atlas-line);
+  border-radius: 999px;
+  background: var(--atlas-soft);
+  color: var(--atlas-blue);
+  font-size: var(--atlas-secondary-size);
+}
+
+.publishedRouteMetadata {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-bottom: 1px solid var(--atlas-line);
+  background: var(--atlas-line);
+  gap: 1px;
+}
+
+.publishedRouteMetadata > div {
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  background: var(--atlas-surface);
+}
+
+.publishedRouteMetadata dt {
+  color: var(--atlas-muted);
+  font-size: var(--atlas-ui-label-size);
+}
+
+.publishedRouteMetadata dd {
+  margin: 0.35rem 0 0;
+  color: var(--atlas-navy);
+  font-weight: 680;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.publishedRouteVisual {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1rem, 2.5vw, 1.7rem);
+  background:
+    radial-gradient(circle at 92% 8%, rgb(36 87 214 / 8%), transparent 22rem),
+    var(--atlas-soft);
+}
+
+.publishedRouteStep {
+  display: grid;
+  grid-template-columns: auto minmax(130px, 1fr) auto minmax(130px, 0.9fr) auto minmax(130px, 1fr) minmax(150px, 0.7fr);
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--atlas-line);
+  border-radius: 14px;
+  background: var(--atlas-surface);
+}
+
+.publishedRouteStep > b {
+  color: var(--atlas-orange);
+  font: 750 0.9rem var(--font-geist-mono), monospace;
+}
+
+.publishedRouteStep > div {
+  min-width: 0;
+}
+
+.publishedRouteStep strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--atlas-navy);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.publishedRouteStep > i {
+  color: var(--atlas-orange);
+  font-size: 1.25rem;
+  font-style: normal;
+}
+
+.publishedRouteStep > small {
+  padding: 0.6rem 0.7rem;
+  border-left: 3px solid var(--atlas-blue);
+  background: rgb(36 87 214 / 6%);
+  color: var(--atlas-muted);
+  line-height: 1.42;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1050px) {
+  .publishedRouteMetadata {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .publishedRouteStep {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .publishedRouteStep > i {
+    display: none;
+  }
+
+  .publishedRouteStep > div,
+  .publishedRouteStep > small {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .publishedRoutes > header,
+  .publishedRouteHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .publishedRoutes > header button,
+  .publishedRouteHeader > strong {
+    width: 100%;
+    text-align: center;
+  }
+
+  .publishedRouteMetadata {
+    grid-template-columns: 1fr;
+  }
+
+  .publishedRouteStep {
+    grid-template-columns: 1fr;
+  }
+
+  .publishedRouteStep > div,
+  .publishedRouteStep > small {
+    grid-column: 1;
   }
 }

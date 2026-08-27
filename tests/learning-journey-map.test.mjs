@@ -138,7 +138,7 @@ test("mission stages count only their declared real activities", () => {
   const stages = createLearningJourneyStageViews("tr", {
     nomenclatureProgress: null,
     completedMissionIds: new Set([
-      "mission:propranolol-route-order",
+      "mission:synthetic-route-order",
       "mission:find-propranolol",
       "mission:evidence-boundaries",
       "mission:unknown-do-not-count",
@@ -149,7 +149,7 @@ test("mission stages count only their declared real activities", () => {
   const review = stages.find((stage) => stage.id === "drug-molecule-review");
   assert.deepEqual(
     [synthesis?.completedUnits, synthesis?.totalUnits, synthesis?.completionPercent],
-    [1, 1, 100],
+    [0, 0, 0],
   );
   assert.deepEqual(
     [review?.completedUnits, review?.totalUnits, review?.completionPercent],
@@ -170,7 +170,7 @@ test("planned mechanism work never receives invented completion", () => {
       "mission:find-propranolol",
       "mission:beta-profile-classification",
       "mission:active-moiety-versus-form",
-      "mission:propranolol-route-order",
+      "mission:synthetic-route-order",
       "mission:evidence-boundaries",
     ]),
   });
@@ -180,7 +180,7 @@ test("planned mechanism work never receives invented completion", () => {
     [mechanism?.completionPercent, mechanism?.completedUnits, mechanism?.totalUnits],
     [0, 0, 0],
   );
-  assert.equal(getRecommendedLearningJourneyStage(stages)?.id, "reaction-mechanisms");
+  assert.equal(getRecommendedLearningJourneyStage(stages)?.id, "synthesis-atlas");
 });
 
 test("the component keeps semantic progress hooks and a 390px single-column layout", async () => {

@@ -1350,3 +1350,105 @@
     padding: var(--space-4);
   }
 }
+
+/* Main Drug Atlas Spatial is a product stage, not a card nested inside the
+   Atlas card. This final precedence follows the Phase A skin; FamilyPage does
+   not opt into the variant and retains its evidence boundary. */
+.atlas[data-atlas-view="spatial"] {
+  width: 100%;
+  max-width: none;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: var(--surface-midnight);
+  box-shadow: none;
+}
+
+.atlas[data-atlas-view="spatial"]::before {
+  position: fixed;
+  background:
+    radial-gradient(circle at 74% 20%, color-mix(in srgb, var(--color-knowledge-cobalt) 14%, transparent), transparent 36rem),
+    radial-gradient(circle at 14% 78%, color-mix(in srgb, var(--color-metallic-orange) 6%, transparent), transparent 30rem);
+}
+
+.atlas[data-atlas-view="spatial"] .viewTabs {
+  min-height: 56px;
+  grid-template-columns: repeat(2, minmax(9.5rem, 17rem));
+  justify-content: center;
+  border-bottom-color: var(--border-color-on-dark);
+  background: color-mix(in srgb, var(--surface-midnight) 88%, transparent);
+}
+
+.atlas[data-atlas-view="spatial"] .viewTabs button {
+  min-height: 56px;
+  gap: 0.15rem;
+  padding: 0.55rem 1.15rem;
+  border-inline: 1px solid var(--border-color-on-dark);
+}
+
+.atlas[data-atlas-view="spatial"] .viewTabs strong {
+  font-size: 1rem;
+}
+
+.atlas[data-atlas-view="spatial"] .viewTabs span {
+  overflow: hidden;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spatial[data-spatial-variant="immersive"] {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.spatial[data-spatial-variant="immersive"]::before {
+  display: none;
+}
+
+.spatial[data-spatial-variant="immersive"] > [data-explore-level] {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.spatial[data-spatial-variant="immersive"] .spatialAccessibleScope {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 620px) {
+  .atlas[data-atlas-view="spatial"] .viewTabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .atlas[data-atlas-view="spatial"] .viewTabs button {
+    min-height: 58px;
+    padding-inline: 0.75rem;
+  }
+
+  .atlas[data-atlas-view="spatial"] .viewTabs span {
+    display: none;
+  }
+
+  .spatial[data-spatial-variant="immersive"] {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+}

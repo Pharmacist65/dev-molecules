@@ -26,6 +26,10 @@ test("curated evidence cards preserve stable science fields while localizing pro
   assert.equal(en.locale, "en");
   assert.equal(tr.moleculeId, en.moleculeId);
   assert.equal(tr.identityStatus, en.identityStatus);
+  assert.equal(tr.synthesisStatus, "not-assessed");
+  assert.equal(en.synthesisStatus, "not-assessed");
+  assert.deepEqual(tr.findings.find((finding) => finding.label === "Sentez anlatısı")?.sourceIds, []);
+  assert.deepEqual(en.findings.find((finding) => finding.label === "Synthesis narrative")?.sourceIds, []);
   assert.match(tr.summary, /doğrulanmış kimlik/i);
   assert.match(en.summary, /verified identity/i);
   assert.equal(tr.findings[0].label, "Kimlik");

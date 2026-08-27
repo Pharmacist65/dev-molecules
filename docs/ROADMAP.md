@@ -4,7 +4,7 @@
 
 Explore, Learn, Build, Teach, and Discover remain the product north star. Milestones sequence scientific, technical, and operational risk; they do not redefine the platform as a permanently small demo.
 
-The 15 curated molecule fixtures, 1,552-record generated catalog, six Synthesis Atlas routes, and 22 Nomenclature Academy exercises are current coverage. No schema, renderer, curriculum, or test may treat those counts as a product ceiling.
+The 15 curated molecule fixtures, 1,552-record generated catalog, privacy-safe six-route private migration aggregate, and 22 Nomenclature Academy exercises are current seed coverage. The withheld route rows live only in a local ignored review archive and are not revalidated by public CI. No schema, renderer, curriculum, or test may treat these counts as a product ceiling. The public synthesis-route index is currently empty by design.
 
 ## Current repository baseline
 
@@ -20,7 +20,7 @@ The current vertical slice implements:
 - 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors and the current Curated Dossier seed;
 - Story/Reference Curated Dossier surfaces whose classification, pharmacology, ADME, metabolite, synthesis, nomenclature, learning, and review coverage fail independently;
 - an eight-module Academy map: five available modules, two coverage-dependent modules, and one planned standalone module;
-- six non-operational Synthesis Atlas routes over three molecules, 20 transformations, 12 mechanism records, two strictly source-reported route presentations, and fail-closed/no-decorative-arrow behavior for incompatible or unmapped steps;
+- a synthesis discovery and coverage pipeline spanning all 1,552 exact identities and 14,897 terminalized molecule–evidence associations, with a six-route private migration aggregate, locally archived withheld rows, and zero public route details;
 - eight Nomenclature Academy sections with 22 exercises over 20 parseable structures and 16 concrete response/widget types;
 - a route-lazy, on-device Ketcher 3.17.2 editor with exact static-catalog identity matching and explicit local JSON export;
 - a device-local Instructor package/progress-export boundary and an adapter-gated Reviewer Console;
@@ -98,7 +98,7 @@ Expand Learn and Build from the current vertical slice into reviewer-approved co
 
 **Deliverables**
 
-- qualified review and expansion of the current six Atlas routes and versioned challenges;
+- qualified review, correction or withdrawal of the current six private route drafts before any route-detail publication, followed by evidence-gated expansion and versioned challenges;
 - deeper Academy sequences beyond the current eight-section/22-exercise curriculum, with prerequisites, misconception tracking, and accessible non-spatial alternatives;
 - hardening of the current Ketcher 2D editor behind its adapter, including validated import/export boundaries, identity-preserving history, and a source-labelled 3D preview;
 - reusable course packs, learning objectives, rubrics, and content-version pinning;

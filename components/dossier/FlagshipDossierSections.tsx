@@ -76,6 +76,7 @@ const copy = {
     journeyBody: "Her düğüm ayrı bir kaynak sınırıdır; boş düğümden sonuç çıkarılmaz.",
     synthesisEyebrow: "SENTEZ HARİTASI",
     synthesisTitle: "Raporlanmış rota ve eğitim adımları",
+    synthesisUnavailableTitle: "Yayımlanabilir sentez rotası gösterilmiyor",
     routeSummary: "Rota özeti",
     materials: "Yapı taşları",
     steps: "Rota adımları",
@@ -187,6 +188,7 @@ const copy = {
     journeyBody: "Each node is an independent source boundary; an empty node supports no inference.",
     synthesisEyebrow: "SYNTHESIS MAP",
     synthesisTitle: "Reported route and educational steps",
+    synthesisUnavailableTitle: "No publishable synthesis route is shown",
     routeSummary: "Route summary",
     materials: "Route materials",
     steps: "Route steps",
@@ -718,10 +720,14 @@ export function FlagshipSynthesis({ flagship, sources, locale, presentation }: F
   } as const;
 
   return (
-    <section className={styles.section} data-flagship-synthesis={presentation}>
+    <section
+      className={styles.section}
+      data-flagship-synthesis={presentation}
+      data-synthesis-publication-state={route ? "published" : "unavailable"}
+    >
       <header className={styles.sectionHeader}>
         <span>{labels.synthesisEyebrow}</span>
-        <h2>{labels.synthesisTitle}</h2>
+        <h2>{route ? labels.synthesisTitle : labels.synthesisUnavailableTitle}</h2>
       </header>
       {route ? (
         <>
@@ -777,7 +783,14 @@ export function FlagshipSynthesis({ flagship, sources, locale, presentation }: F
           <p className={styles.boundary}>{labels.operationsBoundary}</p>
           {presentation === "reference" && route.limitations.length > 0 ? <ul className={styles.limitations}>{route.limitations.map((item) => <li key={item}>{item}</li>)}</ul> : null}
         </>
-      ) : <p className={styles.compactEmpty}>{flagship.synthesis.limitations[0] ?? labels.unavailable}</p>}
+      ) : (
+        <p
+          className={styles.compactEmpty}
+          data-synthesis-detail-available="false"
+        >
+          {flagship.synthesis.limitations[0] ?? labels.unavailable}
+        </p>
+      )}
     </section>
   );
 }

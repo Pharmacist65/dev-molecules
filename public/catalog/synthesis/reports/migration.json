@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "migrationVersion": "legacy-synthesis-atlas-to-canonical-1.0.0",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "migrationVersion": "private-legacy-retirement-aggregate-1.0.0",
   "expectedLegacyRouteCount": 6,
   "legacyRouteCount": 6,
   "accountedRouteCount": 6,
@@ -13,122 +14,10 @@
   },
   "excludedSourceContextStepCount": 3,
   "excludedTargetFormStepCount": 1,
-  "entries": [
-    {
-      "legacyRouteId": "synthesis-atlas-route:propranolol-foundational",
-      "canonicalRouteId": "synthesis-route:legacy-propranolol-foundational",
-      "routeType": "patent_reported",
-      "joinedCatalogEntityId": "molecule:imported:propranolol-aqhhhdlhhxjyjd-uhfffaoysa-n",
-      "joinedPubChemCid": 4946,
-      "joinedInchiKey": "AQHHHDLHHXJYJD-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:propranolol-edu-02"
-      ],
-      "exclusions": [
-        {
-          "legacyStepId": "synthesis-atlas-step:propranolol-edu-01",
-          "reason": "source_context_not_promoted",
-          "limitation": "The legacy step is source-context only and was retained as an explicit upstream gap, not promoted to reported evidence."
-        }
-      ],
-      "outcome": "migrated"
-    },
-    {
-      "legacyRouteId": "synthesis-atlas-route:propranolol-reported",
-      "canonicalRouteId": "synthesis-route:legacy-propranolol-reported",
-      "routeType": "patent_reported",
-      "joinedCatalogEntityId": "molecule:imported:propranolol-aqhhhdlhhxjyjd-uhfffaoysa-n",
-      "joinedPubChemCid": 4946,
-      "joinedInchiKey": "AQHHHDLHHXJYJD-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:propranolol-rep-02"
-      ],
-      "exclusions": [
-        {
-          "legacyStepId": "synthesis-atlas-step:propranolol-rep-01",
-          "reason": "source_context_not_promoted",
-          "limitation": "The legacy step is source-context only and was retained as an explicit upstream gap, not promoted to reported evidence."
-        },
-        {
-          "legacyStepId": "synthesis-atlas-step:propranolol-rep-03",
-          "reason": "target_form_identity_divergence",
-          "limitation": "Excluded because the exact catalog target is the free-base identity; the downstream hydrochloride is a distinct chemical form and is not a covalent target transformation."
-        }
-      ],
-      "outcome": "migrated"
-    },
-    {
-      "legacyRouteId": "synthesis-atlas-route:atenolol-foundational",
-      "canonicalRouteId": "synthesis-route:legacy-atenolol-foundational",
-      "routeType": "patent_reported",
-      "joinedCatalogEntityId": "molecule:imported:atenolol-metkimkyrpqlgs-uhfffaoysa-n",
-      "joinedPubChemCid": 2249,
-      "joinedInchiKey": "METKIMKYRPQLGS-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:atenolol-edu-01",
-        "synthesis-atlas-step:atenolol-edu-02"
-      ],
-      "exclusions": [],
-      "outcome": "migrated"
-    },
-    {
-      "legacyRouteId": "synthesis-atlas-route:atenolol-reported",
-      "canonicalRouteId": "synthesis-route:legacy-atenolol-reported",
-      "routeType": "patent_reported",
-      "joinedCatalogEntityId": "molecule:imported:atenolol-metkimkyrpqlgs-uhfffaoysa-n",
-      "joinedPubChemCid": 2249,
-      "joinedInchiKey": "METKIMKYRPQLGS-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:atenolol-rep-01",
-        "synthesis-atlas-step:atenolol-rep-02",
-        "synthesis-atlas-step:atenolol-rep-03",
-        "synthesis-atlas-step:atenolol-rep-04",
-        "synthesis-atlas-step:atenolol-rep-05"
-      ],
-      "exclusions": [],
-      "outcome": "migrated"
-    },
-    {
-      "legacyRouteId": "synthesis-atlas-route:carvedilol-foundational",
-      "canonicalRouteId": "synthesis-route:legacy-carvedilol-foundational",
-      "routeType": "patent_reported",
-      "joinedCatalogEntityId": "molecule:imported:carvedilol-oghnvejmjsyvrp-uhfffaoysa-n",
-      "joinedPubChemCid": 2585,
-      "joinedInchiKey": "OGHNVEJMJSYVRP-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:carvedilol-edu-02"
-      ],
-      "exclusions": [
-        {
-          "legacyStepId": "synthesis-atlas-step:carvedilol-edu-01",
-          "reason": "source_context_not_promoted",
-          "limitation": "The legacy step is source-context only and was retained as an explicit upstream gap, not promoted to reported evidence."
-        }
-      ],
-      "outcome": "migrated"
-    },
-    {
-      "legacyRouteId": "synthesis-atlas-route:carvedilol-reported",
-      "canonicalRouteId": "synthesis-route:legacy-carvedilol-reported",
-      "routeType": "teaching_reconstruction",
-      "joinedCatalogEntityId": "molecule:imported:carvedilol-oghnvejmjsyvrp-uhfffaoysa-n",
-      "joinedPubChemCid": 2585,
-      "joinedInchiKey": "OGHNVEJMJSYVRP-UHFFFAOYSA-N",
-      "retainedLegacyStepIds": [
-        "synthesis-atlas-step:carvedilol-rep-01",
-        "synthesis-atlas-step:carvedilol-rep-02",
-        "synthesis-atlas-step:carvedilol-rep-03",
-        "synthesis-atlas-step:carvedilol-rep-04",
-        "synthesis-atlas-step:carvedilol-rep-05",
-        "synthesis-atlas-step:carvedilol-rep-06"
-      ],
-      "exclusions": [],
-      "outcome": "migrated"
-    }
-  ],
   "invariants": {
     "allSixLegacyRoutesAccounted": true,
     "exactCidAndInchiKeyJoin": true,
     "operationalDetailsIncluded": false
-  }
+  },
+  "routeOrStepIdentifiersPublished": false
 }

@@ -98,12 +98,12 @@ test("Academy progress reuses real exercises and leaves untracked modules as nul
       correctAttempts: structureIds.length,
       percentComplete: 100,
     },
-    completedMissionIds: new Set(["mission:propranolol-route-order"]),
+    completedMissionIds: new Set(["mission:synthetic-route-order"]),
   });
   const byId = new Map(modules.map((entry) => [entry.id, entry]));
 
   assert.equal(byId.get("structure-language")?.completionPercent, 100);
-  assert.equal(byId.get("synthesis-atlas")?.completionPercent, 100);
+  assert.equal(byId.get("synthesis-atlas")?.completionPercent, null);
   assert.equal(byId.get("pharmacology")?.completionPercent, null);
   assert.equal(byId.get("adme")?.completionPercent, null);
   assert.equal(byId.get("reaction-mechanisms")?.completionPercent, null);

@@ -262,26 +262,13 @@ export function createPropranololFlagshipSeed(
         { id: "journey:propranolol:metabolism", kind: "metabolism", label: localized(locale, "Metabolizma", "Metabolism"), evidence: journeyField(localized(locale, "Hepatik oksidasyon ve glukuronidasyon", "Hepatic oxidation and glucuronidation")), unavailableReason: null },
         { id: "journey:propranolol:excretion", kind: "excretion", label: localized(locale, "Atılım", "Excretion"), evidence: journeyField(localized(locale, "Metabolitlerin çoğu idrarda atılır", "Most metabolites are excreted in the urine")), unavailableReason: null },
       ], [labelSource, "source:uniprot-p08588", "source:uniprot-p07550"]),
-      synthesis: section("source-supported", {
-        id: "synthesis:propranolol-flagship-phase-a",
-        title: localized(locale, "Propranolol: raporlanmış epoksit rotası", "Propranolol: reported epoxide route"),
-        summary: localized(locale, "1-naftol ve epiklorohidrinden glisidil eter/epoksit; izopropilaminle halka açılması; serbest baz ve ayrı HCl form sınırı.", "1-Naphthol and epichlorohydrin to a glycidyl ether/epoxide; isopropylamine ring opening; free-base and separate HCl-form boundary."),
-        materials: [
-          { id: "material:propranolol:1-naphthol", label: "1-naphthol", role: "starting-material", smiles: "C1=CC=C2C(=C1)C=CC=C2O", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-7005", "source:patent-gb2238786a"] },
-          { id: "material:propranolol:epichlorohydrin", label: "epichlorohydrin", role: "starting-material", smiles: "C1C(O1)CCl", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-7835", "source:patent-gb2238786a"] },
-          { id: "material:propranolol:isopropylamine", label: "isopropylamine", role: "starting-material", smiles: "CC(C)N", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-6363", "source:patent-gb2238786a"] },
-          { id: "material:propranolol:glycidyl-ether", label: "2-(naphthalen-1-yloxymethyl)oxirane", role: "intermediate", smiles: "C1C(O1)COC2=CC=CC3=CC=CC=C32", structureReviewStatus: "source-supported", sourceIds: ["source:pubchem-91521", "source:patent-gb2238786a"] },
-          { id: "material:propranolol:free-base", label: "propranolol free-base connectivity", role: "final-product", smiles: "CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O", structureReviewStatus: "source-supported", sourceIds: [identitySource, "source:patent-gb2238786a"] },
-        ],
-        steps: [
-          { id: "flagship-step:propranolol:epoxide", order: 1, title: localized(locale, "Glisidil eter/epoksit bağlantısı", "Glycidyl ether/epoxide connectivity"), inputMaterialIds: ["material:propranolol:1-naphthol", "material:propranolol:epichlorohydrin"], outputMaterialId: "material:propranolol:glycidyl-ether", reactionClass: localized(locale, "O-alkilasyon / epoksit korunumu", "O-alkylation / epoxide retention"), bondChangeSummary: localized(locale, "Kaynak-bağlı bağlantı özeti; atom map inceleme bekler.", "Source-bound connectivity summary; atom mapping awaits review."), sourceIds: ["source:patent-gb2238786a"], reviewStatus: "source-supported" },
-          { id: "flagship-step:propranolol:ring-opening", order: 2, title: localized(locale, "Aminle epoksit halka açılması", "Amine epoxide ring opening"), inputMaterialIds: ["material:propranolol:glycidyl-ether", "material:propranolol:isopropylamine"], outputMaterialId: "material:propranolol:free-base", reactionClass: localized(locale, "Nükleofilik epoksit halka açılması", "Nucleophilic epoxide ring opening"), bondChangeSummary: localized(locale, "Amino-alkol bağlantısı oluşur; stereokimya atanmaz.", "Amino-alcohol connectivity forms; stereochemistry is not assigned."), sourceIds: ["source:patent-gb2238786a"], reviewStatus: "source-supported" },
-        ],
-        sourceIds: ["source:patent-gb2238786a", identitySource],
-        reviewStatus: "source-supported",
-        operationalDetailsIncluded: false,
-        limitations: [localized(locale, "Miktar, koşul, work-up veya üretim talimatı içermez.", "Contains no quantities, conditions, work-up, or manufacturing instruction.")],
-      }, ["source:patent-gb2238786a", identitySource]),
+      synthesis: section("unavailable", null, [], [
+        localized(
+          locale,
+          "Bu statik dossier sentez kanıtı veya rota iddiası yayımlamaz; güncel durum doğrulanmış Sentez Atlası kapsam kaydından okunmalıdır.",
+          "This static dossier publishes no synthesis-evidence or route claim; consult the validated Synthesis Atlas coverage record for current status.",
+        ),
+      ]),
       nomenclature: section("source-supported", {
         variants: [{ id: "name:propranolol:pubchem", role: "preferred", name: evidenceField("1-naphthalen-1-yloxy-3-(propan-2-ylamino)propan-2-ol", identitySource, { note: localized(locale, "PubChem exact sistematik ad biçimi; etkileşimli segment locantları ayrıca düzeltilmiştir.", "Exact PubChem systematic-name form; interactive segment locants are corrected separately.") }, { evidenceType: "curated-database", reviewStatus: "source-supported" }) }],
         segments: [
@@ -343,8 +330,7 @@ export function createPropranololFlagshipSeed(
       learning: section("source-supported", [
         { id: "learning:propranolol:structure", kind: "structure", prompt: localized(locale, "Hangi motif ariloksipropanolamin scaffoldını tanımaya yardım eder?", "Which motif helps identify the aryloxypropanolamine scaffold?"), options: [{ id: "amino-alcohol", label: localized(locale, "Aril eter bağlı amino-alkol yan zinciri", "Aryl-ether-linked amino-alcohol side chain") }, { id: "sulfonamide", label: localized(locale, "Primer sülfonamid", "Primary sulfonamide") }], correctOptionId: "amino-alcohol", explanation: localized(locale, "Bu yapı görevi kaynaklı kimliği öğretir; farmakolojik sonuç üretmez.", "This structure task teaches sourced identity; it does not generate a pharmacology conclusion."), sourceIds: [identitySource], reviewStatus: "source-supported" },
         { id: "learning:propranolol:pharmacology", kind: "pharmacology", prompt: localized(locale, "Birincil hedef eşlemesi hangi iki reseptörü içerir?", "Which two receptors are included in the primary target mapping?"), options: [{ id: "adrb", label: "ADRB1 · ADRB2" }, { id: "ptgs2", label: "PTGS2" }], correctOptionId: "adrb", explanation: localized(locale, "Eşleme kaynak-bağlıdır ve tek etkileşim iddiası değildir.", "The mapping is source-bound and is not an only-interaction claim."), sourceIds: ["source:uniprot-p08588", "source:uniprot-p07550", labelSource], reviewStatus: "source-supported" },
-        { id: "learning:propranolol:synthesis", kind: "synthesis", prompt: localized(locale, "Amino-alkol bağlantısını hangi dönüşüm açıklar?", "Which transformation explains the amino-alcohol connectivity?"), options: [{ id: "epoxide-opening", label: localized(locale, "Aminle epoksit halka açılması", "Amine epoxide ring opening") }, { id: "hydrolysis", label: localized(locale, "Basit ester hidrolizi", "Simple ester hydrolysis") }], correctOptionId: "epoxide-opening", explanation: localized(locale, "Bu, kaynaklandırılmış bağlantı hikâyesidir; laboratuvar protokolü değildir.", "This is a sourced connectivity story, not a laboratory protocol."), sourceIds: ["source:patent-gb2238786a"], reviewStatus: "source-supported" },
-      ], [identitySource, "source:uniprot-p08588", "source:uniprot-p07550", labelSource, "source:patent-gb2238786a"]),
+      ], [identitySource, "source:uniprot-p08588", "source:uniprot-p07550", labelSource]),
       explicitMissingFields: [
         localized(locale, "Sağlıklı erişkin oral clearance: bulunamadı — tahmin edilmedi.", "Healthy-adult oral clearance: not found — not estimated."),
         localized(locale, "Propranolol glukuronid konjugasyon konumu ve stereokimyası: hold.", "Propranolol glucuronide conjugation position and stereochemistry: hold."),

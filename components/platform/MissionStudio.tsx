@@ -4,13 +4,9 @@ import { useMemo, useState } from "react";
 
 import { moleculeById } from "@/lib/data/catalog";
 import { learningMissions } from "@/lib/data/learning-missions";
-import { synthesisStories } from "@/lib/data/synthesis-stories";
 import type { MissionTask, MoleculeId } from "@/lib/domain";
 import {
-  getSynthesisStepContent,
-  isSynthesisStoryContentId,
   useI18n,
-  type Locale,
   type TranslationKey,
   type Translator,
 } from "@/lib/i18n";
@@ -30,7 +26,6 @@ const missionCopy: Readonly<Record<string, {
   "mission:find-propranolol": { title: "missions.find.title", objective: "missions.find.objective", prompt: "missions.find.prompt" },
   "mission:beta-profile-classification": { title: "missions.classify.title", objective: "missions.classify.objective", prompt: "missions.classify.prompt" },
   "mission:active-moiety-versus-form": { title: "missions.forms.title", objective: "missions.forms.objective", prompt: "missions.forms.prompt" },
-  "mission:propranolol-route-order": { title: "missions.route.title", objective: "missions.route.objective", prompt: "missions.route.prompt" },
   "mission:evidence-boundaries": { title: "missions.boundaries.title", objective: "missions.boundaries.objective", prompt: "missions.boundaries.prompt" },
 };
 
@@ -40,7 +35,7 @@ const groupCopy: Readonly<Record<string, TranslationKey>> = {
   "mixed-alpha1-beta": "missions.group.mixedAlpha1Beta",
 };
 
-function itemLabel(itemId: string, t: Translator, locale: Locale) {
+function itemLabel(itemId: string, t: Translator) {
   const molecule = moleculeById.get(itemId as MoleculeId);
   if (molecule) return molecule.identity.preferredName;
   const trainingLabels: Record<string, TranslationKey> = {
@@ -50,12 +45,6 @@ function itemLabel(itemId: string, t: Translator, locale: Locale) {
   };
   const trainingKey = trainingLabels[itemId];
   if (trainingKey) return t(trainingKey);
-  for (const story of synthesisStories) {
-    const stepIndex = story.steps.findIndex((candidate) => candidate.id === itemId);
-    if (stepIndex >= 0 && isSynthesisStoryContentId(story.id)) {
-      return getSynthesisStepContent(locale, story.id, itemId)?.title ?? story.steps[stepIndex]?.title ?? itemId;
-    }
-  }
   return itemId.replaceAll("-", " ");
 }
 
@@ -68,7 +57,7 @@ function MissionTaskPlayer({
   readonly prompt: string;
   readonly onSolved: () => void;
 }) {
-  const { locale, t } = useI18n();
+  const { t } = useI18n();
   const [singleAnswer, setSingleAnswer] = useState("");
   const [ordered, setOrdered] = useState<string[]>([]);
   const [classifications, setClassifications] = useState<Record<string, string>>({});
@@ -113,7 +102,7 @@ function MissionTaskPlayer({
         <div className={styles.orderingBoard}>
           {task.itemIds.map((itemId) => (
             <button key={itemId} type="button" disabled={ordered.includes(itemId)} onClick={() => { setOrdered([...ordered, itemId]); setResult("idle"); }}>
-              <span>{ordered.includes(itemId) ? ordered.indexOf(itemId) + 1 : "+"}</span>{itemLabel(itemId, t, locale)}
+              <span>{ordered.includes(itemId) ? ordered.indexOf(itemId) + 1 : "+"}</span>{itemLabel(itemId, t)}
             </button>
           ))}
         </div>
@@ -134,7 +123,7 @@ function MissionTaskPlayer({
         <div className={styles.classificationBoard}>
           {task.itemIds.map((itemId) => (
             <label key={itemId}>
-              <span>{itemLabel(itemId, t, locale)}</span>
+              <span>{itemLabel(itemId, t)}</span>
               <select value={classifications[itemId] ?? ""} onChange={(event) => { setClassifications({ ...classifications, [itemId]: event.target.value }); setResult("idle"); }}>
                 <option value="" disabled>{t("missions.chooseLens")}</option>
                 {task.groups.map((group) => <option key={group.id} value={group.id}>{groupCopy[group.id] ? t(groupCopy[group.id]) : group.label}</option>)}
@@ -155,7 +144,7 @@ function MissionTaskPlayer({
       <div className={styles.evidenceReviewBoard}>
         {task.claimIds.map((claimId) => (
           <fieldset key={claimId}>
-            <legend>{itemLabel(claimId, t, locale)}</legend>
+            <legend>{itemLabel(claimId, t)}</legend>
             {(["accept", "qualify", "reject"] as const).map((verdict) => (
               <button key={verdict} type="button" data-selected={verdicts[claimId] === verdict} onClick={() => { setVerdicts({ ...verdicts, [claimId]: verdict }); setResult("idle"); }}>{t(`missions.verdict.${verdict}` as TranslationKey)}</button>
             ))}

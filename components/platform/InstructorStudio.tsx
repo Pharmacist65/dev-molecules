@@ -3,7 +3,6 @@
 import { moleculeCatalog } from "@/lib/data/catalog";
 import { learningMissions } from "@/lib/data/learning-missions";
 import { sourceRegistry } from "@/lib/data/sources";
-import { synthesisStories } from "@/lib/data/synthesis-stories";
 import type { NomenclatureProgressSnapshot } from "@/lib/domain";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
 
@@ -13,7 +12,6 @@ const missionTitleKeys: Readonly<Record<string, TranslationKey>> = {
   "mission:find-propranolol": "missions.find.title",
   "mission:beta-profile-classification": "missions.classify.title",
   "mission:active-moiety-versus-form": "missions.forms.title",
-  "mission:propranolol-route-order": "missions.route.title",
   "mission:evidence-boundaries": "missions.boundaries.title",
 };
 
@@ -65,7 +63,7 @@ export function InstructorStudio({
       <div className={styles.metricGrid}>
         <article><span>{t("teach.learnerCompletion")}</span><strong>{completion}%</strong><div><i style={{ width: `${completion}%` }} /></div><small>{t("teach.missionsCompleted", { completed: completedMissionIds.size, total: learningMissions.length })}</small></article>
         <article><span>{t("teach.catalogSeed")}</span><strong>{moleculeCatalog.length}</strong><p>{t("teach.sourceLinkedIdentities")}</p><small>{t("teach.seedNotCeiling")}</small></article>
-        <article><span>{t("teach.synthesisStories")}</span><strong>{synthesisStories.length}</strong><p>{t("teach.reviewerReadyDrafts")}</p><small>{t("teach.expertVerifiedCount", { count: synthesisStories.filter((story) => story.verification.status === "expert-reviewed").length })}</small></article>
+        <article><span>{t("teach.synthesisStories")}</span><strong>0</strong><p>{t("teach.reviewerReadyDrafts")}</p><small>{t("teach.expertVerifiedCount", { count: 0 })}</small></article>
         <article><span>{t("teach.sourceRegistry")}</span><strong>{reviewedSources}/{sourceRegistry.length}</strong><p>{t("teach.verifiedSourceRecords")}</p><small>{t("teach.reviewGatesVisible")}</small></article>
       </div>
 
@@ -88,7 +86,7 @@ export function InstructorStudio({
         <aside className={styles.reviewQueue}>
           <span className={styles.smallLabel}>{t("teach.reviewQueue")}</span>
           <h2>{t("teach.publishFailClosed")}</h2>
-          <div className={styles.queueItem}><span>01</span><div><strong>{t("teach.synthesisNarratives")}</strong><small>{t("teach.chemistryReviewerRequired")}</small></div><i>{t("teach.pendingCount", { count: synthesisStories.length })}</i></div>
+          <div className={styles.queueItem}><span>01</span><div><strong>{t("teach.synthesisNarratives")}</strong><small>{t("teach.chemistryReviewerRequired")}</small></div><i>{t("teach.pendingCount", { count: 0 })}</i></div>
           <div className={styles.queueItem}><span>02</span><div><strong>{t("teach.catalogClassifications")}</strong><small>{t("teach.pharmacologyReviewRequired")}</small></div><i>{t("teach.pendingCount", { count: moleculeCatalog.length })}</i></div>
           <div className={styles.queueItem}><span>03</span><div><strong>{t("teach.missionWording")}</strong><small>{t("teach.educatorReviewRequired")}</small></div><i>{t("teach.pendingCount", { count: learningMissions.length })}</i></div>
           {nomenclatureProgress ? <div className={styles.queueItem}><span>04</span><div><strong>{t("teach.nomenclatureSummary")}</strong><small>{t("teach.topicsCompleted", { count: nomenclatureProgress.completedExerciseIds.length })}</small></div><i>{nomenclatureProgress.percentComplete}%</i></div> : null}

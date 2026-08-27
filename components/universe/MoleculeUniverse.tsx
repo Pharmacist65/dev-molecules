@@ -161,6 +161,7 @@ export interface UniverseMolecule {
 }
 
 export type ExplorePresentationMode = "student" | "reviewer";
+export type ExploreSurfaceVariant = "embedded" | "immersive";
 
 export interface UniverseIndexedCatalog {
   readonly search: (
@@ -195,6 +196,8 @@ export interface MoleculeUniverseProps {
   description?: string;
   className?: string;
   presentationMode?: ExplorePresentationMode;
+  /** Main Drug Atlas uses the immersive stage; Family and other hosts stay embedded. */
+  surfaceVariant?: ExploreSurfaceVariant;
   catalogRecordCount?: number;
   indexedCatalog?: UniverseIndexedCatalog;
   learningActions?: UniverseLearningActions;
@@ -252,6 +255,47 @@ const DEFAULT_TELEMETRY: SceneTelemetry = {
   clippedMoleculeCount: 0,
   labelAvoidanceZones: [],
 };
+
+const renderedBoxesIntersect = (left: DOMRect, right: DOMRect): boolean =>
+  left.width > 0 &&
+  left.height > 0 &&
+  right.width > 0 &&
+  right.height > 0 &&
+  left.left < right.right - 1 &&
+  left.right > right.left + 1 &&
+  left.top < right.bottom - 1 &&
+  left.bottom > right.top + 1;
+
+/**
+ * Counts collisions from the boxes the browser actually rendered. Immersive
+ * Spatial intentionally has one explanatory label rather than synthetic
+ * cluster labels, so its meaningful collision contract is that this label
+ * does not cover another label or the camera controls.
+ */
+const countRenderedSpatialLabelCollisions = (stage: HTMLElement): number => {
+  const visibleBoxes = (selector: string) =>
+    [...stage.querySelectorAll<HTMLElement>(selector)]
+      .filter((element) => {
+        const style = window.getComputedStyle(element);
+        return style.display !== "none" && style.visibility !== "hidden";
+      })
+      .map((element) => element.getBoundingClientRect())
+      .filter((box) => box.width > 0 && box.height > 0);
+  const labels = visibleBoxes("[data-spatial-label]");
+  const obstacles = visibleBoxes("[data-spatial-label-obstacle]");
+  let collisions = 0;
+
+  labels.forEach((label, index) => {
+    for (let otherIndex = index + 1; otherIndex < labels.length; otherIndex += 1) {
+      if (renderedBoxesIntersect(label, labels[otherIndex]!)) collisions += 1;
+    }
+    for (const obstacle of obstacles) {
+      if (renderedBoxesIntersect(label, obstacle)) collisions += 1;
+    }
+  });
+  return collisions;
+};
+
 const DEFAULT_CAMERA_DISTANCE = Math.hypot(
   DEFAULT_MOLECULAR_SCENE_CAMERA.position.x - DEFAULT_MOLECULAR_SCENE_CAMERA.target.x,
   DEFAULT_MOLECULAR_SCENE_CAMERA.position.y - DEFAULT_MOLECULAR_SCENE_CAMERA.target.y,
@@ -281,9 +325,14 @@ function useStableIdMembership(ids: readonly string[]) {
 
 const STUDENT_UNIVERSE_ZOOM = cameraZoom(STUDENT_UNIVERSE_CAMERA);
 const CURATED_OVERVIEW_FAR_ZOOM_RATIO = 0.93;
+const IMMERSIVE_OVERVIEW_NEAR_ZOOM_RATIO = 1.08;
 const UNIVERSE_REPRESENTATIVE_POOL_SIZE = 12;
 const UNIVERSE_VISIBLE_SAMPLE_SIZE = 8;
 const NARROW_UNIVERSE_VISIBLE_SAMPLE_SIZE = 6;
+const IMMERSIVE_OVERVIEW_SAMPLE_SIZE = 6;
+const IMMERSIVE_NARROW_OVERVIEW_SAMPLE_SIZE = 4;
+const IMMERSIVE_NEAR_SAMPLE_SIZE = 10;
+const IMMERSIVE_NARROW_NEAR_SAMPLE_SIZE = 6;
 const CLUSTER_VISIBLE_SAMPLE_SIZE = 10;
 const VIEWPORT_SELECTION_SETTLE_MS = 650;
 
@@ -573,12 +622,14 @@ export function MoleculeUniverse({
   description,
   className,
   presentationMode = "student",
+  surfaceVariant = "embedded",
   catalogRecordCount,
   indexedCatalog,
   learningActions,
   onMoleculeSelect,
 }: MoleculeUniverseProps) {
   const { locale, t } = useI18n();
+  const isImmersive = surfaceVariant === "immersive";
   const candidateRecordsLabel = t("explore.candidateRecords");
   const representativeStructuresLabel = t("explore.representativeStructures");
   const molecules = useMemo(
@@ -593,15 +644,19 @@ export function MoleculeUniverse({
         }))
       : providedMolecules.map((molecule) => {
           const studentCategoricalValue = (value: string | undefined) =>
-            value && STUDENT_CANDIDATE_RECORDS_COPY.has(value)
-              ? candidateRecordsLabel
-              : value;
+            isImmersive
+              ? representativeStructuresLabel
+              : value && STUDENT_CANDIDATE_RECORDS_COPY.has(value)
+                ? candidateRecordsLabel
+                : value;
           const studentLensValue = (lensId: string, value: string) =>
             lensId === STUDENT_STRUCTURAL_LENS_ID
               ? representativeStructuresLabel
               : studentCategoricalValue(value) ?? value;
           const studentLensKey = (lensId: string, value: string) =>
-            lensId === STUDENT_STRUCTURAL_LENS_ID
+            isImmersive
+              ? STUDENT_REPRESENTATIVE_STRUCTURES_KEY
+              : lensId === STUDENT_STRUCTURAL_LENS_ID
               ? STUDENT_REPRESENTATIVE_STRUCTURES_KEY
               : STUDENT_CANDIDATE_RECORDS_KEYS.has(value)
                 ? "candidate-records"
@@ -635,7 +690,7 @@ export function MoleculeUniverse({
               : molecule.studentProfile,
           };
         }),
-    [candidateRecordsLabel, presentationMode, providedMolecules, representativeStructuresLabel],
+    [candidateRecordsLabel, isImmersive, presentationMode, providedMolecules, representativeStructuresLabel],
   );
   const catalogCopy = indexedCatalogCopy[locale];
   const localizedDefaultLenses = useMemo<readonly UniverseLens[]>(
@@ -721,7 +776,9 @@ export function MoleculeUniverse({
   const [sceneViewportKey, setSceneViewportKey] = useState("initial");
   const [flightActive, setFlightActive] = useState(false);
   const [universeZoom, setUniverseZoom] = useState(STUDENT_UNIVERSE_ZOOM);
-  const [universeNearZoomThreshold, setUniverseNearZoomThreshold] = useState(1.08);
+  const [universeNearZoomThreshold, setUniverseNearZoomThreshold] = useState(
+    isImmersive ? 1.42 : 1.08,
+  );
   const [universePan, setUniversePan] = useState({ x: 0, y: 0 });
   const [sceneCamera, setSceneCamera] = useState<MolecularSceneCamera | undefined>(
     STUDENT_UNIVERSE_CAMERA,
@@ -746,10 +803,20 @@ export function MoleculeUniverse({
   const [dimension, setDimension] = useState<ViewerDimension>("3d");
   const [inspectorOpen, setInspectorOpen] = useState(true);
   const [telemetry, setTelemetry] = useState<SceneTelemetry>(DEFAULT_TELEMETRY);
+  const [renderedSpatialLabelCollisionCount, setRenderedSpatialLabelCollisionCount] =
+    useState<number | null>(null);
   const universeVisibleSampleSize =
     sceneViewportWidth <= 540
-      ? NARROW_UNIVERSE_VISIBLE_SAMPLE_SIZE
-      : UNIVERSE_VISIBLE_SAMPLE_SIZE;
+      ? isImmersive
+        ? IMMERSIVE_NARROW_NEAR_SAMPLE_SIZE
+        : NARROW_UNIVERSE_VISIBLE_SAMPLE_SIZE
+      : isImmersive
+        ? IMMERSIVE_NEAR_SAMPLE_SIZE
+        : UNIVERSE_VISIBLE_SAMPLE_SIZE;
+  const universeOverviewSampleSize =
+    sceneViewportWidth <= 540
+      ? IMMERSIVE_NARROW_OVERVIEW_SAMPLE_SIZE
+      : IMMERSIVE_OVERVIEW_SAMPLE_SIZE;
   const cancelViewportSelectionUpdate = useCallback(() => {
     if (viewportSelectionTimerRef.current === null) return;
     window.clearTimeout(viewportSelectionTimerRef.current);
@@ -794,7 +861,13 @@ export function MoleculeUniverse({
       commitViewportSelectionCamera(fittedCamera);
       universeCameraRef.current = fittedCamera;
       const fittedZoom = cameraZoom(fittedCamera);
-      setUniverseNearZoomThreshold(fittedZoom * CURATED_OVERVIEW_FAR_ZOOM_RATIO);
+      setUniverseNearZoomThreshold(
+        fittedZoom * (
+          isImmersive
+            ? IMMERSIVE_OVERVIEW_NEAR_ZOOM_RATIO
+            : CURATED_OVERVIEW_FAR_ZOOM_RATIO
+        ),
+      );
       setUniverseZoom(fittedZoom);
       setUniversePan({
         x: -fittedCamera.target.x * 18,
@@ -802,7 +875,7 @@ export function MoleculeUniverse({
       });
       lastFittedUniverseViewportKeyRef.current = viewportKey;
     },
-    [commitViewportSelectionCamera],
+    [commitViewportSelectionCamera, isImmersive],
   );
 
   useEffect(() => {
@@ -819,7 +892,13 @@ export function MoleculeUniverse({
       // former 128px floor overflowed by a few pixels on Linux at the supported
       // 1440x900 / 150% zoom equivalent, where font metrics move the stage top.
       const available = Math.max(1, Math.floor(window.innerHeight - top - 1));
-      setSceneFirstViewportHeight((current) => current === available ? current : available);
+      const immersiveMinimum = window.innerWidth > 720
+        ? Math.floor(window.innerHeight * 0.78)
+        : 1;
+      const nextHeight = isImmersive
+        ? Math.max(available, immersiveMinimum)
+        : available;
+      setSceneFirstViewportHeight((current) => current === nextHeight ? current : nextHeight);
     };
     const scheduleFirstViewportHeightUpdate = () => {
       window.cancelAnimationFrame(firstFrame);
@@ -859,7 +938,44 @@ export function MoleculeUniverse({
         scheduleFirstViewportHeightUpdate,
       );
     };
-  }, [level]);
+  }, [isImmersive, level]);
+
+  useEffect(() => {
+    if (!isImmersive || level !== "universe") return undefined;
+    const stage = exploreStageRef.current;
+    if (!stage) return undefined;
+    let disposed = false;
+    let frame = 0;
+    const measure = () => {
+      if (disposed) return;
+      const nextCount = countRenderedSpatialLabelCollisions(stage);
+      setRenderedSpatialLabelCollisionCount((current) =>
+        current === nextCount ? current : nextCount
+      );
+    };
+    const scheduleMeasure = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(measure);
+    };
+    const observer = new ResizeObserver(scheduleMeasure);
+    observer.observe(stage);
+    stage.querySelectorAll<HTMLElement>(
+      "[data-spatial-label], [data-spatial-label-obstacle]",
+    ).forEach((element) => observer.observe(element));
+    scheduleMeasure();
+    window.addEventListener("resize", scheduleMeasure);
+    window.visualViewport?.addEventListener("resize", scheduleMeasure);
+    void document.fonts.ready.then(() => {
+      if (!disposed) scheduleMeasure();
+    });
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", scheduleMeasure);
+      window.visualViewport?.removeEventListener("resize", scheduleMeasure);
+    };
+  }, [isImmersive, level, locale, representativeStructuresLabel]);
 
   useEffect(() => {
     if (
@@ -907,10 +1023,17 @@ export function MoleculeUniverse({
     () =>
       visibleMolecules.filter(
         (molecule) =>
-          normalizedQuery.length > 0
-          || getLensKey(molecule, activeLensId, unclassifiedLabel) !== "unclassified",
+          (
+            !isImmersive
+            || presentationMode === "reviewer"
+            || normalizedQuery.length > 0
+            || molecule.representativeMapStatus === "curated-seed"
+          ) && (
+            normalizedQuery.length > 0
+            || getLensKey(molecule, activeLensId, unclassifiedLabel) !== "unclassified"
+          ),
       ),
-    [activeLensId, normalizedQuery, unclassifiedLabel, visibleMolecules],
+    [activeLensId, isImmersive, normalizedQuery, presentationMode, unclassifiedLabel, visibleMolecules],
   );
   const knownCatalogClassificationByCid = useMemo(() => {
     const labels = new Map<number, string>();
@@ -1174,7 +1297,16 @@ export function MoleculeUniverse({
         name: molecule.name,
         structureUrl,
         position,
-        scale: level === "focus" ? 1 : level === "compare" ? 0.72 : level === "cluster" ? 0.62 : 0.45,
+        scale:
+          level === "focus"
+            ? 1
+            : level === "compare"
+              ? 0.72
+              : level === "cluster"
+                ? isImmersive ? 0.58 : 0.62
+                : isImmersive
+                  ? lodLevel === "far" ? 0.74 : 0.52
+                  : 0.45,
         structureOrigin: structure.originLabel,
         expectedPubChemCid: structure.pubChemCid,
         comparison:
@@ -1192,7 +1324,9 @@ export function MoleculeUniverse({
     activeLensId,
     compareIds,
     comparisonGroupId,
+    isImmersive,
     level,
+    lodLevel,
     molecules,
   ]);
   const eligibleIds = useMemo(
@@ -1342,8 +1476,11 @@ export function MoleculeUniverse({
     universeVisibleSampleSize,
   ]);
   const requestedSceneIds = useMemo(
-    () =>
-      selectSceneMoleculeIds({
+    () => {
+      if (isImmersive && level === "universe" && lodLevel === "far") {
+        return candidateIds.slice(0, universeOverviewSampleSize);
+      }
+      return selectSceneMoleculeIds({
         level: lodLevel,
         candidateIds,
         focusedMoleculeId: selectedMolecule?.id ?? null,
@@ -1351,8 +1488,17 @@ export function MoleculeUniverse({
           level === "cluster"
             ? CLUSTER_VISIBLE_SAMPLE_SIZE
             : universeVisibleSampleSize,
-      }),
-    [candidateIds, level, lodLevel, selectedMolecule?.id, universeVisibleSampleSize],
+      });
+    },
+    [
+      candidateIds,
+      isImmersive,
+      level,
+      lodLevel,
+      selectedMolecule?.id,
+      universeOverviewSampleSize,
+      universeVisibleSampleSize,
+    ],
   );
   const computedSceneVisibleIds = useMemo(
     () => (dimension === "2d" ? [] : requestedSceneIds),
@@ -1482,7 +1628,7 @@ export function MoleculeUniverse({
     setUniversePan({ x: 0, y: 0 });
     setSceneCamera(STUDENT_UNIVERSE_CAMERA);
     universeCameraRef.current = STUDENT_UNIVERSE_CAMERA;
-    setUniverseNearZoomThreshold(1.08);
+    setUniverseNearZoomThreshold(isImmersive ? 1.42 : 1.08);
     autoFitPendingRef.current = true;
     commitViewportSelectionCamera(STUDENT_UNIVERSE_CAMERA);
     setCompareIds([]);
@@ -1625,6 +1771,10 @@ export function MoleculeUniverse({
   }
 
   function selectClusterMolecule(molecule: UniverseMolecule) {
+    if (isImmersive) {
+      openMolecule(molecule);
+      return;
+    }
     setClusterSelectedId(molecule.id);
     setSelectedId(molecule.id);
     setTelemetry((current) => ({ ...current, selectedAtom: null }));
@@ -1740,7 +1890,11 @@ export function MoleculeUniverse({
       ?? (level === "universe" ? STUDENT_UNIVERSE_CAMERA : DEFAULT_MOLECULAR_SCENE_CAMERA);
     if (level === "universe" && fitted) {
       setUniverseNearZoomThreshold(
-        cameraZoom(fitted) * CURATED_OVERVIEW_FAR_ZOOM_RATIO,
+        cameraZoom(fitted) * (
+          isImmersive
+            ? IMMERSIVE_OVERVIEW_NEAR_ZOOM_RATIO
+            : CURATED_OVERVIEW_FAR_ZOOM_RATIO
+        ),
       );
     }
     applyCamera(resetState);
@@ -2197,44 +2351,51 @@ export function MoleculeUniverse({
       aria-labelledby={headingId}
       data-explore-level={level}
       data-presentation-mode={presentationMode}
+      data-surface-variant={surfaceVariant}
     >
-      <header className={styles.header}>
-        <div className={styles.headingBlock}>
-          <p className={styles.eyebrow}>{resolvedEyebrow}</p>
-          <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1}>{resolvedTitle}</h2>
-          <p className={styles.description}>{resolvedDescription}</p>
-        </div>
-        <div
-          className={styles.headerSummary}
-          aria-label={t("explore.atlasSummary")}
-          data-universe-summary="true"
-        >
-          <span>
-            {interpolateIndexedCopy(catalogCopy.sceneSample, {
-              count: sceneVisibleIds.length,
-            })}
-          </span>
-          <span>
-            {t(
-              clusters.length === 1
-                ? "explore.clusterCount.one"
-                : "explore.clusterCount.other",
-              { count: clusters.length },
-            )}
-          </span>
-          <span>
-            <strong>
-              {level === "universe"
-                ? t("explore.level.universe")
-                : level === "cluster"
-                  ? t("explore.level.cluster")
-                  : level === "compare"
-                    ? t("explore.level.compare")
-                    : t("explore.level.focus")}
-            </strong>
-          </span>
-        </div>
-      </header>
+      {isImmersive ? (
+        <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1} className={styles.srOnly}>
+          {resolvedTitle}
+        </h2>
+      ) : (
+        <header className={styles.header}>
+          <div className={styles.headingBlock}>
+            <p className={styles.eyebrow}>{resolvedEyebrow}</p>
+            <h2 ref={universeHeadingRef} id={headingId} tabIndex={-1}>{resolvedTitle}</h2>
+            <p className={styles.description}>{resolvedDescription}</p>
+          </div>
+          <div
+            className={styles.headerSummary}
+            aria-label={t("explore.atlasSummary")}
+            data-universe-summary="true"
+          >
+            <span>
+              {interpolateIndexedCopy(catalogCopy.sceneSample, {
+                count: sceneVisibleIds.length,
+              })}
+            </span>
+            <span>
+              {t(
+                clusters.length === 1
+                  ? "explore.clusterCount.one"
+                  : "explore.clusterCount.other",
+                { count: clusters.length },
+              )}
+            </span>
+            <span>
+              <strong>
+                {level === "universe"
+                  ? t("explore.level.universe")
+                  : level === "cluster"
+                    ? t("explore.level.cluster")
+                    : level === "compare"
+                      ? t("explore.level.compare")
+                      : t("explore.level.focus")}
+              </strong>
+            </span>
+          </div>
+        </header>
+      )}
 
       <div className={styles.toolbar}>
         <div
@@ -2405,6 +2566,7 @@ export function MoleculeUniverse({
         className={styles.exploreStage}
         data-level={level}
         data-flight={flightActive ? "active" : "idle"}
+        data-inspector-open={level === "focus" && inspectorOpen ? "true" : "false"}
         style={
           (level === "universe" || level === "focus") && sceneFirstViewportHeight !== null
             ? {
@@ -2423,8 +2585,23 @@ export function MoleculeUniverse({
           data-layout-minimum-gap={telemetry.layoutMinimumGap ?? 0}
           data-overlap-count={telemetry.overlapCount}
           data-clipped-molecule-count={telemetry.clippedMoleculeCount}
-          data-visible-label-count={level === "universe" ? clusters.length : 0}
-          data-label-collision-count={level === "universe" ? labelCollisionCount : 0}
+          data-visible-label-count={
+            level === "universe" ? (isImmersive ? 1 : clusters.length) : 0
+          }
+          data-label-collision-count={
+            level === "universe" && isImmersive
+              ? renderedSpatialLabelCollisionCount ?? "measuring"
+              : level === "universe"
+                ? labelCollisionCount
+                : 0
+          }
+          data-label-collision-source={
+            level === "universe" && isImmersive
+              ? "rendered-dom"
+              : level === "universe"
+                ? "layout-solver"
+                : "not-applicable"
+          }
           data-selected-molecule={
             level === "focus"
               ? selectedMolecule?.id ?? ""
@@ -2506,6 +2683,12 @@ export function MoleculeUniverse({
                 })),
               }));
             }}
+            onMoleculeSelect={isImmersive ? (hit) => {
+              const molecule = molecules.find(
+                (candidate) => candidate.id === hit.moleculeId,
+              );
+              if (molecule) openMolecule(molecule);
+            } : undefined}
             onViewportCommit={({ width, height, aspect }) => {
               if (level !== "universe") return;
               setSceneViewportWidth((current) => current === width ? current : width);
@@ -2648,7 +2831,15 @@ export function MoleculeUniverse({
 
           {level === "universe" ? (
             <div className={styles.clusterLayer} data-near={lodLevel === "near" ? "true" : "false"}>
-              {lodLevel === "far" ? (
+              {isImmersive ? (
+                <p
+                  className={styles.representativeScope}
+                  data-representative-scope="true"
+                  data-spatial-label="representative-scope"
+                >
+                  <strong>{representativeStructuresLabel}</strong>
+                </p>
+              ) : lodLevel === "far" ? (
                 <div
                   className={styles.farClusterWorld}
                   style={{
@@ -2726,7 +2917,12 @@ export function MoleculeUniverse({
                   </ul>
                 </div>
               )}
-              <div className={styles.universeCamera} role="group" aria-label={t("explore.universeZoom")}>
+              <div
+                className={styles.universeCamera}
+                role="group"
+                aria-label={t("explore.universeZoom")}
+                data-spatial-label-obstacle="camera-controls"
+              >
                 <button type="button" aria-label={t("explore.zoomOut")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, 180))}>−</button>
                 <output>{Math.round(universeZoom * 100)}%</output>
                 <button type="button" aria-label={t("explore.zoomIn")} onClick={() => applyCamera(zoomSceneCamera(lastCameraRef.current, -180))}>+</button>

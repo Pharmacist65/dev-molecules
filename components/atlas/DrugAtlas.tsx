@@ -349,6 +349,7 @@ export function DrugAtlas({
           <Suspense fallback={<p className={styles.routeState} role="status">{copy.spatialLoading}</p>}>
             <LazyAtlasSpatialView
               configuration={spatial}
+              variant="immersive"
               copy={{
                 scope: copy.spatialScope,
                 description: copy.spatialHeroDescription,

@@ -1,6 +1,6 @@
 # Molevren Public Alpha — Release Status
 
-Status date: 2026-08-25
+Status date: 2026-08-27
 
 This document distinguishes implemented product flow, checked scientific coverage, and architecture-only capability. Counts are release evidence for this snapshot, never schema or product ceilings.
 
@@ -11,7 +11,7 @@ Dev Molecules V2.1 is the frozen integrity baseline. Molevren is the reversible 
 - **Public name:** Molevren — Pharmaceutical Molecular Atlas & Academy.
 - **Technical identity:** repository and platform remain `dev-molecules`; no destructive rename was performed.
 - **Legal boundary:** the preliminary name review is **medium-high risk**, not trademark clearance. No domain or social handle was purchased or reserved. See [name and domain research](brand/MOLEVREN_NAME_AND_DOMAIN_RESEARCH.md).
-- **Product evidence:** 18 exact PNGs, a checksum manifest, and one 75-second silent H.264 walkthrough are committed under [`docs/assets/molevren/`](assets/molevren/).
+- **Brand/layout reference:** 17 checksum-recorded Phase A PNGs remain under [`docs/assets/molevren/`](assets/molevren/). The retired Phase A and V2.0 route-detail captures and walkthroughs were removed because they predated the current pending-content publication boundary; this set is not current synthesis acceptance evidence.
 
 ## Routed product surfaces
 
@@ -25,9 +25,9 @@ Dev Molecules V2.1 is the frozen integrity baseline. Molevren is the reversible 
 | Family | Two bounded review workspaces with four exact PubChem identity/2D representatives each, computed-unreviewed structural fingerprint comparison, explicit coverage gaps, and unknown-ID fail-closed routing | No sourced production classification, shared mechanism, targets, ADME, or family comparison observations are configured. The representative set is not family coverage. |
 | Academy | Eight-module map with real progress where activities exist | Five modules are available, Pharmacology and ADME are coverage-dependent, and standalone Reaction Mechanisms is planned. |
 | Nomenclature Academy | Eight sections, 22 exercises, 20 parseable 2D structures, 16 response/widget contracts | Curated deterministic exercises; not a general IUPAC parser or arbitrary structure validator. |
-| Synthesis Academy | Three drugs, six open routes, 20 transformations, 12 eligible mechanism records | Two reported routes are directly source-reported; Propranolol's reported-kind route is source-context reconstruction; nine flagship target slots are empty. |
+| Synthesis Academy | Coverage navigation across all 1,552 exact catalog identities; the public publication index currently contains zero route details | A privacy-safe aggregate attests six historical private drafts, but their rows are not in the current tracked public tree and public CI does not revalidate them. Candidate documents, resolved source segments, and decoded ORD fragments are not silently promoted to routes. |
 | Lab | Route-lazy Ketcher 3.17.2, exact static-catalog identity check, computed seed comparison, local evidence card, opt-in JSON export | On-device/public-static only; no upload, account, persistent project store, live AI, or enabled research sandbox. |
-| Instructor Studio | Real Academy/Synthesis task catalog, device-local lesson package, optional connected local progress export | No LMS, learner identity, server sync, cohort analytics, or automatic assignment delivery. |
+| Instructor Studio | Eligible Nomenclature task catalog, device-local lesson package, optional connected local progress export | The public catalog currently has zero eligible synthesis tasks. Synthesis entries require a reviewed and reuse-rights-gated generated projection. No LMS, learner identity, server sync, cohort analytics, or automatic assignment delivery. |
 | Reviewer Console | Typed authenticated/authorized/audited adapter boundary | Public and static builds inject no adapter, so the console remains locked. |
 | Student / Expert | Student science presentation plus an Expert preference that opens curated Drug Dossiers in Reference mode by default | Atlas, Academy, Synthesis, and Lab remain on the same learner-safe presentation; no additional Expert measurement, assay, comparison, or export workflow is shipped. Expert never grants Reviewer access. |
 
@@ -50,6 +50,10 @@ Dev Molecules V2.1 is the frozen integrity baseline. Molevren is the reversible 
 | Enriched classification records | 0 |
 | Enriched pharmacology profiles | 0 |
 | Enriched ADME profiles | 0 |
+| Synthesis coverage records | 1,552 |
+| Terminal molecule–evidence associations | 14,897 |
+| Private migration audit aggregate | 6 |
+| Public synthesis route details | 0 |
 
 The 779 unresolved rows are partitioned into 473 source-identity-structure gaps, 111 exact PubChem-resolution gaps, and 195 complete-pair gaps. Product/application linkage is unresolved for all 2,331 source rows, and all 1,552 generated therapeutic classifications remain unclassified.
 
@@ -61,7 +65,8 @@ DrugCentral and PubChem are the only enabled public-build source policies. Targe
 - The checked catalog still has no scalable reviewed target-interaction or ADME enrichment snapshot. The three flagship dossiers use a separate, hand-curated source registry with explicit review and provenance.
 - Propranolol, Celecoxib, and Omeprazole carry route/form-specific ADME measurements only when dose, formulation, population, conditions, units, and source are resolvable. Their known missing properties remain `null`.
 - Reviewed metabolite edges exist only for the three flagship records. Activity boundaries remain exact: two Propranolol metabolites are `unknown`, Celecoxib statements are limited to COX-1/COX-2 inhibition, and Omeprazole statements are limited to antisecretory context.
-- Synthesis route kind, source gate, and presentation are separate. The current six-route split is three `source-supported` and three `context-supported`; strict reported presentation counts only Atenolol and Carvedilol.
+- Synthesis assessment, source evidence, route type, completeness, review, applicability, access, and rights are independent dimensions. The private migration attestation records six historical drafts as `pending` and `link_only`; the current public tree contains no route rows and makes no reported-route presentation.
+- Candidate/source discovery covers all 1,552 identities. All 14,897 molecule–evidence associations have an explicit terminal outcome; this processing coverage is not a claim that 14,897 reactions or routes were resolved.
 - Synthesis and nomenclature are educational content with their own review boundaries. Passing deterministic tests does not make them peer-reviewed science.
 - PubChem 3D assets are computed conformers, not experimental structures, target-bound poses, or clinical evidence.
 
@@ -88,15 +93,17 @@ Performance claims remain bounded to architecture and tests: route-level lazy lo
 
 ## Candidate verification snapshot
 
-The frozen local candidate passed on 2026-08-25:
+The local release candidate passed on 2026-08-27:
 
 - TypeScript, ESLint, Vinext production build, and GitHub Pages build;
-- 346/346 Node unit and integration tests;
-- 45/45 executed primary Chromium E2E scenarios, with one documentation-only capture test intentionally skipped;
+- 407/407 Node unit and integration tests;
+- 51/51 executed primary Chromium E2E scenarios, with one documentation-only capture test intentionally skipped;
 - 5/5 GitHub Pages E2E scenarios;
 - exact validation of 1,552 catalog records and 3,104 SDF assets;
+- synthesis validation with 1,552 coverage records, a six-route private aggregate attestation, zero public route details, zero warnings, and zero errors; public CI does not revalidate withheld private rows;
+- the public-synthesis boundary scanner across 227 generated release artifacts, 28 public documentation artifacts, and 407 tracked-source artifacts using 12 generic, catalog-aware patterns and no real private canary literals;
 - third-party notice consistency and `npm audit --omit=dev --audit-level=high` with zero reported vulnerabilities;
-- the final 18-image / 75-second evidence manifest with no runtime or horizontal-overflow errors.
+- the 17-image Phase A brand/layout reference manifest; retired synthesis route-detail images and walkthroughs are deliberately absent from the current tracked tree and current release evidence. Earlier public commits may retain retired alpha fixtures; no history rewrite or retroactive confidentiality is claimed.
 
 These are engineering acceptance results for the candidate commit, not scientific peer review, external accessibility certification, legal clearance, or a guarantee about future source availability.
 

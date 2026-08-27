@@ -61,7 +61,9 @@ export const exploreCanvas = (page: Page) =>
   page.locator("canvas[data-molecular-scene-canvas]").first();
 
 export const nearClusterList = (page: Page) =>
-  page.getByRole("list", { name: NEAR_CLUSTER_LIST_NAME });
+  page
+    .locator('[data-representative-scope="true"]')
+    .or(page.getByRole("list", { name: NEAR_CLUSTER_LIST_NAME }));
 
 export async function waitForExploreReady(page: Page) {
   const app = page.locator('[data-catalog-status="ready"][data-catalog-records="1552"]');
@@ -237,7 +239,7 @@ async function snapshotMoleculeRectangles(
   });
 }
 
-/** Measures HTML cluster controls against the real camera-projected SDF bounds. */
+/** Measures the active public map label against real camera-projected SDF bounds. */
 export async function measureClusterSpatialQuality(
   page: Page,
 ): Promise<ClusterSpatialQuality> {
@@ -245,24 +247,32 @@ export async function measureClusterSpatialQuality(
   const canvas = exploreCanvas(page);
   const list = nearClusterList(page);
   await expect(list).toBeVisible();
+  const immersiveScope = page.locator('[data-representative-scope="true"]');
+  const usesImmersiveScope = await immersiveScope.count() > 0;
+  const controls = usesImmersiveScope
+    ? immersiveScope
+    : list.getByRole("button");
+  const labels = usesImmersiveScope
+    ? immersiveScope.locator("strong")
+    : list.locator("button strong");
 
-  const [sceneBox, controls, labels, labelTypography, moleculeRectangles] = await Promise.all([
+  const [sceneBox, controlRectangles, labelRectangles, labelTypography, moleculeRectangles] = await Promise.all([
     scene.boundingBox(),
-    snapshotRectangles(list.getByRole("button")),
-    snapshotRectangles(list.locator("button strong")),
-    snapshotTextReadability(list.locator("button strong")),
+    snapshotRectangles(controls),
+    snapshotRectangles(labels),
+    snapshotTextReadability(labels),
     snapshotMoleculeRectangles(canvas),
   ]);
   expect(sceneBox, "the Explore scene must expose layout bounds").not.toBeNull();
 
-  const overlappingPairs = countRectangleCollisions(controls);
-  const collidingLabelPairs = countRectangleCollisions(labels);
+  const overlappingPairs = countRectangleCollisions(controlRectangles);
+  const collidingLabelPairs = countRectangleCollisions(labelRectangles);
   const moleculeOcclusionPairs = countCrossRectangleCollisions(
-    controls,
+    controlRectangles,
     moleculeRectangles,
   );
   const clippedLabels = sceneBox
-    ? controls
+    ? controlRectangles
         .filter(
           (rectangle) =>
             rectangle.left < sceneBox.x - 1 ||
@@ -271,9 +281,9 @@ export async function measureClusterSpatialQuality(
             rectangle.bottom > sceneBox.y + sceneBox.height + 1,
         )
         .map((rectangle) => rectangle.name)
-    : controls.map((rectangle) => rectangle.name);
+    : controlRectangles.map((rectangle) => rectangle.name);
   const readabilityViolations = [
-    ...controls
+    ...controlRectangles
       .filter((rectangle) => rectangle.height < MINIMUM_LABEL_HEIGHT_PX)
       .map(
         (rectangle) =>
@@ -285,7 +295,7 @@ export async function measureClusterSpatialQuality(
   ];
 
   return {
-    labelCount: controls.length,
+    labelCount: controlRectangles.length,
     moleculeBoundsCount: moleculeRectangles.length,
     overlap: overlappingPairs.length,
     clipped: clippedLabels.length,
@@ -293,8 +303,8 @@ export async function measureClusterSpatialQuality(
     moleculeOcclusion: moleculeOcclusionPairs.length,
     readabilityViolationCount: readabilityViolations.length,
     minimumLabelHeight:
-      controls.length > 0
-        ? Math.min(...controls.map((rectangle) => rectangle.height))
+      controlRectangles.length > 0
+        ? Math.min(...controlRectangles.map((rectangle) => rectangle.height))
         : null,
     minimumStrongFontSize:
       labelTypography.length > 0

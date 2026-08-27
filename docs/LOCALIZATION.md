@@ -52,12 +52,12 @@ The following content is localized:
 - navigation, controls, accessibility labels, loading/error states, and evidence boundaries;
 - Home, Atlas Browse/Spatial, Dossier, Academy, Lab, Instructor, and locked Reviewer copy;
 - Spatial summaries and the display labels for canonical classification values;
-- Synthesis Atlas route, source-scope, material, transformation, mechanism, limitation, and safety narration;
-- Atlas challenge prompts, options, and feedback;
+- Synthesis coverage, publication-gate, and explicit unavailable-state narration;
+- Any future reviewed and rights-cleared route projection and its learning copy;
 - Nomenclature Academy sections, prompts, hints, options, explanations, violated rules, solution steps, and source labels;
 - Student/Expert presentation labels and all explicit unavailable/coverage-gap explanations.
 
-Legacy synthesis-story localization lives in a stable-ID overlay in `lib/i18n/synthesis-content.ts`. Synthesis Atlas, the eight-module Academy map, Nomenclature Academy, and challenge records use paired `{ tr, en }` educational text while pure evaluators consume canonical IDs. Catalog identities, source paths, and search tokens remain canonical rather than translated.
+The public `lib/i18n/synthesis-content.ts` overlay is intentionally empty while every route remains review/rights gated. Synthesis coverage, the eight-module Academy map, Nomenclature Academy, and future publishable challenge records use paired `{ tr, en }` text while pure evaluators consume canonical IDs. Catalog identities and search tokens remain canonical rather than translated.
 
 Changing language must not move a molecule, change a source, promote a verification state, change a challenge answer, or alter the scientific subject.
 
@@ -66,8 +66,8 @@ Changing language must not move a molecule, change a source, promote a verificat
 1. Add or update the English key in `lib/i18n/messages.ts`.
 2. Add the Turkish value with the same placeholders.
 3. Use a stable domain ID for scientific content; do not use translated text as a lookup key.
-4. For legacy synthesis content, update both localized trees without changing source/data identifiers.
-5. For Atlas, Academy, or challenge content, update both values in the paired localized record.
+4. Add route-derived copy only from a reviewed and rights-cleared public projection; never copy private locators, materials, steps, or atom maps into localization.
+5. For Atlas, Academy, or future publishable challenge content, update both values in the paired localized record.
 6. Keep formulas, identifiers, provenance, review states, and scoring outside component prose.
 7. Test both locales and inspect the rendered page at the target viewport sizes.
 

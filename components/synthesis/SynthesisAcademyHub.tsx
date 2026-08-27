@@ -3,15 +3,14 @@
 import {
   lazy,
   Suspense,
-  useMemo,
+  useEffect,
   useState,
+  type FormEvent,
 } from "react";
 
-import {
-  resolveSynthesisCurriculumSelection,
-  synthesisCurriculumReadiness,
-  type SynthesisFlagshipReadiness,
-} from "@/lib/application/synthesis-curriculum";
+import type { IndexedCatalogHit } from "@/lib/application/catalog-expansion";
+import type { SynthesisCatalogSelection } from "@/lib/application/synthesis-catalog";
+import { loadPublishedSynthesisRouteCount } from "@/lib/application/published-synthesis-route";
 import { useI18n, type Locale } from "@/lib/i18n";
 
 import styles from "./SynthesisAcademyHub.module.css";
@@ -29,6 +28,14 @@ export interface SynthesisAcademyHubProps {
   readonly initialMoleculeId?: string;
   readonly initialView?: SynthesisAcademyHubView;
   readonly presentationMode?: "student" | "reviewer";
+  readonly catalogRecordCount?: number;
+  readonly assetBasePath?: string;
+  readonly catalogSelection?: SynthesisCatalogSelection | null;
+  readonly searchCatalog?: (
+    query: string,
+    limit?: number,
+  ) => Promise<readonly IndexedCatalogHit[]>;
+  readonly onSelectCatalogRecord?: (record: IndexedCatalogHit) => void;
   readonly onSelectMolecule?: (moleculeId: string) => void;
   readonly onOpenMoleculeFocus: (moleculeId: string) => void;
   readonly onOpenDrugDossier?: (moleculeId: string) => void;
@@ -39,142 +46,81 @@ export interface SynthesisAcademyHubProps {
 const copy = {
   tr: {
     eyebrow: "Academy · Sentez",
-    title: "Bağların nasıl kurulduğunu, kanıt sınırlarıyla öğren.",
-    description: "Kaynaklı rotaları, eğitsel rekonstrüksiyonları ve mekanizma katmanlarını birbirine karıştırmadan inceleyen derin öğrenme alanı.",
+    title: "Sentez kanıtını, yayın sınırlarıyla incele.",
+    description: "Her kesin molekül kimliği için kaynak araştırmasının kapsamını ve sonucunu gösteren; incelemesi tamamlanmamış rota ayrıntılarını yayımlamayan öğrenme alanı.",
     boundary: "Eğitim görünümü · miktar, ölçek, ayrıntılı work-up veya üretim protokolü içermez",
     back: "Academy’ye dön",
-    curriculum: "Müfredat",
-    atlas: "Rota laboratuvarı",
-    curriculumHint: "Gerçek kapsam ve 12 ilaçlık yayın hedefi",
-    atlasHint: "Rota → basamak → mekanizma",
-    coverage: "Deep Learning kapsamı",
-    coverageTitle: "Kaynak kapısından geçen {available} ilaç var; {planned} hedef yuvası henüz seçilmedi.",
-    coverageBody: "Bu tablo bir katalog tamlık iddiası değildir. Yalnız kaynak kapısından geçen mevcut rotalar açılır; planlanan yuvalara isim veya bilimsel içerik uydurulmaz.",
-    curatedDrugs: "kaynak kapılı ilaç",
-    routes: "rota",
-    transformations: "dönüşüm",
-    mechanisms: "mekanizma kaydı",
-    sourceReported: "doğrudan bildirilen rota",
-    flagshipSet: "12 amiral gemisi hedefi",
-    flagshipIntro: "Mevcut kürasyon önce gelir; çeşitlilik hedefleri yalnız normalize veriyle ölçülür.",
-    available: "Rota mevcut",
-    blocked: "Kaynak kapısı kapalı",
-    planned: "Planlandı · yapılandırılmadı",
-    routeCount: "Açık rota",
-    stepCount: "Dönüşüm",
-    mechanismCount: "Mekanizma",
-    openRoute: "Rota dersini aç",
-    openDossier: "İlaç dosyasını aç",
-    reportedSource: "Kaynakta bildirilen",
-    reportedContext: "Kaynak bağlamlı rekonstrüksiyon",
-    reportedGap: "Kanıt boşluğu açıklanmış",
-    reportedUnavailable: "Bildirilen rota kapalı",
-    noReported: "Bildirilen rota yok",
-    readiness: "Yayın ölçütleri",
-    target: "Hedef",
-    notMeasured: "Ölçülmedi",
-    inProgress: "Devam ediyor",
-    complete: "Tamamlandı",
-    sourceRules: "Kaynak kapısı",
-    sourceRulesIntro: "Rota türü ile kanıt durumu aynı şey değildir.",
-    reportedRule: "Reported Route",
-    teachingRule: "Teaching Route",
-    blockedRule: "Kapalı rota",
-    reviewerLedger: "Reviewer kaynak özeti",
-    supported: "doğrudan destekli",
-    context: "bağlam destekli",
-    partial: "açık boşluklu",
-    sourceBlocked: "kapalı",
-    labTitle: "Etkileşimli Synthesis Atlas",
-    labDescription: "Bir ilacı seç, ileri veya retrosentetik yönde ilerle; yalnız kürate edilmiş mekanizma katmanlarını aç.",
-    changeSelection: "Müfredat tablosuna dön",
-    loading: "Synthesis Atlas yükleniyor…",
-    unavailable: "Kaynak kapısından geçen bir rota yok.",
+    curriculum: "Sentez kapsamı",
+    atlas: "Kanıt atlası",
+    curriculumHint: "Katalog genelinde araştırma ve yayın sınırı",
+    atlasHint: "Kesin kimlik → kapsam kaydı",
+    coverage: "Sentez kanıtı kapsamı",
+    labTitle: "Sentez kanıtı atlası",
+    labDescription: "Kesin katalog kimliğinin kanıt kapsamını aç. Rota ayrıntısı yalnız doğrulanmış, yayımlanabilir bir artifact üzerinden sunulabilir.",
+    changeSelection: "Sentez kapsamına dön",
+    loading: "Sentez kanıtı yükleniyor…",
+    unavailable: "Doğrulanmış sentez kapsam kaydı yüklenemedi.",
+    catalogSearchLabel: "Katalog genelinde sentez kapsamını ara",
+    catalogSearchPlaceholder: "İsim, eş ad, formül veya PubChem CID",
+    catalogSearchAction: "Kapsamda ara",
+    catalogSearchHint: "Her katalog kimliği bir sentez kanıtı kapsam kaydı açar; rota ayrıntısı yalnız bilimsel inceleme ve yeniden kullanım izni tamamlanmış artifact’tan yüklenebilir.",
+    catalogSearching: "Sentez kapsamı aranıyor…",
+    catalogNoResults: "Bu sorguyla eşleşen katalog kimliği bulunamadı.",
+    catalogSearchError: "Katalog araması şu anda kullanılamıyor.",
+    selectedCoverage: "Seçili sentez kapsamı",
+    publicCoverageTitle: "{count} kesin katalog kimliğinin her biri açık bir sentez değerlendirmesine bağlı.",
+    publicCoverageBody: "Aday kaynak değerlendirmeleri, erişim engelleri ve araştırma kapsamında destekleyici kaynak bulunamadığı durumlar sessiz boşluk bırakmadan gösterilir. Bilimsel incelemesi tamamlanmamış rotaların reaksiyon dizisi ve tamlık bilgisi istemci paketine alınmaz.",
+    catalogIdentities: "Katalog kimliği",
+    identityMatch: "Kimlik eşleşmesi",
+    exact: "Kesin",
+    reviewGate: "Bilimsel inceleme",
+    reuseGate: "Yeniden kullanım",
+    required: "Zorunlu",
+    selectedIdentityTitle: "Bu kimliğin kanıt kaydını aç",
+    selectedIdentityBody: "Arama kapsamını ve sonuçlandırılmış kaynak değerlendirmelerini incele; yayımlanabilir rota yoksa sistem bunu açıkça söyler ve molekül yapısına dönüş yolunu korur.",
+    openCoverage: "Sentez kanıtını aç",
+    publishedRouteDetails: "yayımlanmış rota ayrıntısı",
+    publishedRouteCountUnavailable: "Yayın indeksi doğrulanamadı",
   },
   en: {
     eyebrow: "Academy · Synthesis",
-    title: "Learn how bonds are made, with the evidence boundary intact.",
-    description: "A deep-learning space that keeps source-reported routes, educational reconstructions, and mechanism layers distinct.",
+    title: "Inspect synthesis evidence with publication boundaries intact.",
+    description: "A learning space that reports source-search coverage for every exact molecular identity without publishing route detail that has not passed review.",
     boundary: "Teaching view · no quantities, scale, detailed work-up, or manufacturing protocol",
     back: "Back to Academy",
-    curriculum: "Curriculum",
-    atlas: "Route lab",
-    curriculumHint: "Actual coverage and the 12-drug publication target",
-    atlasHint: "Route → step → mechanism",
-    coverage: "Deep Learning coverage",
-    coverageTitle: "{available} drugs pass the source gate; {planned} target slots remain unassigned.",
-    coverageBody: "This table is not a catalog-completeness claim. Only existing routes that pass the source gate can open; planned slots receive no invented name or scientific content.",
-    curatedDrugs: "source-gated drugs",
-    routes: "routes",
-    transformations: "transformations",
-    mechanisms: "mechanism records",
-    sourceReported: "directly reported routes",
-    flagshipSet: "12-flagship target",
-    flagshipIntro: "Existing curation comes first; diversity goals are measured only from normalized data.",
-    available: "Route available",
-    blocked: "Source gate closed",
-    planned: "Planned · unconfigured",
-    routeCount: "Open routes",
-    stepCount: "Transformations",
-    mechanismCount: "Mechanisms",
-    openRoute: "Open route lesson",
-    openDossier: "Open drug dossier",
-    reportedSource: "Source-reported",
-    reportedContext: "Source-context reconstruction",
-    reportedGap: "Declared evidence gap",
-    reportedUnavailable: "Reported route closed",
-    noReported: "No reported route",
-    readiness: "Publication criteria",
-    target: "Target",
-    notMeasured: "Not measured",
-    inProgress: "In progress",
-    complete: "Complete",
-    sourceRules: "Source gate",
-    sourceRulesIntro: "Route kind and evidence state are not the same thing.",
-    reportedRule: "Reported Route",
-    teachingRule: "Teaching Route",
-    blockedRule: "Closed route",
-    reviewerLedger: "Reviewer source summary",
-    supported: "directly supported",
-    context: "context supported",
-    partial: "declared gap",
-    sourceBlocked: "closed",
-    labTitle: "Interactive Synthesis Atlas",
-    labDescription: "Choose a drug, move forward or retrosynthetically, and open only curated mechanism layers.",
-    changeSelection: "Back to curriculum table",
-    loading: "Loading Synthesis Atlas…",
-    unavailable: "No route currently passes the source gate.",
+    curriculum: "Synthesis coverage",
+    atlas: "Evidence atlas",
+    curriculumHint: "Catalog-wide research and publication boundaries",
+    atlasHint: "Exact identity → coverage record",
+    coverage: "Synthesis evidence coverage",
+    labTitle: "Synthesis evidence atlas",
+    labDescription: "Open evidence coverage for an exact catalog identity. Route detail may appear only from a validated, publishable generated artifact.",
+    changeSelection: "Back to synthesis coverage",
+    loading: "Loading synthesis evidence…",
+    unavailable: "A validated synthesis coverage record could not be loaded.",
+    catalogSearchLabel: "Search synthesis coverage across the catalog",
+    catalogSearchPlaceholder: "Name, alias, formula, or PubChem CID",
+    catalogSearchAction: "Search coverage",
+    catalogSearchHint: "Every catalog identity opens a synthesis coverage record; route detail can load only from an artifact that has passed scientific review and reuse permission.",
+    catalogSearching: "Searching synthesis coverage…",
+    catalogNoResults: "No catalog identity matched this query.",
+    catalogSearchError: "Catalog search is currently unavailable.",
+    selectedCoverage: "Selected synthesis coverage",
+    publicCoverageTitle: "All {count} exact catalog identities are connected to an explicit synthesis assessment.",
+    publicCoverageBody: "Candidate-source assessments, access barriers, and scoped no-support results remain visible without silent blanks. Unreviewed reaction sequences and completeness are excluded from the client bundle.",
+    catalogIdentities: "Catalog identities",
+    identityMatch: "Identity match",
+    exact: "Exact",
+    reviewGate: "Scientific review",
+    reuseGate: "Reuse permission",
+    required: "Required",
+    selectedIdentityTitle: "Open this identity's evidence record",
+    selectedIdentityBody: "Inspect search scope and completed source assessments. If no route is publishable, the system says so explicitly and preserves a path back to the molecular structure.",
+    openCoverage: "Open synthesis evidence",
+    publishedRouteDetails: "published route details",
+    publishedRouteCountUnavailable: "Publication index unavailable",
   },
 } as const;
-
-const presentationLabel = (
-  entry: SynthesisFlagshipReadiness,
-  locale: Locale,
-): string => {
-  const labels = copy[locale];
-  switch (entry.reportedRoutePresentation) {
-    case "source-reported":
-      return labels.reportedSource;
-    case "source-context-reconstruction":
-      return labels.reportedContext;
-    case "declared-gap-reconstruction":
-      return labels.reportedGap;
-    case "unavailable":
-      return labels.reportedUnavailable;
-    default:
-      return labels.noReported;
-  }
-};
-
-const statusLabel = (
-  entry: SynthesisFlagshipReadiness,
-  locale: Locale,
-): string => {
-  const labels = copy[locale];
-  if (entry.status === "curated-route-available") return labels.available;
-  if (entry.status === "blocked-source-gate") return labels.blocked;
-  return labels.planned;
-};
 
 const joinClassNames = (...values: readonly (string | undefined)[]) =>
   values.filter(Boolean).join(" ");
@@ -189,48 +135,70 @@ const interpolate = (
 
 export function SynthesisAcademyHub({
   locale: localeOverride,
-  selectedMoleculeId: controlledMoleculeId,
-  initialMoleculeId,
   initialView = "curriculum",
   presentationMode = "student",
-  onSelectMolecule,
+  catalogRecordCount = 1552,
+  assetBasePath,
+  catalogSelection,
+  searchCatalog,
+  onSelectCatalogRecord,
   onOpenMoleculeFocus,
-  onOpenDrugDossier,
   onBackToAcademy,
   className,
 }: SynthesisAcademyHubProps) {
   const { locale: contextLocale } = useI18n();
   const locale = localeOverride ?? contextLocale;
   const labels = copy[locale];
-  const initialSelection = useMemo(
-    () => resolveSynthesisCurriculumSelection(initialMoleculeId),
-    [initialMoleculeId],
-  );
-  const [uncontrolledMoleculeId, setUncontrolledMoleculeId] = useState(
-    initialSelection.moleculeId,
-  );
   const [view, setView] = useState<SynthesisAcademyHubView>(initialView);
-  const selection = resolveSynthesisCurriculumSelection(
-    controlledMoleculeId ?? uncontrolledMoleculeId,
-  );
-  const selectedMoleculeId = selection.moleculeId;
+  const [catalogQuery, setCatalogQuery] = useState("");
+  const [catalogResults, setCatalogResults] = useState<readonly IndexedCatalogHit[]>([]);
+  const [catalogSearchState, setCatalogSearchState] = useState<
+    "idle" | "searching" | "ready" | "empty" | "error"
+  >("idle");
+  const [publishedRouteCount, setPublishedRouteCount] = useState<number | null>(null);
+  const [publishedRouteCountState, setPublishedRouteCountState] = useState<
+    "loading" | "ready" | "unavailable"
+  >("loading");
 
-  function selectMolecule(moleculeId: string) {
-    setUncontrolledMoleculeId(moleculeId);
-    onSelectMolecule?.(moleculeId);
-  }
+  useEffect(() => {
+    let active = true;
+    void loadPublishedSynthesisRouteCount({ assetBasePath })
+      .then((count) => {
+        if (!active) return;
+        setPublishedRouteCount(count);
+        setPublishedRouteCountState("ready");
+      })
+      .catch(() => {
+        if (!active) return;
+        setPublishedRouteCount(null);
+        setPublishedRouteCountState("unavailable");
+      });
+    return () => {
+      active = false;
+    };
+  }, [assetBasePath]);
 
-  function openRoute(moleculeId: string) {
-    selectMolecule(moleculeId);
-    setView("atlas");
+  async function submitCatalogSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const query = catalogQuery.trim();
+    if (!query || !searchCatalog) return;
+    setCatalogSearchState("searching");
+    try {
+      const results = await searchCatalog(query, 10);
+      setCatalogResults(results);
+      setCatalogSearchState(results.length > 0 ? "ready" : "empty");
+    } catch {
+      setCatalogResults([]);
+      setCatalogSearchState("error");
+    }
   }
 
   return (
     <section
       className={joinClassNames(styles.hub, className)}
       data-synthesis-academy="phase-6"
-      data-curated-drugs={synthesisCurriculumReadiness.availableDrugCount}
-      data-target-drugs={synthesisCurriculumReadiness.targetDrugCount}
+      data-published-route-details={publishedRouteCount ?? publishedRouteCountState}
+      data-catalog-records={catalogRecordCount}
     >
       <header className={styles.hero}>
         <div className={styles.heroTopline}>
@@ -247,10 +215,16 @@ export function SynthesisAcademyHub({
             <h1>{labels.title}</h1>
             <p>{labels.description}</p>
           </div>
-          <div className={styles.targetDial} aria-label={`${synthesisCurriculumReadiness.availableDrugCount} / ${synthesisCurriculumReadiness.targetDrugCount} ${labels.curatedDrugs}`}>
-            <strong>{String(synthesisCurriculumReadiness.availableDrugCount).padStart(2, "0")}</strong>
-            <span>/ {synthesisCurriculumReadiness.targetDrugCount}</span>
-            <small>{labels.curatedDrugs}</small>
+          <div
+            className={styles.targetDial}
+            aria-live="polite"
+            aria-label={publishedRouteCount === null
+              ? labels.publishedRouteCountUnavailable
+              : `${publishedRouteCount} ${labels.publishedRouteDetails}`}
+          >
+            <strong>{publishedRouteCount === null ? "—" : String(publishedRouteCount).padStart(2, "0")}</strong>
+            <span>/ {catalogRecordCount.toLocaleString(locale === "tr" ? "tr-TR" : "en-US")}</span>
+            <small>{labels.publishedRouteDetails}</small>
           </div>
         </div>
       </header>
@@ -271,7 +245,7 @@ export function SynthesisAcademyHub({
           role="tab"
           aria-selected={view === "atlas"}
           aria-controls="synthesis-atlas-panel"
-          disabled={!selectedMoleculeId}
+          disabled={!catalogSelection}
           onClick={() => setView("atlas")}
         >
           <strong>{labels.atlas}</strong>
@@ -279,121 +253,109 @@ export function SynthesisAcademyHub({
         </button>
       </nav>
 
+      {searchCatalog && onSelectCatalogRecord ? (
+        <section
+          className={styles.catalogNavigator}
+          aria-labelledby="synthesis-catalog-search-heading"
+          data-synthesis-catalog-navigator="complete-index"
+          data-catalog-record-count={catalogRecordCount}
+        >
+          <div className={styles.catalogSearchIntro}>
+            <div>
+              <span className={styles.sectionLabel}>{labels.selectedCoverage}</span>
+              <h2 id="synthesis-catalog-search-heading">{labels.catalogSearchLabel}</h2>
+              <p>{labels.catalogSearchHint}</p>
+            </div>
+            {catalogSelection ? (
+              <aside data-selected-synthesis-catalog-identity={catalogSelection.catalogEntityId}>
+                <span>{labels.selectedCoverage}</span>
+                <strong>{catalogSelection.preferredName}</strong>
+                <small>{catalogSelection.molecularFormula} · CID {catalogSelection.pubChemCid}</small>
+              </aside>
+            ) : null}
+          </div>
+          <form onSubmit={submitCatalogSearch} role="search">
+            <label htmlFor="synthesis-catalog-query">{labels.catalogSearchPlaceholder}</label>
+            <div>
+              <input
+                id="synthesis-catalog-query"
+                type="search"
+                value={catalogQuery}
+                placeholder={labels.catalogSearchPlaceholder}
+                autoComplete="off"
+                onChange={(event) => setCatalogQuery(event.currentTarget.value)}
+              />
+              <button type="submit" disabled={catalogSearchState === "searching" || !catalogQuery.trim()}>
+                {labels.catalogSearchAction}
+              </button>
+            </div>
+          </form>
+          {catalogSearchState === "searching" ? <p role="status">{labels.catalogSearching}</p> : null}
+          {catalogSearchState === "empty" ? <p role="status">{labels.catalogNoResults}</p> : null}
+          {catalogSearchState === "error" ? <p role="alert">{labels.catalogSearchError}</p> : null}
+          {catalogResults.length > 0 ? (
+            <ul className={styles.catalogResults}>
+              {catalogResults.map((result) => (
+                <li key={result.id}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onSelectCatalogRecord(result);
+                      setCatalogResults([]);
+                      setCatalogSearchState("idle");
+                    }}
+                  >
+                    <strong>{result.preferredName}</strong>
+                    <span>{result.formula} · CID {result.pubChemCid}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
+
       {view === "curriculum" ? (
-        <div id="synthesis-curriculum-panel" role="tabpanel" className={styles.curriculumPanel}>
+        <div
+          id="synthesis-curriculum-panel"
+          role="tabpanel"
+          className={styles.curriculumPanel}
+          data-synthesis-public-coverage-only="true"
+          data-presentation-mode={presentationMode}
+        >
           <section className={styles.coverageIntro} aria-labelledby="synthesis-coverage-heading">
             <div>
               <span className={styles.sectionLabel}>{labels.coverage}</span>
               <h2 id="synthesis-coverage-heading">
-                {interpolate(labels.coverageTitle, {
-                  available: synthesisCurriculumReadiness.availableDrugCount,
-                  planned: synthesisCurriculumReadiness.plannedDrugCount,
+                {interpolate(labels.publicCoverageTitle, {
+                  count: catalogRecordCount.toLocaleString(locale === "tr" ? "tr-TR" : "en-US"),
                 })}
               </h2>
-              <p>{labels.coverageBody}</p>
+              <p>{labels.publicCoverageBody}</p>
             </div>
             <dl className={styles.metrics}>
-              <div><dt>{labels.routes}</dt><dd>{synthesisCurriculumReadiness.routeCount}</dd></div>
-              <div><dt>{labels.transformations}</dt><dd>{synthesisCurriculumReadiness.transformationCount}</dd></div>
-              <div><dt>{labels.mechanisms}</dt><dd>{synthesisCurriculumReadiness.availableMechanismCount}</dd></div>
-              <div><dt>{labels.sourceReported}</dt><dd>{synthesisCurriculumReadiness.sourceReportedRouteCount}</dd></div>
+              <div><dt>{labels.catalogIdentities}</dt><dd>{catalogRecordCount.toLocaleString(locale === "tr" ? "tr-TR" : "en-US")}</dd></div>
+              <div><dt>{labels.identityMatch}</dt><dd>{labels.exact}</dd></div>
+              <div><dt>{labels.reviewGate}</dt><dd>{labels.required}</dd></div>
+              <div><dt>{labels.reuseGate}</dt><dd>{labels.required}</dd></div>
             </dl>
           </section>
-
-          <div className={styles.curriculumGrid}>
-            <section className={styles.flagshipSection} aria-labelledby="synthesis-flagships-heading">
-              <header className={styles.sectionHeader}>
-                <div>
-                  <span className={styles.sectionLabel}>{labels.flagshipSet}</span>
-                  <h2 id="synthesis-flagships-heading">
-                    {String(synthesisCurriculumReadiness.availableDrugCount).padStart(2, "0")} / {synthesisCurriculumReadiness.targetDrugCount}
-                  </h2>
-                </div>
-                <p>{labels.flagshipIntro}</p>
-              </header>
-
-              <ol className={styles.flagshipList}>
-                {synthesisCurriculumReadiness.flagships.map((entry) => (
-                  <li key={entry.id} data-status={entry.status}>
-                    <span className={styles.slot}>{String(entry.slot).padStart(2, "0")}</span>
-                    <div className={styles.flagshipIdentity}>
-                      <strong>{entry.label[locale]}</strong>
-                      <span data-evidence-presentation={entry.reportedRoutePresentation ?? "none"}>
-                        {entry.status === "curated-route-available"
-                          ? presentationLabel(entry, locale)
-                          : statusLabel(entry, locale)}
-                      </span>
-                    </div>
-                    {entry.status === "curated-route-available" && entry.moleculeId ? (
-                      <>
-                        <dl className={styles.entryMetrics}>
-                          <div><dt>{labels.routeCount}</dt><dd>{entry.availableRouteCount}/{entry.routeCount}</dd></div>
-                          <div><dt>{labels.stepCount}</dt><dd>{entry.transformationCount}</dd></div>
-                          <div><dt>{labels.mechanismCount}</dt><dd>{entry.availableMechanismCount}</dd></div>
-                        </dl>
-                        <div className={styles.entryActions}>
-                          {onOpenDrugDossier ? (
-                            <button type="button" onClick={() => onOpenDrugDossier(entry.moleculeId!)}>
-                              {labels.openDossier}
-                            </button>
-                          ) : null}
-                          <button type="button" className={styles.primaryAction} onClick={() => openRoute(entry.moleculeId!)}>
-                            {labels.openRoute} <span aria-hidden="true">→</span>
-                          </button>
-                        </div>
-                      </>
-                    ) : (
-                      <span className={styles.pendingStatus}>{statusLabel(entry, locale)}</span>
-                    )}
-                  </li>
-                ))}
-              </ol>
+          {catalogSelection ? (
+            <section className={styles.publicCoverageSelection} data-public-synthesis-selection={catalogSelection.catalogEntityId}>
+              <div>
+                <span className={styles.sectionLabel}>{labels.selectedCoverage}</span>
+                <h2>{labels.selectedIdentityTitle}</h2>
+                <p>{labels.selectedIdentityBody}</p>
+              </div>
+              <aside>
+                <strong>{catalogSelection.preferredName}</strong>
+                <span>{catalogSelection.molecularFormula} · CID {catalogSelection.pubChemCid}</span>
+                <button type="button" onClick={() => setView("atlas")}>
+                  {labels.openCoverage} <span aria-hidden="true">→</span>
+                </button>
+              </aside>
             </section>
-
-            <aside className={styles.readinessRail}>
-              <section aria-labelledby="synthesis-readiness-heading">
-                <span className={styles.sectionLabel}>{labels.readiness}</span>
-                <h2 id="synthesis-readiness-heading">Phase 6</h2>
-                <ul className={styles.criteriaList}>
-                  {synthesisCurriculumReadiness.criteria.map((criterion) => (
-                    <li key={criterion.id} data-state={criterion.state}>
-                      <div>
-                        <strong>{criterion.label[locale]}</strong>
-                        <span>{labels.target} ≥ {criterion.target}</span>
-                      </div>
-                      <output>
-                        {criterion.current ?? "—"}
-                        <small>{criterion.state === "unmeasured" ? labels.notMeasured : criterion.state === "complete" ? labels.complete : labels.inProgress}</small>
-                      </output>
-                      <p>{criterion.boundary[locale]}</p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              <section className={styles.sourcePolicy} aria-labelledby="synthesis-source-policy-heading">
-                <span className={styles.sectionLabel}>{labels.sourceRules}</span>
-                <h2 id="synthesis-source-policy-heading">{labels.sourceRulesIntro}</h2>
-                <dl>
-                  <div><dt>{labels.reportedRule}</dt><dd>{synthesisCurriculumReadiness.sourcePolicy.reported[locale]}</dd></div>
-                  <div><dt>{labels.teachingRule}</dt><dd>{synthesisCurriculumReadiness.sourcePolicy.teaching[locale]}</dd></div>
-                  <div><dt>{labels.blockedRule}</dt><dd>{synthesisCurriculumReadiness.sourcePolicy.blocked[locale]}</dd></div>
-                </dl>
-              </section>
-
-              {presentationMode === "reviewer" ? (
-                <section className={styles.reviewerLedger} data-reviewer-only="true">
-                  <span className={styles.sectionLabel}>{labels.reviewerLedger}</span>
-                  <dl>
-                    <div><dt>{labels.supported}</dt><dd>{synthesisCurriculumReadiness.sourceGateCounts["source-supported"]}</dd></div>
-                    <div><dt>{labels.context}</dt><dd>{synthesisCurriculumReadiness.sourceGateCounts["context-supported"]}</dd></div>
-                    <div><dt>{labels.partial}</dt><dd>{synthesisCurriculumReadiness.sourceGateCounts["partial-with-declared-gap"]}</dd></div>
-                    <div><dt>{labels.sourceBlocked}</dt><dd>{synthesisCurriculumReadiness.sourceGateCounts.blocked}</dd></div>
-                  </dl>
-                </section>
-              ) : null}
-            </aside>
-          </div>
+          ) : null}
         </div>
       ) : (
         <section id="synthesis-atlas-panel" role="tabpanel" className={styles.atlasPanel}>
@@ -403,15 +365,13 @@ export function SynthesisAcademyHub({
               <h2>{labels.labTitle}</h2>
               <p>{labels.labDescription}</p>
             </div>
-            <button type="button" onClick={() => setView("curriculum")}>
-              {labels.changeSelection}
-            </button>
+            <button type="button" onClick={() => setView("curriculum")}>{labels.changeSelection}</button>
           </header>
-          {selectedMoleculeId ? (
+          {catalogSelection ? (
             <Suspense fallback={<div className={styles.loading} role="status">{labels.loading}</div>}>
               <LazySynthesisAtlas
-                selectedMoleculeId={selectedMoleculeId}
-                onSelectMolecule={selectMolecule}
+                catalogSelection={catalogSelection}
+                onSelectMolecule={() => undefined}
                 onOpenMoleculeFocus={onOpenMoleculeFocus}
                 presentationMode={presentationMode}
               />

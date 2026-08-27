@@ -46,25 +46,6 @@ async function expectStudentNarrativeClean(root: Locator) {
   expect(await root.innerText()).not.toMatch(FORBIDDEN_STUDENT_TECHNICAL_COPY);
 }
 
-async function expectClusterLabelPlurality(
-  root: Locator,
-  singular: string,
-  plural: string,
-) {
-  const escapedSingular = singular.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const escapedPlural = plural.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const label = root
-    .locator("strong")
-    .filter({ hasText: new RegExp(`^(?:${escapedSingular}|${escapedPlural})$`) })
-    .first();
-  await expect(label).toBeVisible();
-  const clusterButton = label.locator("xpath=ancestor::button[1]");
-  const countText = await clusterButton.locator("small").first().innerText();
-  const count = Number.parseInt(countText.replace(/[^0-9]/g, ""), 10);
-  expect(count).toBeGreaterThan(0);
-  await expect(label).toHaveText(count === 1 ? singular : plural);
-}
-
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     window.localStorage.setItem("dev-molecules:locale", "tr");
@@ -171,7 +152,7 @@ test("a curated dossier renders one compact Pharmacology, ADME, and Synthesis ga
   expectCleanRuntime(telemetry);
 });
 
-test("Student Spatial uses neutral Candidate and Representative labels without reviewer or implementation vocabulary", async ({
+test("Student Spatial uses a neutral representative scope without reviewer or implementation vocabulary", async ({
   page,
 }) => {
   const telemetry = watchRuntime(page);
@@ -181,13 +162,14 @@ test("Student Spatial uses neutral Candidate and Representative labels without r
 
   const atlas = page.locator('[data-drug-atlas="true"][data-atlas-view="spatial"]');
   await expect(atlas).toBeVisible();
-  await expect(
-    atlas
-      .locator('[data-atlas-spatial="true"]')
-      .getByText("Explore relationships across representative structures.", {
-        exact: true,
-      }),
-  ).toBeVisible();
+  const accessibleScope = atlas
+    .locator('[data-atlas-spatial="true"] p')
+    .filter({ hasText: "Explore relationships across representative structures." });
+  await expect(accessibleScope).toBeAttached();
+  await expect(accessibleScope).toHaveCSS("clip-path", "inset(50%)");
+  const accessibleScopeBox = await accessibleScope.boundingBox();
+  expect(accessibleScopeBox?.width ?? Infinity).toBeLessThanOrEqual(1);
+  expect(accessibleScopeBox?.height ?? Infinity).toBeLessThanOrEqual(1);
 
   const student = page.locator('[data-presentation-mode="student"]').first();
   const scene = student.locator("[data-active-webgl-contexts]").first();
@@ -205,14 +187,9 @@ test("Student Spatial uses neutral Candidate and Representative labels without r
     "source-matched unclassified imports must stay outside the curated seed map",
   ).toEqual([]);
 
-  await expectClusterLabelPlurality(
-    student,
-    "Candidate record",
-    "Candidate records",
-  );
-  await expect(
-    student.locator("header").first().getByText(/^Representative structures · \d+$/),
-  ).toBeVisible();
+  const representativeScope = student.locator('[data-representative-scope="true"]');
+  await expect(representativeScope).toHaveText("Representative structures");
+  await expect(student.locator('[data-universe-summary="true"]')).toHaveCount(0);
 
   let lensDisclosure = student
     .getByRole("button", { name: /Clustering lens/i })
@@ -235,11 +212,7 @@ test("Student Spatial uses neutral Candidate and Representative labels without r
     student.locator('[data-lens-announcement="structural-similarity"]'),
   ).toBeVisible();
   await expectStudentNarrativeClean(student);
-  await expectClusterLabelPlurality(
-    student,
-    "Representative structure",
-    "Representative structures",
-  );
+  await expect(representativeScope).toHaveText("Representative structures");
   expect(page.url()).not.toMatch(
     /classification-review-in-progress|computed-structural-view-unreviewed/i,
   );

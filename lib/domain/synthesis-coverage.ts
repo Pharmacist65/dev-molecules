@@ -10,6 +10,10 @@ import type {
   SynthesisSearchId,
   SynthesisSourceEvidenceId,
 } from "./synthesis-route";
+import type {
+  SynthesisEvidenceProcessingSummary,
+  SynthesisMoleculeBestOutcome,
+} from "./synthesis-extraction";
 
 export const SYNTHESIS_ASSESSMENT_STATES = [
   "not_assessed",
@@ -92,6 +96,16 @@ export interface SynthesisCoverageRecord {
   readonly sourceEvidenceIds: readonly SynthesisSourceEvidenceId[];
   readonly routes: readonly SynthesisCoverageRouteReference[];
   readonly unresolvedReasons: readonly string[];
+  /**
+   * Added by the extraction pipeline. Optional on historical/private discovery
+   * cache records; required by the current public release validator.
+   */
+  readonly evidenceProcessing?: SynthesisEvidenceProcessingSummary;
+  readonly bestOutcome?: SynthesisMoleculeBestOutcome;
+  /** Public fail-closed projection may retain aggregate state while redacting evidence IDs. */
+  readonly evidenceDetailsRedacted?: true;
+  /** Safe aggregate flag; it exposes no route type, steps, locator or completeness. */
+  readonly reportedRouteFoundPendingReview?: boolean;
   readonly updatedAt: string;
 }
 

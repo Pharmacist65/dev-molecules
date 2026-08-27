@@ -18,10 +18,6 @@ const {
   getSynthesisStoryContent,
   synthesisContent,
 } = await tsImport("../lib/i18n/synthesis-content.ts", import.meta.url);
-const { synthesisStories } = await tsImport(
-  "../lib/data/synthesis-stories.ts",
-  import.meta.url,
-);
 const { createTranslator, interpolateMessage, pluralize, translate } = await tsImport(
   "../lib/i18n/core.ts",
   import.meta.url,
@@ -220,65 +216,8 @@ test("interpolation and plural helpers remain deterministic and visible on bad i
   );
 });
 
-test("synthesis educational copy has exact TR/EN story, step, material and atom-map parity", () => {
-  assert.deepEqual(
-    Object.keys(synthesisContent.en).sort(),
-    [
-      "synthesis:atenolol-educational-scaffold",
-      "synthesis:carvedilol-educational-scaffold",
-      "synthesis:propranolol-educational-scaffold",
-    ],
-  );
+test("pending synthesis narration is absent in both public locales", () => {
+  assert.deepEqual(Object.keys(synthesisContent.en), []);
   assertLocalizedShapeParity(synthesisContent.en, synthesisContent.tr);
-
-  for (const story of synthesisStories) {
-    const copy = getSynthesisStoryContent("en", story.id);
-    assert.ok(copy, `${story.id} must have localized content`);
-    assert.equal(copy.title, story.title);
-    assert.equal(copy.summary, story.summary);
-    assert.equal(copy.routeExplanation, story.routeExplanation);
-    assert.deepEqual(copy.reactionClasses, story.reactionClasses);
-    assert.deepEqual(copy.limitations, story.limitations);
-    assert.equal(copy.stereochemistryTeachingScope, story.stereochemistry.teachingScope);
-    assert.equal(copy.reviewScope, story.review.scope);
-    assert.equal(copy.verificationNote, story.verification.note);
-    assert.equal(copy.safetyNote, story.safety.note);
-
-    for (const material of [
-      ...story.startingMaterials,
-      ...story.intermediates,
-      story.finalProduct,
-    ]) {
-      assert.equal(copy.materials[material.id], material.label);
-    }
-
-    for (const anchor of story.primarySourceAnchors) {
-      assert.equal(copy.sourceAnchors[anchor.sourceId]?.locator, anchor.locator);
-      assert.equal(copy.sourceAnchors[anchor.sourceId]?.supportScope, anchor.supportScope);
-    }
-
-    for (const step of story.steps) {
-      const stepCopy = copy.steps[step.id];
-      assert.ok(stepCopy, `${step.id} must have localized content`);
-      assert.equal(stepCopy.title, step.title);
-      assert.deepEqual(stepCopy.inputLabels, step.inputLabels);
-      assert.equal(stepCopy.outputLabel, step.outputLabel);
-      assert.equal(stepCopy.transformationFamily, step.transformationFamily);
-      assert.equal(stepCopy.changeSummary, step.changeSummary);
-      assert.equal(stepCopy.learningRationale, step.learningRationale);
-      assert.equal(stepCopy.commonMisconception, step.commonMisconception);
-      assert.equal(stepCopy.atomMappingNote, step.atomMapping.note);
-      assert.equal(stepCopy.verificationNote, step.verification.note);
-
-      for (const atom of step.atomMapping.atoms) {
-        assert.equal(stepCopy.atoms[atom.mapId]?.input, atom.inputAtomLabel);
-        assert.equal(stepCopy.atoms[atom.mapId]?.product, atom.productAtomLabel);
-      }
-      for (const bondChange of step.bondChanges) {
-        assert.equal(stepCopy.bondChanges[bondChange.kind], bondChange.description);
-      }
-    }
-  }
-
   assert.equal(getSynthesisStoryContent("tr", "synthesis:unknown"), null);
 });

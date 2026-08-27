@@ -27,7 +27,7 @@ This plan remains the historical delivery contract. The 2026-08-23 repository st
 | 3 · Pharmacology and ADME | Typed evidence-rich domains and fail-closed panels | No reviewed target-interaction snapshot, quantitative ADME fields, or reviewed metabolite edges. |
 | 4 · Catalog enrichment | Source/license registry, `catalog:enrich`, machine-readable readiness report | Zero configured enrichment snapshots and zero classification/pharmacology/ADME enrichment. |
 | 5 · Academy | Eight-module map plus working Nomenclature Academy integration | Pharmacology and ADME are coverage-dependent; standalone Reaction Mechanisms is planned. |
-| 6 · Synthesis Atlas | Three drugs, six routes, 20 transformations, 12 mechanism records | Only two reported routes are directly source-reported; nine 12-drug target slots remain unassigned. |
+| 6 · Synthesis Atlas | Historical three-drug/six-route teaching seed produced a privacy-safe six-route private migration aggregate; its withheld rows are locally archived outside the current tracked public tree, while catalog-wide coverage reaches 1,552/1,552 identities | The public route index is empty until exact identity, source locator, review, and reuse gates pass. The historical 20-transformation/12-mechanism UI is not a current public publication claim. |
 | 7 · Lab and roles | Route-lazy Ketcher, local matching/export, device-local Instructor, adapter-gated Reviewer | No private cloud project store, LMS, research API, or public reviewer adapter. |
 | 8 · Release | Node 24.19.0 builds, focused tests, and routed acceptance coverage exist | Final release evidence, public deployment verification, and any current media capture are handled separately from this text plan. |
 

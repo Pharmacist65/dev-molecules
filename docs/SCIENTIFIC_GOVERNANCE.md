@@ -91,11 +91,11 @@ See [Catalog pipeline](CATALOG_PIPELINE.md).
 
 ## Synthesis governance
 
-Every synthesis record declares a route kind. Legacy stories distinguish literature-reported, patent-reported, educational simplification, and AI-proposed. Synthesis Atlas distinguishes foundational-education and reported-kind routes, then gates each transformation as direct-source, source-context, or an explicit evidence gap. Route kind does not determine presentation: the current six routes split into three direct-source-supported and three source-context-supported gates, and only the Atenolol and Carvedilol reported-kind routes qualify for strict source-reported presentation. Propranolol remains a source-context reconstruction. Presentation must expose source anchors, route version, stereochemistry scope, limitations, and whether operational details are included.
+Every synthesis record declares independent route type, completeness, applicability, review, access, and reuse states. Discovery candidates, source locators, route segments, teaching reconstructions, and computational proposals are separate layers; no layer upgrades another by implication. The current migration retains six legacy route drafts in the private canonical review layer. All six are pending and link-only, so none is eligible for the public route index or detail renderer. The public application may expose an identity-scoped coverage state—including the safe fact that reported-route evidence is pending review—but not a pending route ID, type, completeness, step, material, source, locator, mechanism, or learning task.
 
 ### Current educational safety boundary
 
-The current Synthesis Atlas intentionally includes:
+The private review representation may include the following only when its typed evidence gates pass:
 
 - cited named materials and parent connectivity;
 - reaction-class and transformation explanations;
@@ -104,6 +104,8 @@ The current Synthesis Atlas intentionally includes:
 - curated mechanism interpretations only on explicitly eligible steps;
 - atom-anchored electron-flow arrows only from the two complete mappings defined by foundational transformations; reported steps with a different material context stay closed, and unmapped moves draw no decorative arrows;
 - exact primary-document links and human-resolvable example locators.
+
+These fields remain private while review or reuse is pending. A future public route must pass canonical validation, applicability, review, and source-specific reuse gates before the minimal public route schema can be generated.
 
 They intentionally omit:
 

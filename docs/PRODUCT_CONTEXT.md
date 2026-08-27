@@ -13,7 +13,7 @@ Explore, Learn, Build, Teach, and Discover remain five product jobs, but they ar
 1. **Explore — Home and Drug Atlas:** find any indexed record in Browse, open its source-grounded molecular record, then optionally move into the bounded Spatial Atlas, Curated Dossier depth where available, or a learning route.
 2. **Learn — Academy:** move through an eight-module learning map, the interactive Nomenclature Academy, and a source-gated Synthesis Atlas.
 3. **Build — Lab:** use the route-lazy Ketcher 2D editor, inspect exact static-catalog identity, and export a device-local project deliberately.
-4. **Teach — Instructor Studio:** compose local lesson packages from real nomenclature and synthesis task IDs and, when a local progress snapshot exists, export a local summary.
+4. **Teach — Instructor Studio:** compose local lesson packages from the currently eligible Nomenclature task catalog and, when a local progress snapshot exists, export a local summary. Synthesis-task support remains typed but currently has zero eligible public tasks; entries may appear only through a reviewed and reuse-rights-gated projection.
 5. **Discover — Lab evidence and future Research Sandbox:** inspect curated local evidence today. Private research generation remains unavailable until authentication, private persistence, quota, consent, and audit exist.
 
 Reviewer Console is not one of those learner presentation modes. It is a separate scientific authorization domain and remains locked on the public host without an injected authentication- and audit-backed adapter.
@@ -52,7 +52,7 @@ The current slice proves the product loop with a source-versioned approved-list 
 - Browse over the 1,552 imported structure records in the checked snapshot, a stable Basic Molecular Record boundary for every resolved identity, an optional representative Spatial Atlas, and Curated Dossier depth limited to the 15 seed records;
 - Basic Molecular Records with source-matched identity, real 2D structure, separately labelled computed 3D conformer, provenance, conservative properties when present, and explicit nine-dimension coverage; non-seed records no longer end at an unavailable Dossier;
 - Story and Reference Curated Dossier modes with independent coverage indicators; reviewed target interactions, quantitative ADME fields, and reviewed metabolite edges are currently unavailable;
-- six source-gated Synthesis Atlas routes over three molecules, with 20 transformations and 12 mechanism records; only two reported routes meet the strict direct-source-reported presentation gate;
+- catalog-wide synthesis coverage for all 1,552 records, with six migrated route drafts retained only in the private pending-review layer and zero public route details until review and reuse gates pass;
 - an eight-module Academy map plus an eight-section, 22-exercise Nomenclature Academy over 20 parseable structures and 16 concrete response/widget types;
 - five guided missions covering recognition, scaffold building, repair, synthesis ordering and evidence reading;
 - an on-device Ketcher 3.17.2 editor with exact static-catalog matching and opt-in local JSON export, not a research-grade cloud sketching suite;

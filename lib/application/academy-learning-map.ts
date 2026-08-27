@@ -145,8 +145,8 @@ export const academyModuleDefinitions = [
     ),
     estimatedMinutes: 55,
     recommendedLesson: text(
-      "Sentez Atlası'ndaki kürate edilmiş bir dönüşümü basamak düzeyinde incele.",
-      "Inspect a curated transformation at step level in Synthesis Atlas.",
+      "Doğrulanmış bir mekanizma yayımlandığında bağ değişimini kanıtıyla birlikte incele.",
+      "Inspect a bond change with its evidence after a mechanism passes publication review.",
     ),
     relatedDrugs: [
       { moleculeId: "molecule:propranolol", label: "Propranolol" },
@@ -155,8 +155,8 @@ export const academyModuleDefinitions = [
     destination: "synthesis",
     availability: "planned",
     coverageNote: text(
-      "Bağımsız mekanizma müfredatı planlandı; en yakın çalışan içerik Sentez Atlası'ndaki kürate edilmiş basamaklardır.",
-      "The standalone mechanism curriculum is planned; the nearest working content is the curated step layer in Synthesis Atlas.",
+      "Bağımsız mekanizma müfredatı planlandı; incelemesi tamamlanmamış dönüşüm ayrıntıları öğrenci paketine alınmaz.",
+      "The standalone mechanism curriculum is planned; unreviewed transformation detail is excluded from the student bundle.",
     ),
   },
   {
@@ -164,13 +164,13 @@ export const academyModuleDefinitions = [
     order: 7,
     title: text("Sentez Atlası", "Synthesis Atlas"),
     purpose: text(
-      "Kaynak destekli rotaları ileri ve retrosentetik yönde dönüşüm dönüşüm okuyup kanıt sınırını koru.",
-      "Read source-supported routes transformation by transformation, forward and retrosynthetically, while preserving evidence boundaries.",
+      "Kesin molekül kimlikleri için sentez kanıtı araştırma kapsamını ve yayın kapılarını incele.",
+      "Inspect synthesis-evidence search coverage and publication gates for exact molecular identities.",
     ),
     estimatedMinutes: 70,
     recommendedLesson: text(
-      "Propranolol rotasını başlangıç maddesinden son etkin moleküle kadar izle.",
-      "Follow the propranolol route from starting material to the final active molecule.",
+      "Propranolol için kaynak araştırması ve yayın durumu kaydını aç.",
+      "Open the source-search and publication-status record for propranolol.",
     ),
     relatedDrugs: [
       { moleculeId: "molecule:propranolol", label: "Propranolol" },
@@ -180,8 +180,8 @@ export const academyModuleDefinitions = [
     destination: "synthesis",
     availability: "available",
     coverageNote: text(
-      "Yalnız kürate edilmiş rotalar açıktır; kaynak boşluğu olan upstream adımlar uydurulmaz.",
-      "Only curated routes are open; upstream steps with evidence gaps are not invented.",
+      "Kapsam kayıtları açıktır; rota ayrıntısı yalnız bilimsel inceleme ve yeniden kullanım izni tamamlandığında yayımlanır.",
+      "Coverage records are available; route detail publishes only after scientific review and reuse permission are complete.",
     ),
   },
   {

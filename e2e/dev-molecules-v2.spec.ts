@@ -211,12 +211,14 @@ test("Atlas exposes the 1,552-record Browse boundary, bounded Spatial view, and 
   await expect(page).toHaveURL(/#atlas\/spatial$/);
   await expect(atlas).toHaveAttribute("data-atlas-view", "spatial");
   await expect(atlas.locator('[data-atlas-spatial="true"]')).toBeVisible();
-  await expect(
-    atlas.getByText(
-      "Use Browse to find a specific record in the structure index.",
-      { exact: true },
-    ),
-  ).toBeVisible();
+  const accessibleScope = atlas
+    .locator('[data-atlas-spatial="true"] p')
+    .filter({ hasText: "Use Browse to find a specific record in the structure index." });
+  await expect(accessibleScope).toBeAttached();
+  await expect(accessibleScope).toHaveCSS("clip-path", "inset(50%)");
+  const accessibleScopeBox = await accessibleScope.boundingBox();
+  expect(accessibleScopeBox?.width ?? Infinity).toBeLessThanOrEqual(1);
+  expect(accessibleScopeBox?.height ?? Infinity).toBeLessThanOrEqual(1);
 
   await page
     .getByRole("button", { name: "Open global drug search", exact: true })
@@ -341,7 +343,7 @@ test("Academy exposes exactly eight modules and opens the real nomenclature less
   expectCleanRuntime(telemetry);
 });
 
-test("Synthesis Academy reports actual scope and opens a source-gated route", async ({
+test("Synthesis Academy exposes all-catalog coverage and keeps pending routes closed", async ({
   page,
 }) => {
   const telemetry = watchRuntime(page);
@@ -351,83 +353,44 @@ test("Synthesis Academy reports actual scope and opens a source-gated route", as
 
   const shortcut = page.locator('[data-academy-synthesis-shortcut="true"]');
   await expect(shortcut).toBeVisible();
-  await expect(shortcut).toContainText("3 source-gated drugs · 20 transformations");
-  await shortcut.getByRole("button", { name: "Open synthesis steps" }).click();
+  await expect(shortcut).toContainText("1,552 catalog identities · route detail review-gated");
+  await shortcut.getByRole("button", { name: "Open synthesis coverage" }).click();
   await expect(page).toHaveURL(/#academy\/synthesis\/propranolol\/atlas$/);
 
   const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
-  await expect(synthesis).toHaveAttribute("data-curated-drugs", "3");
-  await expect(synthesis).toHaveAttribute("data-target-drugs", "12");
-  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
-  const targetProduct = synthesis.locator('[data-synthesis-target-product="true"]');
-  await expect(targetProduct).toBeVisible();
-  await expect(
-    targetProduct.getByRole("heading", { name: "Propranolol hydrochloride", exact: true }),
-  ).toBeVisible();
-  await expect(targetProduct.locator('[data-smiles-structure="ready"]')).toBeVisible();
-  const targetTop = () => targetProduct.evaluate((element) => (
-    Math.round(element.getBoundingClientRect().top)
-  ));
-  await expect.poll(targetTop).toBeGreaterThanOrEqual(0);
-  await expect.poll(targetTop).toBeLessThan(260);
+  await expect(synthesis).toHaveAttribute("data-published-route-details", "0");
+  await expect(synthesis).toHaveAttribute("data-catalog-records", "1552");
+  await expect(synthesis.locator('[data-synthesis-catalog-navigator="complete-index"]'))
+    .toHaveAttribute("data-catalog-record-count", "1552");
+  const coverageOnly = synthesis.locator('[data-synthesis-atlas-coverage-only="true"]');
+  await expect(coverageOnly).toBeVisible();
+  await expect(coverageOnly).toHaveAttribute("data-catalog-entity-id", /propranolol/i);
+  await expect(coverageOnly.locator("[data-synthesis-catalog-coverage]"))
+    .toBeVisible();
+  await expect(synthesis.locator('[data-synthesis-target-product="true"]')).toHaveCount(0);
+  await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(targetProduct).toBeVisible();
-  await expectNoHorizontalOverflow(page, "Mobile synthesis target product");
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await targetProduct.getByRole("button", { name: "Open final step" }).click();
-  const finalStepDetail = synthesis.locator(
-    '[data-active-step="synthesis-atlas-step:propranolol-rep-03"]',
-  );
-  await expect(finalStepDetail).toBeVisible();
-  await expect(finalStepDetail).toBeFocused();
-  const stickyHeader = page.locator("header").first();
-  await expect.poll(async () => {
-    const [detailBox, headerBox] = await Promise.all([
-      finalStepDetail.boundingBox(),
-      stickyHeader.boundingBox(),
-    ]);
-    return detailBox && headerBox
-      ? Math.round(detailBox.y - (headerBox.y + headerBox.height))
-      : -1;
-  }).toBeGreaterThanOrEqual(0);
+  await expect(coverageOnly).toBeVisible();
+  await expectNoHorizontalOverflow(page, "Mobile synthesis coverage");
   await page.setViewportSize({ width: 1440, height: 900 });
-  await synthesis.getByRole("button", { name: "Back to curriculum table" }).click();
-  const metrics = synthesis
-    .locator("#synthesis-coverage-heading")
-    .locator("xpath=ancestor::section[1]")
-    .locator("dl");
-  await expect(metrics.locator("dt")).toHaveText([
-    "routes",
-    "transformations",
-    "mechanism records",
-    "directly reported routes",
-  ]);
-  await expect(metrics.locator("dd")).toHaveText(["6", "20", "12", "2"]);
-  await expect(
-    synthesis.locator('li[data-status="planned-unconfigured"]'),
-  ).toHaveCount(9);
-
-  await synthesis
-    .getByRole("button", { name: /Open route lesson/ })
-    .first()
-    .click();
-  await expect(
-    synthesis.locator("#synthesis-atlas-panel"),
-  ).toBeVisible();
-  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
-  await expect(
-    synthesis.locator("[data-source-gate]").first(),
-  ).toHaveAttribute("data-source-gate", /^(?:source-supported|context-supported|partial-with-declared-gap)$/);
-  await expectNoHorizontalOverflow(page, "Synthesis route lab");
+  await synthesis.getByRole("button", { name: "Back to synthesis coverage" }).click();
+  const publicCoverage = synthesis.locator('[data-synthesis-public-coverage-only="true"]');
+  await expect(publicCoverage).toBeVisible();
+  await expect(publicCoverage).toContainText("All 1,552 exact catalog identities");
+  await expect(publicCoverage).toContainText("Unreviewed reaction sequences and completeness are excluded from the client bundle.");
+  await expect(publicCoverage.locator('[data-status="curated-route-available"]')).toHaveCount(0);
 
   await page.goto(
     "/#academy/synthesis/metformin-xzwyzxlipxdolr-uhfffaoysa-n/overview",
     { waitUntil: "domcontentloaded" },
   );
-  const unavailable = page.locator('[data-curated-workflow="unavailable"]');
-  await expect(unavailable).toBeVisible();
-  await expect(page.locator('[data-synthesis-academy="phase-6"]')).toHaveCount(0);
-  await expect(unavailable).not.toContainText("Propranolol");
+  const metforminSynthesis = page.locator('[data-synthesis-academy="phase-6"]');
+  await expect(metforminSynthesis).toBeVisible();
+  await expect(metforminSynthesis.locator('[data-selected-synthesis-catalog-identity]'))
+    .toHaveAttribute("data-selected-synthesis-catalog-identity", /metformin-xzwyzxlipxdolr-uhfffaoysa-n$/);
+  await expect(metforminSynthesis).toContainText("Metformin");
+  await expect(page.locator('[data-curated-workflow="unavailable"]')).toHaveCount(0);
+  await expect(metforminSynthesis).not.toContainText("Propranolol");
   expectCleanRuntime(telemetry);
 });
 
@@ -487,7 +450,7 @@ test("real Ketcher workspace validates the initial structure and exports a priva
   expectCleanRuntime(telemetry);
 });
 
-test("Instructor composes one real task of each kind locally while Reviewer remains locked", async ({
+test("Instructor omits pending synthesis tasks while Reviewer remains locked", async ({
   page,
 }) => {
   const telemetry = watchRuntime(page);
@@ -508,18 +471,20 @@ test("Instructor composes one real task of each kind locally while Reviewer rema
   await instructor
     .getByRole("tab", { name: "Synthesis tasks", exact: true })
     .click();
-  const synthesisTask = instructor.locator('label[data-disabled="false"]').first();
-  await synthesisTask.locator("strong").click();
-  await expect(synthesisTask).toHaveAttribute("data-selected", "true");
+  await expect(instructor.locator('[data-instructor-synthesis-tasks="withheld"]'))
+    .toContainText("No published synthesis task has passed both scientific review and the reuse-rights gate yet.");
+  await expect(instructor.locator('label[data-disabled="false"]')).toHaveCount(0);
   await expect(
     instructor.locator('[aria-label="Package balance"] [data-ready="true"]'),
-  ).toHaveCount(2);
+  ).toHaveCount(1);
   await instructor
     .getByRole("button", {
       name: /Prepare local lesson package/,
     })
     .click();
-  await expect(instructor.getByRole("status")).toContainText("Package prepared");
+  await expect(
+    instructor.getByRole("status").filter({ hasText: "Package prepared" }),
+  ).toContainText("Package prepared");
 
   const downloadPromise = page.waitForEvent("download");
   await instructor
@@ -538,10 +503,7 @@ test("Instructor composes one real task of each kind locally while Reviewer rema
       readonly automaticLearnerDelivery?: boolean;
     };
   };
-  expect(lessonPackage.taskReferences?.map((task) => task.kind).sort()).toEqual([
-    "nomenclature",
-    "synthesis",
-  ]);
+  expect(lessonPackage.taskReferences?.map((task) => task.kind)).toEqual(["nomenclature"]);
   expect(lessonPackage.boundary).toEqual({
     storage: "device-local-download",
     serverSync: false,
@@ -654,20 +616,11 @@ test("capture the documented Dev Molecules 2.0 review surfaces", async ({
     waitUntil: "domcontentloaded",
   });
   const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
-  await synthesis
-    .getByRole("button", { name: /Open route lesson/ })
-    .first()
-    .click();
-  await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
-  const routeGraph = synthesis.locator(
-    '[data-dragging][data-route-direction][data-atlas-level]',
-  );
-  await expect(routeGraph.locator('[data-material-role]')).toHaveCount(6);
-  await positionForScreenshot(
-    routeGraph.locator("xpath=preceding-sibling::div[1]"),
-    96,
-  );
-  await captureDocsScreenshot(page, "synthesis-route.png");
+  const publicCoverage = synthesis.locator('[data-synthesis-public-coverage-only="true"]');
+  await expect(publicCoverage).toBeVisible();
+  await expect(publicCoverage).toContainText("All 1,552 exact catalog identities");
+  await positionForScreenshot(publicCoverage, 96);
+  await captureDocsScreenshot(page, "synthesis-coverage.png");
 
   await page.goto("/#lab", { waitUntil: "domcontentloaded" });
   const editor = page.locator(

@@ -120,7 +120,7 @@ test("Learn opens on a Turkish student map and keeps the English choice after re
   expectCleanRuntime(telemetry);
 });
 
-test("Synthesis Atlas exposes three molecules and the six-step reported Carvedilol route", async ({
+test("Synthesis Atlas keeps pending route shape private while all-catalog coverage remains usable", async ({
   page,
 }) => {
   test.setTimeout(longAcceptanceTimeout);
@@ -131,133 +131,30 @@ test("Synthesis Atlas exposes three molecules and the six-step reported Carvedil
   await page.goto("/#academy/synthesis/propranolol/overview", {
     waitUntil: "domcontentloaded",
   });
-  const synthesisHub = page.locator('[data-synthesis-academy="phase-6"]');
-  await synthesisHub.getByRole("button", { name: "Open route lesson" }).first().click();
 
+  const synthesisHub = page.locator('[data-synthesis-academy="phase-6"]');
+  await expect(synthesisHub.locator('[data-synthesis-public-coverage-only="true"]')).toBeVisible();
+  await expect(synthesisHub.locator('[data-synthesis-catalog-navigator="complete-index"]'))
+    .toHaveAttribute("data-catalog-record-count", "1552");
+  await expect(synthesisHub).toContainText("Unreviewed reaction sequences and completeness are excluded from the client bundle.");
+
+  await synthesisHub.getByRole("button", { name: "Open synthesis evidence" }).click();
   const synthesis = synthesisRoot(page);
   await expect(synthesis).toBeVisible();
-  await expect(synthesis).toHaveAttribute("data-route-kind", "reported");
-  await expect(
-    synthesis.getByText("Teaching view · no operational protocol", { exact: true }),
-  ).toHaveCount(0);
+  await expect(synthesis).toHaveAttribute("data-synthesis-atlas", "coverage-only");
+  await expect(synthesis).toHaveAttribute("data-synthesis-atlas-coverage-only", "true");
+  await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
+  await expect(synthesis.locator("[data-active-step]")).toHaveCount(0);
+  await expect(synthesis.locator("[data-synthesis-target-product]")).toHaveCount(0);
+  await expect(synthesis.locator("[data-synthesis-catalog-coverage]")).toBeVisible();
+  await expect(synthesis).toContainText("No publishable route detail is currently available for this identity.");
 
-  const moleculeNavigation = synthesis.getByRole("navigation", {
-    name: "Synthesis Atlas",
-  });
-  const moleculeButtons = moleculeNavigation.getByRole("button");
-  await expect(moleculeButtons).toHaveCount(3);
-  await expect(moleculeButtons.nth(0)).toContainText("Propranolol");
-  await expect(moleculeButtons.nth(1)).toContainText("Atenolol");
-  await expect(moleculeButtons.nth(2)).toContainText("Carvedilol");
-
-  await moleculeNavigation.getByRole("button", { name: /Carvedilol/ }).click();
-  await expect(synthesis).toHaveAttribute(
-    "data-synthesis-atlas",
-    "synthesis-atlas-route:carvedilol-reported",
-  );
-  await expect(synthesis).toHaveAttribute("data-route-step-count", "6");
-  await expect(synthesis.locator("[data-source-gate]")).toHaveAttribute(
-    "data-source-gate",
-    "source-supported",
-  );
-  await expect(
-    synthesis.getByRole("heading", {
-      name: "Carvedilol: six-transformation full-core route",
-      exact: true,
-    }),
-  ).toBeVisible();
-
-  const graph = synthesis.locator("[data-dragging][data-route-direction]");
-  await expect(graph).toHaveAttribute("data-route-direction", "forward");
-  await synthesis.getByRole("button", { name: "Retrosynthesis", exact: true }).click();
-  await expect(graph).toHaveAttribute("data-route-direction", "retro");
-  await synthesis.getByRole("button", { name: "Forward", exact: true }).click();
-  await expect(graph).toHaveAttribute("data-route-direction", "forward");
-
-  const zoomOutput = synthesis.locator("output").first();
-  await expect(zoomOutput).toHaveText("54%");
-  await synthesis.getByRole("button", { name: "Zoom in", exact: true }).click();
-  await expect(zoomOutput).toHaveText("64%");
-  await synthesis.getByRole("button", { name: "Reset view", exact: true }).click();
-  await expect(zoomOutput).toHaveText("54%");
-
-  // Step 1 is source-backed but deliberately has no published mechanism layer.
-  await synthesis.getByRole("button", { name: /01.*Carbonyl–hydrazine condensation/ }).click();
-  await expect(graph).toHaveAttribute("data-atlas-level", "step");
-  await expect(synthesis.locator("[data-active-step]")).toHaveAttribute(
-    "data-active-step",
-    "synthesis-atlas-step:carvedilol-rep-01",
-  );
-  await expect(
-    synthesis.getByRole("button", { name: "Inspect mechanism", exact: true }),
-  ).toBeDisabled();
-  await expect(
-    synthesis.getByRole("tab", { name: "Mechanism", exact: true }),
-  ).toBeDisabled();
-
-  // Step 4 has an explicit source anchor and a curated, evidence-gated mechanism.
-  await synthesis.getByRole("button", { name: /04.*Phenolic O-alkylation/ }).click();
-  await expect(synthesis.locator("[data-active-step]")).toHaveAttribute(
-    "data-active-step",
-    "synthesis-atlas-step:carvedilol-rep-04",
-  );
-  const inspectMechanism = synthesis.getByRole("button", {
-    name: "Inspect mechanism",
-    exact: true,
-  });
-  await expect(inspectMechanism).toBeEnabled();
-  await inspectMechanism.click();
-  await expect(graph).toHaveAttribute("data-atlas-level", "mechanism");
-  await expect(synthesis.locator("[data-mechanism-layer]")).toBeVisible();
-  await expect(synthesis.getByText("Curated teaching interpretation", { exact: true })).toBeVisible();
-  await expect(synthesis.getByText("Electron flow", { exact: true })).toBeVisible();
-
-  const sourceDrawer = synthesis.locator("details[data-source-drawer]");
-  await expect(sourceDrawer).not.toHaveAttribute("open", "");
-  await sourceDrawer.locator("summary").click();
-  await expect(sourceDrawer).toHaveAttribute("open", "");
-  const sourceLinks = sourceDrawer.locator('a[href^="https://"]');
-  await expect(sourceLinks).toHaveCount(2);
-  for (const link of await sourceLinks.all()) {
-    await expect(link).toHaveAttribute("target", "_blank");
-    await expect(link).toHaveAttribute("href", /^https:\/\/(?:image-ppubs\.uspto\.gov|patentimages\.storage\.googleapis\.com)\//);
-  }
-
-  const challengeLab = synthesis.locator("[data-synthesis-challenges]");
-  const challengeTabs = challengeLab.getByRole("tab");
-  await expect(challengeTabs).toHaveCount(2);
-  await challengeTabs.nth(1).click();
-  const challenge = challengeLab.locator('[data-challenge-kind="missing-intermediate"]');
-  await expect(challenge).toBeVisible();
-  await challenge.getByRole("radio", { name: "Propranolol", exact: true }).click();
-  await challenge.getByRole("button", { name: "Check answer", exact: true }).click();
-  await expect(challenge.locator('[data-result="incorrect"]')).toBeVisible();
-  await challenge.getByRole("button", { name: "Try again", exact: true }).click();
-  await challenge.getByRole("radio", { name: "4-Hydroxycarbazole", exact: true }).click();
-  await challenge.getByRole("button", { name: "Check answer", exact: true }).click();
-  await expect(challenge.locator('[data-result="correct"]')).toBeVisible();
-
-  await expectNoHorizontalOverflow(page, "English Synthesis Atlas at 1920x1080");
+  await expectNoHorizontalOverflow(page, "English synthesis coverage at 1920x1080");
   await captureAcceptanceScreenshot(
     page,
-    "learn-synthesis-atlas-carvedilol-en-1920x1080.png",
+    "learn-synthesis-coverage-propranolol-en-1920x1080.png",
     { timeout: 120_000 },
   );
-
-  // Selected foundational transformations use atom-indexed arrow endpoints;
-  // no generic decorative curve substitutes for missing atom mapping.
-  await moleculeNavigation.getByRole("button", { name: /Propranolol/ }).click();
-  await synthesis
-    .getByRole("button", { name: "Foundational learning route", exact: true })
-    .click();
-  await synthesis.getByRole("button", { name: /01.*Phenolic O-alkylation/ }).click();
-  await synthesis
-    .getByRole("button", { name: "Inspect mechanism", exact: true })
-    .click();
-  const mappedMechanism = synthesis.locator('[data-electron-mapping="complete"]');
-  await expect(mappedMechanism).toBeVisible();
-  await expect(mappedMechanism.locator("svg[aria-label='Electron flow anchored to the actual 2D atoms'] > path")).toHaveCount(2);
-
   expectCleanRuntime(telemetry);
 });
 

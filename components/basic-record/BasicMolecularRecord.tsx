@@ -3,7 +3,8 @@
 import { MoleculeStructurePreview, MoleculeViewer } from "@/components/molecule-viewer";
 import { SmilesNotationPanel } from "@/components/chemistry/SmilesNotationPanel";
 import type { BasicMolecularRecord as BasicMolecularRecordModel } from "@/lib/application/basic-molecular-record";
-import { getDrugHash } from "@/lib/application/platform-route";
+import { getBasicRecordSynthesisSurfaceState } from "@/lib/application/basic-record-synthesis-coverage";
+import { getDrugHash, getSynthesisAcademyHash } from "@/lib/application/platform-route";
 import type { Locale } from "@/lib/i18n";
 
 import styles from "./BasicMolecularRecord.module.css";
@@ -83,9 +84,31 @@ const copyByLocale = {
     synthesisCoverageEyebrow: "SENTEZ KAPSAM KAYDI",
     synthesisCoverageTitle: "Sentez kanıtı araştırması",
     synthesisCoverageDescription: "Bu alan otomatik kaynak keşfinin kapsamını ve bilimsel statüsünü gösterir. Aday kaynak, eğitsel rekonstrüksiyon veya hesaplamalı öneri doğrulanmış bir sentez rotası değildir.",
+    synthesisCoverageUnavailableTitle: "Sentez kapsam verisi kullanılamıyor",
+    synthesisCoverageUnavailableSummary: "Sentez kapsam artefaktı güvenli biçimde yüklenemedi. Bu durum kaynak bulunmadığının, rota bulunmadığının veya molekülün sentezlenebilir ya da sentezlenemez olduğunun kanıtı değildir.",
     reportedResolved: "Raporlanmış sentez kaynağı çözümlendi",
     reportedNotResolved: "Raporlanmış sentez: Çözümlenmedi",
     reportedPending: "Doğrudan kaynak mevcut; rota bilimsel inceleme bekliyor ve doğrulanmış olarak sunulmuyor.",
+    reportedCompleteSummary: "{name} için {count} tam raporlanmış rota referansı çözümlendi.",
+    reportedPartialSummary: "{name} için {count} kısmi raporlanmış rota referansı çözümlendi; kaynak boşlukları açık kalır.",
+    reportedGatedSummary: "{name} için doğrudan kaynak çözümlendi; rota ayrıntıları inceleme ve yeniden kullanım kapısı tamamlanana kadar kapalıdır.",
+    teachingSummary: "{name} için kaynak segmentli bir eğitsel rekonstrüksiyon bulunur; tek bir eksiksiz raporlanmış rota değildir.",
+    candidateCompleteTitle: "Aday kaynaklar değerlendirildi",
+    candidateCompleteSummary: "{name} için {count} aday kaynak eşleşmesinin değerlendirmesi sonuçlandı; henüz yayımlanabilir rota çözümlenmedi.",
+    candidatePendingTitle: "Aday kaynaklar bulundu",
+    candidatePendingSummary: "Bu kayıt, aday kaynak değerlendirmesinin tamamlandığını henüz doğrulamıyor; adaylar rota olarak sunulmaz.",
+    accessBlockedTitle: "Kaynak erişimi engellendi",
+    accessBlockedSummary: "{count} aday belge erişim sınırı nedeniyle incelenemedi; sonuç rota yokluğu iddiası değildir.",
+    scopedNoSupportTitle: "Kaydedilen araştırma kapsamında destekleyici kaynak çözümlenmedi",
+    scopedNoSupportSummary: "{providers} sağlayıcıda {queries} sorgu kaydedildi. Bu sonuç yenilik, patentlenebilirlik veya sentezlenebilirlik anlamına gelmez.",
+    evidenceProcessing: "Aday kanıt işleme özeti",
+    terminalAssociations: "Sonuçlandırılan aday",
+    accessBlocked: "Erişimi engellenen",
+    metadataOnly: "Yalnız üstveri",
+    accessible: "Erişilebilir",
+    unavailableSources: "Kullanılamayan",
+    openSynthesisAtlas: "Sentez Atlası kapsam kaydını aç",
+    atlasGateBoundary: "Atlas tüm katalog kimliklerinde kapsam durumunu açar; rota ayrıntısı yalnız bilimsel inceleme ve yeniden kullanım kapısından sonra gösterilir.",
     assessment: "Değerlendirme",
     sourceEvidence: "Kaynak kanıtı",
     applicability: "Uygulanabilirlik",
@@ -98,7 +121,7 @@ const copyByLocale = {
     specified: "Belirtilmiş",
     notSpecified: "Belirtilmemiş",
     queriedAliases: "Sorgulanan adlar",
-    pipeline: "Pipeline sürümü",
+    pipeline: "Araştırma yöntemi sürümü",
     searchScope: "Kaynak araştırma kapsamı",
     searchScopeBoundary: "Sonuç yalnız aşağıda kaydedilen sağlayıcılar, sorgular ve tarihle sınırlıdır; tüm internetin tüketildiği anlamına gelmez.",
     query: "sorgu",
@@ -114,7 +137,7 @@ const copyByLocale = {
     routeBoundaryTeaching: "Kaynaklandırılmış bölümlerden kurulan eğitsel rekonstrüksiyondur; tek ve eksiksiz raporlanmış rota değildir.",
     routeBoundaryComputational: "Hesaplamalı olarak önerilmiştir; raporlanmış veya doğrulanmış rota değildir.",
     routeComparisonTitle: "Çoklu rota karşılaştırması",
-    routeComparisonDescription: "Yalnız exact coverage kaydında referans verilen ve yayımlanabilir özet kapısını geçen rotalar karşılaştırılır.",
+    routeComparisonDescription: "Yalnız bu molekül kimliğinin kanıt kaydında referans verilen ve yayımlanabilir özet koşullarını karşılayan rotalar karşılaştırılır.",
     routeComparisonWithheld: "Rota özetleri bilimsel inceleme ve lisans / yeniden kullanım kapıları nedeniyle karşılaştırmaya kapalıdır. Kapalı hücrelerden bilimsel sonuç çıkarılmaz.",
     routeComparisonUnavailable: "Rota karşılaştırma indeksi kullanılamıyor. Coverage statüsü korunur; eksik karşılaştırma alanları rota kanıtı sayılmaz.",
     routeComparisonPartial: "Yalnız yayımlanabilir özet kapısını geçen rotaların karşılaştırma alanları açıktır; diğer hücreler kapalı kalır.",
@@ -167,6 +190,7 @@ const copyByLocale = {
       partial: "Kısmi",
       upstream_gap: "Başlangıç öncesi boşluk",
       convergent_partial: "Konvergent kısmi",
+      unknown: "Tamlık çözümlenmedi",
     },
     providerStatuses: {
       completed: "Tamamlandı",
@@ -270,9 +294,31 @@ const copyByLocale = {
     synthesisCoverageEyebrow: "SYNTHESIS COVERAGE RECORD",
     synthesisCoverageTitle: "Synthesis evidence discovery",
     synthesisCoverageDescription: "This section reports the scope and scientific status of automated source discovery. A candidate source, teaching reconstruction, or computational proposal is not a verified synthesis route.",
+    synthesisCoverageUnavailableTitle: "Synthesis coverage data unavailable",
+    synthesisCoverageUnavailableSummary: "The synthesis coverage artifact could not be loaded safely. This is not evidence that no source or route exists, and it does not establish whether the molecule is synthesizable or unsynthesizable.",
     reportedResolved: "Reported synthesis source resolved",
     reportedNotResolved: "Reported synthesis: Not resolved",
     reportedPending: "A direct source is present; the route remains under scientific review and is not presented as verified.",
+    reportedCompleteSummary: "{count} complete reported-route references are resolved for {name}.",
+    reportedPartialSummary: "{count} partial reported-route references are resolved for {name}; source gaps remain explicit.",
+    reportedGatedSummary: "A direct source is resolved for {name}; route details remain closed until review and reuse gates pass.",
+    teachingSummary: "A source-segmented teaching reconstruction exists for {name}; it is not one completely reported route.",
+    candidateCompleteTitle: "Candidate-source assessment complete",
+    candidateCompleteSummary: "Assessment is complete for all {count} candidate-source associations for {name}; no publishable route has been resolved yet.",
+    candidatePendingTitle: "Candidate sources found",
+    candidatePendingSummary: "This record does not yet confirm that candidate-source assessment is complete; candidates are not presented as routes.",
+    accessBlockedTitle: "Source access blocked",
+    accessBlockedSummary: "{count} candidate documents could not be inspected because of access boundaries; this is not a no-route claim.",
+    scopedNoSupportTitle: "No supporting source resolved in the recorded search scope",
+    scopedNoSupportSummary: "{queries} queries were recorded across {providers} providers. This does not establish novelty, patentability, or synthesizability.",
+    evidenceProcessing: "Candidate-source assessment summary",
+    terminalAssociations: "Completed assessments",
+    accessBlocked: "Access blocked",
+    metadataOnly: "Metadata only",
+    accessible: "Accessible",
+    unavailableSources: "Unavailable",
+    openSynthesisAtlas: "Open this Synthesis Atlas coverage record",
+    atlasGateBoundary: "The Atlas opens coverage for every catalog identity; route detail appears only after scientific-review and reuse gates pass.",
     assessment: "Assessment",
     sourceEvidence: "Source evidence",
     applicability: "Applicability",
@@ -285,7 +331,7 @@ const copyByLocale = {
     specified: "Specified",
     notSpecified: "Not specified",
     queriedAliases: "Names queried",
-    pipeline: "Pipeline version",
+    pipeline: "Assessment method version",
     searchScope: "Source-search scope",
     searchScopeBoundary: "The result is bounded by the recorded providers, queries, and date below; it is not an exhaustive search of the internet.",
     query: "query",
@@ -354,6 +400,7 @@ const copyByLocale = {
       partial: "Partial",
       upstream_gap: "Upstream gap",
       convergent_partial: "Convergent partial",
+      unknown: "Completeness unresolved",
     },
     providerStatuses: {
       completed: "Completed",
@@ -404,6 +451,14 @@ const formatDate = (value: string, locale: Locale) => {
   }).format(date);
 };
 
+const interpolate = (
+  template: string,
+  values: Readonly<Record<string, string | number>>,
+): string => Object.entries(values).reduce(
+  (result, [key, value]) => result.replaceAll(`{${key}}`, String(value)),
+  template,
+);
+
 const synthesisProviderLabel = (adapterId: string, locale: Locale): string => {
   const labels = {
     "pubchem-manufacturing": {
@@ -435,13 +490,75 @@ export function BasicMolecularRecord({
   const twoD = record.structures.find((structure) => structure.dimension === "2d")!;
   const threeD = record.structures.find((structure) => structure.dimension === "3d")!;
   const synthesisCoverage = record.synthesisCoverage;
+  const synthesisSurfaceState = synthesisCoverage
+    ? getBasicRecordSynthesisSurfaceState(synthesisCoverage)
+    : null;
+  const reportedRoutes = synthesisCoverage?.routes.filter((route) =>
+    route.routeType === "patent_reported" || route.routeType === "literature_reported"
+  ) ?? [];
+  const completeReportedRouteCount = reportedRoutes.filter(
+    (route) => route.routeCompleteness === "complete",
+  ).length;
+  const partialReportedRouteCount = reportedRoutes.length - completeReportedRouteCount;
+  const processing = synthesisCoverage?.evidenceProcessing ?? null;
+  const synthesisTargetLabel = synthesisCoverage
+    ? `${record.preferredName} · ${copy.formKinds[synthesisCoverage.chemicalFormKind]}`
+    : record.preferredName;
+  const providerQueryCount = synthesisCoverage?.providers.reduce(
+    (sum, provider) => sum + provider.queryCount,
+    0,
+  ) ?? 0;
   const reportedSourceResolved = Boolean(
     synthesisCoverage &&
-    synthesisCoverage.sourceEvidenceState === "direct_source_resolved" &&
-    synthesisCoverage.routes.some((route) =>
-      route.routeType === "patent_reported" || route.routeType === "literature_reported",
-    ),
+    (synthesisCoverage.reportedRouteFoundPendingReview ||
+      synthesisCoverage.sourceEvidenceState === "direct_source_resolved" ||
+      synthesisSurfaceState === "reported_complete" ||
+      synthesisSurfaceState === "reported_partial"),
   );
+  const synthesisSurfaceTitle = synthesisSurfaceState === "candidate_extraction_complete"
+    ? copy.candidateCompleteTitle
+    : synthesisSurfaceState === "candidate_processing_incomplete"
+      ? copy.candidatePendingTitle
+      : synthesisSurfaceState === "source_access_blocked"
+        ? copy.accessBlockedTitle
+        : synthesisSurfaceState === "no_supporting_source_resolved"
+          ? copy.scopedNoSupportTitle
+          : synthesisSurfaceState === "teaching_reconstruction"
+            ? copy.routeTypes.teaching_reconstruction
+            : copy.reportedResolved;
+  const synthesisSurfaceSummary = synthesisSurfaceState === "reported_complete"
+    ? completeReportedRouteCount > 0
+      ? interpolate(copy.reportedCompleteSummary, {
+          name: synthesisTargetLabel,
+          count: completeReportedRouteCount,
+        })
+      : interpolate(copy.reportedGatedSummary, { name: synthesisTargetLabel })
+      : synthesisSurfaceState === "reported_partial"
+      ? partialReportedRouteCount > 0
+        ? interpolate(copy.reportedPartialSummary, {
+            name: synthesisTargetLabel,
+            count: partialReportedRouteCount,
+          })
+        : interpolate(copy.reportedGatedSummary, { name: synthesisTargetLabel })
+      : synthesisSurfaceState === "direct_source_gated"
+        ? interpolate(copy.reportedGatedSummary, { name: synthesisTargetLabel })
+      : synthesisSurfaceState === "teaching_reconstruction"
+        ? interpolate(copy.teachingSummary, { name: synthesisTargetLabel })
+        : synthesisSurfaceState === "candidate_extraction_complete"
+          ? interpolate(copy.candidateCompleteSummary, {
+              name: synthesisTargetLabel,
+              count: processing?.terminalAssociationCount ?? 0,
+            })
+          : synthesisSurfaceState === "candidate_processing_incomplete"
+            ? copy.candidatePendingSummary
+            : synthesisSurfaceState === "source_access_blocked"
+              ? interpolate(copy.accessBlockedSummary, {
+                  count: processing?.accessBlockedCount ?? 0,
+                })
+              : interpolate(copy.scopedNoSupportSummary, {
+                  providers: synthesisCoverage?.providers.length ?? 0,
+                  queries: providerQueryCount,
+                });
 
   return (
     <article
@@ -628,6 +745,8 @@ export function BasicMolecularRecord({
             data-synthesis-assessment-state={synthesisCoverage.assessmentState}
             data-synthesis-source-evidence-state={synthesisCoverage.sourceEvidenceState}
             data-synthesis-review-state={synthesisCoverage.reviewState}
+            data-synthesis-surface-state={synthesisSurfaceState}
+            data-synthesis-best-outcome={synthesisCoverage.bestOutcome ?? "legacy-snapshot"}
           >
             <header className={styles.sectionHeader}>
               <div>
@@ -640,21 +759,43 @@ export function BasicMolecularRecord({
             <div
               className={styles.reportedSynthesisState}
               data-reported-synthesis-state={reportedSourceResolved ? "source-resolved" : "not-resolved"}
+              data-synthesis-terminal-state={synthesisSurfaceState}
             >
               <span aria-hidden="true">{reportedSourceResolved ? "●" : "○"}</span>
               <div>
-                <strong>{reportedSourceResolved ? copy.reportedResolved : copy.reportedNotResolved}</strong>
+                <strong>{synthesisSurfaceTitle}</strong>
+                <small>{synthesisSurfaceSummary}</small>
                 {reportedSourceResolved && synthesisCoverage.reviewState !== "verified" ? (
                   <small>{copy.reportedPending}</small>
                 ) : null}
-                {synthesisCoverage.sourceEvidenceState === "candidate_sources" ? (
+                {synthesisCoverage.sourceEvidenceState === "candidate_sources" && !processing ? (
                   <small>{copy.candidateBoundary}</small>
                 ) : null}
-                {synthesisCoverage.sourceEvidenceState === "none_found" ? (
+                {synthesisCoverage.sourceEvidenceState === "none_found" && synthesisSurfaceState !== "source_access_blocked" ? (
                   <small>{copy.noSourceBoundary}</small>
                 ) : null}
               </div>
             </div>
+
+            {processing ? (
+              <section
+                className={styles.evidenceProcessing}
+                aria-labelledby="basic-record-synthesis-evidence-processing"
+                data-terminal-associations={processing.terminalAssociationCount}
+              >
+                <header>
+                  <h3 id="basic-record-synthesis-evidence-processing">{copy.evidenceProcessing}</h3>
+                  <code>{processing.pipelineVersion}</code>
+                </header>
+                <dl>
+                  <div><dt>{copy.terminalAssociations}</dt><dd>{processing.terminalAssociationCount}/{processing.candidateAssociationCount}</dd></div>
+                  <div><dt>{copy.accessible}</dt><dd>{processing.accessibleCount}</dd></div>
+                  <div><dt>{copy.metadataOnly}</dt><dd>{processing.metadataOnlyCount}</dd></div>
+                  <div><dt>{copy.accessBlocked}</dt><dd>{processing.accessBlockedCount}</dd></div>
+                  <div><dt>{copy.unavailableSources}</dt><dd>{processing.unavailableCount}</dd></div>
+                </dl>
+              </section>
+            ) : null}
 
             <dl className={styles.synthesisStateGrid}>
               <div>
@@ -823,8 +964,44 @@ export function BasicMolecularRecord({
                 </div>
               </section>
             ) : null}
+
+            <div className={styles.synthesisAtlasAction}>
+              <div>
+                <strong>{copy.openSynthesisAtlas}</strong>
+                <p>{copy.atlasGateBoundary}</p>
+              </div>
+              <a href={getSynthesisAcademyHash(record.stableSlug, "atlas")}>
+                {copy.openSynthesisAtlas} <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </section>
-        ) : null}
+        ) : (
+          <section
+            aria-labelledby="basic-record-synthesis-coverage"
+            data-basic-record-synthesis-coverage="unavailable"
+            data-synthesis-surface-state="coverage_unavailable"
+          >
+            <header className={styles.sectionHeader}>
+              <div>
+                <span className={styles.sectionEyebrow}>{copy.synthesisCoverageEyebrow}</span>
+                <h2 id="basic-record-synthesis-coverage">{copy.synthesisCoverageTitle}</h2>
+              </div>
+              <p>{copy.synthesisCoverageDescription}</p>
+            </header>
+
+            <div
+              className={styles.reportedSynthesisState}
+              data-synthesis-coverage-load-state="unavailable"
+              role="status"
+            >
+              <span aria-hidden="true">!</span>
+              <div>
+                <strong>{copy.synthesisCoverageUnavailableTitle}</strong>
+                <small>{copy.synthesisCoverageUnavailableSummary}</small>
+              </div>
+            </div>
+          </section>
+        )}
 
         {record.structuralNeighbors.length > 0 ? (
           <section aria-labelledby="basic-record-neighbors" data-basic-record-neighbors="resident-window">

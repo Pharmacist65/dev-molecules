@@ -46,11 +46,11 @@ test("new product hashes resolve to stable primary sections", () => {
     academyArea: "module",
     lessonId: "adme",
   });
-  assert.deepEqual(parsePlatformHash("#academy/synthesis/celecoxib/reported-route"), {
+  assert.deepEqual(parsePlatformHash("#academy/synthesis/synthetic-compound-alpha/synthetic-route-alpha"), {
     section: "academy",
     academyArea: "synthesis",
-    slug: "celecoxib",
-    routeId: "reported-route",
+    slug: "synthetic-compound-alpha",
+    routeId: "synthetic-route-alpha",
   });
 });
 

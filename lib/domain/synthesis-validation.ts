@@ -8,6 +8,11 @@ import type {
   SynthesisSourceEvidence,
   SynthesisSourceEvidenceId,
 } from "./synthesis-route";
+import type {
+  SynthesisEvidenceAssociationAssessment,
+  SynthesisEvidenceExtractionManifest,
+  SynthesisResolvedReactionSegment,
+} from "./synthesis-extraction";
 
 export interface SynthesisValidationIssue {
   readonly severity: "error" | "warning";
@@ -381,6 +386,209 @@ const validateKnownEvidenceIds = (
   return issues;
 };
 
+export const validateSynthesisEvidenceExtraction = (
+  manifest: SynthesisEvidenceExtractionManifest,
+  assessments: readonly SynthesisEvidenceAssociationAssessment[],
+  segments: readonly SynthesisResolvedReactionSegment[],
+): readonly SynthesisValidationIssue[] => {
+  const issues: SynthesisValidationIssue[] = [];
+  const path = "synthesisEvidenceExtraction";
+  if (!isNonBlank(manifest.pipelineVersion) || !isIsoDate(manifest.generatedAt)) {
+    issues.push(error(
+      "invalid-synthesis-extraction-manifest",
+      path,
+      "Extraction manifest requires a pipeline version and real run timestamp.",
+    ));
+  }
+  if (
+    manifest.candidateAssociationCount !== assessments.length ||
+    manifest.terminalAssociationCount !== assessments.length ||
+    manifest.unresolvedFinalCount !== 0
+  ) {
+    issues.push(error(
+      "synthesis-extraction-count-mismatch",
+      path,
+      "Every candidate association must have exactly one terminal assessment.",
+    ));
+  }
+  if (!isSha256(manifest.assessmentSha256)) {
+    issues.push(error(
+      "invalid-synthesis-extraction-digest",
+      `${path}.assessmentSha256`,
+      "Extraction assessments require a SHA-256 digest.",
+    ));
+  }
+  if (
+    manifest.currentExactLocatorMissingCount < 0 ||
+    manifest.currentJournalFallbackIdentityCount < 0 ||
+    manifest.directSegmentCandidateCount < 0 ||
+    manifest.insufficientOrdReactantIdentityCount < 0 ||
+    manifest.nonCovalentOrdTerminalCount < 0 ||
+    manifest.ordParseErrorCount < 0 ||
+    manifest.ordDecodedFragmentCount !==
+      manifest.directSegmentCandidateCount +
+        manifest.insufficientOrdReactantIdentityCount +
+        manifest.nonCovalentOrdTerminalCount +
+        manifest.ordParseErrorCount
+  ) {
+    issues.push(error(
+      "inconsistent-synthesis-extraction-current-counts",
+      path,
+      "Current extraction counts must be non-negative and the ORD terminal partition must equal the decoded-fragment total.",
+    ));
+  }
+  if (manifest.baselineComparisonState === "matched" && (
+    manifest.moleculeCount !== 1_552 ||
+    manifest.candidateBearingMoleculeCount !== 1_279 ||
+    manifest.candidateAssociationCount !== 14_897 ||
+    manifest.uniqueGlobalDocumentCount !== 14_616 ||
+    manifest.exactLocatorMissingBaselineCount !== 10_915 ||
+    manifest.journalFallbackIdentityBaselineCount !== 1_654 ||
+    manifest.currentExactLocatorMissingCount !== 10_915 ||
+    manifest.currentJournalFallbackIdentityCount !== 0 ||
+    manifest.ordDecodedFragmentCount !== 3_982 ||
+    manifest.directSegmentCandidateCount !== 2_645 ||
+    manifest.insufficientOrdReactantIdentityCount !== 919 ||
+    manifest.nonCovalentOrdTerminalCount !== 418 ||
+    manifest.ordParseErrorCount !== 0
+  )) {
+    issues.push(error(
+      "accepted-synthesis-extraction-baseline-drift",
+      path,
+      "The accepted v1 discovery snapshot or its identity-hardened ORD terminal distribution drifted.",
+    ));
+  }
+  const associationIds = assessments.map((assessment) => assessment.associationId);
+  for (const duplicate of duplicateValues(associationIds)) {
+    issues.push(error(
+      "duplicate-synthesis-extraction-association",
+      `${path}.assessments`,
+      `Candidate association ${duplicate} is duplicated.`,
+    ));
+  }
+  const segmentById = new Map(segments.map((segment) => [segment.segmentId, segment] as const));
+  for (const duplicate of duplicateValues(segments.map((segment) => segment.segmentId))) {
+    issues.push(error(
+      "duplicate-synthesis-extraction-segment",
+      `${path}.segments`,
+      `Resolved segment ${duplicate} is duplicated.`,
+    ));
+  }
+  assessments.forEach((assessment, index) => {
+    const assessmentPath = `${path}.assessments[${index}]`;
+    if ((assessment.extractionOutcome as string) === "unresolved") {
+      issues.push(error(
+        "unresolved-final-synthesis-extraction",
+        `${assessmentPath}.extractionOutcome`,
+        "Unresolved is a working state and cannot appear in a final extraction snapshot.",
+      ));
+    }
+    if (
+      assessment.extractionOutcome === "retryable_error" &&
+      (
+        !assessment.retry ||
+        !Number.isSafeInteger(assessment.retry.retryCount) ||
+        assessment.retry.retryCount < 0 ||
+        !isIsoDate(assessment.retry.lastAttemptedAt) ||
+        !isNonBlank(assessment.retry.exactError) ||
+        !isNonBlank(assessment.retry.retryPolicy) ||
+        assessment.retry.pipelineVersion !== assessment.pipelineVersion
+      )
+    ) {
+      issues.push(error(
+        "retryable-synthesis-extraction-without-retry-audit",
+        `${assessmentPath}.retry`,
+        "Retryable extraction errors require count, time, exact error, policy and pipeline version.",
+      ));
+    }
+    if (
+      assessment.extractionOutcome !== "retryable_error" &&
+      assessment.retry !== null
+    ) {
+      issues.push(error(
+        "terminal-synthesis-extraction-has-retry-audit",
+        `${assessmentPath}.retry`,
+        "Retry metadata is reserved for retryable-error terminal records.",
+      ));
+    }
+    if (assessment.sourceEvidenceState === "direct_segment") {
+      const segment = assessment.extractedSegmentId
+        ? segmentById.get(assessment.extractedSegmentId)
+        : null;
+      if (
+        assessment.extractionOutcome !== "resolved" ||
+        assessment.routeType !== null ||
+        assessment.routeCompleteness !== "unknown" ||
+        assessment.reviewState !== "pending" ||
+        assessment.applicability !== "applicable" ||
+        !assessment.exactLocatorResolved ||
+        !assessment.sourceLocatorValue?.trim() ||
+        !segment ||
+        segment.coverageId !== assessment.coverageId ||
+        segment.sourceEvidenceId !== assessment.sourceEvidenceId
+      ) {
+        issues.push(error(
+          "invalid-resolved-synthesis-direct-segment",
+          assessmentPath,
+          "A resolved direct segment must remain a pending, located, non-route record for the exact coverage identity.",
+        ));
+      }
+    } else if (assessment.extractedSegmentId !== null) {
+      issues.push(error(
+        "candidate-synthesis-evidence-claims-segment",
+        `${assessmentPath}.extractedSegmentId`,
+        "Only resolved direct-segment evidence can link a normalized segment record.",
+      ));
+    }
+    if (assessment.operationalDetailsIncluded !== false) {
+      issues.push(error(
+        "operational-synthesis-extraction-content",
+        `${assessmentPath}.operationalDetailsIncluded`,
+        "Candidate extraction records must explicitly exclude operational details.",
+      ));
+    }
+  });
+  segments.forEach((segment, index) => {
+    const segmentPath = `${path}.segments[${index}]`;
+    if (
+      segment.routeType !== null ||
+      segment.routeCompleteness !== "unknown" ||
+      segment.sourceEvidenceState !== "direct_segment" ||
+      segment.reviewState !== "pending" ||
+      segment.operationalDetailsIncluded !== false ||
+      !segment.sourceLocator.value.trim() ||
+      segment.reactants.length === 0 ||
+      segment.products.length === 0 ||
+      segment.products.some((product) =>
+        product.inchiKey !== segment.stereochemicalResult.targetInchiKey
+      ) ||
+      segment.reactionClass.normalizationState !== "unclassified" ||
+      segment.reactionClass.provenance.state !== "not_computed" ||
+      segment.atomMapping.state !== "not_mapped" ||
+      segment.atomMapping.confidence !== null ||
+      segment.formedBonds.length !== 0 ||
+      segment.brokenBonds.length !== 0
+    ) {
+      issues.push(error(
+        "invalid-private-synthesis-segment",
+        segmentPath,
+        "Resolved ORD segments must remain exact-target, located, pending, unclassified and unmapped non-route facts.",
+      ));
+    }
+  });
+  if (
+    manifest.resolvedSegmentRecordCount !== segments.length ||
+    manifest.directSegmentCandidateCount !== segments.length
+  ) {
+    issues.push(error(
+      "synthesis-direct-segment-count-mismatch",
+      `${path}.segments`,
+      "Every resolved direct-segment assessment requires exactly one private normalized segment.",
+    ));
+  }
+  return issues;
+};
+
 export const validateSynthesisCoverageRecord = (
   record: SynthesisCoverageRecord,
   sourceEvidence: readonly SynthesisSourceEvidence[] = [],
@@ -616,13 +824,29 @@ export const validateSynthesisCoverageRecord = (
   const resolvedSources = record.sourceEvidenceIds
     .map((id) => sources.get(id))
     .filter((source): source is SynthesisSourceEvidence => Boolean(source));
+  const activeProcessedCandidateCount = record.evidenceProcessing
+    ? record.evidenceProcessing.extractionOutcomeCounts.resolved +
+      record.evidenceProcessing.extractionOutcomeCounts.insufficient_detail +
+      record.evidenceProcessing.extractionOutcomeCounts.parse_error +
+      record.evidenceProcessing.extractionOutcomeCounts.retryable_error +
+      record.evidenceProcessing.extractionOutcomeCounts.access_blocked
+    : null;
+  const allDiscoveredCandidatesTerminallyEliminated =
+    activeProcessedCandidateCount === 0;
+  if (record.evidenceDetailsRedacted && record.sourceEvidenceIds.length > 0) {
+    issues.push(error(
+      "redacted-synthesis-coverage-has-evidence-ids",
+      `${path}.sourceEvidenceIds`,
+      "A redacted public coverage projection cannot expose source evidence IDs.",
+    ));
+  }
   if (
     record.sourceEvidenceState === "none_found" &&
     (record.sourceEvidenceIds.length > 0 ||
       record.routes.some((route) => route.routeType !== "computational_proposed") ||
-      record.sourceSearchScope.providers.some(
+      (!allDiscoveredCandidatesTerminallyEliminated && record.sourceSearchScope.providers.some(
         (provider) => provider.candidateCount > 0,
-      ))
+      )))
   ) {
     issues.push(error(
       "none-found-synthesis-has-source-route",
@@ -645,9 +869,12 @@ export const validateSynthesisCoverageRecord = (
   }
   if (
     record.sourceEvidenceState === "candidate_sources" &&
-    (record.sourceEvidenceIds.length === 0 ||
-      !resolvedSources.some((source) => source.resolutionState === "candidate") ||
+    ((!record.evidenceDetailsRedacted && record.sourceEvidenceIds.length === 0) ||
+      (!record.evidenceDetailsRedacted &&
+        !resolvedSources.some((source) => source.resolutionState === "candidate")) ||
       resolvedSources.some((source) => source.resolutionState === "resolved") ||
+      (record.evidenceDetailsRedacted &&
+        (activeProcessedCandidateCount === null || activeProcessedCandidateCount === 0)) ||
       !record.sourceSearchScope.providers.some(
         (provider) => provider.candidateCount > 0,
       ))
@@ -670,7 +897,8 @@ export const validateSynthesisCoverageRecord = (
   }
   if (
     record.sourceEvidenceState === "direct_source_resolved" &&
-    !resolvedSources.some((source) => source.resolutionState === "resolved")
+    !resolvedSources.some((source) => source.resolutionState === "resolved") &&
+    !(record.evidenceDetailsRedacted && record.routes.length > 0)
   ) {
     issues.push(error(
       "resolved-synthesis-state-without-direct-source",
@@ -746,6 +974,50 @@ export const validateSynthesisCoverageRecord = (
       `${path}.updatedAt`,
       "Coverage update time must be ISO-compatible.",
     ));
+  }
+  if (record.evidenceProcessing || record.bestOutcome) {
+    const processing = record.evidenceProcessing;
+    if (!processing || !record.bestOutcome) {
+      issues.push(error(
+        "incomplete-synthesis-evidence-processing-summary",
+        path,
+        "Evidence-processing summary and molecule best outcome must be published together.",
+      ));
+    } else {
+      const terminalKeys = [
+        "resolved",
+        "irrelevant",
+        "identity_mismatch",
+        "access_blocked",
+        "insufficient_detail",
+        "parse_error",
+        "retryable_error",
+        "duplicate",
+        "superseded",
+      ] as const;
+      const actualKeys = Object.keys(processing.extractionOutcomeCounts).sort();
+      const expectedKeys = [...terminalKeys].sort();
+      const terminalCount = terminalKeys.reduce(
+        (sum, key) => sum + processing.extractionOutcomeCounts[key],
+        0,
+      );
+      const accessCount = processing.accessibleCount + processing.accessBlockedCount +
+        processing.metadataOnlyCount + processing.unavailableCount;
+      if (
+        !isNonBlank(processing.pipelineVersion) ||
+        !isIsoDate(processing.completedAt) ||
+        JSON.stringify(actualKeys) !== JSON.stringify(expectedKeys) ||
+        processing.candidateAssociationCount !== processing.terminalAssociationCount ||
+        processing.candidateAssociationCount !== terminalCount ||
+        processing.candidateAssociationCount !== accessCount
+      ) {
+        issues.push(error(
+          "invalid-synthesis-evidence-processing-summary",
+          `${path}.evidenceProcessing`,
+          "Coverage extraction summaries require complete zero-filled terminal counts and consistent access totals.",
+        ));
+      }
+    }
   }
   return issues;
 };
@@ -1191,6 +1463,9 @@ export const validateCanonicalSynthesisRoute = (
   const producerOrder = new Map<string, number>();
   route.steps.forEach((step, index) => {
     const stepPath = `${path}.steps[${index}]`;
+    const runtimeStep = step as Partial<typeof step>;
+    const reactionClass = runtimeStep.reactionClass;
+    const atomMapping = runtimeStep.atomMapping;
     if (!step.id.startsWith("synthesis-route-step:")) {
       issues.push(error(
         "invalid-canonical-synthesis-step-id",
@@ -1205,7 +1480,7 @@ export const validateCanonicalSynthesisRoute = (
         "Canonical steps must be consecutively ordered from one.",
       ));
     }
-    if (!isNonBlank(step.title) || !isNonBlank(step.reactionClass.label)) {
+    if (!isNonBlank(step.title) || !reactionClass || !isNonBlank(reactionClass.label ?? "")) {
       issues.push(error(
         "incomplete-canonical-synthesis-step",
         stepPath,
@@ -1213,13 +1488,87 @@ export const validateCanonicalSynthesisRoute = (
       ));
     }
     if (
-      step.reactionClass.normalizationState === "normalized" &&
-      !step.reactionClass.taxonomyId?.trim()
+      reactionClass?.normalizationState === "normalized" &&
+      !reactionClass.taxonomyId?.trim()
     ) {
       issues.push(error(
         "normalized-reaction-class-without-id",
         `${stepPath}.reactionClass.taxonomyId`,
         "A normalized reaction class requires a taxonomy ID.",
+      ));
+    }
+    const reactionProvenance = reactionClass?.provenance;
+    if (!reactionProvenance) {
+      issues.push(error(
+        "reaction-class-without-provenance",
+        `${stepPath}.reactionClass.provenance`,
+        "Every reaction-class assertion requires an explicit computed, reviewed or not-computed provenance record.",
+      ));
+    } else if (reactionProvenance.state === "not_computed") {
+      if (
+        reactionProvenance.taxonomyName !== null ||
+        reactionProvenance.taxonomyVersion !== null ||
+        reactionProvenance.confidence !== null
+      ) {
+        issues.push(error(
+          "uncomputed-reaction-class-has-provenance-claims",
+          `${stepPath}.reactionClass.provenance`,
+          "An uncomputed reaction class cannot claim a taxonomy version or confidence.",
+        ));
+      }
+    } else if (
+      !isNonBlank(reactionProvenance.taxonomyName ?? "") ||
+      !isNonBlank(reactionProvenance.taxonomyVersion ?? "") ||
+      reactionProvenance.confidence === null ||
+      !Number.isFinite(reactionProvenance.confidence) ||
+      reactionProvenance.confidence < 0 ||
+      reactionProvenance.confidence > 1
+    ) {
+      issues.push(error(
+        "computed-reaction-class-without-provenance",
+        `${stepPath}.reactionClass.provenance`,
+        "Computed/reviewed reaction classes require taxonomy name, version and confidence.",
+      ));
+    }
+    if (!atomMapping) {
+      issues.push(error(
+        "missing-atom-mapping-state",
+        `${stepPath}.atomMapping`,
+        "Every step requires an explicit mapping state and provenance record.",
+      ));
+    } else if (!isNonBlank(atomMapping.reason)) {
+      issues.push(error(
+        "atom-mapping-without-reason",
+        `${stepPath}.atomMapping.reason`,
+        "Every step must explain whether and why atom mapping was or was not asserted.",
+      ));
+    }
+    if (atomMapping?.state === "not_mapped") {
+      if (
+        atomMapping.mapperName !== null ||
+        atomMapping.mapperVersion !== null ||
+        atomMapping.confidence !== null ||
+        step.bondChanges.some((change) => change.mappingState !== "not_mapped")
+      ) {
+        issues.push(error(
+          "unmapped-step-has-mapping-claims",
+          `${stepPath}.atomMapping`,
+          "A not-mapped step cannot carry mapper provenance, confidence or mapped bond changes.",
+        ));
+      }
+    } else if (atomMapping && (
+      !isNonBlank(atomMapping.mapperName ?? "") ||
+      !isNonBlank(atomMapping.mapperVersion ?? "") ||
+      atomMapping.confidence === null ||
+      !Number.isFinite(atomMapping.confidence) ||
+      atomMapping.confidence < 0 ||
+      atomMapping.confidence > 1 ||
+      step.bondChanges.some((change) => change.mappingState === "not_mapped")
+    )) {
+      issues.push(error(
+        "computed-atom-mapping-without-provenance",
+        `${stepPath}.atomMapping`,
+        "Computed/reviewed mapping requires mapper name, version, confidence and consistently mapped bond changes.",
       ));
     }
     if (step.inputMaterialIds.length === 0 || step.outputMaterialIds.length === 0) {
@@ -1301,6 +1650,13 @@ export const validateCanonicalSynthesisRoute = (
             "unmapped-synthesis-bond-has-atom-claims",
             changePath,
             "An unmapped bond change cannot carry fabricated atom references or bond orders.",
+          ));
+        }
+        if (step.reviewState !== "pending") {
+          issues.push(error(
+            "unreviewed-unmapped-bond-annotation-promoted",
+            changePath,
+            "An unmapped qualitative bond annotation must remain pending until qualified review supplies supported mapping or removes the annotation.",
           ));
         }
         return;
@@ -1544,28 +1900,73 @@ export const validateCanonicalSynthesisRoute = (
     const expectedSourceKind = route.routeType === "patent_reported"
       ? "patent"
       : "journal";
-    const completeSources = route.reportedCompleteRouteSourceIds
-      .map((sourceId) => sources.get(sourceId));
-    if (
-      completeSources.length === 0 ||
-      completeSources.some((source) =>
-        !source ||
-        source.resolutionState !== "resolved" ||
-        source.sourceKind !== expectedSourceKind ||
-        source.supportScope !== "complete_route"
-      )
-    ) {
+    const reportedStepIds = new Set<string>();
+    const reportedStepCounts = new Map<string, number>();
+    route.reportedSegments.forEach((segment, segmentIndex) => {
+      const segmentPath = `${path}.reportedSegments[${segmentIndex}]`;
+      if (!isNonBlank(segment.sourceSegmentId)) {
+        issues.push(error(
+          "reported-segment-without-source-id",
+          `${segmentPath}.sourceSegmentId`,
+          "A reported route segment requires a stable source-segment ID.",
+        ));
+      }
+      issues.push(...validateKnownEvidenceIds(
+        segment.sourceEvidenceIds,
+        sources,
+        `${segmentPath}.sourceEvidenceIds`,
+      ));
+      for (const sourceId of segment.sourceEvidenceIds) {
+        const source = sources.get(sourceId);
+        if (
+          !source ||
+          source.resolutionState !== "resolved" ||
+          source.sourceKind !== expectedSourceKind ||
+          source.supportScope === "identity_only" ||
+          !source.locator?.value.trim()
+        ) {
+          issues.push(error(
+            "reported-segment-without-direct-located-source",
+            `${segmentPath}.sourceEvidenceIds`,
+            "Every reported segment requires resolved matching source evidence with an exact locator.",
+          ));
+        }
+      }
+      for (const stepId of segment.stepIds) {
+        reportedStepIds.add(stepId);
+        reportedStepCounts.set(stepId, (reportedStepCounts.get(stepId) ?? 0) + 1);
+        const step = stepById.get(stepId);
+        if (!step) {
+          issues.push(error(
+            "reported-segment-unknown-step",
+            `${segmentPath}.stepIds`,
+            `Reported segment references unknown step ${stepId}.`,
+          ));
+        } else if (step.sourceEvidenceIds.some(
+          (sourceId) => !segment.sourceEvidenceIds.includes(sourceId),
+        )) {
+          issues.push(error(
+            "reported-segment-step-source-mismatch",
+            `${segmentPath}.sourceEvidenceIds`,
+            `Reported segment must contain every direct source cited by step ${stepId}.`,
+          ));
+        }
+      }
+    });
+    if (route.steps.some((step) => !reportedStepIds.has(step.id))) {
       issues.push(error(
-        "reported-synthesis-without-complete-direct-source",
-        `${path}.reportedCompleteRouteSourceIds`,
-        "A reported route requires a matching resolved source that explicitly supports the declared complete route.",
+        "unsegmented-reported-synthesis-step",
+        `${path}.reportedSegments`,
+        "Every reported step must belong to a source-bounded reported segment.",
       ));
     }
-    issues.push(...validateKnownEvidenceIds(
-      route.reportedCompleteRouteSourceIds,
-      sources,
-      `${path}.reportedCompleteRouteSourceIds`,
-    ));
+    if ([...reportedStepCounts.values()].some((count) => count !== 1)) {
+      issues.push(error(
+        "multiply-segmented-reported-step",
+        `${path}.reportedSegments`,
+        "Each reported step must belong to exactly one reported segment.",
+      ));
+    }
     for (const [index, step] of route.steps.entries()) {
       if (step.evidenceMode !== "direct_reported") {
         issues.push(error(
@@ -1574,18 +1975,56 @@ export const validateCanonicalSynthesisRoute = (
           "Every step in a reported route must be directly reported.",
         ));
       }
+      if (step.sourceEvidenceIds.length === 0) {
+        issues.push(error(
+          "reported-synthesis-step-without-direct-source",
+          `${path}.steps[${index}].sourceEvidenceIds`,
+          "Every reported step must resolve to at least one exact-locator source.",
+        ));
+      }
+    }
+    if (route.routeCompleteness === "complete") {
+      const completeSources = route.reportedCompleteRouteSourceIds
+        .map((sourceId) => sources.get(sourceId));
       if (
-        step.sourceEvidenceIds.length === 0 ||
-        !step.sourceEvidenceIds.some((sourceId) =>
-          route.reportedCompleteRouteSourceIds.includes(sourceId)
+        completeSources.length === 0 ||
+        completeSources.some((source) =>
+          !source ||
+          source.resolutionState !== "resolved" ||
+          source.sourceKind !== expectedSourceKind ||
+          source.supportScope !== "complete_route" ||
+          !source.locator?.value.trim()
         )
       ) {
         issues.push(error(
-          "reported-synthesis-step-without-route-source",
-          `${path}.steps[${index}].sourceEvidenceIds`,
-          "Every reported step must resolve to the source reporting the complete route.",
+          "complete-reported-synthesis-without-complete-direct-source",
+          `${path}.reportedCompleteRouteSourceIds`,
+          "A complete reported route requires a resolved matching source that explicitly supports the route end-to-end.",
         ));
       }
+      issues.push(...validateKnownEvidenceIds(
+        route.reportedCompleteRouteSourceIds,
+        sources,
+        `${path}.reportedCompleteRouteSourceIds`,
+      ));
+      for (const [index, step] of route.steps.entries()) {
+        if (!step.sourceEvidenceIds.some((sourceId) =>
+          (route.reportedCompleteRouteSourceIds as readonly SynthesisSourceEvidenceId[])
+            .includes(sourceId)
+        )) {
+          issues.push(error(
+            "complete-reported-step-without-route-source",
+            `${path}.steps[${index}].sourceEvidenceIds`,
+            "Every complete reported step must resolve to the source reporting the route end-to-end.",
+          ));
+        }
+      }
+    } else if (route.reportedCompleteRouteSourceIds.length > 0) {
+      issues.push(error(
+        "partial-reported-route-claims-complete-source",
+        `${path}.reportedCompleteRouteSourceIds`,
+        "A partial reported route must use segment evidence and must not imply end-to-end source support.",
+      ));
     }
   } else if (route.routeType === "teaching_reconstruction") {
     if (route.reviewState === "verified") {
@@ -1607,6 +2046,65 @@ export const validateCanonicalSynthesisRoute = (
     const stepSegmentCounts = new Map<string, number>();
     route.segments.forEach((segment, index) => {
       const segmentPath = `${path}.segments[${index}]`;
+      if (!isNonBlank(segment.sourceSegmentId)) {
+        issues.push(error(
+          "reconstruction-segment-without-source-id",
+          `${segmentPath}.sourceSegmentId`,
+          "A teaching segment requires a stable source-segment ID.",
+        ));
+      }
+      if (
+        segment.identityResolution.molecularIdentity !== "exact_inchi_key" ||
+        !["exact", "source_backed_compatible"].includes(
+          segment.identityResolution.formRelationship,
+        ) ||
+        !["exact", "source_backed_compatible"].includes(
+          segment.identityResolution.stereochemistry,
+        )
+      ) {
+        issues.push(error(
+          "reconstruction-segment-identity-gate",
+          `${segmentPath}.identityResolution`,
+          "Teaching segments require exact molecular identity plus explicit form and stereochemistry compatibility.",
+        ));
+      }
+      if (
+        segment.editorialBridge.state === "educational_bridge" &&
+        (
+          !isNonBlank(segment.editorialBridge.description) ||
+          segment.editorialBridge.reportedAsOneCompleteRoute !== false ||
+          !isNonBlank(segment.editorialBridge.fromSourceSegmentId) ||
+          typeof segment.editorialBridge.boundaryMaterialId !== "string" ||
+          !segment.editorialBridge.boundaryMaterialId.startsWith("synthesis-material:")
+        )
+      ) {
+        issues.push(error(
+          "educational-bridge-without-disclosure",
+          `${segmentPath}.editorialBridge`,
+          "An educational bridge requires a structural boundary, its preceding segment, and an explicit false end-to-end-report claim.",
+        ));
+      } else if (
+        segment.editorialBridge.state === "none" &&
+        (
+          segment.editorialBridge.fromSourceSegmentId !== null ||
+          segment.editorialBridge.boundaryMaterialId !== null ||
+          segment.editorialBridge.reportedAsOneCompleteRoute !== false ||
+          segment.editorialBridge.description !== null
+        )
+      ) {
+        issues.push(error(
+          "invalid-empty-educational-bridge",
+          `${segmentPath}.editorialBridge`,
+          "A non-bridge segment cannot retain boundary or end-to-end-report metadata.",
+        ));
+      }
+      if (segment.reviewState === "verified") {
+        issues.push(error(
+          "teaching-segment-marked-verified",
+          `${segmentPath}.reviewState`,
+          "A teaching reconstruction segment cannot be marked verified reported science.",
+        ));
+      }
       for (const stepId of segment.stepIds) {
         coveredStepIds.add(stepId);
         stepSegmentCounts.set(stepId, (stepSegmentCounts.get(stepId) ?? 0) + 1);
@@ -1657,9 +2155,95 @@ export const validateCanonicalSynthesisRoute = (
             "Every teaching segment must resolve to direct step or route evidence.",
           ));
         } else {
+          if (
+            !source.locator ||
+            JSON.stringify(source.locator) !== JSON.stringify(segment.sourceLocator)
+          ) {
+            issues.push(error(
+              "reconstruction-segment-locator-mismatch",
+              `${segmentPath}.sourceLocator`,
+              "A teaching segment locator must exactly match one of its resolved direct sources.",
+            ));
+          }
           reconstructionDocuments.add(
             source.patentFamilyId ?? `${source.sourceKind}:${source.documentId}`,
           );
+        }
+      }
+    });
+    route.segments.forEach((segment, index) => {
+      const segmentPath = `${path}.segments[${index}]`;
+      if (index === 0) {
+        if (segment.editorialBridge.state !== "none") {
+          issues.push(error(
+            "first-reconstruction-segment-has-bridge",
+            `${segmentPath}.editorialBridge`,
+            "The first source-bounded segment cannot claim an incoming editorial bridge.",
+          ));
+        }
+        return;
+      }
+      const previousSegment = route.segments[index - 1];
+      const previousOutputs = new Set(
+        previousSegment.stepIds.flatMap(
+          (stepId) => stepById.get(stepId)?.outputMaterialIds ?? [],
+        ),
+      );
+      const currentInputs = new Set(
+        segment.stepIds.flatMap(
+          (stepId) => stepById.get(stepId)?.inputMaterialIds ?? [],
+        ),
+      );
+      const exactSharedBoundaryIds = [...previousOutputs].filter((materialId) =>
+        currentInputs.has(materialId)
+      );
+      if (exactSharedBoundaryIds.length !== 1) {
+        issues.push(error(
+          "reconstruction-adjacent-segments-without-exact-boundary",
+          `${segmentPath}.editorialBridge`,
+          "Adjacent teaching segments must share exactly one output-to-input boundary material.",
+        ));
+        return;
+      }
+      const boundaryMaterialId = exactSharedBoundaryIds[0];
+      const boundaryMaterial = materialById.get(boundaryMaterialId);
+      if (
+        segment.editorialBridge.state !== "educational_bridge" ||
+        segment.editorialBridge.fromSourceSegmentId !== previousSegment.sourceSegmentId ||
+        segment.editorialBridge.boundaryMaterialId !== boundaryMaterialId ||
+        segment.editorialBridge.reportedAsOneCompleteRoute !== false
+      ) {
+        issues.push(error(
+          "reconstruction-bridge-annotation-mismatch",
+          `${segmentPath}.editorialBridge`,
+          "The incoming segment must disclose the structurally derived inter-document boundary as an educational bridge, never as one reported route.",
+        ));
+      }
+      if (
+        !boundaryMaterial ||
+        boundaryMaterial.identityResolution !== "exact_inchi_key" ||
+        !boundaryMaterial.canonicalSmiles?.trim() ||
+        !boundaryMaterial.inchiKey ||
+        !/^[A-Z]{14}-[A-Z]{10}-[A-Z]$/u.test(boundaryMaterial.inchiKey)
+      ) {
+        issues.push(error(
+          "reconstruction-bridge-material-not-exact",
+          `${path}.materials`,
+          "The shared inter-document material must carry exact structure identity and a valid computed InChIKey.",
+        ));
+      } else {
+        const requiredBoundarySources = new Set([
+          ...previousSegment.sourceEvidenceIds,
+          ...segment.sourceEvidenceIds,
+        ]);
+        if ([...requiredBoundarySources].some(
+          (sourceId) => !boundaryMaterial.sourceEvidenceIds.includes(sourceId)
+        )) {
+          issues.push(error(
+            "reconstruction-bridge-material-source-mismatch",
+            `${path}.materials`,
+            "The exact bridge material must be source-associated to both adjacent document-bounded segments.",
+          ));
         }
       }
     });

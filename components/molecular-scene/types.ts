@@ -176,6 +176,8 @@ export interface SharedMolecularSceneProps {
   readonly onAtomSelect?: (atom: MolecularSceneAtom | null) => void;
   readonly onAtomHover?: (atom: MolecularSceneAtom | null) => void;
   readonly onMoleculeHover?: (molecule: MolecularSceneMoleculeHit | null) => void;
+  /** Universe-level structure activation; separate from atom selection. */
+  readonly onMoleculeSelect?: (molecule: MolecularSceneMoleculeHit) => void;
   readonly onMoleculeBoundsChange?: (
     bounds: readonly MolecularSceneScreenBounds[],
   ) => void;

@@ -41,7 +41,9 @@ const OUTSIDE_INITIAL_CATALOG_RECORDS = [
 ] as const;
 
 const CATALOG_TOTAL = 1_552;
-const DESKTOP_SCENE_SAMPLE_SIZE = 8;
+const DESKTOP_OVERVIEW_SAMPLE_SIZE = 6;
+const DESKTOP_NEAR_SAMPLE_SIZE = 10;
+const MOBILE_OVERVIEW_SAMPLE_SIZE = 4;
 const STUDENT_FORBIDDEN_COPY = /Sınıflandırma incelemesi sürüyor|Classification review in progress|Sınıflandırılmamış · kürasyon bekliyor|Unclassified · curation pending|Hesaplanmış yapısal görünüm|Computed structural view|has not been reviewed|\b(?:projection|algorithm|fingerprint|Tanimoto|SDF|WebGL|unreviewed|pending-review|source-supported|computed-unreviewed)\b|incelenmemiş|projeksiyon|algoritma/iu;
 
 function catalogApp(page: Page) {
@@ -122,10 +124,17 @@ test.describe("Explore product-quality acceptance", () => {
       .toBeGreaterThan(revisionBeforeZoomOut);
     await waitForUniverseCameraSettle(page);
     await expect(scene).toHaveAttribute("data-lod-level", "far");
-    await expect(scene).toHaveAttribute("data-visible-molecule-count", "0");
+    await expect(scene).toHaveAttribute(
+      "data-visible-molecule-count",
+      String(DESKTOP_OVERVIEW_SAMPLE_SIZE),
+    );
 
     const revisionBeforeZoomIn = await readNumericAttribute(scene, "data-camera-revision");
-    await zoomUniverseCanvas(page, -120);
+    const zoomIn = exploreRoot(page).getByRole("button", {
+      name: /Yakınlaştır|Zoom in/i,
+    });
+    await zoomIn.click();
+    await zoomIn.click();
     await expect
       .poll(() => readNumericAttribute(scene, "data-camera-revision"), {
         message: "returning from Far must update the shared scene",
@@ -220,16 +229,16 @@ test.describe("Explore product-quality acceptance", () => {
     ).toBeGreaterThan(initialSampleCount);
     expect.soft(
       initialSampleCount,
-      "the desktop public overview must retain its bounded eight-structure sample",
-    ).toBe(DESKTOP_SCENE_SAMPLE_SIZE);
+      "the desktop public overview must retain its bounded six-structure sample",
+    ).toBe(DESKTOP_OVERVIEW_SAMPLE_SIZE);
     expect.soft(
       initialSceneSampleCount,
       "the requested scene sample and visible renderer sample must agree",
     ).toBe(initialSampleCount);
     expect.soft(
       nearSampleCount,
-      "near LOD must restore the bounded eight-structure desktop sample",
-    ).toBe(DESKTOP_SCENE_SAMPLE_SIZE);
+      "near LOD must expand to the bounded ten-structure desktop sample",
+    ).toBe(DESKTOP_NEAR_SAMPLE_SIZE);
     expect.soft(await exploreCanvas(page).count(), "Explore must own exactly one WebGL canvas")
       .toBe(1);
     expect.soft(await readNumericAttribute(scene, "data-active-webgl-contexts"))
@@ -282,10 +291,10 @@ test.describe("Explore product-quality acceptance", () => {
     ).toBeGreaterThanOrEqual(14);
     expect.soft(
       publicClusterLabels,
-      "pending draft classifications must collapse into one neutral public region",
+      "the immersive map must expose one neutral representative scope",
     ).toHaveLength(1);
     expect.soft(publicClusterLabels[0]).toMatch(
-      /^(?:Aday kayıtlar|Candidate records)$/i,
+      /^(?:Temsilî yapılar|Representative structures)$/i,
     );
     await expect.soft(exploreRoot(page)).not.toContainText(STUDENT_FORBIDDEN_COPY);
     expect.soft(
@@ -350,7 +359,7 @@ test.describe("Explore product-quality acceptance", () => {
         );
         await expect(catalogDrawer).toHaveAttribute(
           "data-scene-sample-count",
-          String(DESKTOP_SCENE_SAMPLE_SIZE),
+          String(DESKTOP_OVERVIEW_SAMPLE_SIZE),
         );
         await expect(catalogDrawer).toHaveAttribute(
           "data-catalog-result-count",
@@ -403,10 +412,9 @@ test.describe("Explore product-quality acceptance", () => {
         )
         .toBe(true);
 
-      await page
-        .getByRole("navigation", { name: /Keşfet görünüm yolu|Explore view path/i })
-        .getByRole("button", { name: /^(?:Evren|Universe)$/i })
-        .click();
+      await page.evaluate(() => {
+        window.location.hash = "#universe";
+      });
       await expect(exploreRoot(page)).toHaveAttribute("data-explore-level", "universe");
       const clearSearch = page.getByRole("button", { name: /^(?:Temizle|Clear)$/i });
       if (await clearSearch.isVisible()) await clearSearch.click();
@@ -626,7 +634,9 @@ test.describe("Explore product-quality acceptance", () => {
       await waitForExploreReady(page);
       await settleResponsiveLayout(page);
       const scene = exploreScene(page);
-      const expectedVisibleCount = qualityCase.name.startsWith("390x844") ? 6 : 8;
+      const expectedVisibleCount = qualityCase.name.startsWith("390x844")
+        ? MOBILE_OVERVIEW_SAMPLE_SIZE
+        : DESKTOP_OVERVIEW_SAMPLE_SIZE;
       await expect
         .poll(() => readNumericAttribute(scene, "data-visible-molecule-count"), {
           message: `${qualityCase.name} must settle to its viewport-specific sample`,
@@ -650,12 +660,17 @@ test.describe("Explore product-quality acceptance", () => {
         .poll(
           async () => {
             const box = await exploreCanvas(page).boundingBox();
-            const viewportHeight = await page.evaluate(() => window.innerHeight);
+            const stageBox = await exploreRoot(page)
+              .locator('[data-level="universe"]')
+              .boundingBox();
             return {
               hasCanvas: box !== null,
-              startsInViewport: box !== null && box.y >= 0 && box.y < viewportHeight,
-              endsInViewport:
-                box !== null && box.y + box.height <= viewportHeight + 1,
+              containedByStage:
+                box !== null && stageBox !== null
+                && box.x >= stageBox.x - 1
+                && box.y >= stageBox.y - 1
+                && box.x + box.width <= stageBox.x + stageBox.width + 1
+                && box.y + box.height <= stageBox.y + stageBox.height + 1,
             };
           },
           {
@@ -664,12 +679,14 @@ test.describe("Explore product-quality acceptance", () => {
         )
         .toEqual({
           hasCanvas: true,
-          startsInViewport: true,
-          endsInViewport: true,
+          containedByStage: true,
         });
       const overflow = await measureHorizontalOverflow(page);
       const spatialQuality = await measureClusterSpatialQuality(page);
       const canvasBox = await exploreCanvas(page).boundingBox();
+      const stageBox = await exploreRoot(page)
+        .locator('[data-level="universe"]')
+        .boundingBox();
       const renderer = {
         visibleMoleculeCount: await readNumericAttribute(
           scene,
@@ -700,6 +717,7 @@ test.describe("Explore product-quality acceptance", () => {
         effectiveViewport,
         overflow,
         canvasBox,
+        stageBox,
         renderer,
         publicClusterLabels,
         spatialQuality,
@@ -725,7 +743,11 @@ test.describe("Explore product-quality acceptance", () => {
       expect.soft(
         measurement.renderer.visibleMoleculeCount,
         `${measurement.name} must preserve its exact bounded scene sample`,
-      ).toBe(measurement.name.startsWith("390x844") ? 6 : DESKTOP_SCENE_SAMPLE_SIZE);
+      ).toBe(
+        measurement.name.startsWith("390x844")
+          ? MOBILE_OVERVIEW_SAMPLE_SIZE
+          : DESKTOP_OVERVIEW_SAMPLE_SIZE,
+      );
       expect.soft(measurement.renderer.sceneSampleCount).toBe(
         measurement.renderer.visibleMoleculeCount,
       );
@@ -745,10 +767,10 @@ test.describe("Explore product-quality acceptance", () => {
       ).toBeLessThan(0.01);
       expect.soft(
         measurement.publicClusterLabels,
-        `${measurement.name} must retain one neutral public review region`,
+        `${measurement.name} must retain one neutral representative scope`,
       ).toHaveLength(1);
       expect.soft(measurement.publicClusterLabels[0]).toMatch(
-        /^(?:Aday kayıtlar|Candidate records)$/i,
+        /^(?:Temsilî yapılar|Representative structures)$/i,
       );
       expect.soft({
         overlap: measurement.spatialQuality.overlap,
@@ -778,12 +800,21 @@ test.describe("Explore product-quality acceptance", () => {
       ).toBeGreaterThanOrEqual(14);
       expect.soft(
         measurement.canvasBox !== null &&
-          measurement.canvasBox.y >= 0 &&
-          measurement.canvasBox.y < measurement.effectiveViewport.height &&
+          measurement.stageBox !== null &&
+          measurement.canvasBox.x >= measurement.stageBox.x - 1 &&
+          measurement.canvasBox.y >= measurement.stageBox.y - 1 &&
+          measurement.canvasBox.x + measurement.canvasBox.width <=
+            measurement.stageBox.x + measurement.stageBox.width + 1 &&
           measurement.canvasBox.y + measurement.canvasBox.height <=
-            measurement.effectiveViewport.height + 1,
-        `${measurement.name} must contain the complete fitted 3D canvas in the first viewport`,
+            measurement.stageBox.y + measurement.stageBox.height + 1,
+        `${measurement.name} must contain the complete fitted 3D canvas in its immersive stage`,
       ).toBe(true);
+      if (measurement.effectiveViewport.width > 720) {
+        expect.soft(
+          ((measurement.stageBox?.height ?? 0) + 1) / measurement.effectiveViewport.height,
+          `${measurement.name} must retain the 78vh desktop stage`,
+        ).toBeGreaterThanOrEqual(0.78);
+      }
     }
   });
 });

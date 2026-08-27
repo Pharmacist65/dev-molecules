@@ -145,8 +145,8 @@ export const learningJourneyStageDefinitions = [
       "Follow nucleophiles, electrophiles, bond changes, and electron flow within source boundaries.",
     ),
     recommendedLesson: text(
-      "Sentez Atlası'nda kaynak destekli epoksit açılmasını incele.",
-      "Inspect a source-supported epoxide opening in Synthesis Atlas.",
+      "Doğrulanmış bir mekanizma yayımlandığında bağ değişimini kanıtıyla birlikte incele.",
+      "Inspect a bond change with its evidence after a mechanism passes publication review.",
     ),
     relatedMolecules: ["Propranolol", "Carvedilol"],
     destination: "synthesis",
@@ -158,20 +158,17 @@ export const learningJourneyStageDefinitions = [
     order: 5,
     title: text("Sentez Atlası", "Synthesis Atlas"),
     purpose: text(
-      "Kaynak destekli rotaları ileri ve retrosentetik yönde dönüşüm dönüşüm oku.",
-      "Read source-supported routes transformation by transformation in forward and retrosynthetic directions.",
+      "Her kesin molekül kimliği için sentez kanıtı araştırmasının kapsamını ve yayın durumunu incele.",
+      "Inspect synthesis-evidence search coverage and publication state for every exact molecular identity.",
     ),
     recommendedLesson: text(
-      "Carvedilolün bildirilen altı dönüşümlü rotasını aç.",
-      "Open Carvedilol's reported six-transformation route.",
+      "Bir molekül seçerek kaynak araştırması ve yayın kapısı durumunu aç.",
+      "Select a molecule and open its source-search and publication-gate status.",
     ),
     relatedMolecules: ["Propranolol", "Atenolol", "Carvedilol"],
     destination: "synthesis",
     availability: "available",
-    progressSource: {
-      kind: "missions",
-      missionIds: ["mission:propranolol-route-order"],
-    },
+    progressSource: { kind: "planned" },
   },
   {
     id: "drug-molecule-review",

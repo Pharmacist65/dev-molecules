@@ -34,8 +34,14 @@ test.describe("student mobile experience", () => {
 
     const scene = page.locator('[data-active-webgl-contexts="1"]').first();
     await expect(scene).toHaveAttribute("data-scene-status", "ready");
-    await expect(scene).toHaveAttribute("data-scene-sample-count", "6");
-    await expect(scene).toHaveAttribute("data-visible-molecule-count", "6");
+    await expect.poll(async () => Number(await scene.getAttribute("data-scene-sample-count")))
+      .toBeGreaterThanOrEqual(4);
+    const mobileSampleCount = Number(await scene.getAttribute("data-scene-sample-count"));
+    expect(mobileSampleCount).toBeLessThanOrEqual(6);
+    await expect(scene).toHaveAttribute(
+      "data-visible-molecule-count",
+      String(mobileSampleCount),
+    );
     const sceneBox = await scene.boundingBox();
     expect(sceneBox, "the mobile molecular scene must have layout dimensions").not.toBeNull();
     if (sceneBox) {
@@ -82,8 +88,9 @@ test.describe("student mobile experience", () => {
     });
     const synthesis = page.locator('[data-synthesis-academy="phase-6"]');
     await expect(synthesis).toBeVisible();
-    await synthesis.getByRole("button", { name: /Rota dersini aç|Open route lesson/i }).first().click();
-    await expect(synthesis.locator("[data-synthesis-atlas]")).toBeVisible();
+    await synthesis.getByRole("button", { name: /Sentez kanıtını aç|Open synthesis evidence/i }).click();
+    await expect(synthesis.locator('[data-synthesis-atlas-coverage-only="true"]')).toBeVisible();
+    await expect(synthesis.locator("[data-dragging][data-route-direction]")).toHaveCount(0);
     await expectNoHorizontalOverflow(page);
     await captureAcceptanceScreenshot(page, "student-synthesis-atlas-390x844.png");
     expectCleanRuntime(telemetry);

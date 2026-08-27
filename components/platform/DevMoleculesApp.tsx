@@ -43,13 +43,15 @@ import {
   type PlatformRoute,
   type PlatformSection,
 } from "@/lib/application/platform-route";
-import { canOpenSynthesisCurriculumMolecule } from "@/lib/application/synthesis-curriculum";
+import {
+  resolveSynthesisCatalogSelection,
+  type SynthesisCatalogSelection,
+} from "@/lib/application/synthesis-catalog";
 import type { CatalogNormalizedEntity } from "@/lib/catalog";
-import { moleculeById, moleculeCatalog } from "@/lib/data/catalog";
+import { moleculeCatalog } from "@/lib/data/catalog";
 import { createDrugFamilyPage } from "@/lib/data/family-pages";
 import { learningMissions } from "@/lib/data/learning-missions";
-import { synthesisStories } from "@/lib/data/synthesis-stories";
-import type { MoleculeId, NomenclatureProgressSnapshot } from "@/lib/domain";
+import type { NomenclatureProgressSnapshot } from "@/lib/domain";
 import type { AcademyModuleId } from "@/lib/domain/academy";
 import type {
   InstructorProgressSnapshot,
@@ -107,7 +109,10 @@ const MissionStudio = lazy(() =>
 
 const PRESENTATION_MODE_STORAGE_KEY = "dev-molecules:presentation-mode";
 const ATLAS_BROWSE_STATE_STORAGE_KEY = "dev-molecules:atlas-browse-state:v1";
-const SYNTHESIS_MOLECULE_IDS = [...new Set(synthesisStories.map((story) => story.moleculeId))];
+// Legacy/pending synthesis fixtures are not public learning-lens capabilities.
+// Future identities enter here only from the generated review-and-rights-gated
+// public route projection.
+const SYNTHESIS_MOLECULE_IDS: readonly string[] = [];
 const LEARNING_TASK_MOLECULE_IDS = [
   ...new Set(learningMissions.flatMap((mission) => mission.moleculeIds)),
 ];
@@ -218,6 +223,11 @@ function DevMoleculesWorkspace() {
   );
   const [atlasBrowseStateRestored, setAtlasBrowseStateRestored] = useState(false);
   const [selectedId, setSelectedId] = useState<string>(moleculeCatalog[0]?.id ?? "");
+  const [synthesisCatalogState, setSynthesisCatalogState] = useState<
+    | { readonly routeKey: string; readonly status: "ready"; readonly selection: SynthesisCatalogSelection }
+    | { readonly routeKey: string; readonly status: "unavailable" }
+    | null
+  >(null);
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<string>>(new Set());
   const [nomenclatureProgress, setNomenclatureProgress] =
     useState<NomenclatureProgressSnapshot | null>(null);
@@ -373,11 +383,46 @@ function DevMoleculesWorkspace() {
           (molecule) => getMoleculeSlug(molecule.id) === route.slug,
         )
       : undefined;
-  const synthesisRouteMolecule =
-    requestedSynthesisMolecule &&
-    canOpenSynthesisCurriculumMolecule(requestedSynthesisMolecule.id)
-      ? requestedSynthesisMolecule
+  useEffect(() => {
+    if (
+      route.section !== "academy" ||
+      route.academyArea !== "synthesis" ||
+      !route.slug
+    ) {
+      return;
+    }
+
+    let cancelled = false;
+    const routeKey = route.slug;
+    const fallbackIdentity = requestedSynthesisMolecule
+      ? {
+          curatedMoleculeId: requestedSynthesisMolecule.id,
+          preferredName: requestedSynthesisMolecule.identity.preferredName,
+          pubChemCid: requestedSynthesisMolecule.identity.pubChemCid,
+          inchiKey: requestedSynthesisMolecule.identity.inchiKey,
+        }
       : undefined;
+    void resolveSynthesisCatalogSelection(route.slug, indexedCatalogNavigator, {
+      assetBasePath,
+      fallbackIdentity,
+    })
+      .then((selection) => {
+        if (cancelled) return;
+        setSynthesisCatalogState(selection
+          ? { routeKey, status: "ready", selection }
+          : { routeKey, status: "unavailable" });
+      })
+      .catch(() => {
+        if (!cancelled) setSynthesisCatalogState({ routeKey, status: "unavailable" });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [assetBasePath, indexedCatalogNavigator, requestedSynthesisMolecule, route.academyArea, route.section, route.slug]);
+  const activeSynthesisCatalogState =
+    route.slug && synthesisCatalogState?.routeKey === route.slug
+      ? synthesisCatalogState
+      : { routeKey: route.slug ?? "", status: "loading" as const };
   const featuredExploreMolecule =
     seedExploreCatalogView.molecules.find(
       (molecule) => molecule.name.toLocaleLowerCase("en").includes("celecoxib"),
@@ -588,14 +633,6 @@ function DevMoleculesWorkspace() {
   function openMoleculeFocus(moleculeId: string) {
     setSelectedId(moleculeId);
     navigate(`#molecule/${encodeURIComponent(getMoleculeSlug(moleculeId))}`);
-  }
-
-  function selectSynthesisMolecule(moleculeId: string) {
-    if (!canOpenSynthesisCurriculumMolecule(moleculeId)) return;
-    const molecule = moleculeById.get(moleculeId as MoleculeId);
-    if (!molecule) return;
-    setSelectedId(molecule.id);
-    navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id), "atlas"));
   }
 
   const unavailableSynthesisRoute = (
@@ -862,15 +899,22 @@ function DevMoleculesWorkspace() {
           <div className={styles.workspacePage}>
             <Suspense fallback={loading}>
               {route.academyArea === "synthesis" && route.slug ? (
-                synthesisRouteMolecule ? (
+                activeSynthesisCatalogState.status === "ready" ? (
                   <>
                     <SynthesisAcademyHub
                       locale={locale}
-                      selectedMoleculeId={synthesisRouteMolecule.id}
-                      initialMoleculeId={synthesisRouteMolecule.id}
+                      selectedMoleculeId={requestedSynthesisMolecule?.id}
+                      initialMoleculeId={requestedSynthesisMolecule?.id}
                       initialView={route.routeId === "atlas" ? "atlas" : "curriculum"}
                       presentationMode={presentationMode}
-                      onSelectMolecule={selectSynthesisMolecule}
+                      catalogSelection={activeSynthesisCatalogState.selection}
+                      catalogRecordCount={catalogExpansion?.manifest.recordCount ?? 1552}
+                      assetBasePath={assetBasePath}
+                      searchCatalog={searchCatalog}
+                      onSelectCatalogRecord={(record) => {
+                        setSelectedId(record.id);
+                        navigate(getSynthesisAcademyHash(record.stableSlug, "atlas"));
+                      }}
                       onOpenMoleculeFocus={openMoleculeFocus}
                       onOpenDrugDossier={(moleculeId) => {
                         setSelectedId(moleculeId);
@@ -883,12 +927,15 @@ function DevMoleculesWorkspace() {
                       onComplete={completeMission}
                     />
                   </>
-                ) : unavailableSynthesisRoute
+                ) : activeSynthesisCatalogState.status === "loading"
+                  ? loading
+                  : unavailableSynthesisRoute
               ) : (
                 <AcademyHub
                   locale={locale}
                   selectedMoleculeIdOrSlug={selectedId}
                   assetBasePath={assetBasePath}
+                  catalogRecordCount={catalogExpansion?.manifest.recordCount ?? 1552}
                   nomenclatureProgress={nomenclatureProgress}
                   completedMissionIds={completedMissionIds}
                   activeModuleId={getAcademyModuleId(route)}
