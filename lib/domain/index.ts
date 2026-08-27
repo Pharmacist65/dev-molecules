@@ -8,4 +8,7 @@ export * from "./nomenclature";
 export * from "./structure";
 export * from "./synthesis";
 export * from "./synthesis-challenge";
+export * from "./synthesis-coverage";
+export * from "./synthesis-route";
+export * from "./synthesis-validation";
 export * from "./validators";

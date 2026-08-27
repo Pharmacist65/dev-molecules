@@ -29,6 +29,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run catalog:validate
+      - run: npm run synthesis:validate
       - run: npm run licenses:check
       - run: npm run build
       - run: node --test tests/*.test.mjs
@@ -115,6 +116,9 @@ jobs:
           test -s dist-pages/THIRD_PARTY_NOTICES.txt
           test -d dist-pages/assets
           test -s dist-pages/structures/pubchem/cid-4946-3d.sdf
+          test -s dist-pages/catalog/synthesis/manifest.json
+          test -s dist-pages/catalog/synthesis/reports/coverage.json
+          test -s dist-pages/catalog/synthesis/reports/licensing.json
           test -z "$(find dist-pages -type f \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.p8' -o -name '*.key' -o -name '*.p12' -o -name '*.jks' -o -name '*.keystore' \) -print -quit)"
           test -z "$(find dist-pages -type d -name server -print -quit)"
           if grep -RIlE \

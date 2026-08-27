@@ -18,6 +18,11 @@ import {
   type PubChem2dDescriptorId,
   type PubChem2dDescriptorUnit,
 } from "@/lib/structure/pubchem-2d-descriptors";
+import {
+  loadBasicRecordSynthesisCoverage,
+  type BasicRecordSynthesisCoverage,
+  type BasicRecordSynthesisCoverageLoader,
+} from "./basic-record-synthesis-coverage";
 
 export type BasicRecordCoverageDimension =
   | "identity"
@@ -105,6 +110,7 @@ export interface BasicMolecularRecord {
   readonly structures: readonly [BasicRecordStructure, BasicRecordStructure];
   readonly properties: readonly BasicRecordProperty[];
   readonly coverage: readonly BasicRecordCoverageItem[];
+  readonly synthesisCoverage: BasicRecordSynthesisCoverage | null;
   readonly sources: readonly BasicRecordSource[];
   readonly provenance: {
     readonly snapshotId: string;
@@ -184,13 +190,29 @@ const isMatchingCatalogEntity = (
   entity.identity.molecularFormula === hit.formula &&
   entity.preferredName === hit.preferredName;
 
-const createBasicRecordCoverage = (): readonly BasicRecordCoverageItem[] =>
+export function getBasicRecordSynthesisCoverageStatus(
+  synthesisCoverage: BasicRecordSynthesisCoverage | null,
+): BasicRecordCoverageStatus {
+  if (!synthesisCoverage) return "unavailable";
+  const hasVerifiedCompleteReportedRoute = synthesisCoverage.routes.some((route) =>
+    (route.routeType === "patent_reported" || route.routeType === "literature_reported") &&
+    route.routeCompleteness === "complete" &&
+    route.reviewState === "verified",
+  );
+  return hasVerifiedCompleteReportedRoute ? "available" : "partial";
+}
+
+const createBasicRecordCoverage = (
+  synthesisCoverage: BasicRecordSynthesisCoverage | null,
+): readonly BasicRecordCoverageItem[] =>
   COVERAGE_DIMENSIONS.map((dimension) => ({
     dimension,
     status:
       dimension === "identity" || dimension === "structure"
         ? "available"
-        : "unavailable",
+        : dimension === "synthesis"
+          ? getBasicRecordSynthesisCoverageStatus(synthesisCoverage)
+          : "unavailable",
   }));
 
 /**
@@ -265,6 +287,7 @@ export function createBasicMolecularRecord(
     readonly assetBasePath?: string;
     readonly residentEntities?: readonly CatalogNormalizedEntity[];
     readonly descriptors?: readonly PubChem2dDescriptor[];
+    readonly synthesisCoverage?: BasicRecordSynthesisCoverage | null;
   } = {},
 ): BasicMolecularRecord {
   if (!isMatchingCatalogEntity(hit, entity)) {
@@ -377,7 +400,8 @@ export function createBasicMolecularRecord(
       },
     ],
     properties,
-    coverage: createBasicRecordCoverage(),
+    coverage: createBasicRecordCoverage(options.synthesisCoverage ?? null),
+    synthesisCoverage: options.synthesisCoverage ?? null,
     sources: sources.filter((source) => isHttpUrl(source.href)),
     provenance: {
       snapshotId: entity.provenance.snapshotId,
@@ -389,7 +413,9 @@ export function createBasicMolecularRecord(
       options.residentEntities ?? [],
     ),
     limitations: [
-      "No curated pharmacology, ADME, metabolite, synthesis, nomenclature, or learning-depth claim is supplied by this basic record.",
+      options.synthesisCoverage
+        ? "Synthesis discovery coverage is present; candidate sources, pending routes, teaching reconstructions, and computational proposals are not verified synthesis claims."
+        : "No curated pharmacology, ADME, metabolite, synthesis, nomenclature, or learning-depth claim is supplied by this basic record.",
       "Computed structure-neighbor hints do not establish pharmacological, biological, or clinical similarity.",
     ],
   };
@@ -419,6 +445,7 @@ export async function resolveMolecularRecordRoute(
     readonly assetBasePath?: string;
     readonly residentEntities?: readonly CatalogNormalizedEntity[];
     readonly descriptorLoader?: BasicRecordDescriptorLoader;
+    readonly synthesisCoverageLoader?: BasicRecordSynthesisCoverageLoader;
   },
 ): Promise<MolecularRecordRouteResolution> {
   const normalizedSlug = stableSlug.trim();
@@ -464,19 +491,42 @@ export async function resolveMolecularRecordRoute(
     entity.structures.twoD.path,
     options.assetBasePath,
   );
-  let descriptors: readonly PubChem2dDescriptor[] = [];
-  try {
-    descriptors = await (options.descriptorLoader ?? loadPubChem2dDescriptors)(
-      twoDAssetPath,
-      {
-        expectedPubChemCid: entity.identity.pubChemCid,
-        sourceUrl: entity.structures.twoD.sourceUrl,
-      },
-    );
-  } catch {
+  const descriptorRequest = (options.descriptorLoader ?? loadPubChem2dDescriptors)(
+    twoDAssetPath,
+    {
+      expectedPubChemCid: entity.identity.pubChemCid,
+      sourceUrl: entity.structures.twoD.sourceUrl,
+    },
+  ).catch((): readonly PubChem2dDescriptor[] => {
     // Descriptor evidence is optional. A failed/mismatched/malformed SDF adds
     // no descriptor claim, while the already matched identity record remains.
-  }
+    return [];
+  });
+  const synthesisCoverageRequest = (
+    options.synthesisCoverageLoader
+      ? options.synthesisCoverageLoader(
+          {
+            catalogEntityId: entity.id,
+            catalogSnapshotId: entity.provenance.snapshotId,
+            pubChemCid: entity.identity.pubChemCid,
+            inchiKey: entity.identity.inchiKey,
+          },
+          options.assetBasePath,
+        )
+      : loadBasicRecordSynthesisCoverage(
+          {
+            catalogEntityId: entity.id,
+            catalogSnapshotId: entity.provenance.snapshotId,
+            pubChemCid: entity.identity.pubChemCid,
+            inchiKey: entity.identity.inchiKey,
+          },
+          { assetBasePath: options.assetBasePath },
+        )
+  ).catch(() => null);
+  const [descriptors, synthesisCoverage] = await Promise.all([
+    descriptorRequest,
+    synthesisCoverageRequest,
+  ]);
 
   try {
     return {
@@ -487,6 +537,7 @@ export async function resolveMolecularRecordRoute(
         assetBasePath: options.assetBasePath,
         residentEntities: options.residentEntities,
         descriptors,
+        synthesisCoverage,
       }),
     };
   } catch {

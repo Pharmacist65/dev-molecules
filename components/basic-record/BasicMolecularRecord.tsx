@@ -15,6 +15,7 @@ const copyByLocale = {
     identityScope: "Kaynak eşleşmeli kimlik ve yapı kaydı",
     depthTitle: "Temel kayıt",
     depthBody: "Bu kayıt için derin farmasötik içerik henüz eklenmedi.",
+    depthBodyWithSynthesis: "Bu temel kayıtta sentez kanıtı araştırma kapsamı bulunur; diğer derin farmasötik katmanlar henüz eklenmedi.",
     sourceBoundary: "Kimlik, yapı ve temel özellikler kaynak kayıtlarıyla desteklenir; bağımsız bilimsel doğrulama değildir.",
     structures: "2B ve 3B yapı",
     structuresDescription: "Kaynak 2B kaydı ile PubChem tarafından hesaplanan 3B konformer ayrı kökenleriyle gösterilir.",
@@ -79,6 +80,121 @@ const copyByLocale = {
     },
     snapshot: "Katalog anlık görüntüsü",
     capturedAt: "Yakalama zamanı",
+    synthesisCoverageEyebrow: "SENTEZ KAPSAM KAYDI",
+    synthesisCoverageTitle: "Sentez kanıtı araştırması",
+    synthesisCoverageDescription: "Bu alan otomatik kaynak keşfinin kapsamını ve bilimsel statüsünü gösterir. Aday kaynak, eğitsel rekonstrüksiyon veya hesaplamalı öneri doğrulanmış bir sentez rotası değildir.",
+    reportedResolved: "Raporlanmış sentez kaynağı çözümlendi",
+    reportedNotResolved: "Raporlanmış sentez: Çözümlenmedi",
+    reportedPending: "Doğrudan kaynak mevcut; rota bilimsel inceleme bekliyor ve doğrulanmış olarak sunulmuyor.",
+    assessment: "Değerlendirme",
+    sourceEvidence: "Kaynak kanıtı",
+    applicability: "Uygulanabilirlik",
+    review: "İnceleme",
+    license: "Lisans / yeniden kullanım",
+    searchDate: "Son araştırma",
+    identityScopeDetail: "Araştırılan kimlik kapsamı",
+    chemicalForm: "Kimyasal form",
+    stereochemistry: "Stereokimya",
+    specified: "Belirtilmiş",
+    notSpecified: "Belirtilmemiş",
+    queriedAliases: "Sorgulanan adlar",
+    pipeline: "Pipeline sürümü",
+    searchScope: "Kaynak araştırma kapsamı",
+    searchScopeBoundary: "Sonuç yalnız aşağıda kaydedilen sağlayıcılar, sorgular ve tarihle sınırlıdır; tüm internetin tüketildiği anlamına gelmez.",
+    query: "sorgu",
+    queries: "sorgu",
+    candidate: "aday",
+    candidates: "aday",
+    routes: "Rota referansları",
+    noRouteReference: "Bu kimlik için yayımlanabilir rota referansı veya karşılaştırması yok.",
+    routeId: "Rota kimliği",
+    routeType: "Rota türü",
+    completeness: "Tamlık",
+    routeBoundaryReported: "Kaynak doğrudan çözümlenmiş olsa bile bu rota, inceleme statüsü doğrulanmış olana kadar doğrulanmış sayılmaz.",
+    routeBoundaryTeaching: "Kaynaklandırılmış bölümlerden kurulan eğitsel rekonstrüksiyondur; tek ve eksiksiz raporlanmış rota değildir.",
+    routeBoundaryComputational: "Hesaplamalı olarak önerilmiştir; raporlanmış veya doğrulanmış rota değildir.",
+    routeComparisonTitle: "Çoklu rota karşılaştırması",
+    routeComparisonDescription: "Yalnız exact coverage kaydında referans verilen ve yayımlanabilir özet kapısını geçen rotalar karşılaştırılır.",
+    routeComparisonWithheld: "Rota özetleri bilimsel inceleme ve lisans / yeniden kullanım kapıları nedeniyle karşılaştırmaya kapalıdır. Kapalı hücrelerden bilimsel sonuç çıkarılmaz.",
+    routeComparisonUnavailable: "Rota karşılaştırma indeksi kullanılamıyor. Coverage statüsü korunur; eksik karşılaştırma alanları rota kanıtı sayılmaz.",
+    routeComparisonPartial: "Yalnız yayımlanabilir özet kapısını geçen rotaların karşılaştırma alanları açıktır; diğer hücreler kapalı kalır.",
+    comparisonUnavailableCell: "Yayıma kapalı",
+    numberOfSteps: "Basamak sayısı",
+    startingMaterials: "Başlangıç maddeleri",
+    stereochemicalStrategy: "Stereokimyasal strateji",
+    keyTransformations: "Ana dönüşümler",
+    sourceAndYear: "Kaynak sınıfı / yıl",
+    publicationState: "Yayın durumu",
+    candidateBoundary: "Aday kaynaklar yalnız keşif ipucudur; kesin kaynak ve konum çözümlenmeden bir sentez rotasını desteklemez.",
+    noSourceBoundary: "Kaydedilen araştırma kapsamında doğrudan veya aday kaynak bulunmadı. Bu sonuç yenilik, patentlenebilirlik ya da sentezlenebilirlik iddiası değildir.",
+    assessmentStates: {
+      not_assessed: "Değerlendirilmedi",
+      searching: "Araştırma sürüyor",
+      assessed: "Araştırıldı",
+    },
+    sourceEvidenceStates: {
+      none_found: "Kayıtlı kapsamda kaynak bulunamadı",
+      candidate_sources: "Yalnız aday kaynaklar",
+      direct_source_resolved: "Doğrudan kaynak çözümlendi",
+    },
+    applicabilityStates: {
+      applicable: "Uygulanabilir",
+      not_applicable: "Uygulanamaz",
+      unclear: "Belirsiz",
+    },
+    reviewStates: {
+      pending: "İnceleme bekliyor",
+      reviewed: "İncelendi",
+      verified: "Doğrulandı",
+      withdrawn: "Geri çekildi",
+    },
+    licenseStates: {
+      permitted: "Kullanıma izinli",
+      attribution_required: "Atıf gerekli",
+      link_only: "Yalnız bağlantı",
+      restricted: "Kısıtlı",
+      mixed: "Karma",
+      unknown: "Belirsiz",
+    },
+    routeTypes: {
+      patent_reported: "Patentte raporlanmış",
+      literature_reported: "Literatürde raporlanmış",
+      teaching_reconstruction: "Eğitsel rekonstrüksiyon",
+      computational_proposed: "Hesaplamalı öneri",
+    },
+    routeCompleteness: {
+      complete: "Tam",
+      partial: "Kısmi",
+      upstream_gap: "Başlangıç öncesi boşluk",
+      convergent_partial: "Konvergent kısmi",
+    },
+    providerStatuses: {
+      completed: "Tamamlandı",
+      completed_with_errors: "Hatalarla tamamlandı",
+      rate_limited: "Hız sınırına takıldı",
+      unavailable: "Kullanılamadı",
+    },
+    formKinds: {
+      free_parent: "Serbest ana yapı",
+      salt: "Tuz",
+      hydrate: "Hidrat",
+      solvate: "Solvat",
+      other: "Diğer",
+      unresolved: "Çözümlenmedi",
+    },
+    publicationStates: {
+      reported_route: "Raporlanmış rota özeti",
+      teaching_reconstruction: "Eğitsel rekonstrüksiyon özeti",
+      computationally_proposed_route: "Hesaplamalı öneri özeti",
+      withheld: "Yayıma kapalı",
+      unavailable: "Kullanılamıyor",
+    },
+    routeSourceClasses: {
+      patent_reported: "Patent",
+      literature_reported: "Literatür",
+      teaching_reconstruction: "Birleşik kaynaklar",
+      computational_proposed: "Hesaplamalı öneri",
+    },
   },
   en: {
     back: "Back to Drug Atlas",
@@ -86,6 +202,7 @@ const copyByLocale = {
     identityScope: "Source-matched identity and structure record",
     depthTitle: "Basic record",
     depthBody: "Deep pharmaceutical content has not yet been added for this record.",
+    depthBodyWithSynthesis: "Synthesis evidence-discovery coverage is present in this basic record; other deep pharmaceutical layers have not yet been added.",
     sourceBoundary: "Identity, structure, and basic properties are supported by source records; this is not independent scientific verification.",
     structures: "2D and 3D structures",
     structuresDescription: "The source 2D record and PubChem-computed 3D conformer are presented with separate origins.",
@@ -150,6 +267,121 @@ const copyByLocale = {
     },
     snapshot: "Catalog snapshot",
     capturedAt: "Captured",
+    synthesisCoverageEyebrow: "SYNTHESIS COVERAGE RECORD",
+    synthesisCoverageTitle: "Synthesis evidence discovery",
+    synthesisCoverageDescription: "This section reports the scope and scientific status of automated source discovery. A candidate source, teaching reconstruction, or computational proposal is not a verified synthesis route.",
+    reportedResolved: "Reported synthesis source resolved",
+    reportedNotResolved: "Reported synthesis: Not resolved",
+    reportedPending: "A direct source is present; the route remains under scientific review and is not presented as verified.",
+    assessment: "Assessment",
+    sourceEvidence: "Source evidence",
+    applicability: "Applicability",
+    review: "Review",
+    license: "License / reuse",
+    searchDate: "Last searched",
+    identityScopeDetail: "Queried identity scope",
+    chemicalForm: "Chemical form",
+    stereochemistry: "Stereochemistry",
+    specified: "Specified",
+    notSpecified: "Not specified",
+    queriedAliases: "Names queried",
+    pipeline: "Pipeline version",
+    searchScope: "Source-search scope",
+    searchScopeBoundary: "The result is bounded by the recorded providers, queries, and date below; it is not an exhaustive search of the internet.",
+    query: "query",
+    queries: "queries",
+    candidate: "candidate",
+    candidates: "candidates",
+    routes: "Route references",
+    noRouteReference: "No publishable route reference or comparison is available for this identity.",
+    routeId: "Route ID",
+    routeType: "Route type",
+    completeness: "Completeness",
+    routeBoundaryReported: "Even with a directly resolved source, this route is not verified until its review state explicitly says verified.",
+    routeBoundaryTeaching: "This is a teaching reconstruction assembled from sourced segments; it is not reported as one complete route.",
+    routeBoundaryComputational: "This is computationally proposed; it is not a reported or verified route.",
+    routeComparisonTitle: "Multi-route comparison",
+    routeComparisonDescription: "Only routes referenced by the exact coverage record and admitted through the publishable-summary gate are compared.",
+    routeComparisonWithheld: "Route summaries are closed by scientific-review and license / reuse gates. No scientific conclusion should be drawn from closed cells.",
+    routeComparisonUnavailable: "The route-comparison index is unavailable. Coverage status remains intact; missing comparison fields are not route evidence.",
+    routeComparisonPartial: "Comparison fields are open only for routes that pass the publishable-summary gate; all other cells remain closed.",
+    comparisonUnavailableCell: "Not available",
+    numberOfSteps: "Number of steps",
+    startingMaterials: "Starting materials",
+    stereochemicalStrategy: "Stereochemical strategy",
+    keyTransformations: "Key transformations",
+    sourceAndYear: "Source class / year",
+    publicationState: "Publication state",
+    candidateBoundary: "Candidate sources are discovery leads only; they do not support a synthesis route until an exact source and locator are resolved.",
+    noSourceBoundary: "No direct or candidate source was found within the recorded search scope. This is not a novelty, patentability, or synthesizability claim.",
+    assessmentStates: {
+      not_assessed: "Not assessed",
+      searching: "Search in progress",
+      assessed: "Assessed",
+    },
+    sourceEvidenceStates: {
+      none_found: "No source found in recorded scope",
+      candidate_sources: "Candidate sources only",
+      direct_source_resolved: "Direct source resolved",
+    },
+    applicabilityStates: {
+      applicable: "Applicable",
+      not_applicable: "Not applicable",
+      unclear: "Unclear",
+    },
+    reviewStates: {
+      pending: "Pending review",
+      reviewed: "Reviewed",
+      verified: "Verified",
+      withdrawn: "Withdrawn",
+    },
+    licenseStates: {
+      permitted: "Permitted",
+      attribution_required: "Attribution required",
+      link_only: "Link only",
+      restricted: "Restricted",
+      mixed: "Mixed",
+      unknown: "Unknown",
+    },
+    routeTypes: {
+      patent_reported: "Patent reported",
+      literature_reported: "Literature reported",
+      teaching_reconstruction: "Teaching reconstruction",
+      computational_proposed: "Computational proposal",
+    },
+    routeCompleteness: {
+      complete: "Complete",
+      partial: "Partial",
+      upstream_gap: "Upstream gap",
+      convergent_partial: "Convergent partial",
+    },
+    providerStatuses: {
+      completed: "Completed",
+      completed_with_errors: "Completed with errors",
+      rate_limited: "Rate limited",
+      unavailable: "Unavailable",
+    },
+    formKinds: {
+      free_parent: "Free parent",
+      salt: "Salt",
+      hydrate: "Hydrate",
+      solvate: "Solvate",
+      other: "Other",
+      unresolved: "Unresolved",
+    },
+    publicationStates: {
+      reported_route: "Reported-route summary",
+      teaching_reconstruction: "Teaching-reconstruction summary",
+      computationally_proposed_route: "Computational-proposal summary",
+      withheld: "Withheld",
+      unavailable: "Unavailable",
+    },
+    routeSourceClasses: {
+      patent_reported: "Patent",
+      literature_reported: "Literature",
+      teaching_reconstruction: "Combined sources",
+      computational_proposed: "Computational proposal",
+    },
   },
 } as const;
 
@@ -172,6 +404,28 @@ const formatDate = (value: string, locale: Locale) => {
   }).format(date);
 };
 
+const synthesisProviderLabel = (adapterId: string, locale: Locale): string => {
+  const labels = {
+    "pubchem-manufacturing": {
+      tr: "PubChem üretim yöntemi kayıtları",
+      en: "PubChem manufacturing-method records",
+    },
+    "europe-pmc": {
+      tr: "Europe PMC dergi kayıtları",
+      en: "Europe PMC journal records",
+    },
+    "europe-pmc-patents": {
+      tr: "Europe PMC patent kayıtları",
+      en: "Europe PMC patent records",
+    },
+    "open-reaction-database": {
+      tr: "Open Reaction Database",
+      en: "Open Reaction Database",
+    },
+  } as const;
+  return labels[adapterId as keyof typeof labels]?.[locale] ?? adapterId;
+};
+
 export function BasicMolecularRecord({
   record,
   locale,
@@ -180,6 +434,14 @@ export function BasicMolecularRecord({
   const copy = copyByLocale[locale];
   const twoD = record.structures.find((structure) => structure.dimension === "2d")!;
   const threeD = record.structures.find((structure) => structure.dimension === "3d")!;
+  const synthesisCoverage = record.synthesisCoverage;
+  const reportedSourceResolved = Boolean(
+    synthesisCoverage &&
+    synthesisCoverage.sourceEvidenceState === "direct_source_resolved" &&
+    synthesisCoverage.routes.some((route) =>
+      route.routeType === "patent_reported" || route.routeType === "literature_reported",
+    ),
+  );
 
   return (
     <article
@@ -209,7 +471,7 @@ export function BasicMolecularRecord({
         <aside className={styles.summaryCard}>
           <span className={styles.sectionEyebrow}>{copy.identityScope}</span>
           <strong>{copy.depthTitle}</strong>
-          <p>{copy.depthBody}</p>
+          <p>{synthesisCoverage ? copy.depthBodyWithSynthesis : copy.depthBody}</p>
           <p
             className={styles.reviewBoundary}
             data-basic-record-review-status="source-supported"
@@ -354,8 +616,215 @@ export function BasicMolecularRecord({
               </li>
             ))}
           </ul>
-          <p className={styles.depthNotice}>{copy.depthBody}</p>
+          <p className={styles.depthNotice}>
+            {synthesisCoverage ? copy.depthBodyWithSynthesis : copy.depthBody}
+          </p>
         </section>
+
+        {synthesisCoverage ? (
+          <section
+            aria-labelledby="basic-record-synthesis-coverage"
+            data-basic-record-synthesis-coverage="true"
+            data-synthesis-assessment-state={synthesisCoverage.assessmentState}
+            data-synthesis-source-evidence-state={synthesisCoverage.sourceEvidenceState}
+            data-synthesis-review-state={synthesisCoverage.reviewState}
+          >
+            <header className={styles.sectionHeader}>
+              <div>
+                <span className={styles.sectionEyebrow}>{copy.synthesisCoverageEyebrow}</span>
+                <h2 id="basic-record-synthesis-coverage">{copy.synthesisCoverageTitle}</h2>
+              </div>
+              <p>{copy.synthesisCoverageDescription}</p>
+            </header>
+
+            <div
+              className={styles.reportedSynthesisState}
+              data-reported-synthesis-state={reportedSourceResolved ? "source-resolved" : "not-resolved"}
+            >
+              <span aria-hidden="true">{reportedSourceResolved ? "●" : "○"}</span>
+              <div>
+                <strong>{reportedSourceResolved ? copy.reportedResolved : copy.reportedNotResolved}</strong>
+                {reportedSourceResolved && synthesisCoverage.reviewState !== "verified" ? (
+                  <small>{copy.reportedPending}</small>
+                ) : null}
+                {synthesisCoverage.sourceEvidenceState === "candidate_sources" ? (
+                  <small>{copy.candidateBoundary}</small>
+                ) : null}
+                {synthesisCoverage.sourceEvidenceState === "none_found" ? (
+                  <small>{copy.noSourceBoundary}</small>
+                ) : null}
+              </div>
+            </div>
+
+            <dl className={styles.synthesisStateGrid}>
+              <div>
+                <dt>{copy.assessment}</dt>
+                <dd>{copy.assessmentStates[synthesisCoverage.assessmentState]}</dd>
+              </div>
+              <div>
+                <dt>{copy.sourceEvidence}</dt>
+                <dd>{copy.sourceEvidenceStates[synthesisCoverage.sourceEvidenceState]}</dd>
+              </div>
+              <div>
+                <dt>{copy.applicability}</dt>
+                <dd>{copy.applicabilityStates[synthesisCoverage.applicability]}</dd>
+              </div>
+              <div>
+                <dt>{copy.review}</dt>
+                <dd>{copy.reviewStates[synthesisCoverage.reviewState]}</dd>
+              </div>
+              <div>
+                <dt>{copy.license}</dt>
+                <dd>{copy.licenseStates[synthesisCoverage.licenseState]}</dd>
+              </div>
+              <div>
+                <dt>{copy.searchDate}</dt>
+                <dd>{formatDate(synthesisCoverage.searchedAt, locale)}</dd>
+              </div>
+            </dl>
+
+            <div className={styles.synthesisColumns}>
+              <section className={styles.searchScope} aria-labelledby="basic-record-synthesis-search-scope">
+                <header>
+                  <h3 id="basic-record-synthesis-search-scope">{copy.searchScope}</h3>
+                  <p>{copy.searchScopeBoundary}</p>
+                </header>
+                <ul>
+                  {synthesisCoverage.providers.map((provider) => (
+                    <li
+                      key={`${provider.adapterId}:${provider.provider}`}
+                      data-synthesis-provider={provider.adapterId}
+                      data-provider-status={provider.status}
+                    >
+                      <div>
+                        <strong>{synthesisProviderLabel(provider.adapterId, locale)}</strong>
+                        <small>{copy.providerStatuses[provider.status]}</small>
+                      </div>
+                      <span>
+                        {provider.queryCount} {provider.queryCount === 1 ? copy.query : copy.queries} · {provider.candidateCount} {provider.candidateCount === 1 ? copy.candidate : copy.candidates}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <details className={styles.identityScope}>
+                  <summary>{copy.identityScopeDetail}</summary>
+                  <dl>
+                    <div><dt>{copy.chemicalForm}</dt><dd>{copy.formKinds[synthesisCoverage.chemicalFormKind]}</dd></div>
+                    <div><dt>{copy.stereochemistry}</dt><dd>{synthesisCoverage.stereochemistrySpecified ? copy.specified : copy.notSpecified}</dd></div>
+                    <div><dt>{copy.queriedAliases}</dt><dd>{synthesisCoverage.aliasesQueried.join(" · ")}</dd></div>
+                    <div><dt>{copy.pipeline}</dt><dd><code>{synthesisCoverage.pipelineVersion}</code></dd></div>
+                  </dl>
+                </details>
+              </section>
+
+              <section className={styles.routeReferences} aria-labelledby="basic-record-synthesis-routes">
+                <header>
+                  <h3 id="basic-record-synthesis-routes">{copy.routes}</h3>
+                  <span>{synthesisCoverage.routes.length}</span>
+                </header>
+                {synthesisCoverage.routes.length === 0 ? (
+                  <p className={styles.noRoutes}>{copy.noRouteReference}</p>
+                ) : (
+                  <ul>
+                    {synthesisCoverage.routes.map((route) => (
+                      <li
+                        key={route.routeId}
+                        data-synthesis-route-type={route.routeType}
+                        data-route-review-state={route.reviewState}
+                        data-route-license-state={route.licenseState}
+                      >
+                        <div className={styles.routeHeading}>
+                          <strong>{copy.routeTypes[route.routeType]}</strong>
+                          <span data-review-state={route.reviewState}>{copy.reviewStates[route.reviewState]}</span>
+                        </div>
+                        <dl>
+                          <div><dt>{copy.routeId}</dt><dd><code>{route.routeId}</code></dd></div>
+                          <div><dt>{copy.completeness}</dt><dd>{copy.routeCompleteness[route.routeCompleteness]}</dd></div>
+                          <div><dt>{copy.license}</dt><dd>{copy.licenseStates[route.licenseState]}</dd></div>
+                        </dl>
+                        {route.routeType === "teaching_reconstruction" ? (
+                          <p>{copy.routeBoundaryTeaching}</p>
+                        ) : route.routeType === "computational_proposed" ? (
+                          <p>{copy.routeBoundaryComputational}</p>
+                        ) : route.reviewState !== "verified" ? (
+                          <p>{copy.routeBoundaryReported}</p>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </div>
+
+            {synthesisCoverage.routes.length > 0 ? (
+              <section
+                className={styles.routeComparison}
+                aria-labelledby="basic-record-route-comparison"
+                data-synthesis-route-comparison={synthesisCoverage.routeComparison.state}
+              >
+                <header>
+                  <div>
+                    <span className={styles.sectionEyebrow}>{copy.routes}</span>
+                    <h3 id="basic-record-route-comparison">{copy.routeComparisonTitle}</h3>
+                  </div>
+                  <p>{copy.routeComparisonDescription}</p>
+                </header>
+                {synthesisCoverage.routeComparison.state === "withheld" ? (
+                  <p className={styles.comparisonGate}>{copy.routeComparisonWithheld}</p>
+                ) : synthesisCoverage.routeComparison.state === "unavailable" ? (
+                  <p className={styles.comparisonGate}>{copy.routeComparisonUnavailable}</p>
+                ) : synthesisCoverage.routeComparison.state === "partially_available" ? (
+                  <p className={styles.comparisonGate}>{copy.routeComparisonPartial}</p>
+                ) : null}
+                <div className={styles.comparisonScroller}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">{copy.routeId}</th>
+                        <th scope="col">{copy.numberOfSteps}</th>
+                        <th scope="col">{copy.startingMaterials}</th>
+                        <th scope="col">{copy.routeType}</th>
+                        <th scope="col">{copy.stereochemicalStrategy}</th>
+                        <th scope="col">{copy.keyTransformations}</th>
+                        <th scope="col">{copy.sourceAndYear}</th>
+                        <th scope="col">{copy.completeness}</th>
+                        <th scope="col">{copy.review}</th>
+                        <th scope="col">{copy.publicationState}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {synthesisCoverage.routeComparison.routes.map((route) => {
+                        const comparisonAvailable = route.comparisonAvailability === "available";
+                        return (
+                          <tr
+                            key={route.routeId}
+                            data-comparison-route-id={route.routeId}
+                            data-comparison-availability={route.comparisonAvailability}
+                          >
+                            <th scope="row"><code>{route.routeId}</code></th>
+                            <td>{comparisonAvailable ? route.numberOfSteps : <span>{copy.comparisonUnavailableCell}</span>}</td>
+                            <td>{comparisonAvailable ? route.startingMaterials.join(" · ") : <span>{copy.comparisonUnavailableCell}</span>}</td>
+                            <td>{copy.routeTypes[route.routeType]}</td>
+                            <td>{comparisonAvailable ? route.stereochemicalStrategy : <span>{copy.comparisonUnavailableCell}</span>}</td>
+                            <td>{comparisonAvailable ? route.keyTransformations.join(" · ") : <span>{copy.comparisonUnavailableCell}</span>}</td>
+                            <td>
+                              {comparisonAvailable
+                                ? `${copy.routeSourceClasses[route.routeType]} · ${route.sourceYear ?? copy.comparisonUnavailableCell}`
+                                : <span>{copy.comparisonUnavailableCell}</span>}
+                            </td>
+                            <td>{copy.routeCompleteness[route.routeCompleteness]}</td>
+                            <td>{copy.reviewStates[route.reviewState]}</td>
+                            <td>{copy.publicationStates[route.publicationState]}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            ) : null}
+          </section>
+        ) : null}
 
         {record.structuralNeighbors.length > 0 ? (
           <section aria-labelledby="basic-record-neighbors" data-basic-record-neighbors="resident-window">

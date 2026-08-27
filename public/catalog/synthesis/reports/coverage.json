@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "pipelineVersion": "synthesis-discovery-1.0.1",
+  "generatedAt": "2026-08-27T11:05:11.867Z",
+  "coverage": {
+    "requiredRecords": 1552,
+    "coverageRecords": 1552,
+    "exactCoverageComplete": true,
+    "assessed": 1552,
+    "searching": 0
+  },
+  "requestedOutcomes": {
+    "moleculesWithDirectReportedRoute": 3,
+    "moleculesWithCandidateSource": 1279,
+    "moleculesWithTeachingReconstruction": 1,
+    "moleculesWithNoSourceFoundInRecordedScope": 273,
+    "moleculesWithComputationalProposal": 0,
+    "reportedSynthesisNotResolved": 1549
+  },
+  "evidenceBoundaryMetrics": {
+    "exactOrdProductCandidateRecords": 763,
+    "exactOrdProductCandidatesAreNotReportedRoutes": true,
+    "resolvedDirectEvidenceRecords": 3,
+    "candidateEvidenceRecords": 1279,
+    "sourceEvidenceCounts": {
+      "candidate": 14897,
+      "resolved": 6
+    },
+    "sourceKindCounts": {
+      "aggregator": 667,
+      "journal": 4099,
+      "open_reaction_dataset": 3982,
+      "patent": 6155
+    }
+  },
+  "normalizedCandidateExtraction": {
+    "recordsWithExactOrdReactionFragment": 763,
+    "exactOrdReactionFragmentCount": 3982,
+    "decodedFragmentCount": 3982,
+    "upstreamGapFragmentCount": 0,
+    "unclassifiedReactionCount": 3982,
+    "atomMappedFragmentCount": 0,
+    "promotedToCanonicalRouteCount": 0,
+    "operationalParticipantDetailsPublished": false,
+    "boundary": "Normalized ORD reaction fragments remain private discovery candidates until direct-source resolution, applicability review, atom mapping and reuse gates pass."
+  },
+  "routes": {
+    "migratedRouteCount": 6,
+    "byType": {
+      "patent_reported": 5,
+      "teaching_reconstruction": 1
+    },
+    "byCompleteness": {
+      "complete": 2,
+      "convergent_partial": 1,
+      "upstream_gap": 3
+    },
+    "byReviewState": {
+      "pending": 6
+    },
+    "publicDetailAllowed": 0
+  },
+  "bestAvailableCoverage": {
+    "candidate_sources_only": 1276,
+    "none_found_in_scope": 273,
+    "reported_route_pending_or_better": 3
+  },
+  "providerAttempts": {
+    "byStatus": {
+      "europe-pmc-patents:completed": 1552,
+      "europe-pmc:completed": 1552,
+      "open-reaction-database:completed": 1552,
+      "pubchem-manufacturing:completed": 1552
+    },
+    "totalQueries": 9312
+  },
+  "cautions": [
+    "No-source-found is scoped only to the recorded successful adapters and query identities.",
+    "Candidate sources and exact ORD product matches are not complete reported routes.",
+    "Computational routes remain zero because no validated retrosynthesis engine was configured.",
+    "Parent, salt, hydrate, solvate and stereoisomer identity boundaries are never inferred from names alone."
+  ]
+}
