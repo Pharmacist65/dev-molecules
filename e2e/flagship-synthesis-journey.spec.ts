@@ -73,9 +73,11 @@ const copy = {
     unresolvedTransformation:
       "Segment sırası, reaksiyon sınıfı ve bağ değişimleri henüz çözümlenmedi.",
     target3dBoundary:
-      "Bu 3B görünüm exact hedef kimliğine aittir. Kaynak ara ürününe aitmiş gibi gösterilmez.",
+      "Bu hesaplanmış 3B görünüm exact hedef kimliğine aittir; deneysel, kristal veya biyolojik olarak etkin konformasyon değildir.",
+    target2dBoundary:
+      "Bu hedef için serialized kimlik ve provenance kapılarından geçen hesaplanmış 3B varlık kabul edilmedi. Yalnız exact kimlikli 2B kayıt gösterilir; bu, bir konformerin var olmadığı iddiası değildir.",
     intermediate3dMissing:
-      "Bu kaynak girdisi veya ara ürün için kimliği eşleşen bir 3B konformer yok; yalnız bağımsız 2B çizim gösterilir.",
+      "Bu materyal kimliği için kayıtlı provenance kapısından geçen kesin eşleşmeli hesaplanmış 3B varlık yoktur. Bu, bir konformerin var olmadığı iddiası değildir; bağımsız 2B çizim gösterilir.",
     mechanismNotResolved: "MEKANİZMA ÇÖZÜMLENMEDİ",
     openSource: "ORD kaydını aç",
     open3d: "Molekülü 3B odakta aç",
@@ -106,9 +108,11 @@ const copy = {
     unresolvedTransformation:
       "Segment order, reaction class, and bond changes remain unresolved.",
     target3dBoundary:
-      "This 3D view belongs to the exact target identity. It is never presented as a source intermediate.",
+      "This computed 3D view belongs to the exact target identity; it is not an experimental, crystal, or biologically active conformation.",
+    target2dBoundary:
+      "No computed 3D asset passed the serialized-identity and provenance gates for this target. Only the exact-identity 2D record is shown; this is not a claim that no conformer exists.",
     intermediate3dMissing:
-      "No identity-matched 3D conformer exists for this source input or intermediate; only an independent 2D redraw is shown.",
+      "No exact computed 3D asset passed the recorded provenance gate for this material identity. This is not a claim that no conformer exists; the independent 2D redraw is shown.",
     mechanismNotResolved: "MECHANISM NOT RESOLVED",
     openSource: "Open ORD record",
     open3d: "Open molecule in 3D focus",
@@ -296,8 +300,16 @@ async function exerciseExactTargetViewer(
   locale: Locale,
 ) {
   const labels = copy[locale];
-  await expect(panel).toContainText(labels.target3dBoundary);
-  const viewer = panel.locator('[data-molecule-viewer="true"]');
+  const target = panel.locator('[data-target-3d-state]').first();
+  await expect(target).toBeVisible();
+  const target3dState = await target.getAttribute("data-target-3d-state");
+  expect(["available", "2d_only"]).toContain(target3dState);
+  await expect(target).toContainText(
+    target3dState === "available"
+      ? labels.target3dBoundary
+      : labels.target2dBoundary,
+  );
+  const viewer = target.locator('[data-molecule-viewer="true"]');
   await expect(viewer).toHaveCount(1);
   await expect(viewer).toHaveAttribute("aria-label", new RegExp(scenario.name, "u"));
   await expect(viewer).toHaveAttribute("data-structure-status", "ready", {
@@ -314,7 +326,11 @@ async function exerciseExactTargetViewer(
     exact: true,
   });
   await expect(twoD).toBeEnabled();
-  await expect(threeD).toBeEnabled();
+  if (target3dState === "available") {
+    await expect(threeD).toBeEnabled();
+  } else {
+    await expect(threeD).toBeDisabled();
+  }
   await expect(twoD).toHaveAttribute("aria-pressed", "true");
 
   const canvas = viewer.locator('[data-molecule-viewer-canvas="true"]');
@@ -323,19 +339,21 @@ async function exerciseExactTargetViewer(
   await expect(viewer).toHaveAttribute("data-selected-atom", /.+/u);
   const selectedAtom2d = await viewer.getAttribute("data-selected-atom");
 
-  await threeD.focus();
-  await threeD.press("Enter");
-  await expect(threeD).toHaveAttribute("aria-pressed", "true");
-  await expect(viewer).toHaveAttribute("data-structure-status", "ready", {
-    timeout: 30_000,
-  });
-  if ((await viewer.getAttribute("data-cross-view-atom-mapping")) === "exact_ctab_atom_index") {
-    await expect(viewer).toHaveAttribute("data-selected-atom", selectedAtom2d ?? "");
-  }
+  if (target3dState === "available") {
+    await threeD.focus();
+    await threeD.press("Enter");
+    await expect(threeD).toHaveAttribute("aria-pressed", "true");
+    await expect(viewer).toHaveAttribute("data-structure-status", "ready", {
+      timeout: 30_000,
+    });
+    if ((await viewer.getAttribute("data-cross-view-atom-mapping")) === "exact_ctab_atom_index") {
+      await expect(viewer).toHaveAttribute("data-selected-atom", selectedAtom2d ?? "");
+    }
 
-  await twoD.focus();
-  await twoD.press("Space");
-  await expect(twoD).toHaveAttribute("aria-pressed", "true");
+    await twoD.focus();
+    await twoD.press("Space");
+    await expect(twoD).toHaveAttribute("aria-pressed", "true");
+  }
 }
 
 async function moveToNextStudioTab(current: Locator, next: Locator) {
@@ -799,12 +817,22 @@ for (const scenario of scenarios) {
       );
 
       await page.setViewportSize({ width: 1440, height: 900 });
-      await exerciseSpatialKeyboardHandoff(
-        page,
-        studioCount > 0 ? studio : atlas,
-        scenario,
-        locale,
-      );
+      const journeySurface = studioCount > 0 ? studio : atlas;
+      const target3dAdmitted = studioCount > 0 &&
+        (await studio.locator('[data-target-3d-state="available"]').count()) > 0;
+      if (target3dAdmitted || studioCount === 0) {
+        await exerciseSpatialKeyboardHandoff(
+          page,
+          journeySurface,
+          scenario,
+          locale,
+        );
+      } else {
+        await expect(journeySurface.getByRole("button", {
+          name: copy[locale].open3d,
+          exact: true,
+        })).toHaveCount(0);
+      }
     });
   }
 }

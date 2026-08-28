@@ -254,7 +254,11 @@ async function auditExactTargetViewer(
   await expect(explorerTab).toHaveAttribute("aria-selected", "true");
 
   const explorer = studio.locator("#synthesis-studio-panel-explorer");
-  const viewer = explorer.locator('[data-molecule-viewer="true"]');
+  const target = explorer.locator('[data-target-3d-state]').first();
+  await expect(target).toBeVisible();
+  const target3dState = await target.getAttribute("data-target-3d-state");
+  expect(["available", "2d_only"]).toContain(target3dState);
+  const viewer = target.locator('[data-molecule-viewer="true"]');
   await expect(viewer).toHaveCount(1);
   await expect(viewer.getByText(routeCase.preferredName, { exact: true })).toBeVisible();
 
@@ -262,21 +266,30 @@ async function auditExactTargetViewer(
   const twoD = dimensions.getByRole("button", { name: "2D", exact: true });
   const threeD = dimensions.getByRole("button", { name: "3D", exact: true });
   await expect(twoD).toBeEnabled();
-  await expect(threeD).toBeEnabled();
   await expect(twoD).toHaveAttribute("aria-pressed", "true");
   await expect(viewer).toHaveAttribute("data-structure-status", "ready", { timeout: 30_000 });
   await expect(viewer.getByRole("link", { name: "PubChem 2D SDF", exact: true }))
     .toHaveAttribute("href", exactPubChemCid);
 
-  await threeD.click();
-  await expect(threeD).toHaveAttribute("aria-pressed", "true");
-  await expect(viewer).toHaveAttribute("data-structure-status", "ready", { timeout: 30_000 });
-  await expect(viewer.getByRole("link", { name: "PubChem 3D SDF", exact: true }))
-    .toHaveAttribute("href", exactPubChemCid);
+  if (target3dState === "available") {
+    await expect(threeD).toBeEnabled();
+    await threeD.click();
+    await expect(threeD).toHaveAttribute("aria-pressed", "true");
+    await expect(viewer).toHaveAttribute("data-structure-status", "ready", { timeout: 30_000 });
+    await expect(viewer.getByRole("link", { name: "RDKit ETKDGv3", exact: true }))
+      .toHaveAttribute("href", /^https:\/\/www\.rdkit\.org\//u);
 
-  await twoD.click();
-  await expect(twoD).toHaveAttribute("aria-pressed", "true");
-  await expect(viewer).toHaveAttribute("data-structure-status", "ready", { timeout: 30_000 });
+    await twoD.click();
+    await expect(twoD).toHaveAttribute("aria-pressed", "true");
+    await expect(viewer).toHaveAttribute("data-structure-status", "ready", { timeout: 30_000 });
+  } else {
+    await expect(threeD).toBeDisabled();
+    await expect(target).toContainText(
+      "No computed 3D asset passed the serialized-identity and provenance gates for this target.",
+    );
+    await expect(viewer.getByRole("link", { name: /PubChem 3D SDF|RDKit ETKDGv3/u }))
+      .toHaveCount(0);
+  }
   await expectNoHorizontalOverflow(page, `QA ${routeCase.selectionOrder} exact-target viewer`);
 }
 

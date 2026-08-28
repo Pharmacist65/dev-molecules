@@ -12,6 +12,7 @@ import {
   type MolecularRecordRouteResolution,
 } from "@/lib/application/basic-molecular-record";
 import { getDrugHash } from "@/lib/application/platform-route";
+import type { SynthesisCatalogNavigator } from "@/lib/application/synthesis-catalog";
 import type { CatalogNormalizedEntity } from "@/lib/catalog";
 import { curatedDossierMolecules } from "@/lib/data/curated-dossier-catalog";
 import type { MoleculeRecord } from "@/lib/domain/molecule";
@@ -44,7 +45,7 @@ const routeCopy = {
 
 export interface MolecularRecordRouteProps {
   readonly stableSlug: string;
-  readonly navigator: BasicMolecularRecordNavigator;
+  readonly navigator: BasicMolecularRecordNavigator & SynthesisCatalogNavigator;
   readonly residentEntities: readonly CatalogNormalizedEntity[];
   readonly assetBasePath: string;
   readonly locale: Locale;
@@ -151,6 +152,8 @@ export function MolecularRecordRoute({
       <BasicMolecularRecord
         record={state.resolution.record}
         locale={locale}
+        synthesisNavigator={navigator}
+        assetBasePath={assetBasePath}
         onBackToAtlas={onBackToAtlas}
       />
     </div>

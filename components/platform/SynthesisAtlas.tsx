@@ -12,8 +12,11 @@ import {
   type PublishedSynthesisStepEvidenceMode,
 } from "@/lib/application/published-synthesis-route";
 import {
-  loadPublicAlphaSynthesisDrafts,
-} from "@/lib/application/public-alpha-synthesis-draft";
+  SYNTHESIS_LEARNING_STRUCTURE_ASSETS_LOADING,
+  SYNTHESIS_LEARNING_STRUCTURE_ASSETS_NOT_APPLICABLE,
+  loadSynthesisLearningStudioRouteDetail,
+  type SynthesisLearningStudioRouteDetail,
+} from "@/lib/application/synthesis-learning-studio-controller";
 import type {
   PublicAlphaSynthesisDraftGraph,
   PublicAlphaSynthesisDraftStep,
@@ -569,15 +572,23 @@ interface StoredRouteDetailState {
 }
 
 type DraftDetailState =
-  | { readonly kind: "coverage_only"; readonly graphs: readonly [] }
-  | { readonly kind: "loading"; readonly graphs: readonly [] }
-  | { readonly kind: "available"; readonly graphs: readonly PublicAlphaSynthesisDraftGraph[] }
-  | { readonly kind: "unavailable"; readonly graphs: readonly [] };
+  | SynthesisLearningStudioRouteDetail
+  | {
+      readonly kind: "loading";
+      readonly graphs: readonly [];
+      readonly structureAssetsByInchiKey: ReadonlyMap<string, never>;
+      readonly routeDetailLoadState: "ready";
+      readonly structureAssetAvailability:
+        typeof SYNTHESIS_LEARNING_STRUCTURE_ASSETS_LOADING;
+    };
 
 interface StoredDraftDetailState {
   readonly requestKey: string;
-  readonly value: Exclude<DraftDetailState, { readonly kind: "loading" }>;
+  readonly value: SynthesisLearningStudioRouteDetail;
 }
+
+const EMPTY_STRUCTURE_ASSET_REGISTRY: ReadonlyMap<string, never> =
+  new Map<string, never>();
 
 /**
  * The public Atlas deliberately renders only the generated coverage
@@ -616,10 +627,24 @@ export function SynthesisAtlas({
       ].join("|")
     : null;
   const draftDetail: DraftDetailState = draftRequestKey === null
-    ? { kind: "coverage_only", graphs: [] }
+    ? {
+        kind: "coverage_only",
+        graphs: [],
+        structureAssetsByInchiKey: EMPTY_STRUCTURE_ASSET_REGISTRY,
+        routeDetailLoadState: "ready",
+        structureAssetAvailability:
+          SYNTHESIS_LEARNING_STRUCTURE_ASSETS_NOT_APPLICABLE,
+      }
     : storedDraftDetail?.requestKey === draftRequestKey
       ? storedDraftDetail.value
-      : { kind: "loading", graphs: [] };
+      : {
+          kind: "loading",
+          graphs: [],
+          structureAssetsByInchiKey: EMPTY_STRUCTURE_ASSET_REGISTRY,
+          routeDetailLoadState: "ready",
+          structureAssetAvailability:
+            SYNTHESIS_LEARNING_STRUCTURE_ASSETS_LOADING,
+        };
 
   useEffect(() => {
     let active = true;
@@ -655,32 +680,28 @@ export function SynthesisAtlas({
   useEffect(() => {
     let active = true;
     if (!catalogSelection || !coverage || draftRequestKey === null) return undefined;
-    void loadPublicAlphaSynthesisDrafts(
-      {
-        catalogSnapshotId: coverage.catalogSnapshotId,
-        catalogEntityId: catalogSelection.catalogEntityId,
-        coverageId: coverage.coverageId,
-        preferredName: catalogSelection.preferredName,
-        pubChemCid: catalogSelection.pubChemCid,
-        inchiKey: catalogSelection.inchiKey,
-        chemicalForm: coverage.chemicalFormKind,
-        stereochemistrySpecified: coverage.stereochemistrySpecified,
-      },
-      coverage.publicAlphaDrafts,
-      { assetBasePath: import.meta.env.BASE_URL },
-    ).then((graphs) => {
+    void loadSynthesisLearningStudioRouteDetail(catalogSelection, {
+      assetBasePath: import.meta.env.BASE_URL,
+    }).then((detail) => {
       if (!active) return;
       setStoredDraftDetail({
         requestKey: draftRequestKey,
-        value: graphs.length > 0
-          ? { kind: "available", graphs }
-          : { kind: "coverage_only", graphs: [] },
+        value: detail,
       });
     }).catch(() => {
       if (active) {
         setStoredDraftDetail({
           requestKey: draftRequestKey,
-          value: { kind: "unavailable", graphs: [] },
+          value: {
+            kind: "unavailable",
+            graphs: [],
+            structureAssetsByInchiKey: EMPTY_STRUCTURE_ASSET_REGISTRY,
+            routeDetailLoadState: "unavailable",
+            structureAssetAvailability: {
+              ...SYNTHESIS_LEARNING_STRUCTURE_ASSETS_NOT_APPLICABLE,
+              reason: "route_detail_unavailable",
+            },
+          },
         });
       }
     });
@@ -707,6 +728,9 @@ export function SynthesisAtlas({
       }
       data-catalog-entity-id={catalogSelection.catalogEntityId}
       data-route-detail-gate="generated-artifact-required"
+      data-structure-asset-availability={
+        draftDetail.structureAssetAvailability.state
+      }
       data-presentation-mode={presentationMode}
     >
       {routeDetail.kind === "available" ? (
@@ -765,6 +789,13 @@ export function SynthesisAtlas({
               <SynthesisLearningStudio
                 selection={catalogSelection}
                 graphs={draftDetail.graphs}
+                structureAssetsByInchiKey={
+                  draftDetail.structureAssetsByInchiKey
+                }
+                structureAssetAvailability={
+                  draftDetail.structureAssetAvailability
+                }
+                routeDetailLoadState={draftDetail.routeDetailLoadState}
                 presentationMode={presentationMode}
                 onOpenMoleculeFocus={onOpenMoleculeFocus}
               />
@@ -774,6 +805,13 @@ export function SynthesisAtlas({
               <SynthesisLearningStudio
                 selection={catalogSelection}
                 graphs={[]}
+                structureAssetsByInchiKey={
+                  draftDetail.structureAssetsByInchiKey
+                }
+                structureAssetAvailability={
+                  draftDetail.structureAssetAvailability
+                }
+                routeDetailLoadState={draftDetail.routeDetailLoadState}
                 presentationMode={presentationMode}
                 onOpenMoleculeFocus={onOpenMoleculeFocus}
               />

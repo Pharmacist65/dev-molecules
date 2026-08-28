@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "pipelineVersion": "synthesis-learning-coverage-kpi-1.0.0",
+  "catalogSnapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "scope": {
+    "canonicalCoverageRecordCount": 1552,
+    "publicDraftGraphCount": 639,
+    "newDiscoveryPerformed": false,
+    "networkFetchPerformed": false,
+    "routePromotionPerformed": false
+  },
+  "continuousEducationalRouteCoverage": {
+    "unit": "exact_catalog_molecule",
+    "mutuallyExclusive": true,
+    "exhaustive": true,
+    "total": 1552,
+    "byState": {
+      "complete_learning_route": 0,
+      "substantive_partial_route": 0,
+      "fragmentary_route": 639,
+      "candidate_only": 529,
+      "no_supporting_source_resolved": 384
+    },
+    "projectionSha256": "d3687e24e15409e5d5c1148e5ca6e708257fbe4e4cd3c64b9e5e8036d7e3ef6f"
+  },
+  "gapCoverage": {
+    "coverageRecordsWithOpenGap": 1552,
+    "resolvedGapRecordCount": 0,
+    "targetedGapRecordCount": 3174,
+    "targetedGapCoverageRecordCount": 1168,
+    "explicitPublicDraftGapOccurrences": 2645,
+    "byPrimaryKind": {
+      "source_discovery": 384,
+      "route_extraction": 529,
+      "upstream_continuity": 639,
+      "intermediate_identity": 0,
+      "transformation": 0,
+      "form_or_stereochemistry": 0
+    },
+    "byPrimaryUnresolvedReason": {
+      "no_supporting_source_in_recorded_scope": 384,
+      "candidate_source_not_extracted": 529,
+      "candidate_source_details_redacted": 0,
+      "upstream_boundary_not_resolved": 639,
+      "adjacent_identity_not_resolved": 0,
+      "required_transformation_not_resolved": 0,
+      "source_locator_not_resolved": 0,
+      "form_or_stereochemistry_conflict": 0,
+      "atom_mapping_not_resolved": 0,
+      "scientific_review_pending": 0
+    },
+    "recordedUnresolvedBoundaries": {
+      "requiredTransformationNotResolvedStepCount": 4342,
+      "atomMappingNotResolvedStepCount": 4342,
+      "scientificReviewPendingDraftRouteCount": 2645,
+      "sourceLocatorNotResolvedPublishedStepCount": 0
+    }
+  },
+  "evidenceBoundaries": {
+    "assessmentState": {
+      "not_assessed": 0,
+      "searching": 0,
+      "assessed": 1552
+    },
+    "publicCoverageSourceState": {
+      "none_found": 384,
+      "candidate_sources": 1168,
+      "direct_source_resolved": 0
+    },
+    "reviewState": {
+      "pending": 1552,
+      "reviewed": 0,
+      "verified": 0,
+      "withdrawn": 0
+    },
+    "validatedPublicDraftMoleculesWithExactLocators": 639,
+    "publicDraftStepMappingState": {
+      "not_mapped": 4342,
+      "computed": 0,
+      "reviewed": 0
+    },
+    "verifiedScientificClaimMoleculeCount": 0
+  },
+  "learningFeatureKpis": {
+    "unit": "public_draft_route_alternative",
+    "totalPublicDraftRouteAlternatives": 2645,
+    "routesWithComputedIntermediate3d": 451,
+    "computedIntermediate3dAssets": {
+      "unit": "exact_identity_route_boundary_material_asset",
+      "manifestPipelineVersion": "synthesis-intermediate-computed-3d-2.0.0",
+      "manifestGeneratedAt": "2026-08-28T03:22:05.000Z",
+      "mutuallyExclusive": true,
+      "exhaustive": true,
+      "total": 62,
+      "byProvenance": {
+        "rdkitGeneratedFromExactCatalog2d": 62,
+        "pubChemComputedFallback": 0
+      },
+      "rdkitGenerationFailureCount": 11,
+      "provenanceBoundary": "RDKit assets were generated locally from the recorded exact-identity catalog 2D SDF with versioned parameters. A strict local-generation failure remains 2D-only; no catalog 3D fallback is admitted without an independent structure-level exact-identity gate. No admitted asset is experimental, crystal, or bioactive structure evidence."
+    },
+    "routesWithMappedMechanism": 0,
+    "routesWithGeneralMechanismLesson": 0,
+    "routesWith2d3dMechanismSynchronization": 0,
+    "routesWithTypedLearningTask": 0,
+    "computedIntermediate3dBoundary": "Route count includes only alternatives containing an admitted exact-identity computed 3D asset for a text-mined route-boundary material. Failed strict generation remains 2D-only, and intermediate role remains pending scientific review.",
+    "recordingBoundary": "Only features explicitly recorded in the typed synthesis evidence artifacts are counted; absent fields are not inferred."
+  },
+  "promotionOutcome": {
+    "promotedCompleteLearningRouteMolecules": 0,
+    "promotedSubstantivePartialRouteMolecules": 0,
+    "reason": "This build-time projection classifies existing canonical coverage and validated public-alpha graphs only; it performs no source discovery, chemistry inference, or route promotion."
+  },
+  "invariants": {
+    "everyCanonicalCoverageRecordClassifiedExactlyOnce": true,
+    "noTransportOrMissingArtifactConvertedToNoSource": true,
+    "candidateSourceNeverCountedAsDirectEvidence": true,
+    "exactIdentityRequiredForResolvedRouteClass": true,
+    "unmappedStepsNeverCountedAsMappedMechanisms": true,
+    "pendingNeverCountedAsVerified": true,
+    "noScientificClaimOrRoutePromotionInvented": true
+  }
+}

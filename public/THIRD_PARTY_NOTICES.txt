@@ -30,6 +30,20 @@ Dev Molecules keeps the interactive rendering boundary replaceable. This release
 
 ## Development and verification
 
+- **NumPy 2.5.2** — NumPy Developers — BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0
+  Project: <https://numpy.org/>
+  Purpose: pinned build-time numerical dependency of the deterministic RDKit
+  conformer-generation pipeline. It is not shipped to the browser.
+- **Pillow 12.3.0** — Pillow contributors — MIT-CMU License
+  Project: <https://python-pillow.org/>
+  Purpose: pinned build-time dependency of the RDKit Python package. It is not
+  shipped to the browser or used as scientific evidence.
+- **RDKit 2026.03.5** — RDKit contributors — BSD 3-Clause License
+  Project: <https://www.rdkit.org/>
+  Purpose: build-time ETKDGv3 embedding and MMFF94s/UFF minimization of
+  exact-identity route-boundary structures. RDKit is not shipped to the
+  browser. Generated coordinates are labeled computed and are not presented
+  as experimental, crystal, or bioactive conformations.
 - **@playwright/test 1.62.1** — Microsoft Corporation — Apache License 2.0
   Project: <https://github.com/microsoft/playwright>
   Purpose: browser interaction, network, console, performance and visual acceptance tests. It is not shipped as application runtime code.
@@ -63,6 +77,19 @@ The DrugCentral-derived portions of `scripts/catalog/source-snapshots/` and `pub
 ### PubChem structure records
 
 Two- and three-dimensional SDF records are retrieved from [PubChem PUG REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) by exact CID after identity matching. The catalog retains PubChem CID, source URL, retrieval metadata and content hashes. The public prototype's project-level decision is to bundle those exact source records with this policy notice so the static application can preserve identity-checked, fail-closed rendering. NCBI's [data and copyright policies](https://www.ncbi.nlm.nih.gov/home/about/policies/) apply; NCBI cannot grant rights in third-party submitted content. This distribution decision is not a representation that NCBI or Dev Molecules cleared rights in every third-party submission, and institutional adopters must perform their own review.
+
+### Locally computed route-boundary conformers
+
+The synthesis learning build may derive deterministic three-dimensional
+coordinates from an exact PubChem 2D SDF record using RDKit ETKDGv3 and a
+recorded MMFF94s/UFF minimization policy. Each admitted asset retains the exact
+InChIKey, source-2D identifier, generator/version, parameters, timestamp,
+content hash, and minimization state. These generated coordinates are an
+independent computation, not a reused experimental structure; the source 2D
+record and its rights boundary remain identified separately. Inputs with
+unassigned stereochemistry or another failed scientific gate remain 2D-only;
+no catalog 3D fallback is admitted without an independent serialized-identity
+validation gate, and no invented local coordinates are substituted.
 
 ### Synthesis evidence discovery metadata
 

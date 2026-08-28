@@ -25,6 +25,7 @@ export interface SynthesisCatalogFallbackIdentity {
 
 export interface SynthesisCatalogSelection {
   readonly catalogEntityId: string;
+  readonly catalogSnapshotId: string;
   readonly stableSlug: string;
   readonly preferredName: string;
   readonly aliases: readonly string[];
@@ -38,12 +39,17 @@ export interface SynthesisCatalogSelection {
       readonly publicPath: string;
       readonly sourceUrl: string;
       readonly sha256: string;
+      readonly byteLength: number;
+      readonly origin: "database-2d-record";
+      readonly provenance: "source_record";
     };
     readonly threeD: {
       readonly publicPath: string;
       readonly sourceUrl: string;
       readonly sha256: string;
+      readonly byteLength: number;
       readonly origin: "computed-3d-conformer";
+      readonly provenance: "computed";
     };
   };
   readonly curatedMoleculeId: string | null;
@@ -127,6 +133,7 @@ export async function resolveSynthesisCatalogSelection(
 
   return {
     catalogEntityId: entity.id,
+    catalogSnapshotId: entity.provenance.snapshotId,
     stableSlug: hit.stableSlug,
     preferredName: entity.preferredName,
     aliases: entity.aliases,
@@ -143,6 +150,9 @@ export async function resolveSynthesisCatalogSelection(
         ),
         sourceUrl: entity.structures.twoD.sourceUrl,
         sha256: entity.structures.twoD.sha256,
+        byteLength: entity.structures.twoD.byteLength,
+        origin: "database-2d-record",
+        provenance: "source_record",
       },
       threeD: {
         publicPath: resolveCatalogAssetPath(
@@ -151,7 +161,9 @@ export async function resolveSynthesisCatalogSelection(
         ),
         sourceUrl: entity.structures.threeD.sourceUrl,
         sha256: entity.structures.threeD.sha256,
+        byteLength: entity.structures.threeD.byteLength,
         origin: "computed-3d-conformer",
+        provenance: "computed",
       },
     },
     curatedMoleculeId: options.fallbackIdentity?.curatedMoleculeId ?? null,

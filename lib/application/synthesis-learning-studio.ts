@@ -1,4 +1,11 @@
 import type { PublicAlphaSynthesisDraftGraph } from "@/lib/domain/public-alpha-synthesis-draft";
+import type {
+  StructuredSynthesisFact,
+  StructuredSynthesisQuizGate,
+  SynthesisLearningCapabilityCounts,
+  SynthesisLearningStructureBundle,
+  SynthesisMechanismAssuranceRecord,
+} from "@/lib/domain/synthesis-learning-evidence";
 
 import {
   getBasicRecordSynthesisSurfaceState,
@@ -6,6 +13,14 @@ import {
   type BasicRecordSynthesisSurfaceState,
 } from "./basic-record-synthesis-coverage";
 import type { SynthesisCatalogSelection } from "./synthesis-catalog";
+import {
+  createExactCatalogSynthesis2DOnlyBundleFromRecord,
+  createIndependentSynthesis2DStructureBundle,
+  createUnresolvedSynthesisMechanism,
+  deriveStructuredSynthesisQuizGate,
+  hasExactComputedSynthesis3D,
+  summarizeSynthesisLearningCapabilities,
+} from "./synthesis-learning-evidence";
 
 export type SynthesisLearningQuality =
   | "complete_learning_route"
@@ -16,9 +31,7 @@ export type SynthesisLearningQuality =
   | "coverage_unavailable";
 
 export type SynthesisLearningMechanismAssurance =
-  | "source_supported_mechanism"
-  | "educational_interpretation"
-  | "mechanism_not_resolved";
+  SynthesisMechanismAssuranceRecord["assurance"];
 
 export interface SynthesisLearningMaterial {
   readonly id: string;
@@ -28,6 +41,7 @@ export interface SynthesisLearningMaterial {
   readonly role: "source_input" | "route_intermediate" | "exact_target";
   readonly exactIdentityResolved: true;
   readonly threeD: "catalog_computed_conformer" | "unavailable";
+  readonly structureAssets: SynthesisLearningStructureBundle;
 }
 
 export interface SynthesisLearningReference {
@@ -57,19 +71,9 @@ export interface SynthesisLearningStep {
   readonly changedFunctionalGroup: null;
   readonly atomContinuity: null;
   readonly stereochemicalConsequence: null;
-  readonly mechanism: {
-    readonly assurance: "mechanism_not_resolved";
-    readonly reactionFamily: null;
-    readonly nucleophile: null;
-    readonly electrophile: null;
-    readonly leavingGroup: null;
-    readonly bondFormationOrBreakage: null;
-    readonly functionalGroupTransformation: null;
-    readonly regioOrStereochemicalOutcome: null;
-    readonly commonMisconception:
-      "A source-backed transformation does not by itself establish an electron-pushing mechanism.";
-    readonly curvedArrowEligible: false;
-  };
+  readonly mechanism: SynthesisMechanismAssuranceRecord;
+  readonly structuredFacts: readonly StructuredSynthesisFact[];
+  readonly quizGate: StructuredSynthesisQuizGate;
   readonly reference: SynthesisLearningReference;
 }
 
@@ -101,6 +105,7 @@ export interface SynthesisLearningStudioModel {
     readonly chemicalFormKind: BasicRecordSynthesisCoverage["chemicalFormKind"] | "unresolved";
     readonly stereochemistrySpecified: boolean;
   };
+  readonly targetStructureAssets: SynthesisLearningStructureBundle;
   readonly routes: readonly SynthesisLearningRoute[];
   readonly knownRouteCount: number;
   readonly resolvedStepCount: number;
@@ -108,7 +113,16 @@ export interface SynthesisLearningStudioModel {
   readonly sourceStatus: BasicRecordSynthesisCoverage["sourceEvidenceState"] | "unavailable";
   readonly reviewStatus: BasicRecordSynthesisCoverage["reviewState"] | "unavailable";
   readonly sourceAvailable: boolean;
+  readonly capabilityCounts: SynthesisLearningCapabilityCounts;
   readonly limitations: readonly string[];
+}
+
+export interface CreateSynthesisLearningStudioModelOptions {
+  /** Exact-identity catalog pairs for pending-review route-boundary materials. */
+  readonly structureAssetsByInchiKey?: ReadonlyMap<
+    string,
+    SynthesisLearningStructureBundle
+  >;
 }
 
 const targetTerminologyFor = (
@@ -191,23 +205,72 @@ export const classifySynthesisLearningQuality = (
 const createRoutes = (
   selection: SynthesisCatalogSelection,
   graphs: readonly PublicAlphaSynthesisDraftGraph[],
+  options: CreateSynthesisLearningStudioModelOptions,
 ): readonly SynthesisLearningRoute[] => graphs.flatMap((graph) => {
   const materialById = new Map(graph.materials.map((material) => [material.id, material] as const));
   const citationById = new Map(graph.citations.map((citation) => [citation.id, citation] as const));
   const stepById = new Map(graph.steps.map((step) => [step.id, step] as const));
   const toMaterial = (
     material: PublicAlphaSynthesisDraftGraph["materials"][number],
-  ): SynthesisLearningMaterial => ({
-    id: material.id,
-    label: material.label,
-    smiles: material.sourceSmiles,
-    inchiKey: material.inchiKey,
-    role: material.displayRole,
-    exactIdentityResolved: true,
-    threeD: material.displayRole === "exact_target" && material.inchiKey === selection.inchiKey
-      ? "catalog_computed_conformer"
-      : "unavailable",
-  });
+  ): SynthesisLearningMaterial => {
+    const materialIdentity = {
+      id: material.id,
+      inchiKey: material.inchiKey,
+      sourceSmiles: material.sourceSmiles,
+      exactIdentityResolved: true,
+    } as const;
+    const registered = options.structureAssetsByInchiKey?.get(material.inchiKey);
+    const targetCatalog2DBundle =
+      material.displayRole === "exact_target" &&
+      material.inchiKey === selection.inchiKey
+        ? createExactCatalogSynthesis2DOnlyBundleFromRecord(
+            materialIdentity,
+            {
+              catalogEntityId: selection.catalogEntityId,
+              catalogSnapshotId: selection.catalogSnapshotId,
+              pubChemCid: selection.pubChemCid,
+              inchiKey: selection.inchiKey,
+              structures: {
+                twoD: {
+                  path: selection.structures.twoD.publicPath,
+                  sourceUrl: selection.structures.twoD.sourceUrl,
+                  sha256: selection.structures.twoD.sha256,
+                  byteLength: selection.structures.twoD.byteLength,
+                },
+                threeD: {
+                  path: selection.structures.threeD.publicPath,
+                  sourceUrl: selection.structures.threeD.sourceUrl,
+                  sha256: selection.structures.threeD.sha256,
+                  byteLength: selection.structures.threeD.byteLength,
+                },
+              },
+            },
+          )
+        : null;
+    const exactRegistered =
+      (material.displayRole === "route_intermediate" ||
+        material.displayRole === "exact_target") &&
+      registered && hasExactComputedSynthesis3D(
+      materialIdentity,
+      registered,
+    )
+      ? { ...registered, materialId: material.id }
+      : null;
+    const structureAssets = exactRegistered ?? targetCatalog2DBundle ??
+      createIndependentSynthesis2DStructureBundle(materialIdentity);
+    return {
+      id: material.id,
+      label: material.label,
+      smiles: material.sourceSmiles,
+      inchiKey: material.inchiKey,
+      role: material.displayRole,
+      exactIdentityResolved: true,
+      threeD: structureAssets.threeD.status === "available"
+        ? "catalog_computed_conformer"
+        : "unavailable",
+      structureAssets,
+    };
+  };
 
   return graph.alternatives.map((alternative, alternativeIndex): SynthesisLearningRoute => {
     const orderedStepIds = [...alternative.upstreamStepIds, alternative.finalStepId];
@@ -224,6 +287,7 @@ const createRoutes = (
         const material = materialById.get(id);
         return material ? [toMaterial(material)] : [];
       });
+      const structuredFacts: readonly StructuredSynthesisFact[] = [];
       return [{
         id: step.id,
         displayOrder: displayIndex + 1,
@@ -240,18 +304,9 @@ const createRoutes = (
         changedFunctionalGroup: null,
         atomContinuity: null,
         stereochemicalConsequence: null,
-        mechanism: {
-          assurance: "mechanism_not_resolved",
-          reactionFamily: null,
-          nucleophile: null,
-          electrophile: null,
-          leavingGroup: null,
-          bondFormationOrBreakage: null,
-          functionalGroupTransformation: null,
-          regioOrStereochemicalOutcome: null,
-          commonMisconception: "A source-backed transformation does not by itself establish an electron-pushing mechanism.",
-          curvedArrowEligible: false,
-        },
+        mechanism: createUnresolvedSynthesisMechanism(),
+        structuredFacts,
+        quizGate: deriveStructuredSynthesisQuizGate(structuredFacts),
         reference: {
           id: citation.id,
           sourceType: "ORD",
@@ -280,12 +335,53 @@ const createRoutes = (
   });
 });
 
+const createTargetStructureAssets = (
+  selection: SynthesisCatalogSelection,
+  options: CreateSynthesisLearningStudioModelOptions,
+): SynthesisLearningStructureBundle => {
+  const material = {
+    id: `synthesis-learning-target:${selection.catalogEntityId}`,
+    inchiKey: selection.inchiKey,
+    sourceSmiles: selection.isomericSmiles ?? selection.canonicalSmiles,
+    exactIdentityResolved: true,
+  } as const;
+  const registered = options.structureAssetsByInchiKey?.get(selection.inchiKey);
+  if (registered && hasExactComputedSynthesis3D(material, registered)) {
+    return { ...registered, materialId: material.id };
+  }
+  return createExactCatalogSynthesis2DOnlyBundleFromRecord(
+    material,
+    {
+      catalogEntityId: selection.catalogEntityId,
+      catalogSnapshotId: selection.catalogSnapshotId,
+      pubChemCid: selection.pubChemCid,
+      inchiKey: selection.inchiKey,
+      structures: {
+        twoD: {
+          path: selection.structures.twoD.publicPath,
+          sourceUrl: selection.structures.twoD.sourceUrl,
+          sha256: selection.structures.twoD.sha256,
+          byteLength: selection.structures.twoD.byteLength,
+        },
+        threeD: {
+          path: selection.structures.threeD.publicPath,
+          sourceUrl: selection.structures.threeD.sourceUrl,
+          sha256: selection.structures.threeD.sha256,
+          byteLength: selection.structures.threeD.byteLength,
+        },
+      },
+    },
+  ) ?? createIndependentSynthesis2DStructureBundle(material,
+    "catalog_asset_provenance_invalid");
+};
+
 export const createSynthesisLearningStudioModel = (
   selection: SynthesisCatalogSelection,
   graphs: readonly PublicAlphaSynthesisDraftGraph[],
+  options: CreateSynthesisLearningStudioModelOptions = {},
 ): SynthesisLearningStudioModel => {
   const coverage = selection.coverage;
-  const routes = createRoutes(selection, graphs);
+  const routes = createRoutes(selection, graphs, options);
   return {
     quality: classifySynthesisLearningQuality(
       coverage,
@@ -303,6 +399,7 @@ export const createSynthesisLearningStudioModel = (
       chemicalFormKind: coverage?.chemicalFormKind ?? "unresolved",
       stereochemistrySpecified: coverage?.stereochemistrySpecified ?? false,
     },
+    targetStructureAssets: createTargetStructureAssets(selection, options),
     routes,
     knownRouteCount: routes.length,
     resolvedStepCount: routes.length > 0
@@ -316,6 +413,7 @@ export const createSynthesisLearningStudioModel = (
       (coverage.sourceEvidenceState === "candidate_sources" ||
         coverage.sourceEvidenceState === "direct_source_resolved"),
     ),
+    capabilityCounts: summarizeSynthesisLearningCapabilities(routes),
     limitations: [...new Set(graphs.flatMap((graph) => graph.limitations))],
   };
 };

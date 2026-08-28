@@ -2,9 +2,11 @@
 
 import { MoleculeStructurePreview, MoleculeViewer } from "@/components/molecule-viewer";
 import { SmilesNotationPanel } from "@/components/chemistry/SmilesNotationPanel";
+import { EmbeddedSynthesisLearningStudio } from "@/components/synthesis/EmbeddedSynthesisLearningStudio";
 import type { BasicMolecularRecord as BasicMolecularRecordModel } from "@/lib/application/basic-molecular-record";
 import { getBasicRecordSynthesisSurfaceState } from "@/lib/application/basic-record-synthesis-coverage";
 import { getDrugHash, getSynthesisAcademyHash } from "@/lib/application/platform-route";
+import type { SynthesisCatalogNavigator } from "@/lib/application/synthesis-catalog";
 import type { Locale } from "@/lib/i18n";
 
 import styles from "./BasicMolecularRecord.module.css";
@@ -451,6 +453,8 @@ const copyByLocale = {
 export interface BasicMolecularRecordProps {
   readonly record: BasicMolecularRecordModel;
   readonly locale: Locale;
+  readonly synthesisNavigator: SynthesisCatalogNavigator;
+  readonly assetBasePath: string;
   readonly onBackToAtlas: () => void;
 }
 
@@ -500,6 +504,8 @@ const synthesisProviderLabel = (adapterId: string, locale: Locale): string => {
 export function BasicMolecularRecord({
   record,
   locale,
+  synthesisNavigator,
+  assetBasePath,
   onBackToAtlas,
 }: BasicMolecularRecordProps) {
   const copy = copyByLocale[locale];
@@ -1029,15 +1035,6 @@ export function BasicMolecularRecord({
               </section>
             ) : null}
 
-            <div className={styles.synthesisAtlasAction}>
-              <div>
-                <strong>{synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.viewPartialRoute : copy.openSynthesisAtlas}</strong>
-                <p>{synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.publicDraftBoundary : copy.atlasGateBoundary}</p>
-              </div>
-              <a href={getSynthesisAcademyHash(record.stableSlug, "atlas")}>
-                {synthesisCoverage.publicAlphaDrafts.length > 0 ? copy.viewPartialRoute : copy.openSynthesisAtlas} <span aria-hidden="true">→</span>
-              </a>
-            </div>
           </section>
         ) : (
           <section
@@ -1066,6 +1063,14 @@ export function BasicMolecularRecord({
             </div>
           </section>
         )}
+
+        <EmbeddedSynthesisLearningStudio
+          stableSlug={record.stableSlug}
+          navigator={synthesisNavigator}
+          assetBasePath={assetBasePath}
+          locale={locale}
+          fullAtlasHref={getSynthesisAcademyHash(record.stableSlug, "atlas")}
+        />
 
         {record.structuralNeighbors.length > 0 ? (
           <section aria-labelledby="basic-record-neighbors" data-basic-record-neighbors="resident-window">

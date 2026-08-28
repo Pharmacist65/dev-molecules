@@ -126,3 +126,11 @@ test("Dossier atom inspector is a pointer-safe fixed row and selection is camera
   assert.doesNotMatch(selectionSection, /setCameraRevision|resetView/);
   assert.doesNotMatch(relativeSelectionSection, /setCameraRevision|resetView/);
 });
+
+test("the shared viewer disables 3D whenever no admitted 3D source exists", () => {
+  assert.match(viewer, /const hasThreeDStructure = structureUrl\.trim\(\)\.length > 0/u);
+  assert.match(
+    viewer,
+    /aria-pressed=\{dimension === "3d"\}[\s\S]*disabled=\{!hasThreeDStructure\}[\s\S]*viewer\.no3dSource/u,
+  );
+});

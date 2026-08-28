@@ -4,11 +4,13 @@ import { useMemo, useRef, useState } from "react";
 
 import { AdmePanel, DrugJourney, MetaboliteGraph } from "@/components/adme";
 import { PharmacologyPanel } from "@/components/pharmacology";
+import { EmbeddedSynthesisLearningStudio } from "@/components/synthesis/EmbeddedSynthesisLearningStudio";
 import {
   createDrugDossierByIdOrSlug,
   getDossierLearningAvailability,
 } from "@/lib/application/dossier";
 import { getSynthesisAcademyHash } from "@/lib/application/platform-route";
+import type { SynthesisCatalogNavigator } from "@/lib/application/synthesis-catalog";
 import type {
   DossierCoverageDimension,
   DossierCoverageStatus,
@@ -42,6 +44,7 @@ export interface DrugDossierProps {
   readonly onOpenSynthesis?: (moleculeId: string) => void;
   readonly onOpenSynthesisAcademy?: () => void;
   readonly onOpenNomenclature?: (moleculeId: string) => void;
+  readonly synthesisNavigator?: SynthesisCatalogNavigator;
 }
 
 type ReferenceTab =
@@ -253,16 +256,46 @@ function SynthesisJourneyCta({
   dossier,
   locale,
   onOpenSynthesis,
+  synthesisNavigator,
+  presentationMode,
+  assetBasePath,
 }: {
   readonly dossier: DrugDossierRecord;
   readonly locale: "tr" | "en";
   readonly onOpenSynthesis?: (moleculeId: string) => void;
+  readonly synthesisNavigator?: SynthesisCatalogNavigator;
+  readonly presentationMode: "student" | "reviewer";
+  readonly assetBasePath: string;
 }) {
   const labels = copy[locale];
   const moleculeSlug = dossier.moleculeId.slice(
     Math.max(dossier.moleculeId.lastIndexOf(":"), dossier.moleculeId.lastIndexOf("/")) + 1,
   );
   const href = getSynthesisAcademyHash(moleculeSlug, "atlas");
+
+  if (synthesisNavigator) {
+    return (
+      <EmbeddedSynthesisLearningStudio
+        stableSlug={moleculeSlug}
+        navigator={synthesisNavigator}
+        assetBasePath={assetBasePath}
+        locale={locale}
+        fullAtlasHref={href}
+        fallbackIdentity={{
+          curatedMoleculeId: dossier.moleculeId,
+          preferredName: dossier.preferredName,
+          pubChemCid: dossier.sourceRecord.identity.pubChemCid,
+          inchiKey: dossier.sourceRecord.identity.inchiKey,
+        }}
+        presentationMode={presentationMode}
+        fullAtlasAriaLabel={labels.synthesisJourneyCta}
+        synthesisJourneyCta
+        onOpenFullAtlas={onOpenSynthesis
+          ? () => onOpenSynthesis(dossier.moleculeId)
+          : undefined}
+      />
+    );
+  }
 
   return (
     <aside className={styles.synthesisJourneyCta}>
@@ -297,6 +330,7 @@ export function DrugDossier({
   onOpenSynthesis,
   onOpenSynthesisAcademy,
   onOpenNomenclature,
+  synthesisNavigator,
 }: DrugDossierProps) {
   const [mode, setMode] = useState<DossierMode>(initialMode);
   const [activeTab, setActiveTab] = useState<ReferenceTab>("overview");
@@ -439,7 +473,7 @@ export function DrugDossier({
           {dossier.flagship ? (
             <>
               <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
-              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
+              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} synthesisNavigator={synthesisNavigator} presentationMode="student" assetBasePath={assetBasePath} />
               <FlagshipNomenclature flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" parentSmiles={dossier.chemistry.canonicalSmiles.value} />
               <FlagshipComparisons flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
               <FlagshipLearningTasks flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
@@ -454,7 +488,7 @@ export function DrugDossier({
                 available={learningAvailability.synthesis}
                 action={generalSynthesisAction}
               />
-              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
+              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} synthesisNavigator={synthesisNavigator} presentationMode="student" assetBasePath={assetBasePath} />
             </>
           )}
         </div>
@@ -538,7 +572,7 @@ export function DrugDossier({
                 {dossier.flagship
                   ? <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
                   : <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={generalSynthesisAction} />}
-                <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
+                <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} synthesisNavigator={synthesisNavigator} presentationMode="reviewer" assetBasePath={assetBasePath} />
               </>
             ) : null}
             {activeTab === "nomenclature" ? (

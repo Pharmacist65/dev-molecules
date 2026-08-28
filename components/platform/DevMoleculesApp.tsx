@@ -1025,6 +1025,7 @@ function DevMoleculesWorkspace() {
                       navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId), "atlas"));
                     }}
                     onOpenSynthesisAcademy={() => navigate("#academy/synthesis")}
+                    synthesisNavigator={indexedCatalogNavigator}
                   />
                 )}
               />

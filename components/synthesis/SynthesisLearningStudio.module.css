@@ -3,6 +3,8 @@
   --studio-blue: var(--color-parliament-blue, #0a3d91);
   --studio-cobalt: #205be5;
   --studio-orange: var(--color-metallic-orange, #ff8a00);
+  /* Accessible text accent on light Studio surfaces (>= 4.5:1). */
+  --studio-orange-ink: #9a4700;
   --studio-ivory: #fbf8f0;
   --studio-ink: #111d30;
   --studio-muted: #687386;
@@ -20,6 +22,38 @@
 .studio *::before,
 .studio *::after {
   box-sizing: border-box;
+}
+
+.compact {
+  border-radius: clamp(16px, 1.5vw, 22px);
+  box-shadow: 0 18px 52px rgb(3 14 33 / 14%);
+}
+
+.compact .hero {
+  min-height: 150px;
+  padding: clamp(1.1rem, 2.2vw, 2rem);
+}
+
+.compact .hero h2 {
+  max-width: 22ch;
+  font-size: clamp(1.85rem, 3.4vw, 3.35rem);
+  line-height: 0.98;
+}
+
+.compact .tabs button {
+  min-height: 58px;
+  padding: 0.8rem;
+}
+
+.compact .panel {
+  min-height: 360px;
+  padding: clamp(0.9rem, 2vw, 1.8rem);
+}
+
+.compact .targetViewer,
+.compact .stepOutputExplorer,
+.compact .viewer {
+  min-height: 420px;
 }
 
 .hero {
@@ -48,11 +82,18 @@
 .materialCard > span,
 .inlineReference span,
 .stepHeader span {
-  color: var(--studio-orange);
+  color: var(--studio-orange-ink);
   font-size: 0.69rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+}
+
+.eyebrow,
+.mechanismPanel header > span,
+.targetViewerIntro > span,
+.stepHeader span {
+  color: var(--studio-orange);
 }
 
 .hero h2 {
@@ -206,7 +247,7 @@
   padding: clamp(1.25rem, 2.5vw, 2.4rem);
 }
 
-.identityCard h3,
+.identityName,
 .qualityCard h3,
 .emptyState h3,
 .mechanismPanel h3 {
@@ -216,6 +257,10 @@
   font-weight: 520;
   letter-spacing: -0.045em;
   line-height: 1;
+}
+
+.identityName {
+  display: block;
 }
 
 .identityCard > p,
@@ -316,6 +361,47 @@
   border: 1px solid rgb(64 100 151 / 28%);
   border-radius: 20px;
   background: #071224;
+}
+
+.stepOutputExplorer {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.28fr) minmax(0, 1fr);
+  min-height: 570px;
+  overflow: hidden;
+  border: 1px solid rgb(64 100 151 / 28%);
+  border-radius: 20px;
+  background: #071224;
+}
+
+.stepOutput2dOnly {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: clamp(1.2rem, 3vw, 2.8rem);
+  color: var(--studio-ink);
+  background: #fffdf8;
+  text-align: center;
+}
+
+.stepOutput2dOnly .smiles {
+  width: min(100%, 520px);
+  min-height: 280px;
+}
+
+.stepOutput2dOnly code {
+  overflow-wrap: anywhere;
+  color: #123d82;
+  font-size: 0.72rem;
+}
+
+.stepOutput2dOnly p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--studio-muted);
+  font-size: 0.76rem;
+  line-height: 1.6;
 }
 
 .targetViewerIntro {
@@ -436,7 +522,7 @@
 }
 
 .stepPicker span {
-  color: var(--studio-orange);
+  color: var(--studio-orange-ink);
   font: 800 0.68rem var(--font-mono, ui-monospace, monospace);
 }
 
@@ -554,7 +640,7 @@
 }
 
 .reactionArrow span {
-  color: var(--studio-orange);
+  color: var(--studio-orange-ink);
   font-size: 3rem;
   line-height: 1;
 }
@@ -682,6 +768,110 @@
   margin: 1rem;
 }
 
+.learningCheck,
+.advancedMechanism {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--studio-line);
+  border-radius: 14px;
+}
+
+.learningCheck {
+  border-left: 4px solid var(--studio-orange);
+  background: #fffaf1;
+}
+
+.learningCheck > header {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.learningCheck > header span {
+  color: var(--studio-orange-ink);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.learningCheck dl,
+.advancedMechanism dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0.9rem 0 0;
+  overflow: hidden;
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+  background: var(--studio-line);
+}
+
+.learningCheck dl > div,
+.advancedMechanism dl > div {
+  padding: 0.75rem;
+  background: #fffdf8;
+}
+
+.learningCheck dt,
+.advancedMechanism dt {
+  color: var(--studio-muted);
+  font-size: 0.62rem;
+  font-weight: 780;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.learningCheck dd,
+.advancedMechanism dd {
+  margin: 0.35rem 0 0;
+  overflow-wrap: anywhere;
+  font-size: 0.75rem;
+  font-weight: 720;
+}
+
+.advancedMechanism {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  color: #f0f4fb;
+  background: #152238;
+}
+
+.advancedMechanism p {
+  margin: 0.35rem 0 0;
+  color: #b7c4d7;
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.advancedMechanism button {
+  min-height: 38px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  color: #071427;
+  background: var(--studio-orange);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 780;
+}
+
+.advancedMechanism button:disabled {
+  color: #8693a8;
+  background: #25344c;
+  cursor: not-allowed;
+}
+
+.advancedMechanism dl {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.advancedMechanism dl > div {
+  color: var(--studio-ink);
+}
+
 .inlineReference {
   display: flex;
   align-items: center;
@@ -766,7 +956,7 @@
 }
 
 .referenceList > li > div:first-child span {
-  color: var(--studio-orange);
+  color: var(--studio-orange-ink);
   font-size: 0.65rem;
   font-weight: 800;
 }
@@ -866,12 +1056,14 @@
 
   .overviewGrid,
   .targetViewer,
+  .stepOutputExplorer,
   .reactionCanvas,
   .referenceList > li {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .targetViewer,
+  .stepOutputExplorer,
   .viewer {
     min-height: 500px;
   }
@@ -923,7 +1115,9 @@
   .routeFacts,
   .footer dl,
   .stepFacts,
-  .changeLedger dl {
+  .changeLedger dl,
+  .learningCheck dl,
+  .advancedMechanism dl {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -936,9 +1130,14 @@
 
   .inlineReference,
   .footer,
-  .changeLedger > header {
+  .changeLedger > header,
+  .advancedMechanism {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .advancedMechanism {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .stepTargetViewer {

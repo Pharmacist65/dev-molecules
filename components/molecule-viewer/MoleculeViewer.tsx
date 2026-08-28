@@ -470,6 +470,8 @@ export function MoleculeViewer({
           <button
             type="button"
             aria-pressed={dimension === "3d"}
+            disabled={!hasThreeDStructure}
+            title={hasThreeDStructure ? t("viewer.show3d") : t("viewer.no3dSource")}
             onClick={() => setDimension("3d")}
           >
             {t("viewer.dimension3dShort")}
