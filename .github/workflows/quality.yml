@@ -36,15 +36,33 @@ jobs:
       - run: npm run lint
       - run: npm run catalog:validate
       - run: npm run synthesis:validate
+      - name: Validate committed synthesis learning artifacts
+        run: |
+          node --test \
+            tests/synthesis-learning-coverage-kpi.test.mjs \
+            tests/synthesis-learning-evidence.test.mjs
+      - name: Capture committed portable synthesis signature
+        run: |
+          node --import tsx scripts/synthesis/build-portable-regeneration-signature.mts \
+            --mode=semantic > "$RUNNER_TEMP/committed-synthesis-semantic.sha256"
       - run: npm run synthesis:intermediate-3d
       - run: npm run synthesis:learning-kpi
-      - name: Verify generated synthesis learning artifacts are committed
+      - name: Verify portable semantics and runner-local determinism
         run: |
-          git diff --exit-code -- \
-            public/catalog/synthesis/intermediate-3d \
-            public/catalog/synthesis/reports/intermediate-3d-assets.json \
-            public/catalog/synthesis/reports/continuous-learning-coverage.json \
-            public/catalog/synthesis/reports/targeted-gap-records.json
+          node --import tsx scripts/synthesis/build-portable-regeneration-signature.mts \
+            --mode=semantic > "$RUNNER_TEMP/generated-synthesis-semantic.sha256"
+          diff -u \
+            "$RUNNER_TEMP/committed-synthesis-semantic.sha256" \
+            "$RUNNER_TEMP/generated-synthesis-semantic.sha256"
+          node --import tsx scripts/synthesis/build-portable-regeneration-signature.mts \
+            --mode=bytes > "$RUNNER_TEMP/first-run-synthesis-bytes.sha256"
+          npm run synthesis:intermediate-3d
+          npm run synthesis:learning-kpi
+          node --import tsx scripts/synthesis/build-portable-regeneration-signature.mts \
+            --mode=bytes > "$RUNNER_TEMP/second-run-synthesis-bytes.sha256"
+          diff -u \
+            "$RUNNER_TEMP/first-run-synthesis-bytes.sha256" \
+            "$RUNNER_TEMP/second-run-synthesis-bytes.sha256"
       - run: npm run licenses:check
       - run: npm run build
       - run: node --test tests/*.test.mjs
