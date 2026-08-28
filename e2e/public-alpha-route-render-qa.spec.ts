@@ -323,6 +323,10 @@ async function auditReviewBoundaryAndReferences(
 }
 
 test.describe("deterministic public-alpha 60-route render QA", () => {
+  // Keep this large, data-driven acceptance matrix shardable in CI. Each case
+  // creates its own page state and has no ordering dependency.
+  test.describe.configure({ mode: "parallel" });
+
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await installDeterministicPresentation(page);
