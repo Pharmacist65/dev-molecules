@@ -75,7 +75,9 @@ jobs:
 
   browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Software-rendered molecular browser acceptance is intentionally exhaustive
+    # and can exceed 25 minutes on shared GitHub runners. Keep the full suite.
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
