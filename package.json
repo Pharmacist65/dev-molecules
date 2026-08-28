@@ -33,6 +33,8 @@
     "synthesis:extract": "node --import tsx scripts/synthesis/cli.mts extract",
     "synthesis:extract-content": "node --import tsx scripts/synthesis/extract-source-content.mts",
     "synthesis:assemble": "node --import tsx scripts/synthesis/cli.mts assemble",
+    "synthesis:quality": "node --import tsx scripts/synthesis/analyze-public-alpha-quality.mts",
+    "synthesis:upstream-audit": "node --import tsx scripts/synthesis/analyze-upstream-gap-completion.mts",
     "synthesis:migrate": "node --import tsx scripts/synthesis/cli.mts migrate",
     "synthesis:publish": "node --import tsx scripts/synthesis/cli.mts publish",
     "synthesis:validate": "node --import tsx scripts/synthesis/cli.mts validate",

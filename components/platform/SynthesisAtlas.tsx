@@ -20,6 +20,7 @@ import type {
 } from "@/lib/domain/public-alpha-synthesis-draft";
 import type { SynthesisCatalogSelection } from "@/lib/application/synthesis-catalog";
 import { useI18n, type Locale } from "@/lib/i18n";
+import { SynthesisLearningStudio } from "@/components/synthesis/SynthesisLearningStudio";
 import { SmilesStructure } from "./SmilesStructure";
 
 import atlas from "./SynthesisAtlas.module.css";
@@ -436,7 +437,8 @@ function DraftStepCard({
   );
 }
 
-function PublicAlphaDraftDetail({
+/** @deprecated The integrated learning studio is the active public surface. */
+export function PublicAlphaDraftDetail({
   graph,
   locale,
 }: {
@@ -707,14 +709,22 @@ export function SynthesisAtlas({
       data-route-detail-gate="generated-artifact-required"
       data-presentation-mode={presentationMode}
     >
-      <header className={atlas.hero}>
-        <div>
-          <span>{labels.eyebrow}</span>
-          <h1 id="synthesis-atlas-heading">{catalogSelection.preferredName}</h1>
-          <p>{catalogSelection.molecularFormula} · CID {catalogSelection.pubChemCid}</p>
-        </div>
-      </header>
-      <CatalogCoverageBanner selection={catalogSelection} locale={locale} />
+      {routeDetail.kind === "available" ? (
+        <>
+          <header className={atlas.hero}>
+            <div>
+              <span>{labels.eyebrow}</span>
+              <h1 id="synthesis-atlas-heading">{catalogSelection.preferredName}</h1>
+              <p>{catalogSelection.molecularFormula} · CID {catalogSelection.pubChemCid}</p>
+            </div>
+          </header>
+          <CatalogCoverageBanner selection={catalogSelection} locale={locale} />
+        </>
+      ) : (
+        <h1 id="synthesis-atlas-heading" className={atlas.srOnly}>
+          {labels.eyebrow}: {catalogSelection.preferredName}
+        </h1>
+      )}
       {routeDetail.kind === "available" ? (
         <section className={atlas.publishedRoutes} aria-labelledby="published-synthesis-routes-heading">
           <header>
@@ -733,43 +743,68 @@ export function SynthesisAtlas({
             <PublishedRouteDetail key={route.id} route={route} locale={locale} />
           ))}
         </section>
-      ) : draftDetail.kind === "available" ? (
-        <section className={atlas.publicDrafts} aria-label={labels.draftBadge}>
-          {draftDetail.graphs.map((graph) => (
-            <PublicAlphaDraftDetail key={graph.graphId} graph={graph} locale={locale} />
-          ))}
-          <button
-            className={atlas.draftOpen3d}
-            type="button"
-            onClick={() => onOpenMoleculeFocus(catalogSelection.catalogEntityId)}
-          >
-            {labels.open3d} <span aria-hidden="true">↗</span>
-          </button>
-        </section>
       ) : (
-        <section
-          className={atlas.coverageOnlyBoundary}
-          data-route-detail-state={draftRequestKey ? draftDetail.kind : routeDetail.kind}
-          role={routeDetail.kind === "loading" || draftDetail.kind === "loading" ? "status" : undefined}
-        >
-          <strong>
-            {draftDetail.kind === "loading"
-              ? labels.draftLoading
-              : draftDetail.kind === "unavailable"
-                ? labels.draftUnavailable
-                : routeDetail.kind === "loading"
-              ? labels.routeDetailLoading
-              : routeDetail.kind === "unavailable"
-                ? labels.routeDetailUnavailable
-                : closedMessage}
-          </strong>
-          <button
-            type="button"
-            onClick={() => onOpenMoleculeFocus(catalogSelection.catalogEntityId)}
-          >
-            {labels.open3d} <span aria-hidden="true">↗</span>
-          </button>
-        </section>
+        <>
+          {draftDetail.kind === "available" ? (
+            <section
+              className={atlas.publicDrafts}
+              aria-label={labels.draftBadge}
+              data-learning-studio-shell="true"
+              data-public-alpha-synthesis="source-supported-draft"
+              data-review-state="pending"
+              data-verified-scientific-claim="false"
+              data-operational-details="excluded"
+              data-total-unresolved-gap-count={draftDetail.graphs.reduce(
+                (sum, graph) => sum + graph.alternatives.reduce(
+                  (graphSum, alternative) => graphSum + alternative.unresolvedGapCount,
+                  0,
+                ),
+                0,
+              )}
+            >
+              <SynthesisLearningStudio
+                selection={catalogSelection}
+                graphs={draftDetail.graphs}
+                presentationMode={presentationMode}
+                onOpenMoleculeFocus={onOpenMoleculeFocus}
+              />
+            </section>
+          ) : (
+            <section className={atlas.publicDrafts} data-learning-studio-shell="true">
+              <SynthesisLearningStudio
+                selection={catalogSelection}
+                graphs={[]}
+                presentationMode={presentationMode}
+                onOpenMoleculeFocus={onOpenMoleculeFocus}
+              />
+            </section>
+          )}
+          {draftDetail.kind !== "available" ? (
+            <section
+              className={atlas.coverageOnlyBoundary}
+              data-route-detail-state={draftRequestKey ? draftDetail.kind : routeDetail.kind}
+              role={routeDetail.kind === "loading" || draftDetail.kind === "loading" ? "status" : undefined}
+            >
+              <strong>
+                {draftDetail.kind === "loading"
+                  ? labels.draftLoading
+                  : draftDetail.kind === "unavailable"
+                    ? labels.draftUnavailable
+                    : routeDetail.kind === "loading"
+                      ? labels.routeDetailLoading
+                      : routeDetail.kind === "unavailable"
+                        ? labels.routeDetailUnavailable
+                        : closedMessage}
+              </strong>
+              <button
+                type="button"
+                onClick={() => onOpenMoleculeFocus(catalogSelection.catalogEntityId)}
+              >
+                {labels.open3d} <span aria-hidden="true">↗</span>
+              </button>
+            </section>
+          ) : null}
+        </>
       )}
     </section>
   );

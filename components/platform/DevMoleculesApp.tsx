@@ -49,6 +49,7 @@ import {
 } from "@/lib/application/synthesis-catalog";
 import type { CatalogNormalizedEntity } from "@/lib/catalog";
 import { moleculeCatalog } from "@/lib/data/catalog";
+import { curatedDossierMolecules } from "@/lib/data/curated-dossier-catalog";
 import { createDrugFamilyPage } from "@/lib/data/family-pages";
 import { learningMissions } from "@/lib/data/learning-missions";
 import type { NomenclatureProgressSnapshot } from "@/lib/domain";
@@ -360,7 +361,7 @@ function DevMoleculesWorkspace() {
       taskMoleculeIds: LEARNING_TASK_MOLECULE_IDS,
       onOpenSynthesis: (molecule) => {
         setSelectedId(molecule.id);
-        navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id)));
+        navigate(getSynthesisAcademyHash(getMoleculeSlug(molecule.id), "atlas"));
       },
       onOpenNomenclature: (molecule) => {
         setSelectedId(molecule.id);
@@ -379,7 +380,7 @@ function DevMoleculesWorkspace() {
 
   const requestedSynthesisMolecule =
     route.section === "academy" && route.academyArea === "synthesis" && route.slug
-      ? moleculeCatalog.find(
+      ? curatedDossierMolecules.find(
           (molecule) => getMoleculeSlug(molecule.id) === route.slug,
         )
       : undefined;
@@ -491,7 +492,7 @@ function DevMoleculesWorkspace() {
     if (route.section !== "academy") return;
     let selectionTimer: number | undefined;
     if (route.slug) {
-      const selected = moleculeCatalog.find(
+      const selected = curatedDossierMolecules.find(
         (molecule) => getMoleculeSlug(molecule.id) === route.slug,
       );
       if (selected) {
@@ -905,6 +906,7 @@ function DevMoleculesWorkspace() {
                 activeSynthesisCatalogState.status === "ready" ? (
                   <>
                     <SynthesisAcademyHub
+                      key={`synthesis:${route.slug}:${route.routeId ?? "overview"}`}
                       locale={locale}
                       selectedMoleculeId={requestedSynthesisMolecule?.id}
                       initialMoleculeId={requestedSynthesisMolecule?.id}
@@ -1020,7 +1022,7 @@ function DevMoleculesWorkspace() {
                     onBackToAtlas={() => navigate("#atlas")}
                     onOpenSynthesis={(moleculeId) => {
                       setSelectedId(moleculeId);
-                      navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId)));
+                      navigate(getSynthesisAcademyHash(getMoleculeSlug(moleculeId), "atlas"));
                     }}
                     onOpenSynthesisAcademy={() => navigate("#academy/synthesis")}
                   />

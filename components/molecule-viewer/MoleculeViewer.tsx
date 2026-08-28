@@ -14,6 +14,7 @@ import {
 import { getStructureProvenancePresentation } from "@/lib/application/structure-presentation";
 import { useI18n } from "@/lib/i18n";
 import type { MoleculeStructure, SdfAtom } from "@/lib/structure/sdf";
+import { hasExactCtabAtomIndexMapping } from "@/lib/structure/sdf";
 
 import styles from "./MoleculeViewer.module.css";
 import {
@@ -134,7 +135,7 @@ export function MoleculeViewer({
     initialDimension === "2d" && !hasTwoDStructure ? "3d" : initialDimension,
   );
   const twoDResource = useSdfResource(
-    dimension === "2d" && hasTwoDStructure ? (twoDStructureUrl ?? null) : null,
+    hasTwoDStructure ? (twoDStructureUrl ?? null) : null,
     { expectedDimension: "2d", expectedPubChemCid },
   );
   const [representation, setRepresentation] =
@@ -153,6 +154,13 @@ export function MoleculeViewer({
   const statusId = useId();
   const activeResource = dimension === "2d" ? twoDResource : threeDResource;
   const activeStructure = activeResource.structure;
+  const crossViewAtomMapping = threeDResource.status === "ready" && twoDResource.status === "ready"
+    ? hasExactCtabAtomIndexMapping(twoDResource.structure, threeDResource.structure)
+      ? "exact_ctab_atom_index"
+      : "unavailable"
+    : hasTwoDStructure
+      ? "loading"
+      : "unavailable";
 
   const resetView = useCallback(() => {
     setTransform(DEFAULT_VIEWER_TRANSFORM);
@@ -176,12 +184,14 @@ export function MoleculeViewer({
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       resetView();
-      setSelectedAtomIndex(null);
+      if (crossViewAtomMapping !== "exact_ctab_atom_index") {
+        setSelectedAtomIndex(null);
+      }
       hoveredIndexRef.current = null;
       setHoveredAtomIndex(null);
     });
     return () => window.cancelAnimationFrame(frame);
-  }, [dimension, resetView, structureUrl]);
+  }, [crossViewAtomMapping, dimension, resetView, structureUrl]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -431,6 +441,7 @@ export function MoleculeViewer({
       data-structure-status={activeResource.status}
       data-camera-revision={cameraRevision}
       data-selected-atom={selectedAtom ? `${selectedAtom.element}${selectedAtom.index + 1}` : ""}
+      data-cross-view-atom-mapping={crossViewAtomMapping}
       data-selected-atom-overlay-collision="0"
     >
       <header className={styles.header}>

@@ -1301,3 +1301,118 @@
     padding: var(--space-3);
   }
 }
+
+/* Exact-record deep links land on the learning studio, not behind the
+   catalogue-scale Academy introduction. */
+.hub[data-direct-record="true"] .hero {
+  min-height: 0;
+  padding: 0.8rem clamp(1rem, 3vw, 2.6rem);
+}
+
+.hub[data-direct-record="true"] .heroBody {
+  min-height: 0;
+  display: block;
+  padding-top: 0.5rem;
+}
+
+.hub[data-direct-record="true"] .heroBody > div:first-child > .eyebrow,
+.hub[data-direct-record="true"] .hero h1,
+.hub[data-direct-record="true"] .hero p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hub[data-direct-record="true"] .targetDial {
+  display: none;
+}
+
+.directIdentity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.8rem;
+  width: fit-content;
+  margin-top: 0;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-left: 3px solid var(--color-metallic-orange, #ff8a00);
+  border-radius: 10px;
+  background: rgb(2 9 22 / 28%);
+}
+
+.directIdentity strong {
+  color: var(--color-text-on-dark, #fff);
+  font-size: 0.8rem;
+}
+
+.directIdentity span {
+  color: var(--color-text-muted-on-dark, #b7c4d7);
+  font-size: 0.68rem;
+}
+
+.hub[data-direct-record="true"] .labHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.15rem 0.1rem 0.5rem;
+  border: 0;
+  background: transparent;
+}
+
+.hub[data-direct-record="true"] .labHeader > div {
+  display: none;
+}
+
+.hub[data-direct-record="true"] .labHeader h2,
+.hub[data-direct-record="true"] .labHeader p,
+.hub[data-direct-record="true"] .labHeader .sectionLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hub[data-direct-record="true"] .atlasPanel {
+  padding: 0.55rem;
+}
+
+.hub[data-direct-record="true"] [data-synthesis-atlas] {
+  margin-top: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hub[data-direct-record="true"] [data-learning-studio-shell="true"] {
+  gap: 0;
+  padding: 0;
+  background: transparent;
+}
+
+@media (max-width: 760px) {
+  .hub[data-direct-record="true"] .heroBody {
+    min-height: 0;
+  }
+
+  .hub[data-direct-record="true"] .targetDial {
+    display: none;
+  }
+
+  .hub[data-direct-record="true"] .viewTabs button {
+    min-height: 76px;
+    padding: 0.9rem 1rem;
+  }
+
+  .hub[data-direct-record="true"] .atlasPanel {
+    padding: 0.65rem;
+  }
+}

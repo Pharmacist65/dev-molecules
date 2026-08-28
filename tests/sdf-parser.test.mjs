@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-import { parseSdfV2000 } from "../lib/structure/sdf.ts";
+import {
+  hasExactCtabAtomIndexMapping,
+  parseSdfV2000,
+} from "../lib/structure/sdf.ts";
 
 const FIXTURE_DIRECTORY = new URL("../public/structures/pubchem/", import.meta.url);
 
@@ -96,6 +99,31 @@ test("retains directional V2000 stereo bonds from canonical PubChem 2D records",
 
   assert.equal(timolol.bonds.filter((bond) => bond.stereo === 1).length, 1);
   assert.equal(nadolol.bonds.filter((bond) => bond.stereo === 6).length, 2);
+});
+
+test("enables cross-view highlighting only for exact CTAB atom-index mappings", async () => {
+  const [twoDText, threeDText] = await Promise.all([
+    readFile(new URL("cid-1978-2d.sdf", FIXTURE_DIRECTORY), "utf8"),
+    readFile(new URL("cid-1978-3d.sdf", FIXTURE_DIRECTORY), "utf8"),
+  ]);
+  const twoD = parseSdfV2000(twoDText);
+  const threeD = parseSdfV2000(threeDText);
+
+  assert.equal(hasExactCtabAtomIndexMapping(twoD, threeD), true);
+  assert.equal(
+    hasExactCtabAtomIndexMapping(twoD, {
+      ...threeD,
+      atoms: [...threeD.atoms].reverse(),
+    }),
+    false,
+  );
+  assert.equal(
+    hasExactCtabAtomIndexMapping(twoD, {
+      ...threeD,
+      bonds: threeD.bonds.slice(1),
+    }),
+    false,
+  );
 });
 
 test("fails closed for unsupported or truncated structure data", () => {

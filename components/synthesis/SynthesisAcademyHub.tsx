@@ -197,6 +197,7 @@ export function SynthesisAcademyHub({
     <section
       className={joinClassNames(styles.hub, className)}
       data-synthesis-academy="phase-6"
+      data-direct-record={view === "atlas"}
       data-published-route-details={publishedRouteCount ?? publishedRouteCountState}
       data-catalog-records={catalogRecordCount}
     >
@@ -214,6 +215,15 @@ export function SynthesisAcademyHub({
             <span className={styles.eyebrow}>{labels.eyebrow}</span>
             <h1>{labels.title}</h1>
             <p>{labels.description}</p>
+            {catalogSelection ? (
+              <aside
+                className={styles.directIdentity}
+                data-direct-synthesis-catalog-identity={catalogSelection.catalogEntityId}
+              >
+                <strong>{catalogSelection.preferredName}</strong>
+                <span>{catalogSelection.molecularFormula} · CID {catalogSelection.pubChemCid}</span>
+              </aside>
+            ) : null}
           </div>
           <div
             className={styles.targetDial}
@@ -229,13 +239,19 @@ export function SynthesisAcademyHub({
         </div>
       </header>
 
-      <nav className={styles.viewTabs} aria-label={labels.eyebrow}>
+      <div className={styles.viewTabs} role="tablist" aria-label={labels.eyebrow}>
         <button
           type="button"
           role="tab"
           aria-selected={view === "curriculum"}
           aria-controls="synthesis-curriculum-panel"
           onClick={() => setView("curriculum")}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight" && catalogSelection) {
+              event.preventDefault();
+              setView("atlas");
+            }
+          }}
         >
           <strong>{labels.curriculum}</strong>
           <span>{labels.curriculumHint}</span>
@@ -247,15 +263,22 @@ export function SynthesisAcademyHub({
           aria-controls="synthesis-atlas-panel"
           disabled={!catalogSelection}
           onClick={() => setView("atlas")}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              setView("curriculum");
+            }
+          }}
         >
           <strong>{labels.atlas}</strong>
           <span>{labels.atlasHint}</span>
         </button>
-      </nav>
+      </div>
 
       {searchCatalog && onSelectCatalogRecord ? (
         <section
           className={styles.catalogNavigator}
+          hidden={view !== "curriculum"}
           aria-labelledby="synthesis-catalog-search-heading"
           data-synthesis-catalog-navigator="complete-index"
           data-catalog-record-count={catalogRecordCount}

@@ -56,9 +56,10 @@ test("Dossier exposes coverage first and renders each empty science section once
   assert.match(dossier, /data-tab-availability=\{tabAvailability\(tab\)\}/u);
   assert.match(dossier, /data-empty-coverage=\{available \? undefined : section\}/u);
   assert.match(dossier, /section="synthesis"/u);
-  assert.match(dossier, /onOpenSynthesisAcademy\?: \(\) => void/u);
-  assert.match(dossier, /learningAvailability\.synthesis[\s\S]+onOpenSynthesisAcademy/u);
-  assert.match(app, /onOpenSynthesisAcademy=\{\(\) => navigate\("#academy\/synthesis"\)\}/u);
+  assert.match(dossier, /function SynthesisJourneyCta/u);
+  assert.match(dossier, /getSynthesisAcademyHash\(moleculeSlug, "atlas"\)/u);
+  assert.equal(dossier.match(/<SynthesisJourneyCta/gu)?.length, 3);
+  assert.match(app, /onOpenSynthesis=\{\(moleculeId\) => \{[\s\S]+getSynthesisAcademyHash\(getMoleculeSlug\(moleculeId\), "atlas"\)/u);
   assert.match(app, /route\.academyArea === "synthesis" && route\.slug/u);
   assert.match(app, /route\.academyArea === "synthesis" && !route\.slug\) return "synthesis-atlas"/u);
   assert.match(chemistry, /Bu Dossier'a henüz aktarılmayan tanımlayıcılar/u);

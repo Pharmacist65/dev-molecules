@@ -34,6 +34,39 @@ export interface MoleculeStructure {
   readonly properties: Readonly<Record<string, string>>;
 }
 
+/**
+ * Returns true only when two independently loaded CTAB records preserve the
+ * same atom indices and bond graph. Matching molecular identity alone is not
+ * enough for cross-view atom highlighting.
+ */
+export function hasExactCtabAtomIndexMapping(
+  left: MoleculeStructure,
+  right: MoleculeStructure,
+): boolean {
+  if (left.atoms.length !== right.atoms.length || left.bonds.length !== right.bonds.length) {
+    return false;
+  }
+  if (!left.atoms.every((atom, index) => {
+    const candidate = right.atoms[index];
+    return Boolean(
+      candidate &&
+      atom.index === candidate.index &&
+      atom.element === candidate.element &&
+      atom.formalCharge === candidate.formalCharge &&
+      atom.isotope === candidate.isotope,
+    );
+  })) return false;
+
+  const bondKey = (bond: SdfBond): string => {
+    const start = Math.min(bond.atomA, bond.atomB);
+    const end = Math.max(bond.atomA, bond.atomB);
+    return `${start}:${end}:${bond.order}`;
+  };
+  const leftBonds = left.bonds.map(bondKey).sort();
+  const rightBonds = right.bonds.map(bondKey).sort();
+  return leftBonds.every((key, index) => key === rightBonds[index]);
+}
+
 const V2000_CHARGE_CODES: Readonly<Record<number, number>> = {
   1: 3,
   2: 2,

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "pipelineVersion": "synthesis-upstream-gap-audit-1.0.0",
+  "generatedAt": "2026-08-27T18:06:21.530Z",
+  "scope": {
+    "localResolvedSegmentCount": 2645,
+    "exactTargetIdentityCount": 2645,
+    "networkFetchPerformed": false,
+    "broadDiscoveryPerformed": false
+  },
+  "rawExactIdentityProjection": {
+    "uniqueProductIdentityCount": 639,
+    "exactIdentityBridgeEdgeCount": 3033,
+    "segmentsWithAtLeastOneUpstreamIdentityMatch": 480,
+    "finalSegmentsWithSimplePathDepthThreeOrMore": 324,
+    "moleculesWithSimplePathDepthThreeOrMore": 156,
+    "scientificAdmissionState": "rejected_fail_closed",
+    "reason": "An exact reactant/product InChIKey join proves boundary identity only; with mined participant-role errors, unresolved atom mapping and identity cycles, it does not prove a sequential synthesis transformation."
+  },
+  "materialIdentityCycles": {
+    "stronglyConnectedComponentCount": 7,
+    "involvedIdentityCount": 16,
+    "components": [
+      [
+        "MHAJPDPJQMAIIY-UHFFFAOYSA-N",
+        "MYMOFIZGZYHOMD-UHFFFAOYSA-N",
+        "QIGBRXMKCJKVMJ-UHFFFAOYSA-N",
+        "QTBSBXVTEAMEQO-UHFFFAOYSA-N"
+      ],
+      [
+        "AVKUERGKIZMTKX-NJBDSQKTSA-N",
+        "JGSARLDLIJGVTE-MBNYWOFBSA-N"
+      ],
+      [
+        "BQJCRHHNABKAKU-KBQPJGBKSA-N",
+        "OROGSEYTTFOCAN-DNJOTXNNSA-N"
+      ],
+      [
+        "CURLTUGMZLYLDI-UHFFFAOYSA-N",
+        "XSQUKJJJFZCRTK-UHFFFAOYSA-N"
+      ],
+      [
+        "FPIPGXGPPPQFEQ-OVSJKPMPSA-N",
+        "QGNJRVVDBSJHIZ-QHLGVNSISA-N"
+      ],
+      [
+        "JFPVXVDWJQMJEE-IZRZKJBUSA-N",
+        "KEJCWVGMRLCZQQ-YJBYXUATSA-N"
+      ],
+      [
+        "TZFNLOMSOLWIDK-JTQLQIEISA-N",
+        "WTDRDQBEARUVNC-LURJTMIESA-N"
+      ]
+    ]
+  },
+  "sourceAndChemistryBoundary": {
+    "datasetRecordLocatorCount": 2645,
+    "pageSchemeOrExampleLocatorCount": 0,
+    "textMinedSegmentCount": 2635,
+    "nonTextMinedSegmentCount": 10,
+    "sourceMiningStateUnknownCount": 0,
+    "exactProductRoleCount": 2281,
+    "unspecifiedProductRoleCount": 364,
+    "otherOrUnresolvedProductRoleCount": 0,
+    "unclassifiedReactionCount": 2645,
+    "atomMappingNotResolvedCount": 2645,
+    "pendingReviewCount": 2645,
+    "reviewedOrVerifiedCount": 0
+  },
+  "highConfidenceLocalAdmission": {
+    "rule": "Both joined steps must come from non-text-mined structured records, expose the exact target as an explicit product, retain exact dataset locators, exact form/stereo identity and no operational details; repeated source records and material cycles remain excluded.",
+    "eligibleSegmentCount": 0,
+    "exactIdentityBridgeEdgeCount": 0,
+    "finalSegmentsWithPathDepthThreeOrMore": 0,
+    "moleculesWithPathDepthThreeOrMore": 0
+  },
+  "outcome": {
+    "recursivelyPublishedRouteCount": 0,
+    "promotedSubstantivePartialMoleculeCount": 0,
+    "promotedCompleteLearningRouteMoleculeCount": 0,
+    "existingPublicDraftArtifactsChanged": false,
+    "hardBoundary": "The local checkpoint has no high-confidence bridge, no mapped or reviewed reaction step, and no exact original page/scheme/example locator. Recursive publication would promote text-mined participant co-occurrence into a scientific route claim."
+  },
+  "invariants": {
+    "exactInchiKeyMatchNeverTreatedAsReactionRoleProof": true,
+    "cyclicMaterialPathsRejected": true,
+    "textMinedPendingSegmentsNotPromotedByHeuristic": true,
+    "noScientificStateUpgraded": true,
+    "noNewDiscoveryOrNetworkFetch": true
+  }
+}

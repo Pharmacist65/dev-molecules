@@ -1,4 +1,7 @@
-import type { CatalogNormalizedEntity } from "@/lib/catalog";
+import {
+  resolveCatalogAssetPath,
+  type CatalogNormalizedEntity,
+} from "@/lib/catalog";
 
 import type { IndexedCatalogHit } from "./catalog-expansion";
 import {
@@ -28,6 +31,21 @@ export interface SynthesisCatalogSelection {
   readonly molecularFormula: string;
   readonly pubChemCid: number;
   readonly inchiKey: string;
+  readonly canonicalSmiles: string;
+  readonly isomericSmiles: string | null;
+  readonly structures: {
+    readonly twoD: {
+      readonly publicPath: string;
+      readonly sourceUrl: string;
+      readonly sha256: string;
+    };
+    readonly threeD: {
+      readonly publicPath: string;
+      readonly sourceUrl: string;
+      readonly sha256: string;
+      readonly origin: "computed-3d-conformer";
+    };
+  };
   readonly curatedMoleculeId: string | null;
   readonly coverage: BasicRecordSynthesisCoverage | null;
   readonly coverageLoadState: "ready" | "not_published" | "unavailable";
@@ -115,6 +133,27 @@ export async function resolveSynthesisCatalogSelection(
     molecularFormula: entity.identity.molecularFormula,
     pubChemCid: entity.identity.pubChemCid,
     inchiKey: entity.identity.inchiKey,
+    canonicalSmiles: entity.identity.canonicalSmiles,
+    isomericSmiles: entity.identity.isomericSmiles,
+    structures: {
+      twoD: {
+        publicPath: resolveCatalogAssetPath(
+          entity.structures.twoD.path,
+          options.assetBasePath,
+        ),
+        sourceUrl: entity.structures.twoD.sourceUrl,
+        sha256: entity.structures.twoD.sha256,
+      },
+      threeD: {
+        publicPath: resolveCatalogAssetPath(
+          entity.structures.threeD.path,
+          options.assetBasePath,
+        ),
+        sourceUrl: entity.structures.threeD.sourceUrl,
+        sha256: entity.structures.threeD.sha256,
+        origin: "computed-3d-conformer",
+      },
+    },
     curatedMoleculeId: options.fallbackIdentity?.curatedMoleculeId ?? null,
     coverage,
     coverageLoadState,

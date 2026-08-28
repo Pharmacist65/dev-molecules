@@ -8,6 +8,7 @@ import {
   createDrugDossierByIdOrSlug,
   getDossierLearningAvailability,
 } from "@/lib/application/dossier";
+import { getSynthesisAcademyHash } from "@/lib/application/platform-route";
 import type {
   DossierCoverageDimension,
   DossierCoverageStatus,
@@ -69,6 +70,10 @@ const copy = {
     unavailableBody: "Katalog kaydının bulunamaması molekülün yokluğu, yeniliği veya sentezlenebilirliği hakkında hüküm üretmez.",
     synthesis: "Sentez dersine git",
     generalSynthesis: "Genel Sentez Akademisi'ne git",
+    synthesisAtlas: "Sentez Atlası",
+    synthesisJourneyCta: "Sentez aşamalarını incele",
+    synthesisJourneyTitle: "Sentez ve 3B öğrenme yolculuğu",
+    synthesisJourneyBody: "Kesin molekül kimliğini 3B yapı, sentez kapsamı, kaynak destekli taslak basamaklar ve açık kanıt boşluklarıyla birlikte incele.",
     nomenclature: "Nomenklatür dersine git",
     synthesisAvailable: "Kürate edilmiş sentez dersi mevcut",
     synthesisUnavailable: "İlaç-özel sentez dersi henüz yok",
@@ -106,6 +111,10 @@ const copy = {
     unavailableBody: "Absence from the catalog does not establish molecular absence, novelty, or synthesizability.",
     synthesis: "Open synthesis lesson",
     generalSynthesis: "Open general Synthesis Academy",
+    synthesisAtlas: "Synthesis Atlas",
+    synthesisJourneyCta: "Explore synthesis",
+    synthesisJourneyTitle: "3D and synthesis learning journey",
+    synthesisJourneyBody: "Study the exact molecular identity alongside its 3D structure, synthesis coverage, draft steps linked to their sources, and explicit evidence gaps.",
     nomenclature: "Open nomenclature lesson",
     synthesisAvailable: "A curated synthesis lesson is available",
     synthesisUnavailable: "No drug-specific synthesis lesson is available yet",
@@ -240,6 +249,45 @@ function SectionCoverageMessage({
   );
 }
 
+function SynthesisJourneyCta({
+  dossier,
+  locale,
+  onOpenSynthesis,
+}: {
+  readonly dossier: DrugDossierRecord;
+  readonly locale: "tr" | "en";
+  readonly onOpenSynthesis?: (moleculeId: string) => void;
+}) {
+  const labels = copy[locale];
+  const moleculeSlug = dossier.moleculeId.slice(
+    Math.max(dossier.moleculeId.lastIndexOf(":"), dossier.moleculeId.lastIndexOf("/")) + 1,
+  );
+  const href = getSynthesisAcademyHash(moleculeSlug, "atlas");
+
+  return (
+    <aside className={styles.synthesisJourneyCta}>
+      <div>
+        <span>{locale === "tr" ? "SENTEZ VE 3B ÖĞRENME" : "3D & SYNTHESIS LEARNING"}</span>
+        <strong>{labels.synthesisJourneyTitle}</strong>
+        <p>{labels.synthesisJourneyBody}</p>
+      </div>
+      <a
+        data-synthesis-journey-cta="true"
+        href={href}
+        aria-label={labels.synthesisJourneyCta}
+        onClick={onOpenSynthesis
+          ? (event) => {
+              event.preventDefault();
+              onOpenSynthesis(dossier.moleculeId);
+            }
+          : undefined}
+      >
+        {labels.synthesisJourneyCta} <i aria-hidden="true">→</i>
+      </a>
+    </aside>
+  );
+}
+
 export function DrugDossier({
   moleculeIdOrSlug,
   locale,
@@ -286,15 +334,11 @@ export function DrugDossier({
     dossier.pharmacology.pathwayEffects.length > 0;
   const synthesisCoverage = coverageByDimension.get("synthesis");
   const nomenclatureCoverage = coverageByDimension.get("nomenclature");
-  const synthesisAction = learningAvailability.synthesis
-    ? onOpenSynthesis
-      ? { label: labels.synthesis, onClick: () => onOpenSynthesis(dossier.moleculeId) }
-      : undefined
-    : onOpenSynthesisAcademy
-      ? { label: labels.generalSynthesis, onClick: onOpenSynthesisAcademy }
-      : undefined;
   const nomenclatureAction = learningAvailability.nomenclature && onOpenNomenclature
     ? { label: labels.nomenclature, onClick: () => onOpenNomenclature(dossier.moleculeId) }
+    : undefined;
+  const generalSynthesisAction = !learningAvailability.synthesis && onOpenSynthesisAcademy
+    ? { label: labels.generalSynthesis, onClick: onOpenSynthesisAcademy }
     : undefined;
   const tabAvailability = (tab: ReferenceTab): string => {
     if (dossier.flagship) {
@@ -395,19 +439,23 @@ export function DrugDossier({
           {dossier.flagship ? (
             <>
               <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
+              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
               <FlagshipNomenclature flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" parentSmiles={dossier.chemistry.canonicalSmiles.value} />
               <FlagshipComparisons flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
               <FlagshipLearningTasks flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="story" />
             </>
           ) : (
-            <SectionCoverageMessage
-              section="synthesis"
-              eyebrow={labels.tabs.synthesis}
-              title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable}
-              message={synthesisCoverage?.reason ?? labels.unavailableSection}
-              available={learningAvailability.synthesis}
-              action={synthesisAction}
-            />
+            <>
+              <SectionCoverageMessage
+                section="synthesis"
+                eyebrow={labels.tabs.synthesis}
+                title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable}
+                message={synthesisCoverage?.reason ?? labels.unavailableSection}
+                available={learningAvailability.synthesis}
+                action={generalSynthesisAction}
+              />
+              <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
+            </>
           )}
         </div>
       ) : (
@@ -486,9 +534,12 @@ export function DrugDossier({
               ) : <><AdmePanel profiles={dossier.admeProfiles} locale={locale} expert />{hasJourneyEvidence ? <DrugJourney profile={activeProfile} pharmacology={dossier.pharmacology} locale={locale} /> : null}{dossier.metabolites.edges.length > 0 ? <MetaboliteGraph graph={dossier.metabolites} locale={locale} /> : null}</>
             ) : null}
             {activeTab === "synthesis" ? (
-              dossier.flagship
-                ? <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
-                : <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={synthesisAction} />
+              <>
+                {dossier.flagship
+                  ? <FlagshipSynthesis flagship={dossier.flagship} sources={dossier.sources} locale={locale} presentation="reference" />
+                  : <SectionCoverageMessage section="synthesis" eyebrow={labels.tabs.synthesis} title={learningAvailability.synthesis ? labels.synthesisAvailable : labels.synthesisUnavailable} message={synthesisCoverage?.reason ?? labels.unavailableSection} available={learningAvailability.synthesis} action={generalSynthesisAction} />}
+                <SynthesisJourneyCta dossier={dossier} locale={locale} onOpenSynthesis={onOpenSynthesis} />
+              </>
             ) : null}
             {activeTab === "nomenclature" ? (
               dossier.flagship

@@ -26,6 +26,20 @@ const entity = {
     pubChemCid: hit.pubChemCid,
     inchiKey: "ABCDEFGHIJKLMN-ABCDEFGHIJ-A",
     molecularFormula: hit.formula,
+    canonicalSmiles: "CCOC",
+    isomericSmiles: null,
+  },
+  structures: {
+    twoD: {
+      path: "/catalog/structures/example-2d.sdf",
+      sourceUrl: "https://pubchem.ncbi.nlm.nih.gov/compound/123",
+      sha256: "a".repeat(64),
+    },
+    threeD: {
+      path: "/catalog/structures/example-3d.sdf",
+      sourceUrl: "https://pubchem.ncbi.nlm.nih.gov/compound/123",
+      sha256: "b".repeat(64),
+    },
   },
   provenance: { snapshotId: "catalog-snapshot-v1" },
 };
@@ -57,6 +71,9 @@ test("all-catalog synthesis selection resolves exact identity and coverage witho
   assert.equal(selection.preferredName, hit.preferredName);
   assert.equal(selection.coverage, coverage);
   assert.equal(selection.coverageLoadState, "ready");
+  assert.equal(selection.canonicalSmiles, "CCOC");
+  assert.equal(selection.structures.twoD.publicPath, "/dev-molecules/catalog/structures/example-2d.sdf");
+  assert.equal(selection.structures.threeD.origin, "computed-3d-conformer");
   assert.deepEqual(requests, [{
     identity: {
       catalogEntityId: hit.id,

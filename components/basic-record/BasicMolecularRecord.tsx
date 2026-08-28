@@ -14,6 +14,10 @@ const copyByLocale = {
     back: "İlaç Atlası'na dön",
     eyebrow: "Temel Moleküler Kayıt",
     identityScope: "Kaynak eşleşmeli kimlik ve yapı kaydı",
+    synthesisLearningEyebrow: "SENTEZ VE 3B ÖĞRENME",
+    synthesisLearningTitle: "Yapıdan sentez kanıtına geç",
+    synthesisLearningBody: "Bu molekülün 3B yapısını, sentez kapsamını, kaynak destekli basamaklarını ve açık bilimsel boşluklarını tek öğrenme alanında incele.",
+    synthesisLearningAction: "Sentez aşamalarını incele",
     depthTitle: "Temel kayıt",
     depthBody: "Bu kayıt için derin farmasötik içerik henüz eklenmedi.",
     depthBodyWithSynthesis: "Bu temel kayıtta sentez kanıtı araştırma kapsamı bulunur; diğer derin farmasötik katmanlar henüz eklenmedi.",
@@ -228,6 +232,10 @@ const copyByLocale = {
     back: "Back to Drug Atlas",
     eyebrow: "Basic Molecular Record",
     identityScope: "Source-matched identity and structure record",
+    synthesisLearningEyebrow: "3D & SYNTHESIS LEARNING",
+    synthesisLearningTitle: "Move from structure to synthesis evidence",
+    synthesisLearningBody: "Explore this molecule's 3D structure, synthesis coverage, steps linked to their sources, and explicit scientific gaps in one learning workspace.",
+    synthesisLearningAction: "Explore synthesis",
     depthTitle: "Basic record",
     depthBody: "Deep pharmaceutical content has not yet been added for this record.",
     depthBodyWithSynthesis: "Synthesis evidence-discovery coverage is present in this basic record; other deep pharmaceutical layers have not yet been added.",
@@ -611,6 +619,17 @@ export function BasicMolecularRecord({
               {record.aliases.map((alias) => <li key={alias}>{alias}</li>)}
             </ul>
           ) : null}
+          <aside
+            className={styles.synthesisLearningEntry}
+            data-synthesis-learning-entry="true"
+          >
+            <span>{copy.synthesisLearningEyebrow}</span>
+            <strong>{copy.synthesisLearningTitle}</strong>
+            <p>{copy.synthesisLearningBody}</p>
+            <a href={getSynthesisAcademyHash(record.stableSlug, "atlas")}>
+              {copy.synthesisLearningAction} <i aria-hidden="true">→</i>
+            </a>
+          </aside>
         </div>
         <aside className={styles.summaryCard}>
           <span className={styles.sectionEyebrow}>{copy.identityScope}</span>

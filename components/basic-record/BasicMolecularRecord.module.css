@@ -1140,6 +1140,69 @@
   font-size: var(--font-size-secondary);
 }
 
+.synthesisLearningEntry {
+  display: grid;
+  width: min(100%, 45rem);
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  padding: var(--space-5);
+  border: var(--border-subtle-dark);
+  border-left: var(--border-width-emphasis) solid var(--color-metallic-orange);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-glass-dark-strong) 82%, transparent);
+  box-shadow: var(--shadow-subtle), var(--shadow-inset-highlight);
+  backdrop-filter: blur(var(--blur-md));
+}
+
+.synthesisLearningEntry > span {
+  color: var(--color-orange-highlight);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.synthesisLearningEntry > strong {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subtitle);
+  font-weight: var(--font-weight-display);
+}
+
+.synthesisLearningEntry > p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--color-text-muted-on-dark);
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-body);
+}
+
+.synthesisLearningEntry > a {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.875rem;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-on-dark);
+  border: var(--border-width-hairline) solid var(--border-color-orange);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-metallic-orange) 16%, transparent);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.synthesisLearningEntry > a:hover {
+  color: var(--color-deep-navy);
+  background: var(--color-metallic-orange);
+}
+
+.synthesisLearningEntry > a:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
 .summaryCard {
   padding: clamp(var(--space-5), 3vw, var(--space-8));
   color: var(--color-text-on-dark);
