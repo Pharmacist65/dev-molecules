@@ -12,6 +12,7 @@ import { useSdfResource } from "./use-sdf-resource";
 export interface MoleculeStructurePreviewProps {
   readonly structureUrl: string;
   readonly moleculeName: string;
+  readonly expectedPubChemCid?: number;
   readonly className?: string;
   readonly showHydrogens?: boolean;
   readonly onLoad?: (structure: MoleculeStructure) => void;
@@ -20,13 +21,17 @@ export interface MoleculeStructurePreviewProps {
 export function MoleculeStructurePreview({
   structureUrl,
   moleculeName,
+  expectedPubChemCid,
   className,
   showHydrogens = false,
   onLoad,
 }: MoleculeStructurePreviewProps) {
   const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const resource = useSdfResource(structureUrl.trim() ? structureUrl : null);
+  const resource = useSdfResource(structureUrl.trim() ? structureUrl : null, {
+    expectedDimension: "2d",
+    expectedPubChemCid,
+  });
   const [size, setSize] = useState({ width: 1, height: 1 });
 
   useEffect(() => {
@@ -50,7 +55,7 @@ export function MoleculeStructurePreview({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !resource.structure) return;
+    if (!canvas) return;
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     const targetWidth = Math.round(size.width * pixelRatio);
     const targetHeight = Math.round(size.height * pixelRatio);
@@ -59,6 +64,10 @@ export function MoleculeStructurePreview({
     const context = canvas.getContext("2d");
     if (!context) return;
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    if (!resource.structure) {
+      context.clearRect(0, 0, size.width, size.height);
+      return;
+    }
     drawMolecule(context, resource.structure, {
       width: size.width,
       height: size.height,

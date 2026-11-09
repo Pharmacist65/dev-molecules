@@ -6,6 +6,8 @@ import {
 } from "@/lib/domain/molecule";
 import {
   createCategoricalLensProjection,
+  createStructuralSimilarityProjection,
+  getNearestStructuralNeighbors,
   type LensProjection,
   type LensProjectionCoordinate,
 } from "@/lib/explore";
@@ -15,6 +17,12 @@ import {
   localizeExploreClassification,
   localizeExploreSummary,
 } from "./explore-copy";
+import {
+  createStudentMoleculeProfile,
+  getCuratedScaffoldFamily,
+  getCuratedScaffoldFamilyKey,
+  type StudentMoleculeProfile,
+} from "./molecule-learning";
 
 export type ExploreEvidenceTone =
   | "verified"
@@ -42,14 +50,22 @@ export interface ExploreMoleculeStructureView {
 export interface ExploreMoleculeView {
   readonly id: string;
   readonly name: string;
+  readonly canonicalSmiles: string;
   readonly formula?: string;
   readonly category?: string;
   readonly summary?: string;
   readonly lensValues: Readonly<Record<string, string>>;
+  readonly lensKeys: Readonly<Record<string, string>>;
+  readonly lensAliases: Readonly<Record<string, readonly string[]>>;
   readonly coordinates: Readonly<Record<string, LensProjectionCoordinate>>;
   readonly evidenceLabel: string;
   readonly evidenceTone: ExploreEvidenceTone;
   readonly accent: string;
+  readonly studentProfile: StudentMoleculeProfile;
+  readonly structuralNeighbors: readonly {
+    readonly id: string;
+    readonly score: number;
+  }[];
   readonly structure: ExploreMoleculeStructureView;
   readonly regulatoryProduct?: {
     readonly applicationNumber: string;
@@ -110,6 +126,7 @@ interface LensDefinition {
 
 const GENERATED_AT = "2026-08-21T00:00:00.000Z";
 const ALGORITHM_VERSION = "categorical-layout@1.0.0";
+const STRUCTURAL_LENS_ID = "structural-similarity";
 
 const LENS_DEFINITIONS: readonly LensDefinition[] = [
   {
@@ -164,6 +181,10 @@ function classificationLabel(record: MoleculeRecord, axis: MoleculeClassificatio
   return getPrimaryClassification(record, axis)?.label ?? "Sınıflandırılmamış";
 }
 
+function classificationKey(record: MoleculeRecord, axis: MoleculeClassificationAxis) {
+  return getPrimaryClassification(record, axis)?.value ?? "unclassified";
+}
+
 function classificationStatus(record: MoleculeRecord, axis: MoleculeClassificationAxis) {
   return getPrimaryClassification(record, axis)?.verification.status ?? "unknown";
 }
@@ -204,8 +225,8 @@ export function createExploreCatalogView(
   locale: Locale = "tr",
   assetBasePath = "/",
 ): ExploreCatalogView {
-  const inputVersion = `seed-catalog-2026-08-21:${records.length}`;
-  const projections = LENS_DEFINITIONS.map((definition) =>
+  const inputVersion = `catalog-snapshot-2026-08-22:${records.length}`;
+  const categoricalProjections = LENS_DEFINITIONS.map((definition) =>
     createCategoricalLensProjection(
       {
         lensId: definition.id,
@@ -223,9 +244,41 @@ export function createExploreCatalogView(
       })),
     ),
   );
+  const structuralCopy = locale === "tr"
+    ? {
+        label: "Yapısal benzerlik",
+        description: "Kanonik SMILES yol fingerprint'i ve Tanimoto katsayısıyla hesaplanan eğitim görünümü.",
+        meaning: "Yakınlık, bu sürümlü fingerprint'te ortak atom/bağ/yol özelliklerinin Tanimoto benzerliğini gösterir.",
+        doesNotMean: "Bu yerleşim ortak etki, klinik eşdeğerlik, aynı sentez rotası veya patent ilişkisi kanıtı değildir.",
+      }
+    : {
+        label: "Structural similarity",
+        description: "An educational view calculated from a canonical-SMILES path fingerprint and Tanimoto coefficient.",
+        meaning: "Proximity represents Tanimoto similarity of shared atom, bond, and path features in this versioned fingerprint.",
+        doesNotMean: "This layout is not evidence of a shared effect, clinical equivalence, synthesis route, or patent relationship.",
+      };
+  const structuralProjection = createStructuralSimilarityProjection(
+    {
+      lensId: STRUCTURAL_LENS_ID,
+      projectionId: "projection:structural-similarity:smiles-path-v1",
+      inputVersion,
+      generatedAt: GENERATED_AT,
+      meaning: structuralCopy.meaning,
+      doesNotMean: structuralCopy.doesNotMean,
+      verificationStatus: "source-supported",
+    },
+    records.map((record) => ({
+      id: record.id,
+      canonicalSmiles: record.identity.canonicalSmiles,
+    })),
+  );
+  const projections: readonly LensProjection[] = [
+    ...categoricalProjections,
+    structuralProjection,
+  ];
 
   const lenses: ExploreLensView[] = LENS_DEFINITIONS.map((definition, index) => {
-    const projection = projections[index];
+    const projection = categoricalProjections[index];
     if (!projection) throw new Error(`Missing projection for lens ${definition.id}`);
     return {
       id: definition.id,
@@ -243,14 +296,65 @@ export function createExploreCatalogView(
       verificationStatus: projection.verificationStatus,
     };
   });
+  lenses.push({
+    id: STRUCTURAL_LENS_ID,
+    label: structuralCopy.label,
+    description: structuralCopy.description,
+    projectionId: structuralProjection.projectionId,
+    algorithm: structuralProjection.algorithm,
+    algorithmVersion: structuralProjection.algorithmVersion,
+    inputVersion: structuralProjection.inputVersion,
+    inputHash: structuralProjection.inputHash,
+    generatedAt: structuralProjection.generatedAt,
+    meaning: structuralProjection.meaning,
+    doesNotMean: structuralProjection.doesNotMean,
+    coordinateSystem: structuralProjection.coordinateSystem,
+    verificationStatus: structuralProjection.verificationStatus,
+  });
 
   const molecules: ExploreMoleculeView[] = records.map((record) => {
-    const lensValues = Object.fromEntries(
-      LENS_DEFINITIONS.map((definition) => [
+    const studentProfile = createStudentMoleculeProfile(record, locale);
+    const lensValues = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => [
         definition.id,
         localizeExploreClassification(classificationLabel(record, definition.axis), locale),
-      ]),
-    );
+      ] as const),
+      [STRUCTURAL_LENS_ID, studentProfile.scaffoldFamily] as const,
+    ]);
+    const lensKeys = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => [
+        definition.id,
+        classificationKey(record, definition.axis),
+      ] as const),
+      [
+        STRUCTURAL_LENS_ID,
+        getCuratedScaffoldFamilyKey(classificationLabel(record, "structural-family")),
+      ] as const,
+    ]);
+    const lensAliases = Object.fromEntries([
+      ...LENS_DEFINITIONS.map((definition) => {
+        const sourceLabel = classificationLabel(record, definition.axis);
+        return [
+          definition.id,
+          [...new Set([
+            sourceLabel,
+            localizeExploreClassification(sourceLabel, "tr"),
+            localizeExploreClassification(sourceLabel, "en"),
+          ])],
+        ] as const;
+      }),
+      (() => {
+        const sourceLabel = classificationLabel(record, "structural-family");
+        return [
+          STRUCTURAL_LENS_ID,
+          [...new Set([
+            sourceLabel,
+            getCuratedScaffoldFamily(sourceLabel, "tr"),
+            getCuratedScaffoldFamily(sourceLabel, "en"),
+          ])],
+        ] as const;
+      })(),
+    ]);
     const coordinates = Object.fromEntries(
       projections.flatMap((projection) => {
         const coordinate = projection.coordinates[record.id];
@@ -271,14 +375,23 @@ export function createExploreCatalogView(
     return {
       id: record.id,
       name: record.identity.preferredName,
+      canonicalSmiles: record.identity.canonicalSmiles,
       formula: record.identity.molecularFormula,
       category: lensValues.target,
       summary: localizeExploreSummary(record.id, record.educationalProfile.summary, locale),
       lensValues,
+      lensKeys,
+      lensAliases,
       coordinates,
       evidenceLabel: evidenceLabel(record, statuses, locale),
       evidenceTone: evidenceTone(statuses),
       accent: ACCENTS[stableHash(record.id) % ACCENTS.length] ?? ACCENTS[0],
+      studentProfile,
+      structuralNeighbors: getNearestStructuralNeighbors(
+        structuralProjection,
+        record.id,
+        4,
+      ),
       structure: {
         pubChemCid: record.identity.pubChemCid,
         threeDUrl: resolvePublicAssetPath(threeD.publicPath, assetBasePath),

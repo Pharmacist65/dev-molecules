@@ -117,7 +117,7 @@ export const regulatoryProducts: readonly RegulatoryProductReference[] =
       verification: {
         status: "verified",
         note: "Exact Drugs@FDA application/product and ORIG/1/AP action cross-checked; approval is scoped to the linked pharmaceutical form and product.",
-        reviewedBy: "Dev Molecules Drugs@FDA exact product audit",
+        reviewedBy: "Molevren Drugs@FDA exact product audit",
         reviewedAt: RETRIEVED_AT,
       },
       limitations: [

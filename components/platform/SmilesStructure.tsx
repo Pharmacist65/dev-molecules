@@ -1,17 +1,46 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+
+export interface SmilesAtomAnchor {
+  readonly id: string;
+  readonly atomIndex: number;
+}
+
+const EMPTY_ATOM_ANCHORS: readonly SmilesAtomAnchor[] = [];
 
 interface SmilesStructureProps {
   readonly smiles: string;
   readonly label: string;
   readonly className?: string;
+  readonly atomAnchors?: readonly SmilesAtomAnchor[];
+  readonly onDrawReady?: () => void;
 }
 
-export function SmilesStructure({ smiles, label, className }: SmilesStructureProps) {
+export function SmilesStructure({
+  smiles,
+  label,
+  className,
+  atomAnchors = EMPTY_ATOM_ANCHORS,
+  onDrawReady,
+}: SmilesStructureProps) {
   const reactId = useId();
   const svgRef = useRef<SVGSVGElement>(null);
+  const onDrawReadyRef = useRef(onDrawReady);
+  const atomAnchorsRef = useRef(atomAnchors);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const anchorSignature = useMemo(
+    () => atomAnchors.map((anchor) => `${anchor.id}:${anchor.atomIndex}`).join("|"),
+    [atomAnchors],
+  );
+
+  useEffect(() => {
+    onDrawReadyRef.current = onDrawReady;
+  }, [onDrawReady]);
+
+  useEffect(() => {
+    atomAnchorsRef.current = atomAnchors;
+  }, [atomAnchors]);
 
   useEffect(() => {
     let cancelled = false;
@@ -40,7 +69,44 @@ export function SmilesStructure({ smiles, label, className }: SmilesStructurePro
               explicitHydrogens: false,
             });
             drawer.draw(tree, svgRef.current, "light");
+
+            const graph = (
+              drawer as unknown as {
+                preprocessor?: {
+                  graph?: {
+                    vertices?: readonly {
+                      position?: { readonly x?: number; readonly y?: number };
+                    }[];
+                  };
+                };
+              }
+            ).preprocessor?.graph;
+            const anchorLayer = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "g",
+            );
+            anchorLayer.setAttribute("aria-hidden", "true");
+            anchorLayer.setAttribute("data-smiles-anchor-layer", "true");
+            for (const anchor of atomAnchorsRef.current) {
+              const position = graph?.vertices?.[anchor.atomIndex]?.position;
+              if (!Number.isFinite(position?.x) || !Number.isFinite(position?.y)) {
+                continue;
+              }
+              const marker = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle",
+              );
+              marker.setAttribute("cx", String(position?.x));
+              marker.setAttribute("cy", String(position?.y));
+              marker.setAttribute("r", "0.01");
+              marker.setAttribute("fill", "transparent");
+              marker.setAttribute("pointer-events", "none");
+              marker.setAttribute("data-smiles-atom-anchor", anchor.id);
+              anchorLayer.appendChild(marker);
+            }
+            svgRef.current.appendChild(anchorLayer);
             setStatus("ready");
+            window.requestAnimationFrame(() => onDrawReadyRef.current?.());
           },
           () => {
             if (!cancelled) setStatus("error");
@@ -55,7 +121,7 @@ export function SmilesStructure({ smiles, label, className }: SmilesStructurePro
       cancelled = true;
       svg.replaceChildren();
     };
-  }, [smiles]);
+  }, [anchorSignature, smiles]);
 
   return (
     <figure

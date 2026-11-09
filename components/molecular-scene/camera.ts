@@ -96,3 +96,31 @@ export function zoomSceneCamera(
     position: add(camera.target, multiply(normalize(offset), distance)),
   };
 }
+
+function lerp(left: number, right: number, amount: number) {
+  return left + (right - left) * amount;
+}
+
+/** Pure camera interpolation used for spatial fly-to transitions. */
+export function interpolateSceneCamera(
+  from: MolecularSceneCamera,
+  to: MolecularSceneCamera,
+  progress: number,
+): MolecularSceneCamera {
+  const amount = clamp(progress, 0, 1);
+  return {
+    position: {
+      x: lerp(from.position.x, to.position.x, amount),
+      y: lerp(from.position.y, to.position.y, amount),
+      z: lerp(from.position.z, to.position.z, amount),
+    },
+    target: {
+      x: lerp(from.target.x, to.target.x, amount),
+      y: lerp(from.target.y, to.target.y, amount),
+      z: lerp(from.target.z, to.target.z, amount),
+    },
+    fov: lerp(from.fov ?? 42, to.fov ?? 42, amount),
+    near: lerp(from.near ?? 0.05, to.near ?? 0.05, amount),
+    far: lerp(from.far ?? 2500, to.far ?? 2500, amount),
+  };
+}

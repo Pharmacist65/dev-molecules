@@ -1,5 +1,5 @@
 {
-  "name": "dev-molecules-platform",
+  "name": "molevren-platform",
   "version": "0.1.0",
   "description": "Evidence-aware pharmaceutical molecular learning universe.",
   "private": true,
@@ -23,6 +23,11 @@
     "test": "npm run build && node --test tests/*.test.mjs",
     "e2e": "playwright test",
     "e2e:pages": "playwright test --config playwright.pages.config.ts",
+    "catalog:download": "node --import tsx scripts/catalog/cli.mts download",
+    "catalog:normalize": "node --import tsx scripts/catalog/cli.mts normalize",
+    "catalog:build": "node --import tsx scripts/catalog/cli.mts build",
+    "catalog:validate": "node --import tsx scripts/catalog/cli.mts validate",
+    "catalog:report": "node --import tsx scripts/catalog/cli.mts report",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
@@ -37,7 +42,6 @@
     "@cloudflare/workers-types": "5.20260821.1",
     "@eslint/js": "9.39.4",
     "@next/eslint-plugin-next": "16.2.6",
-    "@openai/sites-vite-plugin": "0.1.0",
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",

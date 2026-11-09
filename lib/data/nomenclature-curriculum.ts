@@ -593,8 +593,8 @@ export const nomenclatureExercises: readonly NomenclatureExercise[] = [
       "Parent molecule, salt form, and counter-component are three different record roles; separate them again.",
     ),
     explanation: text(
-      "Dev Molecules kimlik modelinde normalleştirilmiş propranolol ile hidroklorür formu ayrı tutulur ve kaynak ilişkisi kimyasal form üzerinden kurulur.",
-      "In the Dev Molecules identity model, normalized propranolol and its hydrochloride form remain separate, with source relationships resolved through the chemical form.",
+      "Molevren kimlik modelinde normalleştirilmiş propranolol ile hidroklorür formu ayrı tutulur ve kaynak ilişkisi kimyasal form üzerinden kurulur.",
+      "In the Molevren identity model, normalized propranolol and its hydrochloride form remain separate, with source relationships resolved through the chemical form.",
     ),
     misconception: text(
       "Bir ürün kaynağında hidroklorür formunun geçmesi, ana molekül ve form kayıtlarının tek kimlik olduğu anlamına gelmez.",

@@ -34,7 +34,7 @@ export function InstructorStudio({
 
   function exportProgress() {
     const report = {
-      product: "Dev Molecules",
+      product: "Molevren",
       exportedAt: new Date().toISOString(),
       scope: "device-local foundation learner progress",
       completedMissionIds: [...completedMissionIds],
@@ -46,7 +46,7 @@ export function InstructorStudio({
     );
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = "dev-molecules-progress.json";
+    anchor.download = "molevren-progress.json";
     anchor.click();
     URL.revokeObjectURL(url);
   }

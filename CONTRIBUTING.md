@@ -1,6 +1,6 @@
-# Contributing to Dev Molecules
+# Contributing to Molevren
 
-Thank you for helping improve Dev Molecules. Contributions should preserve both software quality and scientific boundaries.
+Thank you for helping improve Molevren. Contributions should preserve both software quality and scientific boundaries.
 
 ## Before opening a pull request
 
@@ -18,9 +18,11 @@ npm run typecheck
 npm run lint
 npm run build
 npm run build:pages
+npm run catalog:validate
 node --test tests/*.test.mjs
 npx playwright test
 npm run e2e:pages
+npm audit --omit=dev --audit-level=high
 git diff --check
 ```
 

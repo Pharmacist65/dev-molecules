@@ -1,28 +1,29 @@
-# Dev Molecules — Roadmap and Acceptance Gates
+# Molevren — Roadmap and Acceptance Gates
 
 ## Roadmap rule
 
 Explore, Learn, Build, Teach, and Discover remain the product north star. Milestones sequence scientific, technical, and operational risk; they do not redefine the platform as a permanently small demo.
 
-The 15-molecule catalog, three synthesis stories, and ten nomenclature topics are seed content. No schema, renderer, curriculum, or test may treat those counts as a product ceiling.
+The 15 curated molecule fixtures, 1,552-record generated catalog, six Synthesis Atlas routes, and 22 Nomenclature Academy exercises are current coverage. No schema, renderer, curriculum, or test may treat those counts as a product ceiling.
 
 ## Current repository baseline
 
 The current vertical slice implements:
 
 - a bilingual TR/EN product shell with all five modes;
-- Universe → cluster → molecule focus navigation;
-- checked-in, source-labelled PubChem 2D/3D SDF assets for 15 catalog identities;
-- a single shared Three.js scene with bounded progressive level of detail;
-- exact Drugs@FDA product/form/action anchors for the seed catalog;
-- three non-operational, direct-patent-anchored synthesis stories;
-- six source-aware synthesis challenge types with domain-derived validation;
-- ten nomenclature topics, ten exercises, and six deterministic interaction types;
+- Student Mode by default with a secondary Reviewer Mode under Settings;
+- Universe → spatial cluster → molecule focus/compare navigation;
+- a single shared Three.js scene with bounded progressive level of detail and 2–4 molecule comparison;
+- four versioned Explore lenses, including a scoped canonical-SMILES path fingerprint/Tanimoto lens that is explicitly not ECFP or clinical similarity;
+- an all-row static pipeline over the selected 2,331-row DrugCentral FDA list: 1,858 complete same-ID structures, 1,747 exact PubChem resolutions, 1,552 imported 2D/3D pairs, 779 explicit unresolved rows, 25 alphabetic shards, one `unclassified` therapeutic shard, and 3,104 PubChem SDF assets;
+- 15 curated regression fixtures with exact Drugs@FDA product/form/action anchors;
+- six non-operational Synthesis Atlas routes over three molecules, including five- and six-transformation source-reported paths, two atom-anchored mechanism mappings defined by foundational transformations, and fail-closed/no-decorative-arrow behavior for incompatible or unmapped steps;
+- eight Nomenclature Academy sections with 22 exercises over 20 parseable structures and 16 concrete response/widget types;
 - a guided builder, device-local teaching progress, and fail-closed evidence cards;
 - a public GitHub Pages delivery adapter over the same application shell;
 - typecheck, lint, server/static production builds, Node tests, and Playwright gates in CI.
 
-This baseline is not a production scientific publication. The synthesis atom correspondence, educational classification wording, and parts of the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or general-purpose chemical editor.
+This baseline is not a production scientific publication or the exact FDA application/product universe. All 1,552 generated therapeutic classifications remain unresolved; all 2,331 product/application links remain unresolved; one display-name form/stereo conflict stays separate; and two multicomponent parent relations remain unresolved. openFDA enrichment is available but not selected; EMA and PMDA are future adapters. Synthesis mechanisms, educational classification wording, and the curriculum remain review-gated. There is no durable multi-user database, institution tenancy, scientific review backend, or general-purpose chemical editor.
 
 ## R1 — Public engineering release
 
@@ -52,7 +53,7 @@ Turn source-audited educational drafts into reviewer-owned content without weake
 **Deliverables**
 
 - named synthetic-chemistry review of route boundaries, transformation wording, stereochemistry scope, and draft atom correspondence;
-- named organic-nomenclature/education review of the ten-topic curriculum and accepted answers;
+- named organic-nomenclature/education review of the eight-section, 22-exercise curriculum and accepted answers;
 - named pharmacology/editorial review of therapeutic-area, target-profile, and scaffold labels;
 - resolved reuse status for each published source-backed field and asset;
 - versioned correction, demotion, withdrawal, and dependent-cache invalidation procedures.
@@ -66,7 +67,7 @@ Turn source-audited educational drafts into reviewer-owned content without weake
 
 ## R3 — Durable identity, catalog, and content services
 
-Replace checked-in seed registries as the only operational store with durable, versioned ingestion and review services.
+Extend the current checked-snapshot/static-shard pipeline into durable, versioned ingestion and review services.
 
 **Deliverables**
 
@@ -90,8 +91,8 @@ Expand Learn and Build from the current vertical slice into reviewer-approved co
 
 **Deliverables**
 
-- additional reviewed synthesis narratives and versioned challenges;
-- deeper nomenclature sequences with prerequisites, misconception tracking, and accessible non-spatial alternatives;
+- qualified review and expansion of the current six Atlas routes and versioned challenges;
+- deeper Academy sequences beyond the current eight-section/22-exercise curriculum, with prerequisites, misconception tracking, and accessible non-spatial alternatives;
 - a precise 2D editor behind a replaceable chemical-tool port, with source-labelled 3D preview;
 - reusable course packs, learning objectives, rubrics, and content-version pinning;
 - learning analytics that remain separate from evidence and scientific review state.

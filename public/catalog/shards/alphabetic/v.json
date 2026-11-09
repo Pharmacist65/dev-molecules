@@ -1,0 +1,2646 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "v",
+  "records": [
+    {
+      "id": "molecule:imported:valacyclovir-hdovuknubwvhox-qmmmgpobsa-n",
+      "preferredName": "Valacyclovir",
+      "aliases": [
+        "valaciclovir"
+      ],
+      "identity": {
+        "pubChemCid": 135398742,
+        "inchiKey": "HDOVUKNUBWVHOX-QMMMGPOBSA-N",
+        "connectivityKey": "HDOVUKNUBWVHOX",
+        "stereochemicalKey": "QMMMGPOBSA",
+        "molecularFormula": "C13H20N6O4",
+        "molecularWeight": 324.34,
+        "canonicalSmiles": "CC(C)C(C(=O)OCCOCN1C=NC2=C1N=C(NC2=O)N)N",
+        "isomericSmiles": "CC(C)[C@@H](C(=O)OCCOCN1C=NC2=C1N=C(NC2=O)N)N",
+        "structureSourceFormSmiles": "CC(C)[C@H](N)C(=O)OCCOCN1C=NC2=C1N=C(N)NC2=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:HDOVUKNUBWVHOX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HDOVUKNUBWVHOX-QMMMGPOBSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:hdovuknubwvhox-qmmmgpobsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2798",
+        "sourceName": "valaciclovir",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2798",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2798",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valaciclovir",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135398742-2d.sdf",
+          "sha256": "a2092a1bf2cfa480c30315831bed10d2bdd901acbd4161b14a62d39ae1e9627b",
+          "byteLength": 6220,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398742/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135398742-3d.sdf",
+          "sha256": "1426faca4932012f93d998459dd0cb6e6aa243ef56e52391d592996e7e10f351",
+          "byteLength": 6536,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398742/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:valbenazine-gejdgvnqkabxkg-cfkgezkqsa-n",
+      "preferredName": "Valbenazine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 24795069,
+        "inchiKey": "GEJDGVNQKABXKG-CFKGEZKQSA-N",
+        "connectivityKey": "GEJDGVNQKABXKG",
+        "stereochemicalKey": "CFKGEZKQSA",
+        "molecularFormula": "C24H38N2O4",
+        "molecularWeight": 418.6,
+        "canonicalSmiles": "CC(C)CC1CN2CCC3=CC(=C(C=C3C2CC1OC(=O)C(C(C)C)N)OC)OC",
+        "isomericSmiles": "CC(C)C[C@@H]1CN2CCC3=CC(=C(C=C3[C@H]2C[C@H]1OC(=O)[C@H](C(C)C)N)OC)OC",
+        "structureSourceFormSmiles": "COC1=CC2=C(C=C1OC)[C@H]1C[C@@H](OC(=O)[C@@H](N)C(C)C)[C@H](CC(C)C)CN1CC2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GEJDGVNQKABXKG",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GEJDGVNQKABXKG-CFKGEZKQSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:gejdgvnqkabxkg-cfkgezkqsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5227",
+        "sourceName": "valbenazine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5227",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5227",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valbenazine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-24795069-2d.sdf",
+          "sha256": "d47481dc8ea7a6ac15840a02254df093966545af1c9d7f19d4cc0c81399fabdb",
+          "byteLength": 8941,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24795069/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-24795069-3d.sdf",
+          "sha256": "4eb4800d077121f0372eefed25e42232ed0ee262ff4df6665522c88bc9fc67ce",
+          "byteLength": 8844,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24795069/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:valdecoxib-lnpdtqafdnkshk-uhfffaoysa-n",
+      "preferredName": "Valdecoxib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 119607,
+        "inchiKey": "LNPDTQAFDNKSHK-UHFFFAOYSA-N",
+        "connectivityKey": "LNPDTQAFDNKSHK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H14N2O3S",
+        "molecularWeight": 314.4,
+        "canonicalSmiles": "CC1=C(C(=NO1)C2=CC=CC=C2)C3=CC=C(C=C3)S(=O)(=O)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1=C(C(=NO1)C1=CC=CC=C1)C1=CC=C(C=C1)S(N)(=O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LNPDTQAFDNKSHK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LNPDTQAFDNKSHK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:lnpdtqafdnkshk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2799",
+        "sourceName": "valdecoxib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2799",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2799",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valdecoxib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-119607-2d.sdf",
+          "sha256": "53d22641a98a2391e6b7526f32643e82f0d3e1a97cb965542d0710c26bf3037a",
+          "byteLength": 5455,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/119607/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-119607-3d.sdf",
+          "sha256": "f5afb5c1c3dcb2cdf3c2883e6c83e4ff8242650651d1f4eb2cd773445536c08d",
+          "byteLength": 6226,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/119607/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:valganciclovir-wpvfjksgqufqap-gkapjakfsa-n",
+      "preferredName": "Valganciclovir",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 135413535,
+        "inchiKey": "WPVFJKSGQUFQAP-GKAPJAKFSA-N",
+        "connectivityKey": "WPVFJKSGQUFQAP",
+        "stereochemicalKey": "GKAPJAKFSA",
+        "molecularFormula": "C14H22N6O5",
+        "molecularWeight": 354.36,
+        "canonicalSmiles": "CC(C)C(C(=O)OCC(CO)OCN1C=NC2=C1N=C(NC2=O)N)N",
+        "isomericSmiles": "CC(C)[C@@H](C(=O)OCC(CO)OCN1C=NC2=C1N=C(NC2=O)N)N",
+        "structureSourceFormSmiles": "CC(C)[C@H](N)C(=O)OCC(CO)OCN1C=NC2=C1N=C(N)NC2=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WPVFJKSGQUFQAP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WPVFJKSGQUFQAP-GKAPJAKFSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:wpvfjksgqufqap-gkapjakfsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2801",
+        "sourceName": "valganciclovir",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2801",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2801",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valganciclovir",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135413535-2d.sdf",
+          "sha256": "67e77e54863ef7f2fa47204c3a9fb32ff3b739cc68ce862e7875e3114d2f206d",
+          "byteLength": 6703,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135413535/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135413535-3d.sdf",
+          "sha256": "1fab50721b9be971562f979ac8aa0079c3bc6154b8d2e8403d15607e12539b88",
+          "byteLength": 7527,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135413535/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:valproic-acid-nijjyaxoarwzee-uhfffaoysa-n",
+      "preferredName": "Valproic Acid",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3121,
+        "inchiKey": "NIJJYAXOARWZEE-UHFFFAOYSA-N",
+        "connectivityKey": "NIJJYAXOARWZEE",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C8H16O2",
+        "molecularWeight": 144.21,
+        "canonicalSmiles": "CCCC(CCC)C(=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCC(CCC)C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:NIJJYAXOARWZEE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:NIJJYAXOARWZEE-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:nijjyaxoarwzee-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2803",
+        "sourceName": "valproic acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2803",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2803",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valproic%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3121-2d.sdf",
+          "sha256": "36e05674a776071c16e1ad5c9b84faa0957e07849eced16b5f4aa37d5c6f08c0",
+          "byteLength": 3965,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3121/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3121-3d.sdf",
+          "sha256": "aaa3942de8bb3976c8ee980b52d8655052d2a83498b40fc1afa29c0d5c818d50",
+          "byteLength": 3975,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3121/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:valsartan-acwbqpmhzxgdfx-qfipxvfzsa-n",
+      "preferredName": "Valsartan",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 60846,
+        "inchiKey": "ACWBQPMHZXGDFX-QFIPXVFZSA-N",
+        "connectivityKey": "ACWBQPMHZXGDFX",
+        "stereochemicalKey": "QFIPXVFZSA",
+        "molecularFormula": "C24H29N5O3",
+        "molecularWeight": 435.5,
+        "canonicalSmiles": "CCCCC(=O)N(CC1=CC=C(C=C1)C2=CC=CC=C2C3=NNN=N3)C(C(C)C)C(=O)O",
+        "isomericSmiles": "CCCCC(=O)N(CC1=CC=C(C=C1)C2=CC=CC=C2C3=NNN=N3)[C@@H](C(C)C)C(=O)O",
+        "structureSourceFormSmiles": "CCCCC(=O)N(CC1=CC=C(C=C1)C1=C(C=CC=C1)C1=NN=NN1)[C@@H](C(C)C)C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ACWBQPMHZXGDFX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ACWBQPMHZXGDFX-QFIPXVFZSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:acwbqpmhzxgdfx-qfipxvfzsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2806",
+        "sourceName": "valsartan",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2806",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2806",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=valsartan",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-60846-2d.sdf",
+          "sha256": "35ee9b337ed82107c483a6d02234391dae804fbb95c06a5f81f100875301e58c",
+          "byteLength": 8110,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/60846/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-60846-3d.sdf",
+          "sha256": "6a53e3036c451fed22001bbaed2d7448491972a131f62c3a1c807295efa29ed1",
+          "byteLength": 8043,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/60846/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vandetanib-uhthhesebzoynr-uhfffaoysa-n",
+      "preferredName": "Vandetanib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3081361,
+        "inchiKey": "UHTHHESEBZOYNR-UHFFFAOYSA-N",
+        "connectivityKey": "UHTHHESEBZOYNR",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C22H24BrFN4O2",
+        "molecularWeight": 475.4,
+        "canonicalSmiles": "CN1CCC(CC1)COC2=C(C=C3C(=C2)N=CN=C3NC4=C(C=C(C=C4)Br)F)OC",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC1=C(OCC2CCN(C)CC2)C=C2N=CN=C(NC3=C(F)C=C(Br)C=C3)C2=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:UHTHHESEBZOYNR",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:UHTHHESEBZOYNR-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:uhthhesebzoynr-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4178",
+        "sourceName": "vandetanib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4178",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4178",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vandetanib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3081361-2d.sdf",
+          "sha256": "969adb7c7d59ca83e1cd2ec7e68ced17914d8c4b62bdcd9fdb249e29cd3d6cb8",
+          "byteLength": 7435,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3081361/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3081361-3d.sdf",
+          "sha256": "811945f900e2a580d01f3ab87dd401d81784eea67c059ad7027e33a2511fdc0a",
+          "byteLength": 8669,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3081361/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vardenafil-seckrcoljrrggv-uhfffaoysa-n",
+      "preferredName": "Vardenafil",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 135400189,
+        "inchiKey": "SECKRCOLJRRGGV-UHFFFAOYSA-N",
+        "connectivityKey": "SECKRCOLJRRGGV",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C23H32N6O4S",
+        "molecularWeight": 488.6,
+        "canonicalSmiles": "CCCC1=NC(=C2N1N=C(NC2=O)C3=C(C=CC(=C3)S(=O)(=O)N4CCN(CC4)CC)OCC)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCC1=NC(C)=C2N1N=C(NC2=O)C1=CC(=CC=C1OCC)S(=O)(=O)N1CCN(CC)CC1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SECKRCOLJRRGGV",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SECKRCOLJRRGGV-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:seckrcoljrrggv-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2809",
+        "sourceName": "vardenafil",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2809",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2809",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vardenafil",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135400189-2d.sdf",
+          "sha256": "355120ec49619b1516beed4281ebaff8480c27f7ff637a866f7c3b4a13767fca",
+          "byteLength": 8659,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135400189/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135400189-3d.sdf",
+          "sha256": "a56d754b0ac2799ef09c3c2f742552d97cbc881da46bcca75c23ff74739263b3",
+          "byteLength": 8911,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135400189/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:varenicline-jqshbvhomnkwft-dtorhvgosa-n",
+      "preferredName": "Varenicline",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5310966,
+        "inchiKey": "JQSHBVHOMNKWFT-DTORHVGOSA-N",
+        "connectivityKey": "JQSHBVHOMNKWFT",
+        "stereochemicalKey": "DTORHVGOSA",
+        "molecularFormula": "C13H13N3",
+        "molecularWeight": 211.26,
+        "canonicalSmiles": "C1C2CNCC1C3=CC4=NC=CN=C4C=C23",
+        "isomericSmiles": "C1[C@@H]2CNC[C@H]1C3=CC4=NC=CN=C4C=C23",
+        "structureSourceFormSmiles": "C1[C@H]2CNC[C@@H]1C1=C2C=C2N=CC=NC2=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:JQSHBVHOMNKWFT",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:JQSHBVHOMNKWFT-DTORHVGOSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:jqshbvhomnkwft-dtorhvgosa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2808",
+        "sourceName": "varenicline",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2808",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2808",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=varenicline",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5310966-2d.sdf",
+          "sha256": "001e9e743e5fb6df883e7d135fc4649e2b33258ccf1ca9359eb5f4371a9ccff4",
+          "byteLength": 4940,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5310966/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5310966-3d.sdf",
+          "sha256": "44cc0d541115ea93eaa4b8edb76d5f071a0aa2241161de0c1ad3cd2ec8056d6b",
+          "byteLength": 5244,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5310966/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vecuronium-bgszaxllhyersy-xqigcqgxsa-n",
+      "preferredName": "Vecuronium",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 39765,
+        "inchiKey": "BGSZAXLLHYERSY-XQIGCQGXSA-N",
+        "connectivityKey": "BGSZAXLLHYERSY",
+        "stereochemicalKey": "XQIGCQGXSA",
+        "molecularFormula": "C34H57N2O4+",
+        "molecularWeight": 557.8,
+        "canonicalSmiles": "CC(=O)OC1CC2CCC3C(C2(CC1N4CCCCC4)C)CCC5(C3CC(C5OC(=O)C)[N+]6(CCCCC6)C)C",
+        "isomericSmiles": "CC(=O)O[C@H]1C[C@@H]2CC[C@@H]3[C@@H]([C@]2(C[C@@H]1N4CCCCC4)C)CC[C@]5([C@H]3C[C@@H]([C@@H]5OC(=O)C)[N+]6(CCCCC6)C)C",
+        "structureSourceFormSmiles": "CC(=O)O[C@H]1[C@H](C[C@H]2[C@@H]3CC[C@H]4C[C@H](OC(C)=O)[C@H](C[C@]4(C)[C@H]3CC[C@]12C)N1CCCCC1)[N+]1(C)CCCCC1",
+        "chargeLayer": "q+1"
+      },
+      "parentEntity": {
+        "id": "parent:BGSZAXLLHYERSY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BGSZAXLLHYERSY-XQIGCQGXSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bgszaxllhyersy-xqigcqgxsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2811",
+        "sourceName": "vecuronium",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2811",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2811",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vecuronium",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-39765-2d.sdf",
+          "sha256": "5f48407c76e636ab3110fdb0bdac26f9ba18179b2ac21f13ce7933c013a59d86",
+          "byteLength": 12293,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/39765/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-39765-3d.sdf",
+          "sha256": "560d688b0efb673e57a944b838c6101eeda352f08901fc751cd4c332d4bc2b4b",
+          "byteLength": 11897,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/39765/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vemurafenib-gpxbxxgiaqbqni-uhfffaoysa-n",
+      "preferredName": "Vemurafenib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 42611257,
+        "inchiKey": "GPXBXXGIAQBQNI-UHFFFAOYSA-N",
+        "connectivityKey": "GPXBXXGIAQBQNI",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C23H18ClF2N3O3S",
+        "molecularWeight": 489.9,
+        "canonicalSmiles": "CCCS(=O)(=O)NC1=C(C(=C(C=C1)F)C(=O)C2=CNC3=C2C=C(C=N3)C4=CC=C(C=C4)Cl)F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCS(=O)(=O)NC1=CC=C(F)C(C(=O)C2=CNC3=NC=C(C=C23)C2=CC=C(Cl)C=C2)=C1F",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GPXBXXGIAQBQNI",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GPXBXXGIAQBQNI-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:gpxbxxgiaqbqni-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4185",
+        "sourceName": "vemurafenib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4185",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4185",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vemurafenib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-42611257-2d.sdf",
+          "sha256": "71bd8d3a73d9be627e2da9f5f7ca9544699405a23ce48376e9f506aa39927ab6",
+          "byteLength": 7339,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/42611257/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-42611257-3d.sdf",
+          "sha256": "54f509caf81a6325b73c4266b12bcfcaab7cd86e6190d4e3d24004a847abab29",
+          "byteLength": 7623,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/42611257/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:venlafaxine-pnvnvhuzrojltj-uhfffaoysa-n",
+      "preferredName": "Venlafaxine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5656,
+        "inchiKey": "PNVNVHUZROJLTJ-UHFFFAOYSA-N",
+        "connectivityKey": "PNVNVHUZROJLTJ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H27NO2",
+        "molecularWeight": 277.4,
+        "canonicalSmiles": "CN(C)CC(C1=CC=C(C=C1)OC)C2(CCCCC2)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC1=CC=C(C=C1)C(CN(C)C)C1(O)CCCCC1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:PNVNVHUZROJLTJ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:PNVNVHUZROJLTJ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:pnvnvhuzrojltj-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2813",
+        "sourceName": "venlafaxine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2813",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2813",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=venlafaxine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5656-2d.sdf",
+          "sha256": "36b5d71862c1c50666801089aefc43acc8669289589373b704b4eae559af21a9",
+          "byteLength": 6356,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5656/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5656-3d.sdf",
+          "sha256": "148df6a10ce663d3ed57503d48260bd8a3a75499fa49b46ec81280d06756ce43",
+          "byteLength": 7268,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5656/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:verapamil-sgtnsnpwrioybx-uhfffaoysa-n",
+      "preferredName": "Verapamil",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 2520,
+        "inchiKey": "SGTNSNPWRIOYBX-UHFFFAOYSA-N",
+        "connectivityKey": "SGTNSNPWRIOYBX",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C27H38N2O4",
+        "molecularWeight": 454.6,
+        "canonicalSmiles": "CC(C)C(CCCN(C)CCC1=CC(=C(C=C1)OC)OC)(C#N)C2=CC(=C(C=C2)OC)OC",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC1=C(OC)C=C(CCN(C)CCCC(C#N)(C(C)C)C2=CC(OC)=C(OC)C=C2)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SGTNSNPWRIOYBX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SGTNSNPWRIOYBX-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:sgtnsnpwrioybx-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2815",
+        "sourceName": "verapamil",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2815",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2815",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=verapamil",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-2520-2d.sdf",
+          "sha256": "43d7472e6f6f849b81146164c04375f77669c1e9c2e2832adeef02f96884f1b0",
+          "byteLength": 8910,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2520/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-2520-3d.sdf",
+          "sha256": "57a6eb5554484ee4abf8c0502001137f00ef6a557571f77e9ee188eb7128aa17",
+          "byteLength": 9595,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2520/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vericiguat-qzfhixarhdbpby-uhfffaoysa-n",
+      "preferredName": "Vericiguat",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 54674461,
+        "inchiKey": "QZFHIXARHDBPBY-UHFFFAOYSA-N",
+        "connectivityKey": "QZFHIXARHDBPBY",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C19H16F2N8O2",
+        "molecularWeight": 426.4,
+        "canonicalSmiles": "COC(=O)NC1=C(N=C(N=C1N)C2=NN(C3=C2C=C(C=N3)F)CC4=CC=CC=C4F)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC(=O)NC1=C(N=C(N=C1N)C2=NN(C3=C2C=C(C=N3)F)CC4=CC=CC=C4F)N",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QZFHIXARHDBPBY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QZFHIXARHDBPBY-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:qzfhixarhdbpby-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5439",
+        "sourceName": "vericiguat",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5439",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5439",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vericiguat",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-54674461-2d.sdf",
+          "sha256": "2efda79fa8e1dabcb5a32dd74b4c743712c69d2f1532e9a7f1a549459d7ca049",
+          "byteLength": 6988,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54674461/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-54674461-3d.sdf",
+          "sha256": "6f6ee04a25b9c71303169c7fa26d90f8a9d93cb7a965defcf1896666d39e3ef3",
+          "byteLength": 8067,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54674461/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vibegron-djxriqmcroircz-xoeocaajsa-n",
+      "preferredName": "Vibegron",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 44472635,
+        "inchiKey": "DJXRIQMCROIRCZ-XOEOCAAJSA-N",
+        "connectivityKey": "DJXRIQMCROIRCZ",
+        "stereochemicalKey": "XOEOCAAJSA",
+        "molecularFormula": "C26H28N4O3",
+        "molecularWeight": 444.5,
+        "canonicalSmiles": "C1CC(NC1CC2=CC=C(C=C2)NC(=O)C3CCC4=NC=CC(=O)N34)C(C5=CC=CC=C5)O",
+        "isomericSmiles": "C1C[C@@H](N[C@@H]1CC2=CC=C(C=C2)NC(=O)[C@@H]3CCC4=NC=CC(=O)N34)[C@@H](C5=CC=CC=C5)O",
+        "structureSourceFormSmiles": "O[C@@H]([C@H]1CC[C@@H](CC2=CC=C(NC(=O)[C@@H]3CCC4=NC=CC(=O)N34)C=C2)N1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DJXRIQMCROIRCZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DJXRIQMCROIRCZ-XOEOCAAJSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:djxriqmcroircz-xoeocaajsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5311",
+        "sourceName": "vibegron",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5311",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5311",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vibegron",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-44472635-2d.sdf",
+          "sha256": "9bf5d1d0b9e515d8627df0a70a785204e42b73760912f9ae03f7d05f3300acd4",
+          "byteLength": 8552,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/44472635/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-44472635-3d.sdf",
+          "sha256": "3f8f3f22a6b6f39c3138ca2824c5b1a064f5ab2b64e7c8795607a5595ba448e9",
+          "byteLength": 9188,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/44472635/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vidarabine-oirdtqyftabqoq-uhtzmrcnsa-n",
+      "preferredName": "Vidarabine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 21704,
+        "inchiKey": "OIRDTQYFTABQOQ-UHTZMRCNSA-N",
+        "connectivityKey": "OIRDTQYFTABQOQ",
+        "stereochemicalKey": "UHTZMRCNSA",
+        "molecularFormula": "C10H13N5O4",
+        "molecularWeight": 267.24,
+        "canonicalSmiles": "C1=NC(=C2C(=N1)N(C=N2)C3C(C(C(O3)CO)O)O)N",
+        "isomericSmiles": "C1=NC(=C2C(=N1)N(C=N2)[C@H]3[C@H]([C@@H]([C@H](O3)CO)O)O)N",
+        "structureSourceFormSmiles": "NC1=NC=NC2=C1N=CN2[C@@H]1O[C@H](CO)[C@@H](O)[C@@H]1O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:OIRDTQYFTABQOQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:OIRDTQYFTABQOQ-UHTZMRCNSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:oirdtqyftabqoq-uhtzmrcnsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2818",
+        "sourceName": "vidarabine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2818",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2818",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vidarabine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-21704-2d.sdf",
+          "sha256": "232593751573d2a5b00ed10515ca21bbb501fdf31d09582b996f3d4d9304e41c",
+          "byteLength": 5195,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/21704/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-21704-3d.sdf",
+          "sha256": "5f0f72c6ed0788fd5bfd4b3deca12b17ff5ddf62bd897cfb45d172d133e40067",
+          "byteLength": 5929,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/21704/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vigabatrin-pjdflnioauizsl-uhfffaoysa-n",
+      "preferredName": "Vigabatrin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5665,
+        "inchiKey": "PJDFLNIOAUIZSL-UHFFFAOYSA-N",
+        "connectivityKey": "PJDFLNIOAUIZSL",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C6H11NO2",
+        "molecularWeight": 129.16,
+        "canonicalSmiles": "C=CC(CCC(=O)O)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NC(CCC(O)=O)C=C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:PJDFLNIOAUIZSL",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:PJDFLNIOAUIZSL-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:pjdflnioauizsl-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2819",
+        "sourceName": "vigabatrin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2819",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2819",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vigabatrin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5665-2d.sdf",
+          "sha256": "392f6b4bc0626cd77ff3f09a69ce3670e88d53c731658e6a44d12f7be79bc454",
+          "byteLength": 3456,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5665/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5665-3d.sdf",
+          "sha256": "b2b1d36e53ac9738b4c95251c53cbf04a7b1980465d74b11bc303e218fd0bd1d",
+          "byteLength": 3356,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5665/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vilazodone-sgegoxdysfkcpt-uhfffaoysa-n",
+      "preferredName": "Vilazodone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 6918314,
+        "inchiKey": "SGEGOXDYSFKCPT-UHFFFAOYSA-N",
+        "connectivityKey": "SGEGOXDYSFKCPT",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C26H27N5O2",
+        "molecularWeight": 441.5,
+        "canonicalSmiles": "C1CN(CCN1CCCCC2=CNC3=C2C=C(C=C3)C#N)C4=CC5=C(C=C4)OC(=C5)C(=O)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NC(=O)C1=CC2=C(O1)C=CC(=C2)N1CCN(CCCCC2=CNC3=C2C=C(C=C3)C#N)CC1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SGEGOXDYSFKCPT",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SGEGOXDYSFKCPT-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:sgegoxdysfkcpt-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4223",
+        "sourceName": "vilazodone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4223",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4223",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vilazodone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6918314-2d.sdf",
+          "sha256": "ace7df3355d9d6f6982083ebeecdc9a25f21faadf3a29f138a5bc6d7a912fb66",
+          "byteLength": 7958,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6918314/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6918314-3d.sdf",
+          "sha256": "20f90272f17270e6c1fcc08b029993a8d2030e457a352033f509c3653858a0e0",
+          "byteLength": 9181,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6918314/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:viloxazine-ywphccpcqojsgz-uhfffaoysa-n",
+      "preferredName": "Viloxazine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5666,
+        "inchiKey": "YWPHCCPCQOJSGZ-UHFFFAOYSA-N",
+        "connectivityKey": "YWPHCCPCQOJSGZ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C13H19NO3",
+        "molecularWeight": 237.29,
+        "canonicalSmiles": "CCOC1=CC=CC=C1OCC2CNCCO2",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCOC1=CC=CC=C1OCC1CNCCO1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:YWPHCCPCQOJSGZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:YWPHCCPCQOJSGZ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ywphccpcqojsgz-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2820",
+        "sourceName": "viloxazine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2820",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2820",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=viloxazine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5666-2d.sdf",
+          "sha256": "adf34e86d4e048d0a53853777842e3ea27da56c3b12da05b9452e1ce39039ab9",
+          "byteLength": 5167,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5666/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5666-3d.sdf",
+          "sha256": "e177f6f4d75eeff4c64b81aa793bfece28778cffd56edef95af3b2416da4b577",
+          "byteLength": 6113,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5666/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:viomycin-gxfaifrpokbqrv-ghxctmglsa-n",
+      "preferredName": "Viomycin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 135398671,
+        "inchiKey": "GXFAIFRPOKBQRV-GHXCTMGLSA-N",
+        "connectivityKey": "GXFAIFRPOKBQRV",
+        "stereochemicalKey": "GHXCTMGLSA",
+        "molecularFormula": "C25H43N13O10",
+        "molecularWeight": 685.7,
+        "canonicalSmiles": "C1C(N=C(NC1O)N)C2C(=O)NCC(C(=O)NC(C(=O)NC(C(=O)NC(=CNC(=O)N)C(=O)N2)CO)CO)NC(=O)CC(CCCN)N",
+        "isomericSmiles": "C1[C@@H](N=C(N[C@H]1O)N)[C@H]2C(=O)NC[C@@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N/C(=C\\NC(=O)N)/C(=O)N2)CO)CO)NC(=O)C[C@H](CCCN)N",
+        "structureSourceFormSmiles": "NCCC[C@H](N)CC(=O)N[C@H]1CNC(=O)[C@@H](NC(=O)\\C(NC(=O)[C@H](CO)NC(=O)[C@H](CO)NC1=O)=C\\NC(N)=O)[C@H]1C[C@H](O)N=C(N)N1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GXFAIFRPOKBQRV",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GXFAIFRPOKBQRV-GHXCTMGLSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:gxfaifrpokbqrv-ghxctmglsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2830",
+        "sourceName": "viomycin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2830",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2830",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=viomycin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135398671-2d.sdf",
+          "sha256": "85900e06806c26b411d6d1b991093ec595285d36921c19df989f40fe670e8521",
+          "byteLength": 11843,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398671/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135398671-3d.sdf",
+          "sha256": "ccaaa65c7f06c24f029661df25e1a15c8d8c0edda0807fa46d0b02a5ed6bbf99",
+          "byteLength": 10499,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398671/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vismodegib-bpqmgsktayivfo-uhfffaoysa-n",
+      "preferredName": "Vismodegib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 24776445,
+        "inchiKey": "BPQMGSKTAYIVFO-UHFFFAOYSA-N",
+        "connectivityKey": "BPQMGSKTAYIVFO",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C19H14Cl2N2O3S",
+        "molecularWeight": 421.3,
+        "canonicalSmiles": "CS(=O)(=O)C1=CC(=C(C=C1)C(=O)NC2=CC(=C(C=C2)Cl)C3=CC=CC=N3)Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CS(=O)(=O)C1=CC(Cl)=C(C=C1)C(=O)NC1=CC=C(Cl)C(=C1)C1=CC=CC=N1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BPQMGSKTAYIVFO",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BPQMGSKTAYIVFO-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:bpqmgsktayivfo-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4227",
+        "sourceName": "vismodegib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4227",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4227",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vismodegib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-24776445-2d.sdf",
+          "sha256": "077ddd9c0eb420f1487b18930ad21f3bd19f0fe248765e46a3f69190eea26ceb",
+          "byteLength": 6068,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24776445/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-24776445-3d.sdf",
+          "sha256": "baf74c07439e42439c6f3fab7bd977eed08f496fd9a44993f13fa4e95ee45204",
+          "byteLength": 7675,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24776445/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vitamin-d3-qysxjufsxhhaji-yrzjjwoysa-n",
+      "preferredName": "Vitamin D3",
+      "aliases": [
+        "colecalciferol"
+      ],
+      "identity": {
+        "pubChemCid": 5280795,
+        "inchiKey": "QYSXJUFSXHHAJI-YRZJJWOYSA-N",
+        "connectivityKey": "QYSXJUFSXHHAJI",
+        "stereochemicalKey": "YRZJJWOYSA",
+        "molecularFormula": "C27H44O",
+        "molecularWeight": 384.6,
+        "canonicalSmiles": "CC(C)CCCC(C)C1CCC2C1(CCCC2=CC=C3CC(CCC3=C)O)C",
+        "isomericSmiles": "C[C@H](CCCC(C)C)[C@H]1CC[C@@H]\\2[C@@]1(CCC/C2=C\\C=C/3\\C[C@H](CCC3=C)O)C",
+        "structureSourceFormSmiles": "CC(C)CCC[C@@H](C)[C@H]1CC[C@H]2\\C(CCC[C@]12C)=C\\C=C1\\C[C@@H](O)CCC1=C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QYSXJUFSXHHAJI",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QYSXJUFSXHHAJI-YRZJJWOYSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:qysxjufsxhhaji-yrzjjwoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2840",
+        "sourceName": "colecalciferol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2840",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2840",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=colecalciferol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5280795-2d.sdf",
+          "sha256": "217339a6f5f4a0cbbdcc90750ba4572144e7bf306abface9b9b4b7d5d3489608",
+          "byteLength": 9417,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5280795/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5280795-3d.sdf",
+          "sha256": "4616b9458e79bd35ee183a85e5f9c433e52cee9a11fd88fa41e0dfd05eba247f",
+          "byteLength": 9578,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5280795/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vitamin-e-gvjhhuawpyxkbd-ieosbipesa-n",
+      "preferredName": "Vitamin E",
+      "aliases": [
+        "tocofersolan"
+      ],
+      "identity": {
+        "pubChemCid": 14985,
+        "inchiKey": "GVJHHUAWPYXKBD-IEOSBIPESA-N",
+        "connectivityKey": "GVJHHUAWPYXKBD",
+        "stereochemicalKey": "IEOSBIPESA",
+        "molecularFormula": "C29H50O2",
+        "molecularWeight": 430.7,
+        "canonicalSmiles": "CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C",
+        "isomericSmiles": "CC1=C(C2=C(CC[C@@](O2)(C)CCC[C@H](C)CCC[C@H](C)CCCC(C)C)C(=C1O)C)C",
+        "structureSourceFormSmiles": "CC(C)CCC[C@@H](C)CCC[C@@H](C)CCC[C@]1(C)CCC2=C(C)C(O)=C(C)C(C)=C2O1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GVJHHUAWPYXKBD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GVJHHUAWPYXKBD-IEOSBIPESA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:gvjhhuawpyxkbd-ieosbipesa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4280",
+        "sourceName": "tocofersolan",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4280",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4280",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=tocofersolan",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-14985-2d.sdf",
+          "sha256": "f336111a00d2c6d77bcbc880348c171faa35b8cb14af4b37b69f2f558db3a23d",
+          "byteLength": 9756,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/14985/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-14985-3d.sdf",
+          "sha256": "613475ab34d7ade2dcaf6e25a12e81ff02cfb08cab42f8b04d889253112adddb",
+          "byteLength": 9726,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/14985/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vorapaxar-zbgxuvoiwdmmje-qhnzekiysa-n",
+      "preferredName": "Vorapaxar",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 10077130,
+        "inchiKey": "ZBGXUVOIWDMMJE-QHNZEKIYSA-N",
+        "connectivityKey": "ZBGXUVOIWDMMJE",
+        "stereochemicalKey": "QHNZEKIYSA",
+        "molecularFormula": "C29H33FN2O4",
+        "molecularWeight": 492.6,
+        "canonicalSmiles": "CCOC(=O)NC1CCC2C(C1)CC3C(C2C=CC4=NC=C(C=C4)C5=CC(=CC=C5)F)C(OC3=O)C",
+        "isomericSmiles": "CCOC(=O)N[C@@H]1CC[C@@H]2[C@@H](C1)C[C@@H]3[C@H]([C@H]2/C=C/C4=NC=C(C=C4)C5=CC(=CC=C5)F)[C@H](OC3=O)C",
+        "structureSourceFormSmiles": "CCOC(=O)N[C@@H]1CC[C@@H]2[C@H](C[C@@H]3[C@@H]([C@@H](C)OC3=O)[C@H]2\\C=C\\C2=CC=C(C=N2)C2=CC(F)=CC=C2)C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ZBGXUVOIWDMMJE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZBGXUVOIWDMMJE-QHNZEKIYSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:zbgxuvoiwdmmje-qhnzekiysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4870",
+        "sourceName": "vorapaxar",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4870",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4870",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vorapaxar",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-10077130-2d.sdf",
+          "sha256": "193d43188a995c22c8641a391396de7d572675a2d95a10438dfea36aabb7513a",
+          "byteLength": 9629,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10077130/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-10077130-3d.sdf",
+          "sha256": "1d121717458fde0ddb4d5f7882f7872d0434570b9940d70bb6fa804c83a72f8b",
+          "byteLength": 9485,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10077130/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:voriconazole-bcehbskcwlpmdn-mgplvramsa-n",
+      "preferredName": "Voriconazole",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 71616,
+        "inchiKey": "BCEHBSKCWLPMDN-MGPLVRAMSA-N",
+        "connectivityKey": "BCEHBSKCWLPMDN",
+        "stereochemicalKey": "MGPLVRAMSA",
+        "molecularFormula": "C16H14F3N5O",
+        "molecularWeight": 349.31,
+        "canonicalSmiles": "CC(C1=NC=NC=C1F)C(CN2C=NC=N2)(C3=C(C=C(C=C3)F)F)O",
+        "isomericSmiles": "C[C@@H](C1=NC=NC=C1F)[C@](CN2C=NC=N2)(C3=C(C=C(C=C3)F)F)O",
+        "structureSourceFormSmiles": "C[C@@H](C1=NC=NC=C1F)[C@](O)(CN1C=NC=N1)C1=C(F)C=C(F)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BCEHBSKCWLPMDN",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BCEHBSKCWLPMDN-MGPLVRAMSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bcehbskcwlpmdn-mgplvramsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2846",
+        "sourceName": "voriconazole",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2846",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2846",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=voriconazole",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-71616-2d.sdf",
+          "sha256": "25c9b8be95c162fdc5d109080c9aa32bb842057376314126ca49f786407a842d",
+          "byteLength": 6020,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71616/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-71616-3d.sdf",
+          "sha256": "0b174be5d6ec7827ea5a701e61068aa16e6cc9c256198826901a075aa0288203",
+          "byteLength": 6394,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71616/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vorinostat-waexfxrvdqxref-uhfffaoysa-n",
+      "preferredName": "Vorinostat",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5311,
+        "inchiKey": "WAEXFXRVDQXREF-UHFFFAOYSA-N",
+        "connectivityKey": "WAEXFXRVDQXREF",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C14H20N2O3",
+        "molecularWeight": 264.32,
+        "canonicalSmiles": "C1=CC=C(C=C1)NC(=O)CCCCCCC(=O)NO",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "ONC(=O)CCCCCCC(=O)NC1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WAEXFXRVDQXREF",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WAEXFXRVDQXREF-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:waexfxrvdqxref-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4124",
+        "sourceName": "vorinostat",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4124",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4124",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vorinostat",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5311-2d.sdf",
+          "sha256": "1cbcbe102e6efb662c08335dfeda99e1acd9d9cd9d45e8234b5322096dac3360",
+          "byteLength": 5467,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5311/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5311-3d.sdf",
+          "sha256": "2d878b9c08d8c94f65e3bfaa43028a6ec6948c4c14b32ec1e57412b00b04534a",
+          "byteLength": 6445,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5311/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:vortioxetine-yqnwzwmkldqsac-uhfffaoysa-n",
+      "preferredName": "Vortioxetine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 9966051,
+        "inchiKey": "YQNWZWMKLDQSAC-UHFFFAOYSA-N",
+        "connectivityKey": "YQNWZWMKLDQSAC",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H22N2S",
+        "molecularWeight": 298.4,
+        "canonicalSmiles": "CC1=CC(=C(C=C1)SC2=CC=CC=C2N3CCNCC3)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1=CC=C(SC2=C(C=CC=C2)N2CCNCC2)C(C)=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:YQNWZWMKLDQSAC",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:YQNWZWMKLDQSAC-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:yqnwzwmkldqsac-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4806",
+        "sourceName": "vortioxetine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4806",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4806",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=vortioxetine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-9966051-2d.sdf",
+          "sha256": "09c2d4db4c241ffe8d9d52d06770221368554db44a0333a4a9f546d91b26ff3a",
+          "byteLength": 6001,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9966051/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-9966051-3d.sdf",
+          "sha256": "11dced2473b91fc3edc308eb8404530cbbd86cbab3fecfd967e5fd692fd18fe6",
+          "byteLength": 6788,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9966051/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:voxelotor-fwcvzaqenizvmy-uhfffaoysa-n",
+      "preferredName": "Voxelotor",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 71602803,
+        "inchiKey": "FWCVZAQENIZVMY-UHFFFAOYSA-N",
+        "connectivityKey": "FWCVZAQENIZVMY",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C19H19N3O3",
+        "molecularWeight": 337.4,
+        "canonicalSmiles": "CC(C)N1C(=CC=N1)C2=C(C=CC=N2)COC3=CC=CC(=C3C=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(C)N1N=CC=C1C1=C(COC2=C(C=O)C(O)=CC=C2)C=CC=N1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FWCVZAQENIZVMY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FWCVZAQENIZVMY-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fwcvzaqenizvmy-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5356",
+        "sourceName": "voxelotor",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5356",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5356",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=voxelotor",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-71602803-2d.sdf",
+          "sha256": "70a487a88c540d6de0a421c4b6968f208fab85203fa64f08d4f0bf0830694de4",
+          "byteLength": 6327,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71602803/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-71602803-3d.sdf",
+          "sha256": "ddd4aa650af91022f2a9991560fd0e94cf5169db9653901031893e2e4c43825a",
+          "byteLength": 7609,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71602803/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

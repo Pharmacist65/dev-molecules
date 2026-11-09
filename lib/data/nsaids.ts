@@ -279,7 +279,7 @@ const toRecord = (seed: NsaidSeed): MoleculeRecord => {
         note:
           "Normalized identity fields checked against PubChem PUG REST on 2026-08-21.",
         reviewedAt: RETRIEVED_AT,
-        reviewedBy: "Dev Molecules PubChem identity check",
+        reviewedBy: "Molevren PubChem identity check",
       },
       sourceIds: [pubChemSourceId],
     },
@@ -399,7 +399,7 @@ const toRecord = (seed: NsaidSeed): MoleculeRecord => {
           note:
             "Computed PubChem conformer; it must never be labeled as an experimental bound pose.",
           reviewedAt: RETRIEVED_AT,
-          reviewedBy: "Dev Molecules asset integrity check",
+          reviewedBy: "Molevren asset integrity check",
         },
       },
     ],
@@ -414,7 +414,7 @@ const toRecord = (seed: NsaidSeed): MoleculeRecord => {
         verification: {
           status: "verified",
           reviewedAt: RETRIEVED_AT,
-          reviewedBy: "Dev Molecules PubChem identity check",
+          reviewedBy: "Molevren PubChem identity check",
         },
         sourceIds: [pubChemSourceId],
         limitations: [

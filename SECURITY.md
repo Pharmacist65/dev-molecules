@@ -1,6 +1,6 @@
 # Security policy
 
-Dev Molecules is an educational software project. It is not a clinical decision-support system and it must not receive patient data, credentials, private molecular structures, or unpublished research material through public issue reports.
+Molevren is an educational software project. It is not a clinical decision-support system and it must not receive patient data, credentials, private molecular structures, or unpublished research material through public issue reports.
 
 ## Reporting a vulnerability
 

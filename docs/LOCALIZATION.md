@@ -1,8 +1,8 @@
-# Dev Molecules — Localization
+# Molevren — Localization
 
 ## Supported locales
 
-Dev Molecules currently ships two complete product locales:
+Molevren currently ships two complete product locales:
 
 - `tr` — Turkish, the deterministic fallback;
 - `en` — English.
@@ -51,12 +51,12 @@ The following content is localized:
 
 - navigation, controls, accessibility labels, loading/error states, and evidence boundaries;
 - Explore summaries and the display labels for canonical classification values;
-- synthesis story, source-scope, material, step, atom-map, limitation, and safety narration;
-- synthesis challenge prompts, options, and feedback;
-- nomenclature topics, prompts, hints, options, explanations, misconceptions, and source labels;
+- Synthesis Atlas route, source-scope, material, transformation, mechanism, limitation, and safety narration;
+- Atlas challenge prompts, options, and feedback;
+- Nomenclature Academy sections, prompts, hints, options, explanations, violated rules, solution steps, and source labels;
 - Build, Teach, and Discover instructional copy.
 
-Synthesis localization lives in a stable-ID overlay in `lib/i18n/synthesis-content.ts`. Its mapped type requires the Turkish tree to match the English story/step/material shape. Nomenclature and challenge records use paired `{ tr, en }` educational text while pure evaluators consume canonical IDs.
+Legacy synthesis-story localization lives in a stable-ID overlay in `lib/i18n/synthesis-content.ts`. Synthesis Atlas, Nomenclature Academy, and challenge records use paired `{ tr, en }` educational text while pure evaluators consume canonical IDs. Catalog identities, source paths, and search tokens remain canonical rather than translated.
 
 Changing language must not move a molecule, change a source, promote a verification state, change a challenge answer, or alter the scientific subject.
 
@@ -65,8 +65,8 @@ Changing language must not move a molecule, change a source, promote a verificat
 1. Add or update the English key in `lib/i18n/messages.ts`.
 2. Add the Turkish value with the same placeholders.
 3. Use a stable domain ID for scientific content; do not use translated text as a lookup key.
-4. For synthesis content, update both localized trees without changing source/data identifiers.
-5. For nomenclature or challenges, update both values in the paired localized record.
+4. For legacy synthesis content, update both localized trees without changing source/data identifiers.
+5. For Atlas, Academy, or challenge content, update both values in the paired localized record.
 6. Keep formulas, identifiers, provenance, review states, and scoring outside component prose.
 7. Test both locales and inspect the rendered page at the target viewport sizes.
 
@@ -78,7 +78,7 @@ Run:
 
 ```bash
 npm run typecheck
-node --test tests/i18n.test.mjs tests/nomenclature-lab.test.mjs tests/synthesis-challenges.test.mjs
+node --test tests/i18n.test.mjs tests/nomenclature-academy.test.mjs tests/synthesis-atlas.test.mjs
 npm run build
 npx playwright test
 ```

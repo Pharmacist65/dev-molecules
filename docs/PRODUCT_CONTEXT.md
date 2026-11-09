@@ -1,8 +1,8 @@
-# Dev Molecules — Product Context
+# Molevren — Product Context
 
 ## Product decision
 
-Dev Molecules is a desktop-first interactive pharmaceutical molecular learning and research platform. Its north star is not a limited molecule demo: it is a connected environment where approved medicines can be explored, synthesis logic can be learned, structures can be built through guided and expert workflows, scientific evidence can be evaluated, and instructors can run coursework.
+Molevren is a desktop-first interactive pharmaceutical molecular learning and research platform. Its north star is not a limited molecule demo: it is a connected environment where approved medicines can be explored, synthesis logic can be learned, structures can be built through guided and expert workflows, scientific evidence can be evaluated, and instructors can run coursework.
 
 The initial small data slice is an implementation and validation seed only. It is **not the final catalog, final curriculum, or final product scope**. The architecture and content model must support expansion from the seed to the full approved small-molecule universe and, later, separately modelled therapeutic modalities.
 
@@ -11,7 +11,7 @@ The initial small data slice is an implementation and validation seed only. It i
 The complete platform preserves five distinct modes:
 
 1. **Explore — Molecular Universe:** navigate medicines through therapeutic class, scaffold, target, mechanism, approval era, origin, metabolite and structural-similarity lenses.
-2. **Learn — Synthesis Theatre and Nomenclature Lab:** follow source-linked synthesis routes step by step, then practise the ten-part naming curriculum through deterministic, explanatory exercises.
+2. **Learn — Synthesis Atlas and Nomenclature Academy:** move from a structure-backed route graph to transformation and mechanism reasoning, then practise an eight-section naming curriculum through deterministic, explanatory exercises.
 3. **Build — Molecule Workbench:** use a guided fragment builder for learners and a precise 2D editor with live 3D preview for advanced users.
 4. **Teach — Instructor Studio:** create courses, missions and assessments; assign work; review misconceptions and learner progress.
 5. **Discover — Research Sandbox:** privately compare user designs with known identities, analogs, synthesis evidence and biological evidence. This mode remains experimental and visually separate from verified education content.
@@ -38,22 +38,23 @@ The long-term content universe begins with approved small-molecule active ingred
 - “Not found” never means new, patentable, safe, effective or synthesizable.
 - Every scientific claim exposes provenance, evidence class, review status and uncertainty.
 - User-created molecules are private by default and are not used for model training without explicit opt-in.
-- Student guidance and expert controls share a platform but do not share an undifferentiated interface.
+- Student Mode is the default learning hierarchy; Reviewer Mode keeps provenance and review controls secondary without changing scientific state.
 
 ## First vertical slice
 
-The first slice proves the complete product loop with a deliberately small, coherent set of approved small-molecule active ingredients. It should include:
+The first slice proves the complete product loop with a source-versioned approved-list catalog and a bounded browser-resident working set. Its current implementation includes:
 
-- 12–20 selected molecules from one or two teachable families;
-- two meaningful exploration lenses plus conventional search/list access;
-- a consistent molecule passport with 2D and 3D views;
-- three source-linked, reviewer-ready synthesis stories;
+- 15 curated regression fixtures plus an all-row evaluation of the selected 2,331-row DrugCentral FDA list: 1,858 complete same-ID source structures, 1,747 exact PubChem resolutions, 1,552 imported 2D/3D pairs, and 779 explicit unresolved rows;
+- categorical therapeutic, target, and scaffold lenses plus a scoped structural-similarity lens, a bounded resident Explore window, and lazy full-index search across all 1,552 imported records;
+- a consistent student Molecule Passport with 2D and 3D views;
+- six source-gated Synthesis Atlas routes over three molecules;
+- an eight-section, 22-exercise Nomenclature Academy over 20 parseable structures and 16 concrete response/widget types;
 - five guided missions covering recognition, scaffold building, repair, synthesis ordering and evidence reading;
 - a guided builder, not yet a full research-grade sketching suite;
 - structured example AI evidence cards before open-ended AI answers;
 - a simple device-local learner progress summary; instructor export remains a planned capability.
 
-The slice is successful only if users understand why molecules are related, can complete the learning loop, and can distinguish evidence from prediction. Seed counts must never leak into product copy or schemas as permanent limits.
+The slice is successful only if users understand why molecules are related, can complete the learning loop, and can distinguish evidence from prediction. Current counts must never leak into product copy or schemas as permanent limits, and DrugCentral FDA-list membership must not be presented as an exact FDA application/product catalog.
 
 ## Explicit non-goals for the first slice
 

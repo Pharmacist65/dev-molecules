@@ -7,17 +7,8 @@ import {
 } from "./explore-helpers";
 
 const localeRoot = (page: Page) => page.locator("[data-locale]").first();
-const synthesisRoot = (page: Page) => page.locator("[data-synthesis-story]").first();
-const nomenclatureRoot = (page: Page) => page.getByTestId("nomenclature-lab");
-
-const expectedChallengeKinds = [
-  "order-steps",
-  "choose-reaction-class",
-  "identify-formed-bond",
-  "choose-precursor",
-  "find-wrong-intermediate",
-  "distinguish-reported-vs-ai",
-] as const;
+const synthesisRoot = (page: Page) => page.locator("[data-synthesis-atlas]").first();
+const academyRoot = (page: Page) => page.getByTestId("nomenclature-academy");
 
 test.use({ locale: "tr-TR" });
 
@@ -31,6 +22,18 @@ async function openLearn(page: Page) {
   await modeButtons.nth(1).click();
   await expect(modeButtons.nth(1)).toHaveAttribute("aria-pressed", "true");
   return modeButtons;
+}
+
+async function openJourney(
+  page: Page,
+  title: string | RegExp,
+  buttonName: string | RegExp,
+) {
+  const card = page
+    .getByRole("heading", { name: title })
+    .locator("xpath=ancestor::li[1]");
+  await expect(card).toBeVisible();
+  await card.getByRole("button", { name: buttonName }).click();
 }
 
 async function switchToEnglish(page: Page) {
@@ -52,7 +55,7 @@ async function expectNoHorizontalOverflow(page: Page, context: string) {
   expect(metrics.scrollX, `${context}: viewport must remain left-aligned`).toBe(0);
 }
 
-test("TR starts safely, EN persists, and every platform mode keeps an English shell", async ({
+test("Learn opens on a Turkish student map and keeps the English choice after reload", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -61,275 +64,262 @@ test("TR starts safely, EN persists, and every platform mode keeps an English sh
 
   await expect(localeRoot(page)).toHaveAttribute("data-locale", "tr");
   await expect(page.locator("html")).toHaveAttribute("lang", "tr");
-
   await openLearn(page);
+
+  const learningMap = page.locator("[data-learning-journey-map]");
   await expect(
-    page.getByRole("tablist", { name: "Öğrenme alanları", exact: true }),
+    learningMap.getByRole("heading", {
+      name: "Molekülü okumaktan savunmaya, altı adım.",
+      exact: true,
+    }),
   ).toBeVisible();
-  await expect(synthesisRoot(page)).toHaveAttribute("data-source-reported", "true");
-  await expect(
-    synthesisRoot(page).locator('[data-smiles-structure="ready"] svg').first(),
-  ).toBeVisible();
-  await expectNoHorizontalOverflow(page, "Turkish Synthesis Theatre");
-  await captureAcceptanceScreenshot(page, "learn-synthesis-tr-1440x900.png");
+  await expect(learningMap.locator('[data-testid^="learning-stage-"]')).toHaveCount(6);
+  for (const title of [
+    "Yapı Dili",
+    "Organik Adlandırma",
+    "Farmasötik Adlandırma",
+    "Reaksiyon Mekanizmaları",
+    "Sentez Atlası",
+    "İlaç Molekülü İnceleme Projesi",
+  ]) {
+    await expect(learningMap.getByRole("heading", { name: title, exact: true })).toBeVisible();
+  }
+  await expectNoHorizontalOverflow(page, "Turkish Learn map at 1440x900");
+  await captureAcceptanceScreenshot(page, "learn-map-tr-1440x900.png");
 
   await switchToEnglish(page);
-  await expect
-    .poll(() =>
-      page.evaluate(() => window.localStorage.getItem("dev-molecules:locale")),
-    )
-    .toBe("en");
+  await expect(
+    learningMap.getByRole("heading", {
+      name: "Six stages from reading a molecule to defending a review.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  for (const title of [
+    "Structure Language",
+    "Organic Nomenclature",
+    "Pharmaceutical Nomenclature",
+    "Reaction Mechanisms",
+    "Synthesis Atlas",
+    "Drug Molecule Review Project",
+  ]) {
+    await expect(learningMap.getByRole("heading", { name: title, exact: true })).toBeVisible();
+  }
+  await expectNoHorizontalOverflow(page, "English Learn map at 1440x900");
 
+  await expect
+    .poll(() => page.evaluate(() => window.localStorage.getItem("dev-molecules:locale")))
+    .toBe("en");
   await page.reload({ waitUntil: "domcontentloaded" });
   await expect(localeRoot(page)).toHaveAttribute("data-locale", "en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-
-  const platformNavigation = page.getByRole("navigation", {
-    name: "Platform sections",
-  });
-  const modeButtons = platformNavigation.getByRole("button");
-  const englishModes = [
-    { label: "Explore", description: "Molecular universe" },
-    { label: "Learn", description: "Synthesis and nomenclature" },
-    { label: "Build", description: "Guided workbench" },
-    { label: "Teach", description: "Instructor studio" },
-    { label: "Discover", description: "Private research space" },
-  ] as const;
-
-  await expect(modeButtons).toHaveCount(englishModes.length);
-  for (const [index, mode] of englishModes.entries()) {
-    const button = modeButtons.nth(index);
-    await expect(button).toContainText(mode.label);
-    await button.click();
-    await expect(button).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByText(mode.description, { exact: true })).toBeVisible();
-    await expectNoHorizontalOverflow(page, `English ${mode.label} mode`);
-  }
-
-  await modeButtons.nth(1).click();
-  await expect(
-    page.getByRole("tablist", { name: "Learning areas", exact: true }),
-  ).toBeVisible();
-  await expect(
-    synthesisRoot(page).locator('[data-smiles-structure="ready"] svg').first(),
-  ).toBeVisible();
-  await expectNoHorizontalOverflow(page, "English Synthesis Theatre");
-  await captureAcceptanceScreenshot(page, "learn-synthesis-en-1440x900.png");
-
-  expectCleanRuntime(telemetry);
-});
-
-test("Synthesis Theatre exposes three sourced stories, six graded challenges, and final 3D focus", async ({
-  page,
-}) => {
-  const telemetry = watchRuntime(page);
-  await page.goto("/#universe", { waitUntil: "domcontentloaded" });
-  await switchToEnglish(page);
   await openLearn(page);
-
-  const synthesis = synthesisRoot(page);
-  await expect(synthesis).toHaveAttribute("data-source-reported", "true");
-
-  const storyTablist = synthesis.getByRole("tablist", {
-    name: "Synthesis stories",
-  });
-  const storyTabs = storyTablist.getByRole("tab");
-  await expect(storyTabs).toHaveCount(3);
-
-  const visitedStoryIds = new Set<string>();
-  for (let index = 0; index < 3; index += 1) {
-    await storyTabs.nth(index).click();
-    await expect(storyTabs.nth(index)).toHaveAttribute("aria-selected", "true");
-    await expect(synthesis).toHaveAttribute("data-source-reported", "true");
-    await expect(
-      synthesis.locator('[data-smiles-structure="ready"] svg').first(),
-    ).toBeVisible();
-
-    const storyId = await synthesis.getAttribute("data-synthesis-story");
-    expect(storyId).toBeTruthy();
-    if (storyId) visitedStoryIds.add(storyId);
-
-    const routeDetails = synthesis.locator("details").first();
-    if ((await routeDetails.getAttribute("open")) === null) {
-      await routeDetails.locator("summary").click();
-    }
-    await expect(routeDetails).toHaveAttribute("open", "");
-    const primarySource = routeDetails
-      .locator('a[href^="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/"]')
-      .first();
-    await expect(primarySource).toBeVisible();
-    await expect(primarySource).toHaveAttribute("target", "_blank");
-    await expect(routeDetails.getByText("Source locator", { exact: true })).toBeVisible();
-  }
-  expect(visitedStoryIds.size).toBe(3);
-
-  const stepButtons = synthesis.locator("aside button[aria-pressed]");
-  await expect(stepButtons).toHaveCount(2);
-  await expect(stepButtons.nth(0)).toHaveAttribute("aria-pressed", "true");
-  await synthesis.getByRole("button", { name: "Next step", exact: true }).click();
-  await expect(stepButtons.nth(1)).toHaveAttribute("aria-pressed", "true");
-
-  const challengeTablist = page.getByRole("tablist", {
-    name: "Choose a challenge",
-  });
-  const challengeTabs = challengeTablist.getByRole("tab");
-  const challengePanel = page.locator("[data-challenge-kind]").first();
-  await expect(challengeTabs).toHaveCount(expectedChallengeKinds.length);
-
-  for (const [index, kind] of expectedChallengeKinds.entries()) {
-    await challengeTabs.nth(index).click();
-    await expect(challengeTabs.nth(index)).toHaveAttribute("aria-selected", "true");
-    await expect(challengePanel).toHaveAttribute("data-challenge-kind", kind);
-  }
-
-  await challengeTabs.nth(0).click();
-  await challengePanel.getByRole("button", { name: "Check order", exact: true }).click();
-  await expect(challengePanel.locator('output[data-result="incorrect"]')).toBeVisible();
-
-  await challengeTabs.nth(1).click();
-  await expect(challengePanel).toHaveAttribute(
-    "data-challenge-kind",
-    "choose-reaction-class",
-  );
-  await challengePanel.getByRole("group").getByRole("button").first().click();
-  await challengePanel.getByRole("button", { name: "Check answer", exact: true }).click();
-  await expect(challengePanel.locator('output[data-result="correct"]')).toBeVisible();
-
-  await synthesis
-    .getByRole("button", { name: "Open final product in 3D", exact: true })
-    .click();
-  await expect(page).toHaveURL(/#molecule\//);
-  await expect(page.locator('[data-explore-level="focus"]')).toBeVisible();
-  await expect(page.locator('[data-scene-status="ready"]').first()).toBeVisible();
+  await expect(page.locator("[data-learning-journey-map]")).toBeVisible();
 
   expectCleanRuntime(telemetry);
 });
 
-test("Nomenclature Lab exposes ten topics and explains both incorrect and correct decisions", async ({
+test("Synthesis Atlas exposes three molecules and the six-step reported Carvedilol route", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   const telemetry = watchRuntime(page);
   await page.goto("/#universe", { waitUntil: "domcontentloaded" });
-  await openLearn(page);
-  await page
-    .getByRole("tab", { name: "İsimlendirme Laboratuvarı", exact: true })
-    .click();
-
-  const lab = nomenclatureRoot(page);
-  await expect(lab).toBeVisible();
-  const topics = lab.locator('[data-testid^="nomenclature-topic-"]');
-  await expect(topics).toHaveCount(10);
-  await expectNoHorizontalOverflow(page, "Turkish Nomenclature Lab");
-  await captureAcceptanceScreenshot(page, "learn-nomenclature-tr-1920x1080.png");
-
   await switchToEnglish(page);
-  await expect(lab).toBeVisible();
-  await expectNoHorizontalOverflow(page, "English Nomenclature Lab");
-  await captureAcceptanceScreenshot(page, "learn-nomenclature-en-1920x1080.png");
+  await openLearn(page);
+  await openJourney(page, "Synthesis Atlas", "Open Synthesis Atlas");
 
-  const visibleInteractionLabels = (await topics.locator("small").allTextContents())
-    .join(" ")
-    .replace(/\s+/g, " ");
-  for (const expectedLabel of [
-    "Parent-chain selection",
-    "Locant assignment",
-    "Functional-group identification",
-    "Group and suffix priority",
-    "Stereochemical prefix",
-    "Complete-name construction",
-  ]) {
-    expect(visibleInteractionLabels).toContain(expectedLabel);
+  const synthesis = synthesisRoot(page);
+  await expect(synthesis).toBeVisible();
+  await expect(synthesis).toHaveAttribute("data-route-kind", "reported");
+  await expect(
+    synthesis.getByText("Teaching view · no operational protocol", { exact: true }),
+  ).toHaveCount(0);
+
+  const moleculeNavigation = synthesis.getByRole("navigation", {
+    name: "Synthesis Atlas",
+  });
+  const moleculeButtons = moleculeNavigation.getByRole("button");
+  await expect(moleculeButtons).toHaveCount(3);
+  await expect(moleculeButtons.nth(0)).toContainText("Propranolol");
+  await expect(moleculeButtons.nth(1)).toContainText("Atenolol");
+  await expect(moleculeButtons.nth(2)).toContainText("Carvedilol");
+
+  await moleculeNavigation.getByRole("button", { name: /Carvedilol/ }).click();
+  await expect(synthesis).toHaveAttribute(
+    "data-synthesis-atlas",
+    "synthesis-atlas-route:carvedilol-reported",
+  );
+  await expect(synthesis).toHaveAttribute("data-route-step-count", "6");
+  await expect(synthesis.locator("[data-source-gate]")).toHaveAttribute(
+    "data-source-gate",
+    "source-supported",
+  );
+  await expect(
+    synthesis.getByRole("heading", {
+      name: "Carvedilol: six-transformation full-core route",
+      exact: true,
+    }),
+  ).toBeVisible();
+
+  const graph = synthesis.locator("[data-dragging][data-route-direction]");
+  await expect(graph).toHaveAttribute("data-route-direction", "forward");
+  await synthesis.getByRole("button", { name: "Retrosynthesis", exact: true }).click();
+  await expect(graph).toHaveAttribute("data-route-direction", "retro");
+  await synthesis.getByRole("button", { name: "Forward", exact: true }).click();
+  await expect(graph).toHaveAttribute("data-route-direction", "forward");
+
+  const zoomOutput = synthesis.locator("output").first();
+  await expect(zoomOutput).toHaveText("54%");
+  await synthesis.getByRole("button", { name: "Zoom in", exact: true }).click();
+  await expect(zoomOutput).toHaveText("64%");
+  await synthesis.getByRole("button", { name: "Reset view", exact: true }).click();
+  await expect(zoomOutput).toHaveText("54%");
+
+  // Step 1 is source-backed but deliberately has no published mechanism layer.
+  await synthesis.getByRole("button", { name: /01.*Carbonyl–hydrazine condensation/ }).click();
+  await expect(graph).toHaveAttribute("data-atlas-level", "step");
+  await expect(synthesis.locator("[data-active-step]")).toHaveAttribute(
+    "data-active-step",
+    "synthesis-atlas-step:carvedilol-rep-01",
+  );
+  await expect(
+    synthesis.getByRole("button", { name: "Inspect mechanism", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    synthesis.getByRole("tab", { name: "Mechanism", exact: true }),
+  ).toBeDisabled();
+
+  // Step 4 has an explicit source anchor and a curated, evidence-gated mechanism.
+  await synthesis.getByRole("button", { name: /04.*Phenolic O-alkylation/ }).click();
+  await expect(synthesis.locator("[data-active-step]")).toHaveAttribute(
+    "data-active-step",
+    "synthesis-atlas-step:carvedilol-rep-04",
+  );
+  const inspectMechanism = synthesis.getByRole("button", {
+    name: "Inspect mechanism",
+    exact: true,
+  });
+  await expect(inspectMechanism).toBeEnabled();
+  await inspectMechanism.click();
+  await expect(graph).toHaveAttribute("data-atlas-level", "mechanism");
+  await expect(synthesis.locator("[data-mechanism-layer]")).toBeVisible();
+  await expect(synthesis.getByText("Curated teaching interpretation", { exact: true })).toBeVisible();
+  await expect(synthesis.getByText("Electron flow", { exact: true })).toBeVisible();
+
+  const sourceDrawer = synthesis.locator("details[data-source-drawer]");
+  await expect(sourceDrawer).not.toHaveAttribute("open", "");
+  await sourceDrawer.locator("summary").click();
+  await expect(sourceDrawer).toHaveAttribute("open", "");
+  const sourceLinks = sourceDrawer.locator('a[href^="https://"]');
+  await expect(sourceLinks).toHaveCount(2);
+  for (const link of await sourceLinks.all()) {
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("href", /^https:\/\/(?:image-ppubs\.uspto\.gov|patentimages\.storage\.googleapis\.com)\//);
   }
 
-  for (let index = 0; index < 10; index += 1) {
-    await topics.nth(index).click();
-    await expect(topics.nth(index)).toHaveAttribute("aria-current", "step");
-  }
+  const challengeLab = synthesis.locator("[data-synthesis-challenges]");
+  const challengeTabs = challengeLab.getByRole("tab");
+  await expect(challengeTabs).toHaveCount(2);
+  await challengeTabs.nth(1).click();
+  const challenge = challengeLab.locator('[data-challenge-kind="missing-intermediate"]');
+  await expect(challenge).toBeVisible();
+  await challenge.getByRole("radio", { name: "Propranolol", exact: true }).click();
+  await challenge.getByRole("button", { name: "Check answer", exact: true }).click();
+  await expect(challenge.locator('[data-result="incorrect"]')).toBeVisible();
+  await challenge.getByRole("button", { name: "Try again", exact: true }).click();
+  await challenge.getByRole("radio", { name: "4-Hydroxycarbazole", exact: true }).click();
+  await challenge.getByRole("button", { name: "Check answer", exact: true }).click();
+  await expect(challenge.locator('[data-result="correct"]')).toBeVisible();
 
-  await topics.nth(0).click();
-  const answerOptions = lab.locator("fieldset button");
-  await expect(answerOptions).toHaveCount(3);
+  await expectNoHorizontalOverflow(page, "English Synthesis Atlas at 1920x1080");
+  await captureAcceptanceScreenshot(page, "learn-synthesis-atlas-carvedilol-en-1920x1080.png");
 
-  await answerOptions.nth(0).click();
-  await lab.getByTestId("nomenclature-check").click();
-  const incorrectFeedback = lab.getByTestId("nomenclature-feedback");
-  await expect(incorrectFeedback).toHaveAttribute("data-state", "incorrect");
-  expect(await incorrectFeedback.locator("p").count()).toBeGreaterThanOrEqual(3);
-
-  await incorrectFeedback
-    .getByRole("button", { name: "Try again", exact: true })
+  // Selected foundational transformations use atom-indexed arrow endpoints;
+  // no generic decorative curve substitutes for missing atom mapping.
+  await moleculeNavigation.getByRole("button", { name: /Propranolol/ }).click();
+  await synthesis
+    .getByRole("button", { name: "Foundational learning route", exact: true })
     .click();
-  await answerOptions.nth(1).click();
-  await lab.getByTestId("nomenclature-check").click();
-  const correctFeedback = lab.getByTestId("nomenclature-feedback");
-  await expect(correctFeedback).toHaveAttribute("data-state", "correct");
-  expect(await correctFeedback.locator("p").count()).toBeGreaterThanOrEqual(3);
-  await expect(lab.getByTestId("nomenclature-next")).toBeVisible();
+  await synthesis.getByRole("button", { name: /01.*Phenolic O-alkylation/ }).click();
+  await synthesis
+    .getByRole("button", { name: "Inspect mechanism", exact: true })
+    .click();
+  const mappedMechanism = synthesis.locator('[data-electron-mapping="complete"]');
+  await expect(mappedMechanism).toBeVisible();
+  await expect(mappedMechanism.locator("svg[aria-label='Electron flow anchored to the actual 2D atoms'] > path")).toHaveCount(2);
 
-  await lab.getByTestId("nomenclature-next").click();
-  await expect(topics.nth(0)).toHaveAttribute("data-complete", "true");
-  await expect(topics.nth(1)).toHaveAttribute("aria-current", "step");
-  await expect(lab.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "10");
+  expectCleanRuntime(telemetry);
+});
 
+test("Nomenclature Academy provides eight sections, twenty-two exercises, SVG feedback, and persisted progress", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  const telemetry = watchRuntime(page);
+  await page.goto("/#universe", { waitUntil: "domcontentloaded" });
+  await switchToEnglish(page);
+  await openLearn(page);
+  await openJourney(page, "Pharmaceutical Nomenclature", "Open Academy");
+
+  const academy = academyRoot(page);
+  await expect(academy).toBeVisible();
+  const sections = academy.locator('[data-testid^="academy-section-"]');
+  await expect(sections).toHaveCount(8);
+  await expect(academy.getByText("Exercise 1 / 22", { exact: true })).toBeVisible();
+  await expect(academy.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+  await expect(academy.locator("figure svg[role=group]")).toBeVisible();
+
+  // A real SVG bond target drives both the wrong and correct feedback paths.
+  await academy
+    .getByRole("button", { name: "Bond b1", exact: true })
+    .dispatchEvent("click");
+  await academy.getByTestId("academy-check-answer").click();
+  const feedback = academy.getByTestId("academy-feedback");
+  await expect(feedback).toHaveAttribute("data-state", "incorrect");
+  await expect(feedback.locator("article")).toHaveCount(3);
+  await feedback.getByRole("button", { name: "Try again", exact: true }).click();
+
+  await academy
+    .getByRole("button", { name: "Bond b2", exact: true })
+    .dispatchEvent("click");
+  await academy.getByTestId("academy-check-answer").click();
+  await expect(feedback).toHaveAttribute("data-state", "correct");
+  await expect(feedback.locator("article")).toHaveCount(3);
+  await expect(academy.getByTestId("academy-next")).toBeVisible();
+  await academy.getByTestId("academy-next").click();
+
+  await expect(academy.getByText("Exercise 2 / 22", { exact: true })).toBeVisible();
+  await expect(academy.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "5");
   await expect
     .poll(() =>
       page.evaluate(() => {
         const serialized = window.localStorage.getItem(
-          "dev-molecules:nomenclature-progress",
+          "dev-molecules:nomenclature-academy-progress",
         );
         return serialized ? JSON.parse(serialized) : null;
       }),
     )
     .toEqual({
       version: 1,
-      currentTopicId: "topic:functional-groups",
-      completedExerciseIds: ["nomenclature:parent-chain:2-methylpentane"],
+      currentExerciseId: "academy:implicit-hydrogen:ethanol-oxygen",
+      completedExerciseIds: ["academy:bond:propene"],
       attempts: 2,
       correctAttempts: 1,
     });
 
+  await expectNoHorizontalOverflow(page, "English Nomenclature Academy at 1920x1080");
+  await captureAcceptanceScreenshot(page, "learn-nomenclature-academy-en-1920x1080.png");
+
   await page.reload({ waitUntil: "domcontentloaded" });
-  const restoredModeButtons = await openLearn(page);
-  await page
-    .getByRole("tab", { name: "Nomenclature Lab", exact: true })
-    .click();
-  await expect(nomenclatureRoot(page)).toBeVisible();
-  const restoredTopics = nomenclatureRoot(page).locator(
-    '[data-testid^="nomenclature-topic-"]',
-  );
-  await expect(restoredTopics.nth(0)).toHaveAttribute("data-complete", "true");
-  await expect(restoredTopics.nth(1)).toHaveAttribute("aria-current", "step");
-  await expect(nomenclatureRoot(page).getByRole("progressbar")).toHaveAttribute(
+  await openLearn(page);
+  await openJourney(page, "Pharmaceutical Nomenclature", "Open Academy");
+  const restoredAcademy = academyRoot(page);
+  await expect(restoredAcademy.getByText("Exercise 2 / 22", { exact: true })).toBeVisible();
+  await expect(restoredAcademy.getByRole("progressbar")).toHaveAttribute(
     "aria-valuenow",
-    "10",
+    "5",
   );
-
-  await nomenclatureRoot(page).locator("fieldset button").nth(2).click();
-  await nomenclatureRoot(page).getByTestId("nomenclature-check").click();
-  await expect
-    .poll(() =>
-      page.evaluate(() => {
-        const serialized = window.localStorage.getItem(
-          "dev-molecules:nomenclature-progress",
-        );
-        return serialized ? JSON.parse(serialized) : null;
-      }),
-    )
-    .toEqual({
-      version: 1,
-      currentTopicId: "topic:functional-groups",
-      completedExerciseIds: ["nomenclature:parent-chain:2-methylpentane"],
-      attempts: 3,
-      correctAttempts: 1,
-    });
-
-  await restoredModeButtons.nth(3).click();
-  const restoredSummary = page.getByText("Nomenclature learning summary", {
-    exact: true,
-  });
-  await expect(restoredSummary).toBeVisible();
-  await expect(restoredSummary.locator("../..")).toContainText("10%");
+  await expect(restoredAcademy.getByTestId("academy-section-1")).toContainText("1/3");
 
   expectCleanRuntime(telemetry);
 });

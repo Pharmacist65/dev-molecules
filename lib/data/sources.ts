@@ -30,7 +30,7 @@ const pubChemSource = (
     status: "verified",
     note: "CID, formula, molecular weight, SMILES and InChIKey checked via PUG REST.",
     reviewedAt: RETRIEVED_AT,
-    reviewedBy: "Dev Molecules PubChem identity check",
+    reviewedBy: "Molevren PubChem identity check",
   },
 });
 
@@ -77,7 +77,7 @@ const drugsFdaProductSource = (
   verification: {
     status: "verified",
     note: `Exact product ${seed.productNumber} and ORIG/1/AP action checked in the Drugs@FDA snapshot updated 2026-08-20.`,
-    reviewedBy: "Dev Molecules Drugs@FDA exact product audit",
+    reviewedBy: "Molevren Drugs@FDA exact product audit",
     reviewedAt: RETRIEVED_AT,
   },
 });
@@ -109,7 +109,7 @@ export const sourceRegistry: readonly SourceReference[] = [
   ...synthesisSourceRegistry,
   {
     id: "source:dev-molecules-educational-draft-001",
-    provider: "Dev Molecules editorial queue",
+    provider: "Molevren editorial queue",
     kind: "internal-review",
     title: "Catalog classification and educational profile drafts",
     externalId: "DM-EDU-DRAFT-001",

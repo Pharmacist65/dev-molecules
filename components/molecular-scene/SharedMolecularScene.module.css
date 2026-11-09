@@ -122,6 +122,25 @@
   backdrop-filter: blur(10px);
 }
 
+.moleculeReadout {
+  position: absolute;
+  z-index: 8;
+  bottom: 3.65rem;
+  left: 1rem;
+  max-width: min(74vw, 420px);
+  padding: 0.42rem 0.58rem;
+  overflow: hidden;
+  border: 1px solid rgb(184 202 236 / 18%);
+  border-radius: 7px;
+  background: rgb(12 25 48 / 88%);
+  color: #d7e0f0;
+  font: 0.56rem var(--font-geist-mono, ui-monospace, monospace);
+  pointer-events: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
 .atomReadout span {
   grid-column: 1 / -1;
   color: #72e3bf;

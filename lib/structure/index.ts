@@ -6,3 +6,10 @@ export {
   type SdfBond,
   type StructureDimension,
 } from "./sdf";
+export {
+  SdfResourceCache,
+  validateSdfResource,
+  type SdfPropertyIdentityExpectation,
+  type SdfResourceContract,
+  type SdfResourceTextLoader,
+} from "./sdf-resource";

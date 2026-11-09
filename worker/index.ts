@@ -1,4 +1,4 @@
-/** Cloudflare Worker entry point for the Dev Molecules application. */
+/** Cloudflare Worker entry point for the Molevren application. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 

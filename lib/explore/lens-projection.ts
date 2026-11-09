@@ -9,7 +9,9 @@ export interface LensProjectionCoordinate {
 export interface LensProjection {
   readonly lensId: string;
   readonly projectionId: string;
-  readonly algorithm: "curated-categorical-layout";
+  readonly algorithm:
+    | "curated-categorical-layout"
+    | "canonical-smiles-path-fingerprint";
   readonly algorithmVersion: string;
   readonly inputVersion: string;
   readonly inputHash: string;

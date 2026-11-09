@@ -8,14 +8,14 @@ const safetyNote =
 const sourceSupported = (note: string) => ({
   status: "source-supported" as const,
   note,
-  reviewedBy: "Dev Molecules primary-source audit",
+  reviewedBy: "Molevren primary-source audit",
   reviewedAt: RETRIEVED_AT,
 });
 
 const pendingExpertReview = (scope: string) => ({
   status: "source-audited-pending-expert-review" as const,
   scope,
-  auditedBy: "Dev Molecules primary-source audit",
+  auditedBy: "Molevren primary-source audit",
   auditedAt: RETRIEVED_AT,
 });
 

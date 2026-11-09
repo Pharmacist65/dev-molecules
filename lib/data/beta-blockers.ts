@@ -493,7 +493,7 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         status: "verified",
         note: "Normalized identity fields checked against PubChem PUG REST on 2026-08-21.",
         reviewedAt: "2026-08-21",
-        reviewedBy: "Dev Molecules PubChem identity check",
+        reviewedBy: "Molevren PubChem identity check",
       },
       sourceIds: [pubChemSourceId],
     },
@@ -611,7 +611,7 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
           status: "verified",
           note: "Computed PubChem conformer; it must never be labeled as an experimental bound pose.",
           reviewedAt: "2026-08-21",
-          reviewedBy: "Dev Molecules asset integrity check",
+          reviewedBy: "Molevren asset integrity check",
         },
       },
     ],
@@ -626,7 +626,7 @@ const toRecord = (seed: BetaBlockerSeed): MoleculeRecord => {
         verification: {
           status: "verified",
           reviewedAt: "2026-08-21",
-          reviewedBy: "Dev Molecules PubChem identity check",
+          reviewedBy: "Molevren PubChem identity check",
         },
         sourceIds: [pubChemSourceId],
         limitations: [

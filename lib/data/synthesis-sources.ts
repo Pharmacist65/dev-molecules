@@ -26,7 +26,7 @@ export const synthesisSourceRegistry = [
     verification: {
       status: "source-supported",
       note: "Patent number, title, Example 4 and named product were checked against the primary patent text.",
-      reviewedBy: "Dev Molecules primary-source audit",
+      reviewedBy: "Molevren primary-source audit",
       reviewedAt: RETRIEVED_AT,
     },
   },
@@ -48,7 +48,7 @@ export const synthesisSourceRegistry = [
     verification: {
       status: "source-supported",
       note: "Patent number, title, Example 1, precursor paragraph and named product were checked against the primary patent text.",
-      reviewedBy: "Dev Molecules primary-source audit",
+      reviewedBy: "Molevren primary-source audit",
       reviewedAt: RETRIEVED_AT,
     },
   },
@@ -71,7 +71,7 @@ export const synthesisSourceRegistry = [
     verification: {
       status: "source-supported",
       note: "Patent number, title, Example 2, starting materials and named product were checked against the primary patent text.",
-      reviewedBy: "Dev Molecules primary-source audit",
+      reviewedBy: "Molevren primary-source audit",
       reviewedAt: RETRIEVED_AT,
     },
   },

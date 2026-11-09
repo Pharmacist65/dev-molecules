@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { parseSdfV2000, type MoleculeStructure } from "@/lib/structure/sdf";
+import {
+  SdfResourceCache,
+  type SdfResourceContract,
+} from "@/lib/structure/sdf-resource";
+import type { MoleculeStructure } from "@/lib/structure/sdf";
 
 type SdfResourceState =
   | {
@@ -24,11 +28,28 @@ type SdfResourceState =
       readonly error: string;
     };
 
-const structureCache = new Map<string, MoleculeStructure>();
+const structureCache = new SdfResourceCache();
 
-export function useSdfResource(url: string | null) {
+export function useSdfResource(
+  url: string | null,
+  contract: SdfResourceContract = {},
+) {
   const [attempt, setAttempt] = useState(0);
-  const requestKey = `${url ?? "idle"}:${attempt}`;
+  const expectedDimension = contract.expectedDimension;
+  const expectedPubChemCid = contract.expectedPubChemCid;
+  const identityPropertyName = contract.expectedIdentity?.propertyName;
+  const identityExpectedValue = contract.expectedIdentity?.expectedValue;
+  const identityLabel = contract.expectedIdentity?.label;
+  const identityExpectationSupplied = contract.expectedIdentity !== undefined;
+  const requestKey = JSON.stringify([
+    url ?? "idle",
+    expectedDimension ?? null,
+    expectedPubChemCid ?? null,
+    identityPropertyName ?? null,
+    identityExpectedValue ?? null,
+    identityExpectationSupplied,
+    attempt,
+  ]);
   const [state, setState] = useState<SdfResourceState>({
     requestKey: "initial",
     status: "loading",
@@ -38,28 +59,27 @@ export function useSdfResource(url: string | null) {
 
   useEffect(() => {
     if (!url) return;
-    const cached = structureCache.get(url);
-    if (cached) return;
+    let active = true;
+    const resourceContract: SdfResourceContract = {
+      expectedDimension,
+      expectedPubChemCid,
+      expectedIdentity: identityExpectationSupplied
+        ? {
+            propertyName: identityPropertyName ?? "",
+            expectedValue: identityExpectedValue ?? "",
+            label: identityLabel,
+          }
+        : undefined,
+    };
 
-    const controller = new AbortController();
-
-    void fetch(url, {
-      signal: controller.signal,
-      credentials: "same-origin",
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        const structure = parseSdfV2000(await response.text());
-        structureCache.set(url, structure);
-        return structure;
-      })
+    void structureCache
+      .get(url, resourceContract)
       .then((structure) => {
+        if (!active) return;
         setState({ requestKey, status: "ready", structure, error: null });
       })
       .catch((error: unknown) => {
-        if (controller.signal.aborted) return;
+        if (!active) return;
         const reason = error instanceof Error ? error.message : "Bilinmeyen hata";
         setState({
           requestKey,
@@ -69,8 +89,19 @@ export function useSdfResource(url: string | null) {
         });
       });
 
-    return () => controller.abort();
-  }, [requestKey, url]);
+    return () => {
+      active = false;
+    };
+  }, [
+    expectedDimension,
+    expectedPubChemCid,
+    identityExpectedValue,
+    identityExpectationSupplied,
+    identityLabel,
+    identityPropertyName,
+    requestKey,
+    url,
+  ]);
 
   if (!url) {
     return {
@@ -81,7 +112,17 @@ export function useSdfResource(url: string | null) {
     };
   }
 
-  const cached = structureCache.get(url);
+  const cached = structureCache.peek(url, {
+    expectedDimension,
+    expectedPubChemCid,
+    expectedIdentity: identityExpectationSupplied
+      ? {
+          propertyName: identityPropertyName ?? "",
+          expectedValue: identityExpectedValue ?? "",
+          label: identityLabel,
+        }
+      : undefined,
+  });
   if (cached) {
     return {
       status: "ready" as const,

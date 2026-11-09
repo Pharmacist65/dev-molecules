@@ -19,7 +19,6 @@ interface EvidenceMentorProps {
 
 const evidenceStatusKeys: Readonly<Record<string, TranslationKey>> = {
   "curated-fallback": "status.curatedFallback",
-  "openai-orchestrated": "status.openaiOrchestrated",
   "valid-record": "status.validRecord",
   "exact-curated-match": "status.exactCuratedMatch",
   "educational-story-only": "status.educationalStoryOnly",

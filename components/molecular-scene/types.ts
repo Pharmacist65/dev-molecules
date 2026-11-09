@@ -26,6 +26,36 @@ export interface MolecularSceneMolecule {
   readonly position?: SceneVector3;
   readonly scale?: number;
   readonly structureOrigin?: string;
+  /** Requests a graph-derived common/changed atom mask for a 2–4 item group. */
+  readonly comparison?: {
+    readonly groupId: string;
+    readonly method: "sdf-local-environment-core@1.0.0";
+  };
+}
+
+export interface MolecularSceneComparisonMask {
+  readonly moleculeId: string;
+  readonly commonAtomIndices: readonly number[];
+  readonly changedAtomIndices: readonly number[];
+  readonly changedElements: Readonly<Record<string, number>>;
+}
+
+export interface MolecularSceneComparisonAnalysis {
+  readonly groupId: string;
+  readonly method: "sdf-local-environment-core@1.0.0";
+  readonly commonCoreAtomCount: number;
+  readonly commonCoreBondCount: number;
+  readonly commonElements: Readonly<Record<string, number>>;
+  readonly masks: readonly MolecularSceneComparisonMask[];
+  readonly limitation: string;
+}
+
+export interface MolecularSceneLayoutMetrics {
+  readonly visibleMoleculeCount: number;
+  readonly minimumGap: number | null;
+  readonly overlapCount: number;
+  readonly clippedMoleculeCount: number;
+  readonly suggestedCamera: MolecularSceneCamera | null;
 }
 
 export interface MolecularSceneAtom {
@@ -37,14 +67,36 @@ export interface MolecularSceneAtom {
   readonly worldCoordinate: SceneVector3;
 }
 
+/** A molecule-level pointer hit that never implies an atom-level selection. */
+export interface MolecularSceneMoleculeHit {
+  readonly moleculeId: string;
+  readonly moleculeName: string;
+}
+
+/** Conservative visible SDF bounds in Explore-scene percentage coordinates. */
+export interface MolecularSceneScreenBounds {
+  readonly moleculeId: string;
+  readonly x: number;
+  readonly y: number;
+  readonly radiusX: number;
+  readonly radiusY: number;
+}
+
 export type MolecularSceneStatus = "idle" | "loading" | "ready" | "partial" | "error";
 
 export interface MolecularScenePort {
   loadMolecules(molecules: readonly MolecularSceneMolecule[]): Promise<void>;
   updateVisibleMolecules(moleculeIds: readonly string[]): Promise<void>;
   setLevelOfDetail(level: MolecularSceneLevelOfDetail): void;
-  setCamera(camera: MolecularSceneCamera): void;
+  setCamera(camera: MolecularSceneCamera, interactive?: boolean): void;
   getCameraState(): MolecularSceneCamera;
+  getComparisonAnalysis(groupId: string): MolecularSceneComparisonAnalysis | null;
+  /** Actual SDF-bound layout evidence for the currently rendered overview. */
+  getLayoutMetrics(): MolecularSceneLayoutMetrics;
+  /** Fits the camera to the last collision-aware layout, if one is active. */
+  fitVisibleMolecules(): MolecularSceneCamera | null;
+  /** Recomputes real-SDF placement for the current viewport without reloading data. */
+  relayoutVisibleMolecules(): void;
   focusMolecule(moleculeId: string | null): void;
   setEmphasizedMolecule(moleculeId: string | null): void;
   setRepresentation(representation: MolecularSceneRepresentation): void;
@@ -52,6 +104,8 @@ export interface MolecularScenePort {
   highlightAtom(atom: MolecularSceneAtom | null): void;
   /** Real, currently rendered SDF atoms in deterministic molecule/atom order. */
   getVisibleAtoms(): readonly MolecularSceneAtom[];
+  /** Current conservative molecule rectangles projected through the real camera. */
+  getVisibleMoleculeScreenBounds(): readonly MolecularSceneScreenBounds[];
   resize(width: number, height: number, pixelRatio?: number): void;
   pickAtom(
     canvasX: number,
@@ -59,6 +113,16 @@ export interface MolecularScenePort {
     viewportWidth: number,
     viewportHeight: number,
   ): MolecularSceneAtom | null;
+  /**
+   * Cheap analytic bounds hit-test used by Universe hover. It intentionally
+   * avoids raycasting every rendered atom instance.
+   */
+  pickMolecule(
+    canvasX: number,
+    canvasY: number,
+    viewportWidth: number,
+    viewportHeight: number,
+  ): MolecularSceneMoleculeHit | null;
   dispose(): void;
 }
 
@@ -84,7 +148,14 @@ export interface SharedMolecularSceneProps {
   readonly ariaLabel?: string;
   readonly onAtomSelect?: (atom: MolecularSceneAtom | null) => void;
   readonly onAtomHover?: (atom: MolecularSceneAtom | null) => void;
+  readonly onMoleculeHover?: (molecule: MolecularSceneMoleculeHit | null) => void;
+  readonly onMoleculeBoundsChange?: (
+    bounds: readonly MolecularSceneScreenBounds[],
+  ) => void;
   readonly onCameraChange?: (camera: MolecularSceneCamera) => void;
   readonly onSceneReady?: (port: MolecularScenePort) => void;
   readonly onStatusChange?: (detail: MolecularSceneStatusDetail) => void;
+  readonly onComparisonAnalysis?: (
+    analysis: MolecularSceneComparisonAnalysis | null,
+  ) => void;
 }

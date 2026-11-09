@@ -22,7 +22,7 @@ export interface EvidenceCardSource {
 export interface MentorEvidenceCard {
   readonly cardId: string;
   readonly generatedAt: string;
-  readonly mode: "curated-fallback" | "openai-orchestrated";
+  readonly mode: "curated-fallback";
   readonly locale: Locale;
   readonly moleculeId: string;
   readonly moleculeName: string;

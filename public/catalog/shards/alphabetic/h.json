@@ -1,0 +1,3688 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "h",
+  "records": [
+    {
+      "id": "molecule:imported:halazepam-wyclkvqlvuqknz-uhfffaoysa-n",
+      "preferredName": "Halazepam",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 31640,
+        "inchiKey": "WYCLKVQLVUQKNZ-UHFFFAOYSA-N",
+        "connectivityKey": "WYCLKVQLVUQKNZ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H12ClF3N2O",
+        "molecularWeight": 352.7,
+        "canonicalSmiles": "C1C(=O)N(C2=C(C=C(C=C2)Cl)C(=N1)C3=CC=CC=C3)CC(F)(F)F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "FC(F)(F)CN1C2=CC=C(Cl)C=C2C(=NCC1=O)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WYCLKVQLVUQKNZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WYCLKVQLVUQKNZ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:wyclkvqlvuqknz-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1348",
+        "sourceName": "halazepam",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1348",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1348",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=halazepam",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-31640-2d.sdf",
+          "sha256": "697749e49e7a5d20d2ceb8ca9c2ae3731e1c45ba9ef0c453d09926d7143e077e",
+          "byteLength": 5517,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31640/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-31640-3d.sdf",
+          "sha256": "c525429bdea79bcfccfe926384ebe1b46f4d61b921066afa418a702427422c7a",
+          "byteLength": 5824,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31640/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:halcinonide-muqngpzzqdcdft-jnqjzlcisa-n",
+      "preferredName": "Halcinonide",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 443943,
+        "inchiKey": "MUQNGPZZQDCDFT-JNQJZLCISA-N",
+        "connectivityKey": "MUQNGPZZQDCDFT",
+        "stereochemicalKey": "JNQJZLCISA",
+        "molecularFormula": "C24H32ClFO5",
+        "molecularWeight": 455,
+        "canonicalSmiles": "CC1(OC2CC3C4CCC5=CC(=O)CCC5(C4(C(CC3(C2(O1)C(=O)CCl)C)O)F)C)C",
+        "isomericSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@]2([C@H](C[C@]4([C@H]3C[C@@H]5[C@]4(OC(O5)(C)C)C(=O)CCl)C)O)F",
+        "structureSourceFormSmiles": "CC1(C)O[C@@H]2C[C@H]3[C@@H]4CCC5=CC(=O)CC[C@]5(C)[C@@]4(F)[C@@H](O)C[C@]3(C)[C@@]2(O1)C(=O)CCl",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:MUQNGPZZQDCDFT",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:MUQNGPZZQDCDFT-JNQJZLCISA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:muqngpzzqdcdft-jnqjzlcisa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4507",
+        "sourceName": "halcinonide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4507",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4507",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=halcinonide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-443943-2d.sdf",
+          "sha256": "266c899effb1f5c04449ff21906a3db5dacc99b465eff1f6752cb8e809822498",
+          "byteLength": 8720,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/443943/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-443943-3d.sdf",
+          "sha256": "70e942b54f21c320a6f8eb934d02cbf43da604eafbef87dc849cfc2515f1f77d",
+          "byteLength": 8758,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/443943/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:halobetasol-propionate-bdsykghymjnpab-licbfipmsa-n",
+      "preferredName": "Halobetasol Propionate",
+      "aliases": [
+        "ulobetasol propionate"
+      ],
+      "identity": {
+        "pubChemCid": 6918178,
+        "inchiKey": "BDSYKGHYMJNPAB-LICBFIPMSA-N",
+        "connectivityKey": "BDSYKGHYMJNPAB",
+        "stereochemicalKey": "LICBFIPMSA",
+        "molecularFormula": "C25H31ClF2O5",
+        "molecularWeight": 485,
+        "canonicalSmiles": "CCC(=O)OC1(C(CC2C1(CC(C3(C2CC(C4=CC(=O)C=CC43C)F)F)O)C)C)C(=O)CCl",
+        "isomericSmiles": "CCC(=O)O[C@@]1([C@H](C[C@@H]2[C@@]1(C[C@@H]([C@]3([C@H]2C[C@@H](C4=CC(=O)C=C[C@@]43C)F)F)O)C)C)C(=O)CCl",
+        "structureSourceFormSmiles": "CCC(=O)O[C@@]1([C@@H](C)C[C@H]2[C@@H]3C[C@H](F)C4=CC(=O)C=C[C@]4(C)[C@@]3(F)[C@@H](O)C[C@]12C)C(=O)CCl",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BDSYKGHYMJNPAB",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BDSYKGHYMJNPAB-LICBFIPMSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bdsykghymjnpab-licbfipmsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1349",
+        "sourceName": "ulobetasol propionate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1349",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1349",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ulobetasol%20propionate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6918178-2d.sdf",
+          "sha256": "f576ef989f094aa35d0c118c2288b25381266c4ff99fa72e8800341e8c55c5cc",
+          "byteLength": 8997,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6918178/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6918178-3d.sdf",
+          "sha256": "2aeb429c99e768b53d3b1d4b47242cd4443af738e0fc69847019c1199d89564d",
+          "byteLength": 8728,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6918178/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:halofantrine-fohhnhsljdzugq-uhfffaoysa-n",
+      "preferredName": "Halofantrine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 37393,
+        "inchiKey": "FOHHNHSLJDZUGQ-UHFFFAOYSA-N",
+        "connectivityKey": "FOHHNHSLJDZUGQ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C26H30Cl2F3NO",
+        "molecularWeight": 500.4,
+        "canonicalSmiles": "CCCCN(CCCC)CCC(C1=C2C=CC(=CC2=C3C=C(C=C(C3=C1)Cl)Cl)C(F)(F)F)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCN(CCCC)CCC(O)C1=C2C=CC(=CC2=C2C=C(Cl)C=C(Cl)C2=C1)C(F)(F)F",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FOHHNHSLJDZUGQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FOHHNHSLJDZUGQ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fohhnhsljdzugq-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1350",
+        "sourceName": "halofantrine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1350",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1350",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=halofantrine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-37393-2d.sdf",
+          "sha256": "d157b67697445cd7927edc349fde35786b808de3c0bf7f9a118b6e9d7dbbd7c5",
+          "byteLength": 8179,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/37393/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-37393-3d.sdf",
+          "sha256": "af0427f82454487eceed2eed6004038405e70aab30b948a5cf197d3210c5aeb4",
+          "byteLength": 8695,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/37393/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:haloperidol-lnepoxffqsencj-uhfffaoysa-n",
+      "preferredName": "Haloperidol",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3559,
+        "inchiKey": "LNEPOXFFQSENCJ-UHFFFAOYSA-N",
+        "connectivityKey": "LNEPOXFFQSENCJ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C21H23ClFNO2",
+        "molecularWeight": 375.9,
+        "canonicalSmiles": "C1CN(CCC1(C2=CC=C(C=C2)Cl)O)CCCC(=O)C3=CC=C(C=C3)F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC1(CCN(CCCC(=O)C2=CC=C(F)C=C2)CC1)C1=CC=C(Cl)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LNEPOXFFQSENCJ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LNEPOXFFQSENCJ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:lnepoxffqsencj-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1353",
+        "sourceName": "haloperidol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1353",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1353",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=haloperidol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3559-2d.sdf",
+          "sha256": "4f66ceaaa92bee018544209a79dc15ab35799c1327988772ef41df28edd327bd",
+          "byteLength": 6747,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3559/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3559-3d.sdf",
+          "sha256": "0f49a79b9f02fe7b4274920eafb12219a48fe569e745f4ec9c2b29b55d5e3228",
+          "byteLength": 9968,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3559/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:haloprogin-ctetyyazbpjbhe-uhfffaoysa-n",
+      "preferredName": "Haloprogin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3561,
+        "inchiKey": "CTETYYAZBPJBHE-UHFFFAOYSA-N",
+        "connectivityKey": "CTETYYAZBPJBHE",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C9H4Cl3IO",
+        "molecularWeight": 361.4,
+        "canonicalSmiles": "C1=C(C(=CC(=C1Cl)Cl)Cl)OCC#CI",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "ClC1=CC(Cl)=C(OCC#CI)C=C1Cl",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:CTETYYAZBPJBHE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:CTETYYAZBPJBHE-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ctetyyazbpjbhe-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1355",
+        "sourceName": "haloprogin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1355",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1355",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=haloprogin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3561-2d.sdf",
+          "sha256": "8c4585646b55f329107b9ebaa42636cd09dc07e5380185e96a84a8452abdb37d",
+          "byteLength": 3501,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3561/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3561-3d.sdf",
+          "sha256": "ddc96e40176f87bae83ef5765c182f139a99314e8e57b2a95ca43cbd82c54b29",
+          "byteLength": 3752,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3561/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:halothane-bcqzxomgpxttic-uhfffaoysa-n",
+      "preferredName": "Halothane",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3562,
+        "inchiKey": "BCQZXOMGPXTTIC-UHFFFAOYSA-N",
+        "connectivityKey": "BCQZXOMGPXTTIC",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C2HBrClF3",
+        "molecularWeight": 197.38,
+        "canonicalSmiles": "C(C(F)(F)F)(Cl)Br",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "FC(F)(F)C(Cl)Br",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BCQZXOMGPXTTIC",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BCQZXOMGPXTTIC-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:bcqzxomgpxttic-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1356",
+        "sourceName": "halothane",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1356",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1356",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=halothane",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3562-2d.sdf",
+          "sha256": "af129a0a368ebec98eff551557b039d0b6d654028ddf7cb25bb77c18cbceeb09",
+          "byteLength": 2426,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3562/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3562-3d.sdf",
+          "sha256": "550166d81ee79d234a4641c08974dc15a9dc6b17ff2f0398973adc9e87691db8",
+          "byteLength": 1871,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3562/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hetacillin-dxvuyoaedjxbpy-nffdbfgfsa-n",
+      "preferredName": "Hetacillin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 443387,
+        "inchiKey": "DXVUYOAEDJXBPY-NFFDBFGFSA-N",
+        "connectivityKey": "DXVUYOAEDJXBPY",
+        "stereochemicalKey": "NFFDBFGFSA",
+        "molecularFormula": "C19H23N3O4S",
+        "molecularWeight": 389.5,
+        "canonicalSmiles": "CC1(C(N2C(S1)C(C2=O)N3C(=O)C(NC3(C)C)C4=CC=CC=C4)C(=O)O)C",
+        "isomericSmiles": "CC1([C@@H](N2[C@H](S1)[C@@H](C2=O)N3C(=O)[C@H](NC3(C)C)C4=CC=CC=C4)C(=O)O)C",
+        "structureSourceFormSmiles": "CC1(C)S[C@@H]2[C@H](N3C(=O)[C@H](NC3(C)C)C3=CC=CC=C3)C(=O)N2[C@H]1C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DXVUYOAEDJXBPY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DXVUYOAEDJXBPY-NFFDBFGFSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:dxvuyoaedjxbpy-nffdbfgfsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1363",
+        "sourceName": "hetacillin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1363",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1363",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hetacillin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-443387-2d.sdf",
+          "sha256": "fd04b902fa4b3b9780d93cb66b414805c437aa6777ab4ed826f645624f490ff7",
+          "byteLength": 7329,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/443387/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-443387-3d.sdf",
+          "sha256": "08a69a8905dbe8de25659d49b4bf576c0efb207c95b9ea94d59bf8d40fd74dca",
+          "byteLength": 7155,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/443387/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexachlorophene-acguyxcxapnikk-uhfffaoysa-n",
+      "preferredName": "Hexachlorophene",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3598,
+        "inchiKey": "ACGUYXCXAPNIKK-UHFFFAOYSA-N",
+        "connectivityKey": "ACGUYXCXAPNIKK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C13H6Cl6O2",
+        "molecularWeight": 406.9,
+        "canonicalSmiles": "C1=C(C(=C(C(=C1Cl)Cl)CC2=C(C(=CC(=C2Cl)Cl)Cl)O)O)Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC1=C(Cl)C=C(Cl)C(Cl)=C1CC1=C(Cl)C(Cl)=CC(Cl)=C1O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ACGUYXCXAPNIKK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ACGUYXCXAPNIKK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:acguyxcxapnikk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1364",
+        "sourceName": "hexachlorophene",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1364",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1364",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hexachlorophene",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3598-2d.sdf",
+          "sha256": "059ecddeb1275326f5dc4bc762fb00fce2e96882af5ea43a968041ae4e55c7ba",
+          "byteLength": 4616,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3598/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3598-3d.sdf",
+          "sha256": "798ffb6066a680b54f3669faf0a7e42aea14a67d7089f5bbc824719f34ba0b60",
+          "byteLength": 5549,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3598/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexafluorenium-hdzaqypyabgtcl-uhfffaoysa-n",
+      "preferredName": "Hexafluorenium",
+      "aliases": [
+        "hexafluronium"
+      ],
+      "identity": {
+        "pubChemCid": 3601,
+        "inchiKey": "HDZAQYPYABGTCL-UHFFFAOYSA-N",
+        "connectivityKey": "HDZAQYPYABGTCL",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C36H42N2+2",
+        "molecularWeight": 502.7,
+        "canonicalSmiles": "C[N+](C)(CCCCCC[N+](C)(C)C1C2=CC=CC=C2C3=CC=CC=C13)C4C5=CC=CC=C5C6=CC=CC=C46",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "C[N+](C)(CCCCCC[N+](C)(C)C1C2=CC=CC=C2C2=C1C=CC=C2)C1C2=CC=CC=C2C2=C1C=CC=C2",
+        "chargeLayer": "q+2"
+      },
+      "parentEntity": {
+        "id": "parent:HDZAQYPYABGTCL",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HDZAQYPYABGTCL-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:hdzaqypyabgtcl-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1365",
+        "sourceName": "hexafluronium",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1365",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1365",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hexafluronium",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3601-2d.sdf",
+          "sha256": "9c9f3adbfbe08166a1f68911d1b64ecb694106db140c6f8da99f538cf58cc0ee",
+          "byteLength": 9952,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3601/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3601-3d.sdf",
+          "sha256": "6478ba7cee5a4fdf128ac2484805be4967c2d9531d524e7f66c5d2c755495122",
+          "byteLength": 10304,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3601/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexamethylenetetramine-vkyksionxsxakp-uhfffaoysa-n",
+      "preferredName": "Hexamethylenetetramine",
+      "aliases": [
+        "methenamine"
+      ],
+      "identity": {
+        "pubChemCid": 4101,
+        "inchiKey": "VKYKSIONXSXAKP-UHFFFAOYSA-N",
+        "connectivityKey": "VKYKSIONXSXAKP",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C6H12N4",
+        "molecularWeight": 140.19,
+        "canonicalSmiles": "C1N2CN3CN1CN(C2)C3",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "C1N2CN3CN1CN(C2)C3",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:VKYKSIONXSXAKP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:VKYKSIONXSXAKP-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:vkyksionxsxakp-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3344",
+        "sourceName": "methenamine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3344",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3344",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=methenamine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4101-2d.sdf",
+          "sha256": "0fa6e3ff0e574bc6dfb12e3e96f85c69b38c152582c94283dc37a763c50e1420",
+          "byteLength": 3785,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4101/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4101-3d.sdf",
+          "sha256": "3bee34c47b6083da2dafa081bf63b0ab54f9d658adc9f9bffd677fa48b3f77c1",
+          "byteLength": 3395,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4101/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexocyclium-zryhpqchhoksmd-uhfffaoysa-n",
+      "preferredName": "Hexocyclium",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 24199,
+        "inchiKey": "ZRYHPQCHHOKSMD-UHFFFAOYSA-N",
+        "connectivityKey": "ZRYHPQCHHOKSMD",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C20H33N2O+",
+        "molecularWeight": 317.5,
+        "canonicalSmiles": "C[N+]1(CCN(CC1)CC(C2CCCCC2)(C3=CC=CC=C3)O)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "C[N+]1(C)CCN(CC(O)(C2CCCCC2)C2=CC=CC=C2)CC1",
+        "chargeLayer": "q+1"
+      },
+      "parentEntity": {
+        "id": "parent:ZRYHPQCHHOKSMD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZRYHPQCHHOKSMD-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:zryhpqchhoksmd-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1371",
+        "sourceName": "hexocyclium",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1371",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1371",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hexocyclium",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-24199-2d.sdf",
+          "sha256": "a5003d8bbb413f97a11773a8c6c394581bd33c8b91b083d33700640244738f88",
+          "byteLength": 7299,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24199/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-24199-3d.sdf",
+          "sha256": "ea6db494ab7dca062e448f535e397278abc665ff83ada333b91c1189c07ce1cd",
+          "byteLength": 8859,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24199/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexyl-2-4-diethylamino-2-hydroxybenzoyl-benzoate-fdatwrluyrhcje-uhfffaoysa-n",
+      "preferredName": "Hexyl 2-(4-(diethylamino)-2-hydroxybenzoyl)benzoate",
+      "aliases": [
+        "diethylamino hydroxybenzoyl hexyl benzoate"
+      ],
+      "identity": {
+        "pubChemCid": 10111431,
+        "inchiKey": "FDATWRLUYRHCJE-UHFFFAOYSA-N",
+        "connectivityKey": "FDATWRLUYRHCJE",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C24H31NO4",
+        "molecularWeight": 397.5,
+        "canonicalSmiles": "CCCCCCOC(=O)C1=CC=CC=C1C(=O)C2=C(C=C(C=C2)N(CC)CC)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCCCOC(=O)C1=C(C=CC=C1)C(=O)C1=C(O)C=C(C=C1)N(CC)CC",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FDATWRLUYRHCJE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FDATWRLUYRHCJE-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fdatwrluyrhcje-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4602",
+        "sourceName": "diethylamino hydroxybenzoyl hexyl benzoate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4602",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4602",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=diethylamino%20hydroxybenzoyl%20hexyl%20benzoate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-10111431-2d.sdf",
+          "sha256": "ebbf9a1a9bcdeed8d5564be0c897c9ed973afb434ef03e6097e0254dd013db1f",
+          "byteLength": 7663,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10111431/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-10111431-3d.sdf",
+          "sha256": "f634dddbb768134bfe4f180cb67d2c15ca10e0f94417278329841fc3ab3d1178",
+          "byteLength": 8407,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10111431/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexylcaine-dklkmkydwhyztd-uhfffaoysa-n",
+      "preferredName": "Hexylcaine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 10770,
+        "inchiKey": "DKLKMKYDWHYZTD-UHFFFAOYSA-N",
+        "connectivityKey": "DKLKMKYDWHYZTD",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H23NO2",
+        "molecularWeight": 261.36,
+        "canonicalSmiles": "CC(CNC1CCCCC1)OC(=O)C2=CC=CC=C2",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(CNC1CCCCC1)OC(=O)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DKLKMKYDWHYZTD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DKLKMKYDWHYZTD-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:dklkmkydwhyztd-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1373",
+        "sourceName": "hexylcaine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1373",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1373",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hexylcaine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-10770-2d.sdf",
+          "sha256": "7b0f735396a03240fd6f8fa368b7291376e4023cabc9de62f448ec0aae54368b",
+          "byteLength": 5803,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10770/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-10770-3d.sdf",
+          "sha256": "4c8316a7cece3ff14ff4cbc26262c756021dc0ec9c41f8a9449c75204dd9fefa",
+          "byteLength": 7249,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10770/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hexylresorcinol-wfjivokawhgmbh-uhfffaoysa-n",
+      "preferredName": "Hexylresorcinol",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3610,
+        "inchiKey": "WFJIVOKAWHGMBH-UHFFFAOYSA-N",
+        "connectivityKey": "WFJIVOKAWHGMBH",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C12H18O2",
+        "molecularWeight": 194.27,
+        "canonicalSmiles": "CCCCCCC1=C(C=C(C=C1)O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCCCC1=C(O)C=C(O)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WFJIVOKAWHGMBH",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WFJIVOKAWHGMBH-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:wfjivokawhgmbh-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1374",
+        "sourceName": "hexylresorcinol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1374",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1374",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hexylresorcinol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3610-2d.sdf",
+          "sha256": "a3909918215b25cffb479e15184d443783f924fdc572c400989acd014bf63bae",
+          "byteLength": 4657,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3610/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3610-3d.sdf",
+          "sha256": "1c4570bc976b6b8eca1c1349e3c99a23d4ded9cb055555bf9b199fd93063cb7a",
+          "byteLength": 5393,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3610/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:histamine-ntyjjopfiahurm-uhfffaoysa-n",
+      "preferredName": "Histamine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 774,
+        "inchiKey": "NTYJJOPFIAHURM-UHFFFAOYSA-N",
+        "connectivityKey": "NTYJJOPFIAHURM",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C5H9N3",
+        "molecularWeight": 111.15,
+        "canonicalSmiles": "C1=C(NC=N1)CCN",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NCCC1=CN=CN1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:NTYJJOPFIAHURM",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:NTYJJOPFIAHURM-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ntyjjopfiahurm-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1375",
+        "sourceName": "histamine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1375",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1375",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=histamine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-774-2d.sdf",
+          "sha256": "34a1acd2d4308259a50e359d75e1a9cdc9f1f709f548272e9105094355920f03",
+          "byteLength": 3273,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/774/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-774-3d.sdf",
+          "sha256": "9636fc9ee730935a9fd92e950b18ade611a932d8457de16162b3a8c1a0bdeca4",
+          "byteLength": 3030,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/774/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:homosalate-wssjonwnbbtcmg-uhfffaoysa-n",
+      "preferredName": "Homosalate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 8362,
+        "inchiKey": "WSSJONWNBBTCMG-UHFFFAOYSA-N",
+        "connectivityKey": "WSSJONWNBBTCMG",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H22O3",
+        "molecularWeight": 262.34,
+        "canonicalSmiles": "CC1CC(CC(C1)(C)C)OC(=O)C2=CC=CC=C2O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1CC(CC(C)(C)C1)OC(=O)C1=C(O)C=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WSSJONWNBBTCMG",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WSSJONWNBBTCMG-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:wssjonwnbbtcmg-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3279",
+        "sourceName": "homosalate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3279",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3279",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=homosalate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-8362-2d.sdf",
+          "sha256": "ab3d150489ffd90efcbb84d2d60067101565b320e1d3347fbc2fe218a77f7d34",
+          "byteLength": 5732,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/8362/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-8362-3d.sdf",
+          "sha256": "20f3cec1686a02c7174f3a21c4d6d0741a0f5c35450a90a9f5120537d419d8c5",
+          "byteLength": 7841,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/8362/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydralazine-rptusvtufvmdqk-uhfffaoysa-n",
+      "preferredName": "Hydralazine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3637,
+        "inchiKey": "RPTUSVTUFVMDQK-UHFFFAOYSA-N",
+        "connectivityKey": "RPTUSVTUFVMDQK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C8H8N4",
+        "molecularWeight": 160.18,
+        "canonicalSmiles": "C1=CC=C2C(=C1)C=NN=C2NN",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NNC1=NN=CC2=CC=CC=C12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:RPTUSVTUFVMDQK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:RPTUSVTUFVMDQK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:rptusvtufvmdqk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1384",
+        "sourceName": "hydralazine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1384",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1384",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydralazine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3637-2d.sdf",
+          "sha256": "2e17faa208879f2129df158e9845c4cee861f71785efb347058ced08ce759d0e",
+          "byteLength": 3609,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3637/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3637-3d.sdf",
+          "sha256": "9948813d773c87a1b81d2d9ff03853e6a5b2946afc5c330a840d3b95bda89c5e",
+          "byteLength": 3725,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3637/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrochlorothiazide-jzufklxoesdkrf-uhfffaoysa-n",
+      "preferredName": "Hydrochlorothiazide",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3639,
+        "inchiKey": "JZUFKLXOESDKRF-UHFFFAOYSA-N",
+        "connectivityKey": "JZUFKLXOESDKRF",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C7H8ClN3O4S2",
+        "molecularWeight": 297.7,
+        "canonicalSmiles": "C1NC2=CC(=C(C=C2S(=O)(=O)N1)S(=O)(=O)N)Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NS(=O)(=O)C1=C(Cl)C=C2NCNS(=O)(=O)C2=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:JZUFKLXOESDKRF",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:JZUFKLXOESDKRF-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:jzufklxoesdkrf-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1385",
+        "sourceName": "hydrochlorothiazide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1385",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1385",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrochlorothiazide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3639-2d.sdf",
+          "sha256": "4078598788e8ece042fe51f1ced6d7d7bdd14b9eff0c0adcc72814277cea6c1c",
+          "byteLength": 4460,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3639/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3639-3d.sdf",
+          "sha256": "bd6b7ae988d029c4a3d8ab7352e2a2f9d236c487cd2edeac385115ac75631954",
+          "byteLength": 4946,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3639/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocodone-llpolzwfymwnkh-cmkmfdcusa-n",
+      "preferredName": "Hydrocodone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5284569,
+        "inchiKey": "LLPOLZWFYMWNKH-CMKMFDCUSA-N",
+        "connectivityKey": "LLPOLZWFYMWNKH",
+        "stereochemicalKey": "CMKMFDCUSA",
+        "molecularFormula": "C18H21NO3",
+        "molecularWeight": 299.4,
+        "canonicalSmiles": "CN1CCC23C4C1CC5=C2C(=C(C=C5)OC)OC3C(=O)CC4",
+        "isomericSmiles": "CN1CC[C@]23[C@@H]4[C@H]1CC5=C2C(=C(C=C5)OC)O[C@H]3C(=O)CC4",
+        "structureSourceFormSmiles": "COC1=CC=C2C[C@@H]3[C@@H]4CCC(=O)[C@@H]5OC1=C2[C@]45CCN3C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LLPOLZWFYMWNKH",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LLPOLZWFYMWNKH-CMKMFDCUSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:llpolzwfymwnkh-cmkmfdcusa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1386",
+        "sourceName": "hydrocodone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1386",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1386",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocodone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5284569-2d.sdf",
+          "sha256": "528b908b726e58880e58b44661f69415ab59e016a6660d465720b6b872879e4a",
+          "byteLength": 6521,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284569/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5284569-3d.sdf",
+          "sha256": "dd92b8f7560589e33ec1e013ba5b2277043c995ef582decde8182e01613f8221",
+          "byteLength": 6499,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284569/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortamate-fwfvlwgefdizmj-fomywirzsa-n",
+      "preferredName": "Hydrocortamate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 84088,
+        "inchiKey": "FWFVLWGEFDIZMJ-FOMYWIRZSA-N",
+        "connectivityKey": "FWFVLWGEFDIZMJ",
+        "stereochemicalKey": "FOMYWIRZSA",
+        "molecularFormula": "C27H41NO6",
+        "molecularWeight": 475.6,
+        "canonicalSmiles": "CCN(CC)CC(=O)OCC(=O)C1(CCC2C1(CC(C3C2CCC4=CC(=O)CCC34C)O)C)O",
+        "isomericSmiles": "CCN(CC)CC(=O)OCC(=O)[C@]1(CC[C@@H]2[C@@]1(C[C@@H]([C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)O)C)O",
+        "structureSourceFormSmiles": "CCN(CC)CC(=O)OCC(=O)[C@@]1(O)CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@]12C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FWFVLWGEFDIZMJ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FWFVLWGEFDIZMJ-FOMYWIRZSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:fwfvlwgefdizmj-fomywirzsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1387",
+        "sourceName": "hydrocortamate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1387",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1387",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortamate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-84088-2d.sdf",
+          "sha256": "9aba2e52306a7acdd434d4038236f1ba8c435880c7f2c905e42a147f1facb71f",
+          "byteLength": 9929,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/84088/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-84088-3d.sdf",
+          "sha256": "d185d8f715426bd22787fd4660a7e4aa00c1a793e3454456199a10b464762b90",
+          "byteLength": 10175,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/84088/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-acetate-alexxdvddisndu-jzypgeldsa-n",
+      "preferredName": "Hydrocortisone Acetate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5744,
+        "inchiKey": "ALEXXDVDDISNDU-JZYPGELDSA-N",
+        "connectivityKey": "ALEXXDVDDISNDU",
+        "stereochemicalKey": "JZYPGELDSA",
+        "molecularFormula": "C23H32O6",
+        "molecularWeight": 404.5,
+        "canonicalSmiles": "CC(=O)OCC(=O)C1(CCC2C1(CC(C3C2CCC4=CC(=O)CCC34C)O)C)O",
+        "isomericSmiles": "CC(=O)OCC(=O)[C@]1(CC[C@@H]2[C@@]1(C[C@@H]([C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)O)C)O",
+        "structureSourceFormSmiles": "CC(=O)OCC(=O)[C@@]1(O)CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@]12C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ALEXXDVDDISNDU",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ALEXXDVDDISNDU-JZYPGELDSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:alexxdvddisndu-jzypgeldsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4213",
+        "sourceName": "hydrocortisone acetate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4213",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4213",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20acetate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5744-2d.sdf",
+          "sha256": "2669bf66c3dc91a7af7cd1e7b70cde0bd9c4661c7917bdbfb8756e834fbd4c5d",
+          "byteLength": 8510,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5744/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5744-3d.sdf",
+          "sha256": "a75b88a642b84cac65b3fcef12f1304bbd3a8f9be4d4953b91824a7a00e67b89",
+          "byteLength": 8689,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5744/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-buteprate-fogxjpfpzohsqs-ayvlzsqqsa-n",
+      "preferredName": "Hydrocortisone buteprate",
+      "aliases": [
+        "hydrocortisone probutate"
+      ],
+      "identity": {
+        "pubChemCid": 636398,
+        "inchiKey": "FOGXJPFPZOHSQS-AYVLZSQQSA-N",
+        "connectivityKey": "FOGXJPFPZOHSQS",
+        "stereochemicalKey": "AYVLZSQQSA",
+        "molecularFormula": "C28H40O7",
+        "molecularWeight": 488.6,
+        "canonicalSmiles": "CCCC(=O)OC1(CCC2C1(CC(C3C2CCC4=CC(=O)CCC34C)O)C)C(=O)COC(=O)CC",
+        "isomericSmiles": "CCCC(=O)O[C@@]1(CC[C@@H]2[C@@]1(C[C@@H]([C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)O)C)C(=O)COC(=O)CC",
+        "structureSourceFormSmiles": "CCCC(=O)O[C@@]1(CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@]12C)C(=O)COC(=O)CC",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FOGXJPFPZOHSQS",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FOGXJPFPZOHSQS-AYVLZSQQSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:fogxjpfpzohsqs-ayvlzsqqsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4569",
+        "sourceName": "hydrocortisone probutate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4569",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4569",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20probutate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-636398-2d.sdf",
+          "sha256": "d6d15923756155a972beb97c6c91b2bf3848908834dd9e05d802a784643039bb",
+          "byteLength": 9875,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/636398/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-636398-3d.sdf",
+          "sha256": "797aba5418850c6ed95945f92a72213289a37dc12935741b425eb5569cecf9ca",
+          "byteLength": 9726,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/636398/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-butyrate-bmcqmvfgovhvng-tufayurcsa-n",
+      "preferredName": "Hydrocortisone Butyrate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 26133,
+        "inchiKey": "BMCQMVFGOVHVNG-TUFAYURCSA-N",
+        "connectivityKey": "BMCQMVFGOVHVNG",
+        "stereochemicalKey": "TUFAYURCSA",
+        "molecularFormula": "C25H36O6",
+        "molecularWeight": 432.5,
+        "canonicalSmiles": "CCCC(=O)OC1(CCC2C1(CC(C3C2CCC4=CC(=O)CCC34C)O)C)C(=O)CO",
+        "isomericSmiles": "CCCC(=O)O[C@@]1(CC[C@@H]2[C@@]1(C[C@@H]([C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)O)C)C(=O)CO",
+        "structureSourceFormSmiles": "CCCC(=O)O[C@@]1(CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@]12C)C(=O)CO",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BMCQMVFGOVHVNG",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BMCQMVFGOVHVNG-TUFAYURCSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bmcqmvfgovhvng-tufayurcsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3959",
+        "sourceName": "hydrocortisone butyrate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3959",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3959",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20butyrate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-26133-2d.sdf",
+          "sha256": "2d70a8c31639092c464ddbb0dfd4fcffddb3f2677c46e0cd94344b2736820315",
+          "byteLength": 9074,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/26133/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-26133-3d.sdf",
+          "sha256": "64241f52fdffc6302b5ff7719b7831d79005fb372c3b7ff990e649bbebd9cfbf",
+          "byteLength": 9010,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/26133/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-cypionate-dlvoseufirpirm-kaqkjvhqsa-n",
+      "preferredName": "Hydrocortisone Cypionate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 223253,
+        "inchiKey": "DLVOSEUFIRPIRM-KAQKJVHQSA-N",
+        "connectivityKey": "DLVOSEUFIRPIRM",
+        "stereochemicalKey": "KAQKJVHQSA",
+        "molecularFormula": "C29H42O6",
+        "molecularWeight": 486.6,
+        "canonicalSmiles": "CC12CCC(=O)C=C1CCC3C2C(CC4(C3CCC4(C(=O)COC(=O)CCC5CCCC5)O)C)O",
+        "isomericSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)COC(=O)CCC5CCCC5)O)C)O",
+        "structureSourceFormSmiles": "C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@]34C)[C@@H]1CC[C@]2(O)C(=O)COC(=O)CCC1CCCC1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DLVOSEUFIRPIRM",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DLVOSEUFIRPIRM-KAQKJVHQSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:dlvoseufirpirm-kaqkjvhqsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1390",
+        "sourceName": "hydrocortisone cypionate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1390",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1390",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20cypionate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-223253-2d.sdf",
+          "sha256": "3e9236ea60529d04ae05296d829661d69e719eaa4329e765747b5a3b43fbae66",
+          "byteLength": 10143,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/223253/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-223253-3d.sdf",
+          "sha256": "017b3a6c9912552a5b608b7df43123270924a76d39d6b44da905db8c3ff87835",
+          "byteLength": 10336,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/223253/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-phosphate-bgsojvfoeqlvmh-vwumjdoosa-n",
+      "preferredName": "Hydrocortisone Phosphate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 441407,
+        "inchiKey": "BGSOJVFOEQLVMH-VWUMJDOOSA-N",
+        "connectivityKey": "BGSOJVFOEQLVMH",
+        "stereochemicalKey": "VWUMJDOOSA",
+        "molecularFormula": "C21H31O8P",
+        "molecularWeight": 442.4,
+        "canonicalSmiles": "CC12CCC(=O)C=C1CCC3C2C(CC4(C3CCC4(C(=O)COP(=O)(O)O)O)C)O",
+        "isomericSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)COP(=O)(O)O)O)C)O",
+        "structureSourceFormSmiles": "C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@]34C)[C@@H]1CC[C@]2(O)C(=O)COP(O)(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BGSOJVFOEQLVMH",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BGSOJVFOEQLVMH-VWUMJDOOSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bgsojvfoeqlvmh-vwumjdoosa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5193",
+        "sourceName": "hydrocortisone phosphate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5193",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5193",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20phosphate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-441407-2d.sdf",
+          "sha256": "f9eb683a08b6939d0a909491ecf8059a23a2a0d0cdecc3a5cc0dddbea5ed9c41",
+          "byteLength": 8595,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/441407/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-441407-3d.sdf",
+          "sha256": "db5d995dd3cc05b99eac07054e8fbb4d57629895ffcfd8890feee341e2662d63",
+          "byteLength": 8791,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/441407/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-succinate-vwqwxzawfpzjda-cgvgkppmsa-n",
+      "preferredName": "Hydrocortisone Succinate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 16623,
+        "inchiKey": "VWQWXZAWFPZJDA-CGVGKPPMSA-N",
+        "connectivityKey": "VWQWXZAWFPZJDA",
+        "stereochemicalKey": "CGVGKPPMSA",
+        "molecularFormula": "C25H34O8",
+        "molecularWeight": 462.5,
+        "canonicalSmiles": "CC12CCC(=O)C=C1CCC3C2C(CC4(C3CCC4(C(=O)COC(=O)CCC(=O)O)O)C)O",
+        "isomericSmiles": "C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)COC(=O)CCC(=O)O)O)C)O",
+        "structureSourceFormSmiles": "C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@]34C)[C@@H]1CC[C@]2(O)C(=O)COC(=O)CCC(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:VWQWXZAWFPZJDA",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:VWQWXZAWFPZJDA-CGVGKPPMSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:vwqwxzawfpzjda-cgvgkppmsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4456",
+        "sourceName": "hydrocortisone succinate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4456",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4456",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20succinate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-16623-2d.sdf",
+          "sha256": "4b1850ddf8f84e0e5b2d395458a44332757cff90c00c3cc813c95e3a65164f05",
+          "byteLength": 9178,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/16623/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-16623-3d.sdf",
+          "sha256": "18e04e3e8bf5e7e8d003bd5e78e638a9291bf28daa16df5d215a896143847193",
+          "byteLength": 9308,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/16623/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrocortisone-valerate-fzchynwyxkicio-fznhgjlxsa-n",
+      "preferredName": "Hydrocortisone Valerate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5282494,
+        "inchiKey": "FZCHYNWYXKICIO-FZNHGJLXSA-N",
+        "connectivityKey": "FZCHYNWYXKICIO",
+        "stereochemicalKey": "FZNHGJLXSA",
+        "molecularFormula": "C26H38O6",
+        "molecularWeight": 446.6,
+        "canonicalSmiles": "CCCCC(=O)OC1(CCC2C1(CC(C3C2CCC4=CC(=O)CCC34C)O)C)C(=O)CO",
+        "isomericSmiles": "CCCCC(=O)O[C@@]1(CC[C@@H]2[C@@]1(C[C@@H]([C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)O)C)C(=O)CO",
+        "structureSourceFormSmiles": "CCCCC(=O)O[C@@]1(CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@]12C)C(=O)CO",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FZCHYNWYXKICIO",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FZCHYNWYXKICIO-FZNHGJLXSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:fzchynwyxkicio-fznhgjlxsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4504",
+        "sourceName": "hydrocortisone valerate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4504",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4504",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrocortisone%20valerate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5282494-2d.sdf",
+          "sha256": "2cda265efeae1196218a2d75fa01ecd4f6f0e5276e8ced3d3c42de579c518b56",
+          "byteLength": 9364,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5282494/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5282494-3d.sdf",
+          "sha256": "e9ce4cd2065a7cb5a558b5450ce5a9fc3a8a61fa1354af4eacd67cd37d4cfb1e",
+          "byteLength": 9564,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5282494/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroflumethiazide-dmdggsialpnsee-uhfffaoysa-n",
+      "preferredName": "Hydroflumethiazide",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3647,
+        "inchiKey": "DMDGGSIALPNSEE-UHFFFAOYSA-N",
+        "connectivityKey": "DMDGGSIALPNSEE",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C8H8F3N3O4S2",
+        "molecularWeight": 331.3,
+        "canonicalSmiles": "C1NC2=C(C=C(C(=C2)C(F)(F)F)S(=O)(=O)N)S(=O)(=O)N1",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NS(=O)(=O)C1=CC2=C(NCNS2(=O)=O)C=C1C(F)(F)F",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DMDGGSIALPNSEE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DMDGGSIALPNSEE-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:dmdggsialpnsee-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1392",
+        "sourceName": "hydroflumethiazide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1392",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1392",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroflumethiazide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3647-2d.sdf",
+          "sha256": "673453179ee995dec3d0d1c4394a7fbf53f1f05f307688a6b10f5249f0d2ba28",
+          "byteLength": 4827,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3647/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3647-3d.sdf",
+          "sha256": "f1fc9a8936b0cdcdc4ec5292745fd94c025179d7339085aad5f1c55d3bb1ac06",
+          "byteLength": 5415,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3647/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrofluoric-acid-krhyyfgtrywzrs-uhfffaoysa-n",
+      "preferredName": "Hydrofluoric Acid",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 14917,
+        "inchiKey": "KRHYYFGTRYWZRS-UHFFFAOYSA-N",
+        "connectivityKey": "KRHYYFGTRYWZRS",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "FH",
+        "molecularWeight": 20.0064,
+        "canonicalSmiles": "F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "F",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:KRHYYFGTRYWZRS",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:KRHYYFGTRYWZRS-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:krhyyfgtrywzrs-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4499",
+        "sourceName": "hydrofluoric acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4499",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4499",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrofluoric%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-14917-2d.sdf",
+          "sha256": "49dd0e92a2d2173a658d80387fe86d60889bd724d5390b1ab5c715d7d52056c3",
+          "byteLength": 1609,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/14917/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-14917-3d.sdf",
+          "sha256": "a00134e1f9e7ca3b56e6c21bf572a6a2f3486683827aa3086403654ca69511e7",
+          "byteLength": 1110,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/14917/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydrogen-peroxide-mhajpdpjqmaiiy-uhfffaoysa-n",
+      "preferredName": "Hydrogen Peroxide",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 784,
+        "inchiKey": "MHAJPDPJQMAIIY-UHFFFAOYSA-N",
+        "connectivityKey": "MHAJPDPJQMAIIY",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "H2O2",
+        "molecularWeight": 34.015,
+        "canonicalSmiles": "OO",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OO",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:MHAJPDPJQMAIIY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:MHAJPDPJQMAIIY-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:mhajpdpjqmaiiy-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3281",
+        "sourceName": "hydrogen peroxide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3281",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3281",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydrogen%20peroxide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-784-2d.sdf",
+          "sha256": "e758443665668f03e829cbc7ca2418bfcb6ba7492d9997f0d0bd3f6ae44c02e7",
+          "byteLength": 1841,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/784/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-784-3d.sdf",
+          "sha256": "457840aff61402439d79e89d0b5896c27b48f6d62620c78c5a0a01917efad48e",
+          "byteLength": 1292,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/784/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydromorphone-wvloadhcbxtijk-ynhqpcigsa-n",
+      "preferredName": "Hydromorphone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5284570,
+        "inchiKey": "WVLOADHCBXTIJK-YNHQPCIGSA-N",
+        "connectivityKey": "WVLOADHCBXTIJK",
+        "stereochemicalKey": "YNHQPCIGSA",
+        "molecularFormula": "C17H19NO3",
+        "molecularWeight": 285.34,
+        "canonicalSmiles": "CN1CCC23C4C1CC5=C2C(=C(C=C5)O)OC3C(=O)CC4",
+        "isomericSmiles": "CN1CC[C@]23[C@@H]4[C@H]1CC5=C2C(=C(C=C5)O)O[C@H]3C(=O)CC4",
+        "structureSourceFormSmiles": "CN1CC[C@@]23[C@H]4OC5=C2C(C[C@@H]1[C@@H]3CCC4=O)=CC=C5O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WVLOADHCBXTIJK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WVLOADHCBXTIJK-YNHQPCIGSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:wvloadhcbxtijk-ynhqpcigsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1393",
+        "sourceName": "hydromorphone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1393",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1393",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydromorphone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5284570-2d.sdf",
+          "sha256": "00e3044837ef831808f4eb05ed9b6dde1b3b368b84e58a17796906226532c1c5",
+          "byteLength": 6241,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284570/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5284570-3d.sdf",
+          "sha256": "5e089b50f80738b31b4bd3eb26fa34ab5a87b6902504b2bd4b8788f51190f1ee",
+          "byteLength": 6285,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284570/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroquinone-qigbrxmkcjkvmj-uhfffaoysa-n",
+      "preferredName": "Hydroquinone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 785,
+        "inchiKey": "QIGBRXMKCJKVMJ-UHFFFAOYSA-N",
+        "connectivityKey": "QIGBRXMKCJKVMJ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C6H6O2",
+        "molecularWeight": 110.11,
+        "canonicalSmiles": "C1=CC(=CC=C1O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC1=CC=C(O)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QIGBRXMKCJKVMJ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QIGBRXMKCJKVMJ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:qigbrxmkcjkvmj-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3282",
+        "sourceName": "hydroquinone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3282",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3282",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroquinone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-785-2d.sdf",
+          "sha256": "12cf276558c3fd8e9fa6806ee124f5255ef1ec3743c106177d7d5f13aac6d77c",
+          "byteLength": 2899,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/785/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-785-3d.sdf",
+          "sha256": "16d64ee0ea39a65fcb2683a5ecd09eb35c96c15545ce132af7d8b89723ff399d",
+          "byteLength": 2630,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/785/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxyamfetamine-giknhhrflcdoeu-uhfffaoysa-n",
+      "preferredName": "Hydroxyamfetamine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3651,
+        "inchiKey": "GIKNHHRFLCDOEU-UHFFFAOYSA-N",
+        "connectivityKey": "GIKNHHRFLCDOEU",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C9H13NO",
+        "molecularWeight": 151.21,
+        "canonicalSmiles": "CC(CC1=CC=C(C=C1)O)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(N)CC1=CC=C(O)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GIKNHHRFLCDOEU",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GIKNHHRFLCDOEU-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:giknhhrflcdoeu-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1394",
+        "sourceName": "hydroxyamfetamine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1394",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1394",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroxyamfetamine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3651-2d.sdf",
+          "sha256": "8458db8270b5824841392dbce007a6aa27564db224d24c26952cf27f267a540b",
+          "byteLength": 3913,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3651/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3651-3d.sdf",
+          "sha256": "3e918f0504dc10a9c81491a61a5e384b8672b0599422e4d63e600f436ffa3ae4",
+          "byteLength": 4071,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3651/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxychloroquine-xxsmgprmxltpcz-uhfffaoysa-n",
+      "preferredName": "Hydroxychloroquine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3652,
+        "inchiKey": "XXSMGPRMXLTPCZ-UHFFFAOYSA-N",
+        "connectivityKey": "XXSMGPRMXLTPCZ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H26ClN3O",
+        "molecularWeight": 335.9,
+        "canonicalSmiles": "CCN(CCCC(C)NC1=C2C=CC(=CC2=NC=C1)Cl)CCO",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCN(CCO)CCCC(C)NC1=CC=NC2=CC(Cl)=CC=C12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XXSMGPRMXLTPCZ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XXSMGPRMXLTPCZ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xxsmgprmxltpcz-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1395",
+        "sourceName": "hydroxychloroquine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1395",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1395",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroxychloroquine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3652-2d.sdf",
+          "sha256": "8ae1fc67f679941348c23456a8a5d1aa7c5ca3a1255fc9343d604eb1f4117df4",
+          "byteLength": 6616,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3652/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3652-3d.sdf",
+          "sha256": "afb24dcfafe5194c158d32d0b6f41ef8d39fe1a799ddc8fa181f3a64c447ab69",
+          "byteLength": 7592,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3652/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxymethanediphosphonic-acid-hjzkoaydrqlpme-uhfffaoysa-n",
+      "preferredName": "Hydroxymethanediphosphonic acid",
+      "aliases": [
+        "oxidronic acid"
+      ],
+      "identity": {
+        "pubChemCid": 27304,
+        "inchiKey": "HJZKOAYDRQLPME-UHFFFAOYSA-N",
+        "connectivityKey": "HJZKOAYDRQLPME",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "CH6O7P2",
+        "molecularWeight": 192,
+        "canonicalSmiles": "C(O)(P(=O)(O)O)P(=O)(O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(P(O)(O)=O)P(O)(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:HJZKOAYDRQLPME",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HJZKOAYDRQLPME-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:hjzkoaydrqlpme-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3409",
+        "sourceName": "oxidronic acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3409",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3409",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxidronic%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-27304-2d.sdf",
+          "sha256": "b55263242a0a1432f21324c0a75affde62d90df7ed6ed7e5cd960ca918d61956",
+          "byteLength": 3184,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/27304/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-27304-3d.sdf",
+          "sha256": "850c3c8221a6a6ee43ec35b4639c99b4219765738f44063ad34521967d3385fe",
+          "byteLength": 2790,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/27304/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxyprogesterone-caproate-domwkuiipqcaju-ljhiybghsa-n",
+      "preferredName": "Hydroxyprogesterone Caproate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 169870,
+        "inchiKey": "DOMWKUIIPQCAJU-LJHIYBGHSA-N",
+        "connectivityKey": "DOMWKUIIPQCAJU",
+        "stereochemicalKey": "LJHIYBGHSA",
+        "molecularFormula": "C27H40O4",
+        "molecularWeight": 428.6,
+        "canonicalSmiles": "CCCCCC(=O)OC1(CCC2C1(CCC3C2CCC4=CC(=O)CCC34C)C)C(=O)C",
+        "isomericSmiles": "CCCCCC(=O)O[C@@]1(CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CCC4=CC(=O)CC[C@]34C)C)C(=O)C",
+        "structureSourceFormSmiles": "CCCCCC(=O)O[C@@]1(CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3CC[C@]12C)C(C)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DOMWKUIIPQCAJU",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DOMWKUIIPQCAJU-LJHIYBGHSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:domwkuiipqcaju-ljhiybghsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4189",
+        "sourceName": "hydroxyprogesterone caproate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4189",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4189",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroxyprogesterone%20caproate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-169870-2d.sdf",
+          "sha256": "5baaf3c3e29e72a699eeeab58e829696dc79423d21c2fa6e4551aa7e5f4ca4ad",
+          "byteLength": 9245,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/169870/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-169870-3d.sdf",
+          "sha256": "38eaae08fb836fde3551864efd68cd64e36c616dac9d089e0c49e2049ee9bf18",
+          "byteLength": 9436,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/169870/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxyurea-vsnhcauresnica-uhfffaoysa-n",
+      "preferredName": "Hydroxyurea",
+      "aliases": [
+        "hydroxycarbamide"
+      ],
+      "identity": {
+        "pubChemCid": 3657,
+        "inchiKey": "VSNHCAURESNICA-UHFFFAOYSA-N",
+        "connectivityKey": "VSNHCAURESNICA",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "CH4N2O2",
+        "molecularWeight": 76.055,
+        "canonicalSmiles": "C(=O)(N)NO",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NC(=O)NO",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:VSNHCAURESNICA",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:VSNHCAURESNICA-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:vsnhcauresnica-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1399",
+        "sourceName": "hydroxycarbamide",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1399",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1399",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroxycarbamide",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3657-2d.sdf",
+          "sha256": "a181efb5a1d8346d0a830c1096e62c73b75142f28f5ba98f3fb7d84ae9bf9477",
+          "byteLength": 2307,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3657/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3657-3d.sdf",
+          "sha256": "977011b5ff321da0acd53ae2cf3dc73ac7bf7d6b69576048bb0cf2400d715ae1",
+          "byteLength": 1970,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3657/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:hydroxyzine-zqdwxgkkhfnsqk-uhfffaoysa-n",
+      "preferredName": "Hydroxyzine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3658,
+        "inchiKey": "ZQDWXGKKHFNSQK-UHFFFAOYSA-N",
+        "connectivityKey": "ZQDWXGKKHFNSQK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C21H27ClN2O2",
+        "molecularWeight": 374.9,
+        "canonicalSmiles": "C1CN(CCN1CCOCCO)C(C2=CC=CC=C2)C3=CC=C(C=C3)Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OCCOCCN1CCN(CC1)C(C1=CC=CC=C1)C1=CC=C(Cl)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ZQDWXGKKHFNSQK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZQDWXGKKHFNSQK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:zqdwxgkkhfnsqk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1400",
+        "sourceName": "hydroxyzine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1400",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1400",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=hydroxyzine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3658-2d.sdf",
+          "sha256": "bc008575035fb9f161b8134e0dedcd7741213de7a8396f92bcce36d61497c97d",
+          "byteLength": 7067,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3658/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3658-3d.sdf",
+          "sha256": "ab48afb27411cc004a30e51df3a9a2a324d1fd42f1731f3f157d28377fefecbb",
+          "byteLength": 8171,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3658/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

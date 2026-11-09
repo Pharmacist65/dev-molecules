@@ -1,10 +1,10 @@
-# Dev Molecules — Architecture
+# Molevren — Architecture
 
 ## Architectural intent
 
-Dev Molecules is one product shell with independently governed scientific, learning, and rendering boundaries. React may compose those boundaries, but it is not allowed to manufacture chemistry, evidence status, scoring rules, or source provenance.
+Molevren is one product shell with independently governed scientific, learning, and rendering boundaries. React may compose those boundaries, but it is not allowed to manufacture chemistry, evidence status, scoring rules, or source provenance.
 
-The current repository is a stateless React 19 application with two delivery adapters around the same product shell: vinext for the server-capable Sites/Cloudflare runtime and a standalone Vite entry for static GitHub Pages delivery. It uses checked-in seed data and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
+The current repository is a stateless React 19 application with two delivery adapters around the same product shell: Vinext for provider-neutral server-capable regression verification and a standalone Vite entry for static GitHub Pages delivery. It combines curated regression fixtures with generated static catalog shards and structure assets; no persistent database or object store is configured. Durable multi-user persistence is a roadmap item, not an implemented capability.
 
 ## Current dependency direction
 
@@ -21,11 +21,17 @@ React product shell
 Source SDF / SMILES / regulatory records / patent anchors
   └─ provenance and review state
        └─ eligible presentation or explicit unavailable state
+
+Versioned catalog source snapshot
+  └─ adapters and form/stereo-aware normalization
+       └─ manifest / search index / shards / reports / lazy SDF assets
 ```
 
 - `lib/domain/` owns identity, evidence, structure, synthesis, nomenclature, challenge, and learning contracts.
 - `lib/application/` turns domain/data records into deterministic UI-facing models; it does not promote review status.
-- `lib/data/` composes the seed catalog, source registry, synthesis stories, challenges, nomenclature curriculum, and provider adapters.
+- `lib/catalog/` owns source adapters, identity normalization, sharding, bounded caches, and the static client.
+- `lib/data/` composes curated regression fixtures, source registries, synthesis routes, challenges, and curricula.
+- `scripts/catalog/` owns the reproducible snapshot → normalize → build → validate → report lifecycle.
 - `components/` renders those contracts and sends user attempts back to pure evaluators.
 - Rendering engines consume validated structure records. They are not sources of molecular identity or scientific truth.
 
@@ -35,21 +41,25 @@ This direction is tested. Application consumers do not import a family-specific 
 
 ### Identity and Catalog
 
-The catalog distinguishes normalized molecular entities, explicit chemical forms, regulatory products, approvals, external identifiers, structures, and educational classifications. Regulatory approval is attached to an exact Drugs@FDA `application + product + action` record and explicit `ChemicalForm`; it is not copied to a related normalized PubChem parent.
+The catalog distinguishes normalized molecular entities, explicit chemical forms, regulatory products, approvals, external identifiers, structures, and educational classifications. Curated regression-fixture approval is attached to an exact Drugs@FDA `application + product + action` record and explicit `ChemicalForm`; it is not copied to a related normalized PubChem parent. Generated catalog approval entries use a separate, narrower DrugCentral FDA-list-membership contract.
 
-The current seed contains 15 molecules from more than one family. This is coverage for the implemented vertical slice, not a schema ceiling or a claim to contain every approved drug.
+The checked `drugcentral-fda-pubchem-eligible-v1` snapshot evaluates all 2,331 rows in the selected DrugCentral FDA list. It finds 1,858 complete same-ID DrugCentral structures, resolves 1,747 exact PubChem identities, imports 1,552 records with complete 2D/3D pairs, and retains 779 fail-closed unresolved rows partitioned as 473 identity-structure gaps, 111 PubChem-resolution gaps, and 195 full-pair gaps. It publishes exactly 3,104 SDF assets in 25 alphabetic shards plus one `unclassified` therapeutic shard. The original 15 curated molecules remain regression fixtures and teaching-content anchors, not a schema ceiling.
+
+Generated approval entries represent DrugCentral FDA-list membership only. Application, product, and commercial-form linkage remains explicitly unresolved for all 2,331 source rows until exact openFDA enrichment is selected and succeeds. One display-name form/stereo conflict remains separate, and two multicomponent forms retain unresolved parent relations. The openFDA adapter is available but unused in this snapshot; direct EMA and PMDA adapters remain future work.
 
 ### Explore
 
-Explore owns lens definitions, versioned categorical projections, clusters, progressive level of detail, stable hash navigation, keyboard/list access, and the Universe → cluster → focus transition.
+Explore owns lens definitions, versioned projections, spatial clusters, progressive level of detail, stable hash navigation, keyboard/list access, camera transitions, and Universe → cluster → focus/compare state.
 
-The current therapeutic-area, target-profile, and curated-scaffold lenses are deterministic categorical layouts. Their screen distance is explicitly **not** a fingerprint/Tanimoto score, binding measurement, clinical similarity, or efficacy claim. Localized labels never change canonical category inputs or coordinates.
+Therapeutic-area, target-profile, and curated-scaffold lenses are deterministic categorical layouts. Their screen distance is explicitly **not** a fingerprint/Tanimoto score, binding measurement, clinical similarity, or efficacy claim. The separate structural lens hashes one-, two-, and three-token canonical-SMILES paths into 512 bits and calculates Tanimoto similarity. It is versioned as `canonical-smiles-path-fingerprint@1.0.0`; it is not ECFP, pharmacology, clinical equivalence, route similarity, or a patent relationship. Localized labels never change canonical inputs, scores, or coordinates.
 
 ### Synthesis and Synthesis Learning
 
 The synthesis domain owns route type, version, direct source anchors, materials, ordered steps, reaction classes, bond changes, named-atom correspondence, stereochemistry scope, review state, limitations, and the non-operational safety contract.
 
-The three current stories are patent-reported educational readings. Primary-source locators are audited, while editorial atom maps remain draft and require named synthetic-chemistry review. `canPresentAsSourceReported` is a fail-closed presentation gate: it requires an eligible route type, eligible source status, a direct HTTPS document and locator, matching source IDs, and `operationalDetailsIncluded === false`.
+Synthesis Atlas contains six routes over propranolol, atenolol, and carvedilol: one foundational-education and one source-reported route per molecule. Together they contain 40 structure-backed materials, 20 conceptual transformations, and 12 curated mechanism teaching records. The reported atenolol and carvedilol routes provide five- and six-transformation paths respectively. The two complete electron-flow mappings originate in foundational transformations and anchor to actual 2D atoms/bonds. They remain bound to those material contexts; incompatible reported steps stay closed, while unmapped movements remain textual and draw no decorative arrows.
+
+Primary-source locators are audited, while mechanism arrows and atom/bond interpretation remain curated educational annotations requiring qualified review. `getSynthesisAtlasSourceGate` fails closed unless direct HTTPS documents, locators, step/source resolution, and the non-operational safety contract are present. `canPresentSynthesisAtlasRouteAsReported` additionally requires a reported route with no declared evidence gap. Route, step, and mechanism navigation is deterministic; a mechanism layer opens only for an explicitly curated, source-gated step.
 
 Challenge answer keys are not trusted blindly. Pure domain evaluators derive the expected answer from the referenced route, step, material role, bond changes, and provenance status; inconsistent configuration returns an invalid state.
 
@@ -57,7 +67,9 @@ See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
 ### Nomenclature Learning
 
-The nomenclature domain contains ten ordered topics, ten source-referenced exercises, and six interaction contracts. A pure evaluator handles single choice, multiple choice, and normalized text answers in TR and EN. It grades only the curated answer contract; it does not infer chemical identity or validate arbitrary names.
+The Nomenclature Academy domain contains eight ordered curriculum sections and 22 source-referenced exercises over 20 parseable structure records. Sixteen concrete response/widget contracts cover choice, atom/bond selection, ordered sequences, structure construction/choice, stereochemical assignment, and normalized text answers in TR and EN. A pure evaluator grades only the curated answer contract; it does not infer chemical identity or validate arbitrary names.
+
+A typed local chemical-tool adapter supports four curated name↔structure records, verifies round trips, and fails closed for unknown names, structures, or mismatches. It is not a general IUPAC parser, OPSIN deployment, or RDKit validation service.
 
 Progress is device-local UI state. Nomenclature persistence stores only a versioned current-topic ID, completed exercise IDs, and aggregate attempt counts; it excludes answers, structures, evaluations, and scientific claims. Learning progress cannot change evidence or review status.
 
@@ -75,7 +87,7 @@ The static GitHub Pages adapter has no API runtime and therefore invokes the sam
 
 ## Delivery adapters
 
-`app/` remains the vinext entry for local development and server-capable hosting. `deployment/github-pages/` is a thin client entry that mounts the same `DevMoleculesApp`; it contains no duplicate chemistry, curriculum, evidence, or UI implementation. `vite.pages.config.ts` sets the GitHub project base path, copies the checked-in public assets, and emits `dist-pages/`.
+`app/` remains the vinext entry for local development and server-capable hosting. `deployment/github-pages/` is a thin client entry that mounts the same `DevMoleculesApp`; it contains no duplicate chemistry, curriculum, evidence, or UI implementation. `vite.pages.config.ts` sets the GitHub project base path, copies the checked-in public assets—including catalog manifest, shards, reports, and structure assets—and emits `dist-pages/`.
 
 The application view model resolves only public asset fetch paths against `import.meta.env.BASE_URL`. Canonical domain `publicPath` records remain unchanged and continue to identify the checked-in asset. Hash navigation keeps Universe, cluster, and molecule-focus links inside the single static document.
 
@@ -104,11 +116,13 @@ See [Localization](LOCALIZATION.md).
 The explicit level-of-detail policy is:
 
 - **Far Universe:** cluster glyphs; no structure download fan-out.
-- **Near Universe:** a maximum of 40 visible source structures.
-- **Cluster:** the selected cluster in the shared scene.
+- **Curated/near Universe:** eight deterministic source structures by default, with a product budget of at most twelve. Forty remains a defensive renderer/cache ceiling, not a visual target.
+- **Cluster:** a deterministic sample of up to ten structures from the selected cluster in the shared scene.
 - **Focus:** one high-detail interactive structure.
 
-The adapter uses source SDF coordinates, instanced atom/bond geometry, a cache bounded to 40 parsed or in-flight structures, demand-driven rendering, and deterministic disposal. Ball-and-stick and space-filling representations, rotate/pan/zoom/reset, hydrogen visibility, and atom hover/selection are scene operations rather than alternate scientific records.
+The adapter uses source SDF coordinates, instanced atom/bond geometry, measured post-scale molecule extents, deterministic collision resolution, whole-layout camera fitting, a cache bounded to 40 parsed or in-flight structures, demand-driven rendering, and deterministic disposal. Ball-and-stick and space-filling representations, rotate/pan/zoom/reset, hydrogen visibility, and atom hover/selection are scene operations rather than alternate scientific records.
+
+The generated-catalog resident metadata window is separately bounded and stratified. A modal, paginated catalog surface searches and browses all 1,552 imported records; selecting an off-window result hydrates only its shard/entity and requested SDF through bounded caches. Generated records whose therapeutic projection is explicitly unclassified stay outside the default spatial map while remaining searchable, pageable, and directly openable.
 
 Runtime loading requires a valid 3D SDF. When a PubChem CID expectation is present, the file CID must match. A malformed, 2D-only, missing, or identity-mismatched file cannot become 3D geometry. Partial multi-record failure retains valid structures and reports failed identities; total failure is explicit.
 
@@ -120,7 +134,7 @@ SmilesDrawer is a presentation adapter. The underlying material ID, SMILES, sour
 
 ## Structure and source data
 
-Each seed catalog identity has checked-in PubChem 2D and 3D SDF records:
+Each curated regression identity has checked-in PubChem 2D and 3D SDF records:
 
 ```text
 public/structures/pubchem/cid-{CID}-2d.sdf
@@ -134,6 +148,8 @@ https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{CID}/record/SDF?record_t
 ```
 
 PubChem 3D records are computed conformers, not experimental crystal structures or protein-bound poses. Tests validate file identity, atoms, bonds, formula, InChIKey, coordinate dimension, provenance fields, and directional 2D stereo bonds.
+
+The generated catalog publishes a separate, sharded static tree under `public/catalog/`. Its validator checks descriptor counts, uniqueness, byte lengths, SHA-256 digests, embedded PubChem CIDs, and 2D InChIKeys across exactly 3,104 current SDF assets; orphan or partial files fail validation. The client searches compact metadata before resolving one shard and one structure on demand. See [Catalog pipeline](CATALOG_PIPELINE.md).
 
 Drugs@FDA anchors retain exact application/product/action identifiers, linked form, dataset and retrieval dates, official record URLs, review scope, and reproducible normalized hashes. The recorded `ORIG/1/AP` date is the selected product application's action date; it is not presented as the active moiety's first historical approval.
 
@@ -162,4 +178,4 @@ npm run e2e:pages
 npm audit --omit=dev --audit-level=high
 ```
 
-Unit and fixture tests cover domain invariants, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, renderer contracts, bounded LOD/cache behavior, and representative 500-record selection policy. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. These checks are acceptance evidence, not a scientific peer review or GPU benchmark.
+Unit and fixture tests cover domain invariants, catalog adapters/normalization/shards/caches, provenance resolution, fail-closed states, deterministic scoring, i18n parity, SDF parsing, structural similarity, renderer contracts, and bounded LOD behavior. Playwright exercises the production bundle, real scene interactions, five-mode navigation, context disposal, missing-asset failure, fixed-size visual captures, the GitHub project base path, source SDF delivery, and the serverless curated-evidence boundary. These checks are acceptance evidence, not a scientific peer review, catalog exhaustiveness proof, or GPU benchmark.

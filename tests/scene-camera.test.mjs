@@ -3,7 +3,12 @@ import test from "node:test";
 
 import { tsImport } from "tsx/esm/api";
 
-const { orbitSceneCamera, panSceneCamera, zoomSceneCamera } = await tsImport(
+const {
+  interpolateSceneCamera,
+  orbitSceneCamera,
+  panSceneCamera,
+  zoomSceneCamera,
+} = await tsImport(
   "../components/molecular-scene/camera.ts",
   import.meta.url,
 );
@@ -53,4 +58,20 @@ test("zoom changes distance while preserving the look target", () => {
   assert.deepEqual(closer.target, camera.target);
   assert.ok(distance(closer.position, closer.target) < distance(camera.position, camera.target));
   assert.ok(distance(farther.position, farther.target) > distance(camera.position, camera.target));
+});
+
+test("fly-to interpolation is bounded and lands exactly on its target", () => {
+  const destination = {
+    ...camera,
+    position: { x: 6, y: 2, z: 18 },
+    target: { x: 3, y: -2, z: 1 },
+  };
+  assert.deepEqual(interpolateSceneCamera(camera, destination, -1), camera);
+  assert.deepEqual(interpolateSceneCamera(camera, destination, 1), destination);
+  assert.deepEqual(interpolateSceneCamera(camera, destination, 2), destination);
+  assert.deepEqual(interpolateSceneCamera(camera, destination, 0.5).target, {
+    x: 1.5,
+    y: -1,
+    z: 0.5,
+  });
 });

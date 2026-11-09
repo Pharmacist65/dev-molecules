@@ -7,6 +7,16 @@ const testPort = Number.isInteger(requestedPort) && requestedPort > 0 && request
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${testPort}`;
 const managesWebServer = !process.env.PLAYWRIGHT_BASE_URL;
 const requestedBrowser = process.env.PLAYWRIGHT_BROWSER;
+const usesSharedSoftwareRenderer =
+  process.env.PLAYWRIGHT_PERFORMANCE_PROFILE === "shared-software-renderer";
+const chromiumLaunchArgs = usesSharedSoftwareRenderer
+  ? [
+      "--enable-webgl",
+      "--use-gl=angle",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+    ]
+  : ["--enable-webgl", "--ignore-gpu-blocklist"];
 
 export default defineConfig({
   testDir: "./e2e",
@@ -36,7 +46,7 @@ export default defineConfig({
     trace: "retain-on-failure",
     video: "off",
     launchOptions: {
-      args: ["--enable-webgl", "--ignore-gpu-blocklist"],
+      args: chromiumLaunchArgs,
     },
   },
   webServer: managesWebServer

@@ -1,10 +1,10 @@
-# Dev Molecules — Scientific Governance
+# Molevren — Scientific Governance
 
 ## Scope
 
 Scientific status belongs to one versioned claim, structure record, source extraction, synthesis interpretation, measurement, or learning item. It does not certify an entire molecule, route, source, screen, or application.
 
-No status in Dev Molecules implies that a structure is safe, effective, novel, patentable, manufacturable, or suitable for clinical or laboratory use. Seed content follows the same rules intended for a larger catalog.
+No status in Molevren implies that a structure is safe, effective, novel, patentable, manufacturable, or suitable for clinical or laboratory use. Seed content follows the same rules intended for a larger catalog.
 
 ## Verification states used by the codebase
 
@@ -20,7 +20,7 @@ No status in Dev Molecules implies that a structure is safe, effective, novel, p
 
 Only `verified` and `expert-reviewed` satisfy the general reviewed-content predicate. `source-supported` is deliberately separate.
 
-The synthesis route review model adds a scoped workflow status: `source-audited-pending-expert-review`. The three current stories use that status. Their patent document, example locator, named inputs, and named product connectivity were audited; their editorial atom correspondence and pedagogical wording still require a named synthetic-chemistry reviewer.
+The legacy synthesis-story review model adds a scoped workflow status: `source-audited-pending-expert-review`. Synthesis Atlas adds separate `foundational-education` and `reported` route kinds plus direct-source, source-context, and evidence-gap step states. A passing source gate never upgrades curated mechanism arrows or pedagogical wording to expert-reviewed.
 
 ## Status transitions
 
@@ -69,19 +69,35 @@ A broad homepage or search-result URL is insufficient when an exact record, pate
 - “No exact match” means only that no match was found in the named sources and versions under the stated identity rules.
 - Missing or invalid structure data never authorizes generated atoms, bonds, stereochemistry, or identity.
 
+## Generated catalog governance
+
+The checked `drugcentral-fda-pubchem-eligible-v1` snapshot evaluates all 2,331 rows in the selected DrugCentral FDA list. Of those, 1,858 have a complete same-ID DrugCentral structure, 1,747 resolve to one exact source-name-aligned PubChem CID, and 1,552 publish with a verified 2D/3D pair. The remaining 779 rows fail closed: 473 lack the complete source identity structure, 111 lack one exact PubChem resolution, and 195 lack a complete verified structure pair. Source-row evaluation is exhaustive for this snapshot; `exhaustive: false` still correctly rejects any claim that this is the exact FDA product/application universe or a global approved-drug inventory.
+
+- Generated approval entries represent source-list membership, not exact FDA application/product/form approval.
+- Exact DrugCentral/PubChem InChIKey agreement and both 2D/3D assets are required for import.
+- Name or connectivity similarity cannot silently merge different forms or stereochemical identities.
+- One display-name group with distinct form/stereo identities remains separate and record-level auditable.
+- Two multicomponent source forms retain explicitly unresolved parent relations; no parent identity is invented.
+- Product/application linkage remains explicitly unresolved for all 2,331 source rows.
+- All 1,552 generated therapeutic classifications remain unresolved in one `unclassified` therapeutic shard.
+- openFDA enrichment is implemented as an adapter but is not selected; EMA and PMDA are not configured.
+
+See [Catalog pipeline](CATALOG_PIPELINE.md).
+
 ## Synthesis governance
 
-Every route declares one of: literature-reported, patent-reported, educational simplification, or AI-proposed. Presentation must also expose source anchors, route version, review state, stereochemistry scope, limitations, and whether operational details are included.
+Every synthesis record declares a route kind. Legacy stories distinguish literature-reported, patent-reported, educational simplification, and AI-proposed. Synthesis Atlas distinguishes foundational-education and reported routes, then gates each transformation as direct-source, source-context, or an explicit evidence gap. Presentation must expose source anchors, route version, stereochemistry scope, limitations, and whether operational details are included.
 
 ### Current educational safety boundary
 
-The current synthesis stories intentionally include:
+The current Synthesis Atlas intentionally includes:
 
 - cited named materials and parent connectivity;
 - reaction-class and transformation explanations;
 - formed/broken bond annotations;
 - source-associated SMILES for 2D teaching diagrams;
-- draft named-atom correspondence;
+- curated mechanism interpretations only on explicitly eligible steps;
+- atom-anchored electron-flow arrows only from the two complete mappings defined by foundational transformations; reported steps with a different material context stay closed, and unmapped moves draw no decorative arrows;
 - exact primary-document links and human-resolvable example locators.
 
 They intentionally omit:
@@ -92,19 +108,20 @@ They intentionally omit:
 - work-up, purification, yield, scale, and execution sequence;
 - claims of reproducibility, safety, manufacturing suitability, or clinical performance.
 
-The external primary patent documents may contain operational information. Dev Molecules links to those third-party documents for provenance but does not reproduce that material as an application protocol.
+The external primary patent documents may contain operational information. Molevren links to those third-party documents for provenance but does not reproduce that material as an application protocol.
 
-A route can pass the narrow source-reported presentation gate while its atom map remains draft. This means the source assertion is supported; it does **not** mean the editorial mapping is expert-reviewed, the procedure is reproducible, or the route is recommended.
+A route can pass the narrow source-reported presentation gate while its mechanism interpretation remains curated educational content. This means the scoped source assertion is supported; it does **not** mean the editorial electron flow is patent-published or expert-reviewed, the procedure is reproducible, or the route is recommended.
 
 See [Synthesis provenance](SYNTHESIS_PROVENANCE.md).
 
 ## Nomenclature and learning governance
 
-The nomenclature curriculum is `curated-educational` content tied to IUPAC references and, where relevant, exact product records. Deterministic answer evaluation demonstrates consistency with the checked-in key; it is not independent scientific verification.
+The eight-section Nomenclature Academy is `curated-educational` content tied to IUPAC references and, where relevant, exact product records. Its 22 exercises use 20 parseable structure records and 16 concrete response/widget types. Deterministic grading against curated answer contracts is not independent scientific verification.
 
 - A correct learning response changes progress only.
 - Learning scores cannot change molecular identity, evidence, or review state.
 - Accepted systematic-name answers must be reviewed when curriculum content changes.
+- The four-record local name↔structure adapter is a curated registry, not a general IUPAC parser or arbitrary structure validator; unknown input must fail closed.
 - Generic, systematic, chemical-form, and product/brand names remain separate concepts.
 - The current curriculum needs named subject-matter and instructional review before institutional publication.
 

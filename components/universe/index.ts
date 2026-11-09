@@ -5,9 +5,12 @@ export {
 } from "./MoleculeUniverse";
 
 export type {
+  ExplorePresentationMode,
   MoleculeEvidenceTone,
   MoleculeUniverseProps,
   UniverseLens,
+  UniverseIndexedCatalog,
+  UniverseLearningActions,
   UniverseMolecule,
   UniverseMoleculeStructure,
 } from "./MoleculeUniverse";

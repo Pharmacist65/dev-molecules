@@ -31,6 +31,7 @@ export interface MoleculeViewerProps {
   readonly structureUrl: string;
   readonly twoDStructureUrl?: string;
   readonly moleculeName: string;
+  readonly expectedPubChemCid?: number;
   readonly sourceLabel: string;
   readonly originLabel: string;
   readonly sourceHref?: string;
@@ -102,6 +103,7 @@ export function MoleculeViewer({
   structureUrl,
   twoDStructureUrl,
   moleculeName,
+  expectedPubChemCid,
   sourceLabel,
   originLabel,
   sourceHref,
@@ -124,12 +126,16 @@ export function MoleculeViewer({
   const projectedAtomsRef = useRef<readonly ProjectedAtom[]>([]);
   const dragRef = useRef<DragState | null>(null);
   const hoveredIndexRef = useRef<number | null>(null);
-  const threeDResource = useSdfResource(hasThreeDStructure ? structureUrl : null);
+  const threeDResource = useSdfResource(hasThreeDStructure ? structureUrl : null, {
+    expectedDimension: "3d",
+    expectedPubChemCid,
+  });
   const [dimension, setDimension] = useState<ViewerDimension>(
     initialDimension === "2d" && !hasTwoDStructure ? "3d" : initialDimension,
   );
   const twoDResource = useSdfResource(
     dimension === "2d" && hasTwoDStructure ? (twoDStructureUrl ?? null) : null,
+    { expectedDimension: "2d", expectedPubChemCid },
   );
   const [representation, setRepresentation] =
     useState<MoleculeRepresentation>(initialRepresentation);
@@ -176,7 +182,7 @@ export function MoleculeViewer({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !activeStructure) {
+    if (!canvas) {
       projectedAtomsRef.current = [];
       return;
     }
@@ -190,6 +196,11 @@ export function MoleculeViewer({
     const context = canvas.getContext("2d");
     if (!context) return;
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    if (!activeStructure) {
+      context.clearRect(0, 0, canvasSize.width, canvasSize.height);
+      projectedAtomsRef.current = [];
+      return;
+    }
     projectedAtomsRef.current = drawMolecule(context, activeStructure, {
       width: canvasSize.width,
       height: canvasSize.height,

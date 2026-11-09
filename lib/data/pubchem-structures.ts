@@ -55,7 +55,7 @@ export const createPubChemStructureSet = ({
     verification: {
       status: "verified",
       reviewedAt: RETRIEVED_AT,
-      reviewedBy: "Dev Molecules asset integrity check",
+      reviewedBy: "Molevren asset integrity check",
       note:
         "The cached SDF is non-empty, names the expected PubChem CID, and contains 2D coordinates. This verifies asset identity, not a biological claim.",
     },
@@ -71,7 +71,7 @@ export const createPubChemStructureSet = ({
     verification: {
       status: "verified",
       reviewedAt: RETRIEVED_AT,
-      reviewedBy: "Dev Molecules asset integrity check",
+      reviewedBy: "Molevren asset integrity check",
       note:
         "The cached SDF is non-empty, names the expected PubChem CID, and contains 3D coordinates. It is a PubChem computed conformer, not an experimental bound pose.",
     },

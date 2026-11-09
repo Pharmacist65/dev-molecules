@@ -112,6 +112,7 @@
 }
 
 .toolbar {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(240px, 0.62fr) minmax(460px, 1.38fr);
   align-items: end;
@@ -202,6 +203,59 @@
 
 .lensPanel {
   min-width: 0;
+}
+
+.lensDisclosureButton {
+  display: grid;
+  width: 100%;
+  min-height: 46px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.18rem 0.8rem;
+  padding: 0.52rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 3%);
+  color: #dfeae5;
+  cursor: pointer;
+  text-align: left;
+}
+
+.lensDisclosureButton span {
+  grid-column: 1;
+  color: #96a59e;
+  font-size: 0.54rem;
+}
+
+.lensDisclosureButton strong {
+  grid-column: 1;
+  overflow: hidden;
+  font-size: 0.66rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lensDisclosureButton i {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: #b8f46d;
+  font: normal 1rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.lensDrawer {
+  position: absolute;
+  z-index: 45;
+  top: calc(100% + 1px);
+  left: clamp(1rem, 2.5vw, 2.25rem);
+  width: min(680px, calc(100% - clamp(2rem, 5vw, 4.5rem)));
+  max-height: min(66svh, 560px);
+  padding: 0.8rem;
+  overflow-y: auto;
+  border: 1px solid rgb(126 219 190 / 24%);
+  border-radius: 0 0 12px 12px;
+  background: rgb(8 17 15 / 97%);
+  box-shadow: 0 24px 50px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(16px);
 }
 
 .lensButtons {
@@ -1138,7 +1192,8 @@
   }
 
   .toolbar {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(132px, 0.42fr);
+    align-items: end;
   }
 
   .lensButtons {
@@ -1203,6 +1258,30 @@
 
   .headerSummary span:nth-child(2) {
     display: none;
+  }
+
+  .toolbar {
+    gap: 0.55rem;
+    padding: 0.62rem 0.75rem;
+  }
+
+  .lensDisclosureButton {
+    min-height: 42px;
+    padding: 0.42rem 0.55rem;
+  }
+
+  .lensDisclosureButton span {
+    font-size: 0.5rem;
+  }
+
+  .lensDisclosureButton strong {
+    font-size: 0.58rem;
+  }
+
+  .lensDrawer {
+    left: 0.75rem;
+    width: calc(100% - 1.5rem);
+    max-height: 58svh;
   }
 
   .breadcrumb {
@@ -1324,6 +1403,23 @@
   min-height: clamp(560px, calc(100svh - 285px), 760px);
   overflow: hidden;
   background: #07100f;
+}
+
+.exploreStage[data-level="universe"] {
+  height: var(--explore-stage-viewport-height, clamp(560px, calc(100svh - 285px), 760px));
+  min-height: var(--explore-stage-viewport-height, clamp(560px, calc(100svh - 285px), 760px));
+}
+
+.exploreStage[data-level="universe"] .sceneTelemetry {
+  height: 100%;
+  min-height: 0;
+}
+
+.exploreStage[data-level="universe"] .sharedScene,
+.exploreStage[data-level="universe"] .sceneHidden {
+  --molecular-scene-height: 100%;
+  height: 100%;
+  min-height: 0;
 }
 
 .sceneTelemetry {
@@ -1479,20 +1575,6 @@
   font-size: 0.51rem;
 }
 
-.moleculeHoverLabel {
-  position: absolute;
-  z-index: 8;
-  bottom: 3.65rem;
-  left: 1rem;
-  max-width: min(74vw, 420px);
-  padding: 0.42rem 0.58rem;
-  border: 1px solid rgb(117 224 188 / 18%);
-  border-radius: 7px;
-  background: rgb(5 13 11 / 88%);
-  color: #bcd0c7;
-  font: 0.56rem var(--font-geist-mono, ui-monospace, monospace);
-  pointer-events: none;
-}
 
 .structureGapStatus {
   position: absolute;
@@ -1541,24 +1623,40 @@
   padding: 0.55rem;
   transform: translate(-50%, -50%);
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent), transparent 72%);
-  border-radius: 50%;
+  border: 0;
+  border-radius: 3px;
   outline: none;
-  background:
-    radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 90%), rgb(6 14 12 / 68%) 68%);
+  background: transparent;
   color: #eaf1ed;
   cursor: pointer;
   font: inherit;
   pointer-events: auto;
+  isolation: isolate;
   transition: border-color 150ms ease, background 150ms ease, transform 150ms ease, opacity 150ms ease;
+}
+
+.clusterGlyph::before {
+  position: absolute;
+  z-index: -1;
+  inset: -14% -9%;
+  clip-path: polygon(7% 36%, 23% 10%, 63% 4%, 93% 25%, 98% 64%, 72% 94%, 31% 88%, 4% 68%);
+  background:
+    radial-gradient(circle at 49% 48%, color-mix(in srgb, var(--accent), transparent 82%), transparent 69%),
+    rgb(6 14 12 / 58%);
+  content: "";
+  transition: filter 150ms ease, transform 150ms ease;
 }
 
 .clusterGlyph:hover,
 .clusterGlyph:focus-visible {
   z-index: 4;
   transform: translate(-50%, -50%) scale(1.05);
-  border-color: color-mix(in srgb, var(--accent), white 10%);
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 83%), rgb(6 14 12 / 78%) 70%);
+}
+
+.clusterGlyph:hover::before,
+.clusterGlyph:focus-visible::before {
+  filter: brightness(1.18) saturate(1.12);
+  transform: scale(1.035);
 }
 
 .clusterGlyph:focus-visible {
@@ -1571,8 +1669,8 @@
   display: block;
   width: 38px;
   height: 28px;
-  border: 1px solid color-mix(in srgb, var(--accent), transparent 48%);
-  border-radius: 50%;
+  clip-path: polygon(4% 28%, 31% 2%, 88% 18%, 98% 71%, 62% 98%, 12% 79%);
+  background: color-mix(in srgb, var(--accent), transparent 83%);
   box-shadow: 0 0 28px color-mix(in srgb, var(--accent), transparent 76%);
 }
 
@@ -2087,6 +2185,10 @@
 .lensButton { border-color: #d4dce8; background: #fff; color: #536078; }
 .lensButton:hover { border-color: #8ba9e8; color: #1f4ab5; }
 .lensButton[aria-pressed="true"] { border-color: #2457d6; background: #edf2ff; color: #173f9f; }
+.lensDisclosureButton { border-color: #cfd8e6; background: #fff; color: #263653; }
+.lensDisclosureButton span { color: #64738a; }
+.lensDisclosureButton i { color: #2457d6; }
+.lensDrawer { border-color: #cfd8e6; background: rgb(255 255 255 / 98%); box-shadow: 0 24px 50px rgb(36 55 88 / 18%); }
 .lensDescription,
 .lensTechnical { color: #637188; }
 .lensMeaning { color: #33425d; }
@@ -2112,8 +2214,7 @@
 .nearClusterNavigation,
 .universeCamera,
 .moleculeSelectors,
-.lodStatus,
-.moleculeHoverLabel { border-color: rgb(184 202 236 / 18%); background: rgb(12 25 48 / 88%); }
+.lodStatus { border-color: rgb(184 202 236 / 18%); background: rgb(12 25 48 / 88%); }
 .nearClusterNavigation button { border-color: rgb(201 214 240 / 16%); color: #d6e0f2; }
 .nearClusterNavigation button:hover,
 .nearClusterNavigation button:focus-visible { border-color: #5f89df; background: rgb(36 87 214 / 24%); color: #fff; }
@@ -2133,8 +2234,7 @@
 .focusActions button:hover,
 .emptyState button:hover { border-color: #5f89df; color: #fff; }
 .lodStatus,
-.universeCamera output,
-.moleculeHoverLabel { color: #b4c1d8; }
+.universeCamera output { color: #b4c1d8; }
 
 .clusterOverlay > header,
 .focusHeader { border-color: rgb(196 211 238 / 16%); background: linear-gradient(rgb(12 25 48 / 96%), rgb(12 25 48 / 82%)); }
@@ -2192,3 +2292,511 @@
 .universe button:focus-visible,
 .universe a:focus-visible,
 .universe input:focus-visible { outline-color: #2457d6; }
+
+/* Student-first atlas additions. Region labels share the projection coordinate
+   system with the real molecular scene; they never substitute for structure. */
+.studentHint {
+  display: block;
+  margin-top: 0.32rem;
+  color: #54647b;
+  font-size: 0.62rem;
+}
+
+.exploreStage[data-flight="active"] .sceneTelemetry {
+  filter: saturate(1.08) brightness(1.04);
+}
+.exploreStage[data-flight="active"]::after {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, rgb(10 25 52 / 16%));
+  content: "";
+  pointer-events: none;
+}
+
+.nearClusterWorld {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  transition: transform 140ms ease-out;
+}
+
+.nearClusterRegions {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nearClusterRegions li {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.nearClusterRegions button {
+  position: relative;
+  display: grid;
+  min-width: 112px;
+  max-width: 180px;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.42rem 0.48rem;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: #f1f5fc;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.nearClusterRegions button::before {
+  position: absolute;
+  z-index: -1;
+  inset: -80% -18%;
+  clip-path: polygon(8% 31%, 30% 8%, 72% 13%, 96% 42%, 81% 84%, 42% 96%, 11% 75%);
+  background:
+    radial-gradient(circle at 48% 45%, color-mix(in srgb, var(--accent), transparent 76%), transparent 64%),
+    rgb(10 24 48 / 44%);
+  content: "";
+  opacity: 0.78;
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+
+.nearClusterRegions button > span {
+  width: 3px;
+  height: 18px;
+  border-radius: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent), transparent 22%);
+}
+
+.nearClusterRegions strong {
+  overflow: hidden;
+  font-size: 0.58rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nearClusterRegions small {
+  color: #afbdd4;
+  font: 0.52rem var(--font-geist-mono, ui-monospace, monospace);
+}
+
+.nearClusterRegions button:hover,
+.nearClusterRegions button:focus-visible {
+  transform: translateY(-2px);
+}
+
+.nearClusterRegions button:hover::before,
+.nearClusterRegions button:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Keep the real fitted scene inside the first viewport at ordinary browser
+   zoom levels without shrinking the global shell used by the other modes. */
+@media (max-height: 720px) and (min-width: 721px) {
+  .header {
+    min-height: 68px;
+    gap: 1rem;
+    padding-block: 0.5rem;
+  }
+
+  .headingBlock {
+    grid-template-columns: minmax(260px, 1fr) minmax(240px, 0.85fr);
+    align-items: center;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.18rem;
+  }
+
+  .header h2 {
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  }
+
+  .description {
+    margin-top: 0;
+    font-size: 0.66rem;
+    line-height: 1.35;
+  }
+
+  .headerSummary span {
+    min-width: 68px;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .toolbar {
+    padding-block: 0.42rem;
+  }
+
+  .searchField label,
+  .controlLabel {
+    margin-bottom: 0.18rem;
+  }
+
+  .searchControl input {
+    min-height: 34px;
+  }
+
+  .lensDisclosureButton {
+    min-height: 38px;
+  }
+
+  .breadcrumb {
+    min-height: 30px;
+  }
+}
+
+@media (max-width: 540px) {
+  .header {
+    gap: 0.5rem;
+    padding: 0.72rem 1rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.22rem;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .headerSummary span {
+    padding-block: 0.48rem;
+  }
+
+  .searchField label,
+  .controlLabel {
+    margin-bottom: 0.2rem;
+  }
+
+  .searchControl input {
+    min-height: 36px;
+  }
+
+  .breadcrumb {
+    min-height: 32px;
+  }
+}
+
+.compareToolbar {
+  position: absolute;
+  z-index: 8;
+  top: 94px;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.62rem 0.72rem;
+  border: 1px solid rgb(194 210 238 / 18%);
+  border-radius: 11px;
+  background: rgb(12 25 48 / 88%);
+  color: #f0f4fb;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.compareToolbar > div { display: grid; gap: 0.16rem; }
+.compareToolbar strong { font-size: 0.62rem; }
+.compareToolbar span { color: #aab8ce; font-size: 0.54rem; }
+.compareToolbar button,
+.compareOverlay button,
+.compareSelectButton {
+  min-height: 34px;
+  padding: 0.46rem 0.62rem;
+  border: 1px solid #628ce2;
+  border-radius: 8px;
+  background: rgb(36 87 214 / 28%);
+  color: #fff;
+  cursor: pointer;
+  font: 650 0.56rem var(--font-geist-sans, Arial, sans-serif);
+}
+.compareToolbar button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+.moleculeSelectors li { grid-template-columns: minmax(0, 1fr) auto auto; }
+.moleculeSelectors .compareSelectButton {
+  width: 36px;
+  min-width: 36px;
+  justify-content: center;
+  padding: 0;
+}
+.moleculeSelectors li[data-compare="true"] { box-shadow: inset 0 0 0 1px #ff9b5c; }
+
+.compareOverlay {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  pointer-events: none;
+}
+
+.compareOverlay > header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 88px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 2.5vw, 2.2rem);
+  border-bottom: 1px solid rgb(196 211 238 / 16%);
+  background: linear-gradient(rgb(12 25 48 / 96%), rgb(12 25 48 / 78%));
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+.compareOverlay > header p { margin: 0 0 0.25rem; color: #ff9b5c; font: 650 0.52rem var(--font-geist-mono, monospace); }
+.compareOverlay > header h3 { margin: 0; color: #fff; font-size: clamp(1.25rem, 2vw, 2rem); font-weight: 540; letter-spacing: -0.04em; }
+.compareOverlay > header span { color: #b4c1d8; font-size: 0.57rem; }
+.compareOverlay > header button { min-width: 104px; }
+
+.compareScaffold {
+  position: absolute;
+  top: 102px;
+  left: 1rem;
+  display: grid;
+  max-width: min(470px, calc(100% - 2rem));
+  gap: 0.16rem;
+  padding: 0.58rem 0.7rem;
+  border: 1px solid rgb(255 155 92 / 25%);
+  border-radius: 9px;
+  background: rgb(26 31 47 / 84%);
+  color: #fff;
+  pointer-events: auto;
+}
+.compareScaffold span { color: #d6ae91; font-size: 0.51rem; }
+.compareScaffold strong { font-size: 0.63rem; }
+.compareScaffold > small { color: #aebbd2; font-size: 0.51rem; line-height: 1.4; }
+.compareMaskLegend { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.2rem 0; }
+.compareMaskLegend span { display: inline-flex; align-items: center; gap: 0.28rem; color: #d7e0ef; }
+.compareMaskLegend span::before { width: 8px; height: 8px; border-radius: 2px; background: #2ad3a1; box-shadow: 0 0 10px rgb(42 211 161 / 48%); content: ""; }
+.compareMaskLegend span[data-mask="changed"]::before { background: #ff6d42; box-shadow: 0 0 10px rgb(255 109 66 / 48%); }
+
+.compareCards {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.42rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+.compareCards li {
+  display: grid;
+  min-width: 0;
+  gap: 0.2rem;
+  padding: 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 58%);
+  border-radius: 12px;
+  background: rgb(12 25 48 / 89%);
+  box-shadow: 0 12px 34px rgb(0 0 0 / 26%);
+  backdrop-filter: blur(12px);
+}
+.compareCards li > span { color: #ffac78; font: 0.5rem var(--font-geist-mono, monospace); }
+.compareCards li > strong { overflow: hidden; color: #fff; font-size: 0.7rem; text-overflow: ellipsis; white-space: nowrap; }
+.compareCards li > small { min-height: 2em; color: #aebbd2; font-size: 0.54rem; line-height: 1.35; }
+.compareCards li > p { display: grid; min-height: 2.4em; gap: 0.12rem; margin: 0; color: #ffd3c4; font: 0.5rem var(--font-geist-mono, monospace); line-height: 1.35; }
+.compareCards li > p span { color: #ff8b68; font-family: var(--font-geist-sans, sans-serif); font-weight: 680; }
+.compareCards li > div { display: flex; gap: 0.3rem; margin-top: 0.25rem; }
+.compareCards li > div button:first-child { flex: 1; }
+.compareCards li > div button:last-child { width: 34px; padding: 0; }
+.compareMessage { position: absolute; top: 102px; right: 1rem; margin: 0; color: #ffd0b5; font-size: 0.58rem; }
+
+.passportGrid {
+  display: grid;
+  gap: 0;
+  margin: 1rem 0;
+  border-top: 1px solid #dce3ed;
+}
+.passportGrid > div { display: grid; gap: 0.28rem; padding: 0.7rem 0; border-bottom: 1px solid #dce3ed; }
+.passportGrid dt { color: #64738a; font-size: 0.55rem; }
+.passportGrid dd { margin: 0; color: #263653; font-size: 0.65rem; line-height: 1.45; overflow-wrap: anywhere; }
+.learningLinks { display: grid; gap: 0.45rem; margin: 0 0 1rem; }
+.learningLinks > div { padding: 0.65rem; border: 1px solid #dbe4f1; border-radius: 9px; background: #f6f8fc; }
+.learningLinks span { color: #1f4ab5; font-size: 0.54rem; font-weight: 700; }
+.learningLinks p { margin: 0.3rem 0 0; color: #536078; font-size: 0.62rem; line-height: 1.45; }
+.sourcesDrawer { padding: 0.7rem; border: 1px solid #dce3ed; border-radius: 9px; color: #536078; }
+.sourcesDrawer summary { cursor: pointer; color: #263653; font-size: 0.62rem; font-weight: 650; }
+.sourcesDrawer a { display: block; margin-top: 0.55rem; color: #2457d6; font-size: 0.58rem; overflow-wrap: anywhere; }
+
+.universe[data-presentation-mode="student"] .inspector { width: 360px; }
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+.universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 360px; }
+
+@media (max-width: 900px) {
+  .compareCards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .universe[data-presentation-mode="student"] .inspector { width: 300px; }
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 300px; }
+}
+
+@media (max-width: 720px) {
+  .nearClusterRegions button { min-width: 96px; max-width: 132px; padding: 0.42rem 0.5rem; }
+  .nearClusterRegions strong { font-size: 0.52rem; }
+  .compareToolbar { top: 116px; right: 0.55rem; left: 0.55rem; justify-content: space-between; }
+  .compareCards { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 210px; overflow-y: auto; }
+  .universe[data-presentation-mode="student"] .inspector { top: 208px; width: min(92vw, 330px); }
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusHeader,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .focusControls,
+  .universe[data-presentation-mode="student"] .focusOverlay[data-inspector="open"] .provenanceBanner { right: 0; }
+}
+
+/* Full-catalog index navigation stays outside the bounded molecular scene. */
+.searchField {
+  position: relative;
+  z-index: 35;
+  min-width: 0;
+}
+
+.searchLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.searchLabelRow > button {
+  margin: 0 0 0.3rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2457d6;
+  cursor: pointer;
+  font-size: 0.56rem;
+  font-weight: 680;
+}
+
+.indexedResults {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  left: 0;
+  z-index: 80;
+  overflow: hidden;
+  border: 1px solid #ccd7e7;
+  border-radius: 13px;
+  background: #fff;
+  color: #1d2d49;
+  box-shadow: 0 22px 55px rgb(18 35 68 / 22%);
+}
+
+.indexedResults > header,
+.indexedResults > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  background: #f4f7fc;
+}
+
+.indexedResults > header { border-bottom: 1px solid #dce3ed; }
+.indexedResults > header strong { color: #263653; font-size: 0.63rem; }
+.indexedResults > header span { color: #758198; font: 0.54rem var(--font-geist-mono, monospace); }
+.indexedResults > p { margin: 0; padding: 1rem 0.8rem; color: #647188; font-size: 0.65rem; line-height: 1.45; }
+.indexedResults[data-indexed-status="error"] > p { color: #a14a22; }
+
+.indexedResults > ul {
+  display: grid;
+  max-height: min(410px, 54vh);
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.indexedResults li { min-width: 0; }
+.indexedResults li > button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 0.14rem;
+  padding: 0.62rem 0.65rem;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #273752;
+  cursor: pointer;
+  text-align: left;
+}
+.indexedResults li > button:hover,
+.indexedResults li > button:focus-visible { background: #edf3ff; }
+.indexedResults li strong { overflow: hidden; font-size: 0.68rem; text-overflow: ellipsis; white-space: nowrap; }
+.indexedResults li span { color: #50617d; font: 0.54rem var(--font-geist-mono, monospace); }
+.indexedResults li small { overflow: hidden; color: #7a879b; font-size: 0.54rem; text-overflow: ellipsis; white-space: nowrap; }
+.indexedResults > footer { border-top: 1px solid #dce3ed; }
+.indexedResults > footer button {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid #cfd9e8;
+  border-radius: 7px;
+  background: #fff;
+  color: #35578f;
+  cursor: pointer;
+  font-size: 0.56rem;
+  font-weight: 680;
+}
+.indexedResults > footer button:disabled { cursor: not-allowed; opacity: 0.38; }
+
+.similarMolecules,
+.passportActions { margin: 0 0 1rem; }
+.similarMolecules > span,
+.passportActions > span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #1f4ab5;
+  font-size: 0.54rem;
+  font-weight: 700;
+}
+.similarMolecules ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+.similarMolecules button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 0.15rem;
+  padding: 0.55rem;
+  border: 1px solid #dbe4f1;
+  border-radius: 9px;
+  background: #f7f9fd;
+  color: #2e405e;
+  cursor: pointer;
+  text-align: left;
+}
+.similarMolecules button:hover { border-color: #9bb5e9; background: #eef3ff; }
+.similarMolecules strong { overflow: hidden; font-size: 0.59rem; text-overflow: ellipsis; white-space: nowrap; }
+.similarMolecules small { color: #718097; font-size: 0.51rem; }
+.similarMolecules em { color: #637188; font: normal 0.48rem var(--font-geist-mono, monospace); }
+.similarMolecules > p { margin: 0.25rem 0 0.5rem; color: #64738a; font-size: 0.54rem; line-height: 1.45; }
+.similarMolecules > small { display: block; margin-top: 0.4rem; color: #6a778c; font-size: 0.54rem; line-height: 1.4; }
+.passportActions > div { display: grid; gap: 0.35rem; }
+.passportActions button {
+  min-height: 35px;
+  padding: 0.52rem 0.65rem;
+  border: 1px solid #cbd8ee;
+  border-radius: 8px;
+  background: #edf3ff;
+  color: #214ca8;
+  cursor: pointer;
+  font-size: 0.58rem;
+  font-weight: 690;
+  text-align: left;
+}
+.passportActions button:hover { border-color: #7799df; background: #e5edff; }
+
+@media (max-width: 720px) {
+  .indexedResults { position: fixed; top: 158px; right: 0.75rem; left: 0.75rem; }
+  .similarMolecules ul { grid-template-columns: 1fr; }
+}

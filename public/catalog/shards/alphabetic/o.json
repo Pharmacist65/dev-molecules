@@ -1,0 +1,4056 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "o",
+  "records": [
+    {
+      "id": "molecule:imported:o-formylcefamandole-rrjhesvqvsrqex-suybppkgsa-n",
+      "preferredName": "O-Formylcefamandole",
+      "aliases": [
+        "cefamandole nafate"
+      ],
+      "identity": {
+        "pubChemCid": 5284527,
+        "inchiKey": "RRJHESVQVSRQEX-SUYBPPKGSA-N",
+        "connectivityKey": "RRJHESVQVSRQEX",
+        "stereochemicalKey": "SUYBPPKGSA",
+        "molecularFormula": "C19H18N6O6S2",
+        "molecularWeight": 490.5,
+        "canonicalSmiles": "CN1C(=NN=N1)SCC2=C(N3C(C(C3=O)NC(=O)C(C4=CC=CC=C4)OC=O)SC2)C(=O)O",
+        "isomericSmiles": "CN1C(=NN=N1)SCC2=C(N3[C@@H]([C@@H](C3=O)NC(=O)[C@@H](C4=CC=CC=C4)OC=O)SC2)C(=O)O",
+        "structureSourceFormSmiles": "CN1N=NN=C1SCC1=C(N2[C@H](SC1)[C@H](NC(=O)[C@H](OC=O)C1=CC=CC=C1)C2=O)C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:RRJHESVQVSRQEX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:RRJHESVQVSRQEX-SUYBPPKGSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:rrjhesvqvsrqex-suybppkgsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:528",
+        "sourceName": "cefamandole nafate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:528",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:528",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=cefamandole%20nafate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5284527-2d.sdf",
+          "sha256": "b56982a01b6732a39377592fcc1b61e3c32e611f45dad5f7f68cd87b9adf1b67",
+          "byteLength": 7602,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284527/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5284527-3d.sdf",
+          "sha256": "3d32f902f79bb9ba10b76ea3e72508e7a11f7d00eae1d006786949aa511f0991",
+          "byteLength": 7441,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284527/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:obeticholic-acid-zxerduolzkymjm-zweccwdjsa-n",
+      "preferredName": "Obeticholic Acid",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 447715,
+        "inchiKey": "ZXERDUOLZKYMJM-ZWECCWDJSA-N",
+        "connectivityKey": "ZXERDUOLZKYMJM",
+        "stereochemicalKey": "ZWECCWDJSA",
+        "molecularFormula": "C26H44O4",
+        "molecularWeight": 420.6,
+        "canonicalSmiles": "CCC1C2CC(CCC2(C3CCC4(C(C3C1O)CCC4C(C)CCC(=O)O)C)C)O",
+        "isomericSmiles": "CC[C@@H]1[C@@H]2C[C@@H](CC[C@@]2([C@H]3CC[C@]4([C@H]([C@@H]3[C@@H]1O)CC[C@@H]4[C@H](C)CCC(=O)O)C)C)O",
+        "structureSourceFormSmiles": "CC[C@H]1[C@@H](O)[C@H]2[C@@H]3CC[C@H]([C@H](C)CCC(O)=O)[C@@]3(C)CC[C@@H]2[C@@]2(C)CC[C@@H](O)C[C@@H]12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ZXERDUOLZKYMJM",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZXERDUOLZKYMJM-ZWECCWDJSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:zxerduolzkymjm-zweccwdjsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5155",
+        "sourceName": "obeticholic acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5155",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5155",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=obeticholic%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-447715-2d.sdf",
+          "sha256": "65681b0c61a504482b6c76e39ad31c7bed7dee4b5b389546868cd35dc5630539",
+          "byteLength": 9893,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/447715/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-447715-3d.sdf",
+          "sha256": "9ec68fc0559c4aa60ea2420c3af951721d93581b4e0e5c4876a04f4b41d75e4c",
+          "byteLength": 9562,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/447715/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:octocrylene-fmjsmjqbsvnsbf-uhfffaoysa-n",
+      "preferredName": "Octocrylene",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 22571,
+        "inchiKey": "FMJSMJQBSVNSBF-UHFFFAOYSA-N",
+        "connectivityKey": "FMJSMJQBSVNSBF",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C24H27NO2",
+        "molecularWeight": 361.5,
+        "canonicalSmiles": "CCCCC(CC)COC(=O)C(=C(C1=CC=CC=C1)C2=CC=CC=C2)C#N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCC(CC)COC(=O)C(C#N)=C(C1=CC=CC=C1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FMJSMJQBSVNSBF",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FMJSMJQBSVNSBF-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fmjsmjqbsvnsbf-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3395",
+        "sourceName": "octocrylene",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3395",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3395",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=octocrylene",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-22571-2d.sdf",
+          "sha256": "fc208c1c3369de59319bad7ead118b377cacdbc8902216f44ad3759b12a517aa",
+          "byteLength": 7046,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/22571/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-22571-3d.sdf",
+          "sha256": "799fc42c889d935324035d25c07afb3dabb67d186df43ba7f2d695c97cee0a6f",
+          "byteLength": 7729,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/22571/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:octyltriethoxysilane-msrjttshwydfiu-uhfffaoysa-n",
+      "preferredName": "Octyltriethoxysilane",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 76262,
+        "inchiKey": "MSRJTTSHWYDFIU-UHFFFAOYSA-N",
+        "connectivityKey": "MSRJTTSHWYDFIU",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C14H32O3Si",
+        "molecularWeight": 276.49,
+        "canonicalSmiles": "CCCCCCCC[Si](OCC)(OCC)OCC",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCCCCC[Si](OCC)(OCC)OCC",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:MSRJTTSHWYDFIU",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:MSRJTTSHWYDFIU-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:msrjttshwydfiu-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4640",
+        "sourceName": "octyltriethoxysilane",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4640",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4640",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=octyltriethoxysilane",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-76262-2d.sdf",
+          "sha256": "c76ca5931c865a4b03e2c04cbf9916004291c5686635eeec1e020978a4705a23",
+          "byteLength": 6190,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/76262/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-76262-3d.sdf",
+          "sha256": "dd3162cdb73cdfe85b7e76b5976c9c6ca402f8aadf063f5846863e2235a66330",
+          "byteLength": 6533,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/76262/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ofloxacin-gsdswsvvblhkdq-uhfffaoysa-n",
+      "preferredName": "Ofloxacin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4583,
+        "inchiKey": "GSDSWSVVBLHKDQ-UHFFFAOYSA-N",
+        "connectivityKey": "GSDSWSVVBLHKDQ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H20FN3O4",
+        "molecularWeight": 361.4,
+        "canonicalSmiles": "CC1COC2=C3N1C=C(C(=O)C3=CC(=C2N4CCN(CC4)C)F)C(=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1COC2=C(N3CCN(C)CC3)C(F)=CC3=C2N1C=C(C(O)=O)C3=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:GSDSWSVVBLHKDQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GSDSWSVVBLHKDQ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:gsdswsvvblhkdq-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1981",
+        "sourceName": "ofloxacin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1981",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1981",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ofloxacin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4583-2d.sdf",
+          "sha256": "4999cc108f907beebe99b35e63201a2b1d44447ae5a8f166e77c832772f17786",
+          "byteLength": 6866,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4583/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4583-3d.sdf",
+          "sha256": "f8ba5c491654fe62cf88f2cda3cc6ee82f4ce96471e868d89acbb7f922dba3e2",
+          "byteLength": 8115,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4583/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olanzapine-kvwdhtxuzhcgio-uhfffaoysa-n",
+      "preferredName": "Olanzapine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 135398745,
+        "inchiKey": "KVWDHTXUZHCGIO-UHFFFAOYSA-N",
+        "connectivityKey": "KVWDHTXUZHCGIO",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H20N4S",
+        "molecularWeight": 312.4,
+        "canonicalSmiles": "CC1=CC2=C(S1)NC3=CC=CC=C3N=C2N4CCN(CC4)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CN1CCN(CC1)C1=NC2=CC=CC=C2NC2=C1C=C(C)S2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:KVWDHTXUZHCGIO",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:KVWDHTXUZHCGIO-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:kvwdhtxuzhcgio-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1982",
+        "sourceName": "olanzapine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1982",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1982",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olanzapine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135398745-2d.sdf",
+          "sha256": "d5c129283ea833faa93f78f91550aef7d5d3a9f27996fd3840774396701a90ff",
+          "byteLength": 6078,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398745/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135398745-3d.sdf",
+          "sha256": "3580095190460087b8e31d86351494c5b8eb59d31f8ff968c32dd87a104d6df1",
+          "byteLength": 7411,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135398745/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olaparib-fdlyamzzixqodn-uhfffaoysa-n",
+      "preferredName": "Olaparib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 23725625,
+        "inchiKey": "FDLYAMZZIXQODN-UHFFFAOYSA-N",
+        "connectivityKey": "FDLYAMZZIXQODN",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C24H23FN4O3",
+        "molecularWeight": 434.5,
+        "canonicalSmiles": "C1CC1C(=O)N2CCN(CC2)C(=O)C3=C(C=CC(=C3)CC4=NNC(=O)C5=CC=CC=C54)F",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "FC1=CC=C(CC2=NNC(=O)C3=CC=CC=C23)C=C1C(=O)N1CCN(CC1)C(=O)C1CC1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FDLYAMZZIXQODN",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FDLYAMZZIXQODN-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:fdlyamzzixqodn-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4907",
+        "sourceName": "olaparib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4907",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4907",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olaparib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-23725625-2d.sdf",
+          "sha256": "9884bb2afa1ab1f8279732127bfcad621a514581059620484495425b577465fa",
+          "byteLength": 7601,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/23725625/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-23725625-3d.sdf",
+          "sha256": "1f18846007f662f100634110077d567b4713351faff98a3ac8e5184d7c8c985e",
+          "byteLength": 9488,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/23725625/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oleic-acid-zqppmhvwecsirj-ktkrtigzsa-n",
+      "preferredName": "Oleic Acid",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 445639,
+        "inchiKey": "ZQPPMHVWECSIRJ-KTKRTIGZSA-N",
+        "connectivityKey": "ZQPPMHVWECSIRJ",
+        "stereochemicalKey": "KTKRTIGZSA",
+        "molecularFormula": "C18H34O2",
+        "molecularWeight": 282.5,
+        "canonicalSmiles": "CCCCCCCCC=CCCCCCCCC(=O)O",
+        "isomericSmiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)O",
+        "structureSourceFormSmiles": "CCCCCCCC\\C=C/CCCCCCCC(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ZQPPMHVWECSIRJ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZQPPMHVWECSIRJ-KTKRTIGZSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:zqppmhvwecsirj-ktkrtigzsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3400",
+        "sourceName": "oleic acid",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3400",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3400",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oleic%20acid",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-445639-2d.sdf",
+          "sha256": "5248a40928910636006c1983fabc2c3f7df19edf15d824f761d77652f33003b4",
+          "byteLength": 6617,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/445639/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-445639-3d.sdf",
+          "sha256": "d0005118753985de1206ec6adda7ee29dc0a9ce56f46dbcc5e5e443b300f1dbc",
+          "byteLength": 6978,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/445639/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oliceridine-dmnovgjwpasqdl-oaqylsrusa-n",
+      "preferredName": "Oliceridine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 66553195,
+        "inchiKey": "DMNOVGJWPASQDL-OAQYLSRUSA-N",
+        "connectivityKey": "DMNOVGJWPASQDL",
+        "stereochemicalKey": "OAQYLSRUSA",
+        "molecularFormula": "C22H30N2O2S",
+        "molecularWeight": 386.6,
+        "canonicalSmiles": "COC1=C(SC=C1)CNCCC2(CCOC3(C2)CCCC3)C4=CC=CC=N4",
+        "isomericSmiles": "COC1=C(SC=C1)CNCC[C@]2(CCOC3(C2)CCCC3)C4=CC=CC=N4",
+        "structureSourceFormSmiles": "COC1=C(SC=C1)CNCC[C@]2(CCOC3(C2)CCCC3)C4=CC=CC=N4",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DMNOVGJWPASQDL",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DMNOVGJWPASQDL-OAQYLSRUSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:dmnovgjwpasqdl-oaqylsrusa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5406",
+        "sourceName": "oliceridine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5406",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5406",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oliceridine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-66553195-2d.sdf",
+          "sha256": "85f90b65f5b5ed298277f2689de8cc186b2d2b3f6edf7733fafec8a7c22678ed",
+          "byteLength": 7661,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/66553195/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-66553195-3d.sdf",
+          "sha256": "ef3c5f55a8ac53b888a71fd03d6d74d092ba3d4cae1fc4aa875337647581945d",
+          "byteLength": 8789,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/66553195/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olmesartan-medoxomil-uqgkuqlkscszgy-uhfffaoysa-n",
+      "preferredName": "Olmesartan Medoxomil",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 130881,
+        "inchiKey": "UQGKUQLKSCSZGY-UHFFFAOYSA-N",
+        "connectivityKey": "UQGKUQLKSCSZGY",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C29H30N6O6",
+        "molecularWeight": 558.6,
+        "canonicalSmiles": "CCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)C(=O)OCC5=C(OC(=O)O5)C)C(C)(C)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCC1=NC(=C(N1CC1=CC=C(C=C1)C1=C(C=CC=C1)C1=NN=NN1)C(=O)OCC1=C(C)OC(=O)O1)C(C)(C)O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:UQGKUQLKSCSZGY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:UQGKUQLKSCSZGY-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:uqgkuqlkscszgy-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1985",
+        "sourceName": "olmesartan medoxomil",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1985",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1985",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olmesartan%20medoxomil",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-130881-2d.sdf",
+          "sha256": "d8dea7bdad601ee4053c62b7c41818e0661ede06b730f9fbff21d5123256953b",
+          "byteLength": 9556,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/130881/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-130881-3d.sdf",
+          "sha256": "ea1da2c8e1da39770e88f4320a6203d26b034efbbd5ef326b467ae4b744cac0a",
+          "byteLength": 8697,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/130881/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olodaterol-couyjevmbvsihv-sfhvurjksa-n",
+      "preferredName": "Olodaterol",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 11504295,
+        "inchiKey": "COUYJEVMBVSIHV-SFHVURJKSA-N",
+        "connectivityKey": "COUYJEVMBVSIHV",
+        "stereochemicalKey": "SFHVURJKSA",
+        "molecularFormula": "C21H26N2O5",
+        "molecularWeight": 386.4,
+        "canonicalSmiles": "CC(C)(CC1=CC=C(C=C1)OC)NCC(C2=C3C(=CC(=C2)O)NC(=O)CO3)O",
+        "isomericSmiles": "CC(C)(CC1=CC=C(C=C1)OC)NC[C@@H](C2=C3C(=CC(=C2)O)NC(=O)CO3)O",
+        "structureSourceFormSmiles": "COC1=CC=C(CC(C)(C)NC[C@H](O)C2=C3OCC(=O)NC3=CC(O)=C2)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:COUYJEVMBVSIHV",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:COUYJEVMBVSIHV-SFHVURJKSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:couyjevmbvsihv-sfhvurjksa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4814",
+        "sourceName": "olodaterol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4814",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4814",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olodaterol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-11504295-2d.sdf",
+          "sha256": "1a2884081ceb7902aa6d3c36b9dc61b40ce66777d20dd72e5ef93373d21957a8",
+          "byteLength": 7487,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11504295/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-11504295-3d.sdf",
+          "sha256": "06aba2791c5f176a32a7594da796a83acfafbb5499817b11eab3968e1d41685b",
+          "byteLength": 8041,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11504295/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olopatadine-jbimvdzlshopla-lscvhkixsa-n",
+      "preferredName": "Olopatadine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5281071,
+        "inchiKey": "JBIMVDZLSHOPLA-LSCVHKIXSA-N",
+        "connectivityKey": "JBIMVDZLSHOPLA",
+        "stereochemicalKey": "LSCVHKIXSA",
+        "molecularFormula": "C21H23NO3",
+        "molecularWeight": 337.4,
+        "canonicalSmiles": "CN(C)CCC=C1C2=CC=CC=C2COC3=C1C=C(C=C3)CC(=O)O",
+        "isomericSmiles": "CN(C)CC/C=C\\1/C2=CC=CC=C2COC3=C1C=C(C=C3)CC(=O)O",
+        "structureSourceFormSmiles": "CN(C)CC\\C=C1\\C2=CC=CC=C2COC2=C1C=C(CC(O)=O)C=C2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:JBIMVDZLSHOPLA",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:JBIMVDZLSHOPLA-LSCVHKIXSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:jbimvdzlshopla-lscvhkixsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1986",
+        "sourceName": "olopatadine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1986",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1986",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olopatadine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5281071-2d.sdf",
+          "sha256": "e15ffb3ff1dd6724d6167fb54c05ae723566f6663fce115b14d5772139f54926",
+          "byteLength": 6734,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281071/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5281071-3d.sdf",
+          "sha256": "17f418b0e2e6154ba6177758faa21b736995ecbefe47c8034635f9fc8ffd61ca",
+          "byteLength": 7010,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281071/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:olsalazine-qqbdljcygrgakp-uhfffaoysa-n",
+      "preferredName": "Olsalazine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 22419,
+        "inchiKey": "QQBDLJCYGRGAKP-UHFFFAOYSA-N",
+        "connectivityKey": "QQBDLJCYGRGAKP",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C14H10N2O6",
+        "molecularWeight": 302.24,
+        "canonicalSmiles": "C1=CC(=C(C=C1N=NC2=CC(=C(C=C2)O)C(=O)O)C(=O)O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(=O)C1=CC(=CC=C1O)N=NC1=CC(C(O)=O)=C(O)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QQBDLJCYGRGAKP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QQBDLJCYGRGAKP-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:qqbdljcygrgakp-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1988",
+        "sourceName": "olsalazine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1988",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1988",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=olsalazine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-22419-2d.sdf",
+          "sha256": "48530e06924dcf5296feabc7324f31b031417b8fe324b71af908c3e95d35aafd",
+          "byteLength": 5049,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/22419/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-22419-3d.sdf",
+          "sha256": "d48c2a292f1031eec3c2af79beeb602fbc9ff16f478983109d20a45d2b4989c4",
+          "byteLength": 5927,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/22419/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:omacetaxine-mepesuccinate-hyfhypwgaurhiv-jfiaxgojsa-n",
+      "preferredName": "Omacetaxine Mepesuccinate",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 285033,
+        "inchiKey": "HYFHYPWGAURHIV-JFIAXGOJSA-N",
+        "connectivityKey": "HYFHYPWGAURHIV",
+        "stereochemicalKey": "JFIAXGOJSA",
+        "molecularFormula": "C29H39NO9",
+        "molecularWeight": 545.6,
+        "canonicalSmiles": "CC(C)(CCCC(CC(=O)OC)(C(=O)OC1C2C3=CC4=C(C=C3CCN5C2(CCC5)C=C1OC)OCO4)O)O",
+        "isomericSmiles": "CC(C)(CCC[C@@](CC(=O)OC)(C(=O)O[C@H]1[C@H]2C3=CC4=C(C=C3CCN5[C@@]2(CCC5)C=C1OC)OCO4)O)O",
+        "structureSourceFormSmiles": "COC(=O)C[C@](O)(CCCC(C)(C)O)C(=O)O[C@H]1[C@H]2C3=C(CCN4CCC[C@]24C=C1OC)C=C1OCOC1=C3",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:HYFHYPWGAURHIV",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HYFHYPWGAURHIV-JFIAXGOJSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:hyfhypwgaurhiv-jfiaxgojsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4677",
+        "sourceName": "omacetaxine mepesuccinate",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4677",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4677",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=omacetaxine%20mepesuccinate",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-285033-2d.sdf",
+          "sha256": "aca6a3a1edfbfa475d100b80b56a4f9c4b8140f4046c88527a2e913d9ac5be93",
+          "byteLength": 10336,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/285033/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-285033-3d.sdf",
+          "sha256": "de85682f025299cad4dc2a723551a0b6745b2c3560170fd5536179f40f9ad51c",
+          "byteLength": 9738,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/285033/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:omeprazole-subdbmmjdzjvos-uhfffaoysa-n",
+      "preferredName": "Omeprazole",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4594,
+        "inchiKey": "SUBDBMMJDZJVOS-UHFFFAOYSA-N",
+        "connectivityKey": "SUBDBMMJDZJVOS",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H19N3O3S",
+        "molecularWeight": 345.4,
+        "canonicalSmiles": "CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C(N2)C=C(C=C3)OC",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC1=CC2=C(C=C1)N=C(N2)S(=O)CC1=NC=C(C)C(OC)=C1C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SUBDBMMJDZJVOS",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SUBDBMMJDZJVOS-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:subdbmmjdzjvos-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1990",
+        "sourceName": "omeprazole",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1990",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1990",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=omeprazole",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4594-2d.sdf",
+          "sha256": "a7320996b9608ffea40848fcba23b916eb1055bc60f4399c364c866c78582d6a",
+          "byteLength": 6266,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4594/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4594-3d.sdf",
+          "sha256": "5a65f7ddc16265d450880fbe57633ad716ec4dac5439bb9983989cbdf0e835fc",
+          "byteLength": 7112,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4594/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ondansetron-felgmeqixogifq-uhfffaoysa-n",
+      "preferredName": "Ondansetron",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4595,
+        "inchiKey": "FELGMEQIXOGIFQ-UHFFFAOYSA-N",
+        "connectivityKey": "FELGMEQIXOGIFQ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H19N3O",
+        "molecularWeight": 293.4,
+        "canonicalSmiles": "CC1=NC=CN1CC2CCC3=C(C2=O)C4=CC=CC=C4N3C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CN1C2=C(C3=CC=CC=C13)C(=O)C(CN1C=CN=C1C)CC2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:FELGMEQIXOGIFQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:FELGMEQIXOGIFQ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:felgmeqixogifq-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1992",
+        "sourceName": "ondansetron",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1992",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1992",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ondansetron",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4595-2d.sdf",
+          "sha256": "a46b1b84b69abd6c40588324c20807e48355b9a431d4e42f205396ca032e7672",
+          "byteLength": 6026,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4595/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4595-3d.sdf",
+          "sha256": "e9eb1c62673b77d419191675ffbc8390e6909e93b2a882d8d3ebc2a31d4115b4",
+          "byteLength": 6648,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4595/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:opicapone-asoadizovztjsr-uhfffaoysa-n",
+      "preferredName": "Opicapone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 135565903,
+        "inchiKey": "ASOADIZOVZTJSR-UHFFFAOYSA-N",
+        "connectivityKey": "ASOADIZOVZTJSR",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C15H10Cl2N4O6",
+        "molecularWeight": 413.2,
+        "canonicalSmiles": "CC1=C(C(=[N+](C(=C1Cl)C)[O-])Cl)C2=NOC(=N2)C3=CC(=C(C(=C3)O)O)[N+](=O)[O-]",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1=C(C2=NOC(=N2)C2=CC(O)=C(O)C(=C2)[N+]([O-])=O)C(Cl)=[N+]([O-])C(C)=C1Cl",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ASOADIZOVZTJSR",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ASOADIZOVZTJSR-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:asoadizovztjsr-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5143",
+        "sourceName": "opicapone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5143",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5143",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=opicapone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-135565903-2d.sdf",
+          "sha256": "bbf95eef63c96d50a126f5565bf10ad83b3ac28f41f5a219f1eaab7eb1eeb37f",
+          "byteLength": 5974,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135565903/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-135565903-3d.sdf",
+          "sha256": "f68ef641dd5f2114a155a9cbdad43fd3bc3d873a5ea8f595e65a27f3a6c01138",
+          "byteLength": 6815,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/135565903/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:orphenadrine-qvyrgxjjslmxqh-uhfffaoysa-n",
+      "preferredName": "Orphenadrine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4601,
+        "inchiKey": "QVYRGXJJSLMXQH-UHFFFAOYSA-N",
+        "connectivityKey": "QVYRGXJJSLMXQH",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H23NO",
+        "molecularWeight": 269.4,
+        "canonicalSmiles": "CC1=CC=CC=C1C(C2=CC=CC=C2)OCCN(C)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CN(C)CCOC(C1=CC=CC=C1)C1=C(C)C=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QVYRGXJJSLMXQH",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QVYRGXJJSLMXQH-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:qvyrgxjjslmxqh-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1999",
+        "sourceName": "orphenadrine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1999",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1999",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=orphenadrine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4601-2d.sdf",
+          "sha256": "409ded03e79c70675840fd12fcdb3dd2ab07b24a77e5cc40404828cd36e74a13",
+          "byteLength": 6004,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4601/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4601-3d.sdf",
+          "sha256": "1d0e7e9bf1773ae894b1e9ecffd4304bfd1e3d8e583427e0dc794de5f75c8378",
+          "byteLength": 6724,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4601/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oseltamivir-vszgpkbbmsaynt-rrfjbimhsa-n",
+      "preferredName": "Oseltamivir",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 65028,
+        "inchiKey": "VSZGPKBBMSAYNT-RRFJBIMHSA-N",
+        "connectivityKey": "VSZGPKBBMSAYNT",
+        "stereochemicalKey": "RRFJBIMHSA",
+        "molecularFormula": "C16H28N2O4",
+        "molecularWeight": 312.4,
+        "canonicalSmiles": "CCC(CC)OC1C=C(CC(C1NC(=O)C)N)C(=O)OCC",
+        "isomericSmiles": "CCC(CC)O[C@@H]1C=C(C[C@@H]([C@H]1NC(=O)C)N)C(=O)OCC",
+        "structureSourceFormSmiles": "CCOC(=O)C1=C[C@@H](OC(CC)CC)[C@H](NC(C)=O)[C@@H](N)C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:VSZGPKBBMSAYNT",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:VSZGPKBBMSAYNT-RRFJBIMHSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:vszgpkbbmsaynt-rrfjbimhsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2001",
+        "sourceName": "oseltamivir",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2001",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2001",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oseltamivir",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-65028-2d.sdf",
+          "sha256": "feae981b6aadadc1551b90891d3de72e2912eec867706dd67214c8cbe1d0fe32",
+          "byteLength": 6767,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/65028/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-65028-3d.sdf",
+          "sha256": "e9ab79f3778a7c41fcad685b626a01cc5fe6ae96add484bc5f136e28248f84dc",
+          "byteLength": 7341,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/65028/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:osilodrostat-usuzgmwdzdxmdg-cybmujfwsa-n",
+      "preferredName": "Osilodrostat",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 44139752,
+        "inchiKey": "USUZGMWDZDXMDG-CYBMUJFWSA-N",
+        "connectivityKey": "USUZGMWDZDXMDG",
+        "stereochemicalKey": "CYBMUJFWSA",
+        "molecularFormula": "C13H10FN3",
+        "molecularWeight": 227.24,
+        "canonicalSmiles": "C1CC2=CN=CN2C1C3=C(C=C(C=C3)C#N)F",
+        "isomericSmiles": "C1CC2=CN=CN2[C@H]1C3=C(C=C(C=C3)C#N)F",
+        "structureSourceFormSmiles": "FC1=C(C=CC(=C1)C#N)[C@H]1CCC2=CN=CN12",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:USUZGMWDZDXMDG",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:USUZGMWDZDXMDG-CYBMUJFWSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:usuzgmwdzdxmdg-cybmujfwsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5384",
+        "sourceName": "osilodrostat",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5384",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5384",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=osilodrostat",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-44139752-2d.sdf",
+          "sha256": "9ab76fbc0c4e0aefabcb39d0e76d40d7fbbfca00b8705683dc74f4223a93a7e4",
+          "byteLength": 4679,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/44139752/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-44139752-3d.sdf",
+          "sha256": "0f481757ad51c65c9b241bbf27bbb5bd2fbc0865d53e7367e0e9f25d043c684b",
+          "byteLength": 5423,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/44139752/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:osimertinib-duyjmqonpnnfpi-uhfffaoysa-n",
+      "preferredName": "Osimertinib",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 71496458,
+        "inchiKey": "DUYJMQONPNNFPI-UHFFFAOYSA-N",
+        "connectivityKey": "DUYJMQONPNNFPI",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C28H33N7O2",
+        "molecularWeight": 499.6,
+        "canonicalSmiles": "CN1C=C(C2=CC=CC=C21)C3=NC(=NC=C3)NC4=C(C=C(C(=C4)NC(=O)C=C)N(C)CCN(C)C)OC",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "COC1=C(NC2=NC=CC(=N2)C2=CN(C)C3=C2C=CC=C3)C=C(NC(=O)C=C)C(=C1)N(C)CCN(C)C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DUYJMQONPNNFPI",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DUYJMQONPNNFPI-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:duyjmqonpnnfpi-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5062",
+        "sourceName": "osimertinib",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5062",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5062",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=osimertinib",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-71496458-2d.sdf",
+          "sha256": "121a461f584b4eb2eb9ce16ffae9f9f3146fb80459b116c3d5d3a8eba189188e",
+          "byteLength": 9189,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71496458/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-71496458-3d.sdf",
+          "sha256": "0a6dd2cf0b78c4fd96715e325b6ead22c697acade2bbd2007e244e414d653f68",
+          "byteLength": 9006,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71496458/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ospemifene-lumknavtfcduie-vhxpqnkssa-n",
+      "preferredName": "Ospemifene",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3036505,
+        "inchiKey": "LUMKNAVTFCDUIE-VHXPQNKSSA-N",
+        "connectivityKey": "LUMKNAVTFCDUIE",
+        "stereochemicalKey": "VHXPQNKSSA",
+        "molecularFormula": "C24H23ClO2",
+        "molecularWeight": 378.9,
+        "canonicalSmiles": "C1=CC=C(C=C1)C(=C(C2=CC=CC=C2)C3=CC=C(C=C3)OCCO)CCCl",
+        "isomericSmiles": "C1=CC=C(C=C1)/C(=C(/C2=CC=CC=C2)\\C3=CC=C(C=C3)OCCO)/CCCl",
+        "structureSourceFormSmiles": "OCCOC1=CC=C(C=C1)C(=C(\\CCCl)C1=CC=CC=C1)\\C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:LUMKNAVTFCDUIE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:LUMKNAVTFCDUIE-VHXPQNKSSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:lumknavtfcduie-vhxpqnkssa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4749",
+        "sourceName": "ospemifene",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4749",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4749",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ospemifene",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3036505-2d.sdf",
+          "sha256": "d17417daba33162a3cf8b8923989437eb07eda2cb85787e3c0289b5daaf0fbc5",
+          "byteLength": 6815,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3036505/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3036505-3d.sdf",
+          "sha256": "5e8fc20fd9479850ab387a9f6bafaa374df75ad6e751098262d626c8e3cefbcb",
+          "byteLength": 7534,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3036505/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxacillin-uwyhmgvutgawsp-jkifevaisa-n",
+      "preferredName": "Oxacillin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 6196,
+        "inchiKey": "UWYHMGVUTGAWSP-JKIFEVAISA-N",
+        "connectivityKey": "UWYHMGVUTGAWSP",
+        "stereochemicalKey": "JKIFEVAISA",
+        "molecularFormula": "C19H19N3O5S",
+        "molecularWeight": 401.4,
+        "canonicalSmiles": "CC1=C(C(=NO1)C2=CC=CC=C2)C(=O)NC3C4N(C3=O)C(C(S4)(C)C)C(=O)O",
+        "isomericSmiles": "CC1=C(C(=NO1)C2=CC=CC=C2)C(=O)N[C@H]3[C@@H]4N(C3=O)[C@H](C(S4)(C)C)C(=O)O",
+        "structureSourceFormSmiles": "CC1=C(C(=O)N[C@H]2[C@H]3SC(C)(C)[C@@H](N3C2=O)C(O)=O)C(=NO1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:UWYHMGVUTGAWSP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:UWYHMGVUTGAWSP-JKIFEVAISA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:uwyhmgvutgawsp-jkifevaisa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2006",
+        "sourceName": "oxacillin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2006",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2006",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxacillin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6196-2d.sdf",
+          "sha256": "b2942d6ecac86c7a647040a836cd4e3b61317ea105740283840d70a17c760d08",
+          "byteLength": 7053,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6196/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6196-3d.sdf",
+          "sha256": "1c418d4b82082bc0e5067ced99d957790f960c5273c7672d02aa70f07d7f283f",
+          "byteLength": 7337,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6196/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxamniquine-xcgyujzmccfsrp-uhfffaoysa-n",
+      "preferredName": "Oxamniquine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4612,
+        "inchiKey": "XCGYUJZMCCFSRP-UHFFFAOYSA-N",
+        "connectivityKey": "XCGYUJZMCCFSRP",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C14H21N3O3",
+        "molecularWeight": 279.33,
+        "canonicalSmiles": "CC(C)NCC1CCC2=CC(=C(C=C2N1)[N+](=O)[O-])CO",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(C)NCC1CCC2=CC(CO)=C(C=C2N1)[N+]([O-])=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XCGYUJZMCCFSRP",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XCGYUJZMCCFSRP-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xcgyujzmccfsrp-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2009",
+        "sourceName": "oxamniquine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2009",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2009",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxamniquine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4612-2d.sdf",
+          "sha256": "63f5a6fdbdf6f97304b526aee509f6a165a0764c7231dc8adb1cc4216a98b2d6",
+          "byteLength": 5951,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4612/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4612-3d.sdf",
+          "sha256": "bda4e50a7588596b970b49816de841b9482421a838a6966c3353fca79f0ce00a",
+          "byteLength": 6933,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4612/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxandrolone-qsljivkcvhqplv-pemputjusa-n",
+      "preferredName": "Oxandrolone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5878,
+        "inchiKey": "QSLJIVKCVHQPLV-PEMPUTJUSA-N",
+        "connectivityKey": "QSLJIVKCVHQPLV",
+        "stereochemicalKey": "PEMPUTJUSA",
+        "molecularFormula": "C19H30O3",
+        "molecularWeight": 306.4,
+        "canonicalSmiles": "CC12CCC3C(C1CCC2(C)O)CCC4C3(COC(=O)C4)C",
+        "isomericSmiles": "C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@]2(C)O)CC[C@@H]4[C@@]3(COC(=O)C4)C",
+        "structureSourceFormSmiles": "C[C@]1(O)CC[C@H]2[C@@H]3CC[C@H]4CC(=O)OC[C@]4(C)[C@H]3CC[C@]12C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QSLJIVKCVHQPLV",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QSLJIVKCVHQPLV-PEMPUTJUSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:qsljivkcvhqplv-pemputjusa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2011",
+        "sourceName": "oxandrolone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2011",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2011",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxandrolone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5878-2d.sdf",
+          "sha256": "be48992807032271f07ebab70a34148efcaf646d9f5d1472ef0b6894b7f9b6e2",
+          "byteLength": 7476,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5878/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5878-3d.sdf",
+          "sha256": "3debaa38c01092069ddca60fb1661c115084cf0801652342c76d4d86125f732f",
+          "byteLength": 7772,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5878/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxaprozin-ofpxsfxsnfpthf-uhfffaoysa-n",
+      "preferredName": "Oxaprozin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4614,
+        "inchiKey": "OFPXSFXSNFPTHF-UHFFFAOYSA-N",
+        "connectivityKey": "OFPXSFXSNFPTHF",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C18H15NO3",
+        "molecularWeight": 293.3,
+        "canonicalSmiles": "C1=CC=C(C=C1)C2=C(OC(=N2)CCC(=O)O)C3=CC=CC=C3",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(=O)CCC1=NC(=C(O1)C1=CC=CC=C1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:OFPXSFXSNFPTHF",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:OFPXSFXSNFPTHF-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ofpxsfxsnfpthf-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2013",
+        "sourceName": "oxaprozin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2013",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2013",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxaprozin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4614-2d.sdf",
+          "sha256": "0c35fc67b2865e58c3acff4ee07b364cf82a31c7ef7cc42d13032dadf0efb43e",
+          "byteLength": 5466,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4614/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4614-3d.sdf",
+          "sha256": "1139a44d0798047c0c9b2037fc695326af56333945b00e77369280763ac88340",
+          "byteLength": 6487,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4614/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxazepam-adimayptobdmtl-uhfffaoysa-n",
+      "preferredName": "Oxazepam",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4616,
+        "inchiKey": "ADIMAYPTOBDMTL-UHFFFAOYSA-N",
+        "connectivityKey": "ADIMAYPTOBDMTL",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C15H11ClN2O2",
+        "molecularWeight": 286.71,
+        "canonicalSmiles": "C1=CC=C(C=C1)C2=NC(C(=O)NC3=C2C=C(C=C3)Cl)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC1N=C(C2=CC=CC=C2)C2=CC(Cl)=CC=C2NC1=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ADIMAYPTOBDMTL",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ADIMAYPTOBDMTL-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:adimayptobdmtl-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2015",
+        "sourceName": "oxazepam",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2015",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2015",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxazepam",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4616-2d.sdf",
+          "sha256": "28e4fa53dca89587b4a789db5b6d67a6902d79f167a4d61f0fb1c77b5de7a2ff",
+          "byteLength": 4991,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4616/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4616-3d.sdf",
+          "sha256": "d3224173223ecb80f259a2a7a25f1322ade8556b387fcc98f58465dcef0d5ba5",
+          "byteLength": 5715,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4616/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxazolidin-hfhzkzsrxitvmk-uhfffaoysa-n",
+      "preferredName": "Oxazolidin",
+      "aliases": [
+        "oxyphenbutazone"
+      ],
+      "identity": {
+        "pubChemCid": 4641,
+        "inchiKey": "HFHZKZSRXITVMK-UHFFFAOYSA-N",
+        "connectivityKey": "HFHZKZSRXITVMK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C19H20N2O3",
+        "molecularWeight": 324.4,
+        "canonicalSmiles": "CCCCC1C(=O)N(N(C1=O)C2=CC=C(C=C2)O)C3=CC=CC=C3",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCC1C(=O)N(N(C1=O)C1=CC=C(O)C=C1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:HFHZKZSRXITVMK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:HFHZKZSRXITVMK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:hfhzkzsrxitvmk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2036",
+        "sourceName": "oxyphenbutazone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2036",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2036",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxyphenbutazone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4641-2d.sdf",
+          "sha256": "60122beba3a9129cdb75f8d547b575e6fcc001db3225a6a171b61a5de2da15a7",
+          "byteLength": 6187,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4641/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4641-3d.sdf",
+          "sha256": "aa57513f98ba206aed7ab89976c2e54c1f80f506c2f21ea78a85f195c2cebcd2",
+          "byteLength": 7054,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4641/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxcarbazepine-ctrlabgolivaiy-uhfffaoysa-n",
+      "preferredName": "Oxcarbazepine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 34312,
+        "inchiKey": "CTRLABGOLIVAIY-UHFFFAOYSA-N",
+        "connectivityKey": "CTRLABGOLIVAIY",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C15H12N2O2",
+        "molecularWeight": 252.27,
+        "canonicalSmiles": "C1C2=CC=CC=C2N(C3=CC=CC=C3C1=O)C(=O)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "NC(=O)N1C2=CC=CC=C2C(=O)CC2=C1C=CC=C2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:CTRLABGOLIVAIY",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:CTRLABGOLIVAIY-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ctrlabgolivaiy-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2017",
+        "sourceName": "oxcarbazepine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2017",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2017",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxcarbazepine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-34312-2d.sdf",
+          "sha256": "21e4033caa87824ac25f73b2f18a4af0546803025213654c06276e12f8aa84cc",
+          "byteLength": 4882,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/34312/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-34312-3d.sdf",
+          "sha256": "a2ade892457ff8a330fe5d8f7b1d670173e9e54eae618d6dcf18d881786610f7",
+          "byteLength": 5443,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/34312/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxiconazole-qrjjegajxvebne-hkoygpovsa-n",
+      "preferredName": "Oxiconazole",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5353853,
+        "inchiKey": "QRJJEGAJXVEBNE-HKOYGPOVSA-N",
+        "connectivityKey": "QRJJEGAJXVEBNE",
+        "stereochemicalKey": "HKOYGPOVSA",
+        "molecularFormula": "C18H13Cl4N3O",
+        "molecularWeight": 429.1,
+        "canonicalSmiles": "C1=CC(=C(C=C1Cl)Cl)CON=C(CN2C=CN=C2)C3=C(C=C(C=C3)Cl)Cl",
+        "isomericSmiles": "C1=CC(=C(C=C1Cl)Cl)CO/N=C(\\CN2C=CN=C2)/C3=C(C=C(C=C3)Cl)Cl",
+        "structureSourceFormSmiles": "ClC1=CC(Cl)=C(CO\\N=C(/CN2C=CN=C2)C2=C(Cl)C=C(Cl)C=C2)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QRJJEGAJXVEBNE",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QRJJEGAJXVEBNE-HKOYGPOVSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:qrjjegajxvebne-hkoygpovsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3408",
+        "sourceName": "oxiconazole",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3408",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3408",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxiconazole",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5353853-2d.sdf",
+          "sha256": "a2d660d37994650c6002230bb74574c955f17256fa4e4527e9a42c2e222526a2",
+          "byteLength": 5963,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5353853/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5353853-3d.sdf",
+          "sha256": "7ac56b76cb138e867b3b6985fc8be2a5f9932f3e62bb12cf49cb5ade0709f7a2",
+          "byteLength": 8369,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5353853/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxprenolol-cemawmomdpgjmb-uhfffaoysa-n",
+      "preferredName": "Oxprenolol",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4631,
+        "inchiKey": "CEMAWMOMDPGJMB-UHFFFAOYSA-N",
+        "connectivityKey": "CEMAWMOMDPGJMB",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C15H23NO3",
+        "molecularWeight": 265.35,
+        "canonicalSmiles": "CC(C)NCC(COC1=CC=CC=C1OCC=C)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(C)NCC(O)COC1=C(OCC=C)C=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:CEMAWMOMDPGJMB",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:CEMAWMOMDPGJMB-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:cemawmomdpgjmb-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2027",
+        "sourceName": "oxprenolol",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2027",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2027",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxprenolol",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4631-2d.sdf",
+          "sha256": "302e49d4130ba80e9d7f4567322b32134ee04a73da5407a069f7a656e45451ac",
+          "byteLength": 5823,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4631/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4631-3d.sdf",
+          "sha256": "2211f895d41ac7d48f96711e464b66e7816a4758c64918ff2f8f42fb45101696",
+          "byteLength": 7179,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4631/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxybuprocaine-cmhhmuwaywtmgs-uhfffaoysa-n",
+      "preferredName": "Oxybuprocaine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4633,
+        "inchiKey": "CMHHMUWAYWTMGS-UHFFFAOYSA-N",
+        "connectivityKey": "CMHHMUWAYWTMGS",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C17H28N2O3",
+        "molecularWeight": 308.4,
+        "canonicalSmiles": "CCCCOC1=C(C=CC(=C1)C(=O)OCCN(CC)CC)N",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCCCOC1=C(N)C=CC(=C1)C(=O)OCCN(CC)CC",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:CMHHMUWAYWTMGS",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:CMHHMUWAYWTMGS-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:cmhhmuwaywtmgs-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3016",
+        "sourceName": "oxybuprocaine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3016",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3016",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxybuprocaine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4633-2d.sdf",
+          "sha256": "5c85ac794043a6eb24817b765282a3119a799b4f005563b20be5a31e32145043",
+          "byteLength": 6546,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4633/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4633-3d.sdf",
+          "sha256": "fe017210cd2d307bd0ac8a282906d821ca02ae259d3645d5a83d239b7558f78b",
+          "byteLength": 7435,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4633/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxybutynin-xiqvnetubqgfhx-uhfffaoysa-n",
+      "preferredName": "Oxybutynin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4634,
+        "inchiKey": "XIQVNETUBQGFHX-UHFFFAOYSA-N",
+        "connectivityKey": "XIQVNETUBQGFHX",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C22H31NO3",
+        "molecularWeight": 357.5,
+        "canonicalSmiles": "CCN(CC)CC#CCOC(=O)C(C1CCCCC1)(C2=CC=CC=C2)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CCN(CC)CC#CCOC(=O)C(O)(C1CCCCC1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XIQVNETUBQGFHX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XIQVNETUBQGFHX-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xiqvnetubqgfhx-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2028",
+        "sourceName": "oxybutynin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2028",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2028",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxybutynin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4634-2d.sdf",
+          "sha256": "3e71e4e50128c95c504d51f62db62a4f3d095514be8078d9a43f8febd0c287e9",
+          "byteLength": 7378,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4634/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4634-3d.sdf",
+          "sha256": "f01ec2ed2d501b0732b1900e8e0bbc6b2048ce255e10d09efebffa94179ff965",
+          "byteLength": 8011,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4634/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxycodone-bruqqqpbmzovgd-xfkajcmbsa-n",
+      "preferredName": "Oxycodone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5284603,
+        "inchiKey": "BRUQQQPBMZOVGD-XFKAJCMBSA-N",
+        "connectivityKey": "BRUQQQPBMZOVGD",
+        "stereochemicalKey": "XFKAJCMBSA",
+        "molecularFormula": "C18H21NO4",
+        "molecularWeight": 315.4,
+        "canonicalSmiles": "CN1CCC23C4C(=O)CCC2(C1CC5=C3C(=C(C=C5)OC)O4)O",
+        "isomericSmiles": "CN1CC[C@]23[C@@H]4C(=O)CC[C@]2([C@H]1CC5=C3C(=C(C=C5)OC)O4)O",
+        "structureSourceFormSmiles": "COC1=CC=C2C[C@H]3N(C)CC[C@@]45[C@@H](OC1=C24)C(=O)CC[C@@]35O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:BRUQQQPBMZOVGD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:BRUQQQPBMZOVGD-XFKAJCMBSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:bruqqqpbmzovgd-xfkajcmbsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2029",
+        "sourceName": "oxycodone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2029",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2029",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxycodone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5284603-2d.sdf",
+          "sha256": "f33d979e278f790ddfc05b0ff9c9e6567869a376006571ff5b6f499317483dac",
+          "byteLength": 6674,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284603/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5284603-3d.sdf",
+          "sha256": "dbda4d6f4d8d5acb8c3fbd9e5d4b4cbc78030106038d0021f8f98cb04eb3c683",
+          "byteLength": 6456,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284603/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxygen-mymofizgzyhomd-uhfffaoysa-n",
+      "preferredName": "Oxygen",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 977,
+        "inchiKey": "MYMOFIZGZYHOMD-UHFFFAOYSA-N",
+        "connectivityKey": "MYMOFIZGZYHOMD",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "O2",
+        "molecularWeight": 31.999,
+        "canonicalSmiles": "O=O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "O=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:MYMOFIZGZYHOMD",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:MYMOFIZGZYHOMD-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:mymofizgzyhomd-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:4235",
+        "sourceName": "oxygen",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:4235",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:4235",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxygen",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-977-2d.sdf",
+          "sha256": "2dfab7fd613d2b3031fabec844f057b97110fb1b8b05a0e1c7ad49f55da08f54",
+          "byteLength": 1643,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/977/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-977-3d.sdf",
+          "sha256": "cad95bcbff935f0e4d0e084319be26533816b6001f108b218720a8816a505ebe",
+          "byteLength": 1076,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/977/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxymetazoline-wywifabbxfuglm-uhfffaoysa-n",
+      "preferredName": "Oxymetazoline",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4636,
+        "inchiKey": "WYWIFABBXFUGLM-UHFFFAOYSA-N",
+        "connectivityKey": "WYWIFABBXFUGLM",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H24N2O",
+        "molecularWeight": 260.37,
+        "canonicalSmiles": "CC1=CC(=C(C(=C1CC2=NCCN2)C)O)C(C)(C)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC1=CC(=C(O)C(C)=C1CC1=NCCN1)C(C)(C)C",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:WYWIFABBXFUGLM",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:WYWIFABBXFUGLM-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:wywifabbxfuglm-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2032",
+        "sourceName": "oxymetazoline",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2032",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2032",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxymetazoline",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4636-2d.sdf",
+          "sha256": "03f24262a6d2da3e8a87e643c3cb4d044ccff94f804e5429fc081957e43c94e0",
+          "byteLength": 6037,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4636/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4636-3d.sdf",
+          "sha256": "29c619588b1cfc167df8d5594153c184a2cfea6d856a1e99944d8b3a26349afd",
+          "byteLength": 6977,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4636/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxymetholone-icmwwnhduzjfdw-dhodbpelsa-n",
+      "preferredName": "Oxymetholone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5281034,
+        "inchiKey": "ICMWWNHDUZJFDW-DHODBPELSA-N",
+        "connectivityKey": "ICMWWNHDUZJFDW",
+        "stereochemicalKey": "DHODBPELSA",
+        "molecularFormula": "C21H32O3",
+        "molecularWeight": 332.5,
+        "canonicalSmiles": "CC12CCC3C(C1CCC2(C)O)CCC4C3(CC(=CO)C(=O)C4)C",
+        "isomericSmiles": "C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@]2(C)O)CC[C@@H]4[C@@]3(C/C(=C/O)/C(=O)C4)C",
+        "structureSourceFormSmiles": "C[C@]1(O)CC[C@H]2[C@@H]3CC[C@H]4CC(=O)\\C(C[C@]4(C)[C@H]3CC[C@]12C)=C/O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ICMWWNHDUZJFDW",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ICMWWNHDUZJFDW-DHODBPELSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:icmwwnhduzjfdw-dhodbpelsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2033",
+        "sourceName": "oxymetholone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2033",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2033",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxymetholone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5281034-2d.sdf",
+          "sha256": "947a145c0938a819473829bb6819ce6a2d1f93144a94bc0c7a28f5ae85fbe88b",
+          "byteLength": 7945,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281034/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5281034-3d.sdf",
+          "sha256": "37e3f44b802086f3e8f3d82d3602b6f92b2541aef4d8c40a9db7360b83101688",
+          "byteLength": 8228,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281034/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxymorphone-uqcnkqcjzoaftq-iswurrpusa-n",
+      "preferredName": "Oxymorphone",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5284604,
+        "inchiKey": "UQCNKQCJZOAFTQ-ISWURRPUSA-N",
+        "connectivityKey": "UQCNKQCJZOAFTQ",
+        "stereochemicalKey": "ISWURRPUSA",
+        "molecularFormula": "C17H19NO4",
+        "molecularWeight": 301.34,
+        "canonicalSmiles": "CN1CCC23C4C(=O)CCC2(C1CC5=C3C(=C(C=C5)O)O4)O",
+        "isomericSmiles": "CN1CC[C@]23[C@@H]4C(=O)CC[C@]2([C@H]1CC5=C3C(=C(C=C5)O)O4)O",
+        "structureSourceFormSmiles": "CN1CC[C@]23[C@H]4OC5=C(O)C=CC(C[C@@H]1[C@]2(O)CCC4=O)=C35",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:UQCNKQCJZOAFTQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:UQCNKQCJZOAFTQ-ISWURRPUSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:uqcnkqcjzoaftq-iswurrpusa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2034",
+        "sourceName": "oxymorphone",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2034",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2034",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxymorphone",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5284604-2d.sdf",
+          "sha256": "231957b708f95f4577b5e5e41f81cfc58327b12cca2dd973e63930e32ed4ca90",
+          "byteLength": 6361,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284604/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5284604-3d.sdf",
+          "sha256": "5fc056a6b7a534f7518f04bf59df07f5497a67512bdec75fa48f6d828fa43712",
+          "byteLength": 6417,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5284604/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxyphencyclimine-dudkazcaisngqn-uhfffaoysa-n",
+      "preferredName": "Oxyphencyclimine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 4642,
+        "inchiKey": "DUDKAZCAISNGQN-UHFFFAOYSA-N",
+        "connectivityKey": "DUDKAZCAISNGQN",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C20H28N2O3",
+        "molecularWeight": 344.4,
+        "canonicalSmiles": "CN1CCCN=C1COC(=O)C(C2CCCCC2)(C3=CC=CC=C3)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CN1CCCN=C1COC(=O)C(O)(C1CCCCC1)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DUDKAZCAISNGQN",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DUDKAZCAISNGQN-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:dudkazcaisngqn-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2026",
+        "sourceName": "oxyphencyclimine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2026",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2026",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxyphencyclimine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-4642-2d.sdf",
+          "sha256": "364eb75b5158c4d5a8e67adf495cf5d583cdceea9762ee5b407e5264e5ce269c",
+          "byteLength": 7150,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4642/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-4642-3d.sdf",
+          "sha256": "76447d1debd93dfa70d66fc30d9234f77da2b61b4841491659581f46bd87e083",
+          "byteLength": 9648,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4642/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxyphenisatin-sjdacomxkwhbow-uhfffaoysa-n",
+      "preferredName": "Oxyphenisatin",
+      "aliases": [
+        "oxyphenisatine"
+      ],
+      "identity": {
+        "pubChemCid": 31315,
+        "inchiKey": "SJDACOMXKWHBOW-UHFFFAOYSA-N",
+        "connectivityKey": "SJDACOMXKWHBOW",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C20H15NO3",
+        "molecularWeight": 317.3,
+        "canonicalSmiles": "C1=CC=C2C(=C1)C(C(=O)N2)(C3=CC=C(C=C3)O)C4=CC=C(C=C4)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC1=CC=C(C=C1)C1(C(=O)NC2=C1C=CC=C2)C1=CC=C(O)C=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SJDACOMXKWHBOW",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SJDACOMXKWHBOW-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:sjdacomxkwhbow-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2038",
+        "sourceName": "oxyphenisatine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2038",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2038",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxyphenisatine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-31315-2d.sdf",
+          "sha256": "ee00cf0cea298762cc477928eac4619c3201fe5c802d722ba2afec612d205db5",
+          "byteLength": 5689,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31315/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-31315-3d.sdf",
+          "sha256": "c9a8c6ab7973614c54f295e90033c88a0ddfde4d4ffbaad71bc640f4692ae025",
+          "byteLength": 6662,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/31315/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:oxyphenonium-gfruphoklbphtq-uhfffaoysa-n",
+      "preferredName": "Oxyphenonium",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 5749,
+        "inchiKey": "GFRUPHOKLBPHTQ-UHFFFAOYSA-N",
+        "connectivityKey": "GFRUPHOKLBPHTQ",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C21H34NO3+",
+        "molecularWeight": 348.5,
+        "canonicalSmiles": "CC[N+](C)(CC)CCOC(=O)C(C1CCCCC1)(C2=CC=CC=C2)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC[N+](C)(CC)CCOC(=O)C(O)(C1CCCCC1)C1=CC=CC=C1",
+        "chargeLayer": "q+1"
+      },
+      "parentEntity": {
+        "id": "parent:GFRUPHOKLBPHTQ",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:GFRUPHOKLBPHTQ-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:gfruphoklbphtq-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:2039",
+        "sourceName": "oxyphenonium",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:2039",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:2039",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=oxyphenonium",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-5749-2d.sdf",
+          "sha256": "f719162323e7661f253dd7b18d9c8d547618b3e95f4ec3c7567e108565ca8bd2",
+          "byteLength": 7613,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5749/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-5749-3d.sdf",
+          "sha256": "80e2036b618413107d2deef0555b7dc80bc386e8f445d62fcccfa769d2ff5adf",
+          "byteLength": 9153,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5749/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ozanimod-xrvdgnkrpoaqtn-fqevstjzsa-n",
+      "preferredName": "Ozanimod",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 52938427,
+        "inchiKey": "XRVDGNKRPOAQTN-FQEVSTJZSA-N",
+        "connectivityKey": "XRVDGNKRPOAQTN",
+        "stereochemicalKey": "FQEVSTJZSA",
+        "molecularFormula": "C23H24N4O3",
+        "molecularWeight": 404.5,
+        "canonicalSmiles": "CC(C)OC1=C(C=C(C=C1)C2=NC(=NO2)C3=C4CCC(C4=CC=C3)NCCO)C#N",
+        "isomericSmiles": "CC(C)OC1=C(C=C(C=C1)C2=NC(=NO2)C3=C4CC[C@@H](C4=CC=C3)NCCO)C#N",
+        "structureSourceFormSmiles": "CC(C)OC1=CC=C(C=C1C#N)C1=NC(=NO1)C1=C2CC[C@H](NCCO)C2=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XRVDGNKRPOAQTN",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XRVDGNKRPOAQTN-FQEVSTJZSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:xrvdgnkrpoaqtn-fqevstjzsa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5383",
+        "sourceName": "ozanimod",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5383",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5383",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ozanimod",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-52938427-2d.sdf",
+          "sha256": "b2bf72dce0e6e90e4f476e80279a865357eb7ed6a7425c17a53599d8be9c1d7b",
+          "byteLength": 7556,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/52938427/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-52938427-3d.sdf",
+          "sha256": "575357a8b333f82bb6f7cb52cf1eda5070e6f4e4cff94c25e6ffdfebded5b476",
+          "byteLength": 8035,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/52938427/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ozenoxacin-xpijwutxqagslk-uhfffaoysa-n",
+      "preferredName": "Ozenoxacin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 9863827,
+        "inchiKey": "XPIJWUTXQAGSLK-UHFFFAOYSA-N",
+        "connectivityKey": "XPIJWUTXQAGSLK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C21H21N3O3",
+        "molecularWeight": 363.4,
+        "canonicalSmiles": "CC1=CC(=CN=C1NC)C2=C(C3=C(C=C2)C(=O)C(=CN3C4CC4)C(=O)O)C",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CNC1=C(C)C=C(C=N1)C1=C(C)C2=C(C=C1)C(=O)C(=CN2C1CC1)C(O)=O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:XPIJWUTXQAGSLK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:XPIJWUTXQAGSLK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:xpijwutxqagslk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:5058",
+        "sourceName": "ozenoxacin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:5058",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:5058",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ozenoxacin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-9863827-2d.sdf",
+          "sha256": "2c30ea35098ddd97366083076e3bad041f6df64e6f7cee453828b9cf2dc22716",
+          "byteLength": 6899,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9863827/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-9863827-3d.sdf",
+          "sha256": "7bd114addb460aebaf34dbf572c74a300ecfd9ca3ee5d1b87e713e5304cd4a8f",
+          "byteLength": 7917,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9863827/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

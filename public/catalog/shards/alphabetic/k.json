@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+  "dimension": "alphabetic",
+  "key": "k",
+  "records": [
+    {
+      "id": "molecule:imported:kanamycin-sbujhosqtjfqjx-noamyhissa-n",
+      "preferredName": "Kanamycin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 6032,
+        "inchiKey": "SBUJHOSQTJFQJX-NOAMYHISSA-N",
+        "connectivityKey": "SBUJHOSQTJFQJX",
+        "stereochemicalKey": "NOAMYHISSA",
+        "molecularFormula": "C18H36N4O11",
+        "molecularWeight": 484.5,
+        "canonicalSmiles": "C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)O)O)OC3C(C(C(C(O3)CO)O)N)O)N",
+        "isomericSmiles": "C1[C@H]([C@@H]([C@H]([C@@H]([C@H]1N)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CN)O)O)O)O)O[C@@H]3[C@@H]([C@H]([C@@H]([C@H](O3)CO)O)N)O)N",
+        "structureSourceFormSmiles": "NC[C@H]1O[C@H](O[C@@H]2[C@@H](N)C[C@@H](N)[C@H](O[C@H]3O[C@H](CO)[C@@H](O)[C@H](N)[C@H]3O)[C@H]2O)[C@H](O)[C@@H](O)[C@@H]1O",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:SBUJHOSQTJFQJX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:SBUJHOSQTJFQJX-NOAMYHISSA-N",
+        "specified": true
+      },
+      "chemicalForm": {
+        "id": "form:sbujhosqtjfqjx-noamyhissa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1519",
+        "sourceName": "kanamycin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1519",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1519",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=kanamycin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-6032-2d.sdf",
+          "sha256": "4bf6cb4f5326e5f4cb97f63a415c8d047df7dc31264849558f85ccb9072ba8ad",
+          "byteLength": 9560,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6032/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-6032-3d.sdf",
+          "sha256": "428c43844072a0ba8b682c8f298339d6f10eb1661866e72e25f69e02feb574b0",
+          "byteLength": 9619,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6032/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ketamine-yqezlkzalyswhr-uhfffaoysa-n",
+      "preferredName": "Ketamine",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3821,
+        "inchiKey": "YQEZLKZALYSWHR-UHFFFAOYSA-N",
+        "connectivityKey": "YQEZLKZALYSWHR",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C13H16ClNO",
+        "molecularWeight": 237.72,
+        "canonicalSmiles": "CNC1(CCCCC1=O)C2=CC=CC=C2Cl",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CNC1(CCCCC1=O)C1=C(Cl)C=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:YQEZLKZALYSWHR",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:YQEZLKZALYSWHR-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:yqezlkzalyswhr-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1523",
+        "sourceName": "ketamine",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1523",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1523",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ketamine",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3821-2d.sdf",
+          "sha256": "2b069937570016ec372362c6767b64e47a8e1e0bfbdb57d69be0eb8d794674dd",
+          "byteLength": 4874,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3821/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3821-3d.sdf",
+          "sha256": "1760e05be47f32bbafb82e680947a59d39cd28abbf1f9a1617a3b0f51d17d380",
+          "byteLength": 4987,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3821/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ketoprofen-dkywvdodhfezim-uhfffaoysa-n",
+      "preferredName": "Ketoprofen",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3825,
+        "inchiKey": "DKYWVDODHFEZIM-UHFFFAOYSA-N",
+        "connectivityKey": "DKYWVDODHFEZIM",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C16H14O3",
+        "molecularWeight": 254.28,
+        "canonicalSmiles": "CC(C1=CC(=CC=C1)C(=O)C2=CC=CC=C2)C(=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CC(C(O)=O)C1=CC=CC(=C1)C(=O)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:DKYWVDODHFEZIM",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:DKYWVDODHFEZIM-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:dkywvdodhfezim-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1528",
+        "sourceName": "ketoprofen",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1528",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1528",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ketoprofen",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3825-2d.sdf",
+          "sha256": "fe0dd3ed88b355b7ac18d7e7bd6f4de2bfc18ab03e3ce4834cdc55d651a57deb",
+          "byteLength": 4957,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3825/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3825-3d.sdf",
+          "sha256": "b5883c935809d73621f29f3eedcbc7b53aaf030dc7eac43c5cf91843b39cf1f6",
+          "byteLength": 5890,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3825/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ketorolac-ozwkmvrbqxnzkk-uhfffaoysa-n",
+      "preferredName": "Ketorolac",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3826,
+        "inchiKey": "OZWKMVRBQXNZKK-UHFFFAOYSA-N",
+        "connectivityKey": "OZWKMVRBQXNZKK",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C15H13NO3",
+        "molecularWeight": 255.27,
+        "canonicalSmiles": "C1CN2C(=CC=C2C(=O)C3=CC=CC=C3)C1C(=O)O",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "OC(=O)C1CCN2C1=CC=C2C(=O)C1=CC=CC=C1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:OZWKMVRBQXNZKK",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:OZWKMVRBQXNZKK-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:ozwkmvrbqxnzkk-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1529",
+        "sourceName": "ketorolac",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1529",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1529",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ketorolac",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3826-2d.sdf",
+          "sha256": "1b26d74a8494bda664e42d9a28065faf8abdf5e0a9187c483ff5c9c1569542b5",
+          "byteLength": 5021,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3826/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3826-3d.sdf",
+          "sha256": "22878f3d65f7b0f8554614eb954f76362942612e84c52b525d0f5e5a556b4031",
+          "byteLength": 5967,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3826/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:ketotifen-zcvmwbygmwkghf-uhfffaoysa-n",
+      "preferredName": "Ketotifen",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3827,
+        "inchiKey": "ZCVMWBYGMWKGHF-UHFFFAOYSA-N",
+        "connectivityKey": "ZCVMWBYGMWKGHF",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C19H19NOS",
+        "molecularWeight": 309.4,
+        "canonicalSmiles": "CN1CCC(=C2C3=C(C(=O)CC4=CC=CC=C42)SC=C3)CC1",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "CN1CCC(CC1)=C1C2=C(SC=C2)C(=O)CC2=C1C=CC=C2",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:ZCVMWBYGMWKGHF",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:ZCVMWBYGMWKGHF-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:zcvmwbygmwkghf-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:1530",
+        "sourceName": "ketotifen",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:1530",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:1530",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=ketotifen",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3827-2d.sdf",
+          "sha256": "3224486e134699139cd1b69f3c184a05d6c30f61703c62f68ee57eb19ed49efa",
+          "byteLength": 6158,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3827/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3827-3d.sdf",
+          "sha256": "b3d6f9e9c602e5653d7a354e21812ba46bc21a09546d0eb1e8113024aec824b0",
+          "byteLength": 6581,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3827/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    },
+    {
+      "id": "molecule:imported:kinetin-qanmhlxazmsuex-uhfffaoysa-n",
+      "preferredName": "Kinetin",
+      "aliases": [],
+      "identity": {
+        "pubChemCid": 3830,
+        "inchiKey": "QANMHLXAZMSUEX-UHFFFAOYSA-N",
+        "connectivityKey": "QANMHLXAZMSUEX",
+        "stereochemicalKey": "UHFFFAOYSA",
+        "molecularFormula": "C10H9N5O",
+        "molecularWeight": 215.21,
+        "canonicalSmiles": "C1=COC(=C1)CNC2=NC=NC3=C2NC=N3",
+        "isomericSmiles": null,
+        "structureSourceFormSmiles": "C(NC1=C2N=CN=C2N=CN1)C1=CC=CO1",
+        "chargeLayer": "none"
+      },
+      "parentEntity": {
+        "id": "parent:QANMHLXAZMSUEX",
+        "relation": "self",
+        "resolutionStatus": "self",
+        "limitations": []
+      },
+      "stereoisomer": {
+        "id": "stereo:QANMHLXAZMSUEX-UHFFFAOYSA-N",
+        "specified": false
+      },
+      "chemicalForm": {
+        "id": "form:qanmhlxazmsuex-uhfffaoysa-n:components-1",
+        "kind": "single-component-source-form",
+        "componentCount": 1,
+        "parentInchiKey": null,
+        "parentResolutionStatus": "not-applicable",
+        "parentResolutionReason": "This source identity is single-component; a separate parent-form link is not required."
+      },
+      "activeIngredient": {
+        "id": "ingredient:drugcentral:3976",
+        "sourceName": "kinetin",
+        "verification": "source-name-only",
+        "limitations": [
+          "The FDA-list name is retained as the source ingredient label; exact product, active-moiety and salt-parent linkage is unresolved."
+        ]
+      },
+      "commercialProducts": [],
+      "commercialProductResolution": {
+        "status": "unresolved",
+        "reason": "No exact FDA application/product/form linkage was selected; an empty list must not be read as proof that commercial products do not exist."
+      },
+      "approvals": [
+        {
+          "id": "approval-listing:drugcentral-fda:3976",
+          "authority": "US FDA",
+          "jurisdiction": "US",
+          "kind": "approved-registry-listing",
+          "sourceRecordId": "drugcentral:3976",
+          "applicationNumber": null,
+          "productId": null,
+          "sourceId": "source:drugcentral-fda-approved-all-v1",
+          "sourceLocator": "https://drugcentral.org/?q=kinetin",
+          "verification": "source-supported",
+          "applicationLinkageStatus": "unresolved",
+          "jurisdictionEvidence": "drugcentral-fda-list-membership",
+          "limitations": [
+            "This is a DrugCentral approval-list membership record, not an exact FDA application or product record.",
+            "Application, product and chemical-form linkage remains empty until exact openFDA enrichment succeeds."
+          ]
+        }
+      ],
+      "structures": {
+        "twoD": {
+          "path": "/catalog/structures/pubchem/cid-3830-2d.sdf",
+          "sha256": "79ae58feb01a7150be05f514196cc2eb8bd3e306964df39dcf430045a5ce5bfa",
+          "byteLength": 4238,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3830/record/SDF?record_type=2d"
+        },
+        "threeD": {
+          "path": "/catalog/structures/pubchem/cid-3830-3d.sdf",
+          "sha256": "c0a05ddbc35bb88cdc69accdb7af3d8988d1fc33a50276dc6e99b61fdfdbf359",
+          "byteLength": 4889,
+          "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3830/record/SDF?record_type=3d"
+        }
+      },
+      "therapeuticGroups": [
+        "unclassified"
+      ],
+      "provenance": {
+        "snapshotId": "drugcentral-fda-pubchem-eligible-2026-08-22",
+        "sourceIds": [
+          "source:drugcentral-fda-approved-all-v1",
+          "source:drugcentral-structures-2021-09-eligible-v1",
+          "source:pubchem-pug-rest-exact-inchikey-v1"
+        ],
+        "capturedAt": "2026-08-22T03:14:07.118Z"
+      }
+    }
+  ]
+}

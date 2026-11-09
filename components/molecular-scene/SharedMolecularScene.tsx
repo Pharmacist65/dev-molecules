@@ -28,6 +28,8 @@ import { getTraversedSceneAtom } from "./keyboard";
 import type {
   MolecularSceneAtom,
   MolecularSceneCamera,
+  MolecularSceneMoleculeHit,
+  MolecularSceneScreenBounds,
   MolecularSceneStatus,
   MolecularSceneStatusDetail,
   SharedMolecularSceneProps,
@@ -41,6 +43,9 @@ interface PointerDrag {
   readonly lastY: number;
   readonly moved: boolean;
   readonly pan: boolean;
+  readonly velocityX: number;
+  readonly velocityY: number;
+  readonly lastTime: number;
 }
 
 interface PointerPoint {
@@ -79,7 +84,10 @@ export function SharedMolecularScene({
   ariaLabel,
   onAtomSelect,
   onAtomHover,
+  onMoleculeHover,
+  onMoleculeBoundsChange,
   onCameraChange,
+  onComparisonAnalysis,
   onSceneReady,
   onStatusChange,
 }: SharedMolecularSceneProps) {
@@ -91,20 +99,28 @@ export function SharedMolecularScene({
   const dragRef = useRef<PointerDrag | null>(null);
   const pointerPointsRef = useRef(new Map<number, PointerPoint>());
   const pinchDistanceRef = useRef<number | null>(null);
+  const inertiaFrameRef = useRef<number | null>(null);
   const hoverRef = useRef<MolecularSceneAtom | null>(null);
+  const moleculeHoverRef = useRef<MolecularSceneMoleculeHit | null>(null);
+  const moleculeBoundsKeyRef = useRef("");
   const cameraRef = useRef<MolecularSceneCamera>(camera ?? DEFAULT_MOLECULAR_SCENE_CAMERA);
   const controlledCameraRef = useRef<MolecularSceneCamera | undefined>(camera);
   const selectCallbackRef = useRef(onAtomSelect);
   const hoverCallbackRef = useRef(onAtomHover);
+  const moleculeHoverCallbackRef = useRef(onMoleculeHover);
+  const moleculeBoundsCallbackRef = useRef(onMoleculeBoundsChange);
   const cameraCallbackRef = useRef(onCameraChange);
+  const comparisonCallbackRef = useRef(onComparisonAnalysis);
   const readyCallbackRef = useRef(onSceneReady);
   const statusCallbackRef = useRef(onStatusChange);
   const [sceneStatus, setSceneStatus] = useState<MolecularSceneStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [renderedMoleculeCount, setRenderedMoleculeCount] = useState(0);
   const [selectedAtom, setSelectedAtom] = useState<MolecularSceneAtom | null>(null);
+  const [hoveredMolecule, setHoveredMolecule] = useState<MolecularSceneMoleculeHit | null>(null);
   const [keyboardAtom, setKeyboardAtom] = useState<MolecularSceneAtom | null>(null);
   const [cameraRevision, setCameraRevision] = useState(0);
+  const [inertiaRevision, setInertiaRevision] = useState(0);
   const [activeContexts, setActiveContexts] = useState(0);
   const instructionsId = useId();
 
@@ -115,8 +131,17 @@ export function SharedMolecularScene({
     hoverCallbackRef.current = onAtomHover;
   }, [onAtomHover]);
   useEffect(() => {
+    moleculeHoverCallbackRef.current = onMoleculeHover;
+  }, [onMoleculeHover]);
+  useEffect(() => {
+    moleculeBoundsCallbackRef.current = onMoleculeBoundsChange;
+  }, [onMoleculeBoundsChange]);
+  useEffect(() => {
     cameraCallbackRef.current = onCameraChange;
   }, [onCameraChange]);
+  useEffect(() => {
+    comparisonCallbackRef.current = onComparisonAnalysis;
+  }, [onComparisonAnalysis]);
   useEffect(() => {
     readyCallbackRef.current = onSceneReady;
   }, [onSceneReady]);
@@ -125,7 +150,10 @@ export function SharedMolecularScene({
   }, [onStatusChange]);
 
   const dispatchSceneEvent = useCallback(
-    (name: "atom-select" | "atom-hover" | "status", detail: unknown) => {
+    (
+      name: "atom-select" | "atom-hover" | "molecule-hover" | "molecule-bounds" | "status",
+      detail: unknown,
+    ) => {
       rootRef.current?.dispatchEvent(
         new CustomEvent(`molecular-scene:${name}`, { detail, bubbles: true }),
       );
@@ -163,12 +191,87 @@ export function SharedMolecularScene({
     [dispatchSceneEvent],
   );
 
+  const publishMoleculeHover = useCallback(
+    (molecule: MolecularSceneMoleculeHit | null) => {
+      if (moleculeHoverRef.current?.moleculeId === molecule?.moleculeId) return;
+      moleculeHoverRef.current = molecule;
+      setHoveredMolecule(molecule);
+      moleculeHoverCallbackRef.current?.(molecule);
+      dispatchSceneEvent("molecule-hover", molecule);
+    },
+    [dispatchSceneEvent],
+  );
+
+  const publishMoleculeBounds = useCallback(() => {
+    const bounds: readonly MolecularSceneScreenBounds[] =
+      adapterRef.current?.getVisibleMoleculeScreenBounds() ?? [];
+    const key = JSON.stringify(bounds);
+    if (moleculeBoundsKeyRef.current === key) return;
+    moleculeBoundsKeyRef.current = key;
+    moleculeBoundsCallbackRef.current?.(bounds);
+    dispatchSceneEvent("molecule-bounds", bounds);
+  }, [dispatchSceneEvent]);
+
+  const publishCameraState = useCallback((nextCamera: MolecularSceneCamera) => {
+    const value = JSON.stringify(nextCamera);
+    rootRef.current?.setAttribute("data-camera-state", value);
+    canvasRef.current?.setAttribute("data-camera-state", value);
+  }, []);
+
   const applyCamera = useCallback((nextCamera: MolecularSceneCamera) => {
     cameraRef.current = nextCamera;
-    adapterRef.current?.setCamera(nextCamera);
+    controlledCameraRef.current = nextCamera;
+    publishCameraState(nextCamera);
+    adapterRef.current?.setCamera(nextCamera, true);
+    publishMoleculeBounds();
     cameraCallbackRef.current?.(nextCamera);
     setCameraRevision((revision) => revision + 1);
+  }, [publishCameraState, publishMoleculeBounds]);
+
+  const stopInertia = useCallback(() => {
+    if (inertiaFrameRef.current === null) return;
+    window.cancelAnimationFrame(inertiaFrameRef.current);
+    inertiaFrameRef.current = null;
   }, []);
+
+  const startInertia = useCallback(
+    (drag: PointerDrag) => {
+      stopInertia();
+      if (
+        !drag.moved ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) return;
+
+      let velocityX = drag.velocityX;
+      let velocityY = drag.velocityY;
+      let lastTime = performance.now();
+      let appliedFrame = false;
+      const advance = (now: number) => {
+        // Keep inertia duration tied to wall-clock time on slow/software
+        // renderers. A low cap makes every delayed frame decay as if only
+        // ~50 ms elapsed, prolonging expensive redraws and input latency.
+        const elapsedFrames = Math.min(8, Math.max(0.5, (now - lastTime) / 16.67));
+        lastTime = now;
+        const decay = 0.89 ** elapsedFrames;
+        velocityX *= decay;
+        velocityY *= decay;
+        if (appliedFrame && Math.hypot(velocityX, velocityY) < 0.08) {
+          inertiaFrameRef.current = null;
+          return;
+        }
+        applyCamera(
+          drag.pan
+            ? panSceneCamera(cameraRef.current, velocityX, velocityY)
+            : orbitSceneCamera(cameraRef.current, velocityX, velocityY),
+        );
+        setInertiaRevision((revision) => revision + 1);
+        appliedFrame = true;
+        inertiaFrameRef.current = window.requestAnimationFrame(advance);
+      };
+      inertiaFrameRef.current = window.requestAnimationFrame(advance);
+    },
+    [applyCamera, stopInertia],
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -176,13 +279,16 @@ export function SharedMolecularScene({
 
     const handleWheel = (event: globalThis.WheelEvent) => {
       event.preventDefault();
+      stopInertia();
       const boundedDelta = Math.max(-180, Math.min(180, event.deltaY));
       applyCamera(zoomSceneCamera(cameraRef.current, boundedDelta));
     };
 
     canvas.addEventListener("wheel", handleWheel, { passive: false });
     return () => canvas.removeEventListener("wheel", handleWheel);
-  }, [applyCamera]);
+  }, [applyCamera, stopInertia]);
+
+  useEffect(() => stopInertia, [stopInertia]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -193,6 +299,7 @@ export function SharedMolecularScene({
     try {
       adapter = new ThreeJsMolecularSceneAdapter(canvas);
       adapterRef.current = adapter;
+      publishCameraState(cameraRef.current);
       readyCallbackRef.current?.(adapter);
       queueMicrotask(() => {
         if (alive) setActiveContexts(getActiveMolecularSceneContextCount());
@@ -217,6 +324,7 @@ export function SharedMolecularScene({
       const bounds = entries[0]?.contentRect;
       if (!bounds || !adapterRef.current) return;
       adapterRef.current.resize(bounds.width, bounds.height, window.devicePixelRatio || 1);
+      publishMoleculeBounds();
     });
     observer.observe(canvas);
 
@@ -242,6 +350,7 @@ export function SharedMolecularScene({
           visibleMoleculeCount: visibleMoleculeIds.length,
           error: null,
         });
+        publishMoleculeBounds();
       }
     });
 
@@ -250,12 +359,21 @@ export function SharedMolecularScene({
       .then(() => adapter.updateVisibleMolecules(visibleMoleculeIds))
       .then(() => {
         if (cancelled) return;
+        const comparisonGroupId = molecules.find((molecule) => molecule.comparison)
+          ?.comparison?.groupId;
+        comparisonCallbackRef.current?.(
+          comparisonGroupId
+            ? adapter.getComparisonAnalysis(comparisonGroupId)
+            : null,
+        );
         const controlledCamera = controlledCameraRef.current;
         if (controlledCamera) {
           cameraRef.current = controlledCamera;
+          publishCameraState(controlledCamera);
           adapter.setCamera(controlledCamera);
         } else if (focusedMoleculeId) {
           cameraRef.current = adapter.getCameraState();
+          publishCameraState(cameraRef.current);
           cameraCallbackRef.current?.(cameraRef.current);
           setCameraRevision((revision) => revision + 1);
         }
@@ -265,9 +383,11 @@ export function SharedMolecularScene({
           visibleMoleculeCount: visibleMoleculeIds.length,
           error: null,
         });
+        publishMoleculeBounds();
       })
       .catch((reason: unknown) => {
         if (cancelled) return;
+        comparisonCallbackRef.current?.(null);
         const requestedCount = new Set(visibleMoleculeIds).size;
         const failedCount =
           reason instanceof MolecularSceneLoadError ? reason.failures.length : requestedCount;
@@ -278,23 +398,35 @@ export function SharedMolecularScene({
           visibleMoleculeCount: requestedCount,
           error: reason instanceof Error ? reason.message : t("viewer.structuresLoadError"),
         });
+        publishMoleculeBounds();
       });
 
     return () => {
       cancelled = true;
     };
-  }, [focusedMoleculeId, molecules, publishStatus, t, visibleMoleculeIds]);
+  }, [
+    focusedMoleculeId,
+    molecules,
+    publishCameraState,
+    publishMoleculeBounds,
+    publishStatus,
+    t,
+    visibleMoleculeIds,
+  ]);
 
   useEffect(() => {
     adapterRef.current?.setLevelOfDetail(levelOfDetail);
-  }, [levelOfDetail]);
+    publishMoleculeBounds();
+  }, [levelOfDetail, publishMoleculeBounds]);
 
   useEffect(() => {
     adapterRef.current?.setRepresentation(representation);
-  }, [representation]);
+    publishMoleculeBounds();
+  }, [publishMoleculeBounds, representation]);
 
   useEffect(() => {
     adapterRef.current?.setHydrogenVisibility(showHydrogens);
+    publishMoleculeBounds();
     if (!showHydrogens && selectedAtom?.element === "H") {
       const frame = window.requestAnimationFrame(() => {
         adapterRef.current?.highlightAtom(null);
@@ -302,7 +434,7 @@ export function SharedMolecularScene({
       });
       return () => window.cancelAnimationFrame(frame);
     }
-  }, [publishAtomSelection, selectedAtom?.element, showHydrogens]);
+  }, [publishAtomSelection, publishMoleculeBounds, selectedAtom?.element, showHydrogens]);
 
   useEffect(() => {
     if (!selectedAtom) return;
@@ -328,28 +460,47 @@ export function SharedMolecularScene({
     const adapter = adapterRef.current;
     if (!adapter) return;
     adapter.focusMolecule(focusedMoleculeId);
-  }, [focusedMoleculeId]);
+    publishMoleculeBounds();
+  }, [focusedMoleculeId, publishMoleculeBounds]);
 
   useEffect(() => {
     adapterRef.current?.setEmphasizedMolecule(emphasizedMoleculeId);
-  }, [emphasizedMoleculeId]);
+    publishMoleculeBounds();
+  }, [emphasizedMoleculeId, publishMoleculeBounds]);
 
   useEffect(() => {
     controlledCameraRef.current = camera;
     if (!camera) return;
     cameraRef.current = camera;
+    publishCameraState(camera);
     adapterRef.current?.setCamera(camera);
-  }, [camera]);
+    publishMoleculeBounds();
+  }, [camera, publishCameraState, publishMoleculeBounds]);
+
+  useEffect(() => {
+    publishMoleculeHover(null);
+  }, [levelOfDetail, molecules, publishMoleculeHover, visibleMoleculeIds]);
 
   const pickAtEvent = (event: ReactPointerEvent<HTMLCanvasElement>) => {
     const adapter = adapterRef.current;
     if (!adapter) return null;
     const point = canvasPoint(event.currentTarget, event);
+    if (levelOfDetail === "universe") {
+      publishAtomHover(null);
+      adapter.highlightAtom(null);
+      publishMoleculeHover(
+        adapter.pickMolecule(point.x, point.y, point.width, point.height),
+      );
+      return null;
+    }
+    publishMoleculeHover(null);
     return adapter.pickAtom(point.x, point.y, point.width, point.height);
   };
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLCanvasElement>) => {
     if (!adapterRef.current || event.button !== 0) return;
+    stopInertia();
+    adapterRef.current.setCamera(cameraRef.current, true);
     const point = canvasPoint(event.currentTarget, event);
     pointerPointsRef.current.set(event.pointerId, { x: point.x, y: point.y });
     if (pointerPointsRef.current.size >= 2) {
@@ -366,6 +517,9 @@ export function SharedMolecularScene({
         lastY: point.y,
         moved: false,
         pan: interactionMode === "pan" || event.shiftKey,
+        velocityX: 0,
+        velocityY: 0,
+        lastTime: event.timeStamp,
       };
     }
     try {
@@ -410,11 +564,16 @@ export function SharedMolecularScene({
     const deltaY = point.y - drag.lastY;
     const moved =
       drag.moved || Math.hypot(point.x - drag.startX, point.y - drag.startY) > 3;
+    const elapsed = Math.max(1, event.timeStamp - drag.lastTime);
+    const frameFactor = Math.min(2.5, 16.67 / elapsed);
     dragRef.current = {
       ...drag,
       lastX: point.x,
       lastY: point.y,
       moved,
+      velocityX: drag.velocityX * 0.58 + deltaX * frameFactor * 0.42,
+      velocityY: drag.velocityY * 0.58 + deltaY * frameFactor * 0.42,
+      lastTime: event.timeStamp,
     };
     applyCamera(
       drag.pan
@@ -432,6 +591,8 @@ export function SharedMolecularScene({
       setKeyboardAtom(atom);
       publishAtomSelection(atom);
       adapterRef.current?.highlightAtom(atom);
+    } else if (drag?.moved) {
+      startInertia(drag);
     }
     pointerPointsRef.current.delete(event.pointerId);
     pinchDistanceRef.current = null;
@@ -445,6 +606,7 @@ export function SharedMolecularScene({
     pointerPointsRef.current.delete(event.pointerId);
     pinchDistanceRef.current = null;
     dragRef.current = null;
+    stopInertia();
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -553,8 +715,10 @@ export function SharedMolecularScene({
       data-visible-count={renderedMoleculeCount}
       data-requested-visible-count={visibleMoleculeIds.length}
       data-camera-revision={cameraRevision}
+      data-inertia-revision={inertiaRevision}
       data-selected-atom={selectedAtomId}
       data-keyboard-atom={keyboardAtomId}
+      data-hovered-molecule={hoveredMolecule?.moleculeId ?? ""}
     >
       <canvas
         ref={canvasRef}
@@ -568,9 +732,11 @@ export function SharedMolecularScene({
         data-lod-level={levelOfDetail}
         data-representation={representation}
         data-camera-revision={cameraRevision}
+        data-inertia-revision={inertiaRevision}
         data-selected-molecule={focusedMoleculeId ?? ""}
         data-structure-origin={structureOrigin}
         data-keyboard-atom={keyboardAtomId}
+        data-hovered-molecule={hoveredMolecule?.moleculeId ?? ""}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -578,6 +744,7 @@ export function SharedMolecularScene({
         onPointerLeave={() => {
           if (dragRef.current) return;
           publishAtomHover(null);
+          publishMoleculeHover(null);
           adapterRef.current?.highlightAtom(keyboardAtom ?? selectedAtom);
         }}
         onKeyDown={handleKeyDown}
@@ -614,6 +781,16 @@ export function SharedMolecularScene({
           <small>{error ? t("viewer.structuresLoadError") : null}</small>
           <small>{t("viewer.partialBody")}</small>
         </div>
+      ) : null}
+
+      {levelOfDetail === "universe" && hoveredMolecule ? (
+        <output
+          className={styles.moleculeReadout}
+          data-molecule-hover-label="true"
+          aria-live="polite"
+        >
+          {hoveredMolecule.moleculeName}
+        </output>
       ) : null}
 
       {announcedAtom ? (

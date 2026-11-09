@@ -7,7 +7,7 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const title = "Dev Molecules — Evidence-aware molecular learning";
+const title = "Molevren — Evidence-aware molecular learning";
 const description =
   "Explore sourced molecular structures, non-operational synthesis stories, nomenclature and scientific evidence in Turkish or English.";
 
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      images: [{ url: socialImage, width: 1200, height: 630, alt: "Dev Molecules evidence-aware learning environment" }],
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Molevren evidence-aware learning environment" }],
     },
     twitter: {
       card: "summary_large_image",
